@@ -92,6 +92,7 @@
 - 지시서는 `홈페이지_구역지도.md`의 구역 번호로 고칠 곳을 정한다. 지시서에 없는 구역은 고치지 않는다.
 - **시안 A 전용 폴더(2026-10-14, 이다결 님 요청):** 시안 A 는 `…\신정개발-홈페이지-새디자인_1\시안A` 폴더(git worktree, 갈래 `sian-a`)에서 고치고 커밋·푸시한다. 원래 폴더 `shinjeong-site` 는 `dev`(원본 작업용)로 둔다. 한 갈래는 두 폴더에서 동시에 열 수 없으므로 `shinjeong-site` 에서 `git switch sian-a` 하지 않는다. 시안 A 미리보기는 시안A 폴더의 `serve.ps1`(4173), 비교 보기는 시안A 폴더의 `비교보기.bat`.
 - **시안 B 전용 폴더·저장소(2026-10-16, 이다결 님 요청):** 시안 B 는 시안 A(커밋 1bcd533)를 그대로 복사해 시작했다. 다른 점은 시안 띠 이름(`시안 B`)과 주소뿐. 폴더 `…신정개발-홈페이지-새디자인_1시안B`(git worktree, 갈래 `sian-b`), 저장소 `idagyeol-bit/shinjeong-site-sian-b`(원격 이름 `sianb`), 주소 https://idagyeol-bit.github.io/shinjeong-site-sian-b/ . 올리기: `sian-b` 갈래에서 `git push sianb sian-b:main`. 시안 A 저장소(`sian`)·원본 저장소(`origin`)에는 시안 B 를 올리지 않는다. 예전 sian-b(43차 띠 시험)는 `backup/sian-b-old-43` 갈래로 남겼다.
+- **시안 C 전용 폴더·저장소(2026-10-23, 이다결 님 요청):** 시안 C 는 시안 B(커밋 b2aca88)를 그대로 복사해 시작했다. 다른 점은 시안 띠 이름(`시안 C`)과 주소뿐(위 "시안은 동시에 2개까지"는 이 요청으로 3개가 됐다). 폴더 `…신정개발-홈페이지-새디자인_1시안C`(git worktree, 갈래 `sian-c`), 저장소 `idagyeol-bit/shinjeong-site-sian-c`(원격 이름 `sianc`), 주소 https://idagyeol-bit.github.io/shinjeong-site-sian-c/ . 올리기: `sian-c` 갈래에서 `git push sianc sian-c:main`. 다른 저장소(`origin`·`sian`·`sianb`)에는 시안 C 를 올리지 않는다. 복사본이므로 이 문서의 "시안 B 예외·시안B N차" 규칙은 시안 C 에도 그대로 적용된다.
 
 ## 비교 보기 (44차)
 - `비교보기.bat`(또는 바탕화면 `신정개발 비교보기`) → http://localhost:4180/ : 왼쪽 최종본(`../_최종본_보기`, origin/main), 오른쪽 작업 폴더(지금 갈래).
