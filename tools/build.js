@@ -712,6 +712,30 @@ const LAB_LINE = {              // 회사 소개 구역의 자체 개발 한 줄
 };
 
 
+/* 시안C 2차 (2026-10-27 이다결 님): 메인 사업분야를 '큰 작업 사진 + 한 문장 + 쓰는 장비 사진(이름·용도)'로.
+   장비 이름과 용도는 보유 장비 표(EQUIP_GROUPS rows 이름·용도 칸)와 사진 설명(cap)에 있는 글자만 쓴다 — 새 사실 없음 */
+const WHATC = [
+  { svc: 'S01', photo: 'R27', gear: [
+      { photo: 'W05', name: '흡입 로봇', use: '설비 내부 작업' },
+      { photo: 'R07', name: '제어 차량', use: '설비 밖 원격 조종' },
+      { photo: 'W07', name: '진공흡입차(습식)', use: '폐기물 수집·운반' } ] },
+  { svc: 'S02', photo: 'P03', gear: [
+      { photo: 'R10', name: '흡입 로봇', use: '반응기 내부 작업' },
+      { photo: 'R13', name: '흡입 헤드와 호스', use: '촉매 회수' } ],
+    note: 'AUTO SEPARATOR, 선별기, 집진기로 촉매를 선별하고 분진을 회수합니다.' },
+  { svc: 'S03', photo: 'W01', gear: [
+      { photo: 'W07', name: '진공흡입차(습식)', use: '폐기물 수집·운반' } ],
+    note: '배관·열교환기·보일러 튜브 세관에는 내산장비를 씁니다.' },
+  { svc: 'S04', photo: 'W10', gear: [
+      { photo: 'W06', name: '무인준설로봇(파쇄형)', use: '준설' },
+      { photo: 'R15', name: '스키드 로더 · 소형 굴삭기', use: '준설' } ],
+    note: '회수한 슬러지는 데칸타로 탈수합니다.' },
+  { svc: 'S05', photo: 'W04', gear: [
+      { photo: 'R42', name: '관로 CCTV 로봇', use: '관로 조사' },
+      { photo: 'R34', name: '차량의 제어 장치', use: '관로 내부 CCTV 조사' },
+      { photo: 'R20', name: '스키드 로더', use: '맨홀 보수 작업' } ] }
+];
+
 /* ===================== 도우미 ===================== */
 const esc = (s) => String(s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -1545,6 +1569,41 @@ ${ROBOT_BY_SVC[s.id] ? `          <p class="bizB__robot"><span>투입 로봇</sp
     </article>`;
   }).join('\n')}
 ${contactFooterOnly() ? '' : `    <div class="bizB__end"><a class="btn btn--line btn--sm" href="contact.html">${c.button} ${arrow(18)}</a></div>`}
+  </section>
+`;
+  },
+
+  /* 시안C 2차: 사업분야 — 큰 작업 사진 + 한 문장 + 쓰는 장비 (사실은 WHATC) */
+  whatC: (bg) => {
+    const c = CFG.home.copy.what;
+    return `  <!-- ===== 사업분야 (시안C 2차: 사진 먼저, 장비는 이름·용도) ===== -->
+  <section class="section${BG_CLASS[bg]} bizC" id="what" aria-labelledby="bizC-title">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <h2 id="bizC-title">${esc(c.title)}</h2>
+${c.leadC ? `        <p class="lead">${esc(c.leadC)}</p>` : ''}
+      </div>
+${WHATC.map((w, i) => {
+    const s = svc(w.svc);
+    return `      <article class="bizC__row${i % 2 ? ' bizC__row--rev' : ''}" data-reveal>
+        <figure class="bizC__main">
+          <div class="bizC__fig">${photo(P(w.photo), '(max-width:960px) 92vw, 700px')}</div>
+          <figcaption>${esc(P(w.photo).cap)}</figcaption>
+        </figure>
+        <div class="bizC__txt">
+          <span class="bizC__num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
+          <h3><a href="${s.file}">${esc(s.title)}</a></h3>
+          <p class="bizC__one">${esc(s.card)}</p>
+          <p class="bizC__gearhead">쓰는 장비</p>
+          <ul class="bizC__gear">
+${w.gear.map((g) => `            <li><div class="bizC__gfig">${photo(P(g.photo), '(max-width:960px) 44vw, 180px')}</div><b>${esc(g.name)}</b><span>${esc(g.use)}</span></li>`).join('\n')}
+          </ul>
+${w.note ? `          <p class="bizC__note">${esc(w.note)}</p>` : ''}
+          <a class="tlink" href="${s.file}">${esc(s.title)} 자세히 보기 ${arrow(14)}</a>
+        </div>
+      </article>`;
+  }).join('\n')}
+    </div>
   </section>
 `;
   },

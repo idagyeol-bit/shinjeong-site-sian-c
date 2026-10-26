@@ -2292,3 +2292,31 @@ html[lang="en"] .phero__lead { max-width: 44em; }
 .labline { font-weight: 600; color: var(--ink); }
 .labfacts { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .labfacts li { font-size: 13.5px; font-weight: 600; padding: 6px 12px; border-radius: 999px; background: #f1f2f5; color: var(--ink); }
+
+/* 시안C 2차: 사업분야 — 사진 먼저 */
+.bizC__row { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 64px); align-items: start; padding-block: clamp(40px, 5vw, 72px); border-top: 1px solid var(--line); }
+.bizC .head + .bizC__row { margin-top: clamp(28px, 4vw, 48px); }
+.bizC__row--rev > .bizC__main { order: 2; }
+.bizC__main { margin: 0; }
+.bizC__fig { overflow: hidden; border-radius: var(--radius-lg); background: var(--soft-2); aspect-ratio: 3 / 2; }
+.bizC__fig img { width: 100%; height: 100%; object-fit: cover; }
+.bizC__main figcaption { margin-top: 10px; font-size: var(--fs-sm); color: var(--muted); }
+.bizC__num { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: var(--brand); }
+.bizC__txt h3 { margin: 8px 0 0; font-size: var(--fs-h3); letter-spacing: -0.03em; }
+.bizC__txt h3 a { color: inherit; text-decoration: none; }
+.bizC__txt h3 a:hover { color: var(--brand); }
+.bizC__one { margin: 10px 0 0; color: var(--muted); }
+.bizC__gearhead { margin: 26px 0 10px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--muted); }
+.bizC__gear { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.bizC__gfig { overflow: hidden; border-radius: var(--radius); background: var(--soft-2); aspect-ratio: 4 / 3; }
+.bizC__gfig img { width: 100%; height: 100%; object-fit: cover; }
+.bizC__gear b { display: block; margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.4; }
+.bizC__gear span { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+.bizC__note { margin: 16px 0 0; font-size: var(--fs-sm); color: var(--muted); }
+.bizC .tlink { display: inline-flex; margin-top: 22px; }
+@media (max-width: 960px) {
+  .bizC__row { grid-template-columns: 1fr; gap: 20px; }
+  .bizC__row--rev > .bizC__main { order: 0; }
+  .bizC__gear { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+}
+@media (max-width: 520px) { .bizC__gear { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
