@@ -736,6 +736,48 @@ const WHATC = [
       { photo: 'R20', name: '스키드 로더', use: '맨홀 보수 작업' } ] }
 ];
 
+/* 시안C 3차 (2026-10-27 이다결 님 선택): 메인 '하는 일' 타일(안 A) · 사업분야 전체 보기 첫 구역 '설비로 찾기'(안 B)
+   분야 이름·대상 설비는 SERVICES·CARD_CHIPS, 투입 장비는 SERVICES.equip 의 글자 그대로. 새 문장은 상황 한 줄(situation)뿐 */
+const WHAT_TILES = [
+  { svc: 'S01', photo: 'R27' },   // 흡입차와 호스로 연결된 로봇
+  { svc: 'S02', photo: 'W05' },   // 스크루 궤도형 흡입 로봇
+  { svc: 'S03', photo: 'W01' },   // 진공흡입차와 연결 호스
+  { svc: 'S04', photo: 'W10' },   // 진공흡입차와 맨홀 호스 작업
+  { svc: 'S05', photo: 'W04' }    // 맨홀 교체 공사 현장
+];
+const TILE_TARGETS = (svcId) => CARD_CHIPS[svcId].slice(0, 4).join(' · ');   // 타일 둘째 줄: 대상 설비 네 개까지
+const FINDER = {
+  title: '우리 설비는 어디에 해당할까요',
+  lead: '설비 상태로 찾으면 맡길 일이 바로 보입니다.',
+  rows: [
+    { svc: 'S01', have: '탱크 · Pond · 배수로 · R.T.O', situation: '잔류물과 퇴적물이 쌓였다면', gear: '흡입 로봇 · 제어 차량 투입' },
+    { svc: 'S02', have: '반응기', situation: '촉매·충진물을 교체해야 한다면', gear: '흡입 로봇 · 분리장치 투입' },
+    { svc: 'S03', have: '배관 · 열교환기 · 냉각탑 · 보일러', situation: '세정해야 한다면', gear: '화학세정용 내산장비' },
+    { svc: 'S04', have: '하수관 · 오수관 · 처리시설', situation: '퇴적물과 슬러지가 쌓였다면', gear: '무인준설로봇 투입' },
+    { svc: 'S05', have: '관로 · 맨홀', situation: '상태를 조사하거나 보수해야 한다면', gear: '관로 CCTV 로봇 투입' }
+  ]
+};
+function finderSection() {
+  return `  <!-- ===== 설비로 찾기 (시안C 3차, 안 B) ===== -->
+  <section class="section finder" aria-labelledby="finder-title">
+    <div class="wrap">
+      <div class="head">
+        <div data-reveal><h2 id="finder-title">${esc(FINDER.title)}</h2></div>
+        <p class="lead">${esc(FINDER.lead)}</p>
+      </div>
+      <div class="finder__rows" data-reveal>
+${FINDER.rows.map((r) => { const s = svc(r.svc); const ph = P(WHAT_TILES.find((w) => w.svc === r.svc).photo); return `        <a class="finder__row" href="${s.file}">
+          <span class="finder__th">${photo(ph, '132px')}</span>
+          <span class="finder__have"><b>${esc(r.have)}</b>${esc(r.situation)}</span>
+          <span class="finder__do">${esc(s.title)}<small>${esc(r.gear)}</small></span>
+          <span class="finder__arrow" aria-hidden="true">${arrow(18)}</span>
+        </a>`; }).join('\n')}
+      </div>
+    </div>
+  </section>
+`;
+}
+
 /* ===================== 도우미 ===================== */
 const esc = (s) => String(s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -1573,6 +1615,28 @@ ${contactFooterOnly() ? '' : `    <div class="bizB__end"><a class="btn btn--line
 `;
   },
 
+  /* 시안C 3차: 하는 일 — 사진 타일 다섯 장(안 A). 타일 전체가 분야 페이지 링크 */
+  whatA: (bg) => {
+    const c = CFG.home.copy.what;
+    return `  <!-- ===== 하는 일 (시안C 3차: 사진 타일) ===== -->
+  <section class="section${BG_CLASS[bg]} bizA" id="what" aria-labelledby="bizA-title">
+    <div class="wrap">
+      <div class="head">
+        <div data-reveal><h2 id="bizA-title">${esc(c.titleA || c.title)}</h2></div>
+${c.leadA ? `        <p class="lead">${esc(c.leadA)}</p>` : ''}
+      </div>
+      <div class="bizA__tiles" data-reveal>
+${WHAT_TILES.map((w) => { const s = svc(w.svc); return `        <a class="bizA__tile" href="${s.file}">
+          <span class="bizA__fig">${photo(P(w.photo), '(max-width:960px) 60vw, 250px')}</span>
+          <h3>${esc(s.title)} ${arrow(14)}</h3>
+          <p>${esc(TILE_TARGETS(s.id))}</p>
+        </a>`; }).join('\n')}
+      </div>
+    </div>
+  </section>
+`;
+  },
+
   /* 시안C 2차: 사업분야 — 큰 작업 사진 + 한 문장 + 쓰는 장비 (사실은 WHATC) */
   whatC: (bg) => {
     const c = CFG.home.copy.what;
@@ -1786,7 +1850,7 @@ pages['services.html'] = () => head({
   h1: '사업분야',
   keepLead: '신정개발은 산업설비와 환경시설 안의 잔류물·퇴적물·촉매를 제거하고, 세정하고, 준설합니다. 업무는 다섯 가지로 나뉩니다.',
   crumbs: [{ label: '사업분야' }]
-}) + tabs(null) + `
+}) + tabs(null) + (CFG.look && CFG.look.finder ? finderSection() : `
   <section class="section">
     <div class="wrap">
       <div class="head">
@@ -1800,7 +1864,7 @@ ${serviceCards(true, true)}
     </div>
   </section>
 
-` + cta({
+`) + cta({
   h2: '어떤 업무에 해당하는지<br>모르셔도 괜찮습니다',
   p: '대상 설비와 작업 목적을 알려 주시면 맞는 업무와 진행 방법을 안내해 드립니다.'
 }) + MAIN_END + footer() + foot();

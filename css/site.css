@@ -2320,3 +2320,35 @@ html[lang="en"] .phero__lead { max-width: 44em; }
   .bizC__gear { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 }
 @media (max-width: 520px) { .bizC__gear { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* 시안C 3차: 하는 일 — 사진 타일 다섯 장 (안 A) */
+.bizA__tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.bizA__tile { display: block; color: inherit; text-decoration: none; }
+.bizA__fig { display: block; aspect-ratio: 4 / 5; border-radius: var(--radius-lg); overflow: hidden; background: var(--soft-2); }
+.bizA__fig img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
+.bizA__tile:hover .bizA__fig img { transform: scale(1.04); }
+.bizA__tile h3 { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: 14px 0 4px; font-size: var(--fs-h4); letter-spacing: var(--ls-normal); }
+.bizA__tile h3 svg { flex: none; color: var(--brand); opacity: 0; transform: translateX(-4px); transition: opacity 0.3s, transform 0.3s; }
+.bizA__tile:hover h3 svg { opacity: 1; transform: none; }
+.bizA__tile p { margin: 0; font-size: var(--fs-xs); color: var(--muted); line-height: 1.6; }
+@media (max-width: 960px) {
+  .bizA__tiles { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); scrollbar-width: none; }
+  .bizA__tiles::-webkit-scrollbar { display: none; }
+  .bizA__tile { flex: 0 0 60%; scroll-snap-align: start; }
+}
+
+/* 시안C 3차: 설비로 찾기 (안 B, 사업분야 전체 보기 첫 구역) */
+.finder__rows { border-top: 1px solid var(--ink); }
+.finder__row { display: grid; grid-template-columns: 132px minmax(0, 1.15fr) minmax(0, 1fr) 24px; gap: clamp(16px, 2.5vw, 40px); align-items: center; padding: 16px 0; border-bottom: 1px solid var(--line); color: inherit; text-decoration: none; transition: background 0.2s; }
+.finder__row:hover { background: var(--soft); }
+.finder__th { display: block; aspect-ratio: 3 / 2; border-radius: var(--radius); overflow: hidden; background: var(--soft-2); }
+.finder__th img { width: 100%; height: 100%; object-fit: cover; }
+.finder__have { font-size: var(--fs-sm); color: var(--muted); line-height: 1.6; }
+.finder__have b { display: block; color: var(--ink); font-weight: 600; font-size: var(--fs-body); }
+.finder__do { font-size: var(--fs-h4); font-weight: 600; letter-spacing: var(--ls-normal); }
+.finder__do small { display: block; font-size: var(--fs-xs); font-weight: 500; color: var(--muted); margin-top: 2px; }
+.finder__arrow { color: var(--brand); display: inline-flex; }
+@media (max-width: 760px) {
+  .finder__row { grid-template-columns: 96px 1fr 20px; grid-template-areas: "th have arr" "th do arr"; row-gap: 4px; }
+  .finder__th { grid-area: th; } .finder__have { grid-area: have; } .finder__do { grid-area: do; } .finder__arrow { grid-area: arr; }
+}
