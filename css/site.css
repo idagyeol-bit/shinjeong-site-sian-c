@@ -2393,3 +2393,25 @@ html[lang="en"] .phero__lead { max-width: 44em; }
   .bizCh--five .bizCh__body { padding: 14px; }
   .bizCh--five .bizCh__dl { grid-template-columns: 44px 1fr; }
 }
+
+/* 시안C 5차: 사업분야 차트 간결판 — 안 A에서 설명 문장을 빼고 현장·투입 두 줄만. 휴대폰(≤960px)은 격자 대신 한 장씩 가로 넘김 + 점 표시 */
+.bizCh--compact .bizCh__body { padding: 16px 16px 16px; }
+.bizCh--compact .bizCh__dl { margin-top: 10px; padding-top: 10px; grid-template-columns: 34px 1fr; gap: 4px 8px; }
+.bizCh--compact .bizCh__dl dd { color: var(--text); }
+.bizCh--compact .bizCh__dl dd.bizCh__gear { color: var(--brand); }
+.bizCh__dots { display: none; }
+@media (max-width: 960px) {
+  .bizCh--compact .bizCh__grid { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; margin-inline: calc(var(--gutter) * -1); padding: 2px var(--gutter) 6px; }
+  .bizCh--compact .bizCh__grid::-webkit-scrollbar { display: none; }
+  .bizCh--compact .bizCh__card { flex: 0 0 min(82%, 340px); scroll-snap-align: start; }
+  .bizCh--compact .bizCh__card:hover { transform: none; }
+  .bizCh--compact .bizCh__fig { aspect-ratio: 16 / 10; }
+  .bizCh--compact .bizCh__body { padding: 16px 18px 18px; }
+  .bizCh--compact .bizCh__body h3 { font-size: var(--fs-h3); }
+  .bizCh--compact .bizCh__body h3 svg { opacity: 1; transform: none; }
+  .bizCh--compact .bizCh__dl { font-size: var(--fs-sm); grid-template-columns: 38px 1fr; }
+  .bizCh__dots { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 6px; }
+  .bizCh__dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--line); transition: width 0.25s var(--ease), background 0.25s; }
+  .bizCh__dots i.on { width: 20px; border-radius: 3px; background: var(--navy); }
+  .bizCh__dots span { margin-left: 8px; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+}

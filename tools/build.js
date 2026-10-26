@@ -1636,24 +1636,26 @@ ${contactFooterOnly() ? '' : `    <div class="bizB__end"><a class="btn btn--line
   /* 시안C 4차: 사업분야 차트 (안 B) — 큰 카드 1 + 작은 카드 4. 사실은 WHAT_CHART */
   whatChart: (bg) => {
     const c = CFG.home.copy.what;
-    const five = !(CFG.look && CFG.look.chartLayout === 'lead');   // 시안C 4차-1: 기본은 안 A(다섯 칸 같은 크기). 'lead' 면 안 B(큰 카드 1 + 4)
-    return `  <!-- ===== 사업분야 차트 (시안C 4차): ${five ? '안 A 다섯 칸' : '안 B 큰 카드 1 + 4'} ===== -->
-  <section class="section${BG_CLASS[bg]} bizCh${five ? ' bizCh--five' : ''}" id="what" aria-labelledby="bizCh-title">
+    const layout = (CFG.look && CFG.look.chartLayout) || 'five';
+    const five = layout !== 'lead';                 // 시안C 4차-1: 기본은 안 A(다섯 칸 같은 크기). 'lead' 면 안 B(큰 카드 1 + 4)
+    const compact = layout === 'compact';           // 시안C 5차: 간결판 — 설명 문장 없이 현장·투입 두 줄, 휴대폰은 한 장씩 가로 넘김(점 표시)
+    return `  <!-- ===== 사업분야 차트 (시안C 4차): ${compact ? '간결판 다섯 칸' : five ? '안 A 다섯 칸' : '안 B 큰 카드 1 + 4'} ===== -->
+  <section class="section${BG_CLASS[bg]} bizCh${five ? ' bizCh--five' : ''}${compact ? ' bizCh--compact' : ''}" id="what" aria-labelledby="bizCh-title">
     <div class="wrap">
       <div class="head">
         <div data-reveal><h2 id="bizCh-title">${esc(c.titleChart || c.title)}</h2></div>
 ${c.leadChart ? `        <p class="lead">${esc(c.leadChart)}</p>` : ''}
       </div>
       <div class="bizCh__grid" data-reveal>
-${WHAT_CHART.map((w, i) => { const s = svc(w.svc); const isLead = !five && w.lead; const ph = P(isLead && w.photoLead ? w.photoLead : w.photo); const one = isLead ? (w.oneLead || w.one) : (five ? w.one : ''); return `        <a class="bizCh__card${isLead ? ' bizCh__card--lead' : ''}" href="${s.file}">
-          <span class="bizCh__fig">${photo(ph, isLead ? '(max-width:960px) 92vw, 640px' : five ? '(max-width:680px) 46vw, (max-width:1100px) 30vw, 250px' : '(max-width:960px) 44vw, 300px')}<span class="bizCh__no" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span></span>
+${WHAT_CHART.map((w, i) => { const s = svc(w.svc); const isLead = !five && w.lead; const ph = P(isLead && w.photoLead ? w.photoLead : w.photo); const one = compact ? '' : isLead ? (w.oneLead || w.one) : (five ? w.one : ''); return `        <a class="bizCh__card${isLead ? ' bizCh__card--lead' : ''}" href="${s.file}">
+          <span class="bizCh__fig">${photo(ph, isLead ? '(max-width:960px) 92vw, 640px' : compact ? '(max-width:960px) 82vw, 250px' : five ? '(max-width:680px) 46vw, (max-width:1100px) 30vw, 250px' : '(max-width:960px) 44vw, 300px')}<span class="bizCh__no" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span></span>
           <span class="bizCh__body">
             <h3>${esc(s.title)} ${arrow(14)}</h3>
 ${one ? `            <p class="bizCh__one">${esc(one)}</p>\n` : ''}            <dl class="bizCh__dl"><dt>현장</dt><dd>${esc(w.where)}</dd><dt>투입</dt><dd class="bizCh__gear">${esc(w.gear)}</dd></dl>
           </span>
         </a>`; }).join('\n')}
       </div>
-    </div>
+${compact ? `      <div class="bizCh__dots" data-chart-dots aria-hidden="true">${WHAT_CHART.map((_, i) => `<i${i === 0 ? ' class="on"' : ''}></i>`).join('')}<span>1 / ${WHAT_CHART.length}</span></div>\n` : ''}    </div>
   </section>
 `;
   },

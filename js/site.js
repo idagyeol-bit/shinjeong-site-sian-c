@@ -203,6 +203,23 @@
       window.addEventListener('hashchange', function () { eqFromHash(true); });
     }
 
+    /* ---------- 5-1. 사업분야 차트 간결판(시안C 5차): 휴대폰 가로 넘김 위치를 점으로 표시 ---------- */
+    var chDots = document.querySelector('[data-chart-dots]');
+    var chGrid = chDots && chDots.parentNode.querySelector('.bizCh__grid');
+    if (chDots && chGrid) {
+      var chCards = chGrid.querySelectorAll('.bizCh__card'), chI = chDots.querySelectorAll('i'), chLab = chDots.querySelector('span');
+      var chUpd = function () {
+        if (!chCards.length) return;
+        var w = chCards[0].getBoundingClientRect().width + 12;            // 카드 너비 + css 의 gap
+        var i = Math.max(0, Math.min(chCards.length - 1, Math.round(chGrid.scrollLeft / w)));
+        for (var k = 0; k < chI.length; k++) chI[k].className = k === i ? 'on' : '';
+        if (chLab) chLab.textContent = (i + 1) + ' / ' + chCards.length;
+      };
+      chGrid.addEventListener('scroll', chUpd, { passive: true });
+      window.addEventListener('resize', chUpd);
+      chUpd();
+    }
+
     /* ---------- 6. 현재 연도 ---------- */
     var y = document.querySelector('[data-year]');
     if (y) y.textContent = String(new Date().getFullYear());
