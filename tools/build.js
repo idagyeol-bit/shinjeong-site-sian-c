@@ -786,13 +786,14 @@ ${FINDER.rows.map((r) => { const s = svc(r.svc); const ph = P(WHAT_TILES.find((w
 /* 시안C 4차 (2026-10-27 이다결 님 선택 '안 B'): 메인 사업분야 차트 — 큰 카드 1 + 작은 카드 4.
    현장(where)은 CARD_CHIPS·SERVICES.targets, 투입(gear)은 SERVICES.equip·EQUIP_GROUPS rows 의 장비 이름만 줄여 씀 — 새 사실 없음 */
 const WHAT_CHART = [
-  { svc: 'S01', photo: 'R27', lead: true,
-    one: '탱크·Pond·배수로 안의 잔류물과 퇴적물을 제거합니다. 위험한 내부에는 흡입 로봇을 먼저 넣고, 작업자는 밖에서 조종합니다.',
+  { svc: 'S01', photo: 'U04', photoLead: 'R27', lead: true,
+    one: '탱크·Pond·배수로 안의 잔류물과 퇴적물을 제거합니다.',
+    oneLead: '탱크·Pond·배수로 안의 잔류물과 퇴적물을 제거합니다. 위험한 내부에는 흡입 로봇을 먼저 넣고, 작업자는 밖에서 조종합니다.',
     where: '탱크 · Pond · 배수로 · R.T.O', gear: '흡입 로봇 · 제어 차량 · 진공흡입차' },
-  { svc: 'S02', photo: 'P13', where: '반응기 · 흡착탑 · 건조기', gear: '흡입 로봇 · 분리장치' },
-  { svc: 'S03', photo: 'U03', where: '배관 · 열교환기 · 냉각탑 · 보일러', gear: '화학세정용 내산장비' },
-  { svc: 'S04', photo: 'W10', where: '하수관 · 오수관 · 처리시설', gear: '무인준설로봇 · 데칸타' },
-  { svc: 'S05', photo: 'P14', where: '관로 · 맨홀 · 지하매설물', gear: '관로 CCTV 로봇 · GPR' }
+  { svc: 'S02', photo: 'P13', one: '반응기의 촉매와 충진물을 꺼내고 교체합니다.', where: '반응기 · 흡착탑 · 건조기', gear: '흡입 로봇 · 분리장치 · 건식 흡입차' },
+  { svc: 'S03', photo: 'U03', one: '배관과 열교환기, 냉각탑, 보일러 튜브를 세정합니다.', where: '배관 · 열교환기 · 냉각탑 · 보일러', gear: '화학세정용 내산장비' },
+  { svc: 'S04', photo: 'W10', one: '하수관과 처리시설의 퇴적물을 준설하고 슬러지를 회수합니다.', where: '하수관 · 오수관 · 처리시설', gear: '무인준설로봇 · 무인로더 · 데칸타' },
+  { svc: 'S05', photo: 'P14', one: 'CCTV와 GPR로 조사하고, 굴착 없이 보수합니다.', where: '관로 · 맨홀 · 지하매설물', gear: '관로 CCTV 로봇 · CCTV 조사차량 · GPR' }
 ];
 
 /* ===================== 도우미 ===================== */
@@ -1635,19 +1636,20 @@ ${contactFooterOnly() ? '' : `    <div class="bizB__end"><a class="btn btn--line
   /* 시안C 4차: 사업분야 차트 (안 B) — 큰 카드 1 + 작은 카드 4. 사실은 WHAT_CHART */
   whatChart: (bg) => {
     const c = CFG.home.copy.what;
-    return `  <!-- ===== 사업분야 차트 (시안C 4차, 안 B) ===== -->
-  <section class="section${BG_CLASS[bg]} bizCh" id="what" aria-labelledby="bizCh-title">
+    const five = !(CFG.look && CFG.look.chartLayout === 'lead');   // 시안C 4차-1: 기본은 안 A(다섯 칸 같은 크기). 'lead' 면 안 B(큰 카드 1 + 4)
+    return `  <!-- ===== 사업분야 차트 (시안C 4차): ${five ? '안 A 다섯 칸' : '안 B 큰 카드 1 + 4'} ===== -->
+  <section class="section${BG_CLASS[bg]} bizCh${five ? ' bizCh--five' : ''}" id="what" aria-labelledby="bizCh-title">
     <div class="wrap">
       <div class="head">
         <div data-reveal><h2 id="bizCh-title">${esc(c.titleChart || c.title)}</h2></div>
 ${c.leadChart ? `        <p class="lead">${esc(c.leadChart)}</p>` : ''}
       </div>
       <div class="bizCh__grid" data-reveal>
-${WHAT_CHART.map((w, i) => { const s = svc(w.svc); const ph = P(w.photo); return `        <a class="bizCh__card${w.lead ? ' bizCh__card--lead' : ''}" href="${s.file}">
-          <span class="bizCh__fig">${photo(ph, w.lead ? '(max-width:960px) 92vw, 640px' : '(max-width:960px) 44vw, 300px')}<span class="bizCh__no" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span></span>
+${WHAT_CHART.map((w, i) => { const s = svc(w.svc); const isLead = !five && w.lead; const ph = P(isLead && w.photoLead ? w.photoLead : w.photo); const one = isLead ? (w.oneLead || w.one) : (five ? w.one : ''); return `        <a class="bizCh__card${isLead ? ' bizCh__card--lead' : ''}" href="${s.file}">
+          <span class="bizCh__fig">${photo(ph, isLead ? '(max-width:960px) 92vw, 640px' : five ? '(max-width:680px) 46vw, (max-width:1100px) 30vw, 250px' : '(max-width:960px) 44vw, 300px')}<span class="bizCh__no" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span></span>
           <span class="bizCh__body">
             <h3>${esc(s.title)} ${arrow(14)}</h3>
-${w.one ? `            <p class="bizCh__one">${esc(w.one)}</p>\n` : ''}            <dl class="bizCh__dl"><dt>현장</dt><dd>${esc(w.where)}</dd><dt>투입</dt><dd class="bizCh__gear">${esc(w.gear)}</dd></dl>
+${one ? `            <p class="bizCh__one">${esc(one)}</p>\n` : ''}            <dl class="bizCh__dl"><dt>현장</dt><dd>${esc(w.where)}</dd><dt>투입</dt><dd class="bizCh__gear">${esc(w.gear)}</dd></dl>
           </span>
         </a>`; }).join('\n')}
       </div>

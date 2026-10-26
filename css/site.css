@@ -2383,3 +2383,13 @@ html[lang="en"] .phero__lead { max-width: 44em; }
   .bizCh__card--lead { grid-column: auto; }
   .bizCh__body { padding: 14px 16px 18px; }
 }
+
+/* 시안C 4차-1: 사업분야 차트 안 A — 다섯 칸 같은 크기 */
+.bizCh--five .bizCh__grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.bizCh--five .bizCh__one { font-size: var(--fs-sm); line-height: 1.6; }
+@media (max-width: 1100px) { .bizCh--five .bizCh__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 680px) {
+  .bizCh--five .bizCh__grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .bizCh--five .bizCh__body { padding: 14px; }
+  .bizCh--five .bizCh__dl { grid-template-columns: 44px 1fr; }
+}
