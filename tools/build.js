@@ -692,6 +692,24 @@ const CARD_CHIPS = {
   S05: ['관로 CCTV 조사', '지하매설물 GPR 조사', '비굴착 보수']
 };
 
+/* 시안C 1차 (2026-10-27 이다결 님 견해): 메인에서 "어떤 로봇으로, 어떻게 일하는지"를 사진과 짧은 글로 보인다.
+   모두 장비·로봇 페이지(EQUIP)와 현장 진행 방식(PROCESS)에 이미 있는 사실을 짧게 줄인 것 — 새 사실·숫자 없음 */
+const ROBOT_BY_SVC = {          // 업무별로 투입하는 로봇 (장비·로봇 페이지 업무별 장비 그대로). 화학세정은 로봇 없음
+  S01: '흡입 로봇 · 제어 차량',
+  S02: '흡입 로봇 · 제어 차량 · 분리장치',
+  S04: '무인준설로봇(파쇄형·흡입형) · 무인로더',
+  S05: '관로 CCTV 로봇'
+};
+const STEPS4 = [                // 현장 진행 방식 7단계(PROCESS.steps)를 메인용 4줄로 줄임 — 1·2 / 3·4 / 5 / 6·7
+  { t: '사전 확인', d: '입구, 내부 구조, 잔류물을 먼저 확인합니다.' },
+  { t: '로봇 투입', d: '로봇이 설비 안의 위험 물질을 먼저 회수합니다.' },
+  { t: '원격 조종', d: '작업자는 설비 밖 제어 차량에서 CCTV를 보며 조종합니다.' },
+  { t: '마무리·처리', d: '위험이 줄어든 뒤 작업자가 마무리하고, 회수물은 탈수해 처리합니다.' }
+];
+const LAB_LINE = {              // 회사 소개 구역의 자체 개발 한 줄 (장비·로봇 페이지 문장 + 숫자)
+  text: '로봇은 기업부설연구소에서 개발해, 신정개발이 맡은 현장 작업에 직접 투입하는 장비입니다.',
+  facts: ['탱크·Pond용 흡입 로봇 1~5세대 개발', '로봇·준설 관련 등록 특허 5건']
+};
 
 
 /* ===================== 도우미 ===================== */
@@ -1519,7 +1537,8 @@ ${i ? '' : `      <h2 class="bizB__sec" id="bizB-title">${c.title}</h2>\n`}     
           <h3 class="bizB__title"><a href="${s.file}">${esc(s.title)}</a></h3>
           <p>${esc(s.card)}</p>
           <ul class="bizB__chips" aria-label="${esc(s.title)} 대상 설비">${CARD_CHIPS[s.id].map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
-          <a class="bizB__go" href="${s.file}" aria-label="${esc(s.title)} 자세히 보기">자세히 보기 ${arrow(14)}</a>
+${ROBOT_BY_SVC[s.id] ? `          <p class="bizB__robot"><span>투입 로봇</span>${esc(ROBOT_BY_SVC[s.id])}</p>   <!-- 시안C 1차 -->
+` : ''}          <a class="bizB__go" href="${s.file}" aria-label="${esc(s.title)} 자세히 보기">자세히 보기 ${arrow(14)}</a>
         </div>
         <figure class="bizB__shot">${photo({ ...P(b.photo), alt: b.alt || P(b.photo).alt }, '(max-width:960px) 92vw, 400px')}${b.note && aiBadge() ? `<figcaption class="bizB__shot-note">${esc(b.note)}</figcaption>` : ''}</figure>   <!-- 시안B 19차: note = AI 연출 이미지 표시 · 23차: 설정 look.aiMark 가 'badge' 일 때만 -->
       </div>
@@ -1567,11 +1586,13 @@ ${feat.map((p) => recRow(p)).join('\n')}
 
       <div class="split split--top" data-reveal>
         <figure class="split__media">
-          <div class="split__fig">${photo(P('R27'), '(max-width:960px) 92vw, 620px')}</div>
+          <div class="split__fig">${photo(P(c.photo || 'R27'), '(max-width:960px) 92vw, 620px')}</div>
           <figcaption class="split__cap split__cap--strong">${c.caption}</figcaption>
         </figure>
         <div>
-${c.summary ? `          <p class="lead comB-steps">${esc(c.summary)}</p>   <!-- 시안B 5차: 단계 이름은 현장 진행 방식 페이지가 맡는다 -->` : `          <ol class="numlist numlist--tight">
+${c.steps4 ? `          <ol class="numlist numlist--tight">   <!-- 시안C 1차: 7단계를 4줄로(STEPS4) -->
+${STEPS4.map((st, i) => `            <li><em>${String(i + 1).padStart(2, '0')}</em><b>${esc(st.t)}</b><p>${esc(st.d)}</p></li>`).join('\n')}
+          </ol>` : c.summary ? `          <p class="lead comB-steps">${esc(c.summary)}</p>   <!-- 시안B 5차: 단계 이름은 현장 진행 방식 페이지가 맡는다 -->` : `          <ol class="numlist numlist--tight">
 ${PROCESS.steps.map((st, i) => `            <li><em>${String(i + 1).padStart(2, '0')}</em><b>${esc(st.t)}</b></li>`).join('\n')}
           </ol>`}
           <div class="mt-24"><a class="btn btn--ghost btn--sm" href="process.html">${c.button} ${arrow(18)}</a></div>
@@ -1638,6 +1659,8 @@ ${pcards(c.cards.map((k) => k.photo), c.cards.map((k) => k.title), null, c.cards
         <div data-reveal>
           <h2>${c.title}</h2>
           <p class="lead mt-20">${esc(C.intro)}</p>
+${c.lab ? `          <p class="labline mt-20">${esc(LAB_LINE.text)}</p>   <!-- 시안C 1차 -->
+          <ul class="labfacts">${LAB_LINE.facts.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
           <div class="mt-28"><a class="btn btn--line" href="company.html">${c.button} ${arrow(18)}</a></div>
         </div>
         <figure class="split__media" data-reveal data-delay="90">

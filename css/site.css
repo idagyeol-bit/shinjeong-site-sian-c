@@ -2284,3 +2284,11 @@ html[lang="en"] .phero__lead { max-width: 44em; }
   .enB-band { flex-direction: column; align-items: flex-start; }
   .enB-band .btn { width: 100%; justify-content: center; }
 }
+
+/* 시안C 1차: 사업분야 판의 투입 로봇 · 회사 소개의 자체 개발 한 줄 */
+.bizB__robot { margin: 16px 0 0; font-size: 14px; font-weight: 600; color: var(--ink); display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.bizB__robot span { font-size: 12px; font-weight: 700; color: #fff; background: #e2611b; padding: 3px 10px; border-radius: 999px; }
+.bizB__panel--3 .bizB__robot, .bizB__panel--4 .bizB__robot, .bizB__panel--5 .bizB__robot { color: #fff; }
+.labline { font-weight: 600; color: var(--ink); }
+.labfacts { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.labfacts li { font-size: 13.5px; font-weight: 600; padding: 6px 12px; border-radius: 999px; background: #f1f2f5; color: var(--ink); }

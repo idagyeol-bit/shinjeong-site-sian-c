@@ -155,11 +155,12 @@ module.exports = {
         boards: [                                             // 시안 B 색판(whatB) — 위에서부터 이 순서로 쌓인다. 제목·설명·칩은 사업분야 데이터 그대로
           // svc = 업무 번호(바꾸지 않는다) · label = 판 위 영문 알약 라벨 · photo = 사진 번호 · alt = 사진 설명(사진에 보이는 것만)
           // 시안B 19차: 다섯 판 사진을 분야 상세 상단(18차)과 같은 AI 연출 이미지로 통일(alt 는 사진 목록의 18차 문구 그대로, note 는 사진 모서리 표시). 예전 사진(P01·P03·W09·W10·W04)은 다른 쓰임 그대로
-          { svc: 'S01', label: 'Cleaning', photo: 'AI02', note: '※ 연출 이미지' },   // 2차 P01 → 19차 AI02
-          { svc: 'S02', label: 'Catalyst', photo: 'AI03', note: '※ 연출 이미지' },   // 2차 P03 → 19차 AI03
-          { svc: 'S03', label: 'Chemical', photo: 'AI04', note: '※ 연출 이미지' },   // 2차 W09 → 19차 AI04
-          { svc: 'S04', label: 'Dredging', photo: 'AI05', note: '※ 연출 이미지' },   // 2차 W10 → 19차 AI05
-          { svc: 'S05', label: 'Pipeline', photo: 'AI06', note: '※ 연출 이미지' }    // 2차 W04 → 19차 AI06
+          // 시안C 1차(2026-10-27): AI 연출 이미지 대신 실제 장비·로봇 사진(이다결 님 메모 3번). 화학세정은 로봇을 쓰지 않아 흡입차 사진
+          { svc: 'S01', label: 'Cleaning', photo: 'R27' },   // 흡입차와 호스로 연결된 로봇
+          { svc: 'S02', label: 'Catalyst', photo: 'W05' },   // 스크루 궤도형 흡입 로봇
+          { svc: 'S03', label: 'Chemical', photo: 'W01' },   // 진공흡입차와 연결 호스
+          { svc: 'S04', label: 'Dredging', photo: 'W06' },   // 파쇄 장치 궤도형 장비
+          { svc: 'S05', label: 'Pipeline', photo: 'R42' }    // 카메라 헤드 소형 주행 장비
         ]
       },
       projects: {                           // 주요 수행 이력
@@ -169,8 +170,10 @@ module.exports = {
       },
       process: {                            // 현장 진행 방식
         title: '현장 진행 방식',                                         // 구역 제목
-        caption: '로봇은 설비 안에서, 흡입차는 밖에서 호스로 연결해 작업합니다.', // 사진 아래 설명 (단계 이름은 현장 진행 방식 페이지와 같은 데이터)
-        summary: '현장 검토부터 회수물·폐기물 처리까지, 일곱 단계로 진행합니다.',   // 시안 B(5차): 일곱 단계 목록 대신 보이는 한 문장. 지우면 단계 이름 일곱 줄이 다시 나온다
+        photo: 'P03',                                                      // 시안C 1차: 사람이 들어가기 어려운 반응기 안의 로봇 (기본 R27)
+        caption: '사람이 들어가기 위험한 반응기 안에 로봇이 먼저 들어갑니다.',   // 사진 아래 짧은 설명
+        steps4: true,                                                      // 시안C 1차: 7단계 대신 4줄(사실은 tools/build.js STEPS4). false 면 아래 summary 한 문장
+        summary: '현장 검토부터 회수물·폐기물 처리까지, 일곱 단계로 진행합니다.',
         button: '현장 진행 방식 자세히 보기'                               // 버튼 문구
       },
       envB: {                               // 환경 띠 (시안 B 12차) — 새 문장은 이 세 줄뿐(확인요청서 2-9). 사실 칸 4개는 tools/build.js
@@ -188,6 +191,7 @@ module.exports = {
       },
       company: {                            // 회사 소개
         title: '회사 소개',                 // 구역 제목 (소개 문장은 사실이라 tools/build.js 의 회사 정보에 있다)
+        lab: true,                          // 시안C 1차: 자체 개발 한 줄과 근거 두 개(사실은 tools/build.js LAB_LINE)
         button: '회사 소개 자세히 보기'      // 버튼 문구
       },
       cta: {                               // 맨 아래 남색 문의 띠 — 메인 페이지 문의 띠에만 쓰인다 (메인 밖은 아래 common.cta)
