@@ -2415,3 +2415,49 @@ html[lang="en"] .phero__lead { max-width: 44em; }
   .bizCh__dots i.on { width: 20px; border-radius: 3px; background: var(--navy); }
   .bizCh__dots span { margin-left: 8px; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
 }
+
+/* 시안C 6차: 주요 수행 이력 — 분류 탭(.rtab). 첫 탭 '로봇 투입 작업'. 한 번에 한 분류만, 사진은 상자 없이 */
+.rtab__bar { display: flex; gap: 6px 30px; border-bottom: 1px solid var(--line); margin-bottom: clamp(28px, 3vw, 40px); overflow-x: auto; scrollbar-width: none; }
+.rtab__bar::-webkit-scrollbar { display: none; }
+.rtab__bar button { appearance: none; background: none; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; padding: 12px 0 13px; font: inherit; font-size: var(--fs-sm); font-weight: 600; letter-spacing: -0.01em; color: var(--muted); white-space: nowrap; cursor: pointer; transition: color 0.2s, border-color 0.2s; }
+.rtab__bar button:hover { color: var(--ink); }
+.rtab__bar button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--brand); }
+.rtab__bar button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; border-radius: 2px; }
+.rtab__panel { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 56px); align-items: start; animation: rtabIn 0.35s var(--ease); }
+.rtab__panel[hidden] { display: none; }
+.rtab__panel--field { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }   /* 분야 탭: 사진 원본이 720~800px 이라 반반으로 */
+@keyframes rtabIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.rtab__media { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.rtab__media figure { margin: 0; }
+.rtab__main { grid-column: 1 / -1; }
+.rtab__fig { display: block; border-radius: var(--radius-lg); overflow: hidden; background: var(--soft-2); aspect-ratio: 16 / 9; }
+.rtab__sub .rtab__fig { aspect-ratio: 3 / 2; }
+.rtab__panel--field .rtab__main .rtab__fig { aspect-ratio: 3 / 2; }
+.rtab__fig img { width: 100%; height: 100%; object-fit: cover; }
+.rtab__media figcaption { margin-top: 9px; font-size: var(--fs-xs); color: var(--muted); line-height: 1.5; }
+.rtab__media figcaption b { display: inline-block; min-width: 1.4em; color: var(--brand); font-weight: 700; font-variant-numeric: tabular-nums; }
+.rtab__text h3 { margin: 0; font-size: var(--fs-h3); letter-spacing: var(--ls-tight); line-height: 1.25; }
+.rtab__how { margin: 12px 0 0; font-size: var(--fs-body); color: var(--text); line-height: 1.75; }
+.rtab__kit { margin: 14px 0 0; font-size: var(--fs-xs); color: var(--muted); }
+.rtab__kit b { color: var(--ink); font-weight: 600; margin-right: 8px; }
+.rtab__lh { margin: 26px 0 0; font-size: var(--fs-xs); font-weight: 600; color: var(--ink); letter-spacing: 0.01em; display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 8px; border-bottom: 1px solid var(--ink); }
+.rtab__lh span { color: var(--muted); font-weight: 500; font-variant-numeric: tabular-nums; }
+.rtab__list { list-style: none; margin: 0; padding: 0; }
+.rtab__list li { display: grid; grid-template-columns: 7.6em minmax(0, 1fr) auto; gap: 0 12px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.rtab__list time { font-size: var(--fs-xs); color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.rtab__list .t { font-size: var(--fs-sm); color: var(--ink); font-weight: 500; letter-spacing: -0.015em; line-height: 1.5; }
+.rtab__list .n { font-size: var(--fs-xs); color: var(--muted); white-space: nowrap; }
+.rtab__list .chip { height: 20px; padding: 0 7px; font-size: 10.5px; margin-left: 8px; vertical-align: 2px; }
+.rtab__src { margin: 10px 0 0; font-size: 11.5px; color: var(--muted); }
+.rtab__more { margin-top: 18px; }
+.rtab__note { margin: 30px 0 0; font-size: var(--fs-xs); color: var(--muted); }
+@media (max-width: 960px) {
+  .rtab__bar { gap: 0 22px; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); }
+  .rtab__panel, .rtab__panel--field { grid-template-columns: 1fr; gap: 22px; }
+  .rtab__media { gap: 12px; }
+  .rtab__fig, .rtab__panel--field .rtab__main .rtab__fig { aspect-ratio: 16 / 10; }
+  .rtab__sub .rtab__fig { aspect-ratio: 4 / 3; }
+  .rtab__media figcaption { font-size: 12px; margin-top: 7px; }
+  .rtab__list li { grid-template-columns: 6.8em minmax(0, 1fr); }
+  .rtab__list .n { grid-column: 2; white-space: normal; }
+}

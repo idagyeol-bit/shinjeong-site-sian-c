@@ -220,6 +220,28 @@
       chUpd();
     }
 
+    /* ---------- 5-2. 주요 수행 이력 분류 탭(시안C 6차): 누르면 그 분류만, 화살표 키로 이동 ---------- */
+    var rtBar = document.querySelector('.rtab__bar');
+    if (rtBar) {
+      var rtTabs = Array.prototype.slice.call(rtBar.querySelectorAll('[role="tab"]'));
+      var rtShow = function (tab) {
+        rtTabs.forEach(function (t) {
+          var on = t === tab; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1;
+          var p = document.getElementById(t.getAttribute('aria-controls'));
+          if (p) { if (on) { p.removeAttribute('hidden'); p.classList.add('is-in'); } else p.setAttribute('hidden', ''); }
+        });
+        if (tab.scrollIntoView) tab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      };
+      rtTabs.forEach(function (t, i) {
+        t.addEventListener('click', function () { rtShow(t); });
+        t.addEventListener('keydown', function (e) {
+          var j = i;
+          if (e.key === 'ArrowRight') j = (i + 1) % rtTabs.length; else if (e.key === 'ArrowLeft') j = (i - 1 + rtTabs.length) % rtTabs.length; else if (e.key === 'Home') j = 0; else if (e.key === 'End') j = rtTabs.length - 1; else return;
+          e.preventDefault(); rtShow(rtTabs[j]); rtTabs[j].focus();
+        });
+      });
+    }
+
     /* ---------- 6. 현재 연도 ---------- */
     var y = document.querySelector('[data-year]');
     if (y) y.textContent = String(new Date().getFullYear());

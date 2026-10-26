@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ko" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>시안C 메인 · 주요 수행 이력 — 로봇 투입 작업 + 분야별</title>
+<link rel="stylesheet" href="../../css/tokens.css">
+<link rel="stylesheet" href="../../css/site.css">
+<style>
+/* ===== 주요 수행 이력 (시안C 6차 후보): 분류 탭 — 첫 탭은 '로봇 투입 작업' =====
+   한 번에 한 분류만 크게. 사진은 상자 없이, 글은 시안C 그대로. */
+.rtab__bar { display: flex; gap: 6px 30px; border-bottom: 1px solid var(--line); margin-bottom: clamp(28px, 3vw, 40px); overflow-x: auto; scrollbar-width: none; }
+.rtab__bar::-webkit-scrollbar { display: none; }
+.rtab__bar button { appearance: none; background: none; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; padding: 12px 0 13px; font: inherit; font-size: var(--fs-sm); font-weight: 600; letter-spacing: -0.01em; color: var(--muted); white-space: nowrap; cursor: pointer; transition: color 0.2s, border-color 0.2s; }
+.rtab__bar button:hover { color: var(--ink); }
+.rtab__bar button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--brand); }
+.rtab__bar button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; border-radius: 2px; }
+.rtab__panel { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 56px); align-items: start; animation: rtabIn 0.35s var(--ease); }
+.js .rtab__panel[hidden] { display: none; }
+@keyframes rtabIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+/* 사진 */
+.rtab__media { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.rtab__media figure { margin: 0; }
+.rtab__main { grid-column: 1 / -1; }
+.rtab__fig { display: block; border-radius: var(--radius-lg); overflow: hidden; background: var(--soft-2); aspect-ratio: 16 / 9; }
+.rtab__sub .rtab__fig { aspect-ratio: 3 / 2; }
+.rtab__panel--field { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }   /* 분야 탭: 사진 원본이 작아(720~800px) 반반으로 */
+.rtab__panel--field .rtab__main .rtab__fig { aspect-ratio: 3 / 2; }
+.rtab__fig img { width: 100%; height: 100%; object-fit: cover; }
+.rtab__media figcaption { margin-top: 9px; font-size: var(--fs-xs); color: var(--muted); line-height: 1.5; }
+.rtab__media figcaption b { display: inline-block; min-width: 1.4em; color: var(--brand); font-weight: 700; font-variant-numeric: tabular-nums; }
+/* 글 */
+.rtab__text h3 { margin: 0; font-size: var(--fs-h3); letter-spacing: var(--ls-tight); line-height: 1.25; }
+.rtab__how { margin: 12px 0 0; font-size: var(--fs-body); color: var(--text); line-height: 1.75; }
+.rtab__kit { margin: 14px 0 0; font-size: var(--fs-xs); color: var(--muted); }
+.rtab__kit b { color: var(--ink); font-weight: 600; margin-right: 8px; }
+.rtab__lh { margin: 26px 0 0; font-size: var(--fs-xs); font-weight: 600; color: var(--ink); letter-spacing: 0.01em; display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 8px; border-bottom: 1px solid var(--ink); }
+.rtab__lh span { color: var(--muted); font-weight: 500; font-variant-numeric: tabular-nums; }
+.rtab__list { list-style: none; margin: 0; padding: 0; }
+.rtab__list li { display: grid; grid-template-columns: 7.6em minmax(0, 1fr) auto; gap: 0 12px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.rtab__list time { font-size: var(--fs-xs); color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.rtab__list .t { font-size: var(--fs-sm); color: var(--ink); font-weight: 500; letter-spacing: -0.015em; line-height: 1.5; }
+.rtab__list .n { font-size: var(--fs-xs); color: var(--muted); white-space: nowrap; }
+.rtab__list .chip { height: 20px; padding: 0 7px; font-size: 10.5px; margin-left: 8px; vertical-align: 2px; }
+.rtab__src { margin: 10px 0 0; font-size: 11.5px; color: var(--muted); }
+.rtab__more { margin-top: 18px; }
+.rtab__note { margin: 30px 0 0; font-size: var(--fs-xs); color: var(--muted); }
+@media (max-width: 960px) {
+  .rtab__bar { gap: 0 22px; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); }
+  .rtab__panel { grid-template-columns: 1fr; gap: 22px; }
+  .rtab__media { gap: 12px; }
+  .rtab__fig { aspect-ratio: 16 / 10; }
+  .rtab__panel--field .rtab__main .rtab__fig { aspect-ratio: 16 / 10; }
+  .rtab__sub .rtab__fig { aspect-ratio: 4 / 3; }
+  .rtab__media figcaption { font-size: 12px; margin-top: 7px; }
+  .rtab__list li { grid-template-columns: 6.8em minmax(0, 1fr); }
+  .rtab__list .n { grid-column: 2; white-space: normal; }
+}
+</style>
+</head>
+<body>
+
+<section class="section rtab" aria-labelledby="rtab-title">
+  <div class="wrap">
+    <div class="head">
+      <div><h2 id="rtab-title">주요 수행 이력</h2></div>
+      <p class="lead">2020~2023년, 4개 발주처와 4년 연속 단가계약을 맺었습니다. 로봇을 투입한 작업과 분야별 실적을 모았습니다.</p>
+    </div>
+
+    <div class="rtab__bar" role="tablist" aria-label="수행 이력 분류">
+      <button role="tab" id="rt-robot" aria-controls="rp-robot" aria-selected="true">로봇 투입 작업</button>
+      <button role="tab" id="rt-s01" aria-controls="rp-s01" aria-selected="false" tabindex="-1">설비 클리닝</button>
+      <button role="tab" id="rt-s02" aria-controls="rp-s02" aria-selected="false" tabindex="-1">촉매·충진물</button>
+      <button role="tab" id="rt-s04" aria-controls="rp-s04" aria-selected="false" tabindex="-1">준설·슬러지</button>
+      <button role="tab" id="rt-s03" aria-controls="rp-s03" aria-selected="false" tabindex="-1">화학세정</button>
+      <button role="tab" id="rt-s05" aria-controls="rp-s05" aria-selected="false" tabindex="-1">관로·지하 조사</button>
+    </div>
+
+    <!-- 탭 1: 로봇 투입 작업 — 어떻게 하는지 사진 세 장 + 기록 -->
+    <div class="rtab__panel rtab__panel--robot" role="tabpanel" id="rp-robot" aria-labelledby="rt-robot">
+      <div class="rtab__media">
+        <figure class="rtab__main"><span class="rtab__fig"><img src="../../assets/photos/P03-1600.jpg" alt="촉매가 쌓인 반응기 안에 투입된 흡입 로봇과 호스"></span>
+          <figcaption><b>1</b>로봇이 먼저 들어가 반응기 안의 촉매를 흡입합니다.</figcaption></figure>
+        <figure class="rtab__sub"><span class="rtab__fig"><img src="_img/P16-761.jpg" alt="제어 차량 안에서 모니터를 보며 조종하는 작업자들"></span>
+          <figcaption><b>2</b>작업자는 설비 밖 제어 차량에서 조종합니다.</figcaption></figure>
+        <figure class="rtab__sub"><span class="rtab__fig"><img src="_img/P17-815.jpg" alt="설비 내부를 네 화면으로 보여 주는 CCTV 모니터"></span>
+          <figcaption><b>3</b>CCTV로 내부를 실시간으로 확인합니다.</figcaption></figure>
+      </div>
+      <div class="rtab__text">
+        <h3>로봇 투입 작업</h3>
+        <p class="rtab__how">로봇이 먼저 들어가 위험 물질을 회수합니다. 작업자는 설비 밖 제어 차량에서 CCTV로 안을 보며 조종하고, 위험이 줄어든 뒤에야 들어가 남은 것을 마무리합니다.</p>
+        <p class="rtab__kit"><b>구성</b>로봇 · CCTV · 제어 차량 · 진공흡입차 · 분리장치</p>
+        <h4 class="rtab__lh">로봇 투입이 기록된 작업 <span>2021~2023</span></h4>
+        <ul class="rtab__list">
+          <li><time>2023.09~2023.11</time><span class="t">폐수처리장 유량조정조 슬러지 준설</span><span class="n">준설·슬러지</span></li>
+          <li><time>2023.06</time><span class="t">설비 내부 Cleaning</span><span class="n">설비 클리닝</span></li>
+          <li><time>2023.02~2023.04</time><span class="t">반응기 로봇 촉매 Unloading</span><span class="n">촉매·충진물</span></li>
+          <li><time>2022.03</time><span class="t">Catalyst (ID 1,800)</span><span class="n">촉매 제거 · Normal</span></li>
+          <li><time>2022.02</time><span class="t">Drum</span><span class="n">Vessel/Drum Cleaning · Phenol</span></li>
+          <li><time>2021.11</time><span class="t">WWT Tank (ID 20,000)</span><span class="n">Tank Cleaning</span></li>
+          <li><time>2021.11</time><span class="t">Catalyst (ID 1,600)</span><span class="n">촉매 제거</span></li>
+          <li><time>2021.08~2022.03</time><span class="t">Cray Filter (ID 1,800)</span><span class="n">N2 분위기 · 4회</span></li>
+        </ul>
+        <p class="rtab__src">2023년은 회사소개서(2024), 2021~2022년은 기술소개서(2025) 기준</p>
+        <div class="rtab__more"><a class="tlink" href="process.html">현장 진행 방식 자세히 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+    </div>
+
+    <!-- 탭 2: 설비 클리닝 -->
+    <div class="rtab__panel rtab__panel--field" role="tabpanel" id="rp-s01" aria-labelledby="rt-s01" hidden>
+      <div class="rtab__media">
+        <figure class="rtab__main"><span class="rtab__fig"><img src="../../assets/photos/P01-800.jpg" alt="탱크 안에서 고압 세척을 하는 작업자 두 명"></span><figcaption>탱크 안 고압 세척 작업</figcaption></figure>
+      </div>
+      <div class="rtab__text">
+        <h3>설비 클리닝</h3>
+        <p class="rtab__how">탱크·Pond·배수로 안의 잔류물과 퇴적물을 제거합니다. 위험한 내부에는 흡입 로봇을 먼저 넣고, 작업자는 밖에서 조종합니다.</p>
+        <h4 class="rtab__lh">수행 실적 <span>2020~2023</span></h4>
+        <ul class="rtab__list">
+          <li><time>2020~2023</time><span class="t">Pond Cleaning 단가계약</span></li>
+          <li><time>2023.06</time><span class="t">설비 내부 Cleaning<em class="chip">로봇 적용</em></span></li>
+          <li><time>2020.05~2020.11</time><span class="t">위험물 저장탱크 개방검사 Cleaning</span></li>
+        </ul>
+        <div class="rtab__more"><a class="tlink" href="service-equipment-cleaning.html">설비 클리닝 자세히 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+    </div>
+
+    <!-- 탭 3: 촉매·충진물 -->
+    <div class="rtab__panel rtab__panel--field" role="tabpanel" id="rp-s02" aria-labelledby="rt-s02" hidden>
+      <div class="rtab__media">
+        <figure class="rtab__main"><span class="rtab__fig"><img src="_img/P15-720.jpg" alt="알갱이 충진물 위에서 흡입 작업 중인 로봇"></span><figcaption>충진물 위에서 흡입 작업 중인 로봇</figcaption></figure>
+      </div>
+      <div class="rtab__text">
+        <h3>촉매·충진물 작업</h3>
+        <p class="rtab__how">반응기의 촉매와 충진물을 꺼내고 교체합니다.</p>
+        <h4 class="rtab__lh">수행 실적 <span>2022~2023</span></h4>
+        <ul class="rtab__list">
+          <li><time>2023.02~2023.04</time><span class="t">반응기 로봇 촉매 Unloading<em class="chip">로봇 적용</em></span></li>
+          <li><time>2023.03~2023.06</time><span class="t">건조제 교체</span></li>
+          <li><time>2023.03</time><span class="t">흡착제 교체</span></li>
+          <li><time>2022.05</time><span class="t">대정비 촉매 교체</span></li>
+        </ul>
+        <div class="rtab__more"><a class="tlink" href="service-catalyst-media.html">촉매·충진물 작업 자세히 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+    </div>
+
+    <!-- 탭 4: 준설·슬러지 -->
+    <div class="rtab__panel rtab__panel--field" role="tabpanel" id="rp-s04" aria-labelledby="rt-s04" hidden>
+      <div class="rtab__media">
+        <figure class="rtab__main"><span class="rtab__fig"><img src="../../assets/photos/W03-1496.jpg" alt="맨홀에 호스를 넣어 작업하는 두 작업자"></span><figcaption>맨홀에 호스를 넣어 작업하는 작업자들</figcaption></figure>
+      </div>
+      <div class="rtab__text">
+        <h3>준설·슬러지 회수</h3>
+        <p class="rtab__how">하수관과 처리시설의 퇴적물을 준설하고 슬러지를 회수합니다.</p>
+        <h4 class="rtab__lh">수행 실적 <span>2020~2023</span></h4>
+        <ul class="rtab__list">
+          <li><time>2020~2023</time><span class="t">준설작업 단가계약</span></li>
+          <li><time>2023.09~2023.11</time><span class="t">폐수처리장 유량조정조 슬러지 준설<em class="chip">로봇 적용</em></span></li>
+          <li><time>2023.07</time><span class="t">공정 내 배수로 슬러지 준설</span></li>
+        </ul>
+        <div class="rtab__more"><a class="tlink" href="service-dredging-sludge.html">준설·슬러지 회수 자세히 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+    </div>
+
+    <!-- 탭 5: 화학세정 -->
+    <div class="rtab__panel rtab__panel--field" role="tabpanel" id="rp-s03" aria-labelledby="rt-s03" hidden>
+      <div class="rtab__media">
+        <figure class="rtab__main"><span class="rtab__fig"><img src="../../assets/photos/W01-1600.jpg" alt="산업설비 현장에 배치된 진공흡입차와 연결 호스"></span><figcaption>현장에 배치된 진공흡입차와 연결 호스</figcaption></figure>
+      </div>
+      <div class="rtab__text">
+        <h3>화학세정</h3>
+        <p class="rtab__how">배관과 열교환기, 냉각탑, 보일러 튜브를 세정합니다.</p>
+        <h4 class="rtab__lh">수행 실적 <span>2022</span></h4>
+        <ul class="rtab__list">
+          <li><time>2022.05~2022.06</time><span class="t">정기보수 APH·열교환기 튜브 Cleaning</span></li>
+        </ul>
+        <div class="rtab__more"><a class="tlink" href="service-chemical-cleaning.html">화학세정 자세히 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+    </div>
+
+    <!-- 탭 6: 관로·지하 조사 -->
+    <div class="rtab__panel rtab__panel--field" role="tabpanel" id="rp-s05" aria-labelledby="rt-s05" hidden>
+      <div class="rtab__media">
+        <figure class="rtab__main"><span class="rtab__fig"><img src="../../assets/photos/R42-1600.jpg" alt="카메라 헤드와 바퀴를 갖춘 소형 주행 장비"></span><figcaption>카메라 헤드를 갖춘 소형 주행 장비</figcaption></figure>
+      </div>
+      <div class="rtab__text">
+        <h3>관로·지하 조사 및 보수</h3>
+        <p class="rtab__how">CCTV와 GPR로 조사하고, 굴착 없이 보수합니다.</p>
+        <h4 class="rtab__lh">수행 실적 <span>2022</span></h4>
+        <ul class="rtab__list">
+          <li><time>2022.01~2022.12</time><span class="t">하수관거 CCTV 조사</span></li>
+        </ul>
+        <div class="rtab__more"><a class="tlink" href="service-inspection-repair.html">관로·지하 조사 및 보수 자세히 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+    </div>
+
+    <p class="rtab__note">사진은 분야별 작업 장면과 장비이며, 목록에 적힌 실적의 현장을 찍은 것은 아닙니다.</p>
+    <div class="mt-28"><a class="btn btn--line btn--sm" href="projects.html">수행 이력 12건 모두 보기 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var bar = document.querySelector('.rtab__bar'); if (!bar) return;
+  var tabs = Array.prototype.slice.call(bar.querySelectorAll('[role="tab"]'));
+  function show(tab) {
+    tabs.forEach(function (t) {
+      var on = t === tab; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1;
+      var p = document.getElementById(t.getAttribute('aria-controls')); if (p) { if (on) p.removeAttribute('hidden'); else p.setAttribute('hidden', ''); }
+    });
+    tab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { show(t); });
+    t.addEventListener('keydown', function (e) {
+      var k = e.key, j = i;
+      if (k === 'ArrowRight') j = (i + 1) % tabs.length; else if (k === 'ArrowLeft') j = (i - 1 + tabs.length) % tabs.length; else if (k === 'Home') j = 0; else if (k === 'End') j = tabs.length - 1; else return;
+      e.preventDefault(); show(tabs[j]); tabs[j].focus();
+    });
+  });
+})();
+</script>
+</body>
+</html>

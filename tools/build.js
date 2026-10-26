@@ -147,7 +147,11 @@ const PHOTOS = {
   P13: { id: 'P13', w: 306, h: 279, sizes: [306], alt: '반응기 옆에 배치된 진공흡입차와 분리장치', cap: '반응기 옆의 진공흡입차와 분리장치' },
   P14: { id: 'P14', w: 537, h: 539, sizes: [537], alt: '도로에서 GPR 장비를 밀며 지하매설물을 조사하는 작업자', cap: '도로 위 GPR 조사' },
   U03: { id: 'U03', w: 1600, h: 1067, sizes: [640, 1000, 1600, 2400], alt: '야간 조명이 켜진 플랜트의 배관과 설비', cap: '야간 플랜트 배관 설비' },
-  U04: { id: 'U04', w: 1600, h: 901, sizes: [640, 1000, 1600], alt: '석유화학 단지 안에서 안전 구획을 세우고 작업 중인 신정개발 흡입차', cap: '안전 구획을 세운 석유화학 단지 안 작업 현장' }
+  U04: { id: 'U04', w: 1600, h: 901, sizes: [640, 1000, 1600], alt: '석유화학 단지 안에서 안전 구획을 세우고 작업 중인 신정개발 흡입차', cap: '안전 구획을 세운 석유화학 단지 안 작업 현장' },
+  /* 시안C 6차 (2026-10-27 이다결 님 결정): 메인 주요 수행 이력(분류 탭)용. 셋 다 기술소개서(2025) PDF 사진 예외 — 파일은 축소·크롭·얼굴 흐림만(확대 없음). 출처 tools/photo-plan.json */
+  P15: { id: 'P15', w: 720, h: 480, sizes: [720], alt: '알갱이 충진물 위에서 흡입 작업 중인 로봇', cap: '충진물 위에서 흡입 작업 중인 로봇' },
+  P16: { id: 'P16', w: 761, h: 507, sizes: [761], alt: '제어 차량 안에서 모니터를 보며 조종하는 작업자들', cap: '제어 차량 안에서 모니터를 보는 작업자들' },
+  P17: { id: 'P17', w: 815, h: 543, sizes: [815], alt: '설비 내부를 네 화면으로 보여 주는 CCTV 모니터', cap: '설비 내부를 보여 주는 CCTV 모니터' }
 };
 const P = (id) => PHOTOS[id];
 
@@ -795,6 +799,31 @@ const WHAT_CHART = [
   { svc: 'S04', photo: 'W10', one: '하수관과 처리시설의 퇴적물을 준설하고 슬러지를 회수합니다.', where: '하수관 · 오수관 · 처리시설', gear: '무인준설로봇 · 무인로더 · 데칸타' },
   { svc: 'S05', photo: 'P14', one: 'CCTV와 GPR로 조사하고, 굴착 없이 보수합니다.', where: '관로 · 맨홀 · 지하매설물', gear: '관로 CCTV 로봇 · CCTV 조사차량 · GPR' }
 ];
+
+/* 시안C 6차: 메인 '주요 수행 이력'을 분류 탭으로 — 첫 탭 '로봇 투입 작업'.
+   ROBOT_HOW: 기술소개서(2025) 3-2 작업 Procedure(p.17·19: 무인 Robot 투입 → 작업자 투입)·3-3 효율성 비교(p.24: CCTV 내부 감시 → 실시간 내부 확인)와 FAQ 문장을 합친 한 문단.
+   ROBOT_KIT: 기술소개서(2025) p.18 '공사개략도(촉매)'에 그려진 구성(Robot·CCTV·Control Car·Vacuum Car·Separator).
+   ROBOT_WORKS_TECH: 기술소개서(2025) p.25 '3-4 공사 실적 — 파트너사별 실적 정리'. 파트너사 글자(G사·A사·L사·H사)는 빼고 종류·기간·비고만 옮겼다.
+     'Cray Filter'는 원문 표기 그대로(Clay 의 오타일 수 있음 — 발주처 확인 전에는 고치지 않는다). 비고의 '촉매 제거'·'Tank Cleaning'·'Vessel/Drum Cleaning'은 같은 자료 3-5 적용 사례의 제목.
+   회사소개서(2024)의 로봇 적용 3건은 PROJECTS 에서 robot:'stated' 로 꺼낸다. */
+const ROBOT_HOW = '로봇이 먼저 들어가 위험 물질을 회수합니다. 작업자는 설비 밖 제어 차량에서 CCTV로 안을 보며 조종하고, 위험이 줄어든 뒤에야 들어가 남은 것을 마무리합니다.';
+const ROBOT_KIT = '로봇 · CCTV · 제어 차량 · 진공흡입차 · 분리장치';
+const ROBOT_WORKS_TECH = [
+  { period: '2022.03', title: 'Catalyst (ID 1,800)', note: '촉매 제거 · Normal' },            // H사 Catalyst (ID 1,800) 22.03.14~15 Normal
+  { period: '2022.02', title: 'Drum', note: 'Vessel/Drum Cleaning · Phenol' },               // L사 Drum 22.02.22 Phenol
+  { period: '2021.11', title: 'WWT Tank (ID 20,000)', note: 'Tank Cleaning' },               // L사 WWT Tank (ID 20,000) 21.11.20~22
+  { period: '2021.11', title: 'Catalyst (ID 1,600)', note: '촉매 제거' },                     // A사 Catalyst (ID 1,600) 21.11.11~12
+  { period: '2021.08~2022.03', title: 'Cray Filter (ID 1,800)', note: 'N2 분위기 · 4회' }    // G사 Cray Filter (ID 1,800) 21.08~22.03 N2, 4회
+];
+/* 로봇 투입 사진 세 장(순서대로 1·2·3) — 설명은 사진에 보이는 것 + 위 ROBOT_HOW 의 절차 */
+const ROBOT_SHOTS = [
+  { photo: 'P03', cap: '로봇이 먼저 들어가 반응기 안의 촉매를 흡입합니다.' },
+  { photo: 'P16', cap: '작업자는 설비 밖 제어 차량에서 조종합니다.' },
+  { photo: 'P17', cap: 'CCTV로 내부를 실시간으로 확인합니다.' }
+];
+/* 분야 탭 사진 (로봇 탭·사업분야 차트와 겹치지 않게 골랐다) */
+const PROJ_TAB_PHOTO = { S01: 'P01', S02: 'P15', S04: 'W03', S03: 'W01', S05: 'R42' };
+const PROJ_TAB_ORDER = ['S01', 'S02', 'S04', 'S03', 'S05'];   // 실적이 많은 분야부터
 
 /* ===================== 도우미 ===================== */
 const esc = (s) => String(s)
@@ -1735,6 +1764,65 @@ ${REC_HEAD}
 ${feat.map((p) => recRow(p)).join('\n')}
       </ul>
       <div class="mt-28" data-reveal><a class="btn btn--line btn--sm" href="projects.html">${fill(c.button, { n: PROJECTS.length })} ${arrow(18)}</a></div>
+    </div>
+  </section>
+`;
+  },
+
+  /* 시안C 6차: 주요 수행 이력 — 분류 탭(첫 탭 '로봇 투입 작업' + 분야 5개). 한 번에 한 분류만 크게.
+     글은 CFG.home.copy.projects(leadTabs·robotTab·robotTitle·listRobot·listField·note·moreRobot), 사실은 위 ROBOT_* · PROJECTS · WHAT_CHART */
+  projTabs: (bg) => {
+    const c = CFG.home.copy.projects;
+    const years = (rows) => { const ys = rows.flatMap((r) => (String(r.period).match(/20\d\d/g) || [])).map(Number); return ys.length ? (Math.min(...ys) === Math.max(...ys) ? String(ys[0]) : `${Math.min(...ys)}~${Math.max(...ys)}`) : ''; };
+    const row = (period, title, robot, note) => `            <li><time>${esc(period)}</time><span class="t">${esc(title)}${robot ? ' <em class="chip">로봇 적용</em>' : ''}</span>${note ? `<span class="n">${esc(note)}</span>` : ''}</li>`;
+    const isContract = (p) => /^20\d\d~20\d\d$/.test(p.period);
+    const rank = (p) => (isContract(p) ? 0 : p.robot === 'stated' ? 1 : 2) * 100 + PROJECT_ORDER.indexOf(p.id);
+    const robotRows = PROJECTS.filter((p) => p.robot === 'stated').sort((x, y) => y.period.localeCompare(x.period)).map((p) => row(p.period, p.title, false, p.cat))
+      .concat(ROBOT_WORKS_TECH.map((w) => row(w.period, w.title, false, w.note)));
+    const robotYears = years(PROJECTS.filter((p) => p.robot === 'stated').concat(ROBOT_WORKS_TECH));
+    const tabs = [{ id: 'robot', label: c.robotTab || '로봇 투입 작업' }].concat(PROJ_TAB_ORDER.map((id) => ({ id: id.toLowerCase(), label: (PROJECTS.find((p) => p.svc === id) || {}).cat || svc(id).title })));   // 탭 이름은 수행 이력 분류 이름(PROJECT_CATS)과 같게
+    const fieldPanel = (id) => { const s = svc(id); const w = WHAT_CHART.find((x) => x.svc === id) || {}; const rows = PROJECTS.filter((p) => p.svc === id).sort((x, y) => rank(x) - rank(y)); const ph = P(PROJ_TAB_PHOTO[id]);
+      return `    <div class="rtab__panel rtab__panel--field" role="tabpanel" id="rp-${id.toLowerCase()}" aria-labelledby="rt-${id.toLowerCase()}" hidden>
+      <div class="rtab__media">
+        <figure class="rtab__main"><span class="rtab__fig">${photo(ph, '(max-width:960px) 92vw, 560px')}</span><figcaption>${esc(ph.cap)}</figcaption></figure>
+      </div>
+      <div class="rtab__text">
+        <h3>${esc(s.title)}</h3>
+${w.oneLead || w.one ? `        <p class="rtab__how">${esc(w.oneLead || w.one)}</p>\n` : ''}        <h4 class="rtab__lh">${esc(c.listField || '수행 실적')} <span>${years(rows)}</span></h4>
+        <ul class="rtab__list">
+${rows.map((p) => row(p.period, p.title, p.robot === 'stated', '')).join('\n')}
+        </ul>
+        <div class="rtab__more"><a class="tlink" href="${s.file}">${esc(s.title)} 자세히 ${arrow(14)}</a></div>
+      </div>
+    </div>`; };
+    return `  <!-- ===== 주요 수행 이력 (시안C 6차): 분류 탭 — 로봇 투입 작업 + 분야별 ===== -->
+  <section class="section${BG_CLASS[bg]} rtab" id="record" aria-labelledby="rtab-title">
+    <div class="wrap">
+      <div class="head">
+        <div data-reveal><h2 id="rtab-title">${esc(c.title)}</h2></div>
+        <p class="lead">${esc(c.leadTabs || c.lead)}</p>
+      </div>
+      <div class="rtab__bar" role="tablist" aria-label="수행 이력 분류" data-reveal>
+${tabs.map((t, i) => `        <button type="button" role="tab" id="rt-${t.id}" aria-controls="rp-${t.id}" aria-selected="${i === 0 ? 'true' : 'false'}"${i === 0 ? '' : ' tabindex="-1"'}>${esc(t.label)}</button>`).join('\n')}
+      </div>
+    <div class="rtab__panel rtab__panel--robot" role="tabpanel" id="rp-robot" aria-labelledby="rt-robot" data-reveal>
+      <div class="rtab__media">
+${ROBOT_SHOTS.map((sh, i) => `        <figure class="${i === 0 ? 'rtab__main' : 'rtab__sub'}"><span class="rtab__fig">${photo(P(sh.photo), i === 0 ? '(max-width:960px) 92vw, 640px' : '(max-width:960px) 45vw, 310px')}</span><figcaption><b>${i + 1}</b>${esc(sh.cap)}</figcaption></figure>`).join('\n')}
+      </div>
+      <div class="rtab__text">
+        <h3>${esc(c.robotTitle || '로봇 투입 작업')}</h3>
+        <p class="rtab__how">${esc(ROBOT_HOW)}</p>
+        <p class="rtab__kit"><b>구성</b>${esc(ROBOT_KIT)}</p>
+        <h4 class="rtab__lh">${esc(c.listRobot || '로봇 투입이 기록된 작업')} <span>${robotYears}</span></h4>
+        <ul class="rtab__list">
+${robotRows.join('\n')}
+        </ul>
+        <p class="rtab__src">2023년은 회사소개서(2024), 2021~2022년은 기술소개서(2025) 기준</p>
+        <div class="rtab__more"><a class="tlink" href="process.html">${esc(c.moreRobot || '현장 진행 방식 자세히')} ${arrow(14)}</a></div>
+      </div>
+    </div>
+${PROJ_TAB_ORDER.map(fieldPanel).join('\n')}
+${c.note ? `      <p class="rtab__note">${esc(c.note)}</p>\n` : ''}      <div class="mt-28" data-reveal><a class="btn btn--line btn--sm" href="projects.html">${fill(c.button, { n: PROJECTS.length })} ${arrow(18)}</a></div>
     </div>
   </section>
 `;
