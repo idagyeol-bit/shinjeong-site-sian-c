@@ -142,7 +142,12 @@ const PHOTOS = {
   P06: { id: 'P06', w: 1000, h: 667, sizes: [640], alt: '진공흡입차 앞에서 호스 작업을 지켜보는 신정개발 작업자', cap: '흡입차와 신정개발 작업자' },
   P08: { id: 'P08', w: 1000, h: 667, sizes: [640, 800], alt: '도로 위에서 GPR 장비를 밀며 조사하는 작업자', cap: '도로 GPR 조사' },
   P10: { id: 'P10', w: 1000, h: 667, sizes: [640, 1000], alt: '방호복을 입고 탱크 안에서 흡입 호스를 다루는 작업자', cap: '기존 작업 · 작업자가 탱크 안에서 직접 흡입' },
-  P11: { id: 'P11', w: 1000, h: 667, sizes: [640, 960], alt: '탱크 바닥에서 흡입 호스를 끌고 작업하는 로봇', cap: '무인장비 적용 · 로봇이 탱크 안에서 흡입' }
+  P11: { id: 'P11', w: 1000, h: 667, sizes: [640, 960], alt: '탱크 바닥에서 흡입 호스를 끌고 작업하는 로봇', cap: '무인장비 적용 · 로봇이 탱크 안에서 흡입' },
+  /* 시안C 4차 (2026-10-27 이다결 님 결정): 메인 사업분야 차트용. P13·P14 는 회사소개서(2024) PDF 사진 예외, U03·U04 는 이다결 님 제공 사진. 출처 tools/photo-plan.json */
+  P13: { id: 'P13', w: 306, h: 279, sizes: [306], alt: '반응기 옆에 배치된 진공흡입차와 분리장치', cap: '반응기 옆의 진공흡입차와 분리장치' },
+  P14: { id: 'P14', w: 537, h: 539, sizes: [537], alt: '도로에서 GPR 장비를 밀며 지하매설물을 조사하는 작업자', cap: '도로 위 GPR 조사' },
+  U03: { id: 'U03', w: 1600, h: 1067, sizes: [640, 1000, 1600, 2400], alt: '야간 조명이 켜진 플랜트의 배관과 설비', cap: '야간 플랜트 배관 설비' },
+  U04: { id: 'U04', w: 1600, h: 901, sizes: [640, 1000, 1600], alt: '석유화학 단지 안에서 안전 구획을 세우고 작업 중인 신정개발 흡입차', cap: '안전 구획을 세운 석유화학 단지 안 작업 현장' }
 };
 const P = (id) => PHOTOS[id];
 
@@ -777,6 +782,18 @@ ${FINDER.rows.map((r) => { const s = svc(r.svc); const ph = P(WHAT_TILES.find((w
   </section>
 `;
 }
+
+/* 시안C 4차 (2026-10-27 이다결 님 선택 '안 B'): 메인 사업분야 차트 — 큰 카드 1 + 작은 카드 4.
+   현장(where)은 CARD_CHIPS·SERVICES.targets, 투입(gear)은 SERVICES.equip·EQUIP_GROUPS rows 의 장비 이름만 줄여 씀 — 새 사실 없음 */
+const WHAT_CHART = [
+  { svc: 'S01', photo: 'R27', lead: true,
+    one: '탱크·Pond·배수로 안의 잔류물과 퇴적물을 제거합니다. 위험한 내부에는 흡입 로봇을 먼저 넣고, 작업자는 밖에서 조종합니다.',
+    where: '탱크 · Pond · 배수로 · R.T.O', gear: '흡입 로봇 · 제어 차량 · 진공흡입차' },
+  { svc: 'S02', photo: 'P13', where: '반응기 · 흡착탑 · 건조기', gear: '흡입 로봇 · 분리장치' },
+  { svc: 'S03', photo: 'U03', where: '배관 · 열교환기 · 냉각탑 · 보일러', gear: '화학세정용 내산장비' },
+  { svc: 'S04', photo: 'W10', where: '하수관 · 오수관 · 처리시설', gear: '무인준설로봇 · 데칸타' },
+  { svc: 'S05', photo: 'P14', where: '관로 · 맨홀 · 지하매설물', gear: '관로 CCTV 로봇 · GPR' }
+];
 
 /* ===================== 도우미 ===================== */
 const esc = (s) => String(s)
@@ -1611,6 +1628,30 @@ ${ROBOT_BY_SVC[s.id] ? `          <p class="bizB__robot"><span>투입 로봇</sp
     </article>`;
   }).join('\n')}
 ${contactFooterOnly() ? '' : `    <div class="bizB__end"><a class="btn btn--line btn--sm" href="contact.html">${c.button} ${arrow(18)}</a></div>`}
+  </section>
+`;
+  },
+
+  /* 시안C 4차: 사업분야 차트 (안 B) — 큰 카드 1 + 작은 카드 4. 사실은 WHAT_CHART */
+  whatChart: (bg) => {
+    const c = CFG.home.copy.what;
+    return `  <!-- ===== 사업분야 차트 (시안C 4차, 안 B) ===== -->
+  <section class="section${BG_CLASS[bg]} bizCh" id="what" aria-labelledby="bizCh-title">
+    <div class="wrap">
+      <div class="head">
+        <div data-reveal><h2 id="bizCh-title">${esc(c.titleChart || c.title)}</h2></div>
+${c.leadChart ? `        <p class="lead">${esc(c.leadChart)}</p>` : ''}
+      </div>
+      <div class="bizCh__grid" data-reveal>
+${WHAT_CHART.map((w, i) => { const s = svc(w.svc); const ph = P(w.photo); return `        <a class="bizCh__card${w.lead ? ' bizCh__card--lead' : ''}" href="${s.file}">
+          <span class="bizCh__fig">${photo(ph, w.lead ? '(max-width:960px) 92vw, 640px' : '(max-width:960px) 44vw, 300px')}<span class="bizCh__no" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span></span>
+          <span class="bizCh__body">
+            <h3>${esc(s.title)} ${arrow(14)}</h3>
+${w.one ? `            <p class="bizCh__one">${esc(w.one)}</p>\n` : ''}            <dl class="bizCh__dl"><dt>현장</dt><dd>${esc(w.where)}</dd><dt>투입</dt><dd class="bizCh__gear">${esc(w.gear)}</dd></dl>
+          </span>
+        </a>`; }).join('\n')}
+      </div>
+    </div>
   </section>
 `;
   },

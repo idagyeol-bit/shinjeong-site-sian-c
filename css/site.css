@@ -2352,3 +2352,34 @@ html[lang="en"] .phero__lead { max-width: 44em; }
   .finder__row { grid-template-columns: 96px 1fr 20px; grid-template-areas: "th have arr" "th do arr"; row-gap: 4px; }
   .finder__th { grid-area: th; } .finder__have { grid-area: have; } .finder__do { grid-area: do; } .finder__arrow { grid-area: arr; }
 }
+
+/* 시안C 4차: 사업분야 차트 (안 B) — 큰 카드 1 + 작은 카드 4 */
+.bizCh__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.bizCh__card { display: flex; flex-direction: column; color: inherit; text-decoration: none; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; transition: box-shadow 0.3s var(--ease), transform 0.3s var(--ease); }
+.bizCh__card:hover { box-shadow: var(--shadow-lift); transform: translateY(-2px); }
+.bizCh__card--lead { grid-column: span 2; grid-row: span 2; }
+.bizCh__fig { position: relative; display: block; aspect-ratio: 4 / 3; background: var(--soft-2); overflow: hidden; }
+.bizCh__card--lead .bizCh__fig { aspect-ratio: auto; flex: 1; min-height: 320px; }
+.bizCh__fig img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
+.bizCh__card:hover .bizCh__fig img { transform: scale(1.04); }
+.bizCh__no { position: absolute; left: 12px; top: 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: #fff; background: rgba(14, 46, 74, 0.78); padding: 4px 8px; border-radius: 3px; }
+.bizCh__body { display: flex; flex-direction: column; flex: 1; padding: 18px 18px 20px; }
+.bizCh__body h3 { margin: 0; font-size: var(--fs-h4); letter-spacing: var(--ls-normal); display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.bizCh__card--lead .bizCh__body h3 { font-size: var(--fs-h3); }
+.bizCh__body h3 svg { flex: none; color: var(--brand); opacity: 0; transform: translateX(-4px); transition: opacity 0.3s, transform 0.3s; }
+.bizCh__card:hover h3 svg { opacity: 1; transform: none; }
+.bizCh__one { margin: 8px 0 0; font-size: var(--fs-body); color: var(--text); line-height: 1.7; }
+.bizCh__dl { margin: 14px 0 0; padding: 12px 0 0; border-top: 1px solid var(--line-soft); display: grid; grid-template-columns: 52px 1fr; gap: 5px 10px; font-size: var(--fs-xs); line-height: 1.5; }
+.bizCh__dl dt { color: var(--muted); }
+.bizCh__dl dd { margin: 0; color: var(--ink); }
+.bizCh__dl dd.bizCh__gear { color: var(--brand); font-weight: 600; }
+@media (max-width: 960px) {
+  .bizCh__grid { grid-template-columns: 1fr 1fr; }
+  .bizCh__card--lead { grid-column: span 2; grid-row: auto; }
+  .bizCh__card--lead .bizCh__fig { aspect-ratio: 16 / 9; min-height: 0; }
+}
+@media (max-width: 520px) {
+  .bizCh__grid { grid-template-columns: 1fr; }
+  .bizCh__card--lead { grid-column: auto; }
+  .bizCh__body { padding: 14px 16px 18px; }
+}
