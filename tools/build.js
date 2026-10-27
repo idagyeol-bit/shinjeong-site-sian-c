@@ -1973,6 +1973,33 @@ ${pcards(c.cards.map((k) => k.photo), c.cards.map((k) => k.title), null, c.cards
   /* 회사 소개 — 소개 문장(C.intro)과 연도 숫자는 사실 데이터라 여기에 둔다 */
   company: (bg) => {
     const c = CFG.home.copy.company;
+    /* 시안C 8차(c.layout === 'bleed'): 사진 50%(화면 왼쪽 끝까지) · 글 50%. 제목은 메시지 한 줄(c.headline), 숫자 셋은 글 안에.
+       숫자: 설립(C.founded) · 기업부설연구소 2017(연혁 2017.11) · 흡입 로봇 5세대(LAB_LINE '탱크·Pond용 흡입 로봇 1~5세대 개발'). 환경 한 줄은 ENV_LINE.
+       소개 문장은 c.introHome(메인용, '로봇이 먼저 들어가 위험 물질을 걷어내고, 작업자는 그다음에' — FAQ·기술소개서 절차와 같은 사실)이 있으면 그것, 없으면 C.intro */
+    if (c.layout === 'bleed') {
+      const ph = P(c.photo || 'R01');
+      return `  <!-- ===== 회사 소개 (시안C 8차: 사진 50 · 글 50, 숫자는 글 안에) ===== -->
+  <section class="section${BG_CLASS[bg]} co" id="company" aria-labelledby="co-title">
+    <div class="co__grid">
+      <figure class="co__media" data-reveal>
+        ${photo(ph, '(max-width:960px) 100vw, 50vw')}
+        <figcaption>${esc(ph.cap)}</figcaption>
+      </figure>
+      <div class="co__body" data-reveal data-delay="90">
+        <span class="co__eyebrow">${esc(c.title)}</span>
+        <h2 id="co-title">${c.headline}</h2>
+        <p class="co__intro">${esc(c.introHome || C.intro)}</p>
+        <ul class="co__nums">
+          <li><b>${C.founded}</b><span>설립</span></li>
+          <li><b>2017</b><span>기업부설연구소 설립</span></li>
+          <li><b>5<i>세대</i></b><span>자체 개발 흡입 로봇</span></li>
+        </ul>
+${c.env ? `        <p class="co__env"><b>${esc(c.envLabel || '환경')}</b>${ENV_LINE.map((x) => esc(x)).join(' · ')}</p>\n` : ''}        <div class="co__act"><a class="btn btn--line" href="company.html">${c.button} ${arrow(18)}</a></div>
+      </div>
+    </div>
+  </section>
+`;
+    }
     return `  <!-- ===== 회사 소개 ===== -->
   <section class="section${BG_CLASS[bg]}">
     <div class="wrap">
