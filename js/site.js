@@ -242,6 +242,26 @@
       });
     }
 
+    /* ---------- 5-4 (9차). 무인 솔루션 페이지(unmanned.html): 페이지 안 차례 강조 · 적용 설비 필터 · 로봇 칸 탭 ---------- */
+    /* 다른 페이지에는 해당 요소가 없어 아무 일도 하지 않는다. 스크립트가 없어도 로봇 5칸·첫 탭 내용은 모두 보인다(필터·탭 전환만 안 됨). */
+    (function(){
+      /* 9차: 무인 솔루션 — 페이지 안 차례 강조 */
+      var links=[].slice.call(document.querySelectorAll('.us-nav a')),secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+      function upd(){var y=scrollY+140,i=0;secs.forEach(function(s,k){if(s&&s.offsetTop<=y)i=k});links.forEach(function(a,k){a.classList.toggle('is-on',k===i)})}
+      if(links.length){addEventListener('scroll',upd,{passive:true});upd();}
+      /* 9차: 적용 설비 필터 — 단추와 사진 아래 태그가 같은 필터를 움직인다 */
+      var btns=[].slice.call(document.querySelectorAll('.rb-filter button')),cards=[].slice.call(document.querySelectorAll('.rb')),cnt=document.querySelector('[data-count]');
+      function apply(f){btns.forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.f===f))});var n=0;cards.forEach(function(c){var on=f==='all'||(' '+c.dataset.tags+' ').indexOf(' '+f+' ')>-1;c.hidden=!on;if(on)n++});if(cnt)cnt.textContent=(f==='all'?'로봇 ':'이 설비에 해당하는 로봇 ')+n+'종'}
+      btns.forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.f)})});
+      [].slice.call(document.querySelectorAll('.rb__tags a')).forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();apply(a.dataset.f);var r=document.getElementById('robots');if(r)r.scrollIntoView({behavior:'smooth'})})});
+      /* 9차: 로봇 칸 탭 — 6차 수행 이력 탭과 같은 동작(클릭 · ←→ Home End) */
+      [].slice.call(document.querySelectorAll('.rb__tabs')).forEach(function(bar){
+        var tabs=[].slice.call(bar.querySelectorAll('[role="tab"]'));
+        function show(t){tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on?'true':'false');x.tabIndex=on?0:-1;var p=document.getElementById(x.getAttribute('aria-controls'));if(p){if(on)p.removeAttribute('hidden');else p.setAttribute('hidden','')}})}
+        tabs.forEach(function(t,i){t.addEventListener('click',function(){show(t)});t.addEventListener('keydown',function(e){var j=i;if(e.key==='ArrowRight')j=(i+1)%tabs.length;else if(e.key==='ArrowLeft')j=(i-1+tabs.length)%tabs.length;else if(e.key==='Home')j=0;else if(e.key==='End')j=tabs.length-1;else return;e.preventDefault();show(tabs[j]);tabs[j].focus()})});
+      });
+    })();
+
     /* ---------- 6. 현재 연도 ---------- */
     var y = document.querySelector('[data-year]');
     if (y) y.textContent = String(new Date().getFullYear());

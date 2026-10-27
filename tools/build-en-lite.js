@@ -1,7 +1,7 @@
 /* 신정개발 홈페이지 — 시안 B 축약 영문판 생성기 (34차, 2026-10-19 이다결 님 결정)
    - en/index.html · en/technology.html · en/contact.html 3쪽만 만든다. 기존 전체 미러(tools/build-en.js, tools/i18n/en.json)는 쓰지 않고 보존만 한다.
    - 영문 문구는 tools/i18n/en-lite.json 한 곳에 있다(34차 지시서 카피 전문 그대로). 여기서는 문구를 만들지 않는다.
-   - 숫자·연락처·주소 숫자 같은 사실 값은 국문 생성 결과(index.html · company.html · technology.html · contact.html, 곧 tools/build.js 의 데이터)에서 읽는다.
+   - 숫자·연락처·주소 숫자 같은 사실 값은 국문 생성 결과(index.html · company.html · unmanned.html · contact.html, 곧 tools/build.js 의 데이터)에서 읽는다.
      영문 파일에 숫자를 손으로 다시 치지 않는다(국문과 어긋남 방지). 읽지 못하면 멈춘다.
    - 모든 영문 쪽: noindex, 시안 띠(영문), 제목 앞 [Draft], 바닥글 AI 고지(영문). 머리말은 Home · Technology · Contact + KOR(국문 홈으로).
    실행: node tools/build.js → node tools/build-en-lite.js */
@@ -23,14 +23,14 @@ const read = (f) => { const p = path.join(ROOT, f); if (!fs.existsSync(p)) fail(
 const pick = (html, re, what) => { const m = html.match(re); if (!m) fail(`국문 페이지에서 ${what}을(를) 찾지 못했습니다`); return m[1]; };
 
 /* ---------- 사실 값: 국문 생성 결과에서 ---------- */
-const ko = { index: read('index.html'), company: read('company.html'), technology: read('technology.html'), contact: read('contact.html') };
+const ko = { index: read('index.html'), company: read('company.html'), technology: read('unmanned.html'), contact: read('contact.html') };
 const statsBlock = pick(ko.index, /<section[^>]*class="[^"]*\btrust\b[^"]*"[\s\S]*?<div class="stats"[^>]*>([\s\S]*?)<\/div>\s*<div class="trust__info"/, '숫자 띠');
 const stats = [...statsBlock.matchAll(/data-count="(\d+)"/g)].map((m) => +m[1]);
 if (stats.length !== 4) fail(`숫자 띠 값이 4개가 아닙니다: ${stats.join(', ')}`);
 const founded = +pick(ko.company, /<dt>설립<\/dt><dd>(\d{4})년/, '설립 연도');   // 회사 소개 '한눈에 보기' 표(설립 1992년)
 const rnd = +pick(ko.company, /<dt>기업부설연구소<\/dt><dd>(\d{4})년/, '기업부설연구소 설립 연도');
-const generations = (ko.technology.match(/class="genB-ms[ "]/g) || []).length;
-if (!generations) fail('세대 이정표(genB-ms)를 찾지 못했습니다');
+const generations = ((ko.technology.match(/<ol class="rb-hist">([\s\S]*?)<\/ol>/) || ['', ''])[1].match(/<li\b/g) || []).length;   // 시안C 9차: 무인 솔루션 페이지(unmanned.html)의 세대 띠 <li> 수(= 5)
+if (!generations) fail('세대 띠(rb-hist)를 찾지 못했습니다');
 const pdfTech = pick(ko.technology, /href="(assets\/docs\/[^"]*robot[^"]*public\.pdf)"/, '기술소개서 공개용 PDF 링크');
 const tel = pick(ko.contact, /<a href="tel:\d+">([\d-]+)<\/a>/, '대표 전화');
 const fax = pick(ko.contact, /팩스 ([\d-]+)/, '팩스');
