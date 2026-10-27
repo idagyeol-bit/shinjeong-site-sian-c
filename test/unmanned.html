@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="ko" class="is-preview">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>[시험 시안] 무인 솔루션 | 신정개발</title>
+<meta name="description" content="작업자 투입 전에 무인 로봇이 유해물질을 먼저 제거합니다. 신정개발 무인 로봇 시스템 — 현장에 투입하는 로봇과 적용 설비, 작업 절차, 적용 시 고려사항, 연구개발·특허.">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#0e2e4a">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="신정개발">
+<meta property="og:title" content="[시험 시안] 무인 솔루션 | 신정개발">
+<meta property="og:description" content="작업자 투입 전에 무인 로봇이 유해물질을 먼저 제거합니다. 신정개발 무인 로봇 시스템 — 현장에 투입하는 로봇과 적용 설비, 작업 절차, 적용 시 고려사항, 연구개발·특허.">
+<meta property="og:url" content="https://idagyeol-bit.github.io/shinjeong-site-sian-c/test/unmanned.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://idagyeol-bit.github.io/shinjeong-site-sian-c/assets/photos/M08-1600.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1067">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/logo/shinjeong-symbol.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/logo/shinjeong-symbol.png">
+<link rel="preload" href="../assets/fonts/sub/PretendardVariable-0.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../css/tokens.test.css">
+<link rel="stylesheet" href="../css/site.css">
+</head>
+<body class="moB-root" data-page="unmanned">
+<a class="skip-link" href="#main">본문 바로가기</a>
+<div class="pvbar" role="note">검토용 시험 시안입니다 · <a href="../index.html">기본판 보기</a> · 공식 홈페이지 <a href="https://sjdevel.com/" target="_blank" rel="noopener">sjdevel.com</a></div>
+<header class="hdr">
+  <a class="hdr__brand" href="index.html">   <!-- 35차: 보이는 글자와 다른 aria-label 을 뺀다(접근성 'label-content-name-mismatch'). 이름은 보이는 상호 글자 그대로 -->
+    <img class="hdr__logo" src="../assets/logo/shinjeong-symbol.svg" width="36" height="44" alt="" aria-hidden="true">
+    <span class="hdr__brandtext"><b>(주)신정개발</b><span aria-hidden="true">SHINJEONG DEVELOPMENT</span></span>
+  </a>
+  <nav class="gnb" aria-label="주요 메뉴">
+      <div class="gnb__item" data-sub>
+        <a href="services.html">사업분야</a>
+        <div class="gnb__drop">
+          <div class="gnb__box">
+            <ul>
+              <li><a href="service-equipment-cleaning.html"><b>설비 클리닝</b><span>탱크·Pond·배수로·R.T.O 내부의 잔류물과 퇴적물을 제거합니다.</span></a></li>
+              <li><a href="service-catalyst-media.html"><b>촉매·충진물 작업</b><span>반응기의 촉매·충진물을 제거하고 교체합니다.</span></a></li>
+              <li><a href="service-chemical-cleaning.html"><b>화학세정</b><span>배관·열교환기·냉각탑·보일러를 세정합니다.</span></a></li>
+              <li><a href="service-dredging-sludge.html"><b>준설·슬러지 회수</b><span>하수·오수관과 처리시설의 퇴적물을 준설하고 슬러지를 회수합니다.</span></a></li>
+              <li><a href="service-inspection-repair.html"><b>관로·지하 조사 및 보수</b><span>관로 CCTV·GPR로 조사하고, 비굴착으로 보수합니다.</span></a></li>
+            </ul>
+            <a class="gnb__all" href="services.html">사업분야 전체 보기 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <a href="unmanned.html" aria-current="page">무인 솔루션</a>
+      <a href="projects.html">수행 이력</a>
+      <a href="company.html">회사 소개</a>
+      <a href="news.html">소식</a>
+  </nav>
+  <div class="hdr__act">
+    <a class="hdr__cta" href="contact.html">현장 문의 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="메뉴 열기"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" aria-hidden="true">
+  <nav aria-label="전체 메뉴">
+    <a href="services.html">사업분야<span>01</span></a>
+    <div class="drawer__sub">
+      <a href="service-equipment-cleaning.html">설비 클리닝</a>
+      <a href="service-catalyst-media.html">촉매·충진물 작업</a>
+      <a href="service-chemical-cleaning.html">화학세정</a>
+      <a href="service-dredging-sludge.html">준설·슬러지 회수</a>
+      <a href="service-inspection-repair.html">관로·지하 조사 및 보수</a>
+    </div>
+    <a href="unmanned.html" aria-current="page">무인 솔루션<span>02</span></a>
+    <a href="projects.html">수행 이력<span>03</span></a>
+    <a href="company.html">회사 소개<span>04</span></a>
+    <a href="news.html">소식<span>05</span></a>
+    <a href="contact.html">현장 문의<span>06</span></a>
+  </nav>
+  <div class="drawer__foot">
+    (주)신정개발 · 산업설비·환경시설 클리닝 전문기업 · 1992년부터<br>
+    전라남도 여수시 봉계2길 27<br>
+    <a href="tel:0616825537">061-682-5537</a><br>
+    <a href="mailto:shinjeong@sjdevel.com">shinjeong@sjdevel.com</a>
+  </div>
+</div>
+
+<main id="main">
+  <section class="phero">
+    <div class="phero__grid" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>무인 솔루션</h1>
+      <p class="phero__lead"><span class="phero__quote">“사람이 없는 곳에 인명 사고도 없다.”</span>작업자 투입 전에 무인 로봇이 유해물질을 먼저 제거합니다. 왜 그렇게 하는지, 현장이 어떻게 진행되는지, 투입하는 로봇이 어느 설비에 쓰이는지 정리했습니다.</p>
+    </div>
+  </section>
+
+  <nav class="crumb" aria-label="현재 위치">
+    <div class="wrap">
+      <ol>
+        <li><a href="index.html">홈</a></li>
+        <li><span aria-current="page">무인 솔루션</span></li>
+      </ol>
+    </div>
+  </nav>
+
+  <nav class="us-nav" aria-label="이 페이지의 차례"><div class="wrap">
+    <a href="#why" class="is-on">왜</a><a href="#how">어떻게</a><a href="#robots">투입 로봇</a><a href="#conditions">적용 시 고려사항</a><a href="#rnd">연구개발 · 특허</a>
+  </div></nav>
+
+  <!-- 1. 왜 (기술소개서 4쪽 숫자 그대로) -->
+  <section class="section section--sm us-key" id="why" aria-label="무인 로봇 시스템 개발 배경">
+    <div class="wrap">
+      <div class="stats stats--flush">
+        <div class="stat"><b>50<i>명</i></b><span>밀폐공간 질식 재해 100명당 사망</span></div>
+        <div class="stat"><b>200<i>회</i></b><span>신정개발 연간 밀폐공간 작업</span></div>
+        <div class="stat"><b>800<i>명</i></b><span>연간 밀폐공간 투입 인원</span></div>
+        <div class="stat"><b>1,200<i>시간</i></b><span>연간 밀폐공간 작업시간</span></div>
+      </div>
+      <p class="note">고용노동부 2014~2023 산업재해조사 · 신정개발 연간 작업 기준 — 기술소개서(2025) '무인 로봇 시스템 개발 배경'. 개발 목적: 작업자 투입 전 유해물질 사전 제거를 통한 위험성 감소, 연속 가동 중 작업 효율 유지.</p>
+    </div>
+  </section>
+
+  <!-- 2. 어떻게 (기술소개서 17~20쪽 · 회사소개서 33·36쪽) -->
+  <section class="section section--soft" id="how">
+    <div class="wrap">
+      <div class="how">
+        <div>
+          <div class="how__fig"><img src="../assets/photos/R27-1600.jpg" srcset="../assets/photos/R27-640.jpg 640w, ../assets/photos/R27-1000.jpg 1000w, ../assets/photos/R27-1600.jpg 1600w" sizes="(max-width:960px) 92vw, 760px" width="1000" height="667" alt="야외에서 흡입차와 호스로 연결된 로봇" loading="lazy" decoding="async"></div>
+          <p class="how__cap">호스로 흡입차와 연결된 로봇</p>
+        </div>
+        <div>
+          <span class="rb__eyebrow">어떻게 하는가</span>
+          <h2>로봇은 설비 안에서 작업하고,<br>작업자는 밖에서 원격 조정합니다.</h2>
+          <ul class="how__list">
+            <li><b>설비 안 · Robot</b><span>내부 잔여 위험 물질을 1차 회수하고, 전면부 Jet Nozzle로 내부를 Cleaning합니다.</span></li>
+            <li><b>설비 밖 · Vacuum Car · Separator</b><span>회수물은 Vacuum Car로 보내고, 촉매 작업에서는 Separator로 분리합니다.</span></li>
+            <li><b>설비 밖 · Control Car</b><span>작업운용 제어반(OCV)에서 원격 조정하고, CCTV로 내부를 감시합니다(RCMS).</span></li>
+            <li><b>작업자 투입</b><span>위험 물질을 최소화한 뒤 작업자가 들어가 내부 최종 잔여물을 제거합니다(Final Cleaning).</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="how__pics">
+        <figure><div class="f"><img src="../assets/photos/P17-815.jpg" srcset="../assets/photos/P17-815.jpg 815w" sizes="(max-width:960px) 92vw, 640px" width="815" height="543" alt="설비 내부를 네 화면으로 보여 주는 CCTV 모니터" loading="lazy" decoding="async"></div><figcaption><b>CCTV</b>설비 내부를 보여 주는 CCTV 모니터</figcaption></figure>
+        <figure><div class="f"><img src="../assets/photos/P16-761.jpg" srcset="../assets/photos/P16-761.jpg 761w" sizes="(max-width:960px) 92vw, 640px" width="761" height="507" alt="제어 차량 안에서 모니터를 보며 조종하는 작업자들" loading="lazy" decoding="async"></div><figcaption><b>Control Car</b>제어 차량 안에서 모니터를 보는 작업자들</figcaption></figure>
+      </div>
+      <ol class="us-steps" aria-label="Robot-Tank Cleaning System 절차">
+        <li class="us-step"><em>01</em><h3>현장 적용 가능성 검토</h3><p>사전 Test 실시</p></li>
+        <li class="us-step"><em>02</em><h3>System 설치</h3></li>
+        <li class="us-step"><em>03</em><h3>1차 Washing</h3><p>Vacuum Car 이용, 외부에서 잔여 물질 제거</p></li>
+        <li class="us-step is-robot"><em>04</em><h3>Robot 투입</h3><p>Shell side 내부 잔여 위험 물질 1차 회수</p></li>
+        <li class="us-step is-robot"><em>05</em><h3>2차 Washing</h3><p>Robot 전면부 Jet Nozzle 이용한 내부 Cleaning</p></li>
+        <li class="us-step"><em>06</em><h3>Final Cleaning</h3><p>작업자 투입 · 내부 최종 잔여물 제거 · 위험 물질 최소화</p></li>
+        <li class="us-step"><em>07</em><h3>폐기물 처리</h3><p>폐기물량 감소 · 처리 기간 단축</p></li>
+      </ol>
+      <p class="us-src">출처: 기술소개서(2025) 'Robot-Tank Cleaning System' 절차의 항목 그대로</p>
+      <details class="us-fold" id="dewater"><summary>회수물 탈수 과정 — 데칸타 · 필터프레스</summary>
+        <ul>
+          <li>데칸타(원심분리): 원액 투입 → 세정수 투입 → 원심분리 → Cake 배출 → 분리액 배출</li>
+          <li>필터프레스(여과·압착): 원액 투입 → 여과판 압착 → 여과액 배출 → Cake 탈거 → 여과판 세척</li>
+          <li>효과: 폐기물 처리량 감량 · 폐기물 처리비용 감소 · 폐기물 처리시간 단축</li>
+        </ul>
+        <p class="us-src">출처: 기술소개서(2025) 폐기물 처리 시스템 (PROCESS.decanter · filterpress · dewaterEffect 그대로)</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- 3. 현장 투입 로봇 (기술소개서 7~8쪽 · 회사소개서 22~23쪽) -->
+  <section class="section" id="robots">
+    <div class="wrap">
+      <div class="head"><div><h2>현장에 투입하는 로봇</h2></div><p class="lead">기술소개서 2-2 '장비 보유 현황'과 회사소개서 보유 장비에 있는 로봇입니다. 설비를 고르면 그 설비에 해당하는 로봇만 남습니다. 기술소개서 6장의 시제품은 아래 연구개발 구역에 따로 둡니다.</p></div>
+
+      <div class="rb-filter" role="group" aria-label="적용 설비로 고르기">
+        <span>적용 설비</span>
+        <button type="button" data-f="all" aria-pressed="true">전체</button>
+        <button type="button" data-f="tank" aria-pressed="false">Tank · Drum</button>
+        <button type="button" data-f="pond" aria-pressed="false">Pond · Open Ditch</button>
+        <button type="button" data-f="reactor" aria-pressed="false">Reactor (촉매 · 충진물)</button>
+        <button type="button" data-f="dredge" aria-pressed="false">준설 — 처리시설 · 하수도</button>
+        <button type="button" data-f="pipe" aria-pressed="false">관로 — CCTV 조사</button>
+        <button type="button" data-f="narrow" aria-pressed="false">협소 공간 · 실외 토사</button>
+      </div>
+      <p class="rb-count" data-count>로봇 5종</p>
+
+      <div class="rb-hist__h"><h3>무인 Vacuum 로봇 세대별</h3><p>개발 연도는 두 문서에 없어 비워 두었습니다 — 확인되면 칸마다 적습니다</p></div>
+      <ol class="rb-hist">
+        <li><em>1세대</em><b>흡입형</b><span>Pond, Tank(관로) · 수중 작업 가능 · 유압 구동</span><i data-gap>연도</i></li>
+        <li><em>2세대</em><b>파쇄 흡입형</b><span>Pond, Open Ditch · 수중 작업 불가 · 전기, 유압 구동</span><i data-gap>연도</i></li>
+        <li><em>3세대</em><b>파쇄 흡입형</b><span>Pond, Tank · 수중 작업 가능 · 유압 구동</span><i data-gap>연도</i></li>
+        <li><em>4세대</em><b>흡입형 · 소형화</b><span>Pond, Tank · 수중 작업 가능 · 유압 구동</span><i data-gap>연도</i></li>
+        <li><em>5세대</em><b>파쇄형 · 소형화</b><span>Pond, Reactor · 수중 작업 가능 · 유압 구동</span><i data-gap>연도</i></li>
+      </ol>
+
+      <!-- 로봇 1 : 흡입 로봇 (흡입형) -->
+      <article class="rb" data-tags="tank pond dredge" id="r-suction">
+        <div class="rb__grid">
+          <div>
+            <figure class="rb__main"><img src="../assets/photos/W05-2400.jpg" srcset="../assets/photos/W05-640.jpg 640w, ../assets/photos/W05-1000.jpg 1000w, ../assets/photos/W05-1600.jpg 1600w, ../assets/photos/W05-2400.jpg 2400w" sizes="(max-width:960px) 92vw, 640px" width="1000" height="667" alt="스크루 궤도형 흡입 로봇" loading="lazy" decoding="async"><figcaption>스크루 궤도형 흡입 로봇</figcaption></figure>
+            <p class="rb__tags"><span>적용 설비</span><a href="#robots" data-f="tank">Tank</a><a href="#robots" data-f="pond">Pond</a><a href="#robots" data-f="dredge">준설</a></p>
+            <div class="rb__thumbs">
+              <figure><div class="f"><img src="../assets/photos/P11-960.jpg" srcset="../assets/photos/P11-640.jpg 640w, ../assets/photos/P11-960.jpg 960w" sizes="(max-width:960px) 22vw, 150px" width="1000" height="667" alt="탱크 바닥에서 흡입 호스를 끌고 작업하는 로봇" loading="lazy" decoding="async"></div><figcaption>탱크 바닥에서 작업하는 로봇</figcaption></figure>
+              <figure><div class="f"><img src="../assets/photos/R13-1600.jpg" srcset="../assets/photos/R13-640.jpg 640w, ../assets/photos/R13-1000.jpg 1000w, ../assets/photos/R13-1600.jpg 1600w" sizes="(max-width:960px) 22vw, 150px" width="1000" height="667" alt="소형 주행 장비, 흡입 헤드 유닛, 유압 호스 묶음" loading="lazy" decoding="async"></div><figcaption>흡입 헤드 유닛</figcaption></figure>
+              <div class="rb__slot" data-gap><b>사진</b>Pond · 준설 작업 장면 요청</div>
+              <div class="rb__slot" data-gap><b>▶ 작업 영상</b>영상 받으면 여기에</div>
+            </div>
+          </div>
+          <div>
+            <span class="rb__eyebrow">무인 Vacuum 로봇 · 흡입형</span>
+            <h2>흡입 로봇<small>Pond · Tank(관로) — 흡입형</small></h2>
+            <p class="rb__use">기존에는 작업자가 탱크 안에 들어가서 하던 작업입니다. 로봇이 내부 잔여 위험 물질을 1차 회수하고, 회수물은 설비 밖 Vacuum Car로 보냅니다.</p>
+            <dl class="rb__meta">
+              <dt>개발</dt><dd>1세대 흡입형 → 4세대 흡입형·소형화 · 개발 연도는 두 문서에 없음<span class="todo" data-gap>확인 중</span></dd>
+              <dt>환경</dt><dd>수중 작업 가능 · 유압 구동 · 준설용</dd>
+            </dl>
+            <div class="rb__spec">
+              <div><em>방식</em><b>흡입형</b></div>
+              <div><em>적용 대상</em><b>Pond · Tank(관로)</b></div>
+              <div><em>구동</em><b>유압</b></div>
+              <div><em>조종</em><b>원격 조정 — Control Car · CCTV</b></div>
+              <div><em>수중 작업</em><b>가능</b></div>
+              <div><em>보유</em><b>무인준설로봇 흡입형 1대</b></div>
+            </div>
+            <div class="rb__act"><a class="btn btn--fill btn--sm" href="contact.html">적용 문의</a><a class="btn btn--line btn--sm" href="../assets/docs/shinjeong-robot-cleaning-system-2025-public.pdf">기술소개서 PDF ↓</a></div>
+          </div>
+        </div>
+        <div class="rb__tabs" role="tablist" aria-label="흡입 로봇 자세히"><button role="tab" id="rt-suction-1" aria-controls="rp-suction-1" aria-selected="true" tabindex="0">개요</button><button role="tab" id="rt-suction-2" aria-controls="rp-suction-2" aria-selected="false" tabindex="-1">작동 방식</button><button role="tab" id="rt-suction-3" aria-controls="rp-suction-3" aria-selected="false" tabindex="-1">세대별 비교</button><button role="tab" id="rt-suction-4" aria-controls="rp-suction-4" aria-selected="false" tabindex="-1">투입 기록</button></div>
+        <div class="rb__panel" role="tabpanel" id="rp-suction-1" aria-labelledby="rt-suction-1">
+          <dl class="us-dl">
+            <dt>어디에</dt><dd>Pond · Tank(관로) · 준설용</dd>
+            <dt>무엇을</dt><dd>내부 잔여 위험 물질 1차 회수 · 전면부 Jet Nozzle로 내부 Cleaning</dd>
+            <dt>어떻게</dt><dd>Control Car에서 원격 조정, CCTV로 내부 감시 · 위험 물질을 최소화한 뒤 작업자 투입(Final Cleaning)</dd>
+          </dl>
+        </div>
+        <div class="rb__panel" role="tabpanel" id="rp-suction-2" aria-labelledby="rt-suction-2" hidden>
+          <ul class="how__list">
+            <li><b>설비 안 · Robot</b><span>내부 잔여 위험 물질을 1차 회수하고, 전면부 Jet Nozzle로 내부를 Cleaning합니다.</span></li>
+            <li><b>설비 밖 · Vacuum Car · Separator</b><span>회수물은 Vacuum Car로 보내고, 촉매 작업에서는 Separator로 분리합니다.</span></li>
+            <li><b>설비 밖 · Control Car</b><span>작업운용 제어반(OCV)에서 원격 조정하고, CCTV로 내부를 감시합니다(RCMS).</span></li>
+            <li><b>작업자 투입</b><span>위험 물질을 최소화한 뒤 작업자가 들어가 내부 최종 잔여물을 제거합니다(Final Cleaning).</span></li>
+          </ul>
+          <p class="us-src">출처: 기술소개서(2025) 작업 Procedure · 공사개략도 · 회사소개서(2024) 협업형 작업지원 로봇시스템</p>
+        </div>
+        <div class="rb__panel" role="tabpanel" id="rp-suction-3" aria-labelledby="rt-suction-3" hidden>
+          <table class="rb__tbl"><thead><tr><th>세대</th><th>방식</th><th>적용 대상</th><th>수중 작업</th><th>구동</th><th>비고</th></tr></thead><tbody>
+            <tr><td>1세대</td><td>흡입형</td><td>Pond, Tank(관로)</td><td>가능</td><td>유압</td><td>—</td></tr>
+            <tr><td>2세대</td><td>파쇄 흡입형</td><td>Pond, Open Ditch</td><td>불가</td><td>전기·유압</td><td>—</td></tr>
+            <tr><td>3세대</td><td>파쇄 흡입형</td><td>Pond, Tank</td><td>가능</td><td>유압</td><td>—</td></tr>
+            <tr><td>4세대</td><td>흡입형</td><td>Pond, Tank</td><td>가능</td><td>유압</td><td>소형화</td></tr>
+            <tr><td>5세대</td><td>파쇄형</td><td>Pond, Reactor</td><td>가능</td><td>유압</td><td>소형화</td></tr>
+          </tbody></table>
+          <p class="us-src">출처: 기술소개서(2025) 장비 보유 현황 — 무인 Vacuum 로봇 (PROCESS.generations 그대로)</p>
+        </div>
+        <div class="rb__panel" role="tabpanel" id="rp-suction-4" aria-labelledby="rt-suction-4" hidden>
+          <p class="note">회사소개서(2024) 실적표에서 비고가 '무인로봇'·'로봇'이거나 공사명에 로봇이 적힌 작업 12건 + 기술소개서(2025) 공사 실적 5건 = 17건 전부. 기록에는 흡입형·파쇄형 구분이 없어 두 로봇에 같은 목록을 보여 줍니다. 발주처·공장 이름은 뺐고, 꼬리표는 원본 비고 칸의 글자입니다.</p>
+          <ul class="rb__rec">
+            <li><time>2023.09~11</time><span>폐수처리장 유량조정조 슬러지 준설 작업<span class="chip">로봇</span></span></li>
+            <li><time>2023.06</time><span>내부 Cleaning 작업 (로봇 적용)</span></li>
+            <li><time>2023.05</time><span>촉매 교체 공사<span class="chip">촉매 · 무인로봇</span></span></li>
+            <li><time>2023.02~04</time><span>Reactor Robot 촉매 Unloading<span class="chip">촉매 · 무인로봇</span></span></li>
+            <li><time>2022.05</time><span>MDEA Storage Tank 내부 Robot Cleaning<span class="chip">무인로봇</span></span></li>
+            <li><time>2022.05</time><span>Skimming 작업 &amp; 흡착제 Loading 작업<span class="chip">촉매 · 무인로봇</span></span></li>
+            <li><time>2022.04~06</time><span>촉매 교체 공사<span class="chip">촉매 · 무인로봇</span></span></li>
+            <li><time>2022.03~04</time><span>1차 반응기 촉매 교체 도급 공사<span class="chip">촉매 · 무인로봇</span></span></li>
+            <li><time>2022.03</time><span>Catalyst (ID 1,800) 촉매 제거 · Normal<span class="chip chip--2">기술소개서</span></span></li>
+            <li><time>2022.02</time><span>Drum — Vessel/Drum Cleaning · Phenol<span class="chip chip--2">기술소개서</span></span></li>
+            <li><time>2022.01</time><span>전처리반응기 촉매교체 작업 (무인화)<span class="chip">촉매 · 무인로봇</span></span></li>
+            <li><time>2021.11</time><span>WWT Tank (ID 20,000) Tank Cleaning<span class="chip chip--2">기술소개서</span></span></li>
+            <li><time>2021.11</time><span>Catalyst (ID 1,600) 촉매 제거<span class="chip chip--2">기술소개서</span></span></li>
+            <li><time>2021.09</time><span>Catalyst Replacement<span class="chip">촉매 · 무인로봇</span></span></li>
+            <li><time>2021.08~22.03</time><span>Clay Filter (ID 1,800) · N₂ 분위기 · 4회<span class="chip chip--2">기술소개서</span></span></li>
+            <li><time>2021.08</time><span>Clay Filter 로봇을 이용한 충진물 Skimming 작업<span class="chip">촉매 · 무인로봇</span></span></li>
+            <li><time>2021.06</time><span>로봇을 활용한 충진물 Unloading Test 작업<span class="chip">촉매 · 무인로봇</span></span></li>
+          </ul>
+          <p class="us-src">기술소개서의 'Cray Filter'는 회사소개서 표기(CLAY FILTER)를 따라 Clay로 적음</p>
+          <p class="more"><a class="tlink" href="index.html#record">로봇 투입 기록 전체 보기 →</a></p>
+        </div>
+      </article>
+
+      <!-- 로봇 2 : 파쇄형 로봇 -->
+      <article class="rb" data-tags="reactor tank pond dredge" id="r-crusher">
+        <div class="rb__grid">
+          <div>
+            <figure class="rb__main"><img src="../assets/photos/W06-1600.jpg" srcset="../assets/photos/W06-640.jpg 640w, ../assets/photos/W06-1000.jpg 1000w, ../assets/photos/W06-1600.jpg 1600w" sizes="(max-width:960px) 92vw, 640px" width="1000" height="667" alt="전면에 파쇄 장치를 갖춘 궤도형 장비와 흡입 호스" loading="lazy" decoding="async"><figcaption>전면에 파쇄 장치를 갖춘 궤도형 장비</figcaption></figure>
+            <p class="rb__tags"><span>적용 설비</span><a href="#robots" data-f="reactor">Reactor</a><a href="#robots" data-f="tank">Tank</a><a href="#robots" data-f="pond">Pond</a><a href="#robots" data-f="dredge">준설</a></p>
+            <div class="rb__thumbs">
+              <figure><div class="f"><img src="../assets/photos/P03-1600.jpg" srcset="../assets/photos/P03-640.jpg 640w, ../assets/photos/P03-1000.jpg 1000w, ../assets/photos/P03-1600.jpg 1600w" sizes="(max-width:960px) 22vw, 150px" width="1000" height="667" alt="촉매가 쌓인 반응기 안에 투입된 흡입 로봇과 호스" loading="lazy" decoding="async"></div><figcaption>반응기 안의 로봇</figcaption></figure>
+              <figure><div class="f"><img src="../assets/photos/P15-720.jpg" srcset="../assets/photos/P15-720.jpg 720w" sizes="(max-width:960px) 22vw, 150px" width="720" height="480" alt="알갱이 충진물 위에서 흡입 작업 중인 로봇" loading="lazy" decoding="async"></div><figcaption>충진물 위의 로봇</figcaption></figure>
+              <figure><div class="f"><img src="../assets/photos/R10-1600.jpg" srcset="../assets/photos/R10-640.jpg 640w, ../assets/photos/R10-1000.jpg 1000w, ../assets/photos/R10-1600.jpg 1600w" sizes="(max-width:960px) 22vw, 150px" width="1000" height="667" alt="전면에 작업 헤드를 갖춘 주황색 궤도형 장비" loading="lazy" decoding="async"></div><figcaption>전면 작업 헤드</figcaption></figure>
+              <div class="rb__slot" data-gap><b>▶ 작업 영상</b>영상 받으면 여기에</div>
+            </div>
+          </div>
+          <div>
+            <span class="rb__eyebrow">무인 Vacuum 로봇 · 파쇄형</span>
+            <h2>파쇄형 로봇<small>Pond · Reactor — 흡입되지 않는 고착 슬러지를 파쇄</small></h2>
+            <p class="rb__use">Sludge가 Vacuum Suction 되지 않을 정도로 고착되거나 점성이 있을 때 파쇄 작업을 합니다. 5세대 파쇄형은 Tank·Reactor 내부의 액체·슬러지 제거에 씁니다.</p>
+            <dl class="rb__meta">
+              <dt>개발</dt><dd>2·3세대 파쇄 흡입형 → 5세대 파쇄형·소형화 · 개발 연도는 두 문서에 없음<span class="todo" data-gap>확인 중</span></dd>
+              <dt>환경</dt><dd>수중 작업 가능 · 유압 구동 · 방폭 대응: 방폭 카메라 원격 감시, 알루미늄 본체, 비철 스크류</dd>
+            </dl>
+            <div class="rb__spec">
+              <div><em>방식</em><b>파쇄형 (2·3세대는 파쇄 흡입형)</b></div>
+              <div><em>적용 대상</em><b>Pond · Reactor · Tank</b></div>
+              <div><em>구동</em><b>유압</b></div>
+              <div><em>조종</em><b>원격 조정 · 방폭 카메라 원격 감시</b></div>
+              <div><em>수중 작업</em><b>가능</b></div>
+              <div><em>본체 · 주행 · 세척</em><b>알루미늄 본체 · 비철(Non-steel) 스크류 · 스크류형/체인형 바퀴 · 전면부 Jet Nozzle</b></div>
+            </div>
+            <div class="rb__act"><a class="btn btn--fill btn--sm" href="contact.html">적용 문의</a><a class="btn btn--line btn--sm" href="../assets/docs/shinjeong-robot-cleaning-system-2025-public.pdf">기술소개서 PDF ↓</a></div>
+          </div>
+        </div>
+        <div class="rb__tabs" role="tablist" aria-label="파쇄형 로봇 자세히"><button role="tab" id="rt-crusher-1" aria-controls="rp-crusher-1" aria-selected="true" tabindex="0">개요</button><button role="tab" id="rt-crusher-2" aria-controls="rp-crusher-2" aria-selected="false" tabindex="-1">작동 방식</button><button role="tab" id="rt-crusher-3" aria-controls="rp-crusher-3" aria-selected="false" tabindex="-1">세대별 비교</button><button role="tab" id="rt-crusher-4" aria-controls="rp-crusher-4" aria-selected="false" tabindex="-1">투입 기록</button></div>
+        <div class="rb__panel" role="tabpanel" id="rp-crusher-1" aria-labelledby="rt-crusher-1">
+          <dl class="us-dl">
+            <dt>어디에</dt><dd>Pond · Reactor · Tank · 준설용</dd>
+            <dt>무엇을</dt><dd>Vacuum Suction 되지 않을 정도로 고착되거나 점성이 있는 Sludge의 파쇄 · 5세대: Tank·Reactor 내부의 액체·슬러지 제거</dd>
+            <dt>어떻게</dt><dd>Control Car에서 원격 조정, 방폭 카메라로 원격 감시 · 위험 물질을 최소화한 뒤 작업자 투입(Final Cleaning)</dd>
+          </dl>
+        </div>
+        <div class="rb__panel" role="tabpanel" id="rp-crusher-2" aria-labelledby="rt-crusher-2" hidden>
+          <ul class="how__list">
+            <li><b>설비 안 · Robot</b><span>내부 잔여 위험 물질을 1차 회수하고, 전면부 Jet Nozzle로 내부를 Cleaning합니다.</span></li>
+            <li><b>설비 밖 · Vacuum Car · Separator</b><span>회수물은 Vacuum Car로 보내고, 촉매 작업에서는 Separator로 분리합니다.</span></li>
+            <li><b>설비 밖 · Control Car</b><span>작업운용 제어반(OCV)에서 원격 조정하고, CCTV로 내부를 감시합니다(RCMS).</span></li>
+            <li><b>작업자 투입</b><span>위험 물질을 최소화한 뒤 작업자가 들어가 내부 최종 잔여물을 제거합니다(Final Cleaning).</span></li>
+          </ul>
+          <p class="us-src">출처: 기술소개서(2025) 작업 Procedure · 공사개략도 · 회사소개서(2024) 협업형 작업지원 로봇시스템</p>
+        </div>
+        <div class="rb__panel" role="tabpanel" id="rp-crusher-3" aria-labelledby="rt-crusher-3" hidden>
+          <table class="rb__tbl"><thead><tr><th>세대</th><th>방식</th><th>적용 대상</th><th>수중 작업</th><th>구동</th><th>비고</th></tr></thead><tbody>
+            <tr><td>1세대</td><td>흡입형</td><td>Pond, Tank(관로)</td><td>가능</td><td>유압</td><td>—</td></tr>
+            <tr><td>2세대</td><td>파쇄 흡입형</td><td>Pond, Open Ditch</td><td>불가</td><td>전기·유압</td><td>—</td></tr>
+            <tr><td>3세대</td><td>파쇄 흡입형</td><td>Pond, Tank</td><td>가능</td><td>유압</td><td>—</td></tr>
+            <tr><td>4세대</td><td>흡입형</td><td>Pond, Tank</td><td>가능</td><td>유압</td><td>소형화</td></tr>
+            <tr><td>5세대</td><td>파쇄형</td><td>Pond, Reactor</td><td>가능</td><td>유압</td><td>소형화</td></tr>
+          </tbody></table>
+          <p class="us-src">출처: 기술소개서(2025) 장비 보유 현황 — 무인 Vacuum 로봇 (PROCESS.generations 그대로)</p>
+        </div>
+        <div class="rb__panel" role="tabpanel" id="rp-crusher-4" aria-labelledby="rt-crusher-4" hidden>
+          <p class="note">회사소개서(2024) 실적표에서 비고가 '무인로봇'·'로봇'이거나 공사명에 로봇이 적힌 작업 12건 + 기술소개서(2025) 공사 실적 5건 = 17건 전부. 기록에는 흡입형·파쇄형 구분이 없어 두 로봇에 같은 목록을 보여 줍니다. 발주처·공장 이름은 뺐고, 꼬리표는 원본 비고 칸의 글자입니다.</p>
+          <ul class="rb__rec">
+            <li><time>2023.09~11</time><span>폐수처리장 유량조정조 슬러지 준설 작업<span class="chip">로봇</span></span></li>
+            <li><time>2023.06</time><span>내부 Cleaning 작업 (로봇 적용)</span></li>
+            <li><time>2023.05</time><span>촉매 교체 공사<span class="chip">촉매 · 무인로봇</span></span></li>
+            <li><time>2023.02~04</time><span>Reactor Robot 촉매 Unloading<span class="chip">촉매 · 무인로봇</span></span></li>
+            <li><time>2022.05</time><span>MDEA Storage Tank 내부 Robot Cleaning<span class="chip">무인로봇</span></span></li>
+            <li><time>2022.05</time><span>Skimming 작업 &amp; 흡착제 Loading 작업<span class="chip">촉매 · 무인로봇</span></span></li>
+            <li><time>2022.04~06</time><span>촉매 교체 공사<span class="chip">촉매 · 무인로봇</span></span></li>
+            <li><time>2022.03~04</time><span>1차 반응기 촉매 교체 도급 공사<span class="chip">촉매 · 무인로봇</span></span></li>
+            <li><time>2022.03</time><span>Catalyst (ID 1,800) 촉매 제거 · Normal<span class="chip chip--2">기술소개서</span></span></li>
+            <li><time>2022.02</time><span>Drum — Vessel/Drum Cleaning · Phenol<span class="chip chip--2">기술소개서</span></span></li>
+            <li><time>2022.01</time><span>전처리반응기 촉매교체 작업 (무인화)<span class="chip">촉매 · 무인로봇</span></span></li>
+            <li><time>2021.11</time><span>WWT Tank (ID 20,000) Tank Cleaning<span class="chip chip--2">기술소개서</span></span></li>
+            <li><time>2021.11</time><span>Catalyst (ID 1,600) 촉매 제거<span class="chip chip--2">기술소개서</span></span></li>
+            <li><time>2021.09</time><span>Catalyst Replacement<span class="chip">촉매 · 무인로봇</span></span></li>
+            <li><time>2021.08~22.03</time><span>Clay Filter (ID 1,800) · N₂ 분위기 · 4회<span class="chip chip--2">기술소개서</span></span></li>
+            <li><time>2021.08</time><span>Clay Filter 로봇을 이용한 충진물 Skimming 작업<span class="chip">촉매 · 무인로봇</span></span></li>
+            <li><time>2021.06</time><span>로봇을 활용한 충진물 Unloading Test 작업<span class="chip">촉매 · 무인로봇</span></span></li>
+          </ul>
+          <p class="us-src">기술소개서의 'Cray Filter'는 회사소개서 표기(CLAY FILTER)를 따라 Clay로 적음</p>
+          <p class="more"><a class="tlink" href="index.html#record">로봇 투입 기록 전체 보기 →</a></p>
+        </div>
+      </article>
+
+      <!-- 로봇 3 : 관로 CCTV 로봇 -->
+      <article class="rb" data-tags="pipe" id="r-cctv">
+        <div class="rb__grid">
+          <div>
+            <figure class="rb__main"><img src="../assets/photos/R42-1600.jpg" srcset="../assets/photos/R42-640.jpg 640w, ../assets/photos/R42-1000.jpg 1000w, ../assets/photos/R42-1600.jpg 1600w" sizes="(max-width:960px) 92vw, 640px" width="1000" height="667" alt="카메라 헤드와 바퀴를 갖춘 소형 주행 장비" loading="lazy" decoding="async"><figcaption>카메라 헤드를 갖춘 소형 주행 장비</figcaption></figure>
+            <p class="rb__tags"><span>적용 설비</span><a href="#robots" data-f="pipe">관로</a></p>
+            <div class="rb__thumbs">
+              <figure><div class="f"><img src="../assets/photos/R34-1600.jpg" srcset="../assets/photos/R34-640.jpg 640w, ../assets/photos/R34-1000.jpg 1000w, ../assets/photos/R34-1600.jpg 1600w" sizes="(max-width:960px) 22vw, 150px" width="1000" height="667" alt="차량에 실린 제어 장치를 다루는 작업자와 발밑의 소형 주행 장비" loading="lazy" decoding="async"></div><figcaption>차량의 제어 장치와 소형 주행 장비</figcaption></figure>
+              <div class="rb__slot" data-gap><b>사진</b>관로 조사 장면 요청</div>
+              <div class="rb__slot" data-gap><b>사진</b>조사 화면 요청</div>
+              <div class="rb__slot" data-gap><b>▶ 작업 영상</b>영상 받으면 여기에</div>
+            </div>
+          </div>
+          <div>
+            <span class="rb__eyebrow">관로조사용 장비</span>
+            <h2>관로 CCTV 로봇<small>관내부 CCTV 조사</small></h2>
+            <p class="rb__use">관내부 CCTV 조사는 회사소개서 사업분야의 업무이고, 2021~2023년 하수관거·하수관로 CCTV 조사용역 실적이 있습니다. 로봇 자체의 사양은 두 문서에 없습니다.</p>
+            <dl class="rb__meta">
+              <dt>개발</dt><dd>도입 시기는 두 문서에 없음<span class="todo" data-gap>확인 중</span></dd>
+              <dt>환경</dt><dd>관로 — 관로조사용 · 하수관거·하수관로 CCTV 조사</dd>
+            </dl>
+            <div class="rb__spec">
+              <div><em>용도</em><b>관로조사용</b></div>
+              <div><em>보유</em><b>관로 CCTV 로봇 1대</b></div>
+              <div><em>함께 보유 (관로조사용)</em><b>CCTV 조사차량 2대 · D=250~600mm</b></div>
+              <div><em>함께 보유 (관로조사용)</em><b>탈취제거 SYSTEM 1SET</b></div>
+            </div>
+            <div class="rb__act"><a class="btn btn--fill btn--sm" href="contact.html">적용 문의</a><a class="btn btn--line btn--sm" href="service-inspection-repair.html">관로·지하 조사 분야 보기</a></div>
+          </div>
+        </div>
+        <div class="rb__tabs" role="tablist" aria-label="관로 CCTV 로봇 자세히"><button role="tab" id="rt-cctv-1" aria-controls="rp-cctv-1" aria-selected="true" tabindex="0">개요</button><button role="tab" id="rt-cctv-2" aria-controls="rp-cctv-2" aria-selected="false" tabindex="-1">조사 기록</button></div>
+        <div class="rb__panel" role="tabpanel" id="rp-cctv-1" aria-labelledby="rt-cctv-1">
+          <dl class="us-dl">
+            <dt>어디에</dt><dd>관로</dd>
+            <dt>무엇을</dt><dd>관내부 CCTV 조사 · 비굴착보수공사도 같은 사업분야에 있음</dd>
+            <dt>기록</dt><dd>하수관거 CCTV 조사용역(2021·2022), 하수관로 정비사업 수밀시험 및 CCTV 조사용역(2022~2023) 등</dd>
+          </dl>
+        </div>
+        <div class="rb__panel" role="tabpanel" id="rp-cctv-2" aria-labelledby="rt-cctv-2" hidden>
+          <ul class="rb__rec rb__rec--one">
+            <li><time>2022.01~12</time><span>하수관거 CCTV 조사<span class="chip">관로 조사</span></span></li>
+          </ul>
+          <p class="us-src">출처: 회사소개서(2024) 실적표 — 하수관거 CCTV 조사용역(2021·2022), 하수관로 정비사업 수밀시험 및 CCTV 조사용역(2022~2023) 등. 수행 이력 페이지 '관로·지하 조사' 분류와 같은 기록</p>
+        </div>
+      </article>
+
+      <!-- 로봇 4 : 무인 로더 (사진 없음 — 같은 틀) -->
+      <article class="rb" data-tags="pond narrow dredge" id="r-loader">
+        <div class="rb__grid">
+          <div>
+            <div class="rb__ph" data-gap><b>사진 요청</b>무인 로더 (大 · 小) 전신 사진</div>
+            <p class="rb__tags"><span>적용 설비</span><a href="#robots" data-f="pond">Pond · Open Ditch</a><a href="#robots" data-f="narrow">협소공간 · 실외</a><a href="#robots" data-f="dredge">준설</a></p>
+            <div class="rb__thumbs">
+              <div class="rb__slot" data-gap><b>사진</b>실외 작업</div>
+              <div class="rb__slot" data-gap><b>사진</b>협소공간 작업</div>
+              <div class="rb__slot" data-gap><b>사진</b>원격 Control</div>
+              <div class="rb__slot" data-gap><b>▶ 작업 영상</b>영상 받으면 여기에</div>
+            </div>
+          </div>
+          <div>
+            <span class="rb__eyebrow">기타 Cleaning 로봇</span>
+            <h2>무인 로더 (大 · 小)<small>토사 · Sludge — 원격 Control</small></h2>
+            <p class="rb__use">大는 실외, 小는 협소공간의 토사·Sludge를 다룹니다. Pond Cleaning에서 Open Ditch·Pond 하부 퇴적물 처리, 작동 설비 하부 퇴적물 처리, 오염 지역 진입로 확보, 인력 작업이 힘든 고착 슬러지 제거에 씁니다.</p>
+            <dl class="rb__meta">
+              <dt>개발</dt><dd>도입 시기는 두 문서에 없음<span class="todo" data-gap>확인 중</span></dd>
+              <dt>환경</dt><dd>실외(大) · 협소공간(小) · 수중 작업 불가 · 비방폭 지역 사용</dd>
+            </dl>
+            <div class="rb__spec">
+              <div><em>대상</em><b>토사 · Sludge</b></div>
+              <div><em>조종</em><b>원격 Control</b></div>
+              <div><em>구동</em><b>전기 · 유압</b></div>
+              <div><em>수중 작업</em><b>불가</b></div>
+              <div><em>장점 · 단점</em><b>연속 작업 가능 · 작업자 안전 확보 / 작업 시간 제한(배터리 교체 및 충전)</b></div>
+              <div><em>보유</em><b>무인로더 1대 · 무인궤도로더 1대</b></div>
+            </div>
+            <div class="rb__act"><a class="btn btn--fill btn--sm" href="contact.html">적용 문의</a><a class="btn btn--line btn--sm" href="../assets/docs/shinjeong-robot-cleaning-system-2025-public.pdf">기술소개서 PDF ↓</a></div>
+          </div>
+        </div>
+        <div class="rb__tabs" role="tablist" aria-label="무인 로더 자세히"><button role="tab" id="rt-loader-1" aria-controls="rp-loader-1" aria-selected="true" tabindex="0">개요</button><button role="tab" id="rt-loader-2" aria-controls="rp-loader-2" aria-selected="false" tabindex="-1">적용 범위</button></div>
+        <div class="rb__panel" role="tabpanel" id="rp-loader-1" aria-labelledby="rt-loader-1">
+          <dl class="us-dl">
+            <dt>어디에</dt><dd>Open Ditch · Pond 하부, 작동 설비 하부, 오염 지역 진입로 · 준설용</dd>
+            <dt>무엇을</dt><dd>토사·Sludge 퇴적물 처리 · 인력 작업이 힘든 고착 슬러지 제거</dd>
+            <dt>어떻게</dt><dd>원격 Control · 전기, 유압 구동 · 조작자 교대와 장비 연속 가동으로 연속 작업</dd>
+          </dl>
+        </div>
+        <div class="rb__panel" role="tabpanel" id="rp-loader-2" aria-labelledby="rt-loader-2" hidden>
+          <dl class="us-dl">
+            <dt>장점</dt><dd>연속 작업 가능 · 신체·근골격계·넘어짐 위험에서 작업자 안전 확보</dd>
+            <dt>단점</dt><dd>배터리 교체·충전에 따른 작업 시간 제한 · 비방폭 지역 사용</dd>
+            <dt>적용 범위</dt><dd>Open Ditch · Pond 하부 퇴적물 처리 · 작동 설비 하부 퇴적물 처리 · 오염 지역 진입로 확보 · 인력 작업이 힘든 고착 슬러지 제거</dd>
+          </dl>
+          <p class="us-src">출처: 기술소개서(2025) 용도별 적용 예시 — Pond Cleaning (로더) (PROCESS.cases 그대로)</p>
+        </div>
+      </article>
+
+      <!-- 로봇 5 : 무인 Jet Cleaner (사진 없음 — 같은 틀) -->
+      <article class="rb" data-tags="narrow" id="r-jet">
+        <div class="rb__grid">
+          <div>
+            <div class="rb__ph" data-gap><b>사진 요청</b>무인 Jet Cleaner 전신 사진</div>
+            <p class="rb__tags"><span>적용 설비</span><a href="#robots" data-f="narrow">협소 공간</a></p>
+            <div class="rb__thumbs">
+              <div class="rb__slot" data-gap><b>사진</b>고압세척 장면</div>
+              <div class="rb__slot" data-gap><b>사진</b>Nozzle</div>
+              <div class="rb__slot" data-gap><b>사진</b>CCTV 연동</div>
+              <div class="rb__slot" data-gap><b>▶ 작업 영상</b>영상 받으면 여기에</div>
+            </div>
+          </div>
+          <div>
+            <span class="rb__eyebrow">기타 Cleaning 로봇</span>
+            <h2>무인 Jet Cleaner<small>설비 고압세척 (8+ Nozzle) — 원격 Control</small></h2>
+            <p class="rb__use">협소 공간 Water Jet Cleaning, 오염지역 무인 방제(유해물질 제거), 협소 공간 Inspection에 씁니다.</p>
+            <dl class="rb__meta">
+              <dt>개발</dt><dd>도입 시기는 두 문서에 없음<span class="todo" data-gap>확인 중</span></dd>
+              <dt>환경</dt><dd>협소 공간 · 구동부 수중 작업 가능 · 전기 구동</dd>
+            </dl>
+            <div class="rb__spec">
+              <div><em>대상</em><b>설비 고압세척 (8+ Nozzle)</b></div>
+              <div><em>조종</em><b>원격 Control</b></div>
+              <div><em>구동</em><b>전기</b></div>
+              <div><em>수중 작업</em><b>구동부 가능</b></div>
+              <div><em>장점</em><b>연속 작업 가능 · 협소 공간 무인 작업</b></div>
+              <div><em>단점</em><b>복잡한 내부 공간에서는 간섭·부분 Cleaning · 세정수 비산에 따른 시야 저하는 CCTV 연동으로 확보</b></div>
+            </div>
+            <div class="rb__act"><a class="btn btn--fill btn--sm" href="contact.html">적용 문의</a><a class="btn btn--line btn--sm" href="../assets/docs/shinjeong-robot-cleaning-system-2025-public.pdf">기술소개서 PDF ↓</a></div>
+          </div>
+        </div>
+        <div class="rb__tabs" role="tablist" aria-label="무인 Jet Cleaner 자세히"><button role="tab" id="rt-jet-1" aria-controls="rp-jet-1" aria-selected="true" tabindex="0">개요</button><button role="tab" id="rt-jet-2" aria-controls="rp-jet-2" aria-selected="false" tabindex="-1">적용 범위</button></div>
+        <div class="rb__panel" role="tabpanel" id="rp-jet-1" aria-labelledby="rt-jet-1">
+          <dl class="us-dl">
+            <dt>어디에</dt><dd>협소 공간</dd>
+            <dt>무엇을</dt><dd>Water Jet Cleaning · 무인 방제(유해물질 제거) · Inspection</dd>
+            <dt>어떻게</dt><dd>원격 Control · 전기 구동 · 8개 이상 Nozzle</dd>
+          </dl>
+        </div>
+        <div class="rb__panel" role="tabpanel" id="rp-jet-2" aria-labelledby="rt-jet-2" hidden>
+          <dl class="us-dl">
+            <dt>장점</dt><dd>연속 작업 가능 · 협소 공간 무인 작업</dd>
+            <dt>단점</dt><dd>복잡한 내부 공간에서는 간섭·부분 Cleaning · 세정수 비산에 따른 시야 저하 — CCTV 연동으로 확보</dd>
+            <dt>적용 범위</dt><dd>협소 공간 Water Jet Cleaning · 오염지역 무인 방제(유해물질 제거) · 협소 공간 Inspection</dd>
+          </dl>
+          <p class="us-src">출처: 기술소개서(2025) 용도별 적용 예시 — Jet Cleaning (PROCESS.cases 그대로)</p>
+        </div>
+      </article>
+
+      <p class="us-src" style="margin-top:22px">회사소개서의 박스무인준설로봇(준설용 1대)은 두 문서에 사양이 없어 이름만 적습니다. Control Car · Vacuum Car · Separator는 로봇이 아니라 설비 밖 구성이라 위 '어떻게'에 두었습니다.</p>
+    </div>
+  </section>
+
+  <!-- 4. 적용 시 고려사항 (기술소개서 29~30쪽 + 12쪽 Manway) -->
+  <section class="section section--soft" id="conditions">
+    <div class="wrap">
+      <div class="head"><div><h2>적용 시 고려사항</h2></div><p class="lead">기술소개서 3-6 '적용 시 고려사항'(PFO Tank 작업 기준)의 항목입니다. 로봇 투입 여부는 현장 적용 가능성 검토와 사전 Test로 정합니다.</p></div>
+      <ul class="us-cons">
+        <li><em>Robot 투입 시 고려사항 1</em><b>Robot 운영의 내부 활동성</b><p>Tank 내부 PFO의 성상에 따른 Robot의 이동성이 중요하며, Suction Hose의 이동으로 Heating Coil과 간섭될 수 있으므로 Heating Coil의 배치를 고려</p></li>
+        <li><em>Robot 투입 시 고려사항 2</em><b>Suction Hose의 내열성</b><p>Sludge Suction Hose의 허용온도는 55℃. 고온 작업용 호스는 유동성이 부족해 작업의 간섭이 발생할 수 있음</p></li>
+        <li><em>Robot 투입 시 고려사항 3</em><b>Quid Sludge 제거</b><p>Sludge 성상에 따른 인위적인 파쇄 작업 가능 여부 확인</p></li>
+      </ul>
+      <div class="us-recheck">
+        <h3>작업 재검토사항</h3>
+        <ul>
+          <li>Tank 내부 Heating Coil의 균일한 배치</li>
+          <li>Sludge 성상이 Vacuum Suction 되지 않을 정도의 고착이나 점성으로 형성되었을 때</li>
+          <li>Robot 구동부위 이상으로 Liquid가 잔존한 상태일 때는 구동이 어려우며, 최소로 환경 조성</li>
+          <li>충진물 제거 작업의 Manway 한계: 최소 18인치</li>
+        </ul>
+        <blockquote>“Robot Cleaning 작업으로 모든 문제는 해결할 수 없으며, 고위험성의 원인만 해결하는 데 중점.”</blockquote>
+      </div>
+      <div class="us-two">
+        <details class="us-fold" open><summary>밀폐공간 작업 위험성 비교 — 인원 투입 vs 로봇 투입</summary>
+          <table><thead><tr><th>주요 위험성 (인원 투입)</th><th>로봇 투입</th></tr></thead><tbody>
+            <tr><td>유독가스에 의한 질식</td><td>위험물질 사전 제거</td></tr>
+            <tr><td>고위험 물질 접촉</td><td>위험물질 사전 제거</td></tr>
+            <tr><td>공기 공급 중단에 의한 질식</td><td>작업자 안전 확보</td></tr>
+            <tr><td>줄 걸림에 의한 넘어짐</td><td>내부 작업시간 최소화</td></tr>
+            <tr><td>협소 공간에 따른 근골격 부상</td><td>협소공간 대체 투입</td></tr>
+          </tbody></table>
+        </details>
+        <details class="us-fold" open><summary>효율성 비교</summary>
+          <table><thead><tr><th>로봇 투입 작업</th><th>효과</th></tr></thead><tbody>
+            <tr><td>일반 작업 허가서로 진행</td><td>준비시간 감소</td></tr>
+            <tr><td>1시간 이상 연속 작업</td><td>유효 작업시간 확보</td></tr>
+            <tr><td>Jet · 흡입 동시 작업</td><td>작업 효율 증가</td></tr>
+            <tr><td>CCTV 내부 감시</td><td>실시간 내부 확인</td></tr>
+            <tr><td>위험구역(방폭·가스) 긴급 작업</td><td>위험지역 내 즉시 투입</td></tr>
+          </tbody></table>
+        </details>
+      </div>
+      <details class="us-fold" style="margin-top:28px"><summary>용도별 적용 예시 — 장점 · 단점 · 적용 범위</summary>
+        <ul>
+          <li><b>Tank / Pond Cleaning</b> — 장점: 인명사고 위험 감소(질식·매몰·협착·넘어짐), 연속 작업으로 능률 향상. 단점: 유해성 감소 후 Final Cleaning 인력 작업. 적용 범위: 방폭지역(고위험가스 설비) 작업 가능(유압구동 — 궤도부 고무재질, 파쇄·접촉 부분 Non-spark 재질) · 수중 작업 및 Water Jet-Cleaning 등 동시 작업 · CCTV, Jet 등 추가 장비 장착.</li>
+          <li><b>Pond Cleaning (로더)</b> — 장점: 연속 작업, 작업자 안전 확보. 단점: 작업 시간 제한(배터리 교체 및 충전), 비방폭 지역 사용. 적용 범위: Open Ditch·Pond 하부 퇴적물 · 작동 설비 하부 퇴적물 · 오염 지역 진입로 확보 · 인력 작업이 힘든 고착 슬러지 제거.</li>
+          <li><b>Jet Cleaning</b> — 장점: 연속 작업, 협소 공간 무인 작업. 단점: 복잡한 내부 공간 간섭·부분 Cleaning, 세정수 비산 시야 저하(CCTV 연동으로 확보). 적용 범위: 협소 공간 Water Jet Cleaning · 오염지역 무인 방제 · 협소 공간 Inspection.</li>
+          <li><b>폐기물(충진물) 제거 작업</b> — 장점: 질식 위험·위험물질 노출에서 작업자 안전 확보, 질소 공간 무인 작업. 단점: 비산물 시야 저하(CCTV 연동), Manway 한계 최소 18인치. 적용 범위: Reactor/Tank 내부(질소 분위기 포함) 충진물 제거 · 방폭 지역 작업 · 기타 설비 슬러지 및 고형 폐기물 제거.</li>
+        </ul>
+      </details>
+      <p class="us-src">출처: 기술소개서(2025) 적용 시 고려사항 · 위험성·효율성 비교 · 용도별 적용 예시</p>
+    </div>
+  </section>
+
+  <!-- 5. 연구개발·특허 -->
+  <section class="section" id="rnd">
+    <div class="wrap">
+      <div class="head"><div><h2>연구개발 · 특허</h2></div><p class="lead">기업부설연구소는 2017년 11월 설립했습니다. 등록 특허 5건, 연구개발 과제 3건, 시제품 5종은 기술소개서에 있는 것입니다. 시제품은 위의 보유 장비와 구분합니다.</p></div>
+      <div class="stats stats--flush" style="margin-bottom:36px">
+        <div class="stat"><b>2017<i>.11</i></b><span>기업부설연구소 설립</span></div>
+        <div class="stat"><b>5<i>건</i></b><span>등록 특허</span></div>
+        <div class="stat"><b>3<i>건</i></b><span>연구개발 과제</span></div>
+        <div class="stat"><b>5<i>종</i></b><span>로봇 시제품</span></div>
+      </div>
+      <div class="us-rd">
+        <div>
+          <h3>등록 특허</h3>
+          <table><thead><tr><th>특허 명칭</th><th>등록</th></tr></thead><tbody>
+            <tr><td>정합식 맨홀</td><td>2017</td></tr>
+            <tr><td>관내부 무인 준설 처리 시스템</td><td>2017</td></tr>
+            <tr><td>스크류 바퀴를 구비한 수륙양용 준설로봇</td><td>2020</td></tr>
+            <tr><td>소형관로 준설로봇 및 그 운전방법</td><td>2020</td></tr>
+            <tr><td>워터젯 유닛을 구비한 세정로봇 장치</td><td>2020</td></tr>
+          </tbody></table>
+          <p class="us-src">회사소개서에는 특허증 8장과 출원사실증명 4장이 실려 있음</p>
+        </div>
+        <div>
+          <h3>로봇 시제품</h3>
+          <p class="note">벽면/천장 부착형은 KCL 성능시험(입회시험)을 거쳤습니다.</p>
+          <table><thead><tr><th>로봇</th><th>크기 · 무게</th><th>구동 · 조종</th></tr></thead><tbody>
+            <tr><td>벽면/천장 부착형 (Wall/Ceiling Mobile Robot)</td><td>480×660×325mm · 59.5kg</td><td>유압 140bar 캐터필러 · 조이스틱/카메라 자율 제어</td></tr>
+            <tr><td>흡입/준설 (Screw Mobile Robot)</td><td>490×730×260mm · 61.2kg</td><td>유압 최대 140bar 스크류 · 조이스틱/카메라 자율 제어</td></tr>
+            <tr><td>흡입/준설 (Grinding Mobile Robot)</td><td>490×1,010×260mm · 81kg</td><td>유압 최대 140bar 스크류 · 조이스틱/카메라 자율 제어</td></tr>
+            <tr><td>파쇄 (Splinter Robot, Caterpillar)</td><td>415×1,140×400mm · 79.2kg</td><td>유압 최대 140bar 캐터필러 · 조이스틱</td></tr>
+            <tr><td>파쇄 (Splinter Robot, Screw)</td><td>490×1,010×260mm · 87.5kg</td><td>유압 최대 140bar 스크류 · 조이스틱</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+      <details class="us-fold" style="margin-top:28px"><summary>연구개발 과제 3건</summary>
+        <ul>
+          <li>능동형 촉매 적재장치 — 촉매 반응탑 내 고체 촉매의 고밀도 적층 · 공압</li>
+          <li>석유화학 저장탱크 협업형 클리닝 시스템 — 고위험물 저장탱크 내부 세정 · 유압</li>
+          <li>수중 슬러지 수거 무인 자율 이동 로봇 시스템 — 하수도 슬러지 제거 · 유압</li>
+        </ul>
+        <p class="us-src">출처: 기술소개서(2025) 연구개발 (PROCESS.projects 과제 · 활용 · 구동)</p>
+      </details>
+      <p class="doc-link"><a class="tlink" href="../assets/docs/shinjeong-robot-cleaning-system-2025-public.pdf" target="_blank" rel="noopener">기술소개서 (2025) 보기 →</a></p>
+      <p class="note mt-block">출처: (주)신정개발 회사소개서(2024) · 기술소개서(2025)</p>
+    </div>
+  </section>
+
+  <section class="section section--sm us-ask">
+    <div class="wrap">
+      <div><h2>로봇 적용은 현장 적용 가능성 검토와 사전 Test로 시작합니다</h2><p>기술소개서 작업 절차의 첫 단계입니다. 대상 설비와 작업을 알려 주시면 검토부터 안내합니다.</p></div>
+      <a class="btn btn--light" href="contact.html">현장 문의하기 →</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftrB-ask">   <!-- 시안B 26차: 바닥글 윗줄 소형 문의 줄 — 머리말 낱말·문의 버튼 문구·이메일 재사용(새 문장 없음) -->
+      <span class="ftrB-ask__label">현장 문의</span>
+      <div class="ftrB-ask__act">
+        <a class="btn btn--line btn--sm" href="contact.html">현장 문의하기 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a>
+        <a class="ftrB-ask__mail" href="mailto:shinjeong@sjdevel.com">shinjeong@sjdevel.com</a>
+      </div>
+    </div>
+    <div class="ftr__top">
+      <div class="ftr__brand">
+        <img class="ftr__logo" src="../assets/logo/shinjeong-symbol.svg" width="30" height="37" alt="" aria-hidden="true">
+        <b>(주)신정개발</b><span aria-hidden="true">SHINJEONG DEVELOPMENT</span>
+        <p class="ftr__info">
+          (주)신정개발 · 산업설비·환경시설 클리닝 전문기업 · 1992년부터<br>
+          본사 전라남도 여수시 봉계2길 27<br>
+          지사 충청남도 서산시 지곡면 충의로 1106<br>
+          TEL <a href="tel:0616825537">061-682-5537</a> · FAX 061-683-5567<br>
+          <a href="mailto:shinjeong@sjdevel.com">shinjeong@sjdevel.com</a>
+        </p>
+      </div>
+      <nav class="ftr__map" aria-label="사이트맵">
+        <div>
+          <h3>사업분야</h3>   <!-- 35차: h4 → h3 (제목 단계 건너뜀 'heading-order' 수리, 글자·모양 그대로) -->
+          <ul>
+            <li><a href="service-equipment-cleaning.html">설비 클리닝</a></li>
+            <li><a href="service-catalyst-media.html">촉매·충진물 작업</a></li>
+            <li><a href="service-chemical-cleaning.html">화학세정</a></li>
+            <li><a href="service-dredging-sludge.html">준설·슬러지 회수</a></li>
+            <li><a href="service-inspection-repair.html">관로·지하 조사 및 보수</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>기술</h3>   <!-- 35차: h4 → h3 (제목 단계 건너뜀 'heading-order' 수리, 글자·모양 그대로) -->
+          <ul>
+            <li><a href="unmanned.html">무인 솔루션</a></li>
+            <li><a href="unmanned.html#robots">현장 투입 로봇</a></li>
+            <li><a href="unmanned.html#how">작업 절차</a></li>
+            <li><a href="unmanned.html#dewater">회수물 탈수 과정</a></li>
+            <li><a href="company.html#equipment">보유 장비</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>회사</h3>   <!-- 35차: h4 → h3 (제목 단계 건너뜀 'heading-order' 수리, 글자·모양 그대로) -->
+          <ul>
+            <li><a href="projects.html">수행 이력</a></li>
+            <li><a href="company.html">회사 소개</a></li>
+            <li><a href="news.html">소식</a></li>
+            <li><a href="../assets/docs/shinjeong-company-profile-2024-public.pdf" target="_blank" rel="noopener">회사소개서 (PDF)</a></li>
+            <li><a href="../assets/docs/shinjeong-robot-cleaning-system-2025-public.pdf" target="_blank" rel="noopener">기술소개서 (PDF)</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>문의</h3>   <!-- 35차: h4 → h3 (제목 단계 건너뜀 'heading-order' 수리, 글자·모양 그대로) -->
+          <ul>
+            <li><a href="contact.html">현장 문의</a></li>
+            <li><a href="mailto:shinjeong@sjdevel.com">이메일로 문의</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="ftr__bot">
+      <p>&copy; <span data-year>2026</span> (주)신정개발. All rights reserved.</p>
+      <button class="totop" type="button" data-totop>맨 위로 <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8.5 7H17v8.5"/></svg></button>
+    </div>
+    <p class="ftr__ai">본 사이트의 일부 이미지·영상은 이해를 돕기 위해 연출된 AI 이미지·영상입니다.</p>   <!-- 시안B 23차: AI 연출 이미지 공통 고지(설정 look.aiNotice, look.aiMark 가 'footer' 일 때) — 개별 배지 대신 바닥글 한 줄 -->
+  </div>
+  <div class="moB-wordmark" aria-hidden="true">SHINJEONG DEVELOPMENT</div>   <!-- 시안B 16차: 바닥 대형 워드마크(장식, 머리말의 영문 상호 재사용, 낭독기에 안 읽힘) -->
+</footer>
+
+<nav class="mcta" aria-label="빠른 문의">
+  <a class="mcta__tel" href="tel:0616825537">전화 문의</a>
+  <a class="mcta__go" href="contact.html">현장 문의 <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a>
+</nav>
+<script src="../js/site.js"></script>
+<script src="../js/moB.js"></script>
+</body>
+</html>
