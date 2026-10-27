@@ -2461,3 +2461,73 @@ html[lang="en"] .phero__lead { max-width: 44em; }
   .rtab__list li { grid-template-columns: 6.8em minmax(0, 1fr); }
   .rtab__list .n { grid-column: 2; white-space: normal; }
 }
+
+/* ===== 시안C 7차: 왜 로봇을 먼저 넣는가 (.why, 남색 칸) ===== */
+.why { color: #fff; }
+.why__eyebrow { display: block; font-size: var(--fs-eyebrow); font-weight: 700; letter-spacing: var(--ls-wide); color: #9fc4e8; margin-bottom: 18px; }
+.why__head { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(24px, 4vw, 72px); align-items: end; margin-bottom: clamp(32px, 4vw, 52px); }
+.why__head h2 { margin: 0; color: #fff; font-size: clamp(26px, 2.7vw, 40px); line-height: 1.3; letter-spacing: var(--ls-tight); word-break: keep-all; }
+.why__head p { margin: 0; font-size: var(--fs-body); line-height: 1.75; color: #c9d6e2; word-break: keep-all; }
+.why__head p small { display: block; margin-top: 10px; font-size: var(--fs-xs); color: #8aa3ba; }
+.why__pair { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.why__pair figure { margin: 0; }
+.why__fig { display: block; aspect-ratio: 16 / 10; border-radius: var(--radius-lg); overflow: hidden; background: #0a2336; }
+.why__fig img { width: 100%; height: 100%; object-fit: cover; }
+.why__pair figcaption { margin-top: 14px; }
+.why__pair figcaption b { display: block; font-size: var(--fs-eyebrow); font-weight: 700; letter-spacing: var(--ls-wide); color: #9fc4e8; }
+.why__pair figcaption span { display: block; margin-top: 4px; font-size: var(--fs-h3); font-weight: 700; letter-spacing: var(--ls-tight); color: #fff; }
+.why__arrow { position: absolute; left: 50%; top: 31%; width: 44px; height: 44px; margin-left: -22px; display: grid; place-items: center; color: #fff; opacity: 0.85; }
+@media (max-width: 960px) {
+  .why__head { grid-template-columns: 1fr; gap: 14px; margin-bottom: 26px; }
+  .why__pair { grid-template-columns: 1fr; gap: 22px; }
+  .why__pair figcaption { margin-top: 10px; }
+  .why__pair figcaption span { font-size: var(--fs-h4); }
+  .why__arrow { display: none; }
+}
+
+/* ===== 시안C 7차: 무인 솔루션 (.unm) — 로봇 네 대, 이름 + 세 단어 ===== */
+.unm .head .lead { font-size: var(--fs-h4); color: var(--ink); }
+.unm__row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+.unm__fig { display: block; aspect-ratio: 3 / 2; border-radius: var(--radius-lg); overflow: hidden; background: var(--soft-2); }
+.unm__fig img { width: 100%; height: 100%; object-fit: cover; }
+.unm__bot h3 { margin: 12px 0 0; font-size: var(--fs-h4); font-weight: 600; letter-spacing: var(--ls-normal); line-height: 1.3; }
+.unm__bot p { margin: 4px 0 0; font-size: var(--fs-sm); color: var(--muted); }
+.unm__more { margin-top: 26px; }
+@media (max-width: 960px) {
+  .unm .head .lead { font-size: var(--fs-body); }
+  .unm__row { grid-template-columns: 1fr 1fr; gap: 20px 14px; }
+  .unm__fig { aspect-ratio: 1 / 1; }
+  .unm__bot h3 { margin-top: 9px; font-size: var(--fs-sm); font-weight: 700; }
+  .unm__bot p { font-size: 12.5px; }
+}
+
+/* ===== 시안C 7차: 회사 소개 반반(.split--half) + 환경 한 줄(.envline) + 숫자 셋(.stats--3) ===== */
+.split--half { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 3.5vw, 56px); align-items: stretch; }
+.split--half .split__media { display: flex; flex-direction: column; }
+.split--half .split__fig { flex: 1; min-height: 360px; }
+.split--half .split__fig img { height: 100%; object-fit: cover; }
+.envline { font-size: var(--fs-sm); color: var(--text); line-height: 1.7; }
+.envline b { font-weight: 700; color: var(--ink); margin-right: 10px; }
+.stats--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 960px) {
+  .split--half { grid-template-columns: 1fr; }
+  .split--half .split__fig { min-height: 0; aspect-ratio: 3 / 2; }
+  .stats--3 { grid-template-columns: 1fr 1fr; }
+}
+
+/* ===== 시안C 7차: 소식 페이지(news.html) — 연도 머리글 + 날짜·제목·분류 줄 ===== */
+.news__year { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 24px; padding: 28px 0; border-top: 1px solid var(--ink); }
+.news__year:first-of-type { border-top-width: 2px; }
+.news__y { margin: 0; font-size: var(--fs-h3); letter-spacing: var(--ls-tight); font-variant-numeric: tabular-nums; }
+.news__list { list-style: none; margin: 0; padding: 0; }
+.news__list li { display: grid; grid-template-columns: 7em minmax(0, 1fr) auto; gap: 0 16px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.news__list li:last-child { border-bottom: 0; }
+.news__list time { font-size: var(--fs-sm); color: var(--muted); font-variant-numeric: tabular-nums; }
+.news__t { font-size: var(--fs-h4); font-weight: 600; letter-spacing: var(--ls-normal); color: var(--ink); }
+.news__tag { font-size: var(--fs-xs); color: var(--brand); font-weight: 600; white-space: nowrap; }
+.news__src { margin: 28px 0 0; font-size: var(--fs-xs); color: var(--muted); }
+@media (max-width: 720px) {
+  .news__year { grid-template-columns: 1fr; gap: 8px; padding: 22px 0; }
+  .news__list li { grid-template-columns: 1fr auto; row-gap: 4px; }
+  .news__list time { grid-column: 1 / -1; }
+}

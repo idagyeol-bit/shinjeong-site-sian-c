@@ -816,13 +816,35 @@ const ROBOT_WORKS_TECH = [
   { period: '2021.08~2022.03', title: 'Cray Filter (ID 1,800)', note: 'N2 분위기 · 4회' }    // G사 Cray Filter (ID 1,800) 21.08~22.03 N2, 4회
 ];
 /* 로봇 투입 사진 세 장(순서대로 1·2·3) — 설명은 사진에 보이는 것 + 위 ROBOT_HOW 의 절차 */
-const ROBOT_SHOTS = [
-  { photo: 'P03', cap: '로봇이 먼저 들어가 반응기 안의 촉매를 흡입합니다.' },
-  { photo: 'P16', cap: '작업자는 설비 밖 제어 차량에서 조종합니다.' },
-  { photo: 'P17', cap: 'CCTV로 내부를 실시간으로 확인합니다.' }
+const ROBOT_SHOTS = [   // 7차: 한 장만. P03 은 '왜 로봇인가', P16 은 '무인 솔루션'으로 옮겼다(메인에 같은 사진 두 번 금지). P17 은 쉬는 사진
+  { photo: 'R27', cap: '흡입차와 호스로 연결된 로봇' }
 ];
-/* 분야 탭 사진 (로봇 탭·사업분야 차트와 겹치지 않게 골랐다) */
-const PROJ_TAB_PHOTO = { S01: 'P01', S02: 'P15', S04: 'W03', S03: 'W01', S05: 'R42' };
+/* 분야 탭 사진 (로봇 탭·사업분야 차트·무인 솔루션과 겹치지 않게 골랐다). 7차: 관로 탭은 R42(무인 솔루션으로) 대신 W04 */
+const PROJ_TAB_PHOTO = { S01: 'P01', S02: 'P15', S04: 'W03', S03: 'W01', S05: 'W04' };
+
+/* 시안C 7차 (2026-10-27 이다결 님 결정): 첫 화면 바로 아래 두 칸 — ① 왜 로봇을 먼저 넣는가(남색) ② 무인 솔루션(흰색).
+   WHY_STAT: 기술소개서(2025) p.4 개발 배경(고용노동부 산업재해조사 2014~2023 — 밀폐공간 질식 재해 100명당 50명 사망) = PROCESS.bgfacts 와 같은 사실.
+   WHY_PAIR: '이전'은 기술소개서 p.26 기존 작업 사진(P10), '지금'은 p.28 로봇 적용 사진(P03). 글귀의 '먼저'는 FAQ·절차(로봇이 먼저 회수, 작업자는 나중)와 같은 뜻 — '사람 대신'이 아니다.
+   UNMANNED_BOTS: 이름·쓰는 곳은 기술소개서 장비 보유 현황·세대별 표(흡입/파쇄형 — Pond·Tank·Reactor)와 장비·로봇 페이지 업무별 장비(관로 CCTV 로봇) 그대로. 시제품(6장)은 넣지 않는다. */
+const WHY_STAT = { text: '밀폐공간 질식 재해는 100명 중 50명이 목숨을 잃습니다.', src: '고용노동부 산업재해조사 2014~2023 · 신정개발 기술소개서(2025)' };
+const WHY_PAIR = [
+  { photo: 'P10', k: '이전', t: '사람이 들어가던 곳' },
+  { photo: 'P03', k: '지금', t: '로봇이 먼저 들어갑니다' }
+];
+const UNMANNED_BOTS = [
+  { photo: 'W05', name: '흡입 로봇', where: '탱크 · Pond · 반응기' },
+  { photo: 'W06', name: '파쇄형 로봇', where: '굳은 슬러지 · 충진물' },
+  { photo: 'R42', name: '관로 CCTV 로봇', where: '하수관 · 관로 조사' },
+  { photo: 'P16', name: '제어 차량', where: '사람은 밖에서 CCTV로 조종' }
+];
+/* 회사 소개 구역의 환경 한 줄(7차: 환경 띠를 메인에서 빼고 여기로) — CREDS.certs·awards·permits, 연혁 2017.05·2007.10·2004.10·2006.05 */
+const ENV_LINE = ['ISO 14001 환경경영 인증 (2017)', '환경부장관상 (2007)', '일반·지정폐기물 수집·운반업 허가 (2004·2006)'];
+/* 소식(7차 신설 news.html): 회사소개서(2024) 연혁 가운데 2015년 이후 항목을 날짜순으로. 새 소식은 NEWS_EXTRA 에 { y, m, label, tag } 로 더한다(사실만) */
+const NEWS_FROM = 2015;
+const NEWS_EXTRA = [];
+const newsTag = (label) => /연구소/.test(label) ? '연구소' : /면허|등록|허가/.test(label) ? '면허·허가' : /수상|대상|표창|우수상/.test(label) ? '수상' : /인증|확인|승인/.test(label) ? '인증' : '소식';
+const NEWS = C.history.filter((h) => h.year >= NEWS_FROM).flatMap((h) => h.items.map((it) => ({ y: h.year, m: it.m, label: it.label, tag: newsTag(it.label) })))
+  .concat(NEWS_EXTRA).sort((x, y) => (y.y - x.y) || (String(y.m).localeCompare(String(x.m))));
 const PROJ_TAB_ORDER = ['S01', 'S02', 'S04', 'S03', 'S05'];   // 실적이 많은 분야부터
 
 /* ===================== 도우미 ===================== */
@@ -1066,8 +1088,8 @@ function footer() {
   const g = CFG.common.footerGroups;   // 바닥글 묶음 제목 (40차, 설정 파일)
   const map = [
     { h: g.services, items: SERVICES.map((s) => ({ href: s.file, label: s.title })) },
-    { h: g.tech, items: [{ href: 'process.html', label: '현장 진행 방식' }, { href: 'technology.html', label: '장비·로봇' }, { href: 'process.html#dewater', label: '회수물 탈수 과정' }] },
-    { h: g.company, items: [{ href: 'projects.html', label: '수행 이력' }, { href: 'company.html', label: '회사 소개' }, { href: DOC_PROFILE, label: '회사소개서 (PDF)', blank: true }, { href: DOC_TECH, label: '기술소개서 (PDF)', blank: true }] },
+    { h: g.tech, items: [{ href: 'index.html#unmanned', label: '무인 솔루션' }, { href: 'technology.html', label: '장비·로봇' }, { href: 'process.html', label: '작업 절차' }, { href: 'process.html#dewater', label: '회수물 탈수 과정' }] },   // 7차: 현장 진행 방식은 메뉴에서 빼고 '작업 절차'로 바닥글에만
+    { h: g.company, items: [{ href: 'projects.html', label: '수행 이력' }, { href: 'company.html', label: '회사 소개' }, { href: 'news.html', label: '소식' }, { href: DOC_PROFILE, label: '회사소개서 (PDF)', blank: true }, { href: DOC_TECH, label: '기술소개서 (PDF)', blank: true }] },
     { h: g.contact, items: [{ href: 'contact.html', label: '현장 문의' }, { href: `mailto:${C.email}`, label: '이메일로 문의' }] }
   ];
   return `<footer class="ftr">
@@ -1663,6 +1685,49 @@ ${contactFooterOnly() ? '' : `    <div class="bizB__end"><a class="btn btn--line
   },
 
   /* 시안C 4차: 사업분야 차트 (안 B) — 큰 카드 1 + 작은 카드 4. 사실은 WHAT_CHART */
+  /* 시안C 7차: 왜 로봇을 먼저 넣는가 — 남색 칸. 큰 제목이 곧 메시지, 사진 두 장(이전/지금) */
+  why: (bg) => {
+    const c = CFG.home.copy.why;
+    return `  <!-- ===== 왜 로봇을 먼저 넣는가 (시안C 7차) ===== -->
+  <section class="section${BG_CLASS[bg]} why" id="why" aria-labelledby="why-title">
+    <div class="wrap">
+      <div class="why__head">
+        <div data-reveal>
+          <span class="why__eyebrow">${esc(c.eyebrow)}</span>
+          <h2 id="why-title">${c.title}</h2>
+        </div>
+        <p data-reveal data-delay="90">${esc(WHY_STAT.text)} ${esc(c.text)}<small>${esc(WHY_STAT.src)}</small></p>
+      </div>
+      <div class="why__pair" data-reveal data-delay="120">
+${WHY_PAIR.map((w, i) => `        <figure>
+          <span class="why__fig">${photo(P(w.photo), '(max-width:960px) 92vw, 600px')}</span>
+          <figcaption><b>${esc(w.k)}</b><span>${esc(w.t)}</span></figcaption>
+        </figure>${i === 0 ? `\n        <span class="why__arrow" aria-hidden="true">${arrow(28)}</span>` : ''}`).join('\n')}
+      </div>
+    </div>
+  </section>
+`;
+  },
+
+  /* 시안C 7차: 무인 솔루션 — 흰 칸. 로봇 네 대, 이름 + 세 단어 */
+  unmanned: (bg) => {
+    const c = CFG.home.copy.unmanned;
+    return `  <!-- ===== 무인 솔루션 (시안C 7차) ===== -->
+  <section class="section${BG_CLASS[bg]} unm" id="unmanned" aria-labelledby="unm-title">
+    <div class="wrap">
+      <div class="head">
+        <div data-reveal><h2 id="unm-title">${esc(c.title)}</h2></div>
+        <p class="lead">${esc(c.lead)}</p>
+      </div>
+      <div class="unm__row" data-reveal>
+${UNMANNED_BOTS.map((b) => `        <div class="unm__bot"><span class="unm__fig">${photo(P(b.photo), '(max-width:960px) 46vw, 280px')}</span><h3>${esc(b.name)}</h3><p>${esc(b.where)}</p></div>`).join('\n')}
+      </div>
+      <div class="unm__more" data-reveal><a class="tlink" href="${c.moreHref || 'technology.html'}">${esc(c.more)} ${arrow(14)}</a></div>
+    </div>
+  </section>
+`;
+  },
+
   whatChart: (bg) => {
     const c = CFG.home.copy.what;
     const layout = (CFG.look && CFG.look.chartLayout) || 'five';
@@ -1807,7 +1872,7 @@ ${tabs.map((t, i) => `        <button type="button" role="tab" id="rt-${t.id}" a
       </div>
     <div class="rtab__panel rtab__panel--robot" role="tabpanel" id="rp-robot" aria-labelledby="rt-robot" data-reveal>
       <div class="rtab__media">
-${ROBOT_SHOTS.map((sh, i) => `        <figure class="${i === 0 ? 'rtab__main' : 'rtab__sub'}"><span class="rtab__fig">${photo(P(sh.photo), i === 0 ? '(max-width:960px) 92vw, 640px' : '(max-width:960px) 45vw, 310px')}</span><figcaption><b>${i + 1}</b>${esc(sh.cap)}</figcaption></figure>`).join('\n')}
+${ROBOT_SHOTS.map((sh, i) => `        <figure class="${i === 0 ? 'rtab__main' : 'rtab__sub'}"><span class="rtab__fig">${photo(P(sh.photo), i === 0 ? '(max-width:960px) 92vw, 640px' : '(max-width:960px) 45vw, 310px')}</span><figcaption>${ROBOT_SHOTS.length > 1 ? `<b>${i + 1}</b>` : ''}${esc(sh.cap)}</figcaption></figure>`).join('\n')}
       </div>
       <div class="rtab__text">
         <h3>${esc(c.robotTitle || '로봇 투입 작업')}</h3>
@@ -1818,7 +1883,7 @@ ${ROBOT_SHOTS.map((sh, i) => `        <figure class="${i === 0 ? 'rtab__main' : 
 ${robotRows.join('\n')}
         </ul>
         <p class="rtab__src">2023년은 회사소개서(2024), 2021~2022년은 기술소개서(2025) 기준</p>
-        <div class="rtab__more"><a class="tlink" href="process.html">${esc(c.moreRobot || '현장 진행 방식 자세히')} ${arrow(14)}</a></div>
+        <div class="rtab__more"><a class="tlink" href="process.html">${esc(c.moreRobot || '작업 절차 자세히')} ${arrow(14)}</a></div>
       </div>
     </div>
 ${PROJ_TAB_ORDER.map(fieldPanel).join('\n')}
@@ -1911,24 +1976,23 @@ ${pcards(c.cards.map((k) => k.photo), c.cards.map((k) => k.title), null, c.cards
     return `  <!-- ===== 회사 소개 ===== -->
   <section class="section${BG_CLASS[bg]}">
     <div class="wrap">
-      <div class="split">
+      <div class="split${c.half ? ' split--half' : ''}">   <!-- 시안C 7차(c.half): 사진 50% · 글 50%, 사진은 글 높이만큼 채움 -->
         <div data-reveal>
           <h2>${c.title}</h2>
           <p class="lead mt-20">${esc(C.intro)}</p>
 ${c.lab ? `          <p class="labline mt-20">${esc(LAB_LINE.text)}</p>   <!-- 시안C 1차 -->
           <ul class="labfacts">${LAB_LINE.facts.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
-          <div class="mt-28"><a class="btn btn--line" href="company.html">${c.button} ${arrow(18)}</a></div>
+${c.env ? `          <p class="envline mt-20"><b>${esc(c.envLabel || '환경')}</b>${ENV_LINE.map((x) => esc(x)).join(' · ')}</p>   <!-- 시안C 7차: 환경 띠 대신 한 줄 -->\n` : ''}          <div class="mt-28"><a class="btn btn--line" href="company.html">${c.button} ${arrow(18)}</a></div>
         </div>
         <figure class="split__media" data-reveal data-delay="90">
-          <div class="split__fig">${photo(P('M02'), '(max-width:960px) 92vw, 620px')}</div>
-          <figcaption class="split__cap split__cap--sm">${esc(P('M02').cap)}</figcaption>
+          <div class="split__fig">${photo(P(c.photo || 'M02'), '(max-width:960px) 92vw, 620px')}</div>
+          <figcaption class="split__cap split__cap--sm">${esc(P(c.photo || 'M02').cap)}</figcaption>
         </figure>
       </div>
 
-      <div class="stats stats--flush mt-block" data-reveal>
+      <div class="stats stats--flush${c.half ? ' stats--3' : ''} mt-block" data-reveal>
         <div class="stat"><b><span data-count="${C.founded}">${C.founded}</span></b><span>설립</span></div>
-        <div class="stat"><b><span data-count="2007">2007</span></b><span>법인 전환</span></div>
-        <div class="stat"><b><span data-count="2017">2017</span></b><span>기업부설연구소 설립</span></div>
+${c.half ? '' : `        <div class="stat"><b><span data-count="2007">2007</span></b><span>법인 전환</span></div>\n`}        <div class="stat"><b><span data-count="2017">2017</span></b><span>기업부설연구소 설립</span></div>
         <div class="stat"><b><span data-count="2">2</span><i>곳</i></b><span>여수 본사 · 서산 지사</span></div>
       </div>
     </div>
@@ -2396,6 +2460,32 @@ ${SRC_LINE}    </div>
   h2: '우리 현장은 어떤 순서로<br>진행될지 물어보세요',
   p: '대상 설비·작업 목적·희망 일정을 알려 주시면 현장 검토부터 안내하겠습니다.'
 }) + MAIN_END + footer() + foot([CFG.look && CFG.look.processVideo ? 'procB-video.js' : 'process-scene.js'].concat(procDiet() ? ['tech-fold.js'] : []))   /* 시안B 25차: 영상판이면 3D 스크립트 대신 procB-video.js */;
+
+/* ---------- 4-1. 소식 (시안C 7차 신설) — 회사소개서 연혁의 최근 항목을 날짜순으로. 새 소식은 NEWS_EXTRA ---------- */
+pages['news.html'] = () => {
+  const c = CFG.pages.news;
+  const years = [...new Set(NEWS.map((n) => n.y))];
+  return head({
+    file: 'news.html', page: 'news',
+    title: `소식 | ${C.brand}`,
+    desc: '신정개발의 인증·수상·연구소 소식을 날짜순으로 정리했습니다.'
+  }) + header('news', null, 'news.html') + `
+<main id="main">
+` + phero({ h1: c.title, keepLead: c.lead, crumbs: [{ label: c.title }] }) + `
+  <section class="section">
+    <div class="wrap">
+${years.map((y) => `      <div class="news__year" data-reveal>
+        <h2 class="news__y">${y}</h2>
+        <ul class="news__list">
+${NEWS.filter((n) => n.y === y).map((n) => `          <li><time>${y}.${esc(n.m)}</time><span class="news__t">${esc(n.label)}</span><span class="news__tag">${esc(n.tag)}</span></li>`).join('\n')}
+        </ul>
+      </div>`).join('\n')}
+      <p class="news__src" data-reveal>${esc(c.src)}</p>
+    </div>
+  </section>
+
+` + cta({ h2: CFG.common.cta.title, p: CFG.common.cta.text }) + MAIN_END + footer() + foot();
+};
 
 /* ---------- 5. 수행 이력 ---------- */
 pages['projects.html'] = () => head({

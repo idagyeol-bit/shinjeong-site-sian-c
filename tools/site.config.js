@@ -134,13 +134,15 @@ module.exports = {
        bg: 'white' = 흰 바탕, 'soft' = 연회색 바탕, 'navy' = 남색 바탕
        (주의: 'process' 구역의 버튼은 남색 바탕에 맞춘 흰 테두리 버튼이라, 다른 바탕에서는 잘 안 보일 수 있다) */
     sections: [
-      { id: 'trust', bg: 'navy' },     // 숫자 띠 (200회 · 170여 건 · 특허 · 면허, 주요 현장) — 시안B 24차: 남색 풀블리드 띠(숫자·글자 흰색, 칩·출처는 작고 옅게). 'white' 로 되돌릴 수 있다
-      { id: 'whatChart', bg: 'soft' }, // 시안C 4차: 사업분야 차트(사진·한 문장·현장·투입). 배치는 look.chartLayout('five' 다섯 칸 / 'lead' 큰 카드 1+4). 'whatA'(타일) · 'whatC' · 'whatB' 로 되돌릴 수 있다    // 사업분야 — 시안 B: 층층이 덮이는 색판 다섯 장(시안B 2차). 'what' 으로 바꾸면 업무 카드 다섯 장 격자. 바탕색은 판마다 css 에서 정한다
-      { id: 'projTabs', bg: 'white' }, // 시안C 6차: 주요 수행 이력 — 분류 탭(첫 탭 '로봇 투입 작업' + 분야 5개). 'projects' 로 바꾸면 예전 표 세 줄. 바탕은 앞 구역(soft)과 구분되게 white
-      { id: 'process', bg: 'navy' },   // 현장 진행 방식
-      { id: 'envB', bg: 'white' },     // 환경 띠 — 시안 B(12차): 환경 관련 사실 4칸(인증·수상·면허·탈수, 사실은 tools/build.js). 바탕은 css 의 옅은 포인트색(--brand-tint)이 이긴다
-      // { id: 'scenes', bg: 'soft' }, // 현장의 장면 (사진 카드 세 장) — 시안 B 에서는 뺐다(시안B 5차, 2026-10-18 이다결 님 선택: 색판 사업분야에 같은 사진이 있어 역할이 겹침). 줄 앞의 // 를 지우면 다시 생긴다
-      { id: 'company', bg: 'white' }   // 회사 소개 (연도 숫자는 사실이라 tools/build.js 에 있다)
+      { id: 'why', bg: 'navy' },       // 시안C 7차: 왜 로봇을 먼저 넣는가 — 큰 제목 + 사진 두 장(이전/지금). 글은 copy.why, 사실은 tools/build.js WHY_*
+      { id: 'unmanned', bg: 'white' }, // 시안C 7차: 무인 솔루션 — 로봇 네 대(이름 + 세 단어). 글은 copy.unmanned, 목록은 tools/build.js UNMANNED_BOTS
+      { id: 'trust', bg: 'navy' },     // 숫자 띠 (200회 · 170여 건 · 특허 · 면허, 주요 현장) — 7차: 무인 솔루션 아래로. 시안B 24차: 남색 풀블리드 띠
+      { id: 'whatChart', bg: 'soft' }, // 시안C 4차: 사업분야 차트. 배치는 look.chartLayout('compact' 5차 / 'five' / 'lead')
+      { id: 'projTabs', bg: 'white' }, // 시안C 6차: 주요 수행 이력 — 분류 탭(첫 탭 '로봇 투입 작업'). 'projects' 로 바꾸면 예전 표 세 줄
+      // { id: 'process', bg: 'navy' },   // 현장 진행 방식 — 7차: 메인에서 뺐다(무인 솔루션이 맡음). 줄 앞의 // 를 지우면 다시 생긴다
+      // { id: 'envB', bg: 'white' },     // 환경 띠 — 7차: 메인에서 빼고 회사 소개 안 한 줄로(copy.company.env). 줄 앞의 // 를 지우면 다시 생긴다
+      // { id: 'scenes', bg: 'soft' }, // 현장의 장면 (사진 카드 세 장) — 시안 B 에서는 뺐다
+      { id: 'company', bg: 'soft' }    // 회사 소개 — 7차: 사진 50%·글 50%(copy.company.half), 바탕 soft(앞 구역 white 와 구분)
     ],
 
     /* ⑦ 메인 문구 — 지금 글자 그대로. 숫자가 들어가는 자리는 {n} 같은 자리표시다 */
@@ -178,7 +180,7 @@ module.exports = {
         robotTitle: '로봇 투입 작업',                                    // 첫 탭 제목
         listRobot: '로봇 투입이 기록된 작업',                            // 첫 탭 목록 머리글
         listField: '수행 실적',                                          // 분야 탭 목록 머리글
-        moreRobot: '현장 진행 방식 자세히',                              // 첫 탭 링크 글자 (process.html)
+        moreRobot: '작업 절차 자세히',                                  // 첫 탭 링크 글자 (process.html — 7차: 메뉴에서는 뺐지만 페이지는 남아 있다)
         note: '사진은 분야별 작업 장면과 장비이며, 목록에 적힌 실적의 현장을 찍은 것은 아닙니다.'   // 구역 맨 아래 작은 글 — 빈 문자열이면 숨김
       },
       process: {                            // 현장 진행 방식
@@ -188,6 +190,17 @@ module.exports = {
         steps4: true,                                                      // 시안C 1차: 7단계 대신 4줄(사실은 tools/build.js STEPS4). false 면 아래 summary 한 문장
         summary: '현장 검토부터 회수물·폐기물 처리까지, 일곱 단계로 진행합니다.',
         button: '현장 진행 방식 자세히 보기'                               // 버튼 문구
+      },
+      why: {                                // 시안C 7차: 왜 로봇을 먼저 넣는가 (남색 칸). 숫자·출처는 tools/build.js WHY_STAT
+        eyebrow: '왜 로봇을 먼저 넣는가',                                                  // 제목 위 작은 글
+        title: '사람이 들어가던 곳에,<br>이제 로봇이 먼저 들어갑니다.',                      // 큰 제목 (<br> 는 줄바꿈)
+        text: '신정개발의 로봇은 이 위험을 줄이려고 만들었습니다. 로봇이 먼저 들어가 위험 물질을 걷어내고, 사람은 위험이 줄어든 뒤에 들어갑니다.'   // 숫자 문장 뒤에 이어지는 글
+      },
+      unmanned: {                           // 시안C 7차: 무인 솔루션 (흰 칸). 로봇 목록은 tools/build.js UNMANNED_BOTS
+        title: '무인 솔루션',                                                // 구역 제목
+        lead: '현장에 맞는 로봇을 고르고, 사람은 밖에서 조종합니다.',          // 제목 옆 한 줄
+        more: '로봇과 장비, 작업 절차 자세히',                               // 아래 링크 글자
+        moreHref: 'technology.html'                                          // 링크가 가는 곳
       },
       envB: {                               // 환경 띠 (시안 B 12차) — 새 문장은 이 세 줄뿐(확인요청서 2-9). 사실 칸 4개는 tools/build.js
         eyebrow: 'ENVIRONMENT · 환경',                                      // 제목 위 작은 글
@@ -205,6 +218,10 @@ module.exports = {
       company: {                            // 회사 소개
         title: '회사 소개',                 // 구역 제목 (소개 문장은 사실이라 tools/build.js 의 회사 정보에 있다)
         lab: true,                          // 시안C 1차: 자체 개발 한 줄과 근거 두 개(사실은 tools/build.js LAB_LINE)
+        half: true,                         // 시안C 7차: 사진 50% · 글 50% (사진이 글 높이만큼 채움), 숫자는 설립·연구소·지사 셋(법인 전환 제거)
+        env: true,                          // 시안C 7차: 환경 한 줄(ISO 14001 · 환경부장관상 · 폐기물 수집·운반업 허가 — 사실은 tools/build.js ENV_LINE)
+        envLabel: '환경',                   // 환경 한 줄 앞의 작은 제목
+        photo: 'M02',                       // 사진 (여수 본사 건물)
         button: '회사 소개 자세히 보기'      // 버튼 문구
       },
       cta: {                               // 맨 아래 남색 문의 띠 — 메인 페이지 문의 띠에만 쓰인다 (메인 밖은 아래 common.cta)
@@ -217,12 +234,21 @@ module.exports = {
 
   /* ===================== ⑧ 메뉴와 공통 문구 (모든 페이지) ===================== */
   nav: [                                   // 맨 위 메뉴 — 위에서부터 왼쪽→오른쪽 순서. href·key 는 바꾸지 않는다
+    { href: 'index.html#unmanned', label: '무인 솔루션', key: 'unmanned' },   // 7차: 메인의 무인 솔루션 칸으로
     { href: 'services.html', label: '사업분야', key: 'services' },
     { href: 'projects.html', label: '수행 이력', key: 'projects' },
-    { href: 'process.html', label: '현장 진행 방식', key: 'process' },
     { href: 'technology.html', label: '장비·로봇', key: 'technology' },
-    { href: 'company.html', label: '회사 소개', key: 'company' }
+    { href: 'company.html', label: '회사 소개', key: 'company' },
+    { href: 'news.html', label: '소식', key: 'news' }                        // 7차 신설
+    // { href: 'process.html', label: '현장 진행 방식', key: 'process' }   // 7차: 메뉴에서 뺐다. 페이지는 남아 있고 바닥글 '작업 절차'와 링크로 간다
   ],
+  pages: {                                 // 7차: 메인 밖 새 페이지의 글
+    news: {
+      title: '소식',
+      lead: '인증·수상·연구소 소식을 날짜순으로 정리했습니다.',
+      src: '출처: 회사소개서(2024) 연혁. 새 소식은 tools/build.js 의 NEWS_EXTRA 에 더합니다.'
+    }
+  },
   common: {                                 // 모든 페이지에 같이 쓰이는 문구
     headerCta: '현장 문의',                // PC 머리말 오른쪽 버튼 문구
     drawerContact: '현장 문의',            // 휴대폰 메뉴(☰) 맨 아래 항목 문구
