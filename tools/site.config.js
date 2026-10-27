@@ -292,7 +292,7 @@ module.exports = {
   look: {
     finder: true,                          // 시안C 3차(안 B): 사업분야 전체 보기 첫 구역을 '설비로 찾기'로. false 면 예전 카드 격자
     chartLayout: 'compact',                // 시안C 5차: 메인 사업분야 차트 배치 — 'compact' = 간결판(설명 문장 없이 현장·투입 두 줄, 휴대폰은 한 장씩 가로 넘김) · 'five' = 다섯 칸 같은 크기(안 A, 4차-1) · 'lead' = 큰 카드 1 + 작은 카드 4(안 B, 4차)
-    showGaps: true,                        // 시안C 9차: 무인 솔루션 페이지(unmanned.html)의 빈칸 표시 — 두 문서에 없는 칸(세대별 개발 연도·도입 시기·로더/Jet Cleaner 사진·작업 영상)을 점선으로 보인다. dev 검토용 true, main 병합 전 false 로(false 면 그 자리를 출력하지 않는다)
+    showGaps: false,                        // 시안C 9차: 무인 솔루션 페이지(unmanned.html)의 빈칸 표시 — 두 문서에 없는 칸(세대별 개발 연도·도입 시기·로더/Jet Cleaner 사진·작업 영상)을 점선으로 보인다. dev 검토용 true, main 병합 전 false 로(false 면 그 자리를 출력하지 않는다)
     /* 시안B 23차: AI 연출 이미지 고지 방식 — 'footer' = 모든 페이지 바닥글에 공통 한 줄(aiNotice), 개별 배지(히어로 mark·색판 note·분야 상세 note)는 끈다.
        'badge' 로 바꾸면 18·19·21차의 개별 배지가 다시 켜지고 바닥글 줄은 빠진다(배지 코드·스타일은 그대로 남아 있다) */
     aiMark: 'footer',
