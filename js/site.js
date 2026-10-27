@@ -203,6 +203,45 @@
       window.addEventListener('hashchange', function () { eqFromHash(true); });
     }
 
+    /* ---------- 5-1. 사업분야 차트 간결판(시안C 5차): 휴대폰 가로 넘김 위치를 점으로 표시 ---------- */
+    var chDots = document.querySelector('[data-chart-dots]');
+    var chGrid = chDots && chDots.parentNode.querySelector('.bizCh__grid');
+    if (chDots && chGrid) {
+      var chCards = chGrid.querySelectorAll('.bizCh__card'), chI = chDots.querySelectorAll('i'), chLab = chDots.querySelector('span');
+      var chUpd = function () {
+        if (!chCards.length) return;
+        var w = chCards[0].getBoundingClientRect().width + 12;            // 카드 너비 + css 의 gap
+        var i = Math.max(0, Math.min(chCards.length - 1, Math.round(chGrid.scrollLeft / w)));
+        for (var k = 0; k < chI.length; k++) chI[k].className = k === i ? 'on' : '';
+        if (chLab) chLab.textContent = (i + 1) + ' / ' + chCards.length;
+      };
+      chGrid.addEventListener('scroll', chUpd, { passive: true });
+      window.addEventListener('resize', chUpd);
+      chUpd();
+    }
+
+    /* ---------- 5-2. 주요 수행 이력 분류 탭(시안C 6차): 누르면 그 분류만, 화살표 키로 이동 ---------- */
+    var rtBar = document.querySelector('.rtab__bar');
+    if (rtBar) {
+      var rtTabs = Array.prototype.slice.call(rtBar.querySelectorAll('[role="tab"]'));
+      var rtShow = function (tab) {
+        rtTabs.forEach(function (t) {
+          var on = t === tab; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1;
+          var p = document.getElementById(t.getAttribute('aria-controls'));
+          if (p) { if (on) { p.removeAttribute('hidden'); p.classList.add('is-in'); } else p.setAttribute('hidden', ''); }
+        });
+        if (tab.scrollIntoView) tab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      };
+      rtTabs.forEach(function (t, i) {
+        t.addEventListener('click', function () { rtShow(t); });
+        t.addEventListener('keydown', function (e) {
+          var j = i;
+          if (e.key === 'ArrowRight') j = (i + 1) % rtTabs.length; else if (e.key === 'ArrowLeft') j = (i - 1 + rtTabs.length) % rtTabs.length; else if (e.key === 'Home') j = 0; else if (e.key === 'End') j = rtTabs.length - 1; else return;
+          e.preventDefault(); rtShow(rtTabs[j]); rtTabs[j].focus();
+        });
+      });
+    }
+
     /* ---------- 6. 현재 연도 ---------- */
     var y = document.querySelector('[data-year]');
     if (y) y.textContent = String(new Date().getFullYear());
