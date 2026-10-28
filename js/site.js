@@ -262,6 +262,10 @@
       });
     })();
 
+    /* ---------- 5-5 (10차). 메인 무인 솔루션 '로봇이 하는 일': 휴대폰 가로 넘김 위치를 점으로 ---------- */
+    (function(){var r=document.querySelector('.u10__jobs'),d=[].slice.call(document.querySelectorAll('.u10__dots i'));if(!r||!d.length)return;
+    r.addEventListener('scroll',function(){var c=r.children,k=0,b=1e9,pl=parseFloat(getComputedStyle(r).paddingLeft)||0;for(var i=0;i<c.length;i++){var x=Math.abs(c[i].offsetLeft-r.offsetLeft-pl-r.scrollLeft);if(x<b){b=x;k=i}}if(r.scrollLeft+r.clientWidth>=r.scrollWidth-4)k=c.length-1;d.forEach(function(e,i){e.classList.toggle('on',i===k)})},{passive:true});})();
+
     /* ---------- 6. 현재 연도 ---------- */
     var y = document.querySelector('[data-year]');
     if (y) y.textContent = String(new Date().getFullYear());

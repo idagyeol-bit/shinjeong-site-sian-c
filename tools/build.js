@@ -151,7 +151,11 @@ const PHOTOS = {
   /* 시안C 6차 (2026-10-27 이다결 님 결정): 메인 주요 수행 이력(분류 탭)용. 셋 다 기술소개서(2025) PDF 사진 예외 — 파일은 축소·크롭·얼굴 흐림만(확대 없음). 출처 tools/photo-plan.json */
   P15: { id: 'P15', w: 720, h: 480, sizes: [720], alt: '알갱이 충진물 위에서 흡입 작업 중인 로봇', cap: '충진물 위에서 흡입 작업 중인 로봇' },
   P16: { id: 'P16', w: 761, h: 507, sizes: [761], alt: '제어 차량 안에서 모니터를 보며 조종하는 작업자들', cap: '제어 차량 안에서 모니터를 보는 작업자들' },
-  P17: { id: 'P17', w: 815, h: 543, sizes: [815], alt: '설비 내부를 네 화면으로 보여 주는 CCTV 모니터', cap: '설비 내부를 보여 주는 CCTV 모니터' }
+  P17: { id: 'P17', w: 815, h: 543, sizes: [815], alt: '설비 내부를 네 화면으로 보여 주는 CCTV 모니터', cap: '설비 내부를 보여 주는 CCTV 모니터' },
+  /* 시안C 10차: 기술소개서(2025) 8쪽 '기타 Cleaning 로봇'의 장비 사진(PDF 사진 예외 — CLAUDE.md, tools/photo-plan.json). 검은 바탕 그대로, 확대 없음 */
+  X01: { id: 'X01', w: 604, h: 403, sizes: [604], alt: '앞에 버킷을 단 궤도형 무인 로더', cap: '앞에 버킷을 단 궤도형 무인 로더' },
+  X02: { id: 'X02', w: 674, h: 531, sizes: [674], alt: '앞에 버킷을 단 소형 궤도형 무인 로더', cap: '앞에 버킷을 단 소형 궤도형 무인 로더' },
+  X03: { id: 'X03', w: 598, h: 448, sizes: [598], alt: '노즐 여러 개를 단 바퀴형 세척 로봇', cap: '노즐 여러 개를 단 바퀴형 세척 로봇' }
 };
 const P = (id) => PHOTOS[id];
 
@@ -838,17 +842,19 @@ const PROJ_TAB_PHOTO = { S01: 'P01', S02: 'P15', S04: 'W03', S03: 'W01', S05: 'W
 /* 시안C 7차 (2026-10-27 이다결 님 결정): 첫 화면 바로 아래 두 칸 — ① 왜 로봇을 먼저 넣는가(남색) ② 무인 솔루션(흰색).
    WHY_STAT: 기술소개서(2025) p.4 개발 배경(고용노동부 산업재해조사 2014~2023 — 밀폐공간 질식 재해 100명당 50명 사망) = PROCESS.bgfacts 와 같은 사실.
    WHY_PAIR: '이전'은 기술소개서 p.26 기존 작업 사진(P10), '지금'은 p.28 로봇 적용 사진(P03). 글귀의 '먼저'는 FAQ·절차(로봇이 먼저 회수, 작업자는 나중)와 같은 뜻 — '사람 대신'이 아니다.
-   UNMANNED_BOTS: 9차 — 메인 무인 솔루션 4칸을 '상황 제목(situation) + 로봇 이름(name) + 한 줄(fact) + 적용 설비 태그(tags)'로. 글자는 모두 ①②의 표현(지시서 9차 부록 1 — ② 19·30·13쪽 · ① 9·22·36쪽), 칸 전체가 무인 솔루션 페이지의 그 로봇 칸(href)으로 가는 링크. 시제품(6장)은 넣지 않는다. */
+   UNMANNED_BOTS: 10차 — 메인 무인 솔루션 '로봇이 하는 일' 5칸. fn=기능 배지, job=하는 일(굵게), name=로봇 이름(작게), fit=검은 바탕 사진(contain). 시제품(6장)은 넣지 않는다. */
 const WHY_STAT = { text: '밀폐공간 질식 재해는 100명 중 50명이 목숨을 잃습니다.', src: '고용노동부 산업재해조사 2014~2023 · 신정개발 기술소개서(2025)' };
 const WHY_PAIR = [
   { photo: 'P10', k: '이전', t: '사람이 들어가던 곳' },
   { photo: 'P03', k: '지금', t: '로봇이 먼저 들어갑니다' }
 ];
+/* 시안C 10차: 메인 무인 솔루션 — 로봇이 하는 일. fn=기능 배지, job=하는 일(굵게), name=로봇 이름(작게). 글자 근거: ② 7·8·10·11·12쪽, ① 22쪽 */
 const UNMANNED_BOTS = [
-  { photo: 'W05', tags: ['Tank', 'Pond', '준설'], situation: 'Pond · Tank 안의 잔여 위험 물질을 회수할 때', name: '흡입 로봇', fact: '수중 작업 가능', href: 'unmanned.html#r-suction' },
-  { photo: 'W06', tags: ['Reactor', 'Tank', 'Pond'], situation: '흡입되지 않을 만큼 굳은 슬러지, Tank·Reactor 내부의 슬러지를 제거할 때', name: '파쇄형 로봇', fact: '방폭 대응 (5세대)', href: 'unmanned.html#r-crusher' },
-  { photo: 'R42', tags: ['관로', '하수관로'], situation: '관로 안을 CCTV로 조사할 때', name: '관로 CCTV 로봇', fact: '관로조사용', href: 'unmanned.html#r-cctv' },
-  { photo: 'P16', tags: ['Control Car', 'CCTV'], situation: '작업자는 설비 밖 Control Car에서 원격 조정하고 CCTV로 내부를 봅니다', name: '작업운용 제어반(OCV)', fact: '원격제어 및 모니터링(RCMS)', href: 'unmanned.html#how' }
+  { photo: 'W05', fn: '흡입', job: '탱크 · Pond 바닥의 위험 물질을 빨아들입니다', name: '흡입 로봇', href: 'unmanned.html#r-suction' },
+  { photo: 'W06', fn: '파쇄', job: '굳은 슬러지 · 충진물을 부숴서 회수합니다', name: '파쇄형 로봇', href: 'unmanned.html#r-crusher' },
+  { photo: 'X01', fn: '퇴적물 처리', job: 'Pond · 배수로 바닥에 쌓인 것을 치웁니다', name: '무인 로더', href: 'unmanned.html#r-loader', fit: true },
+  { photo: 'X03', fn: '고압 세척', job: '좁은 공간을 고압수로 씻어 냅니다', name: '무인 Jet Cleaner', href: 'unmanned.html#r-jet', fit: true },
+  { photo: 'R42', fn: '관로 조사', job: '하수관 안을 카메라로 조사합니다', name: '관로 CCTV 로봇', href: 'unmanned.html#r-cctv' }
 ];
 /* 회사 소개 구역의 환경 한 줄(7차: 환경 띠를 메인에서 빼고 여기로) — CREDS.certs·awards·permits, 연혁 2017.05·2007.10·2004.10·2006.05 */
 const ENV_LINE = ['ISO 14001 환경경영 인증 (2017)', '환경부장관상 (2007)', '일반·지정폐기물 수집·운반업 허가 (2004·2006)'];
@@ -1722,26 +1728,35 @@ ${WHY_PAIR.map((w, i) => `        <figure>
 `;
   },
 
-  /* 시안C 7차: 무인 솔루션 — 흰 칸. 9차: 로봇 네 칸을 '상황 제목(h3) + 로봇 이름 + 한 줄 + 사진 아래 적용 설비 태그'로(.unm4), 칸 전체가 무인 솔루션 페이지(unmanned.html)의 그 로봇 칸으로 가는 링크.
-     글자는 UNMANNED_BOTS(①②의 표현)와 설정 home.copy.unmanned. 7차 .unm 스타일은 css 에 남아 있다 */
+  /* 시안C 7차: 무인 솔루션 — 흰 칸. 10차: 뜻 한 문단 + 설비 안/밖 사진 한 쌍 + '로봇이 하는 일' 5칸(기능 배지 먼저, 로봇 이름은 아래 작게. 휴대폰은 가로 넘김 + 점) + 기록 건수 줄(지시서 10차 부록 1).
+     글자는 설정 home.copy.unmanned 와 UNMANNED_BOTS, 건수·연도는 ROBOT_RECORDS 에서 센다. 9차 .unm4 · 7차 .unm 은 쓰지 않는다 */
   unmanned: (bg) => {
     const c = CFG.home.copy.unmanned;
-    return `  <!-- ===== 무인 솔루션 (시안C 7차 → 9차 상황형 4칸) ===== -->
-  <section class="section${BG_CLASS[bg]} unm4" id="unmanned" aria-labelledby="unm-title">
+    const ys = ROBOT_RECORDS.flatMap((r) => (r.period.match(/20\d\d/g) || []).map(Number));
+    return `  <!-- ===== 무인 솔루션 (시안C 7차 → 10차) ===== -->
+  <section class="section${BG_CLASS[bg]} u10" id="unmanned" aria-labelledby="u10-title">
     <div class="wrap">
-      <div class="head">
-        <div data-reveal><h2 id="unm-title">${esc(c.title)}</h2></div>
-        <p class="lead">${esc(c.lead)}</p>
+      <div class="u10__top" data-reveal>
+        <div>
+          <h2 id="u10-title">${esc(c.title)}</h2>
+          <p class="u10__lead">${esc(c.lead)}</p>
+        </div>
+        <div class="u10__pair">
+          <figure>${photo(P('P03'), '(max-width:960px) 46vw, 380px')}<figcaption><em>설비 안</em><b>로봇이 먼저 들어가 작업</b></figcaption></figure>
+          <figure>${photo(P('P16'), '(max-width:960px) 46vw, 380px')}<figcaption><em>설비 밖</em><b>작업자는 화면을 보며 조종</b></figcaption></figure>
+        </div>
       </div>
-      <div class="unm4__row" data-reveal>
-${UNMANNED_BOTS.map((b) => `        <a class="unm4__bot" href="${b.href}">
-          <span class="unm4__fig">${photo(P(b.photo), '(max-width:960px) 46vw, 300px')}</span>
-          <span class="unm4__tags">${b.tags.map((t) => `<span>${esc(t)}</span>`).join('')}</span>
-          <h3>${esc(b.situation)}</h3>
-          <p><b>${esc(b.name)}</b> · ${esc(b.fact)}</p>
-        </a>`).join('\n')}
+
+      <div class="u10__sub u10__swipe"><h3 style="margin:0;font-size:inherit">로봇이 하는 일</h3><span>옆으로 넘겨 보기 →</span></div>
+      <ul class="u10__jobs" data-reveal>
+${UNMANNED_BOTS.map((b) => `        <li><a href="${b.href}"><span class="u10__ph${b.fit ? ' u10__ph--fit' : ''}">${photo(P(b.photo), '(max-width:960px) 64vw, 250px')}<span class="u10__fn">${esc(b.fn)}</span></span><p>${esc(b.job)}</p><small>${esc(b.name)}</small></a></li>`).join('\n')}
+      </ul>
+      <div class="u10__dots" aria-hidden="true">${UNMANNED_BOTS.map((_, i) => `<i${i ? '' : ' class="on"'}></i>`).join('')}</div>
+
+      <div class="u10__foot">
+        <p><b>${ROBOT_RECORDS.length}건</b>로봇을 투입한 작업 기록 (${Math.min(...ys)}~${Math.max(...ys)})</p>
+        <a class="tlink" href="${c.moreHref || 'unmanned.html'}">${esc(c.more)}</a>
       </div>
-      <div class="unm4__more" data-reveal><a class="tlink" href="${c.moreHref || 'unmanned.html'}">${esc(c.more)} ${arrow(14)}</a></div>
     </div>
   </section>
 `;
@@ -2264,13 +2279,19 @@ pages['process.html'] = () => redirectPage('process.html', 'unmanned.html#how');
 const showGaps = () => !!(CFG.look && CFG.look.showGaps);
 const gap = (html) => (showGaps() ? html : '');
 /* 적용 설비 필터 7칩 (지시서 9차 A-3) — data-f ↔ 로봇 칸의 data-tags */
-const US_FILTERS = [['all', '전체'], ['tank', 'Tank · Drum'], ['pond', 'Pond · Open Ditch'], ['reactor', 'Reactor (촉매 · 충진물)'], ['dredge', '준설 — 처리시설 · 하수도'], ['pipe', '관로 — CCTV 조사'], ['narrow', '협소 공간 · 실외 토사']];
-/* 작동 방식 4줄(② 19쪽 절차 · ① 33·36쪽 구성) — '어떻게' 구역과 흡입·파쇄형 칸의 '작동 방식' 탭에 같은 글자 */
+const US_FILTERS = [['all', '전체'], ['tank', '탱크 · 드럼'], ['pond', 'Pond · 배수로'], ['reactor', '반응기 (촉매 · 충진물)'], ['dredge', '준설 (처리시설 · 하수도)'], ['pipe', '관로 조사'], ['narrow', '좁은 공간 · 실외 흙']];   // 10차: 쉬운 말(B-1 8번)
+/* 작동 방식 4줄(② 19쪽 절차 · ① 33·36쪽 구성) — 흡입·파쇄형 칸의 '작동 방식' 탭(원문 용어 그대로). 10차: '어떻게' 구역은 아래 US_HOW_EASY(쉬운 말) */
 const US_HOW_LIST = `<ul class="how__list">
             <li><b>설비 안 · Robot</b><span>내부 잔여 위험 물질을 1차 회수하고, 전면부 Jet Nozzle로 내부를 Cleaning합니다.</span></li>
             <li><b>설비 밖 · Vacuum Car · Separator</b><span>회수물은 Vacuum Car로 보내고, 촉매 작업에서는 Separator로 분리합니다.</span></li>
             <li><b>설비 밖 · Control Car</b><span>작업운용 제어반(OCV)에서 원격 조정하고, CCTV로 내부를 감시합니다(RCMS).</span></li>
             <li><b>작업자 투입</b><span>위험 물질을 최소화한 뒤 작업자가 들어가 내부 최종 잔여물을 제거합니다(Final Cleaning).</span></li>
+          </ul>`;
+const US_HOW_EASY = `<ul class="how__list">
+            <li><b>설비 안 — 로봇</b><span>안에 남은 위험 물질을 로봇이 먼저 회수하고, 앞쪽 노즐로 물을 뿜어 내부를 씻어 냅니다.</span></li>
+            <li><b>설비 밖 — 흡입차</b><span>로봇이 회수한 것은 호스를 타고 밖의 흡입차로 나옵니다. 촉매 작업에서는 분리장치로 걸러 냅니다.</span></li>
+            <li><b>설비 밖 — 제어 차량</b><span>작업자는 제어 차량 안에서 CCTV 화면으로 내부를 보며 로봇을 원격으로 조종합니다.</span></li>
+            <li><b>마지막 — 작업자</b><span>위험 물질이 줄어든 뒤에야 작업자가 들어가 남은 것을 마무리합니다.</span></li>
           </ul>`;
 const US_GEN_TABLE = `<table class="rb__tbl"><thead><tr>${['세대', '방식', '적용 대상', '수중 작업', '구동', '비고'].map((h) => `<th>${h}</th>`).join('')}</tr></thead><tbody>
 ${PROCESS.generations.map((g) => `            <tr>${g.map((v) => `<td>${esc(v)}</td>`).join('')}</tr>`).join('\n')}
@@ -2293,12 +2314,11 @@ const usPanel = (k, i, body) => `        <div class="rb__panel" role="tabpanel" 
           ${body}
         </div>`;
 const usAct = (second) => `<div class="rb__act"><a class="btn btn--fill btn--sm" href="contact.html">적용 문의</a>${second || `<a class="btn btn--line btn--sm" href="${DOC_TECH}">기술소개서 PDF ↓</a>`}</div>`;
-const usThumb = (id, cap) => `              <figure><div class="f">${photo(P(id), '(max-width:960px) 22vw, 150px')}</div><figcaption>${cap}</figcaption></figure>`;
+const usThumb = (id, cap, fit) => `              <figure><div class="f${fit ? ' f--fit' : ''}">${photo(P(id), '(max-width:960px) 22vw, 150px')}</div><figcaption>${cap}</figcaption></figure>`;
 const usSlot = (b, t) => gap(`              <div class="rb__slot" data-gap><b>${b}</b>${t}</div>`);
 const usThumbs = (items) => { const xs = items.filter(Boolean); return xs.length ? `            <div class="rb__thumbs">\n${xs.join('\n')}\n            </div>\n` : ''; };
-const usMain = (id, cap) => `            <figure class="rb__main">${photo(P(id), '(max-width:960px) 92vw, 640px')}<figcaption>${cap}</figcaption></figure>\n`;
+const usMain = (id, cap, fit) => `            <figure class="rb__main${fit ? ' rb__main--fit' : ''}">${photo(P(id), '(max-width:960px) 92vw, 640px')}<figcaption>${cap}</figcaption></figure>\n`;
 const usPh = (t) => gap(`            <div class="rb__ph" data-gap><b>사진 요청</b>${t}</div>\n`);
-const US_TODO = () => gap('<span class="todo" data-gap>확인 중</span>');
 const US_HOW_SRC = '<p class="us-src">출처: 기술소개서(2025) 작업 Procedure · 공사개략도 · 회사소개서(2024) 협업형 작업지원 로봇시스템</p>';
 const US_GEN_SRC = '<p class="us-src">출처: 기술소개서(2025) 장비 보유 현황 — 무인 Vacuum 로봇 (PROCESS.generations 그대로)</p>';
 /* 흡입·파쇄형 공통: 작동 방식 · 세대별 비교 · 투입 기록 탭 (B-1 ⑤·⑥ — 같은 내용) */
@@ -2351,24 +2371,24 @@ pages['unmanned.html'] = () => {
         </div>
         <div>
           <span class="rb__eyebrow">어떻게 하는가</span>
-          <h2>로봇은 설비 안에서 작업하고,<br>작업자는 밖에서 원격 조정합니다.</h2>
-          ${US_HOW_LIST}
+          <h2>로봇은 안에서 일하고,<br>사람은 밖에서 화면을 보며 조종합니다.</h2>
+          ${US_HOW_EASY}
         </div>
       </div>
       <div class="how__pics">
         <figure><div class="f">${photo(P('P17'), '(max-width:960px) 92vw, 640px')}</div><figcaption><b>CCTV</b>설비 내부를 보여 주는 CCTV 모니터</figcaption></figure>
-        <figure><div class="f">${photo(P('P16'), '(max-width:960px) 92vw, 640px')}</div><figcaption><b>Control Car</b>제어 차량 안에서 모니터를 보는 작업자들</figcaption></figure>
+        <figure><div class="f">${photo(P('P16'), '(max-width:960px) 92vw, 640px')}</div><figcaption><b>제어 차량</b>제어 차량 안에서 모니터를 보는 작업자들</figcaption></figure>
       </div>
       <ol class="us-steps" aria-label="Robot-Tank Cleaning System 절차">
-        <li class="us-step"><em>01</em><h3>현장 적용 가능성 검토</h3><p>사전 Test 실시</p></li>
-        <li class="us-step"><em>02</em><h3>System 설치</h3></li>
-        <li class="us-step"><em>03</em><h3>1차 Washing</h3><p>Vacuum Car 이용, 외부에서 잔여 물질 제거</p></li>
-        <li class="us-step is-robot"><em>04</em><h3>Robot 투입</h3><p>Shell side 내부 잔여 위험 물질 1차 회수</p></li>
-        <li class="us-step is-robot"><em>05</em><h3>2차 Washing</h3><p>Robot 전면부 Jet Nozzle 이용한 내부 Cleaning</p></li>
-        <li class="us-step"><em>06</em><h3>Final Cleaning</h3><p>작업자 투입 · 내부 최종 잔여물 제거 · 위험 물질 최소화</p></li>
-        <li class="us-step"><em>07</em><h3>폐기물 처리</h3><p>폐기물량 감소 · 처리 기간 단축</p></li>
+        <li class="us-step"><em>01</em><h3>현장 검토 · 사전 시험</h3><p>로봇을 쓸 수 있는 현장인지 미리 확인</p></li>
+        <li class="us-step"><em>02</em><h3>장비 설치</h3><p>제어 차량 · 흡입차 · 로봇 배치</p></li>
+        <li class="us-step"><em>03</em><h3>1차 세척</h3><p>흡입차로 밖에서 먼저 빨아냄</p></li>
+        <li class="us-step is-robot"><em>04</em><h3>로봇 투입</h3><p>안에 남은 위험 물질을 로봇이 먼저 회수</p></li>
+        <li class="us-step is-robot"><em>05</em><h3>2차 세척</h3><p>로봇 앞쪽 노즐로 내부를 씻음</p></li>
+        <li class="us-step"><em>06</em><h3>마무리 청소</h3><p>작업자가 들어가 남은 것을 제거</p></li>
+        <li class="us-step"><em>07</em><h3>폐기물 처리</h3><p>탈수로 양을 줄이고 처리 기간 단축</p></li>
       </ol>
-      <p class="us-src">출처: 기술소개서(2025) 'Robot-Tank Cleaning System' 절차의 항목 그대로</p>
+      <p class="us-src">출처: 기술소개서(2025) 작업 절차를 쉬운 말로 옮김</p>
       <details class="us-fold" id="dewater"><summary>회수물 탈수 과정 — 데칸타 · 필터프레스</summary>
         <ul>
           <li>데칸타(원심분리): ${PROCESS.decanter.map(esc).join(' → ')}</li>
@@ -2383,7 +2403,7 @@ pages['unmanned.html'] = () => {
   <!-- 3. 현장 투입 로봇 (기술소개서 7~8쪽 · 회사소개서 22~23쪽) -->
   <section class="section" id="robots">
     <div class="wrap">
-      <div class="head"><div><h2>현장에 투입하는 로봇</h2></div><p class="lead">기술소개서 2-2 '장비 보유 현황'과 회사소개서 보유 장비에 있는 로봇입니다. 설비를 고르면 그 설비에 해당하는 로봇만 남습니다. 기술소개서 6장의 시제품은 아래 연구개발 구역에 따로 둡니다.</p></div>
+      <div class="head"><div><h2>현장에 투입하는 로봇</h2></div><p class="lead">우리 설비를 고르면, 거기에 들어가는 로봇만 남습니다. 실제로 현장에 넣는 장비만 모았습니다.</p></div>
 
       <div class="rb-filter" role="group" aria-label="적용 설비로 고르기">
         <span>적용 설비</span>
@@ -2391,7 +2411,7 @@ ${US_FILTERS.map(([f, t]) => `        <button type="button" data-f="${f}" aria-p
       </div>
       <p class="rb-count" data-count>로봇 5종</p>
 
-      <div class="rb-hist__h"><h3>무인 Vacuum 로봇 세대별</h3><p>개발 연도는 두 문서에 없어 비워 두었습니다 — 확인되면 칸마다 적습니다</p></div>
+      <div class="rb-hist__h"><h3>흡입 로봇, 1세대부터 5세대까지</h3><p>출처: 기술소개서(2025) 장비 보유 현황</p></div>
       <ol class="rb-hist">
         <li><em>1세대</em><b>흡입형</b><span>Pond, Tank(관로) · 수중 작업 가능 · 유압 구동</span>${gap('<i data-gap>연도</i>')}</li>
         <li><em>2세대</em><b>파쇄 흡입형</b><span>Pond, Open Ditch · 수중 작업 불가 · 전기, 유압 구동</span>${gap('<i data-gap>연도</i>')}</li>
@@ -2404,17 +2424,17 @@ ${US_FILTERS.map(([f, t]) => `        <button type="button" data-f="${f}" aria-p
       <article class="rb" data-tags="tank pond dredge" id="r-suction">
         <div class="rb__grid">
           <div>
-${usMain('W05', '스크루 궤도형 흡입 로봇')}            ${usTags([['tank', 'Tank'], ['pond', 'Pond'], ['dredge', '준설']])}
+${usMain('W05', '스크루 궤도형 흡입 로봇')}            ${usTags([['tank', '탱크'], ['pond', 'Pond'], ['dredge', '준설']])}
 ${usThumbs([usThumb('P11', '탱크 바닥에서 작업하는 로봇'), usThumb('R13', '흡입 헤드 유닛'), usSlot('사진', 'Pond · 준설 작업 장면 요청'), usSlot('▶ 작업 영상', '영상 받으면 여기에')])}          </div>
           <div>
-            <span class="rb__eyebrow">무인 Vacuum 로봇 · 흡입형</span>
-            <h2>흡입 로봇<small>Pond · Tank(관로) — 흡입형</small></h2>
-            <p class="rb__use">기존에는 작업자가 탱크 안에 들어가서 하던 작업입니다. 로봇이 내부 잔여 위험 물질을 1차 회수하고, 회수물은 설비 밖 Vacuum Car로 보냅니다.</p>
+            <span class="rb__eyebrow">무인 흡입 로봇</span>
+            <h2>흡입 로봇<small>탱크 · Pond 바닥에 남은 것을 빨아들이는 로봇</small></h2>
+            <p class="rb__use">예전에는 작업자가 탱크 안에 들어가 호스로 하던 일입니다. 이제 로봇이 먼저 들어가 남은 위험 물질을 회수하고, 회수한 것은 밖의 흡입차로 보냅니다.</p>
             <dl class="rb__meta">
-              <dt>개발</dt><dd>1세대 흡입형 → 4세대 흡입형·소형화 · 개발 연도는 두 문서에 없음${US_TODO()}</dd>
-              <dt>환경</dt><dd>수중 작업 가능 · 유압 구동 · 준설용</dd>
+              <dt>개발</dt><dd>1세대 → 4세대(더 작게 개량)</dd>
+              <dt>환경</dt><dd>물속에서도 작업 · 유압으로 움직임 · 준설에도 사용</dd>
             </dl>
-            ${usSpec([['방식', '흡입형'], ['적용 대상', 'Pond · Tank(관로)'], ['구동', '유압'], ['조종', '원격 조정 — Control Car · CCTV'], ['수중 작업', '가능'], ['보유', '무인준설로봇 흡입형 1대']])}
+            ${usSpec([['방식', '흡입형'], ['적용 대상', 'Pond · Tank(관로)'], ['구동', '유압'], ['조종', '제어 차량에서 CCTV를 보며 원격 조종'], ['수중 작업', '가능'], ['보유', '무인준설로봇 흡입형 1대']])}
             ${usAct()}
           </div>
         </div>
@@ -2427,17 +2447,17 @@ ${usCommonPanels('suction')}
       <article class="rb" data-tags="reactor tank pond dredge" id="r-crusher">
         <div class="rb__grid">
           <div>
-${usMain('W06', '전면에 파쇄 장치를 갖춘 궤도형 장비')}            ${usTags([['reactor', 'Reactor'], ['tank', 'Tank'], ['pond', 'Pond'], ['dredge', '준설']])}
+${usMain('W06', '전면에 파쇄 장치를 갖춘 궤도형 장비')}            ${usTags([['reactor', '반응기'], ['tank', '탱크'], ['pond', 'Pond'], ['dredge', '준설']])}
 ${usThumbs([usThumb('P03', '반응기 안의 로봇'), usThumb('P15', '충진물 위의 로봇'), usThumb('R10', '전면 작업 헤드'), usSlot('▶ 작업 영상', '영상 받으면 여기에')])}          </div>
           <div>
-            <span class="rb__eyebrow">무인 Vacuum 로봇 · 파쇄형</span>
-            <h2>파쇄형 로봇<small>Pond · Reactor — 흡입되지 않는 고착 슬러지를 파쇄</small></h2>
-            <p class="rb__use">Sludge가 Vacuum Suction 되지 않을 정도로 고착되거나 점성이 있을 때 파쇄 작업을 합니다. 5세대 파쇄형은 Tank·Reactor 내부의 액체·슬러지 제거에 씁니다.</p>
+            <span class="rb__eyebrow">무인 흡입 로봇 · 파쇄형</span>
+            <h2>파쇄형 로봇<small>빨아들일 수 없을 만큼 굳은 슬러지를 부수는 로봇</small></h2>
+            <p class="rb__use">슬러지가 굳거나 끈적해서 빨아들여지지 않을 때, 부숴서 처리합니다. 5세대는 탱크와 반응기 안의 액체·슬러지를 걷어내는 데 씁니다.</p>
             <dl class="rb__meta">
-              <dt>개발</dt><dd>2·3세대 파쇄 흡입형 → 5세대 파쇄형·소형화 · 개발 연도는 두 문서에 없음${US_TODO()}</dd>
-              <dt>환경</dt><dd>수중 작업 가능 · 유압 구동 · 방폭 대응: 방폭 카메라 원격 감시, 알루미늄 본체, 비철 스크류</dd>
+              <dt>개발</dt><dd>2·3세대(부수며 빨아들임) → 5세대(파쇄형, 더 작게 개량)</dd>
+              <dt>환경</dt><dd>물속에서도 작업 · 폭발 위험이 있는 설비에 맞춘 구성(방폭 카메라 · 알루미늄 본체 · 비철 스크류)</dd>
             </dl>
-            ${usSpec([['방식', '파쇄형 (2·3세대는 파쇄 흡입형)'], ['적용 대상', 'Pond · Reactor · Tank'], ['구동', '유압'], ['조종', '원격 조정 · 방폭 카메라 원격 감시'], ['수중 작업', '가능'], ['본체 · 주행 · 세척', '알루미늄 본체 · 비철(Non-steel) 스크류 · 스크류형/체인형 바퀴 · 전면부 Jet Nozzle']])}
+            ${usSpec([['방식', '파쇄형 (2·3세대는 파쇄 흡입형)'], ['적용 대상', 'Pond · Reactor · Tank'], ['구동', '유압'], ['조종', '원격 조종 · 방폭 카메라로 감시'], ['수중 작업', '가능'], ['본체 · 바퀴 · 세척', '알루미늄 본체 · 스크류형/체인형 바퀴 · 앞쪽 물분사 노즐']])}
             ${usAct()}
           </div>
         </div>
@@ -2453,14 +2473,13 @@ ${usCommonPanels('crusher')}
 ${usMain('R42', '카메라 헤드를 갖춘 소형 주행 장비')}            ${usTags([['pipe', '관로']])}
 ${usThumbs([usThumb('R34', '차량의 제어 장치와 소형 주행 장비'), usSlot('사진', '관로 조사 장면 요청'), usSlot('사진', '조사 화면 요청'), usSlot('▶ 작업 영상', '영상 받으면 여기에')])}          </div>
           <div>
-            <span class="rb__eyebrow">관로조사용 장비</span>
-            <h2>관로 CCTV 로봇<small>관내부 CCTV 조사</small></h2>
-            <p class="rb__use">관내부 CCTV 조사는 회사소개서 사업분야의 업무이고, 2021~2023년 하수관거·하수관로 CCTV 조사용역 실적이 있습니다. 로봇 자체의 사양은 두 문서에 없습니다.</p>
+            <span class="rb__eyebrow">관로 조사 장비</span>
+            <h2>관로 CCTV 로봇<small>관 안을 카메라로 조사하는 장비</small></h2>
+            <p class="rb__use">관 안으로 들어가 내부를 카메라로 조사합니다. 2021~2023년 하수관 CCTV 조사 용역을 해 왔습니다.</p>
             <dl class="rb__meta">
-              <dt>개발</dt><dd>도입 시기는 두 문서에 없음${US_TODO()}</dd>
-              <dt>환경</dt><dd>관로 — 관로조사용 · 하수관거·하수관로 CCTV 조사</dd>
+              <dt>환경</dt><dd>하수관 · 관로</dd>
             </dl>
-            ${usSpec([['용도', '관로조사용'], ['보유', '관로 CCTV 로봇 1대'], ['함께 보유 (관로조사용)', 'CCTV 조사차량 2대 · D=250~600mm'], ['함께 보유 (관로조사용)', '탈취제거 SYSTEM 1SET']])}
+            ${usSpec([['용도', '관로 조사'], ['보유', '관로 CCTV 로봇 1대'], ['함께 쓰는 장비', 'CCTV 조사차량 2대 (관경 250~600mm)'], ['함께 쓰는 장비', '냄새 제거 장치(탈취제거 SYSTEM) 1세트']])}
             ${usAct(`<a class="btn btn--line btn--sm" href="${svc('S05').file}">관로·지하 조사 분야 보기</a>`)}
           </div>
         </div>
@@ -2472,21 +2491,20 @@ ${usPanel('cctv', 2, `<ul class="rb__rec rb__rec--one">
           <p class="us-src">출처: 회사소개서(2024) 실적표 — 하수관거 CCTV 조사용역(2021·2022), 하수관로 정비사업 수밀시험 및 CCTV 조사용역(2022~2023) 등. 수행 이력 페이지 '관로·지하 조사' 분류와 같은 기록</p>`)}
       </article>
 
-      <!-- 로봇 4 : 무인 로더 (사진 없음 — 같은 틀) -->
-      <article class="rb${showGaps() ? '' : ' rb--nophoto'}" data-tags="pond narrow dredge" id="r-loader">
+      <!-- 로봇 4 : 무인 로더 (10차: 기술소개서 8쪽 사진 X01·X02) -->
+      <article class="rb" data-tags="pond narrow dredge" id="r-loader">
         <div class="rb__grid">
           <div>
-${usPh('무인 로더 (大 · 小) 전신 사진')}            ${usTags([['pond', 'Pond · Open Ditch'], ['narrow', '협소공간 · 실외'], ['dredge', '준설']])}
-${usThumbs([usSlot('사진', '실외 작업'), usSlot('사진', '협소공간 작업'), usSlot('사진', '원격 Control'), usSlot('▶ 작업 영상', '영상 받으면 여기에')])}          </div>
+${usMain('X01', '앞에 버킷을 단 궤도형 무인 로더 (大)', true)}            ${usTags([['pond', 'Pond · 배수로'], ['narrow', '좁은 공간 · 실외'], ['dredge', '준설']])}
+${usThumbs([usThumb('X02', '무인 로더 (小)', true)])}          </div>
           <div>
-            <span class="rb__eyebrow">기타 Cleaning 로봇</span>
-            <h2>무인 로더 (大 · 小)<small>토사 · Sludge — 원격 Control</small></h2>
-            <p class="rb__use">大는 실외, 小는 협소공간의 토사·Sludge를 다룹니다. Pond Cleaning에서 Open Ditch·Pond 하부 퇴적물 처리, 작동 설비 하부 퇴적물 처리, 오염 지역 진입로 확보, 인력 작업이 힘든 고착 슬러지 제거에 씁니다.</p>
+            <span class="rb__eyebrow">그 밖의 청소 로봇</span>
+            <h2>무인 로더 (大 · 小)<small>흙과 슬러지를 치우는 원격 조종 로더</small></h2>
+            <p class="rb__use">큰 것은 실외, 작은 것은 좁은 공간용입니다. Pond와 배수로 바닥에 쌓인 것, 돌아가는 설비 아래 쌓인 것, 사람이 치우기 힘든 굳은 슬러지를 치웁니다. 오염된 곳에 들어갈 길을 내는 데도 씁니다.</p>
             <dl class="rb__meta">
-              <dt>개발</dt><dd>도입 시기는 두 문서에 없음${US_TODO()}</dd>
-              <dt>환경</dt><dd>실외(大) · 협소공간(小) · 수중 작업 불가 · 비방폭 지역 사용</dd>
+              <dt>환경</dt><dd>실외(大) · 좁은 공간(小) · 물속 작업은 안 됨 · 폭발 위험 지역에는 쓰지 않음</dd>
             </dl>
-            ${usSpec([['대상', '토사 · Sludge'], ['조종', '원격 Control'], ['구동', '전기 · 유압'], ['수중 작업', '불가'], ['장점 · 단점', '연속 작업 가능 · 작업자 안전 확보 / 작업 시간 제한(배터리 교체 및 충전)'], ['보유', '무인로더 1대 · 무인궤도로더 1대']])}
+            ${usSpec([['대상', '흙 · 슬러지'], ['조종', '원격 조종'], ['구동', '전기 · 유압'], ['수중 작업', '불가'], ['장점 · 단점', '교대로 쉬지 않고 작업 · 작업자 안전 / 배터리 교체·충전 시간이 필요'], ['보유', '무인로더 1대 · 무인궤도로더 1대']])}
             ${usAct()}
           </div>
         </div>
@@ -2496,21 +2514,20 @@ ${usPanel('loader', 2, `${usDl([['장점', cases(1).pros.map(esc).join(' · ')],
           <p class="us-src">출처: 기술소개서(2025) 용도별 적용 예시 — Pond Cleaning (로더) (PROCESS.cases 그대로)</p>`)}
       </article>
 
-      <!-- 로봇 5 : 무인 Jet Cleaner (사진 없음 — 같은 틀) -->
-      <article class="rb${showGaps() ? '' : ' rb--nophoto'}" data-tags="narrow" id="r-jet">
+      <!-- 로봇 5 : 무인 Jet Cleaner (10차: 기술소개서 8쪽 사진 X03) -->
+      <article class="rb" data-tags="narrow" id="r-jet">
         <div class="rb__grid">
           <div>
-${usPh('무인 Jet Cleaner 전신 사진')}            ${usTags([['narrow', '협소 공간']])}
-${usThumbs([usSlot('사진', '고압세척 장면'), usSlot('사진', 'Nozzle'), usSlot('사진', 'CCTV 연동'), usSlot('▶ 작업 영상', '영상 받으면 여기에')])}          </div>
+${usMain('X03', '노즐 여러 개를 단 바퀴형 세척 로봇', true)}            ${usTags([['narrow', '좁은 공간']])}
+          </div>
           <div>
-            <span class="rb__eyebrow">기타 Cleaning 로봇</span>
-            <h2>무인 Jet Cleaner<small>설비 고압세척 (8+ Nozzle) — 원격 Control</small></h2>
-            <p class="rb__use">협소 공간 Water Jet Cleaning, 오염지역 무인 방제(유해물질 제거), 협소 공간 Inspection에 씁니다.</p>
+            <span class="rb__eyebrow">그 밖의 청소 로봇</span>
+            <h2>무인 Jet Cleaner<small>좁은 곳을 고압수로 씻는 원격 조종 로봇</small></h2>
+            <p class="rb__use">노즐 8개 이상으로 고압수를 뿜어 좁은 공간을 씻습니다. 오염된 곳의 유해물질을 사람 없이 제거하고, 좁은 곳 안을 점검하는 데도 씁니다.</p>
             <dl class="rb__meta">
-              <dt>개발</dt><dd>도입 시기는 두 문서에 없음${US_TODO()}</dd>
-              <dt>환경</dt><dd>협소 공간 · 구동부 수중 작업 가능 · 전기 구동</dd>
+              <dt>환경</dt><dd>좁은 공간 · 바퀴 쪽은 물에 잠겨도 작업 · 전기로 움직임</dd>
             </dl>
-            ${usSpec([['대상', '설비 고압세척 (8+ Nozzle)'], ['조종', '원격 Control'], ['구동', '전기'], ['수중 작업', '구동부 가능'], ['장점', '연속 작업 가능 · 협소 공간 무인 작업'], ['단점', '복잡한 내부 공간에서는 간섭·부분 Cleaning · 세정수 비산에 따른 시야 저하는 CCTV 연동으로 확보']])}
+            ${usSpec([['대상', '설비 고압 세척 (노즐 8개 이상)'], ['조종', '원격 조종'], ['구동', '전기'], ['수중 작업', '구동부 가능'], ['장점', '쉬지 않고 작업 · 좁은 곳을 사람 없이'], ['단점', '안이 복잡하면 일부만 씻김 · 물이 튀어 안 보이면 CCTV로 확인']])}
             ${usAct()}
           </div>
         </div>
@@ -2527,21 +2544,22 @@ ${usPanel('jet', 2, `${usDl([['장점', cases(2).pros.map(esc).join(' · ')], ['
   <!-- 4. 적용 시 고려사항 (기술소개서 29~30쪽 + 12쪽 Manway) -->
   <section class="section section--soft" id="conditions">
     <div class="wrap">
-      <div class="head"><div><h2>적용 시 고려사항</h2></div><p class="lead">기술소개서 3-6 '적용 시 고려사항'(PFO Tank 작업 기준)의 항목입니다. 로봇 투입 여부는 현장 적용 가능성 검토와 사전 Test로 정합니다.</p></div>
+      <div class="head"><div><h2>로봇이 모든 걸<br>해결하지는 않습니다</h2></div><p class="lead">그래서 로봇을 넣기 전에 현장을 먼저 보고 시험해 봅니다. 아래는 저희가 확인하는 것들입니다.</p></div>
       <ul class="us-cons">
-        <li><em>Robot 투입 시 고려사항 1</em><b>Robot 운영의 내부 활동성</b><p>Tank 내부 PFO의 성상에 따른 Robot의 이동성이 중요하며, Suction Hose의 이동으로 Heating Coil과 간섭될 수 있으므로 Heating Coil의 배치를 고려</p></li>
-        <li><em>Robot 투입 시 고려사항 2</em><b>Suction Hose의 내열성</b><p>Sludge Suction Hose의 허용온도는 55℃. 고온 작업용 호스는 유동성이 부족해 작업의 간섭이 발생할 수 있음</p></li>
-        <li><em>Robot 투입 시 고려사항 3</em><b>Quid Sludge 제거</b><p>Sludge 성상에 따른 인위적인 파쇄 작업 가능 여부 확인</p></li>
+        <li><em>확인 1</em><b>로봇이 안에서 잘 움직일 수 있는가</b><p>바닥에 쌓인 것의 상태에 따라 로봇이 움직이기 어려울 수 있고, 호스가 탱크 안 가열 코일에 걸릴 수 있습니다. 코일 배치를 먼저 봅니다.</p></li>
+        <li><em>확인 2</em><b>호스가 열을 견디는가</b><p>흡입 호스는 55℃까지 견딥니다. 더 뜨거운 곳은 고온용 호스를 쓰는데, 덜 휘어서 작업에 걸릴 수 있습니다.</p></li>
+        <li><em>확인 3</em><b>굳은 슬러지를 부술 수 있는가</b><p>슬러지 상태를 보고 파쇄 작업이 가능한지 확인합니다.</p></li>
       </ul>
       <div class="us-recheck">
-        <h3>작업 재검토사항</h3>
+        <h3>이럴 때는 작업 방법을 다시 검토합니다</h3>
         <ul>
-          <li>Tank 내부 Heating Coil의 균일한 배치</li>
-          <li>Sludge 성상이 Vacuum Suction 되지 않을 정도의 고착이나 점성으로 형성되었을 때</li>
-          <li>Robot 구동부위 이상으로 Liquid가 잔존한 상태일 때는 구동이 어려우며, 최소로 환경 조성</li>
-          <li>충진물 제거 작업의 Manway 한계: 최소 18인치</li>
+          <li>탱크 안 가열 코일이 고르게 배치되어 있을 때</li>
+          <li>슬러지가 너무 굳거나 끈적해서 빨아들여지지 않을 때</li>
+          <li>액체가 로봇 바퀴보다 높이 남아 있을 때 — 움직이기 어려워 먼저 줄입니다</li>
+          <li>충진물 작업은 출입구(맨웨이)가 18인치 이상이어야 합니다</li>
         </ul>
-        <blockquote>“Robot Cleaning 작업으로 모든 문제는 해결할 수 없으며, 고위험성의 원인만 해결하는 데 중점.”</blockquote>
+        <blockquote>로봇으로 모든 문제를 해결할 수는 없습니다. 가장 위험한 원인을 먼저 없애는 데 씁니다.</blockquote>
+        <p class="us-easy">기술소개서(2025) 적용 시 고려사항의 내용을 쉬운 말로 옮겼습니다. 원문은 기술소개서 PDF에서 볼 수 있습니다.</p>
       </div>
       <div class="us-two">
         <details class="us-fold" open><summary>밀폐공간 작업 위험성 비교 — 인원 투입 vs 로봇 투입</summary>
@@ -2566,7 +2584,7 @@ ${usPanel('jet', 2, `${usDl([['장점', cases(2).pros.map(esc).join(' · ')], ['
   <!-- 5. 연구개발·특허 -->
   <section class="section" id="rnd">
     <div class="wrap">
-      <div class="head"><div><h2>연구개발 · 특허</h2></div><p class="lead">기업부설연구소는 2017년 11월 설립했습니다. 등록 특허 5건, 연구개발 과제 3건, 시제품 5종은 기술소개서에 있는 것입니다. 시제품은 위의 보유 장비와 구분합니다.</p></div>
+      <div class="head"><div><h2>연구개발 · 특허</h2></div><p class="lead">2017년 11월 기업부설연구소를 세웠습니다. 로봇과 준설 관련 특허를 등록했고, 로봇 시제품을 만들어 성능시험을 했습니다. 시제품은 위의 현장 장비와 따로 적었습니다.</p></div>
       <div class="stats stats--flush" style="margin-bottom:36px">
         <div class="stat"><b>2017<i>.11</i></b><span>기업부설연구소 설립</span></div>
         <div class="stat"><b>${PROCESS.patents.length}<i>건</i></b><span>등록 특허</span></div>
