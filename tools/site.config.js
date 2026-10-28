@@ -134,8 +134,9 @@ module.exports = {
        bg: 'white' = 흰 바탕, 'soft' = 연회색 바탕, 'navy' = 남색 바탕
        (주의: 'process' 구역의 버튼은 남색 바탕에 맞춘 흰 테두리 버튼이라, 다른 바탕에서는 잘 안 보일 수 있다) */
     sections: [
-      { id: 'why', bg: 'navy' },       // 시안C 7차: 왜 로봇을 먼저 넣는가 — 큰 제목 + 사진 두 장(이전/지금). 글은 copy.why, 사실은 tools/build.js WHY_*
-      { id: 'unmanned', bg: 'white' }, // 시안C 7차: 무인 솔루션 — 로봇 네 대(이름 + 세 단어). 글은 copy.unmanned, 목록은 tools/build.js UNMANNED_BOTS
+      // { id: 'why', bg: 'navy' },  // 11차: principle 로 바꿈 — 시안C 7차: 왜 로봇을 먼저 넣는가 — 큰 제목 + 사진 두 장(이전/지금). 글은 copy.why, 사실은 tools/build.js WHY_*
+      { id: 'principle', bg: 'white' }, // 시안C 11차: 신정개발의 원칙 — 표어 · 실천 한 줄 · 숫자 셋 · 넓은 사진(흰 바탕 고정). 글은 copy.principle
+      { id: 'unmanned', bg: 'soft' },  // 11차: 연회색. 시안C 7차: 무인 솔루션 — 로봇 네 대(이름 + 세 단어). 글은 copy.unmanned, 목록은 tools/build.js UNMANNED_BOTS
       { id: 'trust', bg: 'navy' },     // 숫자 띠 (200회 · 170여 건 · 특허 · 면허, 주요 현장) — 7차: 무인 솔루션 아래로. 시안B 24차: 남색 풀블리드 띠
       { id: 'whatChart', bg: 'soft' }, // 시안C 4차: 사업분야 차트. 배치는 look.chartLayout('compact' 5차 / 'five' / 'lead')
       { id: 'projTabs', bg: 'white' }, // 시안C 6차: 주요 수행 이력 — 분류 탭(첫 탭 '로봇 투입 작업'). 'projects' 로 바꾸면 예전 표 세 줄
@@ -191,6 +192,12 @@ module.exports = {
         summary: '현장 검토부터 회수물·폐기물 처리까지, 일곱 단계로 진행합니다.',
         button: '현장 진행 방식 자세히 보기'                               // 버튼 문구
       },
+      principle: {                       // 시안C 11차: 신정개발의 원칙 (흰 칸). 표어는 회사소개서 32쪽 · 기술소개서 4쪽 그대로, 실천 한 줄은 기술소개서 5쪽 개발 목적
+        label: '신정개발의 원칙',
+        quote: '사람이 없는 곳에<br>인명 사고도 없다.',
+        lead: '그래서 위험한 설비 안에는',
+        strong: '작업자보다 로봇이 먼저 들어갑니다.'
+      },
       why: {                                // 시안C 7차: 왜 로봇을 먼저 넣는가 (남색 칸). 숫자·출처는 tools/build.js WHY_STAT
         eyebrow: '왜 로봇을 먼저 넣는가',                                                  // 제목 위 작은 글
         title: '사람이 들어가던 곳에,<br>이제 로봇이 먼저 들어갑니다.',                      // 큰 제목 (<br> 는 줄바꿈)
@@ -198,7 +205,7 @@ module.exports = {
       },
       unmanned: {                           // 시안C 7차: 무인 솔루션 (흰 칸). 로봇 목록은 tools/build.js UNMANNED_BOTS — 10차: 뜻 한 문단 + 설비 안/밖 사진 + '로봇이 하는 일' 5칸
         title: '무인 솔루션',                                                // 구역 제목
-        lead: '탱크와 반응기처럼 사람이 들어가기 위험한 곳에는 로봇이 먼저 들어갑니다. 작업자는 위험이 줄어든 뒤에 들어갑니다.',   // 제목 아래 문단 (10차)
+        lead: '다섯 종류의 로봇이 탱크·반응기·배수로·관로 안에 들어가 작업합니다. 작업자는 밖에서 조종하고, 위험이 줄어든 뒤에 들어갑니다.',   // 제목 아래 문단 (11차). '다섯 종류'는 글자 그대로 — tools/build.js UNMANNED_BOTS 의 로봇 수가 바뀌면 이 문장도 같이 고친다
         more: '로봇별 작업 방법 자세히 →',                                    // 아래 링크 글자 (10차)
         moreHref: 'unmanned.html'                                            // 링크가 가는 곳 (9차부터 무인 솔루션 페이지)
       },

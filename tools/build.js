@@ -1704,7 +1704,35 @@ ${contactFooterOnly() ? '' : `    <div class="bizB__end"><a class="btn btn--line
   },
 
   /* 시안C 4차: 사업분야 차트 (안 B) — 큰 카드 1 + 작은 카드 4. 사실은 WHAT_CHART */
-  /* 시안C 7차: 왜 로봇을 먼저 넣는가 — 남색 칸. 큰 제목이 곧 메시지, 사진 두 장(이전/지금) */
+  /* 시안C 11차: 신정개발의 원칙 — 흰 칸 고정(bg 를 쓰지 않음). 회사 표어 → 실천 한 줄 → 증거 숫자 셋 → 덮개 없는 넓은 사진 한 장(지시서 11차 부록 1).
+     글자는 설정 home.copy.principle, 숫자는 PROCESS.generations · PROCESS.patents · ROBOT_RECORDS 에서 센다. 사진 R25 의 설명은 장소를 빼고 쓴다 */
+  principle: () => {
+    const c = CFG.home.copy.principle;
+    const ys = ROBOT_RECORDS.flatMap((r) => (r.period.match(/20\d\d/g) || []).map(Number));
+    return `  <!-- ===== 원칙 구역 (시안C 11차) ===== -->
+  <section class="pc" aria-labelledby="pc-title">
+    <div class="wrap">
+      <p class="pc__k">${esc(c.label)}</p>
+      <div class="pc__grid" data-reveal>
+        <div>
+          <h2 class="pc__q" id="pc-title">${c.quote}</h2>
+        </div>
+        <div class="pc__side">
+          <p class="pc__s">${esc(c.lead)}<br><strong>${esc(c.strong)}</strong></p>
+        </div>
+      </div>
+      <ul class="pc__proof" data-reveal data-delay="90">
+        <li><b>${PROCESS.generations.length}<i>세대</i></b><span>무인 흡입 로봇</span></li>
+        <li><b>${PROCESS.patents.length}<i>건</i></b><span>로봇 · 준설 관련 등록 특허</span></li>
+        <li><b>${ROBOT_RECORDS.length}<i>건</i></b><span>로봇 투입 작업 기록 (${Math.min(...ys)}~${Math.max(...ys)})</span></li>
+      </ul>
+    </div>
+    <figure class="pc__fig" data-reveal>${photo({ ...P('R25'), alt: '제어 차량과 호스로 연결된 로봇' }, '100vw')}<figcaption><div class="wrap">제어 차량과 호스로 연결된 궤도형 로봇</div></figcaption></figure>
+  </section>
+`;
+  },
+
+  /* 시안C 7차: 왜 로봇을 먼저 넣는가 — 남색 칸. 11차: 설정 home.sections 에서 뺐다(코드는 되돌릴 수 있게 남김). 큰 제목이 곧 메시지, 사진 두 장(이전/지금) */
   why: (bg) => {
     const c = CFG.home.copy.why;
     return `  <!-- ===== 왜 로봇을 먼저 넣는가 (시안C 7차) ===== -->
@@ -1731,8 +1759,7 @@ ${WHY_PAIR.map((w, i) => `        <figure>
   /* 시안C 7차: 무인 솔루션 — 흰 칸. 10차: 뜻 한 문단 + 설비 안/밖 사진 한 쌍 + '로봇이 하는 일' 5칸(기능 배지 먼저, 로봇 이름은 아래 작게. 휴대폰은 가로 넘김 + 점) + 기록 건수 줄(지시서 10차 부록 1).
      글자는 설정 home.copy.unmanned 와 UNMANNED_BOTS, 건수·연도는 ROBOT_RECORDS 에서 센다. 9차 .unm4 · 7차 .unm 은 쓰지 않는다 */
   unmanned: (bg) => {
-    const c = CFG.home.copy.unmanned;
-    const ys = ROBOT_RECORDS.flatMap((r) => (r.period.match(/20\d\d/g) || []).map(Number));
+    const c = CFG.home.copy.unmanned;   // 11차: 기록 건수 줄은 원칙 구역(principle)으로 옮기고 링크만 남김
     return `  <!-- ===== 무인 솔루션 (시안C 7차 → 10차) ===== -->
   <section class="section${BG_CLASS[bg]} u10" id="unmanned" aria-labelledby="u10-title">
     <div class="wrap">
@@ -1742,7 +1769,7 @@ ${WHY_PAIR.map((w, i) => `        <figure>
           <p class="u10__lead">${esc(c.lead)}</p>
         </div>
         <div class="u10__pair">
-          <figure>${photo(P('P03'), '(max-width:960px) 46vw, 380px')}<figcaption><em>설비 안</em><b>로봇이 먼저 들어가 작업</b></figcaption></figure>
+          <figure>${photo(P('P03'), '(max-width:960px) 46vw, 380px')}<figcaption><em>설비 안</em><b>로봇이 들어가 작업</b></figcaption></figure>
           <figure>${photo(P('P16'), '(max-width:960px) 46vw, 380px')}<figcaption><em>설비 밖</em><b>작업자는 화면을 보며 조종</b></figcaption></figure>
         </div>
       </div>
@@ -1753,8 +1780,7 @@ ${UNMANNED_BOTS.map((b) => `        <li><a href="${b.href}"><span class="u10__ph
       </ul>
       <div class="u10__dots" aria-hidden="true">${UNMANNED_BOTS.map((_, i) => `<i${i ? '' : ' class="on"'}></i>`).join('')}</div>
 
-      <div class="u10__foot">
-        <p><b>${ROBOT_RECORDS.length}건</b>로봇을 투입한 작업 기록 (${Math.min(...ys)}~${Math.max(...ys)})</p>
+      <div class="u10__foot u10__foot--link">
         <a class="tlink" href="${c.moreHref || 'unmanned.html'}">${esc(c.more)}</a>
       </div>
     </div>
