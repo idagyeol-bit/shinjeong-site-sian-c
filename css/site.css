@@ -2722,27 +2722,52 @@ html[lang="en"] .phero__lead { max-width: 44em; }
 .rb--nophoto .rb__grid { grid-template-columns: 1fr; }
 .rb .rb__panel th, .rb .rb__panel td { text-align: left; }
 
-/* ===== 시안C 9차: 메인 무인 솔루션 — 상황형 4칸(.unm4) ===== */
-/* 메인 무인 솔루션(9차 후보): 상황이 제목, 로봇 이름은 그 아래. 사진 아래에 적용 설비 태그 — 상세 페이지의 같은 필터로 이어진다 */
-.unm4 .head .lead { font-size: var(--fs-h4); color: var(--ink); }
-.unm4__row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
-.unm4__bot { display: block; color: inherit; text-decoration: none; }
-.unm4__fig { display: block; aspect-ratio: 3 / 2; border-radius: var(--radius-lg); overflow: hidden; background: var(--soft-2); }
-.unm4__fig img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease); }
-.unm4__bot:hover .unm4__fig img { transform: scale(1.03); }
-.unm4__tags { display: flex; flex-wrap: wrap; gap: 5px; margin: 10px 0 0; }
-.unm4__tags span { display: inline-flex; align-items: center; height: 22px; padding: 0 8px; border-radius: 100px; font-size: 11px; font-weight: 700; background: var(--brand-tint); color: var(--brand); }
-.unm4__bot h3 { margin: 10px 0 0; font-size: var(--fs-h4); font-weight: 600; letter-spacing: var(--ls-normal); line-height: 1.35; word-break: keep-all; }
-.unm4__bot p { margin: 4px 0 0; font-size: var(--fs-sm); color: var(--muted); }
-.unm4__bot p b { color: var(--ink); font-weight: 600; }
-.unm4__more { margin-top: 26px; }
-@media (max-width: 960px) {
-  .unm4 .head .lead { font-size: var(--fs-body); }
-  .unm4__row { grid-template-columns: 1fr 1fr; gap: 20px 14px; }
-  .unm4__fig { aspect-ratio: 1 / 1; }
-  .unm4__tags span { height: 20px; padding: 0 7px; font-size: 10.5px; }
-  .unm4__bot h3 { margin-top: 8px; font-size: var(--fs-sm); font-weight: 700; }
-  .unm4__bot p { font-size: 12.5px; }
-}
 /* 9차 보정(지시서 밖, 모양만): 고정 차례 띠(.us-nav, 55px)가 닻 자리를 덮지 않게 — 로봇 칸·탈수 접기는 머리말 scroll-padding 에 띠 높이만큼 더 띄운다 */
 .rb[id], #dewater { scroll-margin-top: 76px; }
+
+/* ===== 시안C 10차: 메인 무인 솔루션 ===== */
+.u10__top { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.u10 h2 { margin: 0; font-size: var(--fs-h2); letter-spacing: var(--ls-tight); line-height: 1.15; }
+.u10__lead { margin: 18px 0 0; font-size: var(--fs-lead, 18px); line-height: 1.75; color: var(--ink); word-break: keep-all; max-width: 30em; }
+.u10__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.u10__pair figure { margin: 0; position: relative; border-radius: var(--radius-lg); overflow: hidden; background: var(--soft-2); }
+.u10__pair img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+.u10__pair figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 14px 12px; color: #fff; background: linear-gradient(180deg, transparent, rgba(8,28,44,.8)); }
+.u10__pair em { display: block; font-style: normal; font-size: 12px; font-weight: 700; color: #9fc4e8; }
+.u10__pair b { display: block; margin-top: 2px; font-size: var(--fs-body); font-weight: 700; line-height: 1.35; }
+/* 로봇이 하는 일 — 기능이 먼저, 로봇 이름은 그 아래 작게 */
+.u10__sub { margin: clamp(40px, 5vw, 64px) 0 16px; font-size: var(--fs-sm); font-weight: 700; color: var(--ink); }
+.u10__jobs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.u10__jobs a { display: block; color: inherit; text-decoration: none; }
+.u10__ph { position: relative; display: block; aspect-ratio: 4 / 3; border-radius: var(--radius); overflow: hidden; background: #000; }
+.u10__ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.u10__ph--fit img { object-fit: contain; }
+.u10__fn { position: absolute; left: 8px; top: 8px; padding: 4px 10px; border-radius: 100px; background: var(--brand); color: #fff; font-size: 13px; font-weight: 700; }
+.u10__jobs p { margin: 10px 0 0; font-size: var(--fs-sm); font-weight: 600; line-height: 1.45; color: var(--ink); word-break: keep-all; }
+.u10__jobs small { display: block; margin-top: 4px; font-size: 12px; color: var(--muted); }
+.u10__dots { display: none; }
+.u10__swipe span { display: none; }
+.u10__foot { margin-top: clamp(28px, 3.5vw, 40px); padding-top: 16px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.u10__foot p { margin: 0; font-size: var(--fs-sm); color: var(--text); }
+.u10__foot p b { font-size: var(--fs-h4); color: var(--ink); margin-right: 6px; }
+@media (max-width: 960px) {
+  .u10__top { grid-template-columns: 1fr; gap: 18px; }
+  .u10__lead { font-size: var(--fs-body); margin-top: 12px; }
+  .u10__pair b { font-size: 13.5px; }
+  .u10__pair figcaption { padding: 22px 10px 9px; }
+  .u10__sub { margin-top: 34px; }
+  .u10__jobs { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: calc(var(--gutter) * -1); padding: 0 var(--gutter) 6px; scroll-padding: 0 var(--gutter); scrollbar-width: none; }
+  .u10__jobs::-webkit-scrollbar { display: none; }
+  .u10__jobs li { flex: 0 0 64%; scroll-snap-align: start; }
+  .u10__swipe { display: flex; justify-content: space-between; align-items: center; }
+  .u10__swipe span { display: inline-flex; font-size: 12px; font-weight: 600; color: var(--muted); }
+  .u10__dots { display: flex; gap: 6px; justify-content: center; margin-top: 12px; }
+  .u10__dots i { width: 6px; height: 6px; border-radius: 50%; background: #c9d2da; transition: width .2s; }
+  .u10__dots i.on { width: 18px; border-radius: 3px; background: var(--ink); }
+  .u10__jobs p { font-size: 13.5px; }
+  .u10__fn { font-size: 12px; padding: 3px 8px; }
+}
+/* 10차 보정(지시서 B-2 '두 칸의 사진은 object-fit: contain, 바탕 #000'을 CSS로 — 모양만) · 쉬운 말 안내 줄(.us-easy)은 출처 줄(.us-src)과 같은 크기 */
+.rb__main--fit, .rb__thumbs .f--fit { background: #000; }
+.rb__main--fit img, .rb__thumbs .f--fit img { object-fit: contain; }
+.us-easy { margin: 10px 0 0; font-size: 11.5px; color: var(--muted); }
