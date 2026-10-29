@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="../css/tokens.test.css">
 <link rel="stylesheet" href="../css/site.css">
 </head>
-<body class="moB-root" data-page="home" data-hero="slides">
+<body class="moB-root" data-page="home" data-hero="lines">
 <a class="skip-link" href="#main">본문 바로가기</a>
 <div class="pvbar" role="note">검토용 시험 시안입니다 · <a href="../index.html">기본판 보기</a> · 공식 홈페이지 <a href="https://sjdevel.com/" target="_blank" rel="noopener">sjdevel.com</a></div>
 <header class="hdr">
@@ -85,69 +85,32 @@
 
 <main id="main">
 
-  <!-- ===== 히어로: 구호·가치 5장면 자동 전환 (큰 틀 'slides', 시안 B) ===== -->
-  <section class="heroB" id="heroB" aria-roledescription="carousel" aria-label="신정개발이 중요하게 생각하는 것">
-    <div class="heroB__stage" aria-live="off">
-      <div class="heroB__slide is-on" data-i="0" role="group" aria-roledescription="slide" aria-label="클리닝">
-        <div class="heroB__ph"><img src="../assets/photos/M08-2400.jpg" srcset="../assets/photos/M08-960.jpg 960w, ../assets/photos/M08-1600.jpg 1600w, ../assets/photos/M08-2400.jpg 2400w" sizes="100vw" width="1600" height="1067" alt="산업설비 야간 전경" decoding="async" fetchpriority="high" style="--pos: 50% 50%; --pos-m: 58% 50%"></div>
-        <div class="heroB__scrim" aria-hidden="true"></div>
-        <div class="heroB__txt">
-          <span class="heroB__tag">CLEANING</span>
-          <h1 class="heroB__title">Cleaning으로<br>안전한 환경을 만드는 기업</h1>
-          <p class="heroB__sub">1992년부터 여수에서 — 산업설비 클리닝 전문기업 신정개발</p>
-        </div>
-      </div>
-      <div class="heroB__slide" data-i="1" role="group" aria-roledescription="slide" aria-label="안전" aria-hidden="true">
-        <div class="heroB__ph"><img src="../assets/photos/U02-1672.jpg" srcset="../assets/photos/U02-800.jpg 800w, ../assets/photos/U02-1200.jpg 1200w, ../assets/photos/U02-1672.jpg 1672w" sizes="100vw" width="1672" height="941" alt="맑은 푸른 하늘 아래 증류탑과 배관이 늘어선 석유화학 설비" decoding="async" style="--pos: 50% 50%; --pos-m: 74% 50%"></div>
-        <div class="heroB__scrim" aria-hidden="true"></div>
-        <div class="heroB__txt">
-          <span class="heroB__tag">SAFETY · 안전</span>
-          <h2 class="heroB__title">안전은 비용이 아니라<br>기준입니다</h2>
-          <p class="heroB__sub">일을 맡는 순간부터 마치는 순간까지, 신정개발의 모든 판단은 안전에서 시작됩니다</p>
-        </div>
-      </div>
-      <div class="heroB__slide" data-i="2" role="group" aria-roledescription="slide" aria-label="환경" aria-hidden="true">
-        <div class="heroB__ph"><img src="../assets/photos/AI07-2400.jpg" srcset="../assets/photos/AI07-960.jpg 960w, ../assets/photos/AI07-1600.jpg 1600w, ../assets/photos/AI07-2400.jpg 2400w" sizes="100vw" width="3344" height="1882" alt="푸른 바다와 도시가 보이는 해안의 밝은 석유화학 플랜트 전경" decoding="async" style="--pos: 50% 50%; --pos-m: 62% 50%"></div>
-        <div class="heroB__scrim" aria-hidden="true"></div>
-        <div class="heroB__txt">
-          <span class="heroB__tag">ENVIRONMENT · 환경</span>
-          <h2 class="heroB__title">오늘의 클리닝이<br>내일의 환경이 됩니다</h2>
-          <p class="heroB__sub">설비 하나를 깨끗이 하는 일이 공장을, 도시를, 바다를 바꾼다고 믿습니다</p>
-        </div>
-      </div>
-      <div class="heroB__slide" data-i="3" role="group" aria-roledescription="slide" aria-label="로봇" aria-hidden="true" data-video="1">
-        <div class="heroB__ph"><img src="../assets/photos/AI09-2400.jpg" srcset="../assets/photos/AI09-960.jpg 960w, ../assets/photos/AI09-1600.jpg 1600w, ../assets/photos/AI09-2400.jpg 2400w" sizes="100vw" width="4096" height="2304" alt="원격 조종기를 든 작업자 앞에서 호스를 끌며 작업하는 주황색 궤도형 로봇" decoding="async" style="--pos: 50% 50%; --pos-m: 50% 50%"><video class="heroB__vid" muted playsinline loop preload="none" aria-hidden="true" data-mp4="assets/video/AI09-hero.mp4" data-webm="assets/video/AI09-hero.webm" style="--pos: 50% 50%; --pos-m: 50% 50%"></video>   <!-- 시안B 22차: 연출 영상(js/heroB-video.js 가 한가할 때 source 를 붙여 받고, 장면이 켜지면 처음부터 무음 반복 재생). 포스터는 위 사진 --></div>
-        <div class="heroB__scrim" aria-hidden="true"></div>
-        <div class="heroB__txt">
-          <span class="heroB__tag">ROBOT · 로봇</span>
-          <h2 class="heroB__title">위험한 곳에는<br>사람보다 로봇이 먼저 들어갑니다</h2>
-          <p class="heroB__sub">자체 개발 무인 로봇이, 사람이 들어가기 전에 위험을 먼저 줄입니다</p>
-        </div>
-      </div>
-      <div class="heroB__slide" data-i="4" role="group" aria-roledescription="slide" aria-label="발전" aria-hidden="true">
-        <div class="heroB__ph"><img src="../assets/photos/AI08-2400.jpg" srcset="../assets/photos/AI08-960.jpg 960w, ../assets/photos/AI08-1600.jpg 1600w, ../assets/photos/AI08-2400.jpg 2400w" sizes="100vw" width="3344" height="1882" alt="동틀 녘 플랜트를 바라보는 안전모 쓴 작업자의 뒷모습" decoding="async" style="--pos: 50% 50%; --pos-m: 56% 50%"></div>
-        <div class="heroB__scrim" aria-hidden="true"></div>
-        <div class="heroB__txt">
-          <span class="heroB__tag">NEXT · 발전</span>
-          <h2 class="heroB__title">신정개발의 가능성에는<br>한계가 없습니다</h2>
-          <p class="heroB__sub">현장에서 얻은 경험이 기술이 되고, 그 기술이 다시 새로운 내일을 엽니다</p>
-        </div>
-      </div>
+  <!-- ===== 히어로: 세 줄 카피 5장면 (큰 틀 'lines', 시안C 12차) ===== -->
+  <section class="heroL" id="heroL" aria-roledescription="carousel" aria-label="신정개발 소개">
+    <div class="heroL__s is-on heroL__s--lite" data-i="0" role="group" aria-roledescription="slide" aria-label="정체성">
+      <img class="heroL__img" src="../assets/photos/M02-1599.jpg" srcset="../assets/photos/M02-720.jpg 720w, ../assets/photos/M02-1200.jpg 1200w, ../assets/photos/M02-1599.jpg 1599w" sizes="100vw" width="1599" height="1066" alt="신정개발 상호가 보이는 본사 건물과 차량" decoding="async" fetchpriority="high" style="--pos: 50% 40%; --pos-m: 40% 50%">
+      <div class="heroL__copy"><div class="wrap"><h1 class="heroL__h"><span class="heroL__ln"><span><b>1992년</b>부터 한 길.</span></span><span class="heroL__ln"><span>성실하게 쌓아 온 시간이</span></span><span class="heroL__ln"><span>지금의 신정개발입니다.</span></span></h1></div></div>
     </div>
-    <div class="heroB__ctrl">
-      <button type="button" class="heroB__btn" data-go="-1" aria-label="이전 장면"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <button type="button" class="heroB__btn heroB__btn--pp" data-pp aria-label="자동 전환 멈춤"><svg class="heroB__i-pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="7" y="5" width="3.5" height="14" rx="1" fill="currentColor"/><rect x="13.5" y="5" width="3.5" height="14" rx="1" fill="currentColor"/></svg><svg class="heroB__i-play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></button>
-      <button type="button" class="heroB__btn" data-go="1" aria-label="다음 장면"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <span class="heroB__count" aria-hidden="true"><b>01</b> / 05</span>
-      <span class="heroB__bar" aria-hidden="true"><i></i></span>
+    <div class="heroL__s" data-i="1" role="group" aria-roledescription="slide" aria-label="신뢰" aria-hidden="true">
+      <img class="heroL__img" src="../assets/photos/M10-1351.jpg" srcset="../assets/photos/M10-640.jpg 640w, ../assets/photos/M10-1000.jpg 1000w, ../assets/photos/M10-1351.jpg 1351w" sizes="100vw" width="1000" height="667" alt="안전 구획을 설치한 산업설비 현장에 배치된 진공흡입차" decoding="async" loading="lazy" style="--pos: 50% 50%; --pos-m: 72% 50%">
+      <div class="heroL__copy"><div class="wrap"><h2 class="heroL__h"><span class="heroL__ln"><span><b>4년 연속,</b></span></span><span class="heroL__ln"><span>같은 고객이 다시 맡긴 회사.</span></span><span class="heroL__ln"><span>품질은 그 선택이 증명합니다.</span></span></h2></div></div>
     </div>
-    <div class="heroB__tabs" role="group" aria-label="장면 고르기">
-      <button type="button" class="heroB__tab is-on" data-to="0" aria-current="true" aria-label="클리닝 장면 보기">클리닝</button>
-      <button type="button" class="heroB__tab" data-to="1" aria-label="안전 장면 보기">안전</button>
-      <button type="button" class="heroB__tab" data-to="2" aria-label="환경 장면 보기">환경</button>
-      <button type="button" class="heroB__tab" data-to="3" aria-label="로봇 장면 보기">로봇</button>
-      <button type="button" class="heroB__tab" data-to="4" aria-label="발전 장면 보기">발전</button>
+    <div class="heroL__s" data-i="2" role="group" aria-roledescription="slide" aria-label="안전" aria-hidden="true">
+      <img class="heroL__img" src="../assets/photos/W03-1496.jpg" srcset="../assets/photos/W03-640.jpg 640w, ../assets/photos/W03-1000.jpg 1000w, ../assets/photos/W03-1496.jpg 1496w" sizes="100vw" width="1000" height="667" alt="맨홀에 호스를 넣어 작업하는 두 작업자" decoding="async" loading="lazy" style="--pos: 50% 45%; --pos-m: 50% 50%">
+      <div class="heroL__copy"><div class="wrap"><h2 class="heroL__h"><span class="heroL__ln"><span>현장마다 <b>안전</b>을 지키고,</span></span><span class="heroL__ln"><span>고객을 <b>배려</b>하며,</span></span><span class="heroL__ln"><span>내일의 <b>희망</b>을 만듭니다.</span></span></h2></div></div>
     </div>
+    <div class="heroL__s" data-i="3" role="group" aria-roledescription="slide" aria-label="로봇" aria-hidden="true">
+      <img class="heroL__img" src="../assets/photos/AI10-2400.jpg" srcset="../assets/photos/AI10-960.jpg 960w, ../assets/photos/AI10-1600.jpg 1600w, ../assets/photos/AI10-2400.jpg 2400w" sizes="100vw" width="3840" height="2160" alt="은색 설비의 둥근 점검구로 호스를 끌며 들어가는 주황색 궤도형 로봇" decoding="async" loading="lazy" style="--pos: 50% 50%; --pos-m: 42% 50%">
+      <div class="heroL__copy"><div class="wrap"><h2 class="heroL__h"><span class="heroL__ln"><span><b>다섯 세대</b>의 무인 로봇이</span></span><span class="heroL__ln"><span>작업자보다 먼저</span></span><span class="heroL__ln"><span>위험한 설비 안에 들어갑니다.</span></span></h2></div></div>
+    </div>
+    <div class="heroL__s heroL__s--dark" data-i="4" role="group" aria-roledescription="slide" aria-label="미래" aria-hidden="true">
+      <img class="heroL__img heroL__img--right" src="../assets/photos/AI01-1536.jpg" srcset="../assets/photos/AI01-1536.jpg 1536w" sizes="100vw" width="1536" height="1024" alt="차세대 로봇 3D 그림" decoding="async" loading="lazy" style="--pos: 50% 50%; --pos-m: 82% 50%">
+      <div class="heroL__copy"><div class="wrap"><h2 class="heroL__h"><span class="heroL__ln"><span>등록 특허 <b>다섯 건</b>,</span></span><span class="heroL__ln"><span>멈추지 않는 연구개발로</span></span><span class="heroL__ln"><span>Cleaning 최고의 기업이 되겠습니다.</span></span></h2></div></div>
+    </div>
+    <div class="heroL__rail"><div class="wrap">
+      <ul class="heroL__tabs" aria-label="장면 고르기"><li><button type="button" data-to="0" aria-current="true">정체성</button></li><li><button type="button" data-to="1">신뢰</button></li><li><button type="button" data-to="2">안전</button></li><li><button type="button" data-to="3">로봇</button></li><li><button type="button" data-to="4">미래</button></li></ul>
+      <button type="button" class="heroL__pp" data-pp aria-label="자동 전환 멈춤"><svg class="heroL__i-pause" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><rect x="1" y="0" width="3.4" height="12" fill="currentColor"/><rect x="7.6" y="0" width="3.4" height="12" fill="currentColor"/></svg><svg class="heroL__i-play" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2 0l10 6-10 6z" fill="currentColor"/></svg></button>
+    </div></div>
   </section>
 
   <!-- ===== 신뢰 숫자 ===== -->
@@ -399,7 +362,6 @@
 </nav>
 <script src="../js/site.js"></script>
 <script src="../js/moB.js"></script>
-<script src="../js/hero-slides.js"></script>
-<script src="../js/heroB-video.js"></script>
+<script src="../js/hero-lines.js"></script>
 </body>
 </html>

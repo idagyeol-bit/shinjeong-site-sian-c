@@ -88,7 +88,7 @@ const C = {
    설명(alt/cap)은 사진에 보이는 것만 적습니다. 모델명·세대·성능·발주처는 적지 않습니다. */
 const PHOTOS = {
   /* 모든 사진은 3:2로 크롭했고, 크롭·번호판/얼굴 흐림 외의 합성은 없습니다. 원본 대응: tools/photo-plan.json */
-  M02: { id: 'M02', w: 1200, h: 800, sizes: [720, 1200], alt: '신정개발 상호가 보이는 본사 건물과 차량', cap: '여수 본사 · ' + C.address },   // 설명의 주소는 푸터와 같은 C.address
+  M02: { id: 'M02', w: 1599, h: 1066, sizes: [720, 1200, 1599], alt: '신정개발 상호가 보이는 본사 건물과 차량', cap: '여수 본사 · ' + C.address },   // 설명의 주소는 푸터와 같은 C.address
   M04: { id: 'M04', w: 980, h: 653, sizes: [640, 980], alt: '해질녘 산업단지 전경', cap: '산업단지 전경' },
   M05: { id: 'M05', w: 1400, h: 933, sizes: [800, 1400], alt: '산업설비 현장에 설치된 안전 구획과 차량', cap: '산업설비 현장의 안전 구획과 차량' },
   M06: { id: 'M06', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '안전제일 표시가 있는 작업자의 안전모', cap: '작업자의 안전모' },
@@ -959,7 +959,7 @@ ${V ? '' : `<link rel="canonical" href="${SITE_URL}${here}">
 <link rel="stylesheet" href="css/${V ? `tokens.${V.name}.css` : 'tokens.css'}">
 <link rel="stylesheet" href="css/site.css">
 ${!marked && o.jsonld ? `<script type="application/ld+json">${JSON.stringify(o.jsonld)}</script>\n` : ''}</head>
-<body class="moB-root" data-page="${o.page}"${o.page === 'home' && (CFG.frame.hero === 'reel' || CFG.frame.hero === 'slides') ? ` data-hero="${CFG.frame.hero}"` : ''}>
+<body class="moB-root" data-page="${o.page}"${o.page === 'home' && (CFG.frame.hero === 'reel' || CFG.frame.hero === 'slides' || CFG.frame.hero === 'lines') ? ` data-hero="${CFG.frame.hero}"` : ''}>
 <a class="skip-link" href="#main">본문 바로가기</a>
 ${V ? `<div class="pvbar" role="note">검토용 ${esc(V.label)}입니다 · <a href="../index.html">기본판 보기</a> · 공식 홈페이지 <a href="${OFFICIAL_SITE.url}" target="_blank" rel="noopener">${OFFICIAL_SITE.label}</a></div>\n`
     : S ? `<div class="sianbar" role="note" style="--sian: ${S.color}"><span class="sianbar__name">${esc(S.name)}</span>${S.direction ? `<span class="sianbar__dir">${esc(S.direction)}</span>` : ''}<span class="sianbar__note">최종본과 다른 작업용 판입니다</span></div>\n`
@@ -1629,6 +1629,40 @@ ${list.map((sc, i) => `      <button type="button" class="heroB__tab${i ? '' : '
 `;
 }
 
+/* ---------- 큰 틀 'lines'의 첫 화면 — 세 줄 카피 5장면 (시안C 12차) ----------
+   장면마다 화면 가득 사진 + 왼쪽 아래 세 줄(1줄 증거 · 2줄 이어짐 · 3줄 결론). 증거 낱말은 <b>(초록), 결론 줄만 굵은 흰색.
+   맨 아래 다섯 이름(정체성·신뢰·안전·로봇·미래)에 진행 선이 7초 동안 차오르고, 이름을 누르면 그 장면으로. 오른쪽 끝 멈춤 단추.
+   휴대폰: 옆으로 밀어 넘기기, 길게 누르면 잠시 멈춤. 세 줄은 화면 폭이 좁아도 세 줄(js/hero-lines.js 가 그 장면 글자만 줄인다).
+   스크립트가 없거나 움직임 줄이기면 1장면이 멈춰 보인다. 문구·사진은 CFG.hero.lines. class 는 모두 heroL- 로 시작한다 */
+const KOR_NUM = ['영', '한', '두', '세', '네', '다섯', '여섯', '일곱', '여덟', '아홉', '열'];
+function heroLines() {
+  const list = CFG.hero.lines;
+  const vars = {
+    founded: C.founded,                               // 1992 (회사 기본 정보)
+    gens: KOR_NUM[PROCESS.generations.length] || PROCESS.generations.length,   // 무인 흡입 로봇 세대 수 (② 7쪽, 지금 5 → '다섯')
+    patents: KOR_NUM[PROCESS.patents.length] || PROCESS.patents.length          // 등록 특허 수 (② 6쪽, 지금 5 → '다섯')
+  };
+  const img = (sc, i) => {
+    const p = P(sc.photo);
+    const srcset = p.sizes.map((w) => `assets/photos/${p.id}-${w}.jpg ${w}w`).join(', ');
+    const style = ` style="--pos: ${sc.pos || '50% 50%'}; --pos-m: ${sc.posM || sc.pos || '50% 50%'}"`;
+    return `<img class="heroL__img${sc.fit === 'right' ? ' heroL__img--right' : ''}" src="assets/photos/${p.id}-${p.sizes[p.sizes.length - 1]}.jpg" srcset="${srcset}" sizes="100vw" width="${p.w}" height="${p.h}" alt="${esc(sc.alt || p.alt)}" decoding="async"${i ? ' loading="lazy"' : ' fetchpriority="high"'}${style}>`;
+  };
+  return `  <!-- ===== 히어로: 세 줄 카피 5장면 (큰 틀 'lines', 시안C 12차) ===== -->
+  <section class="heroL" id="heroL" aria-roledescription="carousel" aria-label="신정개발 소개">
+${list.map((sc, i) => `    <div class="heroL__s${i ? '' : ' is-on'}${sc.tone ? ' heroL__s--' + sc.tone : ''}${sc.fit === 'right' ? ' heroL__s--dark' : ''}" data-i="${i}" role="group" aria-roledescription="slide" aria-label="${esc(sc.name)}"${i ? ' aria-hidden="true"' : ''}>
+      ${img(sc, i)}
+      <div class="heroL__copy"><div class="wrap"><${i ? 'h2' : 'h1'} class="heroL__h">${sc.lines.map((ln) => `<span class="heroL__ln"><span>${fill(ln, vars)}</span></span>`).join('')}</${i ? 'h2' : 'h1'}></div></div>${sc.mark && aiBadge() ? `
+      <span class="heroL__mark" aria-hidden="true">${esc(sc.mark)}</span>` : ''}
+    </div>`).join('\n')}
+    <div class="heroL__rail"><div class="wrap">
+      <ul class="heroL__tabs" aria-label="장면 고르기">${list.map((sc, i) => `<li><button type="button" data-to="${i}"${i ? '' : ' aria-current="true"'}>${esc(sc.name)}</button></li>`).join('')}</ul>
+      <button type="button" class="heroL__pp" data-pp aria-label="자동 전환 멈춤"><svg class="heroL__i-pause" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><rect x="1" y="0" width="3.4" height="12" fill="currentColor"/><rect x="7.6" y="0" width="3.4" height="12" fill="currentColor"/></svg><svg class="heroL__i-play" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2 0l10 6-10 6z" fill="currentColor"/></svg></button>
+    </div></div>
+  </section>
+`;
+}
+
 /* 큰 틀 'base'의 메인 구역 여섯 개 — 40차 전의 구역 그대로. 각 함수는 바탕 이름(bg)을 받는다 */
 const HOME_SECTIONS = {
   /* 신뢰 숫자 — 숫자(TRUST)·주요 현장(TRUST_SITES)·출처(TRUST_SRC)는 사실 데이터 */
@@ -2091,7 +2125,7 @@ ${c.half ? '' : `        <div class="stat"><b><span data-count="2007">2007</span
    설정 파일의 frame 칸(hero / sections / header)이 여기서 이름으로 고른다. 지금은 'base'(40차 전의 모양) 하나뿐이다.
    새 큰 틀은 그림 시안으로 고른 뒤 지시서로 여기에 이름을 더한다. */
 const FRAMES = {
-  hero: { base: heroBase, reel: heroReel, slides: heroSlides },
+  hero: { base: heroBase, reel: heroReel, slides: heroSlides, lines: heroLines },   // 시안C 12차: lines = 세 줄 카피 5장면
   sections: { base: HOME_SECTIONS },
   header: { base: headerBase }
 };
@@ -2119,7 +2153,7 @@ pages['index.html'] = () => {
   }) + header('home', null, 'index.html') + `
 <main id="main">
 
-` + frame('hero')() + '\n' + CFG.home.sections.map((s) => S[s.id](s.bg)).join('\n') + '\n' + cta({ home: true }) + MAIN_END + footer() + foot((CFG.frame.hero === 'reel' ? ['reel.js'] : CFG.frame.hero === 'slides' ? ['hero-slides.js'] : []).concat(CFG.frame.hero === 'slides' && CFG.hero.scenes.some((sc) => sc.cine) ? ['heroB3d.js'] : []).concat(CFG.frame.hero === 'slides' && CFG.hero.scenes.some((sc) => sc.video) ? ['heroB-video.js'] : []).concat(CFG.home.sections.some((s) => s.id === 'whatB') ? ['biz-stack.js'] : []));
+` + frame('hero')() + '\n' + CFG.home.sections.map((s) => S[s.id](s.bg)).join('\n') + '\n' + cta({ home: true }) + MAIN_END + footer() + foot((CFG.frame.hero === 'reel' ? ['reel.js'] : CFG.frame.hero === 'slides' ? ['hero-slides.js'] : CFG.frame.hero === 'lines' ? ['hero-lines.js'] : []).concat(CFG.frame.hero === 'slides' && CFG.hero.scenes.some((sc) => sc.cine) ? ['heroB3d.js'] : []).concat(CFG.frame.hero === 'slides' && CFG.hero.scenes.some((sc) => sc.video) ? ['heroB-video.js'] : []).concat(CFG.home.sections.some((s) => s.id === 'whatB') ? ['biz-stack.js'] : []));
 };
 
 /* ---------- 2. 사업분야 ---------- */
@@ -3164,6 +3198,17 @@ function checkConfig() {
       if (sc.video && !sc.video.mp4) configError(`첫 화면 장면 '${sc.name}'의 영상에는 mp4 경로가 있어야 합니다 (설정 hero.scenes[].video.mp4)`);
       if (sc.video && !fs.existsSync(path.join(OUT, sc.video.mp4))) configError(`첫 화면 장면 '${sc.name}'의 영상 파일이 없습니다: ${sc.video.mp4}`);
       if (sc.video && sc.cine) configError(`첫 화면 장면 '${sc.name}'에 영상(video)과 3D 연출(cine)을 함께 둘 수 없습니다 — 하나만 남기세요`);
+    });
+  }
+  /* 시안C 12차: 큰 틀 'lines'의 장면 */
+  if (CFG.frame.hero === 'lines') {
+    if (!Array.isArray(CFG.hero.lines) || !CFG.hero.lines.length) configError(`큰 틀 'lines'에는 장면 목록이 있어야 합니다 (설정 hero.lines)`);
+    CFG.hero.lines.forEach((sc, i) => {
+      if (!sc.name) configError(`첫 화면 장면 ${i + 1}번째의 name 이 없습니다 (설정 hero.lines)`);
+      if (!Array.isArray(sc.lines) || sc.lines.length !== 3) configError(`첫 화면 장면 '${sc.name}'의 lines 는 세 줄이어야 합니다 (설정 hero.lines)`);
+      if (!PHOTOS[sc.photo]) configError(`첫 화면 장면 '${sc.name}'의 사진 번호 '${sc.photo}'이 사진 목록에 없습니다 (설정 hero.lines)`);
+      if (sc.fit && sc.fit !== 'right') configError(`첫 화면 장면 '${sc.name}'의 fit 은 'right' 만 됩니다 (설정 hero.lines)`);
+      if (sc.tone && sc.tone !== 'lite') configError(`첫 화면 장면 '${sc.name}'의 tone 은 'lite' 만 됩니다 (설정 hero.lines)`);
     });
   }
   /* 시안B 25차: 현장 진행 방식의 연출 영상(설정 look.processVideo) */
