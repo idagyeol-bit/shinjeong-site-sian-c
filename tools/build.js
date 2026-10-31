@@ -3227,7 +3227,7 @@ ${usPanel('jet', 2, `${usDl([['장점', cases(2).pros.map(esc).join(' · ')], ['
       <div class="head"><div><h2>연구개발 · 특허</h2></div><p class="lead">2017년 11월 기업부설연구소를 세웠습니다. 로봇과 준설 관련 특허를 등록했고, 로봇 시제품을 만들어 성능시험을 했습니다. 시제품은 위의 현장 장비와 따로 적었습니다.</p></div>
       <div class="stats stats--flush" style="margin-bottom:36px">
         <div class="stat"><b>2017<i>.11</i></b><span>기업부설연구소 설립</span></div>
-        <div class="stat"><b>${PROCESS.patents.length}<i>건</i></b><span>등록 특허</span></div>
+        <div class="stat"><b>${COMPANY17.patents.length}<i>건</i></b><span>등록 특허</span></div>   <!-- 2026-11-01: 대표 5건 → 전체 8건(① 28~29쪽 특허증) — 메인 · 회사 소개와 같은 수 -->
         <div class="stat"><b>${PROCESS.projects.length}<i>건</i></b><span>연구개발 과제</span></div>
         <div class="stat"><b>${PROCESS.protos.length}<i>종</i></b><span>로봇 시제품</span></div>
       </div>
@@ -3235,9 +3235,9 @@ ${usPanel('jet', 2, `${usDl([['장점', cases(2).pros.map(esc).join(' · ')], ['
         <div>
           <h3>등록 특허</h3>
           <table><thead><tr><th>특허 명칭</th><th>등록</th></tr></thead><tbody>
-${PROCESS.patents.map(([name, year]) => `            <tr><td>${esc(name)}</td><td>${esc(year)}</td></tr>`).join('\n')}
+${COMPANY17.patents.map(([, name, , d]) => `            <tr><td>${esc(name)}</td><td>${esc(d.slice(0, 4))}</td></tr>`).join('\n')}
           </tbody></table>
-          <p class="us-src">회사소개서에는 특허증 8장과 출원사실증명 4장이 실려 있음</p>
+          <p class="us-src">회사소개서(2024) 28~29쪽 특허증 · 이 밖에 출원 4건 <a class="tlink" href="company.html#credentials">특허증 원본 보기 →</a></p>
         </div>
         <div>
           <h3>로봇 시제품</h3>
@@ -3379,6 +3379,25 @@ ${UNM_GENS.map(([n, t, d]) => `        <li><b>${n}<small>세대</small></b><stro
     return `<div class="um-c um-c--o" style="${col};grid-row:3"><em>설비 밖</em><span>${esc(x)}</span></div>`;
   };
   const mrow = (k, x) => x ? `<p class="um-sm__r${k === 'in' && x[0] === 'r' ? ' is-robot' : ''}"><em>${k === 'in' ? `설비 안 · ${x[0] === 'r' ? '로봇' : '작업자'}` : '설비 밖'}</em><span>${esc(k === 'in' ? x[1] : x)}</span></p>` : '';
+  /* 한눈에 비교 구역 — 2026-11-01 빼기: 로봇 다섯 칸과 같은 내용이라 설정 pages.unmanned.v14.compare:false 로 끈다(지우지 않음) */
+  const compareSec = `  <section class="um-sec" id="compare" aria-labelledby="um-cmp-h">
+    <div class="wrap">
+      <p class="um-kick">한눈에 비교</p>
+      <h2 class="um-h2" id="um-cmp-h">로봇마다 들어가는 곳과 하는 일이 다릅니다</h2>
+      <p class="um-lead">로봇 이름을 누르면 그 로봇 설명으로 갑니다. 점은 그 설비에 들어가는 로봇입니다.</p>
+      <div class="um-cmp">
+        <table><thead><tr><th scope="col">로봇</th><th scope="col">로봇이 하는 일</th>${UNM_COLS.map(([, n]) => `<th scope="col">${esc(n)}</th>`).join('')}<th scope="col">수중 작업</th><th scope="col">구동</th></tr></thead><tbody>
+${UNM14.map((b) => `          <tr><th scope="row"><a href="#${b.id}">${unmFn(b)}<b>${esc(b.name)}</b></a></th><td class="um-cmp__job">${unmJob(b)}</td>${UNM_COLS.map(([k, n]) => b.m.includes(k) ? `<td><i class="um-dot" role="img" aria-label="${esc(n)} 들어감"></i></td>` : '<td class="is-no">·</td>').join('')}<td>${esc(b.water || '—')}</td><td>${esc(b.power || '—')}</td></tr>`).join('\n')}
+        </tbody></table>
+        <ul class="um-cmpm">
+${UNM14.map((b) => `          <li><a href="#${b.id}"><span class="um-cmpm__h">${unmFn(b)}<b>${esc(b.name)}</b></span><span class="um-cmpm__w"><em>들어가는 곳</em>${esc(b.where.join(' · '))}</span><span class="um-cmpm__w"><em>작업 조건</em>${esc(cond(b))}</span></a></li>`).join('\n')}
+        </ul>
+      </div>
+      <p class="us-src">출처: 회사소개서(2024) · 기술소개서(2025) 장비 소개 · ‘—’는 두 문서에 적혀 있지 않은 칸</p>
+    </div>
+  </section>
+
+`;
   return head({
     file: 'unmanned.html', page: 'unmanned',
     title: `${c.title} | ${C.brand}`,
@@ -3406,30 +3425,13 @@ ${UNM14.map((b) => `        <li><a class="um-bot" href="#${b.id}"><span class="u
     </div>
   </section>
 
-  <nav class="um-nav" aria-label="이 페이지의 차례"><div class="wrap"><a href="#robots" class="um-nav__m">로봇 라인업</a>${UNM14.map((b) => `<a href="#${b.id}" class="um-nav__r">${esc(b.name)}</a>`).join('')}<span class="um-nav__sep" aria-hidden="true"></span><a href="#compare">한눈에 비교</a><a href="#how">작업 절차</a><a href="#conditions" class="um-nav__pc">적용 시 고려사항</a><a href="#rnd">연구개발 · 특허</a></div></nav>
+  <nav class="um-nav" aria-label="이 페이지의 차례"><div class="wrap"><a href="#robots" class="um-nav__m">로봇 라인업</a>${UNM14.map((b) => `<a href="#${b.id}" class="um-nav__r">${esc(b.name)}</a>`).join('')}<span class="um-nav__sep" aria-hidden="true"></span>${v.compare === false ? '' : '<a href="#compare">한눈에 비교</a>'}<a href="#how">작업 절차</a><a href="#conditions" class="um-nav__pc">적용 시 고려사항</a><a href="#rnd">연구개발 · 특허</a></div></nav>
 
   <div class="um-details">
 ${UNM14.map(detail).join('\n')}
   </div>
 
-  <section class="um-sec" id="compare" aria-labelledby="um-cmp-h">
-    <div class="wrap">
-      <p class="um-kick">한눈에 비교</p>
-      <h2 class="um-h2" id="um-cmp-h">로봇마다 들어가는 곳과 하는 일이 다릅니다</h2>
-      <p class="um-lead">로봇 이름을 누르면 그 로봇 설명으로 갑니다. 점은 그 설비에 들어가는 로봇입니다.</p>
-      <div class="um-cmp">
-        <table><thead><tr><th scope="col">로봇</th><th scope="col">로봇이 하는 일</th>${UNM_COLS.map(([, n]) => `<th scope="col">${esc(n)}</th>`).join('')}<th scope="col">수중 작업</th><th scope="col">구동</th></tr></thead><tbody>
-${UNM14.map((b) => `          <tr><th scope="row"><a href="#${b.id}">${unmFn(b)}<b>${esc(b.name)}</b></a></th><td class="um-cmp__job">${unmJob(b)}</td>${UNM_COLS.map(([k, n]) => b.m.includes(k) ? `<td><i class="um-dot" role="img" aria-label="${esc(n)} 들어감"></i></td>` : '<td class="is-no">·</td>').join('')}<td>${esc(b.water || '—')}</td><td>${esc(b.power || '—')}</td></tr>`).join('\n')}
-        </tbody></table>
-        <ul class="um-cmpm">
-${UNM14.map((b) => `          <li><a href="#${b.id}"><span class="um-cmpm__h">${unmFn(b)}<b>${esc(b.name)}</b></span><span class="um-cmpm__w"><em>들어가는 곳</em>${esc(b.where.join(' · '))}</span><span class="um-cmpm__w"><em>작업 조건</em>${esc(cond(b))}</span></a></li>`).join('\n')}
-        </ul>
-      </div>
-      <p class="us-src">출처: 회사소개서(2024) · 기술소개서(2025) 장비 소개 · ‘—’는 두 문서에 적혀 있지 않은 칸</p>
-    </div>
-  </section>
-
-  <section class="um-sec" id="how" aria-labelledby="um-how-h">
+${v.compare === false ? '' : compareSec}  <section class="um-sec" id="how" aria-labelledby="um-how-h">
     <div class="wrap">
       <p class="um-kick">작업 절차</p>
       <h2 class="um-h2" id="um-how-h">로봇은 안에서, 사람은 밖에서</h2>
@@ -3497,22 +3499,22 @@ ${UNM_STEPS.map((s) => `        <li class="${s.in && s.in[0] === 'r' ? 'is-robot
   <section class="section" id="rnd">
     <div class="wrap">
       <div class="head"><div><h2>연구개발 · 특허</h2></div><p class="lead">2017년 11월 기업부설연구소를 세웠습니다. 로봇과 준설 관련 특허를 등록했고, 로봇 시제품을 만들어 성능시험을 했습니다. 시제품은 위의 현장 장비와 따로 적었습니다.</p></div>
-${UNM_GENS_HTML}
       <div class="stats stats--flush" style="margin-bottom:36px">
         <div class="stat"><b>2017<i>.11</i></b><span>기업부설연구소 설립</span></div>
-        <div class="stat"><b>${PROCESS.patents.length}<i>건</i></b><span>등록 특허</span></div>
-        <div class="stat"><b>${PROCESS.projects.length}<i>건</i></b><span>연구개발 과제</span></div>
-        <div class="stat"><b>${PROCESS.protos.length}<i>종</i></b><span>로봇 시제품</span></div>
+        <div class="stat"><b>${COMPANY17.patents.length}<i>건</i></b><span>등록 특허</span></div>   <!-- 2026-11-01: 대표 5건 → 전체 8건(① 28~29쪽 특허증) — 메인 · 회사 소개와 같은 수 -->
       </div>
-      <div class="us-rd">
+      <div class="us-rd us-rd--one">
         <div>
           <h3>등록 특허</h3>
           <table><thead><tr><th>특허 명칭</th><th>등록</th></tr></thead><tbody>
-${PROCESS.patents.map(([name, year]) => `            <tr><td>${esc(name)}</td><td>${esc(year)}</td></tr>`).join('\n')}
+${COMPANY17.patents.map(([, name, , d]) => `            <tr><td>${esc(name)}</td><td>${esc(d.slice(0, 4))}</td></tr>`).join('\n')}
           </tbody></table>
-          <p class="us-src">회사소개서에는 특허증 8장과 출원사실증명 4장이 실려 있음</p>
+          <p class="us-src">회사소개서(2024) 28~29쪽 특허증 · 이 밖에 출원 4건 <a class="tlink" href="company.html#credentials">특허증 원본 보기 →</a></p>
         </div>
-        <div>
+      </div>
+      <details class="us-fold us-fold--rnd" style="margin-top:28px"><summary>로봇 세대 · 시제품 · 연구개발 과제 자세히</summary>   <!-- 2026-11-01 빼기: 로봇 제조사처럼 읽히지 않게 접어 둔다 -->
+${UNM_GENS_HTML}
+        <div class="us-fold__b">
           <h3>로봇 시제품</h3>
           <p class="note">벽면/천장 부착형은 KCL 성능시험(입회시험)을 거쳤습니다.</p>
           <table><thead><tr><th>로봇</th><th>크기 · 무게</th><th>구동 · 조종</th></tr></thead><tbody>
@@ -3523,8 +3525,7 @@ ${PROCESS.patents.map(([name, year]) => `            <tr><td>${esc(name)}</td><t
             <tr><td>파쇄 (Splinter Robot, Screw)</td><td>490×1,010×260mm · 87.5kg</td><td>유압 최대 140bar 스크류 · 조이스틱</td></tr>
           </tbody></table>
         </div>
-      </div>
-      <details class="us-fold" style="margin-top:28px"><summary>연구개발 과제 ${PROCESS.projects.length}건</summary>
+        <h3 class="us-fold__h">연구개발 과제 ${PROCESS.projects.length}건</h3>
         <ul>
           <li>능동형 촉매 적재장치 — 촉매 반응탑 내 고체 촉매의 고밀도 적층 · 공압</li>
           <li>석유화학 저장탱크 협업형 클리닝 시스템 — 고위험물 저장탱크 내부 세정 · 유압</li>

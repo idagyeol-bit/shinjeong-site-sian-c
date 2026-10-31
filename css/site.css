@@ -3799,3 +3799,9 @@ html:has(.c7-lb.is-open), html:has(.c7-lb.is-open) body, .c7-lb, .c7-lb__st { ov
 /* 13차 카드 규칙은 칩을 휴대폰에서만 보인다 — 목록에서는 PC 에서도 같은 모양으로 */
 .wl__r .cs-chip { display: inline-flex; align-items: center; gap: 4px; height: 24px; margin-top: 6px; padding: 0 8px; font-size: 12.5px; font-weight: 700; background: var(--cs-robot); color: #fff; }
 .wl__r .cs-chip svg { width: 14px; height: 14px; } .wl__r .cs-chip--none { background: var(--soft, #f4f6f8); color: var(--muted); }
+
+/* 무인 솔루션 빼기 (2026-11-01): 연구개발 칸 — 특허 표 하나는 넓게, 세대 · 시제품 · 과제는 접기 안 */
+.us-rd--one { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+.us-fold--rnd .um-gens { margin: 18px 0 8px; }
+.us-fold--rnd .us-fold__b { margin-top: 22px; } .us-fold--rnd .us-fold__b h3, .us-fold__h { margin: 22px 0 8px; font-size: var(--fs-h4); }
+.us-fold--rnd table { width: 100%; }
