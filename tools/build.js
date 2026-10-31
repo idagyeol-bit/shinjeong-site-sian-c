@@ -128,6 +128,22 @@ const PHOTOS = {
   B10: { id: 'B10', w: 1076, h: 752, sizes: [1076], alt: '설비 바닥 틈으로 들어간 호스', cap: '설비 바닥 틈으로 들어간 호스' },   // 시안C 15차: 회사소개서(2024) 13쪽 주요사업 안내 사진 보정판
   B11: { id: 'B11', w: 484, h: 814, sizes: [484], alt: '격자를 그린 땅 위의 GPR 조사', cap: '격자를 그린 땅 위의 GPR 조사' },   // 시안C 15차: 회사소개서(2024) 14쪽 주요사업 안내 사진 보정판
   B12: { id: 'B12', w: 596, h: 960, sizes: [596], alt: 'GPR 조사 장비', cap: 'GPR 조사 장비' },   // 시안C 15차: 회사소개서(2024) 14쪽 주요사업 안내 사진 보정판
+  CF01: { id: 'CF01', w: 1386, h: 1732, sizes: [440, 1386], alt: 'ISO 9001:2015 품질경영시스템 인증서', cap: 'ISO 9001:2015 품질경영시스템 인증서' },   // 시안C 17차: 회사소개서(2024) 26~27쪽 원본 이미지 2배 보정 · 개인 정보 가림
+  CF02: { id: 'CF02', w: 1386, h: 1732, sizes: [440, 1386], alt: 'ISO 14001:2015 환경경영시스템 인증서', cap: 'ISO 14001:2015 환경경영시스템 인증서' },   // 시안C 17차: 회사소개서(2024) 26~27쪽 원본 이미지 2배 보정 · 개인 정보 가림
+  CF03: { id: 'CF03', w: 1386, h: 1734, sizes: [440, 1386], alt: 'KOSHA-MS 안전보건경영시스템 인증서', cap: 'KOSHA-MS 안전보건경영시스템 인증서' },   // 시안C 17차: 회사소개서(2024) 26~27쪽 원본 이미지 2배 보정 · 개인 정보 가림
+  CF04: { id: 'CF04', w: 1386, h: 1734, sizes: [440, 1386], alt: '위험성평가 인정서', cap: '위험성평가 인정서' },   // 시안C 17차: 회사소개서(2024) 26~27쪽 원본 이미지 2배 보정 · 개인 정보 가림
+  CF05: { id: 'CF05', w: 1386, h: 1732, sizes: [440, 1386], alt: '기업부설연구소 인정서', cap: '기업부설연구소 인정서' },   // 시안C 17차: 회사소개서(2024) 26~27쪽 원본 이미지 2배 보정 · 개인 정보 가림
+  CF06: { id: 'CF06', w: 1386, h: 1732, sizes: [440, 1386], alt: '벤처기업확인서', cap: '벤처기업확인서' },   // 시안C 17차: 회사소개서(2024) 26~27쪽 원본 이미지 2배 보정 · 개인 정보 가림
+  CF07: { id: 'CF07', w: 1386, h: 1732, sizes: [440, 1386], alt: '경영혁신형 중소기업(Main-Biz) 확인서', cap: '경영혁신형 중소기업(Main-Biz) 확인서' },   // 시안C 17차: 회사소개서(2024) 26~27쪽 원본 이미지 2배 보정 · 개인 정보 가림
+  CF08: { id: 'CF08', w: 1386, h: 1732, sizes: [440, 1386], alt: '기술혁신형 중소기업(Inno-Biz) 확인서', cap: '기술혁신형 중소기업(Inno-Biz) 확인서' },   // 시안C 17차: 회사소개서(2024) 26~27쪽 원본 이미지 2배 보정 · 개인 정보 가림
+  PT01: { id: 'PT01', w: 1212, h: 1560, sizes: [440, 1212], alt: '특허증 — 정합식 맨홀', cap: '특허증 — 정합식 맨홀' },   // 시안C 17차: 회사소개서(2024) 28~29쪽 원본 이미지 2배 보정 · 개인 정보 가림
+  PT02: { id: 'PT02', w: 1212, h: 1560, sizes: [440, 1212], alt: '특허증 — 관내부 무인 준설 처리 시스템', cap: '특허증 — 관내부 무인 준설 처리 시스템' },   // 시안C 17차: 회사소개서(2024) 28~29쪽 원본 이미지 2배 보정 · 개인 정보 가림
+  PT03: { id: 'PT03', w: 1212, h: 1560, sizes: [440, 1212], alt: '특허증 — 스크류 바퀴를 구비한 수륙양용 준설로봇', cap: '특허증 — 스크류 바퀴를 구비한 수륙양용 준설로봇' },   // 시안C 17차: 회사소개서(2024) 28~29쪽 원본 이미지 2배 보정 · 개인 정보 가림
+  PT04: { id: 'PT04', w: 1212, h: 1560, sizes: [440, 1212], alt: '특허증 — 소형관로 준설로봇 및 그 운전방법', cap: '특허증 — 소형관로 준설로봇 및 그 운전방법' },   // 시안C 17차: 회사소개서(2024) 28~29쪽 원본 이미지 2배 보정 · 개인 정보 가림
+  PT05: { id: 'PT05', w: 1212, h: 1560, sizes: [440, 1212], alt: '특허증 — 워터젯 유닛을 구비한 세정로봇 장치', cap: '특허증 — 워터젯 유닛을 구비한 세정로봇 장치' },   // 시안C 17차: 회사소개서(2024) 28~29쪽 원본 이미지 2배 보정 · 개인 정보 가림
+  PT06: { id: 'PT06', w: 1212, h: 1558, sizes: [440, 1212], alt: '특허증 — 저장소 내부 검사장치', cap: '특허증 — 저장소 내부 검사장치' },   // 시안C 17차: 회사소개서(2024) 28~29쪽 원본 이미지 2배 보정 · 개인 정보 가림
+  PT07: { id: 'PT07', w: 1214, h: 1558, sizes: [440, 1214], alt: '특허증 — 협업형 무인로봇을 이용한 산업용 저장소의 자율 클리닝 시스템', cap: '특허증 — 협업형 무인로봇을 이용한 산업용 저장소의 자율 클리닝 시스템' },   // 시안C 17차: 회사소개서(2024) 28~29쪽 원본 이미지 2배 보정 · 개인 정보 가림
+  PT08: { id: 'PT08', w: 1214, h: 1558, sizes: [440, 1214], alt: '특허증 — 레이다를 이용한 파이프 두께 측정장치', cap: '특허증 — 레이다를 이용한 파이프 두께 측정장치' },   // 시안C 17차: 회사소개서(2024) 28~29쪽 원본 이미지 2배 보정 · 개인 정보 가림
   R27: { id: 'R27', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '야외에서 흡입차와 호스로 연결된 로봇', cap: '흡입차와 호스로 연결된 로봇' },
   R34: { id: 'R34', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '차량에 실린 제어 장치를 다루는 작업자와 발밑의 소형 주행 장비', cap: '차량의 제어 장치와 소형 주행 장비' },
   R42: { id: 'R42', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '카메라 헤드와 바퀴를 갖춘 소형 주행 장비', cap: '카메라 헤드를 갖춘 소형 주행 장비' },
@@ -1113,6 +1129,51 @@ const SVC16 = {
     },
     stepsSrc: '회사소개서(2024) 9쪽 주요사업 안내 · 22~24쪽 보유 장비',
     extra: null, use: null, tech: [['등록 특허', PROCESS.patents[0][0], PROCESS.patents[0][1], '기술소개서(2025) 6쪽']] }
+};
+
+/* ===================== 시안C 17차: 회사 소개 (미리보기 v3, 2026-11-01 이다결 님 결정) =====================
+   이야기 순서: 인사말(누구인가) → 숫자 → 걸어온 길(연혁) → 하는 일(다섯 업무) → 인증 · 특허(증명) → 사람과 조직 → 보유 장비 → 오시는 길.
+   greeting = 회사소개서(2024) 5쪽 인사말 글 그대로(입찰 서류용 인사 두 줄은 뺐다). 서명은 '주식회사 신정개발 대표이사'까지 — 대표 이름은 쓰지 않는다.
+   certs / patents = 회사소개서(2024) 26~29쪽 인증서 · 특허증 원본 이미지(PHOTOS CF01~CF08 · PT01~PT08). 유효기간 · 번호 · 날짜는 문서에 적힌 그대로.
+   대표자 이름과 발명자의 이름 · 생년월일 · 주소는 이미지에서 가렸다. keyYears = 연혁에서 굵게 보일 해(지금 사이트 '핵심 이정표' 다섯 해) */
+const COMPANY17 = {
+  greeting: {
+    q: '변함없는 노력과 연구개발로<br>Cleaning분야의 최고의 기업이 되겠습니다.',
+    paras: [
+      '저희 회사는 1992년 설립 이후 풍부한 현장경험과 숙련된 직원들의 일치된 노력으로 UTILITY환경분야 유지보수전문업체로서의 역할에 최선을 다하는 마음가짐으로 공사를 수행하고 있습니다.',
+      '그 동안 수많은 토목, 건설현장 및 산업체의 검사, 시공, 운영분야에서 어려웠던 여건을 극복하고 성장하게 되었습니다.',
+      '그 결과 성능이 우수한 많은 장비와 다양화된 고급기술을 보유하게 됨과 동시에 산학협력을 통한 발전성 있는 미래지향적인 첨단환경업체로서 발전해 나아가고 있습니다.',
+      '앞으로 우리 (주)신정개발은 작업방법의 개선과 환경.안전.보건에 주력하여 공사의 질을 높이고, 더 큰 만족을 드리며, 기업의 사회적 소명을 다하기 위해 끊임없는 노력을 기울일 것을 약속 드립니다.'
+    ],
+    sign: '주식회사 신정개발 대표이사', photo: 'M02', src: '회사소개서(2024) 5쪽 인사말'
+  },
+  // [사진, 이름, 문서 이름, 발급 기관, 문서에 적힌 기간(없으면 '')]
+  certs: [
+    ['CF01', 'ISO 9001:2015', '품질경영시스템 인증서', 'TCS', ''],
+    ['CF02', 'ISO 14001:2015', '환경경영시스템 인증서', 'TCS', ''],
+    ['CF03', 'KOSHA-MS', '안전보건경영시스템 인증서', '한국산업안전보건공단', '2022.05.31 ~ 2025.05.30'],
+    ['CF04', '위험성평가', '위험성평가 인정서', '한국산업안전보건공단', '2021.05.31 ~ 2024.05.30'],
+    ['CF05', '기업부설연구소', '기업부설연구소 인정서', '한국산업기술진흥협회', '최초 인정 2017.11.14'],
+    ['CF06', '벤처기업', '벤처기업확인서 · 연구개발유형', '벤처기업확인기관', '2022.10.24 ~ 2025.10.23'],
+    ['CF07', 'MAIN-BIZ', '경영혁신형 중소기업 확인서', '중소벤처기업부', '2023.07.10 ~ 2026.07.09'],
+    ['CF08', 'INNO-BIZ', '기술혁신형 중소기업 확인서', '중소벤처기업부', '2023.12.01 ~ 2026.11.30']
+  ],
+  // [사진, 발명의 명칭, 특허 번호, 등록일]
+  patents: [
+    ['PT01', '정합식 맨홀', '10-1736394', '2017.03.08'],
+    ['PT02', '관내부 무인 준설 처리 시스템', '10-1726660', '2017.04.07'],
+    ['PT03', '스크류 바퀴를 구비한 수륙양용 준설로봇', '10-2066976', '2020.01.10'],
+    ['PT04', '소형관로 준설로봇 및 그 운전방법', '10-2114302', '2020.05.18'],
+    ['PT05', '워터젯 유닛을 구비한 세정로봇 장치', '10-2140282', '2020.07.27'],
+    ['PT06', '저장소 내부 검사장치', '10-2403678', '2022.05.25'],
+    ['PT07', '협업형 무인로봇을 이용한 산업용 저장소의 자율 클리닝 시스템', '10-2556408', '2023.07.12'],
+    ['PT08', '레이다를 이용한 파이프 두께 측정장치', '10-2562019', '2023.07.27']
+  ],
+  keyYears: [1992, 1995, 2007, 2017, 2023],
+  // 하는 일 칸의 분야별 대표 장비 이름 — 16차 전 회사 소개 장비 칩 글자 그대로
+  eqKey: { S01: ['진공흡입차', '고압 JET-CLEANER', '흡입 로봇', '제어 차량'], S02: ['진공흡입차(건식)', 'AUTO SEPARATOR', '선별기', '집진기', '흡입 로봇'], S03: ['화학세정용 내산장비'],
+    S04: ['무인준설로봇', '무인로더', '스키드 로더', '데칸타', '소형 굴삭기'], S05: ['CCTV 조사차량', '관로 CCTV 로봇', '탈취제거 SYSTEM', '스키드 로더'] },
+  photos: { overview: 'M05', org: 'B09', equipment: 'R01', location: 'R24' }
 };
 
 /* ===================== 도우미 ===================== */
@@ -2828,7 +2889,7 @@ ${extra ? `  <p>${extra}</p>\n` : ''}</main>
 </body>
 </html>
 `;
-pages['technology.html'] = () => redirectPage('technology.html', 'unmanned.html', '보유 장비 표는 회사 소개 페이지에 있습니다. <a class="tlink" href="company.html#equipment">보유 장비 보기 →</a>');
+pages['technology.html'] = () => redirectPage('technology.html', 'unmanned.html', '보유 장비는 회사 소개 페이지와 사업분야 각 페이지에 있습니다. <a class="tlink" href="company.html#equipment">보유 장비 보기 →</a>');
 pages['process.html'] = () => redirectPage('process.html', 'unmanned.html#how');
 
 /* ---------- 4-A. 무인 솔루션 (unmanned.html, 시안C 9차 신설) ----------
@@ -3702,6 +3763,121 @@ ${SRC_LINE}    </div>
 /* 시안B 33차(설정 look.contactSlim): 문의 페이지 슬림화 — 양식 필드 8 → 5(문의 업무·대상 설비·현장 위치 끔), 오른쪽 사이드 안내(적어 주시면 좋은 내용·문의 후 진행 순서) 끔,
    자주 묻는 질문 구역 끔(FAQ 데이터·faqBlock 보존). 26차의 '문의 페이지 본문 유지' 결정과 초기 FAQ 도입을 이 설정으로 바꾼다(이다결 님 2026-10-19).
    꺼지는 글은 모두 코드에 남는다(33차 보고에 목록). 설정을 지우면 32차 문의 페이지로 돌아간다 */
+/* ---------- 시안C 17차: 회사 소개 — 사업분야 16차와 같은 틀 (미리보기 v3) ----------
+   인사말(사진 | 글) → 숫자 줄(남색) → 위에 붙는 줄 → 걸어온 길(가로 타임라인) → 하는 일(사진 | 글) → 인증 · 특허(가로 줄 두 개, 누르면 크게)
+   → 사람과 조직(도형 조직도, 기업부설연구소 초록) → 보유 장비(분야 요약 + 공통 장비 표) → 오시는 길 → 남색 끝 띠.
+   사진 | 글 칸의 사진은 글을 읽는 동안 화면에 붙어 있다(휴대폰은 위 사진 → 글). 구역 id 는 예전 그대로(#overview · #credentials · #equipment · #organization · #history · #location) — 바닥글 · 문의 페이지 링크가 그대로 맞는다.
+   보유 장비 표(분야별)는 사업분야 상세(16차)에만 둔다 — 여기는 분야별 요약과 링크, 다른 곳에 없는 공통(운반·지원) 장비 표만. 위의 예전 pages['company.html'] 은 지우지 않고 이 판이 덮어쓴다 */
+pages['company.html'] = () => {
+  const K = COMPANY17, G = K.greeting;
+  const ic = (d, s = 18) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+  const BOT = '<rect x="4" y="8" width="16" height="10" rx="2"/><path d="M12 4v4M9 13h.01M15 13h.01"/>';
+  const kick = (t) => `<p class="c7-k">${t}</p>`;
+  const fig = (id, sizes) => { const p = P(id); return `<figure class="c7-ph">${photo(p, sizes || '(max-width:860px) 100vw, 50vw')}<figcaption>${esc(p.cap || p.alt)}</figcaption></figure>`; };
+  const split = (id, label, side, media, body, soft) => `  <section class="c7-sec c7-sec--${side}${soft ? ' c7-sec--soft' : ''}" id="${id}" aria-label="${label}"><div class="c7-split">
+    <div class="c7-split__m">${media}</div>
+    <div class="c7-split__t">${body}</div>
+  </div></section>
+`;
+  const rail = (title, cnt, note, items, aria) => `<div class="c7-rail" data-rail><div class="c7-rail__h"><h3>${title} <span>${cnt}</span></h3><p>${note}</p><span class="c7-rail__btns"><button type="button" class="c7-rail__b" data-d="-1" aria-label="${aria} 이전">‹</button><button type="button" class="c7-rail__b" data-d="1" aria-label="${aria} 다음">›</button></span></div>
+      <ul class="c7-rail__track" tabindex="0" aria-label="${aria} — 옆으로 넘겨 보세요">${items}</ul><div class="c7-rail__prog" aria-hidden="true"><i></i></div></div>`;
+  const card = (kind, id, t, small, meta) => { const p = P(id); return `<li><button type="button" class="c7-cd" data-k="${kind}" data-w="${p.w}" data-t="${esc(t)}" data-m="${esc(meta)}" aria-label="${esc(t)} 크게 보기"><span class="c7-cd__ph"><img src="assets/photos/${id}-440.jpg" width="440" height="${Math.round(p.h * 440 / p.w)}" alt="${esc(p.alt)}" loading="lazy" decoding="async"></span><span class="c7-cd__tx"><b>${esc(t)}</b><small>${esc(small)}</small></span></button></li>`; };
+  /* 걸어온 길 */
+  const hist = C.history.slice().sort((a, b) => a.year - b.year).map((h) => `<li class="c7-hx__y${K.keyYears.includes(h.year) ? ' is-key' : ''}"><b>${h.year}</b><span class="c7-hx__dot" aria-hidden="true"></span><ul>${h.items.slice().sort((a, b) => a.m.localeCompare(b.m)).map((it) => `<li><em>${+it.m}월</em>${esc(it.label)}</li>`).join('')}</ul></li>`).join('');
+  /* 하는 일 */
+  const svl = SERVICES.map((s) => `<li><a href="${s.file}"><span class="c7-sv__ic">${ic(SVC16_IC[s.id], 18)}</span><b>${esc(s.title)}</b>${arrow(16)}</a></li>`).join('');
+  /* 인증 · 특허 */
+  const cg = K.certs.map(([id, t, doc, org, per]) => card('c', id, t, org + (per ? ' · ' + per : ''), doc + ' · ' + org + (per ? ' · ' + per : ''))).join('');
+  const pg = K.patents.map(([id, t, no, d]) => card('p', id, t, no + ' · ' + d.slice(0, 4), '특허 제 ' + no + ' 호 · 등록 ' + d)).join('');
+  const aw = CREDS.awards.map((x) => { const m = x.match(/^(.*) \((\d{4})\)$/); return `<li><em>${m[2]}</em>${esc(m[1])}</li>`; }).join('');
+  /* 보유 장비 */
+  const eqRows = SERVICES.map((s, k) => { const g = EQUIP_GROUPS.find((x) => x.svc === s.id); const n = g.rows.filter((r) => !r[4]).length;
+    return `<li><a href="${s.file}#sv-eq"><span class="c7-eq__n">${String(k + 1).padStart(2, '0')}</span><span class="c7-eq__t"><b>${esc(s.title)}</b><small>${K.eqKey[s.id].map(esc).join(' · ')}</small></span><span class="c7-eq__c">장비 ${n}종 ${arrow(14)}</span></a></li>`; }).join('');
+  const cm = EQUIP_GROUPS.find((g) => g.id === 'eq-common');
+  const cmRows = cm.rows.map(([a, b, c, d]) => `<tr><th scope="row">${esc(a)}</th><td>${esc(b)}</td><td>${esc(c)}</td><td class="q">${esc(d)}</td></tr>`).join('');
+  const NV = 'https://map.naver.com/p/search/', KK = 'https://map.kakao.com/link/search/';
+  const nav = [['greeting', '인사말', '인사말'], ['history', '걸어온 길', '연혁'], ['overview', '하는 일', '사업'], ['credentials', '인증 · 특허', '인증'], ['organization', '사람과 조직', '조직'], ['equipment', '보유 장비', '장비'], ['location', '오시는 길', '위치']];
+  return head({
+    file: 'company.html', page: 'company',
+    title: `회사 소개 | ${C.brand}`,
+    desc: C.intro
+  }) + header('company', null, 'company.html') + `
+<main id="main" class="c7">
+  <section class="c7-msg" id="greeting" aria-labelledby="c7-h"><div class="c7-split">
+    <div class="c7-split__m">${fig(G.photo)}</div>
+    <div class="c7-split__t c7-msg__t">
+      <nav class="c7-crumb" aria-label="현재 위치"><a href="index.html">홈</a><span aria-hidden="true">›</span><span aria-current="page">회사 소개</span></nav>
+      <h1 id="c7-h">회사 소개 <span>인사말</span></h1>
+      <p class="c7-msg__q">${G.q}</p>
+      <div class="c7-msg__b">${G.paras.map((x) => `<p>${esc(x)}</p>`).join('')}</div>
+      <p class="c7-msg__s">${esc(G.sign)}</p>
+      <p class="us-src">${esc(G.src)}</p>
+    </div>
+  </div></section>
+  <section class="c7-facts" aria-label="한눈에 보기"><div class="wrap"><dl>
+    <div><dt>설립</dt><dd>${C.founded}<small>년</small></dd></div>
+    <div><dt>법인 전환</dt><dd>2007<small>년</small></dd></div>
+    <div><dt>기업부설연구소</dt><dd>2017<small>년</small></dd></div>
+    <div><dt>수행 실적 2020~2023</dt><dd>${PROJECT_SUMMARY.n}<small>${PROJECT_SUMMARY.unit}</small></dd></div>
+    <div><dt>등록 특허</dt><dd>${K.patents.length}<small>건</small></dd></div>
+  </dl><p class="c7-facts__src">회사소개서(2024) 기준</p></div></section>
+  <nav class="c7-nav" aria-label="회사 소개 안"><div class="wrap"><b>회사 소개</b>${nav.map(([id, l, s]) => `<a href="#${id}"><span class="c7-n__l">${l}</span><span class="c7-n__s">${s}</span></a>`).join('')}</div></nav>
+
+  <section class="c7-sec c7-sec--full" id="history" aria-label="걸어온 길"><div class="wrap">
+    <div class="c7-fh"><div>${kick('걸어온 길')}<h2 class="c7-h2">1992년 신학상사로 출발했습니다</h2></div><p class="c7-lead">1995년 신정개발로 상호를 바꾸고, 2007년 법인으로 전환했습니다. 굵은 점은 주요 연혁입니다.</p></div>
+    <div class="c7-hx" data-rail><div class="c7-hx__bar"><span>${C.history[C.history.length - 1].year} — ${C.history[0].year}</span><span class="c7-rail__btns"><button type="button" class="c7-rail__b" data-d="-1" aria-label="이전 연도">‹</button><button type="button" class="c7-rail__b" data-d="1" aria-label="다음 연도">›</button></span></div>
+      <ol class="c7-hx__track c7-rail__track" tabindex="0" aria-label="연혁 — 옆으로 넘겨 보세요">${hist}</ol><div class="c7-rail__prog" aria-hidden="true"><i></i></div></div>
+    <p class="us-src">회사소개서(2024) 6쪽 연혁</p>
+  </div></section>
+` + split('overview', '하는 일', 'r', fig(K.photos.overview), `${kick('하는 일')}<h2 class="c7-h2">산업설비와 환경시설을 다루는<br>다섯 가지 업무</h2>
+      <p class="c7-lead">설비 유지보수, 촉매·충진물 작업, 준설과 시설 조사·보수를 해 왔습니다. 분야를 누르면 작업 방식과 장비를 볼 수 있습니다.</p>
+      <ul class="c7-sv">${svl}</ul>
+      <a class="c7-rec" href="cases.html"><span><small>수행 실적</small><b>2020~2023년 ${PROJECT_SUMMARY.n}${PROJECT_SUMMARY.unit}</b></span><em>적용 사례 보기 ${arrow(14)}</em></a>
+      <h3 class="c7-h3">회사 자료</h3>
+      <ul class="c7-doc"><li><a href="${DOC_PROFILE}" target="_blank" rel="noopener"><span><b>회사소개서 (2024)</b><small>PDF · 24쪽 · 9.5MB</small></span><em>내려받기 ↓</em></a></li><li><a href="${DOC_TECH}" target="_blank" rel="noopener"><span><b>기술소개서 (2025)</b><small>PDF · 54쪽 · 9.1MB</small></span><em>내려받기 ↓</em></a></li></ul>
+      <p class="us-src">홈페이지 공개용으로 일부 쪽을 뺀 파일입니다.</p>`, true) + `
+  <section class="c7-sec c7-sec--full" id="credentials" aria-label="인증 · 특허"><div class="wrap">
+    <div class="c7-fh"><div>${kick('인증 · 특허')}<h2 class="c7-h2">인증서와 특허증,<br>원본으로 확인하세요</h2></div><p class="c7-lead">회사소개서(2024)에 실린 인증서 ${K.certs.length}가지와 등록 특허 ${K.patents.length}건입니다. 옆으로 넘기고, 누르면 크게 볼 수 있습니다.</p></div>
+    ${rail('인증서', K.certs.length, '품질 · 환경 · 안전보건 · 기업 인증', cg, '인증서')}
+    ${rail('특허증', K.patents.length, '등록 8건 · 이 밖에 출원 4건', pg, '특허증')}
+    <p class="us-src">회사소개서(2024) 26~29쪽 · 유효기간은 문서에 적힌 그대로 · 대표자 이름과 발명자 개인 정보는 가렸습니다.</p>
+    <div class="c7-two">
+      <div><h3 class="c7-h3">면허 · 허가 · 등록 <small>${CREDS.licenses.length + CREDS.permits.length}종</small></h3><ul class="c7-ls">${CREDS.licenses.concat(CREDS.permits).map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>
+      <div><h3 class="c7-h3">수상 <small>${CREDS.awards.length}회</small></h3><ul class="c7-yr">${aw}</ul></div>
+    </div>
+  </div></section>
+` + split('organization', '사람과 조직', 'l', fig(K.photos.org, '(max-width:860px) 100vw, 50vw'), `${kick('사람과 조직')}<h2 class="c7-h2">조직과 기술 인력</h2>
+      <p class="c7-lead">대표이사 아래 경영지원팀 · 안전 · 공무 · 기업부설연구소와 C&amp;M · C&amp;S · SAP 다섯 개 팀이 있습니다.</p>
+      <div class="c7-oc" role="img" aria-label="${esc(ORG_LABEL)}">
+        <div class="c7-oc__ceo">대표이사</div>
+        <div class="c7-oc__r1">${ORG_ROWS[0].map((t) => /연구소/.test(t) ? `<div class="c7-oc__b c7-oc__b--lab"><span class="c7-oc__ic">${ic(BOT, 18)}</span>${esc(t)}<small>2017년 설립</small></div>` : `<div class="c7-oc__b">${esc(t)}</div>`).join('')}</div>
+        <div class="c7-oc__r2">${ORG_ROWS[1].map((t) => `<div class="c7-oc__t">${esc(t)}</div>`).join('')}</div>
+      </div>
+      <a class="c7-lab" href="unmanned.html#rnd"><span class="c7-lab__k">기업부설연구소</span><span class="c7-lab__t"><b>연구개발 과제 · 등록 특허 · 로봇 세대는<br>무인 솔루션 페이지에 모아 두었습니다</b><small>2017년 11월 설립 · 한국산업기술진흥협회 인정 · 벤처기업 확인유형 ‘연구개발유형’</small></span>${arrow(16)}</a>
+      <h3 class="c7-h3">보유 기술자격 <small>${CREDS.qualFields.length}개 분야</small></h3>
+      <ul class="c7-q">${CREDS.quals.map((q, i) => `<li><b>${esc(CREDS.qualFields[i])}</b><span>${esc(q)}</span></li>`).join('')}</ul>
+      <p class="us-src">회사소개서(2024) 7쪽 조직도 · 18쪽 기술자격 · 27쪽 인정서 · 확인서</p>`, false) + split('equipment', '보유 장비', 'r', fig(K.photos.equipment), `${kick('보유 장비')}<h2 class="c7-h2">분야마다 쓰는 장비를<br>갖추고 있습니다</h2>
+      <p class="c7-lead">분야를 누르면 그 분야 페이지의 장비표(규격 · 용도 · 보유 대수)로 갑니다.</p>
+      <ul class="c7-eq">${eqRows}</ul>
+      <h3 class="c7-h3">공통 장비 <small>운반 · 지원</small></h3>
+      <table class="c7-eqt"><thead><tr><th scope="col">장비</th><th scope="col">규격</th><th scope="col">용도</th><th scope="col">보유</th></tr></thead><tbody>${cmRows}</tbody></table>
+      <p class="us-src">회사소개서(2024) 21~24쪽 보유 장비 · 보유 대수는 회사소개서(2024) 수록 기준이며, 현재 수량과 가동 상태는 문의 시 안내합니다.</p>`, true) + split('location', '오시는 길', 'l', fig(K.photos.location), `${kick('오시는 길 · 연락처')}<h2 class="c7-h2">여수 본사 · 서산 지사</h2>
+      <div class="c7-loc"><div><h3>여수 본사</h3><p>${esc(C.address)}</p><p class="c7-map"><a href="${NV}${encodeURIComponent(C.address)}" target="_blank" rel="noopener">네이버 지도 ↗</a><a href="${KK}${encodeURIComponent(C.address)}" target="_blank" rel="noopener">카카오맵 ↗</a></p></div>
+        <div><h3>서산 지사</h3><p>${esc(C.branch)}</p><p class="c7-map"><a href="${NV}${encodeURIComponent(C.branch)}" target="_blank" rel="noopener">네이버 지도 ↗</a></p></div></div>
+      <dl class="c7-tb"><div><dt>회사명</dt><dd>${esc(C.name)} <small>${esc(C.brandEn)} CO., LTD.</small></dd></div><div><dt>대표 전화</dt><dd><a href="tel:${C.tel.replace(/-/g, '')}">${C.tel}</a></dd></div><div><dt>문의 가능 시간</dt><dd>${esc(C.hours)}</dd></div><div><dt>팩스</dt><dd>${C.fax}</dd></div><div><dt>이메일</dt><dd><a href="mailto:${C.email}">${C.email}</a></dd></div></dl>`, false) + `
+  <section class="c7-end"><div class="wrap">
+    <div><h2>어떤 업무에 해당하는지<br>모르셔도 괜찮습니다</h2><p>대상 설비와 작업 목적을 알려 주시면 맞는 업무와 진행 방법을 안내해 드립니다.</p></div>
+    <ul><li><a href="contact.html">${esc(CFG.common.cta.button)} ${arrow(18)}</a></li><li><a href="services.html"><span>사업분야<small>다섯 분야의 작업 방식과 장비</small></span>${arrow(18)}</a></li><li><a href="cases.html"><span>적용 사례<small>2020~2023년 수행 기록</small></span>${arrow(18)}</a></li></ul>
+  </div></section>
+
+  <div class="c7-lb" role="dialog" aria-modal="true" aria-label="확대 보기" hidden>
+    <div class="c7-lb__h"><div><b></b><small></small></div><span class="c7-lb__n"></span><button type="button" class="c7-lb__x" aria-label="닫기">×</button></div>
+    <div class="c7-lb__st"><img alt=""></div>
+    <div class="c7-lb__f"><button type="button" data-go="-1">‹ 이전</button><button type="button" class="c7-lb__zb">확대 / 줄이기</button><button type="button" data-go="1">다음 ›</button></div>
+  </div>
+` + MAIN_END + footer() + foot(['company17.js']);
+};
+
 const contactSlim = () => !!(CFG.look && CFG.look.contactSlim);
 pages['contact.html'] = () => head({
   file: 'contact.html', page: 'contact',
