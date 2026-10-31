@@ -92,10 +92,10 @@ module.exports = {
       buttons: [ { label: '무인 솔루션 보기', href: 'unmanned.html', fill: true }, { label: '회사 소개', href: 'company.html' } ],
       photos: [
         { photo: 'R01', pos: '50% 72%', posM: '50% 72%', cap: '차고에 모은 로봇 차량과 로봇들' },
-        { photo: 'M10', pos: '50% 50%', posM: '60% 50%', cap: '안전 구획을 설치한 현장의 진공흡입차', item: 0 },
+        { photo: 'M10', pos: '50% 50%', posM: '55% 50%', cap: '안전 구획을 설치한 현장의 진공흡입차', item: 0 },
         { photo: 'W03', pos: '50% 42%', posM: '50% 40%', cap: '맨홀에 호스를 넣어 작업하는 두 작업자', item: 1 },
-        { photo: 'AI10', pos: '50% 50%', posM: '45% 50%', cap: '점검구로 들어가는 무인 로봇 · 연출 이미지', item: 2 },
-        { photo: 'AI01', fit: 'right', posM: '78% 50%', cap: '차세대 로봇 3D 그림', item: 3 }
+        { photo: 'R26', pos: '56% 72%', posM: '48% 52%', cap: '제어 차량에서 조종하는 작업자와 로봇', item: 2 },
+        { photo: 'W05', pos: '50% 55%', posM: '50% 55%', cap: '\'SUCTION ROBOT\' 스크루 궤도형 흡입 로봇', item: 3 }
       ],
       items: [
         { label: '신뢰', big: '4년 연속', small: '같은 고객이 다시 맡긴 회사', href: 'projects.html' },            // ① 39·42·44·46쪽 2020~2023 같은 발주처 4곳 단가계약
