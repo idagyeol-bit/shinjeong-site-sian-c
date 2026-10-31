@@ -111,6 +111,11 @@ const PHOTOS = {
   R25: { id: 'R25', w: 1000, h: 667, sizes: [640, 1000, 1600, 2400], alt: '본사 앞에서 제어 차량과 호스로 연결된 로봇', cap: '본사 앞 — 제어 차량과 호스로 연결된 궤도형 장비' },
   R26: { id: 'R26', w: 1000, h: 870, sizes: [1000, 2400], alt: '제어 차량에서 로봇을 조종하는 작업자와 호스로 연결된 궤도형 로봇', cap: '제어 차량에서 조종하는 작업자와 로봇' },   // 시안C 12차 v4: 첫 화면 '로봇' 사진(로봇 폴더 517A5365.JPG, 번호판 흐림)
   R24: { id: 'R24', w: 1000, h: 667, sizes: [1000, 2400], alt: '본사 마당의 제어 차량과 진공흡입차, 호스로 연결된 로봇', cap: '본사 마당의 제어 차량 · 흡입차 · 로봇' },   // 시안C 12차: 원칙 구역 사진(로봇 폴더 517A5363.JPG). R25 는 첫 화면 R26 과 거의 같은 장면이라 바꿈
+  /* 시안C 13차: 적용 사례 사진 — 기존 사진의 원본에서 다시 만든 보정판(잡티·명암·선명도, 원본에 없는 세부는 만들지 않음) */
+  K01: { id: 'K01', w: 1000, h: 667, sizes: [1000, 1600], alt: '탱크 바닥에서 흡입 호스를 끌고 작업하는 로봇', cap: '탱크 바닥에서 작업하는 로봇' },        // P11(기술소개서 26쪽 960px)을 1600px로 보정
+  K03: { id: 'K03', w: 1000, h: 667, sizes: [1000, 1800], alt: '진공흡입차 옆에서 맨홀에 호스를 연결해 작업하는 작업자들', cap: '진공흡입차와 맨홀 호스 작업' },   // W10 보정
+  K04: { id: 'K04', w: 1000, h: 667, sizes: [1000, 1600], alt: '산업설비 현장에 배치된 진공흡입차와 연결 호스', cap: '산업설비 현장의 진공흡입차와 연결 호스' },   // W01 보정
+  K05: { id: 'K05', w: 1000, h: 667, sizes: [1000, 1800], alt: '도로 위 맨홀 교체 공사 현장에서 작업하는 작업자들', cap: '맨홀 교체 공사 현장' },              // W04 보정
   R27: { id: 'R27', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '야외에서 흡입차와 호스로 연결된 로봇', cap: '흡입차와 호스로 연결된 로봇' },
   R34: { id: 'R34', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '차량에 실린 제어 장치를 다루는 작업자와 발밑의 소형 주행 장비', cap: '차량의 제어 장치와 소형 주행 장비' },
   R42: { id: 'R42', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '카메라 헤드와 바퀴를 갖춘 소형 주행 장비', cap: '카메라 헤드를 갖춘 소형 주행 장비' },
@@ -151,7 +156,7 @@ const PHOTOS = {
   U03: { id: 'U03', w: 1600, h: 1067, sizes: [640, 1000, 1600, 2400], alt: '야간 조명이 켜진 플랜트의 배관과 설비', cap: '야간 플랜트 배관 설비' },
   U04: { id: 'U04', w: 1600, h: 901, sizes: [640, 1000, 1600], alt: '석유화학 단지 안에서 안전 구획을 세우고 작업 중인 신정개발 흡입차', cap: '안전 구획을 세운 석유화학 단지 안 작업 현장' },
   /* 시안C 6차 (2026-10-27 이다결 님 결정): 메인 주요 수행 이력(분류 탭)용. 셋 다 기술소개서(2025) PDF 사진 예외 — 파일은 축소·크롭·얼굴 흐림만(확대 없음). 출처 tools/photo-plan.json */
-  P15: { id: 'P15', w: 720, h: 480, sizes: [720], alt: '알갱이 충진물 위에서 흡입 작업 중인 로봇', cap: '충진물 위에서 흡입 작업 중인 로봇' },
+  P15: { id: 'P15', w: 720, h: 480, sizes: [720, 1280], alt: '알갱이 충진물 위에서 흡입 작업 중인 로봇', cap: '충진물 위에서 흡입 작업 중인 로봇' },
   P16: { id: 'P16', w: 761, h: 507, sizes: [761], alt: '제어 차량 안에서 모니터를 보며 조종하는 작업자들', cap: '제어 차량 안에서 모니터를 보는 작업자들' },
   P17: { id: 'P17', w: 815, h: 543, sizes: [815], alt: '설비 내부를 네 화면으로 보여 주는 CCTV 모니터', cap: '설비 내부를 보여 주는 CCTV 모니터' },
   /* 시안C 10차: 기술소개서(2025) 8쪽 '기타 Cleaning 로봇'의 장비 사진(PDF 사진 예외 — CLAUDE.md, tools/photo-plan.json). 검은 바탕 그대로, 확대 없음 */
@@ -868,6 +873,51 @@ const NEWS = C.history.filter((h) => h.year >= NEWS_FROM).flatMap((h) => h.items
   .concat(NEWS_EXTRA).sort((x, y) => (y.y - x.y) || (String(y.m).localeCompare(String(x.m))));
 const PROJ_TAB_ORDER = ['S01', 'S02', 'S04', 'S03', 'S05'];   // 실적이 많은 분야부터
 
+/* ===================== 시안C 13차: 적용 사례 (2026-10-31 이다결 님 결정) =====================
+   메인 '적용 사례' 구역(분야 다섯 카드)과 적용 사례 페이지(cases.html, 분야별 상세)가 함께 쓰는 자료.
+   robot = 로봇 투입 기록 건수(0 = 기록 없음, -1 = 기록 대신 '관로 CCTV 로봇 보유' 표시) — robotRows 줄 수와 같아야 한다(생성기가 검사)
+   main = 메인 카드의 대표 숫자 하나 · stats = 상세 페이지 숫자 칸(r: true = 초록 로봇 숫자)
+   rows = 주요 수행 실적(발주처 이름은 쓰지 않는다) · rowRobot: true = 로봇 표시
+   근거: 로봇 투입 기록 = 회사소개서(2024) 43~47쪽 · 기술소개서(2025) 25쪽(9차 ROBOT_RECORDS 17건을 분야별로 나눔)
+         단가계약·실적 = 회사소개서(2024) 2020~2023 실적표 39~47쪽. 화학세정 15건 · CCTV 8건은 실적표에서 센 수(클라이언트 확인 C-31) */
+const CASES = [
+  { id: 's01', svc: 'S01', name: '설비 클리닝', photo: 'K01', robot: 4,
+    desc: '탱크·Pond·배수로 안의 잔류물과 퇴적물을 제거합니다. 위험한 내부에는 흡입 로봇을 먼저 넣고, 작업자는 밖에서 조종합니다.',
+    main: { n: '4', u: '년 연속', l: 'Pond Cleaning 단가계약 (2020~2023)' },
+    stats: [ { n: '4', u: '년 연속', l: 'Pond Cleaning 단가계약 (2020~2023)' }, { n: '4', u: '건', l: '로봇 투입 기록', r: true } ],
+    robotRows: [ ['2023.06', '내부 Cleaning 작업 (로봇 적용)'], ['2022.05', 'MDEA Storage Tank 내부 Robot Cleaning'], ['2022.02', 'Drum — Vessel/Drum Cleaning · Phenol'], ['2021.11', 'WWT Tank (ID 20,000) Tank Cleaning'] ],
+    rows: [ ['2020~2023', 'Pond Cleaning 단가계약'], ['2023.06', '설비 내부 Cleaning', true], ['2020.05~11', '위험물 저장탱크 개방검사 Cleaning'] ] },
+  { id: 's02', svc: 'S02', name: '촉매·충진물', photo: 'P03', robot: 12,
+    desc: '반응기의 촉매·충진물을 꺼내고 새로 채웁니다. 반응기 안에는 로봇이 먼저 들어가 촉매와 충진물을 회수합니다.',
+    main: { n: '12', u: '건', l: '로봇 투입 기록 (2021~2023)' },
+    stats: [ { n: '12', u: '건', l: '로봇 투입 기록 (2021~2023)', r: true }, { n: '3', u: '년', l: '2021·2022·2023 해마다 로봇 작업' } ],
+    robotRows: [ ['2023.05', '촉매 교체 공사'], ['2023.02~04', 'Reactor Robot 촉매 Unloading'], ['2022.05', 'Skimming 작업 & 흡착제 Loading 작업'], ['2022.04~06', '촉매 교체 공사'], ['2022.03~04', '1차 반응기 촉매 교체 도급 공사'], ['2022.03', 'Catalyst (ID 1,800) 촉매 제거'], ['2022.01', '전처리반응기 촉매교체 작업 (무인화)'], ['2021.11', 'Catalyst (ID 1,600) 촉매 제거'], ['2021.09', 'Catalyst Replacement'], ['2021.08~22.03', 'Clay Filter (ID 1,800) · N₂ 분위기 · 4회'], ['2021.08', 'Clay Filter 로봇을 이용한 충진물 Skimming 작업'], ['2021.06', '로봇을 활용한 충진물 Unloading Test 작업'] ],
+    rows: [ ['2023.03~06', '건조제 교체'], ['2023.03', '흡착제 교체'], ['2022.05', '대정비 촉매 교체'] ] },
+  { id: 's04', svc: 'S04', name: '준설·슬러지', photo: 'K03', robot: 1,
+    desc: '하수·오수관과 처리시설에 쌓인 퇴적물을 준설하고 슬러지를 회수합니다. 폐수처리장 유량조정조에는 로봇을 넣었습니다.',
+    main: { n: '4', u: '년 연속', l: '준설작업 단가계약 (2020~2023)' },
+    stats: [ { n: '4', u: '년 연속', l: '준설작업 단가계약 (2020~2023)' }, { n: '1', u: '건', l: '로봇 투입 기록 · 유량조정조', r: true } ],
+    robotRows: [ ['2023.09~11', '폐수처리장 유량조정조 슬러지 준설 작업'] ],
+    rows: [ ['2020~2023', '준설작업 단가계약'], ['2023.09~11', '폐수처리장 유량조정조 슬러지 준설', true], ['2023.07', '공정 내 배수로 슬러지 준설'] ] },
+  { id: 's03', svc: 'S03', name: '화학세정', photo: 'K04', robot: 0,
+    desc: '보일러·열교환기 튜브와 배관 계통을 세정합니다. 정기보수 기간에 맞춰 설비를 멈춘 동안 작업합니다.',
+    main: { n: '15', u: '건', l: '보일러·튜브·APH 세정 (2020~2023)' },
+    stats: [ { n: '15', u: '건', l: '보일러·튜브·APH 세정 (2020~2023)' }, { n: '4', u: '년 연속', l: '같은 발주처에서 해마다' } ],
+    robotRows: [],
+    rows: [ ['2023', '보일러 세정작업'], ['2022.05~06', '정기보수 APH·열교환기 튜브 Cleaning'], ['2022.04', '보일러 튜브 외면 & EP Cleaning'], ['2021.05', '보일러 튜브 세정작업'], ['2020.09', '보일러 튜브 외면 세정작업'] ] },
+  { id: 's05', svc: 'S05', name: '관로·지하 조사', photo: 'K05', robot: -1,
+    desc: '관로 안을 CCTV 로봇으로 조사하고, 지하매설물을 GPR로 확인한 뒤 비굴착으로 보수합니다.',
+    main: { n: '8', u: '건', l: '하수관로 CCTV 조사 용역 (2020~2023)' },
+    stats: [ { n: '8', u: '건', l: '하수관로 CCTV 조사 용역 (2020~2023)' }, { n: '2', u: '대', l: 'CCTV 조사차량 보유' }, { n: '1', u: '대', l: '관로 CCTV 로봇 보유', r: true } ],
+    robotRows: [],
+    rows: [ ['2022.01~12', '하수관거 CCTV 조사'], ['2020~2023', '하수관로 정비사업 CCTV 조사·수밀시험 용역'] ] }
+];
+const CASE_SRC = { robot: '회사소개서(2024) 43~47쪽 · 기술소개서(2025) 25쪽', rows: '회사소개서(2024) 2020~2023 실적표 · 발주처 이름은 적지 않습니다' };
+const CASE_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="7" width="16" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3v4M9 12h.01M15 12h.01M2 20h20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
+const caseBadge = (c, cls) => c.robot > 0 ? `<span class="cs-rb${cls || ''}">${CASE_ICON}로봇 적용 <b>${c.robot}</b>건</span>` : c.robot === -1 ? `<span class="cs-rb${cls || ''}">${CASE_ICON}관로 CCTV 로봇</span>` : '';
+const caseChip = (c) => c.robot > 0 ? `<span class="cs-chip">${CASE_ICON}로봇 ${c.robot}건</span>` : c.robot === -1 ? `<span class="cs-chip">${CASE_ICON}CCTV 로봇</span>` : '<span class="cs-chip cs-chip--none">로봇 미적용</span>';
+const caseRobotTotal = () => CASES.reduce((a, c) => a + Math.max(0, c.robot), 0);
+
 /* ===================== 도우미 ===================== */
 const esc = (s) => String(s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -1110,7 +1160,7 @@ function footer() {
   const map = [
     { h: g.services, items: SERVICES.map((s) => ({ href: s.file, label: s.title })) },
     { h: g.tech, items: [{ href: 'unmanned.html', label: '무인 솔루션' }, { href: 'unmanned.html#robots', label: '현장 투입 로봇' }, { href: 'unmanned.html#how', label: '작업 절차' }, { href: 'unmanned.html#dewater', label: '회수물 탈수 과정' }, { href: 'company.html#equipment', label: '보유 장비' }] },   // 시안C 9차: 장비·로봇 · 현장 진행 방식 페이지가 무인 솔루션(unmanned.html) 한 페이지로 합쳐져 모두 그쪽 구역으로, 보유 장비 표는 회사 소개로
-    { h: g.company, items: [{ href: 'projects.html', label: '수행 이력' }, { href: 'company.html', label: '회사 소개' }, { href: 'news.html', label: '소식' }, { href: DOC_PROFILE, label: '회사소개서 (PDF)', blank: true }, { href: DOC_TECH, label: '기술소개서 (PDF)', blank: true }] },
+    { h: g.company, items: [{ href: 'cases.html', label: '적용 사례' }, { href: 'company.html', label: '회사 소개' }, { href: 'news.html', label: '소식' }, { href: DOC_PROFILE, label: '회사소개서 (PDF)', blank: true }, { href: DOC_TECH, label: '기술소개서 (PDF)', blank: true }] },
     { h: g.contact, items: [{ href: 'contact.html', label: '현장 문의' }, { href: `mailto:${C.email}`, label: '이메일로 문의' }] }
   ];
   return `<footer class="ftr">
@@ -1843,7 +1893,7 @@ ${WHY_PAIR.map((w, i) => `        <figure>
           <p class="u10__lead">${esc(c.lead)}</p>
         </div>
         <div class="u10__pair">
-          <figure>${photo(P('P03'), '(max-width:960px) 46vw, 380px')}<figcaption><em>설비 안</em><b>로봇이 들어가 작업</b></figcaption></figure>
+          <figure>${photo(P('P15'), '(max-width:960px) 46vw, 380px')}<figcaption><em>설비 안</em><b>로봇이 들어가 작업</b></figcaption></figure>
           <figure>${photo(P('P16'), '(max-width:960px) 46vw, 380px')}<figcaption><em>설비 밖</em><b>작업자는 화면을 보며 조종</b></figcaption></figure>
         </div>
       </div>
@@ -1970,6 +2020,28 @@ ${feat.map((p) => recRow(p)).join('\n')}
 
   /* 시안C 6차: 주요 수행 이력 — 분류 탭(첫 탭 '로봇 투입 작업' + 분야 5개). 한 번에 한 분류만 크게.
      글은 CFG.home.copy.projects(leadTabs·robotTab·robotTitle·listRobot·listField·note·moreRobot), 사실은 위 ROBOT_* · PROJECTS · WHAT_CHART */
+  /* 시안C 13차: 적용 사례 — 분야 다섯 카드(사진 + 초록 로봇 띠 + 파란 대표 숫자). 카드를 누르면 cases.html#s01 … 분야 상세로.
+     휴대폰은 한 줄 목록(사진 · 이름 + 로봇 칩 · 숫자 · ›). 자료는 CASES, 글은 CFG.home.copy.cases */
+  cases: (bg) => {
+    const c = CFG.home.copy.cases;
+    const robotFields = CASES.filter((x) => x.robot > 0 || x.robot === -1).length;
+    return `  <!-- ===== 적용 사례 (시안C 13차) ===== -->
+  <section class="section${BG_CLASS[bg]} cs" id="cases" aria-labelledby="cs-title">
+    <div class="wrap">
+      <div class="cs__head" data-reveal>
+        <div><p class="cs__kick">${esc(c.label)}</p><h2 id="cs-title">${esc(c.title)}</h2><p class="cs__lead">${esc(c.lead)}</p></div>
+        <a class="cs__more" href="cases.html">${esc(c.more)} ${arrow(16)}</a>
+      </div>
+      <p class="cs__sum" data-reveal><span><i class="cs__k cs__k--r"></i><strong>로봇 적용</strong> 다섯 분야 중 ${['', '한', '두', '세', '네', '다섯'][robotFields] || robotFields} 분야 · 로봇 투입 기록 ${caseRobotTotal()}건 (2021~2023)</span><span><i class="cs__k cs__k--n"></i><strong>결과 숫자</strong> 회사소개서(2024) 2020~2023 실적표</span></p>
+      <ul class="cs__cards">
+${CASES.map((x) => { const p = P(x.photo); return `        <li data-reveal><a class="cs-card" href="cases.html#${x.id}"><span class="cs-card__ph">${photo(p, '(max-width:860px) 92px, (max-width:1100px) 31vw, 270px')}${caseBadge(x)}</span><span class="cs-card__tx"><h3>${esc(x.name)}</h3>${caseChip(x)}<span class="cs-card__num"><b>${esc(x.main.n)}<i>${esc(x.main.u)}</i></b><span>${esc(x.main.l)}</span></span><span class="cs-card__go">적용 사례 보기<span>${arrow(14)}</span></span></span></a></li>`; }).join('\n')}
+      </ul>
+      <a class="cs__all" href="cases.html">${esc(c.more)} ${arrow(16)}</a>
+      <p class="cs__src">로봇 투입 기록: ${esc(CASE_SRC.robot)}</p>
+    </div>
+  </section>
+`;
+  },
   projTabs: (bg) => {
     const c = CFG.home.copy.projects;
     const years = (rows) => { const ys = rows.flatMap((r) => (String(r.period).match(/20\d\d/g) || [])).map(Number); return ys.length ? (Math.min(...ys) === Math.max(...ys) ? String(ys[0]) : `${Math.min(...ys)}~${Math.max(...ys)}`) : ''; };
@@ -2427,7 +2499,7 @@ const usCommonPanels = (k) => usPanel(k, 2, `${US_HOW_LIST}\n          ${US_HOW_
   + usPanel(k, 4, `<p class="note">회사소개서(2024) 실적표에서 비고가 '무인로봇'·'로봇'이거나 공사명에 로봇이 적힌 작업 12건 + 기술소개서(2025) 공사 실적 5건 = 17건 전부. 기록에는 흡입형·파쇄형 구분이 없어 두 로봇에 같은 목록을 보여 줍니다. 발주처·공장 이름은 뺐고, 꼬리표는 원본 비고 칸의 글자입니다.</p>
           ${US_RECORDS}
           <p class="us-src">기술소개서의 'Cray Filter'는 회사소개서 표기(CLAY FILTER)를 따라 Clay로 적음</p>
-          <p class="more"><a class="tlink" href="index.html#record">로봇 투입 기록 전체 보기 →</a></p>`);
+          <p class="more"><a class="tlink" href="cases.html">로봇 투입 기록 전체 보기 →</a></p>`);
 
 pages['unmanned.html'] = () => {
   const c = CFG.pages.unmanned;
@@ -2757,6 +2829,41 @@ ${NEWS.filter((n) => n.y === y).map((n) => `          <li><time>${y}.${esc(n.m)}
   </section>
 
 ` + cta({ h2: CFG.common.cta.title, p: CFG.common.cta.text }) + MAIN_END + footer() + foot();
+};
+
+/* ---------- 시안C 13차: 적용 사례 페이지 (cases.html) — 분야 탭 + 분야별 상세 다섯 개 ----------
+   주소 끝 #s01 · #s02 · #s04 · #s03 · #s05 로 그 분야가 열린다(js/cases.js). 스크립트가 없으면 다섯 분야가 차례로 모두 보인다.
+   한 분야: 남색 머리(제목 · 설명 · 초록 로봇 띠 · 사진) → 숫자 칸(파랑 = 결과, 초록 = 로봇) → 로봇 투입 기록 · 주요 수행 실적(5줄 넘으면 접기) → 다른 분야 */
+pages['cases.html'] = () => {
+  const c = CFG.pages.cases;
+  const rowsHtml = (list, robotAll) => list.length
+    ? list.map((r) => `<li><time>${esc(r[0])}</time><span>${esc(r[1])}</span>${robotAll || r[2] ? '<span class="cs-tag">로봇</span>' : '<span></span>'}</li>`).join('')
+    : `<li><span class="cs-empty">${esc(c.noRobot)}</span></li>`;
+  const block = (x, i) => {
+    const p = P(x.photo);
+    return `  <article class="csd" id="${x.id}" aria-labelledby="${x.id}-h">
+    <div class="csd__top"><div class="wrap csd__hero">
+      <div><p class="csd__kick">${esc(c.title)}</p><${i ? 'h2' : 'h1'} id="${x.id}-h">${esc(x.name)}</${i ? 'h2' : 'h1'}><p class="csd__desc">${esc(x.desc)}</p>${caseBadge(x, ' cs-rb--hero')}</div>
+      <figure class="csd__ph">${photo(p, '(max-width:860px) 100vw, 50vw', i === 0)}<figcaption>${esc(p.cap || p.alt)}</figcaption></figure>
+    </div></div>
+    <div class="wrap"><ul class="csd__stats" style="--n:${x.stats.length}">${x.stats.map((s) => `<li${s.r ? ' class="r"' : ''}><b>${esc(s.n)}<i>${esc(s.u)}</i></b><span>${esc(s.l)}</span></li>`).join('')}</ul></div>
+    <div class="wrap csd__grid">
+      <div><h3>로봇 투입 기록 <em class="r">${x.robotRows.length}건</em></h3><ul class="csd__rows">${rowsHtml(x.robotRows, true)}</ul><button type="button" class="csd__more" hidden></button><p class="csd__src">${esc(CASE_SRC.robot)}</p></div>
+      <div><h3>주요 수행 실적 <em class="n">2020~2023</em></h3><ul class="csd__rows">${rowsHtml(x.rows, false)}</ul><button type="button" class="csd__more" hidden></button><p class="csd__src">${esc(CASE_SRC.rows)}</p></div>
+    </div>
+    <div class="wrap csd__foot"><a class="btn btn--line btn--sm" href="contact.html">${esc(x.name)} ${esc(c.ask)} ${arrow(16)}</a><a class="tlink" href="${svc(x.svc).file}">${esc(svc(x.svc).title)} 업무 보기 ${arrow(14)}</a></div>
+  </article>`;
+  };
+  return head({
+    file: 'cases.html', page: 'cases',
+    title: `${c.title} | ${C.brand}`,
+    desc: c.desc
+  }) + header('cases', null, 'cases.html') + `
+<main id="main">
+` + phero({ h1: c.title, keepLead: c.lead, crumbs: [{ label: c.title }] }) + `
+  <nav class="csd-nav" aria-label="분야"><div class="wrap">${CASES.map((x) => `<a href="#${x.id}">${esc(x.name)}${x.robot ? '<i class="d" aria-label="로봇 적용"></i>' : ''}</a>`).join('')}</div></nav>
+${CASES.map(block).join('\n')}
+` + cta({ h2: CFG.common.cta.title, p: CFG.common.cta.text }) + MAIN_END + footer() + foot(['cases.js']);
 };
 
 /* ---------- 5. 수행 이력 ---------- */
@@ -3190,6 +3297,13 @@ function checkConfig() {
     if (!(s.bg in BG_CLASS)) configError(`구역 바탕 '${s.bg}'이 없습니다 (설정 home.sections, 구역 '${s.id}'). 쓸 수 있는 것: ${Object.keys(BG_CLASS).join(', ')}`);
   });
   CFG.hero.services.forEach((x) => { if (!svc(x.svc)) configError(`첫 화면 업무 번호 '${x.svc}'이 없습니다 (설정 hero.services). 쓸 수 있는 것: ${SERVICES.map((s) => s.id).join(', ')}`); });
+  /* 시안C 13차: 적용 사례 자료 */
+  CASES.forEach((x) => {
+    if (!PHOTOS[x.photo]) configError(`적용 사례 '${x.name}'의 사진 '${x.photo}'이 사진 목록에 없습니다`);
+    if (x.robot > 0 && x.robot !== x.robotRows.length) configError(`적용 사례 '${x.name}'의 robot(${x.robot})과 robotRows 줄 수(${x.robotRows.length})가 다릅니다`);
+    if (!svc(x.svc)) configError(`적용 사례 '${x.name}'의 업무 번호 '${x.svc}'가 없습니다`);
+  });
+  if (typeof ROBOT_RECORDS !== 'undefined' && caseRobotTotal() !== ROBOT_RECORDS.length) configError(`적용 사례 로봇 건수 합(${caseRobotTotal()})이 ROBOT_RECORDS(${ROBOT_RECORDS.length})와 다릅니다`);
   CFG.home.copy.scenes.cards.concat([{ photo: CFG.hero.photo.id }]).forEach((k) => { if (!PHOTOS[k.photo]) configError(`사진 번호 '${k.photo}'이 사진 목록에 없습니다`); });
   if (CFG.sian && CFG.sian.name && !/^#[0-9a-fA-F]{6}$/.test(CFG.sian.color)) configError(`시안 띠 색(sian.color)은 #과 여섯 자리 색 번호로 적습니다. 지금: '${CFG.sian.color}'`);
   /* 큰 틀 'reel'의 업무별 사진·영상 (시안 A) */
