@@ -2973,3 +2973,124 @@ body[data-page="home"] .hdr:not(.is-scrolled) .hdr__lang { color: #fff; border-c
   .heroS.is-ready .heroS__img.is-on { animation: none; } .heroS__img { transition: none; }
   .heroS__glance li.is-on a::before { animation: none; transform: none; }
 }
+
+/* ===================== 시안C 13차: 적용 사례 (메인 구역 .cs · 페이지 .csd) =====================
+   색 역할: 초록 = 로봇 적용, 파랑 = 결과 숫자, 남색 = 글·단추. 각진 모서리, 그림자 없음 */
+:root { --cs-robot: #128a4a; --cs-robot-l: #e7f6ee; --cs-num: #0f5fa8; --cs-num-l: #e8f1fa; }
+.cs-rb { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px 0 10px; background: var(--cs-robot); color: #fff; font-size: 14.5px; font-weight: 700; white-space: nowrap; }
+.cs-rb svg, .cs-chip svg { width: 20px; height: 20px; flex: none; }
+.cs-rb b { font-size: 1.15em; font-weight: 800; }
+.cs-chip { display: none; }
+/* 메인 구역 */
+.cs__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; margin-bottom: clamp(24px, 3vw, 36px); }
+.cs__kick { display: flex; align-items: center; gap: 12px; margin: 0 0 16px; font-size: 14px; font-weight: 700; color: var(--navy); }
+.cs__kick::before { content: ""; width: 28px; height: 2px; background: currentColor; }
+.cs h2 { margin: 0; font-size: var(--fs-h2); letter-spacing: var(--ls-tight); line-height: 1.18; }
+.cs__lead { margin: 14px 0 0; max-width: 36em; font-size: var(--fs-lead, 18px); line-height: 1.75; color: var(--text); word-break: keep-all; }
+.cs__more { flex: none; display: inline-flex; align-items: center; gap: 10px; font-size: 15.5px; font-weight: 600; color: var(--ink); border-bottom: 1px solid currentColor; padding-bottom: 4px; }
+.cs__sum { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 0 0 clamp(24px, 3vw, 36px); padding: 16px 20px; background: var(--soft, #f4f6f8); font-size: 14.5px; color: var(--text); }
+.cs__sum span { display: inline-flex; align-items: center; gap: 10px; } .cs__sum strong { color: var(--ink); }
+.cs__k { display: inline-block; width: 14px; height: 14px; } .cs__k--r { background: var(--cs-robot); } .cs__k--n { background: var(--cs-num); }
+.cs__cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; }
+.cs-card { display: flex; flex-direction: column; height: 100%; color: inherit; border: 1px solid var(--line); background: #fff; transition: border-color .25s, transform .25s; }
+.cs-card:hover { border-color: var(--navy); transform: translateY(-3px); color: inherit; }
+.cs-card:focus-visible { outline: 3px solid var(--cs-num); outline-offset: 3px; }
+.cs-card__ph { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; background: #0b0e12; }
+.cs-card__ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+.cs-card:hover .cs-card__ph img { transform: scale(1.05); }
+.cs-card__ph .cs-rb { position: absolute; left: 0; bottom: 0; }
+.cs-card__tx { flex: 1; display: flex; flex-direction: column; padding: 22px 20px 20px; }
+.cs-card h3 { margin: 0; text-align: left; font-size: 20px; letter-spacing: -0.03em; }
+.cs-card__num { display: block; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+.cs-card__num b { display: block; color: var(--cs-num); font-size: clamp(38px, 3vw, 48px); font-weight: 800; line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+.cs-card__num b i { font-style: normal; font-size: .42em; font-weight: 700; margin-left: 4px; }
+.cs-card__num > span { display: block; margin-top: 8px; font-size: 14px; line-height: 1.45; color: var(--text); }
+.cs-card__go { margin-top: auto; padding-top: 20px; display: flex; justify-content: space-between; align-items: center; font-size: 14.5px; font-weight: 600; color: var(--navy); }
+.cs-card__go span { display: inline-grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--line); transition: background .25s, color .25s; }
+.cs-card:hover .cs-card__go span { background: var(--navy); color: #fff; border-color: var(--navy); }
+.cs__all { display: none; }
+.cs__src { margin: 24px 0 0; font-size: 12.5px; color: var(--muted); }
+/* 적용 사례 페이지 */
+.csd-nav { position: sticky; top: var(--header-h); z-index: 40; background: #fff; border-bottom: 1px solid var(--line); }
+.csd-nav .wrap { display: flex; gap: 32px; overflow-x: auto; scrollbar-width: none; }
+.csd-nav .wrap::-webkit-scrollbar { display: none; }
+.csd-nav a { flex: none; position: relative; padding: 18px 0; font-size: 16px; font-weight: 600; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
+.csd-nav a .d { width: 7px; height: 7px; border-radius: 50%; background: var(--cs-robot); }
+.csd-nav a[aria-current="page"] { color: var(--ink); }
+.csd-nav a[aria-current="page"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--ink); }
+.csd { padding-bottom: clamp(56px, 6vw, 96px); }
+.csd[hidden] { display: none; }
+html:not(.csd-js) .csd + .csd { border-top: 8px solid var(--soft, #f4f6f8); }
+.csd__top { background: var(--navy); color: #fff; }
+.csd__hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(32px, 5vw, 80px); align-items: end; padding-block: clamp(40px, 5vw, 64px); }
+.csd__kick { margin: 0 0 14px; font-size: 14px; font-weight: 700; color: #9fb3c6; }
+.csd h1, .csd__hero h2 { margin: 0; color: #fff; font-size: clamp(38px, 4.4vw, 64px); letter-spacing: -0.045em; line-height: 1.1; }
+.csd__desc { margin: 18px 0 0; max-width: 30em; font-size: clamp(16px, 1.2vw, 18px); line-height: 1.8; color: #d6e1ea; word-break: keep-all; }
+.cs-rb--hero { margin-top: 24px; }
+.csd__ph { position: relative; margin: 0; aspect-ratio: 16 / 10; overflow: hidden; }
+.csd__ph img { width: 100%; height: 100%; object-fit: cover; }
+.csd__ph figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 16px 12px; font-size: 13px; color: #fff; background: linear-gradient(transparent, #0008); }
+.csd__stats { list-style: none; margin: -1px 0 0; padding: 0; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); border: 1px solid var(--line); background: #fff; }
+.csd__stats li { padding: 26px 28px; } .csd__stats li + li { border-left: 1px solid var(--line); }
+.csd__stats b { display: block; color: var(--cs-num); font-size: clamp(40px, 3.8vw, 58px); font-weight: 800; line-height: 1; letter-spacing: -0.04em; }
+.csd__stats b i { font-style: normal; font-size: .4em; font-weight: 700; margin-left: 4px; }
+.csd__stats li.r b { color: var(--cs-robot); }
+.csd__stats span { display: block; margin-top: 10px; font-size: 14.5px; color: var(--text); }
+.csd__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 80px); margin-top: clamp(48px, 5vw, 72px); }
+.csd__grid h3 { margin: 0; font-size: 22px; display: flex; align-items: center; gap: 10px; }
+.csd__grid h3 em { font-style: normal; font-size: 13px; font-weight: 700; padding: 3px 9px; }
+.csd__grid h3 em.r { background: var(--cs-robot-l); color: var(--cs-robot); } .csd__grid h3 em.n { background: var(--cs-num-l); color: var(--cs-num); }
+.csd__rows { list-style: none; margin: 16px 0 0; padding: 0; border-top: 2px solid var(--ink); }
+.csd__rows li { display: grid; grid-template-columns: 128px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--line); font-size: 15.5px; }
+.csd__rows time { color: var(--muted); font-size: 14.5px; font-variant-numeric: tabular-nums; }
+.csd__rows.is-folded li:nth-child(n+6) { display: none; }
+.cs-tag { font-size: 12.5px; font-weight: 700; color: var(--cs-robot); background: var(--cs-robot-l); padding: 3px 8px; white-space: nowrap; }
+.cs-empty { grid-column: 1 / -1; color: var(--muted); }
+.csd__more { width: 100%; height: 48px; margin-top: 12px; border: 1px solid var(--line); background: #fff; font: inherit; font-size: 15px; font-weight: 600; color: var(--navy); cursor: pointer; }
+.csd__src { margin: 14px 0 0; font-size: 12.5px; color: var(--muted); }
+.csd__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 40px; }
+@media (max-width: 1100px) { .cs__cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 860px) {
+  .cs__head { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .cs__head .cs__more, .cs__sum { display: none; }
+  /* 휴대폰 메인: 한 줄 목록 — 사진 · 이름 + 초록 로봇 칩 · 파란 숫자와 설명 · › */
+  .cs__cards { grid-template-columns: 1fr; gap: 0; border-top: 2px solid var(--ink); }
+  .cs__cards li { border-bottom: 1px solid var(--line); }
+  .cs-card { position: relative; display: grid; grid-template-columns: 92px minmax(0, 1fr); align-items: center; gap: 16px; padding: 16px 28px 16px 0; border: 0; }
+  .cs-card::after { content: ""; position: absolute; right: 4px; top: 50%; width: 9px; height: 9px; border-top: 2px solid var(--muted); border-right: 2px solid var(--muted); transform: translateY(-50%) rotate(45deg); }
+  .cs-card:hover { transform: none; }
+  .cs-card__ph { width: 92px; height: 92px; aspect-ratio: auto; }
+  .cs-card__ph .cs-rb { display: none; }
+  .cs-card__tx { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-items: center; gap: 6px 8px; padding: 0; text-align: left; }
+  .cs-card h3 { font-size: 17.5px; }
+  .cs-chip { display: inline-flex; align-items: center; gap: 4px; height: 24px; padding: 0 8px; font-size: 12.5px; font-weight: 700; background: var(--cs-robot); color: #fff; }
+  .cs-chip svg { width: 14px; height: 14px; }
+  .cs-chip--none { background: var(--soft, #f4f6f8); color: var(--muted); }
+  .cs-card__num { flex: 0 0 100%; margin: 2px 0 0; padding: 0; border: 0; display: flex; align-items: baseline; gap: 8px; }
+  .cs-card__num b { font-size: 28px; white-space: nowrap; flex: none; } .cs-card__num b i { font-size: .46em; }
+  .cs-card__num > span { margin: 0; font-size: 12.5px; color: var(--muted); line-height: 1.35; }
+  .cs-card__go { display: none; }
+  .cs__all { display: flex; justify-content: center; align-items: center; gap: 8px; height: 52px; margin-top: 24px; background: var(--navy); color: #fff; font-weight: 600; }
+  .cs__all:hover { color: #fff; }
+  /* 휴대폰 상세: 분야 탭 → 사진 → 제목·설명 → 숫자 2칸 → 목록 */
+  .csd-nav .wrap { gap: 22px; } .csd-nav a { padding: 14px 0; font-size: 14.5px; }
+  .csd__hero { display: flex; flex-direction: column-reverse; gap: 0; padding-block: 0 28px; }
+  .csd__ph { margin: 0 calc(var(--gutter) * -1); }
+  .csd__hero > div { padding-top: 24px; }
+  .csd__kick { display: none; }
+  .csd h1, .csd__hero h2 { font-size: 32px; }
+  .csd__desc { margin-top: 12px; font-size: 15.5px; line-height: 1.7; }
+  .cs-rb--hero { margin-top: 18px; height: 32px; font-size: 13.5px; }
+  .csd__stats { grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; border: 0; background: transparent; }
+  .csd__stats li, .csd__stats li + li { padding: 16px 14px; border: 1px solid var(--line); }
+  .csd__stats li:nth-child(3) { grid-column: 1 / -1; }
+  .csd__stats b { font-size: 34px; } .csd__stats span { margin-top: 8px; font-size: 13px; line-height: 1.45; }
+  .csd__grid { grid-template-columns: 1fr; gap: 40px; margin-top: 40px; }
+  .csd__grid h3 { font-size: 19px; }
+  .csd__rows li { grid-template-columns: minmax(0, 1fr) auto; gap: 4px 10px; padding: 14px 0; font-size: 15px; }
+  .csd__rows time { grid-column: 1; font-size: 12.5px; }
+  .csd__rows li > span:not(.cs-tag):not(.cs-empty) { grid-column: 1; }
+  .cs-tag { grid-column: 2; grid-row: 1 / span 2; justify-self: end; }
+  .csd__foot { flex-direction: column; align-items: stretch; } .csd__foot .btn { justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) { .cs-card, .cs-card__ph img { transition: none; } }

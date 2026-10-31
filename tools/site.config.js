@@ -179,7 +179,7 @@ module.exports = {
       { id: 'unmanned', bg: 'soft' },  // 11차: 연회색. 시안C 7차: 무인 솔루션 — 로봇 네 대(이름 + 세 단어). 글은 copy.unmanned, 목록은 tools/build.js UNMANNED_BOTS
       { id: 'trust', bg: 'navy' },     // 숫자 띠 (200회 · 170여 건 · 특허 · 면허, 주요 현장) — 7차: 무인 솔루션 아래로. 시안B 24차: 남색 풀블리드 띠
       { id: 'whatChart', bg: 'soft' }, // 시안C 4차: 사업분야 차트. 배치는 look.chartLayout('compact' 5차 / 'five' / 'lead')
-      { id: 'projTabs', bg: 'white' }, // 시안C 6차: 주요 수행 이력 — 분류 탭(첫 탭 '로봇 투입 작업'). 'projects' 로 바꾸면 예전 표 세 줄
+      { id: 'cases', bg: 'white' },      // 시안C 13차: 적용 사례(분야 다섯 카드 → cases.html). 예전 분류 탭은 { id: 'projTabs', bg: 'white' }
       // { id: 'process', bg: 'navy' },   // 현장 진행 방식 — 7차: 메인에서 뺐다(무인 솔루션이 맡음). 줄 앞의 // 를 지우면 다시 생긴다
       // { id: 'envB', bg: 'white' },     // 환경 띠 — 7차: 메인에서 빼고 회사 소개 안 한 줄로(copy.company.env). 줄 앞의 // 를 지우면 다시 생긴다
       // { id: 'scenes', bg: 'soft' }, // 현장의 장면 (사진 카드 세 장) — 시안 B 에서는 뺐다
@@ -188,6 +188,12 @@ module.exports = {
 
     /* ⑦ 메인 문구 — 지금 글자 그대로. 숫자가 들어가는 자리는 {n} 같은 자리표시다 */
     copy: {                                 // 구역별 문구 (구역 이름은 위 sections 의 id 와 같다)
+      cases: {                              // 시안C 13차: 메인 '적용 사례' 구역(분야 다섯 카드). 자료는 tools/build.js 의 CASES
+        label: '적용 사례',
+        title: '현장에 적용한 방법과 결과',
+        lead: '2020~2023년, 4개 발주처와 4년 연속 단가계약을 맺었습니다. 분야를 누르면 그 분야의 적용 사례로 바로 갑니다.',
+        more: '적용 사례 전체 보기'
+      },
       trust: {                              // 숫자 띠
         label: '숫자로 보는 신정개발',      // 숫자 띠의 이름 (화면 읽기 프로그램이 읽는 글)
         sitesTitle: '주요 현장'            // 숫자 아래 현장 칩 앞의 작은 제목 (칩 내용은 사실이라 tools/build.js 에 있다)
@@ -286,11 +292,18 @@ module.exports = {
   nav: [                                   // 맨 위 메뉴 — 위에서부터 왼쪽→오른쪽 순서. href·key 는 9차에 바꿈(장비·로봇 · 현장 진행 방식 → 무인 솔루션 한 페이지)
     { href: 'services.html', label: '사업분야', key: 'services' },
     { href: 'unmanned.html', label: '무인 솔루션', key: 'unmanned' },        // 9차: 새 페이지 unmanned.html (7차엔 메인의 무인 솔루션 칸 index.html#unmanned)
-    { href: 'projects.html', label: '수행 이력', key: 'projects' },
+    { href: 'cases.html', label: '적용 사례', key: 'cases' },   // 시안C 13차: '수행 이력' → '적용 사례'. projects.html 은 남아 있다
     { href: 'company.html', label: '회사 소개', key: 'company' },
     { href: 'news.html', label: '소식', key: 'news' }                        // 7차 신설
   ],
   pages: {                                 // 7차: 메인 밖 새 페이지의 글
+    cases: {                               // 시안C 13차: 적용 사례 페이지(cases.html)
+      title: '적용 사례',
+      lead: '분야마다 어떤 방법으로 작업했고, 어떤 결과를 냈는지 모았습니다. 초록은 로봇을 적용한 기록, 파랑은 결과 숫자입니다.',
+      desc: '설비 클리닝·촉매·충진물·준설·화학세정·관로 조사, 신정개발이 현장에 적용한 방법과 결과입니다.',
+      noRobot: '두 문서에 이 분야의 로봇 투입 기록은 없습니다.',
+      ask: '문의하기'
+    },
     news: {
       title: '소식',
       lead: '인증·수상·연구소 소식을 날짜순으로 정리했습니다.',
