@@ -1983,7 +1983,8 @@ function heroStatement() {
   const vars = {
     founded: C.founded,
     gens: KOR_NUM_S[PROCESS.generations.length] || PROCESS.generations.length,
-    patents: KOR_NUM_S[PROCESS.patents.length] || PROCESS.patents.length
+    patents: KOR_NUM_S[PROCESS.patents.length] || PROCESS.patents.length,
+    patentsAll: KOR_NUM_S[COMPANY17.patents.length] || COMPANY17.patents.length   // 메인 빼기(2026-11-01): 전체 등록 특허 수(① 28~29쪽 특허증 8장) — 숫자 띠 '8건 등록 특허'와 같은 수
   };
   const f = (x) => esc(fill(x, vars));
   const ar = `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
@@ -2103,12 +2104,12 @@ ${contactFooterOnly() ? '' : `    <div class="bizB__end"><a class="btn btn--line
           <p class="pc__s">${esc(c.lead)}<br><strong>${esc(c.strong)}</strong></p>
         </div>
       </div>
-      <ul class="pc__proof" data-reveal data-delay="90">
+${c.proof === false ? '' : `      <ul class="pc__proof" data-reveal data-delay="90">
         <li><b>${PROCESS.generations.length}<i>세대</i></b><span>무인 흡입 로봇</span></li>
         <li><b>${PROCESS.patents.length}<i>건</i></b><span>로봇 · 준설 관련 등록 특허</span></li>
         <li><b>${ROBOT_RECORDS.length}<i>건</i></b><span>로봇 투입 작업 기록 (${Math.min(...ys)}~${Math.max(...ys)})</span></li>
       </ul>
-    </div>
+`}    </div>
     <figure class="pc__fig" data-reveal>${photo(P('R24'), '100vw')}<figcaption><div class="wrap">본사 마당의 제어 차량 · 흡입차 · 로봇</div></figcaption></figure>
   </section>
 `;
@@ -2218,6 +2219,31 @@ ${one ? `            <p class="bizCh__one">${esc(one)}</p>\n` : ''}            <
         </a>`; }).join('\n')}
       </div>
 ${compact ? `      <div class="bizCh__dots" data-chart-dots aria-hidden="true">${WHAT_CHART.map((_, i) => `<i${i === 0 ? ' class="on"' : ''}></i>`).join('')}<span>1 / ${WHAT_CHART.length}</span></div>\n` : ''}    </div>
+  </section>
+`;
+  },
+
+  /* 메인 빼기(2026-11-01 이다결 님 결정): 사업분야 카드 다섯 장 + 적용 사례 카드 다섯 장 → 한 줄 목록 하나.
+     한 줄 = 사진 · 분야(분야 페이지 링크) · 현장 · 투입(WHAT_CHART) · 적용 결과(CASES.main — 적용 사례 페이지 그 분야로). 새 문장 없음 — 글은 모두 기존 자료 */
+  whatList: (bg) => {
+    const c = CFG.home.copy.what, k = CFG.home.copy.cases;
+    return `  <!-- ===== 사업분야 한 줄 목록 (메인 빼기) ===== -->
+  <section class="section${BG_CLASS[bg]} wl" id="what" aria-labelledby="wl-title">
+    <div class="wrap">
+      <div class="wl__head" data-reveal>
+        <h2 id="wl-title">${esc(c.titleChart || c.title)}</h2>
+        <p>${esc(c.leadChart)}</p>
+      </div>
+      <ol class="wl__list">
+${WHAT_CHART.map((w, i) => { const s = svc(w.svc), x = CASES.find((y) => y.svc === w.svc), p = P(w.photo); return `        <li class="wl__row" data-reveal>
+          <a class="wl__ph" href="${s.file}" tabindex="-1" aria-hidden="true">${photo(p, '(max-width:860px) 96px, 220px')}</a>
+          <div class="wl__t"><span class="wl__n">${String(i + 1).padStart(2, '0')}</span><h3><a href="${s.file}">${esc(s.title)} ${arrow(16)}</a></h3></div>
+          <dl class="wl__dl"><div><dt>현장</dt><dd>${esc(w.where)}</dd></div><div><dt>투입</dt><dd>${esc(w.gear)}</dd></div></dl>
+          ${x ? `<a class="wl__r" href="cases.html#${x.id}"><b>${esc(x.main.n)}<i>${esc(x.main.u)}</i></b><span>${esc(x.main.l)}</span><em>${caseChip(x)}</em></a>` : '<span class="wl__r"></span>'}
+        </li>`; }).join('\n')}
+      </ol>
+      <div class="wl__foot" data-reveal><a class="wl__all" href="cases.html">${esc(k.more)} ${arrow(16)}</a><p>로봇 투입 기록: ${esc(CASE_SRC.robot)}</p></div>
+    </div>
   </section>
 `;
   },
@@ -2478,12 +2504,12 @@ ${pcards(c.cards.map((k) => k.photo), c.cards.map((k) => k.title), null, c.cards
         <span class="co__eyebrow">${esc(c.title)}</span>
         <h2 id="co-title">${c.headline}</h2>
         <p class="co__intro">${esc(c.introHome || C.intro)}</p>
-        <ul class="co__nums">
+${c.nums === false ? '' : `        <ul class="co__nums">
           <li><b>${C.founded}</b><span>설립</span></li>
           <li><b>2017</b><span>기업부설연구소 설립</span></li>
           <li><b>5<i>세대</i></b><span>무인 흡입 로봇 (기술소개서)</span></li>
         </ul>
-${c.env ? `        <p class="co__env"><b>${esc(c.envLabel || '환경')}</b>${ENV_LINE.map((x) => esc(x)).join(' · ')}</p>\n` : ''}        <div class="co__act"><a class="btn btn--line" href="company.html">${c.button} ${arrow(18)}</a></div>
+`}${c.env ? `        <p class="co__env"><b>${esc(c.envLabel || '환경')}</b>${ENV_LINE.map((x) => esc(x)).join(' · ')}</p>\n` : ''}        <div class="co__act"><a class="btn btn--line" href="company.html">${c.button} ${arrow(18)}</a></div>
       </div>
     </div>
   </section>
