@@ -102,7 +102,7 @@ const PHOTOS = {
   W07: { id: 'W07', w: 1000, h: 667, sizes: [640, 1000, 1263], alt: '산업설비 현장에 배치된 신정개발 진공흡입차', cap: '산업설비 현장의 진공흡입차' },
   W09: { id: 'W09', w: 1000, h: 667, sizes: [640, 1000, 1600, 2400], alt: '산업설비 현장의 작업 차량과 보호구를 착용한 작업자들', cap: '산업설비 현장의 작업 차량과 작업자' },
   W10: { id: 'W10', w: 1000, h: 667, sizes: [640, 1000, 1600, 2400], alt: '진공흡입차 옆에서 맨홀에 호스를 연결해 작업하는 작업자들', cap: '진공흡입차와 맨홀 호스 작업' },
-  R01: { id: 'R01', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '차고에 정렬된 신정개발 차량 두 대와 로봇 장비들', cap: '차고의 차량과 로봇 장비' },
+  R01: { id: 'R01', w: 1000, h: 667, sizes: [640, 1000, 1600, 2400], alt: '차고에 정렬된 신정개발 차량 두 대와 로봇 장비들', cap: '차고의 차량과 로봇 장비' },
   R07: { id: 'R07', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '차량에 설치된 모니터·제어 장치 앞에 선 조종자', cap: '차량의 모니터·제어 장치와 조작자' },
   R10: { id: 'R10', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '전면에 작업 헤드를 갖춘 주황색 궤도형 장비', cap: '전면 작업 헤드를 갖춘 궤도형 장비' },
   R13: { id: 'R13', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '소형 주행 장비, 흡입 헤드 유닛, 유압 호스 묶음', cap: '소형 주행 장비와 흡입 헤드, 호스' },
@@ -959,7 +959,7 @@ ${V ? '' : `<link rel="canonical" href="${SITE_URL}${here}">
 <link rel="stylesheet" href="css/${V ? `tokens.${V.name}.css` : 'tokens.css'}">
 <link rel="stylesheet" href="css/site.css">
 ${!marked && o.jsonld ? `<script type="application/ld+json">${JSON.stringify(o.jsonld)}</script>\n` : ''}</head>
-<body class="moB-root" data-page="${o.page}"${o.page === 'home' && (CFG.frame.hero === 'reel' || CFG.frame.hero === 'slides' || CFG.frame.hero === 'lines') ? ` data-hero="${CFG.frame.hero}"` : ''}>
+<body class="moB-root" data-page="${o.page}"${o.page === 'home' && (CFG.frame.hero === 'reel' || CFG.frame.hero === 'slides' || CFG.frame.hero === 'lines' || CFG.frame.hero === 'statement') ? ` data-hero="${CFG.frame.hero}"` : ''}>
 <a class="skip-link" href="#main">본문 바로가기</a>
 ${V ? `<div class="pvbar" role="note">검토용 ${esc(V.label)}입니다 · <a href="../index.html">기본판 보기</a> · 공식 홈페이지 <a href="${OFFICIAL_SITE.url}" target="_blank" rel="noopener">${OFFICIAL_SITE.label}</a></div>\n`
     : S ? `<div class="sianbar" role="note" style="--sian: ${S.color}"><span class="sianbar__name">${esc(S.name)}</span>${S.direction ? `<span class="sianbar__dir">${esc(S.direction)}</span>` : ''}<span class="sianbar__note">최종본과 다른 작업용 판입니다</span></div>\n`
@@ -1663,6 +1663,44 @@ ${list.map((sc, i) => `    <div class="heroL__s${i ? '' : ' is-on'}${sc.tone ? '
 `;
 }
 
+/* ---------- 큰 틀 'statement'의 첫 화면 — 한 문장 + 바뀌는 현장 사진 + 한눈에 보는 네 칸 (시안C 12차 v4) ----------
+   글은 바뀌지 않는다. 6초마다 바뀌는 것은 뒤의 사진, 오른쪽 아래 사진 설명 한 줄, 그 사진에 맞는 아래 칸의 밝기뿐(js/hero-statement.js).
+   PC 는 아래 칸에 마우스를 올리면 그 사진으로. 휴대폰은 사진 위에 제목·단추 하나, 네 칸은 사진 아래 남색 목록.
+   스크립트가 없거나 움직임 줄이기면 첫 사진에 멈춘다. 문구·사진은 CFG.hero.statement. class 는 모두 heroS 로 시작한다 */
+const KOR_NUM_S = ['영', '한', '두', '세', '네', '다섯', '여섯', '일곱', '여덟', '아홉', '열'];
+function heroStatement() {
+  const s = CFG.hero.statement;
+  const vars = {
+    founded: C.founded,
+    gens: KOR_NUM_S[PROCESS.generations.length] || PROCESS.generations.length,
+    patents: KOR_NUM_S[PROCESS.patents.length] || PROCESS.patents.length
+  };
+  const f = (x) => esc(fill(x, vars));
+  const ar = `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  const img = (sc, i) => {
+    const p = P(sc.photo);
+    const srcset = p.sizes.map((w) => `assets/photos/${p.id}-${w}.jpg ${w}w`).join(', ');
+    return `<img class="heroS__img${i ? '' : ' is-on'}${sc.fit === 'right' ? ' heroS__img--right' : ''}" src="assets/photos/${p.id}-${p.sizes[p.sizes.length - 1]}.jpg" srcset="${srcset}" sizes="100vw" width="${p.w}" height="${p.h}" alt="" decoding="async"${i ? ' loading="lazy"' : ' fetchpriority="high"'} style="--pos: ${sc.pos || '50% 50%'}; --pos-m: ${sc.posM || sc.pos || '50% 50%'}" data-cap="${esc(sc.cap || '')}"${sc.item === undefined ? '' : ` data-item="${sc.item}"`}>`;
+  };
+  return `  <!-- ===== 히어로: 한 문장 + 바뀌는 현장 사진 + 한눈에 보는 네 칸 (큰 틀 'statement', 시안C 12차 v4) ===== -->
+  <section class="heroS" id="heroS" aria-label="신정개발 소개">
+    <div class="heroS__bg" aria-hidden="true">
+${s.photos.map((sc, i) => `      ${img(sc, i)}`).join('\n')}
+    </div>
+    <p class="heroS__cap" aria-hidden="true"><span>${esc(s.photos[0].cap || '')}</span></p>
+    <div class="heroS__msg"><div class="wrap">
+      <p class="heroS__eyebrow">${f(s.eyebrow)}</p>
+      <h1 class="heroS__h">${s.title.map((t) => `<span>${f(t)}</span>`).join('')}</h1>
+      <p class="heroS__lead">${f(s.lead)}</p>
+      <div class="heroS__links">${s.buttons.map((b) => `<a class="heroS__btn${b.fill ? ' heroS__btn--fill' : ''}" href="${esc(b.href)}">${esc(b.label)} ${ar}</a>`).join('')}</div>
+    </div></div>
+    <nav class="heroS__glance" aria-label="한눈에 보는 신정개발"><div class="wrap"><ul>
+${s.items.map((it, i) => `      <li data-i="${i}"><a href="${esc(it.href)}"><em>${f(it.label)}</em><b>${f(it.big)}</b><span>${f(it.small)}${ar}</span></a></li>`).join('\n')}
+    </ul></div></nav>
+  </section>
+`;
+}
+
 /* 큰 틀 'base'의 메인 구역 여섯 개 — 40차 전의 구역 그대로. 각 함수는 바탕 이름(bg)을 받는다 */
 const HOME_SECTIONS = {
   /* 신뢰 숫자 — 숫자(TRUST)·주요 현장(TRUST_SITES)·출처(TRUST_SRC)는 사실 데이터 */
@@ -2125,7 +2163,7 @@ ${c.half ? '' : `        <div class="stat"><b><span data-count="2007">2007</span
    설정 파일의 frame 칸(hero / sections / header)이 여기서 이름으로 고른다. 지금은 'base'(40차 전의 모양) 하나뿐이다.
    새 큰 틀은 그림 시안으로 고른 뒤 지시서로 여기에 이름을 더한다. */
 const FRAMES = {
-  hero: { base: heroBase, reel: heroReel, slides: heroSlides, lines: heroLines },   // 시안C 12차: lines = 세 줄 카피 5장면
+  hero: { base: heroBase, reel: heroReel, slides: heroSlides, lines: heroLines, statement: heroStatement },   // 시안C 12차: lines = 세 줄 카피 5장면 · 시안C 12차 v4
   sections: { base: HOME_SECTIONS },
   header: { base: headerBase }
 };
@@ -2153,7 +2191,7 @@ pages['index.html'] = () => {
   }) + header('home', null, 'index.html') + `
 <main id="main">
 
-` + frame('hero')() + '\n' + CFG.home.sections.map((s) => S[s.id](s.bg)).join('\n') + '\n' + cta({ home: true }) + MAIN_END + footer() + foot((CFG.frame.hero === 'reel' ? ['reel.js'] : CFG.frame.hero === 'slides' ? ['hero-slides.js'] : CFG.frame.hero === 'lines' ? ['hero-lines.js'] : []).concat(CFG.frame.hero === 'slides' && CFG.hero.scenes.some((sc) => sc.cine) ? ['heroB3d.js'] : []).concat(CFG.frame.hero === 'slides' && CFG.hero.scenes.some((sc) => sc.video) ? ['heroB-video.js'] : []).concat(CFG.home.sections.some((s) => s.id === 'whatB') ? ['biz-stack.js'] : []));
+` + frame('hero')() + '\n' + CFG.home.sections.map((s) => S[s.id](s.bg)).join('\n') + '\n' + cta({ home: true }) + MAIN_END + footer() + foot((CFG.frame.hero === 'reel' ? ['reel.js'] : CFG.frame.hero === 'slides' ? ['hero-slides.js'] : CFG.frame.hero === 'lines' ? ['hero-lines.js'] : CFG.frame.hero === 'statement' ? ['hero-statement.js'] : []).concat(CFG.frame.hero === 'slides' && CFG.hero.scenes.some((sc) => sc.cine) ? ['heroB3d.js'] : []).concat(CFG.frame.hero === 'slides' && CFG.hero.scenes.some((sc) => sc.video) ? ['heroB-video.js'] : []).concat(CFG.home.sections.some((s) => s.id === 'whatB') ? ['biz-stack.js'] : []));
 };
 
 /* ---------- 2. 사업분야 ---------- */
@@ -3210,6 +3248,17 @@ function checkConfig() {
       if (sc.fit && sc.fit !== 'right') configError(`첫 화면 장면 '${sc.name}'의 fit 은 'right' 만 됩니다 (설정 hero.lines)`);
       if (sc.tone && sc.tone !== 'lite') configError(`첫 화면 장면 '${sc.name}'의 tone 은 'lite' 만 됩니다 (설정 hero.lines)`);
     });
+  }
+  /* 시안C 12차 v4: 큰 틀 'statement'의 첫 화면 */
+  if (CFG.frame.hero === 'statement') {
+    const s = CFG.hero.statement;
+    if (!s || !Array.isArray(s.title) || !s.title.length) configError(`큰 틀 'statement'에는 제목(title)이 있어야 합니다 (설정 hero.statement)`);
+    if (!Array.isArray(s.photos) || !s.photos.length) configError(`첫 화면 사진 목록이 없습니다 (설정 hero.statement.photos)`);
+    s.photos.forEach((sc, i) => {
+      if (!PHOTOS[sc.photo]) configError(`첫 화면 사진 ${i + 1}번째의 사진 번호 '${sc.photo}'이 사진 목록에 없습니다 (설정 hero.statement.photos)`);
+      if (sc.item !== undefined && !s.items[sc.item]) configError(`첫 화면 사진 '${sc.photo}'의 item ${sc.item} 칸이 없습니다 (설정 hero.statement.items)`);
+    });
+    if (!Array.isArray(s.items) || s.items.length !== 4) configError(`아래 칸(items)은 네 개여야 합니다 (설정 hero.statement.items)`);
   }
   /* 시안B 25차: 현장 진행 방식의 연출 영상(설정 look.processVideo) */
   if (CFG.look && CFG.look.processVideo) {
