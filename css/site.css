@@ -2885,3 +2885,91 @@ body[data-hero="lines"][data-page="home"] .hdr.is-scrolled .hdr__cta:hover { bac
   .heroL__s.is-play .heroL__img, .heroL__s.is-play .heroL__ln > span { animation: none; }
   .heroL__s, .heroL__s.is-on { transition: none; }
 }
+
+/* ===================== 시안C 12차 v4: 첫 화면 큰 틀 'statement' — 한 문장 + 바뀌는 현장 사진 + 한눈에 보는 네 칸 =====================
+   색: 남색 덮개 · 흰 글자, 강조색은 초록 하나(머리글 앞 짧은 선 · 켜진 칸의 작은 이름). 모서리 각지게, 그림자 없음. 움직임: 사진 교차(1.6초)·느린 다가옴, 처음 한 번 글 떠오름 */
+.heroS { --heroS-ink: #06141f; --heroS-leaf: #5BE584; --heroS-dur: 6s;
+  position: relative; display: flex; flex-direction: column; height: 100vh; height: 100svh; min-height: 640px; overflow: hidden; background: var(--heroS-ink); color: #fff; }
+.heroS__bg { position: absolute; inset: 0; }
+.heroS__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 50%); opacity: 0; transition: opacity 1.6s ease; }
+.heroS__img.is-on { opacity: 1; }
+.heroS.is-ready .heroS__img.is-on { animation: heroS-kb calc(var(--heroS-dur) + 2s) linear both; }
+@keyframes heroS-kb { from { transform: scale(1.06); } to { transform: scale(1); } }
+.heroS__img--right { left: auto; width: 60%; background: #0b0e12; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 26%); mask-image: linear-gradient(90deg, transparent 0, #000 26%); }
+.heroS::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, #06141feb 0%, #06141fbf 34%, #06141f40 62%, #06141f00 82%),
+              linear-gradient(0deg, #06141ff2 0%, #06141fa6 26%, #06141f00 54%),
+              linear-gradient(180deg, #06141f8c 0%, #06141f00 20%); }
+.heroS__msg { position: relative; z-index: 2; flex: 1; display: flex; align-items: center; padding-top: var(--header-h); }
+.heroS__eyebrow { display: flex; align-items: center; gap: 14px; margin: 0 0 24px; font-size: 14px; font-weight: 600; letter-spacing: .16em; color: #c9d6e1; }
+.heroS__eyebrow::before { content: ""; width: 36px; height: 2px; background: var(--heroS-leaf); }
+.heroS__h { margin: 0; max-width: none; color: #fff; font-size: clamp(42px, 5.2vw, 88px); line-height: 1.12; letter-spacing: -0.045em; font-weight: 800; text-shadow: 0 2px 24px #0000004d; word-break: keep-all; }
+.heroS__h span { display: block; }
+.heroS__lead { margin: 22px 0 0; max-width: 34em; font-size: clamp(15.5px, 1.2vw, 18.5px); line-height: 1.7; color: #e3ebf2; word-break: keep-all; }
+.heroS__links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+.heroS__btn { height: 52px; padding: 0 24px; display: inline-flex; align-items: center; gap: 12px; font-size: 15.5px; font-weight: 600; color: #fff; border: 1px solid #ffffff8c; transition: background .2s; }
+.heroS__btn:hover { background: #ffffff1a; color: #fff; }
+.heroS__btn--fill { background: #fff; color: #0b2236; border-color: #fff; }
+.heroS__btn--fill:hover { background: #e9eef3; color: #0b2236; }
+.heroS__btn:focus-visible, .heroS__glance a:focus-visible { outline: 2px solid var(--heroS-leaf); outline-offset: 3px; }
+html:not(.heroS-intro) .heroS__h span, html:not(.heroS-intro) .heroS__eyebrow { animation: none; }
+.heroS-intro .heroS__eyebrow, .heroS-intro .heroS__h span, .heroS-intro .heroS__lead, .heroS-intro .heroS__links { animation: heroS-up 1.1s cubic-bezier(.16,.84,.24,1) both; }
+.heroS-intro .heroS__eyebrow { animation-delay: .1s; } .heroS-intro .heroS__h span:first-child { animation-delay: .25s; } .heroS-intro .heroS__h span:last-child { animation-delay: .42s; } .heroS-intro .heroS__lead { animation-delay: .65s; } .heroS-intro .heroS__links { animation-delay: .8s; }
+@keyframes heroS-up { from { opacity: 0; transform: translateY(36px); } to { opacity: 1; transform: none; } }
+.heroS__cap { position: absolute; z-index: 3; right: var(--gutter); bottom: 156px; margin: 0; display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: #ffffffcc; text-shadow: 0 1px 8px #0006; pointer-events: none; }
+.heroS__cap::before { content: ""; width: 28px; height: 1px; background: #ffffff99; }
+.heroS__cap span { transition: opacity .5s; } .heroS__cap.is-swap span { opacity: 0; }
+.heroS__glance { position: relative; z-index: 3; }
+.heroS__glance ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid #ffffff2e; }
+.heroS__glance li { position: relative; } .heroS__glance li + li { border-left: 1px solid #ffffff2e; }
+.heroS__glance a { display: block; padding: 24px 28px 32px; color: #fff; }
+.heroS__glance li:first-child a { padding-left: 0; }
+.heroS__glance a::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 2px; background: #fff; transform: scaleX(0); transform-origin: left; }
+.heroS__glance li.is-on a::before { animation: heroS-fill var(--heroS-dur) linear forwards; }
+@keyframes heroS-fill { to { transform: scaleX(1); } }
+.heroS__glance em { display: block; font-style: normal; font-size: 13px; font-weight: 600; letter-spacing: .1em; color: #ffffff80; transition: color .4s; }
+.heroS__glance b { display: block; margin-top: 10px; font-size: clamp(21px, 1.8vw, 29px); font-weight: 700; letter-spacing: -0.03em; color: #ffffffb3; transition: color .4s; }
+.heroS__glance span { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 8px; font-size: 14.5px; line-height: 1.5; color: #ffffff8c; transition: color .4s; word-break: keep-all; }
+.heroS__glance li.is-on em { color: var(--heroS-leaf); }
+.heroS__glance li.is-on b, .heroS__glance a:hover b { color: #fff; }
+.heroS__glance li.is-on span, .heroS__glance a:hover span { color: #e3ebf2; }
+/* 메인 머리말: 스크롤 뒤 밝은 머리말(시안 B 'slides' 와 같은 모양) · 첫 화면 위 ENG 단추 흰색 */
+body[data-hero="statement"][data-page="home"] .hdr.is-scrolled { background: #F8FAFC; color: #17324D; border-bottom: 1px solid #E2E8F0; box-shadow: 0 1px 2px #0f172a0a; }
+body[data-hero="statement"][data-page="home"] .hdr.is-scrolled .hdr__cta { background: #17324D; border-color: #17324D; color: #fff; }
+body[data-page="home"] .hdr:not(.is-scrolled) .hdr__lang { color: #fff; border-color: #ffffff66; }
+@media (max-width: 1100px) { .heroS__glance a { padding: 22px 18px 28px; } }
+@media (max-width: 960px) {   /* 휴대폰·태블릿: 사진을 자르지 않게 위 사진(4:3) · 아래 남색 판에 글 · 네 칸은 2×2 */
+  .heroS { height: auto; min-height: 0; display: block; overflow: visible; padding-top: var(--header-h); }
+  .heroS__bg { position: relative; inset: auto; aspect-ratio: 4 / 3; max-height: 70svh; overflow: hidden; }
+  .heroS__img { object-position: var(--pos-m, var(--pos, 50% 50%)); }
+  .heroS__img--right { left: 0; width: 100%; -webkit-mask-image: none; mask-image: none; }
+  .heroS::after { top: var(--header-h); bottom: auto; height: min(75vw, 70svh); background: linear-gradient(180deg, #06141f59 0%, #06141f00 26%, #06141f00 70%, #06141fa6 100%); }
+  .heroS__cap { top: calc(var(--header-h) + min(75vw, 70svh) - 34px); bottom: auto; left: var(--gutter); right: auto; font-size: 12px; color: #ffffffe6; }
+  .heroS__cap::before { width: 16px; }
+  .heroS__msg { display: block; padding: 28px 0 30px; }
+  .heroS__eyebrow { margin-bottom: 12px; font-size: 12px; letter-spacing: .12em; } .heroS__eyebrow::before { width: 24px; }
+  .heroS__h { font-size: min(9.6vw, 44px); line-height: 1.16; text-shadow: none; }
+  .heroS__lead { display: block; margin-top: 14px; font-size: 15px; line-height: 1.65; color: #c9d6e1; }
+  .heroS__links { margin-top: 22px; } .heroS__btn { height: 48px; padding: 0 20px; font-size: 15px; } .heroS__btn:not(.heroS__btn--fill) { display: none; }
+  .heroS__glance { background: #0b2236; padding: 6px 0 calc(8px + env(safe-area-inset-bottom, 0px)); }
+  .heroS__glance ul { grid-template-columns: 1fr 1fr; border-top: 0; }
+  .heroS__glance li + li { border-left: 0; }
+  .heroS__glance li:nth-child(even) { border-left: 1px solid #ffffff1f; }
+  .heroS__glance li:nth-child(n+3) { border-top: 1px solid #ffffff1f; }
+  .heroS__glance a, .heroS__glance li:first-child a { display: block; padding: 18px 14px 20px 0; min-height: 112px; }
+  .heroS__glance li:nth-child(even) a { padding-left: 16px; padding-right: 0; }
+  .heroS__glance a::before { top: -1px; left: 0; right: 0; height: 2px; background: var(--heroS-leaf); }
+  .heroS__glance li:nth-child(even) a::before { left: 16px; }
+  .heroS__glance em { font-size: 12px; letter-spacing: .06em; }
+  .heroS__glance b { margin-top: 8px; font-size: 20px; line-height: 1.25; color: #fff; }
+  .heroS__glance span { display: block; margin-top: 6px; font-size: 13px; line-height: 1.45; color: #c9d6e1; }
+  .heroS__glance span svg { display: none; }
+}
+@media (max-width: 767.98px) {   /* 휴대폰: 첫 화면이 보이는 동안 아래 고정 문의 띠를 숨긴다 */
+  .mcta { transition: transform .35s ease, opacity .35s ease; }
+  body.is-heroS-in .mcta { transform: translateY(calc(100% + 24px)); opacity: 0; pointer-events: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .heroS.is-ready .heroS__img.is-on { animation: none; } .heroS__img { transition: none; }
+  .heroS__glance li.is-on a::before { animation: none; transform: none; }
+}
