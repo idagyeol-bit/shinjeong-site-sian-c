@@ -3821,7 +3821,7 @@ pages['company.html'] = () => {
   const eqRows = SERVICES.map((s, k) => { const g = EQUIP_GROUPS.find((x) => x.svc === s.id); const n = g.rows.filter((r) => !r[4]).length;
     return `<li><a href="${s.file}#sv-eq"><span class="c7-eq__n">${String(k + 1).padStart(2, '0')}</span><span class="c7-eq__t"><b>${esc(s.title)}</b><small>${K.eqKey[s.id].map(esc).join(' · ')}</small></span><span class="c7-eq__c">장비 ${n}종 ${arrow(14)}</span></a></li>`; }).join('');
   const cm = EQUIP_GROUPS.find((g) => g.id === 'eq-common');
-  const cmRows = cm.rows.map(([a, b, c, d]) => `<tr><th scope="row">${esc(a)}</th><td>${esc(b)}</td><td>${esc(c)}</td><td class="q">${esc(d)}</td></tr>`).join('');
+  const cmRows = cm.rows.map(([a, b, c, d]) => `<tr><th scope="row">${esc(a)}</th><td${b === '—' ? ' class="z"' : ''}>${esc(b)}</td><td>${esc(c)}</td><td class="q">${esc(d)}</td></tr>`).join('');
   const NV = 'https://map.naver.com/p/search/', KK = 'https://map.kakao.com/link/search/';
   const nav = [['greeting', '인사말', '인사말'], ['history', '걸어온 길', '연혁'], ['overview', '하는 일', '사업'], ['credentials', '인증 · 특허', '인증'], ['organization', '사람과 조직', '조직'], ['equipment', '보유 장비', '장비'], ['location', '오시는 길', '위치']];
   return head({
