@@ -1038,6 +1038,83 @@ const SVC15_ICON = {
 const svc15Ic = (k, s = 18) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${SVC15_ICON[k]}</svg>`;
 const svc15Gear = (id) => (FINDER.rows.find((r) => r.svc === id) || {}).gear || '';   // 초록 띠 글 = 사업분야 목록의 투입 장비 글(3차 FINDER) 그대로
 
+/* ===================== 시안C 16차: 사업분야 — 무인 솔루션 로봇 상세와 같은 틀 (미리보기 v5, 2026-11-01 이다결 님 결정) =====================
+   다섯 분야 상세(service-*.html)와 사업분야 목록(services.html) 머리가 함께 쓰는 자료. 새 사실 없음 — 글은 두 문서와 지금 사이트 자료(SERVICES · SVC15 · UNM_STEPS · PROCESS · EQUIP_GROUPS)에서.
+   head  = 사업분야 머리(현장 사진 띠 + 한 줄 + 안내). 한 줄의 '비우고(잔류물 제거·촉매 교체·준설) 씻고(클리닝·화학세정) 살핍니다(CCTV·GPR 조사)'는 다섯 분야 이름을 쉬운 말로 옮긴 것.
+   fn·ic = 분야 이름 앞 짧은 이름 · 선 그림. io = 개요의 두 줄 [이름, 초록(로봇)이면 1, 글(<b> 허용), 아래 단계로 가는 단추 글, 단계 id].
+   steps = '작업 방식' 칸 [제목, 내용, 장소('in' 설비 안·로봇 | 'in-p' 설비 안·작업자 | 'out' 설비 밖 | ''), 사진들, 장비 칩 [이름, 로봇이면 1, 링크]] — 설비 클리닝은 UNM_STEPS(기술소개서 19쪽), 촉매는 PROCESS.crew(18쪽)에서 뽑는다.
+   extra = 작업 방식 아래 현장 사진 [제목, 글, 사진들, 출처]. tech = '알아 두실 점'의 관련 기술 [종류, 이름, 둘째 줄, 출처]. */
+const SVC16_HEAD = {
+  photo: 'M10',
+  line: '탱크에서 하수관까지,<br>설비 안쪽을 비우고 씻고 살핍니다',
+  lead: '설비 클리닝 · 촉매 · 화학세정 · 준설 · 관로 조사의 다섯 분야입니다. 분야를 고르면 작업 순서와 보유 장비를 이어서 볼 수 있습니다.'
+};
+const SVC16_IC = {
+  S01: '<path d="M5 6c0-1.7 3.1-3 7-3s7 1.3 7 3v12c0 1.7-3.1 3-7 3s-7-1.3-7-3z"/><path d="M5 6c0 1.7 3.1 3 7 3s7-1.3 7-3M5 13c0 1.7 3.1 3 7 3s7-1.3 7-3"/>',
+  S02: '<rect x="7" y="2.5" width="10" height="19" rx="5"/><path d="M10 8h.01M14 10h.01M11 13h.01M14 15h.01M10 17h.01"/>',
+  S03: '<path d="M3 9h7v6H3zM14 9h7v6h-7zM10 12h4"/><path d="M17.5 4.5c0 1.4-1 2.5-1 2.5s-1-1.1-1-2.5 1-2.5 1-2.5 1 1.1 1 2.5z"/>',
+  S04: '<path d="M2 20h20"/><path d="M4 20c1.5-4.5 4.5-6.5 8-6.5s6.5 2 8 6.5"/><path d="M14 4h6v6M20 4l-7 7"/>',
+  S05: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3v2.5M12 18.5V21"/>'
+};
+const s16Place = (u) => u.in ? (u.in[0] === 'r' ? 'in' : 'in-p') : (u.out && !u.all ? 'out' : '');
+const SVC16 = {
+  S01: { fn: '클리닝', down: '6단계 작업 순서 보기', eqT: '세척 · 흡입 장비', endQ: '탱크 · Pond 클리닝이 필요하신가요?',
+    io: [['로봇이 하는 일', 1, '탱크 내부의 잔여 위험 물질을 먼저 <b>회수하고</b>, 전면부 Jet Nozzle로 <b>세척합니다</b>', '03 · 04단계', 'st-3'],
+         ['사람이 하는 일', 0, '설비 밖 제어 차량에서 원격 조정하고, 위험 물질이 줄어든 뒤 <b>Final Cleaning</b>', '05단계', 'st-5']],
+    howT: '탱크 · Pond 클리닝은 이렇게 합니다', howS: 'Robot-Tank Cleaning System — 기술소개서(2025) 19쪽의 6단계 그대로',
+    steps: () => {
+      const ph = [['R25'], ['W07'], ['R27'], [], ['P01'], []];
+      const ch = [[['제어 차량', 0], ['흡입 로봇', 1, 'unmanned.html#r-suction']], [['진공흡입차(습식) 5대', 0]], [['흡입 로봇', 1, 'unmanned.html#r-suction'], ['제어 차량 원격 조정', 0]], [['흡입 로봇', 1, 'unmanned.html#r-suction']], [], [['데칸타 · 필터프레스 → 준설·슬러지 회수', 0, 'service-dredging-sludge.html#dewater']]];
+      return UNM_STEPS.map((u, k) => [u.t, u.all || (u.in ? u.in[1] : u.out), s16Place(u), ph[k], ch[k]]);
+    },
+    stepsSrc: '기술소개서(2025) 19쪽 Robot-Tank Cleaning System · 설비 밖 원격 조정은 18·20쪽 공사개략도',
+    extra: ['탱크 · Pond 밖의 작업', '공장 내부 배수로 · R.T.O 유지보수·클리닝 · Filter Press 세정 · Bag Filter 교체', ['B01', 'B02'], '회사소개서(2024) 9·10쪽 주요사업 안내'],
+    use: 'tank', tech: [] },
+  S02: { fn: '촉매', down: '작업 구성 보기', eqT: '촉매 회수 · 선별 장비', endQ: '촉매 · 충진물 교체를 앞두고 계신가요?',
+    io: [['로봇이 하는 일', 1, '반응기 안의 잔여 위험 물질을 <b>회수하고</b>, 전면부 Jet Nozzle로 내부를 <b>세척합니다</b>', '구성 01', 'st-1'],
+         ['사람이 하는 일', 0, '설비 밖 제어 차량에서 CCTV로 내부를 보며 <b>조종합니다</b>', '구성 02', 'st-2']],
+    howT: '반응기 촉매 작업은 이렇게 구성합니다', howS: '공사개략도(촉매) — 기술소개서(2025) 18쪽의 구성',
+    steps: () => {
+      const ph = [['R13'], ['P16', 'P17'], ['W07'], ['B05']];
+      const ch = [[['흡입 로봇', 1, 'unmanned.html#r-suction']], [['제어 차량', 0]], [['진공흡입차(건식) 4대', 0]], [['AUTO SEPARATOR 6SET', 0]]];
+      return PROCESS.crew.map(([a, b, c], k) => [a, c, b === '설비 내부' ? 'in' : 'out', ph[k], ch[k]]);
+    },
+    stepsSrc: '기술소개서(2025) 18쪽 공사개략도(촉매) · 회사소개서(2024) 21~24쪽 보유 장비',
+    extra: ['촉매 교체 현장', '회사소개서 촉매 쪽에 실린 현장 사진', ['B03', 'B04'], '회사소개서(2024) 11쪽 EQUIPMENT CLEANING(CATALYST)'],
+    use: 'waste', tech: [['연구개발 과제', PROCESS.projects[0][0], PROCESS.projects[0][1] + ' · ' + PROCESS.projects[0][3] + ' 구동', '기술소개서(2025) 38~40쪽'],
+      ['로봇 세대', '5세대 ' + PROCESS.generations[4][1] + ' · ' + PROCESS.generations[4][5], '적용 대상 ' + PROCESS.generations[4][2] + ' · 수중 작업 ' + PROCESS.generations[4][3] + ' · ' + PROCESS.generations[4][4], '기술소개서(2025) 7쪽']] },
+  S03: { fn: '세정', down: '세정 대상 보기', eqT: '세관 장비', endQ: '배관 · 열교환기 세정이 필요하신가요?',
+    io: [['하는 일', 0, '배관 · 열교환기 · 냉각탑 계통과 보일러 튜브를 <b>세정합니다</b>', '세정 대상', 'sv-how'],
+         ['쓰는 장비', 0, '화학세정용 내산장비 <b>50HP / 20HP · 2대</b>', '보유 장비', 'sv-eq']],
+    howT: '화학세정 대상', howS: '회사소개서(2024) 9쪽 주요사업 안내 — 원문 표기를 함께 적음',
+    steps: () => [['Plant 배관', '건설 PLANT · PIPE류 세정', '', [], []], ['열교환기', 'HEATER EXCHANGERS', '', [], []], ['Cooling Tower 계통', 'COOLING TOWER SYSTEM', '', [], []], ['보일러 Tube', '보일러 TUBE IN/OUT 세정', '', [], []]],
+    stepsSrc: '회사소개서(2024) 9쪽 주요사업 안내',
+    extra: ['화학세정 현장', '회사소개서 화학세정 쪽에 실린 현장 사진', ['B06', 'B07', 'B08'], '회사소개서(2024) 12쪽 화학세정'],
+    use: null, tech: [] },
+  S04: { fn: '준설', down: '준설부터 탈수까지 보기', eqT: '준설 · 탈수 장비', endQ: '퇴적물 · 슬러지 준설이 필요하신가요?', eqph: ['R15'],
+    io: [['로봇이 하는 일', 1, '하수 · 오수관과 처리시설의 퇴적물을 <b>준설합니다</b>', '01 준설', 'st-1'],
+         ['사람이 하는 일', 0, '무인준설로봇과 무인로더를 <b>원격으로 조종합니다</b>', '01 준설', 'st-1']],
+    howT: '준설부터 탈수까지', howS: '무인 장비로 회수하고, 회수한 슬러지는 탈수해 양을 줄입니다',
+    steps: () => [['원격 조종으로 준설', '무인준설로봇과 무인로더를 원격으로 조종해 퇴적물을 준설합니다', '', ['W06', 'X01'], [['파쇄형 로봇', 1, 'unmanned.html#r-crusher'], ['무인 로더', 1, 'unmanned.html#r-loader'], ['흡입 로봇', 1, 'unmanned.html#r-suction']]],
+      ['흡입 · 운반', '진공흡입차(습식)로 회수물을 흡입해 옮깁니다', '', ['B09'], [['진공흡입차(습식) 5대', 0]]],
+      ['탈수 — 데칸타', PROCESS.decanter.join(' → '), '', [], [['데칸타 10마력 1대', 0]]],
+      ['탈수 — 필터프레스', PROCESS.filterpress.join(' → '), '', [], []]],
+    stepsSrc: '회사소개서(2024) 23쪽 보유 장비 · 기술소개서(2025) 31~37쪽 폐기물 처리(탈수 순서)', dew: true,
+    extra: ['준설 현장', '회사소개서 준설공사 쪽에 실린 현장 사진', ['B10'], '회사소개서(2024) 13쪽 준설공사'],
+    use: 'pond', tech: [1, 2, 3].map((i) => ['등록 특허', PROCESS.patents[i][0], PROCESS.patents[i][1], '기술소개서(2025) 6쪽']).concat([['연구개발 과제', PROCESS.projects[2][0], PROCESS.projects[2][1] + ' · ' + PROCESS.projects[2][3] + ' 구동', '기술소개서(2025) 38~40쪽']]) },
+  S05: { fn: '조사 · 보수', down: '조사 · 보수 업무 보기', eqT: '조사 · 보수 장비', endQ: '관로 조사나 보수가 필요하신가요?',
+    io: [['로봇이 하는 일', 1, '하수관 안을 카메라로 <b>조사합니다</b>', '01 CCTV', 'st-1'],
+         ['함께 하는 업무', 0, '지하매설물 <b>GPR 조사</b> · 굴착 없이 하는 <b>비굴착 보수</b>', '02 · 03', 'st-2']],
+    howT: '조사부터 보수까지', howS: '세 가지 업무와 그때 쓰는 장비',
+    steps: () => {
+      const ph = [['R42'], ['P08', 'B11'], ['R20']];
+      const ch = [[['관로 CCTV 로봇', 1, 'unmanned.html#r-cctv'], ['CCTV 조사차량 2대 (D=250~600mm)', 0], ['탈취제거 SYSTEM', 0]], [], [['스키드 로더 (맨홀 보수)', 0]]];
+      return svc('S05').rows.map((r, k) => [r.label, r.text, '', ph[k], ch[k]]);
+    },
+    stepsSrc: '회사소개서(2024) 9쪽 주요사업 안내 · 22~24쪽 보유 장비',
+    extra: null, use: null, tech: [['등록 특허', PROCESS.patents[0][0], PROCESS.patents[0][1], '기술소개서(2025) 6쪽']] }
+};
+
 /* ===================== 도우미 ===================== */
 const esc = (s) => String(s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -2421,11 +2498,7 @@ pages['services.html'] = () => head({
   desc: '설비 클리닝, 촉매·충진물 작업, 화학세정, 준설·슬러지 회수, 관로·지하 조사 및 보수 — 신정개발이 다루는 다섯 가지 업무를 소개합니다.'
 }) + header('services', null, 'services.html') + `
 <main id="main">
-` + phero({
-  h1: '사업분야',
-  keepLead: '신정개발은 산업설비와 환경시설 안의 잔류물·퇴적물·촉매를 제거하고, 세정하고, 준설합니다. 업무는 다섯 가지로 나뉩니다.',
-  crumbs: [{ label: '사업분야' }]
-}) + tabs(null) + (CFG.look && CFG.look.finder ? finderSection() : `
+` + svc16Top(null) + (CFG.look && CFG.look.finder ? finderSection() : `
   <section class="section">
     <div class="wrap">
       <div class="head">
@@ -2630,6 +2703,107 @@ ${v.gear.length ? `  <section class="sv-sec sv-sec--soft"><div class="wrap"><p c
 
   <nav class="wrap sv-pn" aria-label="다른 사업분야">${prev ? `<a href="${prev.file}">‹ 이전 · ${esc(prev.title)}</a>` : '<a href="services.html">‹ 사업분야 전체</a>'}${next ? `<a href="${next.file}">다음 · ${esc(next.title)} ›</a>` : '<a href="services.html">사업분야 전체 ›</a>'}</nav>
 ` + cta({ h2: `${esc(s.title)},<br>어디까지 가능한지 물어보세요`, p: s.inquiryHint.join(' · ') + ' 등을 알려 주시면 가능한 작업 범위와 진행 방법을 안내해 드립니다.' }) + MAIN_END + footer() + foot();
+  };
+});
+
+/* ---------- 시안C 16차: 사업분야 머리 · 상세 5개 — 무인 솔루션 로봇 상세와 같은 틀 (미리보기 v5) ----------
+   머리(현장 사진 띠 + 한 줄) → 다섯 분야 줄(사진에 걸침, 지금 분야 표시) → 위에 붙는 줄(PC: 분야 다섯 | 지금 분야 · 개요 · 작업 방식 · 보유 장비 · 알아 두실 점 · 문의·사례 / 휴대폰: 뒤의 다섯만)
+   → 개요(사진 | 번호·그림·이름 · 소개 · 두 줄(로봇 / 사람 — 단계로 가는 단추) · 작업 범위 칩 · 표 · '작업 순서 보기') → 작업 방식 → 보유 장비 → 알아 두실 점 → 남색 끝 띠(문의 · 적용 사례 · 다음 분야).
+   개요와 아래 칸이 한 장(章)으로 읽히게: 칸 제목마다 '01 설비 클리닝 · 작업 방식', 개요의 두 줄에서 해당 단계로 바로 내려가는 단추, 문의는 장 끝에 한 번.
+   분야를 옮기는 링크(다섯 분야 줄 · 위 줄 · 이전/다음 · 끝 띠)는 모두 #sv-ov 로 — 다른 분야로 가면 머리를 건너뛰고 개요부터 열린다(메뉴·메인에서 들어오면 머리부터).
+   15차 SERVICES.forEach 는 지우지 않고, 이 판이 같은 파일 이름을 덮어쓴다 */
+const s16Ic = (d, s = 18) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+const s16Num = (s) => String(SERVICES.indexOf(s) + 1).padStart(2, '0');
+const s16Fn = (s) => `<span class="s6-fn"><em>${s16Num(s)}</em>${s16Ic(SVC16_IC[s.id], 16)}${esc(SVC16[s.id].fn)}</span>`;
+function svc16Top(cur) {
+  const hp = P(SVC16_HEAD.photo);
+  const crumb = `<nav class="s6-crumb" aria-label="현재 위치"><a href="index.html">홈</a><span aria-hidden="true">›</span>${cur ? `<a href="services.html">사업분야</a><span aria-hidden="true">›</span><span aria-current="page">${esc(cur.title)}</span>` : '<span aria-current="page">사업분야</span>'}</nav>`;
+  const k = cur ? '<p class="s6-top__k">사업분야</p>' : '<h1 class="s6-top__k">사업분야</h1>';
+  const line = cur ? `
+  <section class="s6-line" aria-label="사업분야 다섯"><div class="wrap"><ul class="s6-fds">${SERVICES.map((s) => `<li><a class="s6-fd" href="${s.file}#sv-ov"${s === cur ? ' aria-current="page"' : ''}><span class="s6-fd__ph">${photo(P(SVC15[s.id].head), '80px')}</span><span class="s6-fd__tx">${s16Fn(s)}<b>${esc(s.title)}</b></span></a></li>`).join('')}</ul></div></section>` : '';
+  return `
+  <section class="s6-top${cur ? '' : ' s6-top--list'}" aria-label="사업분야 소개"><div class="s6-top__bg">${photo(hp, '100vw', true)}</div><div class="wrap">
+    ${crumb}
+    ${k}
+    <p class="s6-top__h">${SVC16_HEAD.line}</p>
+    <p class="s6-top__l">${esc(SVC16_HEAD.lead)}</p>
+  </div></section>${line}
+`;
+}
+SERVICES.forEach((s, idx) => {
+  pages[s.file] = () => {
+    const v = SVC16[s.id], v15 = SVC15[s.id], hp = P(v15.head);
+    const N = String(SERVICES.length).padStart(2, '0'), n = s16Num(s);
+    const prev = SERVICES[idx - 1], next = SERVICES[idx + 1] || SERVICES[0];
+    const eg = EQUIP_GROUPS.find((g) => g.svc === s.id);
+    const use = v.use ? SVC15_USE[v.use] : null;
+    const hasNote = !!(use || v.tech.length || s.id === 'S01');
+    const ch = (lab) => `<p class="s6-ch"><i>${n}</i>${esc(s.title)}<span>${lab}</span></p>`;
+    const chip = ([name, robot, href]) => robot
+      ? `<a class="s6-chip s6-chip--r" href="${href || 'unmanned.html#robots'}">${svc15Ic('bot', 15)}${esc(name)}</a>`
+      : href ? `<a class="s6-chip s6-chip--l" href="${href}">${esc(name)} ${arrow(14)}</a>` : `<span class="s6-chip">${esc(name)}</span>`;
+    const PL = { in: ['in', '설비 안 · 로봇'], 'in-p': ['inp', '설비 안 · 작업자'], out: ['out', '설비 밖'] };
+    const steps = v.steps();
+    const stepHtml = steps.map(([t, d, pl, phs, chips], k) => {
+      const media = phs.length
+        ? `<span class="s6-st__ph s6-st__ph--${phs.length}">${phs.map((id) => photo(P(id), '(max-width:860px) 104px, 420px')).join('')}</span>`
+        : `<span class="s6-st__ph s6-st__ph--none"><b>${String(k + 1).padStart(2, '0')}</b><small>${esc(t)}</small></span>`;
+      const desc = s.id === 'S04' && / → /.test(d) ? `<ol class="s6-flow">${d.split(' → ').map((x) => `<li>${esc(x)}</li>`).join('')}</ol>` : `<p>${esc(d)}</p>`;
+      return `<li class="s6-st${pl === 'in' ? ' is-robot' : ''}" id="${s.id === 'S04' && k === 2 ? 'dewater' : 'st-' + (k + 1)}">${media}<div class="s6-st__tx"><div class="s6-st__h"><em>${String(k + 1).padStart(2, '0')}</em>${pl ? `<span class="s6-pl s6-pl--${PL[pl][0]}">${PL[pl][1]}</span>` : ''}</div><h3>${esc(t)}</h3>${desc}${chips.length ? `<div class="s6-chips">${chips.map(chip).join('')}</div>` : ''}</div></li>`;
+    }).join('');
+    const robots = v15.gear.filter((g) => g[0] === 'robot');
+    const spec = [['주요 장비', s.equip.map(esc).join(' · ')]]
+      .concat(s.worktime ? [['작업 시기', esc(s.worktime)]] : [])
+      .concat([['투입 로봇', robots.length ? robots.map((g) => `<a href="${g[4]}">${svc15Ic('bot', 15)}${esc(g[1])}</a>`).join(' · ') : '—']])
+      .concat(s.id === 'S04' ? [['회수 뒤', '데칸타·필터프레스로 탈수해 처리량을 줄입니다']] : [])
+      .concat([['문의 시', s.inquiryHint.map(esc).join(' · ')]]);
+    const useBlock = use ? (() => {
+      const col = (t, items, cls, ic) => `<div class="s6-use__c${cls ? ' ' + cls : ''}"><h4>${ic ? svc15Ic(ic, 16) : ''}${t}</h4><ul>${items.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>`;
+      return `<div class="s6-blk"><h3>${esc(use.t)} <small>용도별 적용 예시 — 로봇을 쓸 때 좋아지는 점과 유의할 점</small></h3><div class="s6-use">${col('좋아지는 점', use.pros, 'is-pro', 'check')}${col('유의할 점', use.cons, 'is-con', 'warn')}${col('적용 범위', use.scope, '', '')}</div><p class="us-src">${esc(use.page)} 용도별 적용 예시 — 글 그대로</p></div>`;
+    })() : '';
+    const techBlock = v.tech.length ? `<div class="s6-blk s6-tech"><h3>관련 기술 <small>이 분야와 닿는 특허 · 연구개발 · 로봇</small></h3><ul>${v.tech.map(([a, b, c, d]) => `<li><em>${esc(a)}</em><b>${esc(b)}</b><span>${esc(c)}</span><small>${esc(d)}</small></li>`).join('')}</ul><a class="tlink" href="unmanned.html#rnd">연구개발 · 특허 전체는 무인 솔루션에서 ${arrow(14)}</a></div>` : '';
+    const condLink = s.id === 'S01' ? `<a class="s6-lnk" href="unmanned.html#conditions"><span><b>로봇을 넣을 때의 위험 비교 · PFO Tank 작업 고려사항</b>로봇을 쓰는 작업 전체에 해당하는 내용은 무인 솔루션 페이지 한 곳에 모아 두었습니다.</span><em>무인 솔루션에서 보기 ${arrow(16)}</em></a>` : '';
+    const ex = v.extra;
+    const exHtml = ex ? `<div class="s6-ex"><div><h3>${esc(ex[0])}</h3><p>${esc(ex[1])}</p><p class="us-src">${esc(ex[3])}</p></div><div class="s6-ex__ph s6-ex__ph--${ex[2].length}">${ex[2].map((id) => `<figure>${photo(P(id), '(max-width:860px) 46vw, 380px')}<figcaption>${esc(P(id).cap || P(id).alt)}</figcaption></figure>`).join('')}</div></div>` : '';
+    const eqRows = eg.rows.filter((r) => !r[4]).map(([a, b, c, d]) => `<tr><th scope="row">${esc(a)}</th><td>${esc(b)}</td><td>${esc(c)}</td><td class="q">${esc(d)}</td></tr>`).join('');
+    const eqPh = (v.eqph || []).map((id) => `<figure>${photo(P(id), '(max-width:860px) 100vw, 420px')}<figcaption>${esc(P(id).cap || P(id).alt)}</figcaption></figure>`).join('');
+    const nav = `  <nav class="s6-nav" aria-label="사업분야 · 이 분야 안"><div class="wrap">${SERVICES.map((x) => `<a class="s6-nav__f" href="${x.file}#sv-ov"${x === s ? ' aria-current="page"' : ''}>${esc(x.title)}</a>`).join('')}<span class="s6-nav__sep" aria-hidden="true"></span><b class="s6-nav__cur">${n} ${esc(s.title)}</b><a href="#sv-ov" data-s>개요</a><a href="#sv-how" data-s>작업 방식</a><a href="#sv-eq" data-s>보유 장비</a>${hasNote ? '<a href="#sv-note" data-s>알아 두실 점</a>' : ''}<a href="#sv-end" data-s><span class="s6-w">문의 · </span>사례</a></div></nav>`;
+    return head({
+      file: s.file, page: 'services',
+      title: `${s.title} | 여수 산업설비 클리닝 ${C.brand}`,
+      desc: s.desc,
+      jsonld: { '@context': 'https://schema.org', '@type': 'Service', name: s.title, description: s.summary, provider: { '@type': 'Organization', name: C.name, url: SITE_URL } }
+    }) + header('services', s.id, s.file) + `
+<main id="main" class="s6">
+` + svc16Top(s) + nav + `
+  <section class="s6-ov" id="sv-ov" aria-labelledby="sv-h"><div class="wrap">
+    <div class="s6-pg"><a href="${prev ? prev.file + '#sv-ov' : 'services.html'}">‹ ${prev ? '이전' : '전체'}</a><span><b>${n}</b> / ${N}</span><a href="${next.file}#sv-ov">다음 ›</a></div>
+    <div class="s6-ov__grid">
+      <figure class="s6-ov__ph">${photo(hp, '(max-width:860px) 100vw, 640px')}<figcaption>${esc(hp.cap || hp.alt)}</figcaption></figure>
+      <div>
+        ${s16Fn(s)}
+        <h1 id="sv-h">${esc(s.title)}</h1>
+        <p class="s6-ov__d">${esc(s.body)}</p>
+        <dl class="s6-io">${v.io.map(([a, g, c, go, to]) => `<div${g ? ' class="is-r"' : ''}><dt>${a}</dt><dd>${c}</dd><a class="s6-go" href="#${to}">${esc(go)} ${arrow(13)}</a></div>`).join('')}</dl>
+        <ul class="s6-tg"><li class="s6-tg__k">작업 범위</li>${s.targets.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
+        <dl class="s6-spec">${spec.map(([a, b]) => `<div><dt>${a}</dt><dd>${b}</dd></div>`).join('')}</dl>
+        <a class="s6-down" href="#sv-how">${esc(v.down)} ${arrow(16)}</a>
+      </div>
+    </div>
+  </div></section>
+  <section class="s6-sec s6-sec--how" id="sv-how"><div class="wrap">
+    ${ch('작업 방식')}<h2 class="s6-h2">${esc(v.howT)}</h2><p class="s6-lead">${esc(v.howS)}</p>
+    <ol class="s6-sts" style="--c:${steps.length === 4 ? 4 : 3}">${stepHtml}</ol>
+    ${v.dew ? `<div class="s6-eff"><b>탈수 효과</b>${PROCESS.dewaterEffect.map((x) => `<span>${svc15Ic('check', 16)}${esc(x)}</span>`).join('')}</div>` : ''}
+    <p class="us-src">${esc(v.stepsSrc)}</p>${exHtml}
+  </div></section>
+  <section class="s6-sec" id="sv-eq"><div class="wrap s6-eqs"><div>${ch('보유 장비')}<h2 class="s6-h2">${esc(v.eqT)}</h2><p class="s6-eqs__d">${esc(eg.desc)}</p>${eqPh}<p class="us-src">회사소개서(2024) 21~24쪽 보유 장비</p></div>
+    <table class="s6-eqt"><thead><tr><th scope="col">장비</th><th scope="col">규격</th><th scope="col">용도</th><th scope="col">보유</th></tr></thead><tbody>${eqRows}</tbody></table></div></section>
+${hasNote ? `  <section class="s6-sec s6-sec--soft" id="sv-note"><div class="wrap">${ch('알아 두실 점')}${useBlock}${techBlock}${condLink}</div></section>\n` : ''}  <section class="s6-end" id="sv-end"><div class="wrap">
+    <div><p class="s6-ch s6-ch--on"><i>${n}</i>${esc(s.title)}</p><h2>${esc(v.endQ)}</h2><p>${s.inquiryHint.map(esc).join(' · ')} 등을 알려 주시면 가능한 작업 범위와 진행 방법을 안내해 드립니다.</p></div>
+    <ul><li><a href="contact.html?service=${s.id}">이 업무로 문의하기 ${arrow(18)}</a></li><li><a href="cases.html#${v15.case}"><span>${esc(s.title)} 적용 사례<small>이 분야에서 한 일과 로봇 투입 기록</small></span>${arrow(18)}</a></li><li><a href="${next.file}#sv-ov"><span>다음 분야 · ${esc(next.title)}<small>${s16Num(next)} / ${N}</small></span>${arrow(18)}</a></li></ul>
+  </div></section>
+` + MAIN_END + footer() + foot(['service16.js']);
   };
 });
 
