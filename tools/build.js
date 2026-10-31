@@ -863,6 +863,69 @@ const UNMANNED_BOTS = [
   { photo: 'X03', fn: '고압 세척', job: '좁은 공간을 고압수로 씻어 냅니다', name: '무인 Jet Cleaner', href: 'unmanned.html#r-jet', fit: true },
   { photo: 'R42', fn: '관로 조사', job: '하수관 안을 카메라로 조사합니다', name: '관로 CCTV 로봇', href: 'unmanned.html#r-cctv' }
 ];
+/* ===================== 시안C 14차: 무인 솔루션 (2026-10-31 이다결 님 결정) =====================
+   메인 '무인 솔루션' 구역(HOME_SECTIONS.unmanned14)과 무인 솔루션 페이지(unmanned.html)가 함께 쓰는 자료.
+   색은 초록 하나(로봇 · 설비 안)만. 로봇마다 다른 색을 쓰지 않고 번호 + 선 그림 + 기능 이름으로 나눈다.
+   job(하는 일)·fn(기능)·name·photo·href 는 10차 UNMANNED_BOTS 그대로 — 메인과 상세 페이지가 같은 문장을 쓴다.
+   verb = job 끝의 동작 말(굵게). ctrl = 두 번째 줄(작업자가 하는 일 / 함께 쓰는 장비).
+   where = 들어가는 곳(9차 상세 페이지 usTags 글자 그대로), m = 비교표 칸 키, spec = 9차 상세 페이지 usSpec 그대로(조종 줄은 ctrl 로 옮김).
+   근거: ② 7·8·10·11·12쪽, ① 22~23쪽(장비) — 9차 상세 페이지와 같은 사실. 새 사실 없음 */
+const UNM14_EXTRA = [
+  { key: 'suction', verb: '빨아들입니다', ctrl: ['작업자가 하는 일', '제어 차량에서 CCTV를 보며 원격 조종'],
+    where: ['탱크', 'Pond', '준설'], m: ['tank', 'pond', 'dredge'],
+    spec: [['방식', '흡입형'], ['적용 대상', 'Pond · Tank(관로)'], ['구동', '유압'], ['수중 작업', '가능'], ['보유', '무인준설로봇 흡입형 1대']], water: '가능', power: '유압' },
+  { key: 'crusher', verb: '부숴서 회수합니다', ctrl: ['작업자가 하는 일', '원격 조종 · 방폭 카메라로 감시'],
+    where: ['반응기', '탱크', 'Pond', '준설'], m: ['reactor', 'tank', 'pond', 'dredge'],
+    spec: [['방식', '파쇄형 (2·3세대는 파쇄 흡입형)'], ['적용 대상', 'Pond · Reactor · Tank'], ['구동', '유압'], ['수중 작업', '가능'], ['본체 · 바퀴 · 세척', '알루미늄 본체 · 스크류형/체인형 바퀴 · 앞쪽 물분사 노즐']], water: '가능', power: '유압' },
+  { key: 'loader', verb: '치웁니다', ctrl: ['작업자가 하는 일', '원격 조종'],
+    where: ['Pond · 배수로', '좁은 공간 · 실외', '준설'], m: ['pond', 'narrow', 'dredge'],
+    spec: [['대상', '흙 · 슬러지'], ['구동', '전기 · 유압'], ['수중 작업', '불가'], ['장점 · 단점', '교대로 쉬지 않고 작업 · 작업자 안전 / 배터리 교체·충전 시간이 필요'], ['보유', '무인로더 1대 · 무인궤도로더 1대']], water: '불가', power: '전기 · 유압' },
+  { key: 'jet', verb: '씻어 냅니다', ctrl: ['작업자가 하는 일', '원격 조종'],
+    where: ['좁은 공간'], m: ['narrow'],
+    spec: [['대상', '설비 고압 세척 (노즐 8개 이상)'], ['구동', '전기'], ['수중 작업', '구동부 가능'], ['장점', '쉬지 않고 작업 · 좁은 곳을 사람 없이'], ['단점', '안이 복잡하면 일부만 씻김 · 물이 튀어 안 보이면 CCTV로 확인']], water: '구동부 가능', power: '전기' },
+  { key: 'cctv', verb: '조사합니다', ctrl: ['함께 쓰는 장비', 'CCTV 조사차량 2대 (관경 250~600mm)'],
+    where: ['관로'], m: ['pipe'],
+    spec: [['용도', '관로 조사'], ['보유', '관로 CCTV 로봇 1대'], ['함께 쓰는 장비', '냄새 제거 장치(탈취제거 SYSTEM) 1세트']], water: '', power: '' }
+];
+const UNM14 = UNMANNED_BOTS.map((b, i) => Object.assign({}, b, UNM14_EXTRA[i], { id: b.href.split('#')[1], no: String(i + 1).padStart(2, '0') }));
+const UNM_COLS = [['tank', '탱크'], ['reactor', '반응기'], ['pond', 'Pond · 배수로'], ['pipe', '관로'], ['narrow', '좁은 공간'], ['dredge', '준설']];
+/* 안 · 밖 한 쌍(메인 · 상세 같은 글). 근거: 9차 상세 '어떻게'(US_HOW_EASY) — 설비 안 로봇 / 설비 밖 제어 차량 */
+const UNM_PAIR = {
+  in: { photo: 'P15', k: '설비 안 · 로봇', t: '로봇이 먼저 들어가 위험 물질을 회수합니다' },
+  out: { photo: 'P16', k: '설비 밖 · 사람', t: '작업자는 제어 차량에서 CCTV 화면을 보며 조종합니다' }
+};
+/* 작업 절차 7단계 — 9차 상세 페이지 us-steps 글 그대로. in/out 은 두 문서에 장소가 적힌 단계만(① 설비 안 ② 설비 밖).
+   all = 장소가 적혀 있지 않은 단계(두 줄을 합친 한 칸, 장소 표시 없음). 근거: ② 17~20쪽 */
+const UNM_STEPS = [
+  { n: '01', t: '현장 검토 · 사전 시험', all: '로봇을 쓸 수 있는 현장인지 미리 확인' },
+  { n: '02', t: '장비 설치', all: '제어 차량 · 흡입차 · 로봇 배치' },
+  { n: '03', t: '1차 세척', out: '흡입차로 밖에서 먼저 빨아냄' },
+  { n: '04', t: '로봇 투입', in: ['r', '안에 남은 위험 물질을 로봇이 먼저 회수'], out: '제어 차량에서 CCTV 화면으로 내부를 보며 원격 조종' },
+  { n: '05', t: '2차 세척', in: ['r', '로봇 앞쪽 노즐로 내부를 씻음'], out: '제어 차량에서 원격 조종' },
+  { n: '06', t: '마무리 청소', in: ['p', '작업자가 들어가 남은 것을 제거'] },
+  { n: '07', t: '폐기물 처리', all: '탈수로 양을 줄이고 처리 기간 단축' }
+];
+/* 흡입 로봇 세대 — 9차 상세 rb-hist 글 그대로(② 장비 보유 현황) */
+const UNM_GENS = [
+  ['1', '흡입형', 'Pond, Tank(관로) · 수중 작업 가능 · 유압 구동'],
+  ['2', '파쇄 흡입형', 'Pond, Open Ditch · 수중 작업 불가 · 전기, 유압 구동'],
+  ['3', '파쇄 흡입형', 'Pond, Tank · 수중 작업 가능 · 유압 구동'],
+  ['4', '흡입형 · 소형화', 'Pond, Tank · 수중 작업 가능 · 유압 구동'],
+  ['5', '파쇄형 · 소형화', 'Pond, Reactor · 수중 작업 가능 · 유압 구동']
+];
+/* 기능 그림(선 그림, 글자색을 따른다) */
+const UNM_ICON = {
+  suction: '<path d="M9 3h6v5l3 4H6l3-4z"/><path d="M12 21v-5M9.5 18.5 12 16l2.5 2.5"/>',
+  crusher: '<path d="M4 4h7l-2 5 3 2-2 9H4z"/><path d="M15 4h5v16h-6l2-6-3-2z"/>',
+  loader: '<path d="M2 20h20"/><path d="M4 20c1.5-4.5 4.5-6.5 8-6.5s6.5 2 8 6.5"/><path d="M14 4h6v6M20 4l-7 7"/>',
+  jet: '<rect x="2" y="9.5" width="7" height="5" rx="1"/><path d="M9 12h3M15 8l6-3M15 12h7M15 16l6 3"/>',
+  cctv: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3v2.5M12 18.5V21"/>'
+};
+const unmFn = (b) => `<span class="um-fn"><em>${b.no}</em><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${UNM_ICON[b.key]}</svg>${esc(b.fn)}</span>`;
+const unmJob = (b) => `${esc(b.job.slice(0, b.job.length - b.verb.length))}<b>${esc(b.verb)}</b>`;
+const unmPair = (sizes) => `<div class="um-pair">
+${['in', 'out'].map((k) => { const x = UNM_PAIR[k]; return `          <figure class="um-pair__${k}"><span class="um-pair__ph">${photo(P(x.photo), sizes)}</span><figcaption><span class="um-k">${esc(x.k)}</span><b>${esc(x.t)}</b></figcaption></figure>`; }).join('\n')}
+        </div>`;
 /* 회사 소개 구역의 환경 한 줄(7차: 환경 띠를 메인에서 빼고 여기로) — CREDS.certs·awards·permits, 연혁 2017.05·2007.10·2004.10·2006.05 */
 const ENV_LINE = ['ISO 14001 환경경영 인증 (2017)', '환경부장관상 (2007)', '일반·지정폐기물 수집·운반업 허가 (2004·2006)'];
 /* 소식(7차 신설 news.html): 회사소개서(2024) 연혁 가운데 2015년 이후 항목을 날짜순으로. 새 소식은 NEWS_EXTRA 에 { y, m, label, tag } 로 더한다(사실만) */
@@ -1880,6 +1943,32 @@ ${WHY_PAIR.map((w, i) => `        <figure>
 `;
   },
 
+  /* 시안C 14차: 무인 솔루션 — 제목 · 문단 + 안/밖 사진 한 쌍(사진 아래 초록 선 = 설비 안 · 로봇, 검정 선 = 설비 밖 · 사람)
+     + '로봇이 하는 일' 다섯 칸(번호 · 선 그림 · 기능 → 하는 일, 동작 말 굵게 → 로봇 이름). 휴대폰은 다섯 줄 목록(넘기지 않음).
+     글은 CFG.home.copy.unmanned, 로봇은 UNM14(= 10차 UNMANNED_BOTS + 14차 자료). 10차 unmanned 는 지우지 않는다 */
+  unmanned14: (bg) => {
+    const c = CFG.home.copy.unmanned;
+    return `  <!-- ===== 무인 솔루션 (시안C 14차) ===== -->
+  <section class="section${BG_CLASS[bg]} u14" id="unmanned" aria-labelledby="u14-title">
+    <div class="wrap">
+      <div class="u14__top" data-reveal>
+        <div>
+          <p class="u14__eb">${esc(c.eyebrow || 'UNMANNED SOLUTION')}</p>
+          <h2 id="u14-title">${esc(c.title)}</h2>
+          <p class="u14__lead">${esc(c.lead)}</p>
+        </div>
+        ${unmPair('(max-width:860px) 42vw, 340px')}
+      </div>
+      <div class="u14__sub"><h3>${esc(c.jobsTitle || '로봇이 하는 일')}</h3></div>
+      <ul class="u14__jobs" data-reveal>
+${UNM14.map((b) => `        <li><a class="u14-job" href="${b.href}"><span class="u14-job__ph${b.fit ? ' is-fit' : ''}">${photo(P(b.photo), '(max-width:860px) 104px, (max-width:1100px) 30vw, 250px')}</span>${unmFn(b)}<p>${unmJob(b)}</p><small>${esc(b.name)}</small></a></li>`).join('\n')}
+      </ul>
+      <a class="u14__more" href="${c.moreHref || 'unmanned.html'}">${esc(c.more)}</a>
+    </div>
+  </section>
+`;
+  },
+
   /* 시안C 7차: 무인 솔루션 — 흰 칸. 10차: 뜻 한 문단 + 설비 안/밖 사진 한 쌍 + '로봇이 하는 일' 5칸(기능 배지 먼저, 로봇 이름은 아래 작게. 휴대폰은 가로 넘김 + 점) + 기록 건수 줄(지시서 10차 부록 1).
      글자는 설정 home.copy.unmanned 와 UNMANNED_BOTS, 건수·연도는 ROBOT_RECORDS 에서 센다. 9차 .unm4 · 7차 .unm 은 쓰지 않는다 */
   unmanned: (bg) => {
@@ -2501,7 +2590,7 @@ const usCommonPanels = (k) => usPanel(k, 2, `${US_HOW_LIST}\n          ${US_HOW_
           <p class="us-src">기술소개서의 'Cray Filter'는 회사소개서 표기(CLAY FILTER)를 따라 Clay로 적음</p>
           <p class="more"><a class="tlink" href="cases.html">로봇 투입 기록 전체 보기 →</a></p>`);
 
-pages['unmanned.html'] = () => {
+const unmannedPageV9 = () => {   // 시안C 14차: 9차 판(쓰지 않음). 새 판은 아래 pages['unmanned.html']
   const c = CFG.pages.unmanned;
   const cases = (i) => PROCESS.cases[i];
   return head({
@@ -2864,6 +2953,233 @@ pages['cases.html'] = () => {
   <nav class="csd-nav" aria-label="분야"><div class="wrap">${CASES.map((x) => `<a href="#${x.id}">${esc(x.name)}${x.robot ? '<i class="d" aria-label="로봇 적용"></i>' : ''}</a>`).join('')}</div></nav>
 ${CASES.map(block).join('\n')}
 ` + cta({ h2: CFG.common.cta.title, p: CFG.common.cta.text }) + MAIN_END + footer() + foot(['cases.js']);
+};
+
+/* ---------- 시안C 14차: 무인 솔루션 페이지 (unmanned.html) ----------
+   남색 머리(제목 · 슬로건 · 안/밖 사진 한 쌍) → 로봇 라인업 다섯(첫 화면 안) → 위에 붙는 탭 → 고른 로봇 하나(주소 #r-suction …)
+   → 한눈에 비교(#compare) → 작업 절차 안/밖 두 줄(#how, 탈수 과정 #dewater 포함) → 개발 배경(#why) → 적용 시 고려사항(#conditions)
+   → 연구개발 · 특허(#rnd, 흡입 로봇 세대 포함) → 문의. #why · #conditions · #rnd · #dewater · 문의 칸은 9차 글 그대로 옮겼다.
+   스크립트(js/unmanned.js)가 없으면 로봇 다섯이 차례로 모두 보인다. 9차 판은 unmannedPageV9 로 남긴다(쓰지 않음) */
+pages['unmanned.html'] = () => {
+  const c = CFG.pages.unmanned;
+  const v = c.v14;
+  const N = String(UNM14.length).padStart(2, '0');
+  const UNM_GENS_HTML = `      <ol class="um-gens" aria-label="흡입 로봇 세대">
+${UNM_GENS.map(([n, t, d]) => `        <li><b>${n}<small>세대</small></b><strong>${esc(t)}</strong><span>${esc(d)}</span></li>`).join('\n')}
+      </ol>
+      <p class="us-src">흡입 로봇 1~5세대 — 출처: 기술소개서(2025) 장비 보유 현황</p>`;
+  const detail = (b, i) => {
+    const prv = UNM14[(i + UNM14.length - 1) % UNM14.length];
+    const nxt = UNM14[(i + 1) % UNM14.length];
+    const p = P(b.photo);
+    return `    <section class="um-rd" id="${b.id}" aria-labelledby="${b.id}-h">
+      <div class="wrap">
+        <div class="um-pg"><a href="#${prv.id}" aria-label="이전 로봇 ${esc(prv.name)}">‹ 이전</a><span><b>${b.no}</b> / ${N}</span><a href="#${nxt.id}" aria-label="다음 로봇 ${esc(nxt.name)}">다음 ›</a></div>
+        <div class="um-rd__grid">
+          <figure class="um-rd__ph${b.fit ? ' is-fit' : ''}">${photo(p, '(max-width:860px) 100vw, 640px', i === 0)}<figcaption>${esc(p.cap || p.alt)}</figcaption></figure>
+          <div>
+            ${unmFn(b)}
+            <h2 id="${b.id}-h">${esc(b.name)}</h2>
+            <dl class="um-io"><div class="is-robot"><dt>로봇이 하는 일</dt><dd>${unmJob(b)}</dd></div><div><dt>${esc(b.ctrl[0])}</dt><dd>${esc(b.ctrl[1])}</dd></div></dl>
+            <p class="um-where"><span>들어가는 곳</span>${b.where.map((w) => `<em>${esc(w)}</em>`).join('')}</p>
+            <dl class="um-spec">${b.spec.map(([k, x]) => `<div><dt>${esc(k)}</dt><dd>${esc(x)}</dd></div>`).join('')}</dl>
+            <div class="um-rd__act"><a class="btn btn--fill" href="cases.html">적용 사례 보기 ${arrow(16)}</a><a class="tlink" href="#${nxt.id}">다음 로봇 · ${esc(nxt.name)} ${arrow(14)}</a></div>
+            <p class="us-src">출처: 회사소개서(2024) · 기술소개서(2025) 장비 소개</p>
+          </div>
+        </div>
+      </div>
+    </section>`;
+  };
+  const cond = (b) => [b.water && `수중 작업 ${b.water}`, b.power && `${b.power} 구동`].filter(Boolean).join(' · ') || '—';
+  const lane = (s, i, where) => {
+    const col = `grid-column:${i + 2}`;
+    if (s.all) return where === 'in' ? `<div class="um-c um-c--all" style="${col};grid-row:2 / 4"><span>${esc(s.all)}</span></div>` : '';
+    const x = s[where];
+    if (!x) return `<div class="um-c um-c--e" style="${col};grid-row:${where === 'in' ? 2 : 3}" aria-hidden="true"></div>`;
+    if (where === 'in') return `<div class="um-c ${x[0] === 'r' ? 'um-c--r' : 'um-c--p'}" style="${col};grid-row:2"><em>${x[0] === 'r' ? '로봇' : '작업자'}</em><span>${esc(x[1])}</span></div>`;
+    return `<div class="um-c um-c--o" style="${col};grid-row:3"><em>설비 밖</em><span>${esc(x)}</span></div>`;
+  };
+  const mrow = (k, x) => x ? `<p class="um-sm__r${k === 'in' && x[0] === 'r' ? ' is-robot' : ''}"><em>${k === 'in' ? `설비 안 · ${x[0] === 'r' ? '로봇' : '작업자'}` : '설비 밖'}</em><span>${esc(k === 'in' ? x[1] : x)}</span></p>` : '';
+  return head({
+    file: 'unmanned.html', page: 'unmanned',
+    title: `${c.title} | ${C.brand}`,
+    desc: '위험한 설비 안에는 로봇이 먼저 들어갑니다. 신정개발 무인 로봇 다섯 종류 — 하는 일과 들어가는 곳, 작업 절차, 적용 시 고려사항, 연구개발·특허.'
+  }) + header('unmanned', null, 'unmanned.html') + `
+<main id="main">
+  <section class="um-top" aria-labelledby="um-h">
+    <div class="wrap um-top__in">
+      <div>
+        <nav class="um-crumb" aria-label="현재 위치"><a href="index.html">홈</a><span aria-hidden="true">›</span><span aria-current="page">${esc(c.title)}</span></nav>
+        <h1 id="um-h"><small>${esc(c.title)}</small>${v.h1}</h1>
+        <p class="um-top__desc">${esc(v.desc)}</p>
+        <p class="um-top__quote">${esc(c.quote)}</p>
+      </div>
+      ${unmPair('(max-width:860px) 42vw, 380px')}
+    </div>
+  </section>
+
+  <section class="um-line" id="robots" aria-labelledby="um-line-h">
+    <div class="wrap">
+      <p class="um-line__h"><b id="um-line-h">로봇 라인업 ${UNM14.length}</b><span>로봇을 고르면 아래에서 바로 볼 수 있습니다</span></p>
+      <ul class="um-bots">
+${UNM14.map((b) => `        <li><a class="um-bot" href="#${b.id}"><span class="um-bot__ph${b.fit ? ' is-fit' : ''}">${photo(P(b.photo), '96px')}</span><span class="um-bot__tx">${unmFn(b)}<b>${esc(b.name)}</b></span></a></li>`).join('\n')}
+      </ul>
+    </div>
+  </section>
+
+  <nav class="um-nav" aria-label="이 페이지의 차례"><div class="wrap"><a href="#robots" class="um-nav__m">로봇 라인업</a>${UNM14.map((b) => `<a href="#${b.id}" class="um-nav__r">${esc(b.name)}</a>`).join('')}<span class="um-nav__sep" aria-hidden="true"></span><a href="#compare">한눈에 비교</a><a href="#how">작업 절차</a><a href="#conditions" class="um-nav__pc">적용 시 고려사항</a><a href="#rnd">연구개발 · 특허</a></div></nav>
+
+  <div class="um-details">
+${UNM14.map(detail).join('\n')}
+  </div>
+
+  <section class="um-sec" id="compare" aria-labelledby="um-cmp-h">
+    <div class="wrap">
+      <p class="um-kick">한눈에 비교</p>
+      <h2 class="um-h2" id="um-cmp-h">로봇마다 들어가는 곳과 하는 일이 다릅니다</h2>
+      <p class="um-lead">로봇 이름을 누르면 그 로봇 설명으로 갑니다. 점은 그 설비에 들어가는 로봇입니다.</p>
+      <div class="um-cmp">
+        <table><thead><tr><th scope="col">로봇</th><th scope="col">로봇이 하는 일</th>${UNM_COLS.map(([, n]) => `<th scope="col">${esc(n)}</th>`).join('')}<th scope="col">수중 작업</th><th scope="col">구동</th></tr></thead><tbody>
+${UNM14.map((b) => `          <tr><th scope="row"><a href="#${b.id}">${unmFn(b)}<b>${esc(b.name)}</b></a></th><td class="um-cmp__job">${unmJob(b)}</td>${UNM_COLS.map(([k, n]) => b.m.includes(k) ? `<td><i class="um-dot" role="img" aria-label="${esc(n)} 들어감"></i></td>` : '<td class="is-no">·</td>').join('')}<td>${esc(b.water || '—')}</td><td>${esc(b.power || '—')}</td></tr>`).join('\n')}
+        </tbody></table>
+        <ul class="um-cmpm">
+${UNM14.map((b) => `          <li><a href="#${b.id}"><span class="um-cmpm__h">${unmFn(b)}<b>${esc(b.name)}</b></span><span class="um-cmpm__w"><em>들어가는 곳</em>${esc(b.where.join(' · '))}</span><span class="um-cmpm__w"><em>작업 조건</em>${esc(cond(b))}</span></a></li>`).join('\n')}
+        </ul>
+      </div>
+      <p class="us-src">출처: 회사소개서(2024) · 기술소개서(2025) 장비 소개 · ‘—’는 두 문서에 적혀 있지 않은 칸</p>
+    </div>
+  </section>
+
+  <section class="um-sec" id="how" aria-labelledby="um-how-h">
+    <div class="wrap">
+      <p class="um-kick">작업 절차</p>
+      <h2 class="um-h2" id="um-how-h">로봇은 안에서, 사람은 밖에서</h2>
+      <p class="um-lead">${esc(v.howLead)}</p>
+      <div class="um-lanes" role="presentation">
+        <div class="um-lanes__hd" style="grid-column:1;grid-row:1"></div>
+${UNM_STEPS.map((s, i) => `        <div class="um-lanes__hd" style="grid-column:${i + 2};grid-row:1"><em>${s.n}</em><b>${esc(s.t)}</b></div>`).join('\n')}
+        <div class="um-lanes__lb is-in" style="grid-column:1;grid-row:2">설비 안</div>
+        <div class="um-lanes__lb" style="grid-column:1;grid-row:3">설비 밖</div>
+${UNM_STEPS.map((s, i) => '        ' + lane(s, i, 'in') + lane(s, i, 'out')).join('\n')}
+      </div>
+      <ol class="um-sm">
+${UNM_STEPS.map((s) => `        <li class="${s.in && s.in[0] === 'r' ? 'is-robot' : ''}"><span class="um-sm__n">${s.n}</span><div><b>${esc(s.t)}</b>${s.all ? `<p class="um-sm__r"><span>${esc(s.all)}</span></p>` : mrow('in', s.in) + mrow('out', s.out)}</div></li>`).join('\n')}
+      </ol>
+      <p class="us-src">출처: 기술소개서(2025) 작업 절차를 쉬운 말로 옮김 · 장소가 적힌 단계만 ‘설비 안 / 설비 밖’으로 나눔</p>
+      <details class="us-fold" id="dewater"><summary>회수물 탈수 과정 — 데칸타 · 필터프레스</summary>
+        <ul>
+          <li>데칸타(원심분리): ${PROCESS.decanter.map(esc).join(' → ')}</li>
+          <li>필터프레스(여과·압착): ${PROCESS.filterpress.map(esc).join(' → ')}</li>
+          <li>효과: ${PROCESS.dewaterEffect.map(esc).join(' · ')}</li>
+        </ul>
+        <p class="us-src">출처: 기술소개서(2025) 폐기물 처리 시스템 (PROCESS.decanter · filterpress · dewaterEffect 그대로)</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- 1. 왜 (기술소개서 4쪽 숫자 그대로) -->
+  <section class="section section--sm us-key" id="why" aria-label="무인 로봇 시스템 개발 배경">
+    <div class="wrap">
+      <div class="stats stats--flush">
+        <div class="stat"><b>50<i>명</i></b><span>밀폐공간 질식 재해 100명당 사망</span></div>
+        <div class="stat"><b>200<i>회</i></b><span>신정개발 연간 밀폐공간 작업</span></div>
+        <div class="stat"><b>800<i>명</i></b><span>연간 밀폐공간 투입 인원</span></div>
+        <div class="stat"><b>1,200<i>시간</i></b><span>연간 밀폐공간 작업시간</span></div>
+      </div>
+      <p class="note">고용노동부 2014~2023 산업재해조사 · 신정개발 연간 작업 기준 — 기술소개서(2025) '무인 로봇 시스템 개발 배경'. 개발 목적: 작업자 투입 전 유해물질 사전 제거를 통한 위험성 감소, 연속 가동 중 작업 효율 유지.</p>
+    </div>
+  </section>
+
+  <section class="section section--soft" id="conditions">
+    <div class="wrap">
+      <div class="head"><div><h2>로봇이 모든 걸<br>해결하지는 않습니다</h2></div><p class="lead">그래서 로봇을 넣기 전에 현장을 먼저 보고 시험해 봅니다. 아래는 저희가 확인하는 것들입니다.</p></div>
+      <ul class="us-cons">
+        <li><em>확인 1</em><b>로봇이 안에서 잘 움직일 수 있는가</b><p>바닥에 쌓인 것의 상태에 따라 로봇이 움직이기 어려울 수 있고, 호스가 탱크 안 가열 코일에 걸릴 수 있습니다. 코일 배치를 먼저 봅니다.</p></li>
+        <li><em>확인 2</em><b>호스가 열을 견디는가</b><p>흡입 호스는 55℃까지 견딥니다. 더 뜨거운 곳은 고온용 호스를 쓰는데, 덜 휘어서 작업에 걸릴 수 있습니다.</p></li>
+        <li><em>확인 3</em><b>굳은 슬러지를 부술 수 있는가</b><p>슬러지 상태를 보고 파쇄 작업이 가능한지 확인합니다.</p></li>
+      </ul>
+      <div class="us-recheck">
+        <h3>이럴 때는 작업 방법을 다시 검토합니다</h3>
+        <ul>
+          <li>탱크 안 가열 코일이 고르게 배치되어 있을 때</li>
+          <li>슬러지가 너무 굳거나 끈적해서 빨아들여지지 않을 때</li>
+          <li>액체가 로봇 바퀴보다 높이 남아 있을 때 — 움직이기 어려워 먼저 줄입니다</li>
+          <li>충진물 작업은 출입구(맨웨이)가 18인치 이상이어야 합니다</li>
+        </ul>
+        <blockquote>로봇으로 모든 문제를 해결할 수는 없습니다. 가장 위험한 원인을 먼저 없애는 데 씁니다.</blockquote>
+        <p class="us-easy">기술소개서(2025) 적용 시 고려사항의 내용을 쉬운 말로 옮겼습니다. 원문은 기술소개서 PDF에서 볼 수 있습니다.</p>
+      </div>
+      <div class="us-two">
+        <details class="us-fold" open><summary>밀폐공간 작업 위험성 비교 — 인원 투입 vs 로봇 투입</summary>
+          ${usTwo(PROCESS.risk, ['주요 위험성 (인원 투입)', '로봇 투입'])}
+        </details>
+        <details class="us-fold" open><summary>효율성 비교</summary>
+          ${usTwo(PROCESS.eff, ['로봇 투입 작업', '효과'])}
+        </details>
+      </div>
+      <details class="us-fold" style="margin-top:28px"><summary>용도별 적용 예시 — 장점 · 단점 · 적용 범위</summary>
+        <ul>
+          <li><b>Tank / Pond Cleaning</b> — 장점: 인명사고 위험 감소(질식·매몰·협착·넘어짐), 연속 작업으로 능률 향상. 단점: 유해성 감소 후 Final Cleaning 인력 작업. 적용 범위: 방폭지역(고위험가스 설비) 작업 가능(유압구동 — 궤도부 고무재질, 파쇄·접촉 부분 Non-spark 재질) · 수중 작업 및 Water Jet-Cleaning 등 동시 작업 · CCTV, Jet 등 추가 장비 장착.</li>
+          <li><b>Pond Cleaning (로더)</b> — 장점: 연속 작업, 작업자 안전 확보. 단점: 작업 시간 제한(배터리 교체 및 충전), 비방폭 지역 사용. 적용 범위: Open Ditch·Pond 하부 퇴적물 · 작동 설비 하부 퇴적물 · 오염 지역 진입로 확보 · 인력 작업이 힘든 고착 슬러지 제거.</li>
+          <li><b>Jet Cleaning</b> — 장점: 연속 작업, 협소 공간 무인 작업. 단점: 복잡한 내부 공간 간섭·부분 Cleaning, 세정수 비산 시야 저하(CCTV 연동으로 확보). 적용 범위: 협소 공간 Water Jet Cleaning · 오염지역 무인 방제 · 협소 공간 Inspection.</li>
+          <li><b>폐기물(충진물) 제거 작업</b> — 장점: 질식 위험·위험물질 노출에서 작업자 안전 확보, 질소 공간 무인 작업. 단점: 비산물 시야 저하(CCTV 연동), Manway 한계 최소 18인치. 적용 범위: Reactor/Tank 내부(질소 분위기 포함) 충진물 제거 · 방폭 지역 작업 · 기타 설비 슬러지 및 고형 폐기물 제거.</li>
+        </ul>
+      </details>
+      <p class="us-src">출처: 기술소개서(2025) 적용 시 고려사항 · 위험성·효율성 비교 · 용도별 적용 예시</p>
+    </div>
+  </section>
+
+  <!-- 5. 연구개발·특허 -->
+  <section class="section" id="rnd">
+    <div class="wrap">
+      <div class="head"><div><h2>연구개발 · 특허</h2></div><p class="lead">2017년 11월 기업부설연구소를 세웠습니다. 로봇과 준설 관련 특허를 등록했고, 로봇 시제품을 만들어 성능시험을 했습니다. 시제품은 위의 현장 장비와 따로 적었습니다.</p></div>
+${UNM_GENS_HTML}
+      <div class="stats stats--flush" style="margin-bottom:36px">
+        <div class="stat"><b>2017<i>.11</i></b><span>기업부설연구소 설립</span></div>
+        <div class="stat"><b>${PROCESS.patents.length}<i>건</i></b><span>등록 특허</span></div>
+        <div class="stat"><b>${PROCESS.projects.length}<i>건</i></b><span>연구개발 과제</span></div>
+        <div class="stat"><b>${PROCESS.protos.length}<i>종</i></b><span>로봇 시제품</span></div>
+      </div>
+      <div class="us-rd">
+        <div>
+          <h3>등록 특허</h3>
+          <table><thead><tr><th>특허 명칭</th><th>등록</th></tr></thead><tbody>
+${PROCESS.patents.map(([name, year]) => `            <tr><td>${esc(name)}</td><td>${esc(year)}</td></tr>`).join('\n')}
+          </tbody></table>
+          <p class="us-src">회사소개서에는 특허증 8장과 출원사실증명 4장이 실려 있음</p>
+        </div>
+        <div>
+          <h3>로봇 시제품</h3>
+          <p class="note">벽면/천장 부착형은 KCL 성능시험(입회시험)을 거쳤습니다.</p>
+          <table><thead><tr><th>로봇</th><th>크기 · 무게</th><th>구동 · 조종</th></tr></thead><tbody>
+            <tr><td>벽면/천장 부착형 (Wall/Ceiling Mobile Robot)</td><td>480×660×325mm · 59.5kg</td><td>유압 140bar 캐터필러 · 조이스틱/카메라 자율 제어</td></tr>
+            <tr><td>흡입/준설 (Screw Mobile Robot)</td><td>490×730×260mm · 61.2kg</td><td>유압 최대 140bar 스크류 · 조이스틱/카메라 자율 제어</td></tr>
+            <tr><td>흡입/준설 (Grinding Mobile Robot)</td><td>490×1,010×260mm · 81kg</td><td>유압 최대 140bar 스크류 · 조이스틱/카메라 자율 제어</td></tr>
+            <tr><td>파쇄 (Splinter Robot, Caterpillar)</td><td>415×1,140×400mm · 79.2kg</td><td>유압 최대 140bar 캐터필러 · 조이스틱</td></tr>
+            <tr><td>파쇄 (Splinter Robot, Screw)</td><td>490×1,010×260mm · 87.5kg</td><td>유압 최대 140bar 스크류 · 조이스틱</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+      <details class="us-fold" style="margin-top:28px"><summary>연구개발 과제 ${PROCESS.projects.length}건</summary>
+        <ul>
+          <li>능동형 촉매 적재장치 — 촉매 반응탑 내 고체 촉매의 고밀도 적층 · 공압</li>
+          <li>석유화학 저장탱크 협업형 클리닝 시스템 — 고위험물 저장탱크 내부 세정 · 유압</li>
+          <li>수중 슬러지 수거 무인 자율 이동 로봇 시스템 — 하수도 슬러지 제거 · 유압</li>
+        </ul>
+        <p class="us-src">출처: 기술소개서(2025) 연구개발 (PROCESS.projects 과제 · 활용 · 구동)</p>
+      </details>
+      <p class="doc-link"><a class="tlink" href="${DOC_TECH}" target="_blank" rel="noopener">기술소개서 (2025) 보기 →</a></p>
+${SRC_LINE}    </div>
+  </section>
+
+  <section class="section section--sm us-ask">
+    <div class="wrap">
+      <div><h2>로봇 적용은 현장 적용 가능성 검토와 사전 Test로 시작합니다</h2><p>기술소개서 작업 절차의 첫 단계입니다. 대상 설비와 작업을 알려 주시면 검토부터 안내합니다.</p></div>
+      <a class="btn btn--light" href="contact.html">현장 문의하기 →</a>
+    </div>
+  </section>
+
+` + MAIN_END + footer() + foot(['unmanned.js']);
 };
 
 /* ---------- 5. 수행 이력 ---------- */
@@ -3297,6 +3613,14 @@ function checkConfig() {
     if (!(s.bg in BG_CLASS)) configError(`구역 바탕 '${s.bg}'이 없습니다 (설정 home.sections, 구역 '${s.id}'). 쓸 수 있는 것: ${Object.keys(BG_CLASS).join(', ')}`);
   });
   CFG.hero.services.forEach((x) => { if (!svc(x.svc)) configError(`첫 화면 업무 번호 '${x.svc}'이 없습니다 (설정 hero.services). 쓸 수 있는 것: ${SERVICES.map((s) => s.id).join(', ')}`); });
+  /* 시안C 14차: 무인 솔루션 자료 */
+  if (UNM14_EXTRA.length !== UNMANNED_BOTS.length) configError(`무인 솔루션 14차 자료(${UNM14_EXTRA.length})와 UNMANNED_BOTS(${UNMANNED_BOTS.length}) 개수가 다릅니다`);
+  UNM14.forEach((b) => {
+    if (!b.job.endsWith(b.verb)) configError(`무인 솔루션 '${b.name}'의 verb '${b.verb}'가 job 끝과 다릅니다`);
+    if (!UNM_ICON[b.key]) configError(`무인 솔루션 '${b.name}'의 그림 '${b.key}'가 없습니다`);
+    if (!PHOTOS[b.photo]) configError(`무인 솔루션 '${b.name}'의 사진 '${b.photo}'이 사진 목록에 없습니다`);
+    b.m.forEach((k) => { if (!UNM_COLS.some((c) => c[0] === k)) configError(`무인 솔루션 '${b.name}'의 비교표 칸 '${k}'가 없습니다`); });
+  });
   /* 시안C 13차: 적용 사례 자료 */
   CASES.forEach((x) => {
     if (!PHOTOS[x.photo]) configError(`적용 사례 '${x.name}'의 사진 '${x.photo}'이 사진 목록에 없습니다`);

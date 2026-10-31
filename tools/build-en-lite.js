@@ -29,7 +29,7 @@ const stats = [...statsBlock.matchAll(/data-count="(\d+)"/g)].map((m) => +m[1]);
 if (stats.length !== 4) fail(`숫자 띠 값이 4개가 아닙니다: ${stats.join(', ')}`);
 const founded = +pick(ko.company, /<dt>설립<\/dt><dd>(\d{4})년/, '설립 연도');   // 회사 소개 '한눈에 보기' 표(설립 1992년)
 const rnd = +pick(ko.company, /<dt>기업부설연구소<\/dt><dd>(\d{4})년/, '기업부설연구소 설립 연도');
-const generations = ((ko.technology.match(/<ol class="rb-hist">([\s\S]*?)<\/ol>/) || ['', ''])[1].match(/<li\b/g) || []).length;   // 시안C 9차: 무인 솔루션 페이지(unmanned.html)의 세대 띠 <li> 수(= 5)
+const generations = ((ko.technology.match(/<ol class="(?:rb-hist|um-gens)"[^>]*>([\s\S]*?)<\/ol>/) || ['', ''])[1].match(/<li\b/g) || []).length;   // 시안C 9차: 무인 솔루션 페이지(unmanned.html)의 세대 띠 <li> 수(= 5)
 if (!generations) fail('세대 띠(rb-hist)를 찾지 못했습니다');
 const pdfTech = pick(ko.technology, /href="(assets\/docs\/[^"]*robot[^"]*public\.pdf)"/, '기술소개서 공개용 PDF 링크');
 const tel = pick(ko.contact, /<a href="tel:\d+">([\d-]+)<\/a>/, '대표 전화');
