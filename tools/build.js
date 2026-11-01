@@ -3340,6 +3340,57 @@ ${CASES.map(block).join('\n')}
 ` + cta({ h2: CFG.common.cta.title, p: CFG.common.cta.text }) + MAIN_END + footer() + foot(['cases.js']);
 };
 
+/* ---------- 시안C 19차: 적용 사례 — 남색은 맨 위 머리 한 번만 (미리보기 '적용 사례 머리' A) ----------
+   남색 머리(위치 · 제목 · 한 줄 · 결과 숫자 셋 · 출처) → 위에 붙는 분야 줄(로봇 기록 있음 점 설명) → 고른 분야 하나(흰 바탕: 사진 | 번호 · 이름 · 소개 · 분야 숫자 · 문의 · 업무 보기)
+   → 로봇 투입 기록 · 주요 수행 실적 목록(13차 그대로). 분야마다 남색 큰 머리와 '로봇 적용 n건' 초록 표시는 두지 않는다(숫자 칸과 겹침).
+   한 번에 한 분야만 보이는 동작 · 목록 접기는 js/cases.js 그대로. 위의 13차 pages['cases.html'] 은 지우지 않고 이 판이 덮어쓴다 */
+pages['cases.html'] = () => {
+  const c = CFG.pages.cases;
+  const N = String(CASES.length).padStart(2, '0');
+  const rowsHtml = (list, robotAll) => list.length
+    ? list.map((r) => `<li><time>${esc(r[0])}</time><span>${esc(r[1])}</span>${robotAll || r[2] ? '<span class="cs-tag">로봇</span>' : '<span></span>'}</li>`).join('')
+    : `<li><span class="cs-empty">${esc(c.noRobot)}</span></li>`;
+  const block = (x, i) => {
+    const p = P(x.photo);
+    return `  <article class="csd cs9" id="${x.id}" aria-labelledby="${x.id}-h">
+    <div class="wrap cs9__g">
+      <figure class="cs9__ph">${photo(p, '(max-width:860px) 100vw, 50vw', i === 0)}<figcaption>${esc(p.cap || p.alt)}</figcaption></figure>
+      <div class="cs9__tx">
+        <p class="cs9__k"><span>${esc(c.title)}</span><b>${String(i + 1).padStart(2, '0')}</b> / ${N}</p>
+        <h2 id="${x.id}-h">${esc(x.name)}</h2>
+        <p class="cs9__d">${esc(x.desc)}</p>
+        <dl class="cs9__st">${x.stats.map((s) => `<div${s.r ? ' class="is-r"' : ''}><dt>${esc(s.l)}</dt><dd>${esc(s.n)}<small>${esc(s.u)}</small></dd></div>`).join('')}</dl>
+        <div class="cs9__act"><a class="cs9__btn" href="contact.html?service=${x.svc}">${esc(x.name)} ${esc(c.ask)} ${arrow(16)}</a><a class="tlink" href="${svc(x.svc).file}">${esc(svc(x.svc).title)} 업무 보기 ${arrow(14)}</a></div>
+      </div>
+    </div>
+    <div class="wrap csd__grid${x.robotRows.length ? '' : ' csd__grid--one'}">
+      ${x.robotRows.length ? `<div><h3>로봇 투입 기록 <em class="r">${x.robotRows.length}건</em></h3><ul class="csd__rows">${rowsHtml(x.robotRows, true)}</ul><button type="button" class="csd__more" hidden></button><p class="csd__src">${esc(CASE_SRC.robot)}</p></div>` : ''}
+      <div><h3>주요 수행 실적 <em class="n">2020~2023</em></h3><ul class="csd__rows">${rowsHtml(x.rows, false)}</ul><button type="button" class="csd__more" hidden></button><p class="csd__src">${esc(CASE_SRC.rows)}</p></div>
+    </div>
+  </article>`;
+  };
+  return head({
+    file: 'cases.html', page: 'cases',
+    title: `${c.title} | ${C.brand}`,
+    desc: c.desc
+  }) + header('cases', null, 'cases.html') + `
+<main id="main" class="cs9-page">
+  <section class="cs9-head" aria-labelledby="cs9-h"><div class="wrap">
+    <nav class="cs9-head__crumb" aria-label="현재 위치"><a href="index.html">홈</a><span aria-hidden="true">›</span><span aria-current="page">${esc(c.title)}</span></nav>
+    <h1 id="cs9-h">${esc(c.title)}</h1>
+    <p class="cs9-head__l">${esc(c.lead)}</p>
+    <dl class="cs9-head__sum">
+      <div><dt>${esc(TRUST[1].l)}</dt><dd>${TRUST[1].n}<small>${esc(TRUST[1].unit)}</small></dd></div>
+      <div><dt>4개 발주처와 단가계약 (2020~2023)</dt><dd>4<small>년 연속</small></dd></div>
+      <div class="is-r"><dt>로봇 투입 기록 (2021~2023)</dt><dd>${caseRobotTotal()}<small>건</small></dd></div>
+    </dl>
+    <p class="cs9-head__src">${esc(CASE_SRC.rows)}</p>
+  </div></section>
+  <nav class="csd-nav cs9-nav" aria-label="분야"><div class="wrap"><div class="cs9-nav__l">${CASES.map((x) => `<a href="#${x.id}">${esc(x.name)}${x.robot ? '<i class="d" aria-label="로봇 투입 기록 있음"></i>' : ''}</a>`).join('')}</div><span class="cs9-nav__k" aria-hidden="true"><i class="d"></i>로봇 투입 기록 있음</span></div></nav>
+${CASES.map(block).join('\n')}
+` + cta({ h2: CFG.common.cta.title, p: CFG.common.cta.text }) + MAIN_END + footer() + foot(['cases.js']);
+};
+
 /* ---------- 시안C 14차: 무인 솔루션 페이지 (unmanned.html) ----------
    남색 머리(제목 · 슬로건 · 안/밖 사진 한 쌍) → 로봇 라인업 다섯(첫 화면 안) → 위에 붙는 탭 → 고른 로봇 하나(주소 #r-suction …)
    → 한눈에 비교(#compare) → 작업 절차 안/밖 두 줄(#how, 탈수 과정 #dewater 포함) → 개발 배경(#why) → 적용 시 고려사항(#conditions)
