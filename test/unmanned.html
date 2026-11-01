@@ -22,7 +22,7 @@
 <link rel="apple-touch-icon" href="../assets/logo/shinjeong-symbol.png">
 <link rel="preload" href="../assets/fonts/sub/PretendardVariable-0.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../css/tokens.test.css?v=818fd80b">
-<link rel="stylesheet" href="../css/site.css?v=aa1531b2">
+<link rel="stylesheet" href="../css/site.css?v=82ac1641">
 </head>
 <body class="moB-root" data-page="unmanned">
 <a class="skip-link" href="#main">본문 바로가기</a>
@@ -97,9 +97,12 @@
     </div>
   </section>
 
+  <nav class="um-lnb" aria-label="무인 솔루션 안"><div class="wrap"><div class="um-lnb__t"><a href="#robots" data-view="robots">로봇 라인업</a><a href="#method" data-view="method">작업 방식</a><a href="#rnd" data-view="rnd">연구개발 · 특허</a></div><a class="um-lnb__q" href="#ask">현장 문의 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a></div></nav>   <!-- 시안C 21차: 세 화면 메뉴(대기업 사이트의 2단 메뉴처럼). 로봇 고르기는 화면 안 · 14차 .um-nav 는 쓰지 않음 -->
+
+  <div class="um-view" id="v-robots" data-view="robots">
   <section class="um-line" id="robots" aria-labelledby="um-line-h">
     <div class="wrap">
-      <p class="um-line__h"><b id="um-line-h">로봇 라인업 5</b><span>로봇을 고르면 아래에서 바로 볼 수 있습니다</span></p>
+      <div class="um-vh um-vh--row"><div><p class="um-k2">로봇 라인업</p><h2 id="um-line-h">현장에 들어가는 로봇 다섯</h2></div><p class="um-vh__l">로봇을 고르면 하는 일 · 들어가는 곳 · 사양이 바로 아래에 나옵니다.</p></div>
       <ul class="um-bots">
         <li><a class="um-bot" href="#r-suction"><span class="um-bot__ph"><img src="../assets/photos/W05-2400.jpg" srcset="../assets/photos/W05-640.jpg 640w, ../assets/photos/W05-1000.jpg 1000w, ../assets/photos/W05-1600.jpg 1600w, ../assets/photos/W05-2400.jpg 2400w" sizes="96px" width="1000" height="667" alt="스크루 궤도형 흡입 로봇" loading="lazy" decoding="async"></span><span class="um-bot__tx"><span class="um-fn"><em>01</em><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v5l3 4H6l3-4z"/><path d="M12 21v-5M9.5 18.5 12 16l2.5 2.5"/></svg>흡입</span><b>흡입 로봇</b></span></a></li>
         <li><a class="um-bot" href="#r-crusher"><span class="um-bot__ph"><img src="../assets/photos/W06-1600.jpg" srcset="../assets/photos/W06-640.jpg 640w, ../assets/photos/W06-1000.jpg 1000w, ../assets/photos/W06-1600.jpg 1600w" sizes="96px" width="1000" height="667" alt="전면에 파쇄 장치를 갖춘 궤도형 장비와 흡입 호스" loading="lazy" decoding="async"></span><span class="um-bot__tx"><span class="um-fn"><em>02</em><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h7l-2 5 3 2-2 9H4z"/><path d="M15 4h5v16h-6l2-6-3-2z"/></svg>파쇄</span><b>파쇄형 로봇</b></span></a></li>
@@ -109,8 +112,6 @@
       </ul>
     </div>
   </section>
-
-  <nav class="um-nav" aria-label="이 페이지의 차례"><div class="wrap"><a href="#robots" class="um-nav__m">로봇 라인업</a><a href="#r-suction" class="um-nav__r">흡입 로봇</a><a href="#r-crusher" class="um-nav__r">파쇄형 로봇</a><a href="#r-loader" class="um-nav__r">무인 로더</a><a href="#r-jet" class="um-nav__r">무인 Jet Cleaner</a><a href="#r-cctv" class="um-nav__r">관로 CCTV 로봇</a><span class="um-nav__sep" aria-hidden="true"></span><a href="#how">작업 절차</a><a href="#conditions" class="um-nav__pc">적용 시 고려사항</a><a href="#rnd">연구개발 · 특허</a></div></nav>
 
   <div class="um-details">
     <section class="um-rd" id="r-suction" aria-labelledby="r-suction-h">
@@ -200,6 +201,25 @@
     </section>
   </div>
 
+
+    <div class="wrap"><a class="um-next" href="#method"><span><small>다음</small><b>작업 방식</b><em>개발 배경 · 작업 절차 · 적용 시 고려사항</em></span><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a></div>
+  </div>
+
+  <div class="um-view" id="method" data-view="method">
+  <!-- 1. 왜 (기술소개서 4쪽 숫자 그대로) -->
+  <section class="section section--sm us-key" id="why" aria-labelledby="um-why-h">
+    <div class="wrap">
+      <div class="um-vh"><p class="um-k2">개발 배경</p><h2 id="um-why-h">밀폐공간 작업의 위험을 줄이기 위해 개발했습니다</h2></div>   <!-- 21차: 제목 = PROCESS.factsNote 의 뒷부분 -->
+      <div class="stats stats--flush">
+        <div class="stat"><b>50<i>명</i></b><span>밀폐공간 질식 재해 100명당 사망</span></div>
+        <div class="stat"><b>200<i>회</i></b><span>신정개발 연간 밀폐공간 작업</span></div>
+        <div class="stat"><b>800<i>명</i></b><span>연간 밀폐공간 투입 인원</span></div>
+        <div class="stat"><b>1,200<i>시간</i></b><span>연간 밀폐공간 작업시간</span></div>
+      </div>
+      <p class="note">고용노동부 2014~2023 산업재해조사 · 신정개발 연간 작업 기준 — 기술소개서(2025) '무인 로봇 시스템 개발 배경'. 개발 목적: 작업자 투입 전 유해물질 사전 제거를 통한 위험성 감소, 연속 가동 중 작업 효율 유지.</p>
+    </div>
+  </section>
+
   <section class="um-sec" id="how" aria-labelledby="um-how-h">
     <div class="wrap">
       <p class="um-kick">작업 절차</p>
@@ -232,19 +252,6 @@
       </ol>
       <p class="us-src">출처: 기술소개서(2025) 19쪽 Robot-Tank Cleaning System(단계 이름 · 내용) · 18·20쪽 공사개략도(제어 차량 원격 조정) · 장소가 적힌 단계만 ‘설비 안 / 설비 밖’으로 나눔</p>
       <p class="mt-18"><a class="tlink" href="service-dredging-sludge.html#dewater">회수물 탈수 과정(데칸타 · 필터프레스)은 준설·슬러지 회수에서 보기 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a></p>   <!-- 시안C 15차: 탈수 접기는 사업분야 준설·슬러지 페이지로 -->
-    </div>
-  </section>
-
-  <!-- 1. 왜 (기술소개서 4쪽 숫자 그대로) -->
-  <section class="section section--sm us-key" id="why" aria-label="무인 로봇 시스템 개발 배경">
-    <div class="wrap">
-      <div class="stats stats--flush">
-        <div class="stat"><b>50<i>명</i></b><span>밀폐공간 질식 재해 100명당 사망</span></div>
-        <div class="stat"><b>200<i>회</i></b><span>신정개발 연간 밀폐공간 작업</span></div>
-        <div class="stat"><b>800<i>명</i></b><span>연간 밀폐공간 투입 인원</span></div>
-        <div class="stat"><b>1,200<i>시간</i></b><span>연간 밀폐공간 작업시간</span></div>
-      </div>
-      <p class="note">고용노동부 2014~2023 산업재해조사 · 신정개발 연간 작업 기준 — 기술소개서(2025) '무인 로봇 시스템 개발 배경'. 개발 목적: 작업자 투입 전 유해물질 사전 제거를 통한 위험성 감소, 연속 가동 중 작업 효율 유지.</p>
     </div>
   </section>
 
@@ -291,6 +298,10 @@
     </div>
   </section>
 
+    <div class="wrap"><a class="um-next" href="#rnd"><span><small>다음</small><b>연구개발 · 특허</b><em>기업부설연구소 · 등록 특허 8건</em></span><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a></div>
+  </div>
+
+  <div class="um-view" id="v-rnd" data-view="rnd">
   <!-- 5. 연구개발·특허 -->
   <section class="section" id="rnd">
     <div class="wrap">
@@ -348,24 +359,18 @@
     </div>
   </section>
 
-  <section class="section section--sm us-ask">
-    <div class="wrap">
-      <div><h2>로봇 적용은 현장 적용 가능성 검토와 사전 Test로 시작합니다</h2><p>기술소개서 작업 절차의 첫 단계입니다. 대상 설비와 작업을 알려 주시면 검토부터 안내합니다.</p></div>
-      <a class="btn btn--light" href="contact.html">현장 문의하기 →</a>
-    </div>
-  </section>
+    <div class="wrap"><a class="um-next" href="#robots"><span><small>처음으로</small><b>로봇 라인업</b><em>현장에 들어가는 로봇</em></span><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a></div>
+  </div>
+
+  <section class="c7-end um-ask" id="ask" aria-labelledby="um-ask-h"><div class="wrap">   <!-- 시안C 21차: 회사 소개(18차)와 같은 문의 띠 — 글은 예전 띠 문장을 줄임 -->
+    <div><h2 id="um-ask-h">현장 문의</h2><p>로봇 적용은 현장 적용 가능성 검토와 사전 Test로 시작합니다. 대상 설비와 작업을 알려 주세요.</p></div>
+    <div class="c7-end__act"><a class="c7-end__go" href="contact.html">문의하기 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a><button type="button" class="c7-end__mail" data-copy="shinjeong@sjdevel.com" title="눌러서 이메일 주소 복사" aria-label="이메일 주소 shinjeong@sjdevel.com 복사"><span class="c7-end__ic"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3.5 6l8.5 7 8.5-7"/></svg></span><span class="c7-end__addr">shinjeong@sjdevel.com</span><span class="c7-end__cp" aria-hidden="true"><span class="c7-i-copy"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg></span><span class="c7-i-ok"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></span><span class="sr-only" aria-live="polite"></span></button></div>
+  </div></section>
 
 </main>
 
 <footer class="ftr">
   <div class="wrap">
-    <div class="ftrB-ask">   <!-- 시안B 26차: 바닥글 윗줄 소형 문의 줄 — 머리말 낱말·문의 버튼 문구·이메일 재사용(새 문장 없음) -->
-      <span class="ftrB-ask__label">현장 문의</span>
-      <div class="ftrB-ask__act">
-        <a class="btn btn--line btn--sm" href="contact.html">현장 문의하기 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a>
-        <a class="ftrB-ask__mail" href="mailto:shinjeong@sjdevel.com">shinjeong@sjdevel.com</a>
-      </div>
-    </div>
     <div class="ftr__top">
       <div class="ftr__brand">
         <img class="ftr__logo" src="../assets/logo/shinjeong-symbol.svg" width="30" height="37" alt="" aria-hidden="true">
@@ -431,6 +436,7 @@
 </nav>
 <script src="../js/site.js?v=30f861b1"></script>
 <script src="../js/moB.js?v=e965b8f9"></script>
-<script src="../js/unmanned.js?v=882cbc05"></script>
+<script src="../js/unmanned.js?v=e215abf5"></script>
+<script src="../js/company17.js?v=c7371fde"></script>
 </body>
 </html>
