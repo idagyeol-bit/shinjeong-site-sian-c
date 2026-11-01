@@ -144,6 +144,12 @@ const PHOTOS = {
   PT06: { id: 'PT06', w: 1212, h: 1558, sizes: [440, 1212], alt: '특허증 — 저장소 내부 검사장치', cap: '특허증 — 저장소 내부 검사장치' },   // 시안C 17차: 회사소개서(2024) 28~29쪽 원본 이미지 2배 보정 · 개인 정보 가림
   PT07: { id: 'PT07', w: 1214, h: 1558, sizes: [440, 1214], alt: '특허증 — 협업형 무인로봇을 이용한 산업용 저장소의 자율 클리닝 시스템', cap: '특허증 — 협업형 무인로봇을 이용한 산업용 저장소의 자율 클리닝 시스템' },   // 시안C 17차: 회사소개서(2024) 28~29쪽 원본 이미지 2배 보정 · 개인 정보 가림
   PT08: { id: 'PT08', w: 1214, h: 1558, sizes: [440, 1214], alt: '특허증 — 레이다를 이용한 파이프 두께 측정장치', cap: '특허증 — 레이다를 이용한 파이프 두께 측정장치' },   // 시안C 17차: 회사소개서(2024) 28~29쪽 원본 이미지 2배 보정 · 개인 정보 가림
+  RB01: { id: 'RB01', w: 1000, h: 667, sizes: [640, 1000], alt: '벽면/천장 부착형 무인 로봇', cap: '벽면/천장 부착형 무인 로봇' },   // 시안C 22차: 로봇 ZIP 517A5349.JPG (tools/photo-plan.json)
+  RB02: { id: 'RB02', w: 1000, h: 667, sizes: [640, 1000], alt: '위에서 본 벽면/천장 부착형 무인 로봇', cap: '벽면/천장 부착형 무인 로봇 — 위에서 본 모습' },   // 시안C 22차: 로봇 ZIP 517A5383.JPG (tools/photo-plan.json)
+  RB03: { id: 'RB03', w: 1000, h: 667, sizes: [640, 1000], alt: '스크류 바퀴를 단 흡입/준설 무인 로봇', cap: '흡입/준설 무인 로봇' },   // 시안C 22차: 로봇 ZIP 517A5343.JPG (tools/photo-plan.json)
+  RB04: { id: 'RB04', w: 1000, h: 667, sizes: [640, 1000], alt: '앞에서 본 흡입/준설 무인 로봇', cap: '흡입/준설 무인 로봇 — 앞에서 본 모습' },   // 시안C 22차: 로봇 ZIP 517A5381.JPG (tools/photo-plan.json)
+  RB05: { id: 'RB05', w: 1000, h: 667, sizes: [640, 1000], alt: '노란 파쇄 장치를 단 궤도형 파쇄 무인 로봇', cap: '파쇄 무인 로봇 (Caterpillar Type)' },   // 시안C 22차: 로봇 ZIP 517A5380.JPG (tools/photo-plan.json)
+  RB06: { id: 'RB06', w: 1000, h: 667, sizes: [640, 1000], alt: '위에서 본 궤도형 파쇄 무인 로봇', cap: '파쇄 무인 로봇 — 위에서 본 모습' },   // 시안C 22차: 로봇 ZIP 517A5339.JPG (tools/photo-plan.json)
   R27: { id: 'R27', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '야외에서 흡입차와 호스로 연결된 로봇', cap: '흡입차와 호스로 연결된 로봇' },
   R34: { id: 'R34', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '차량에 실린 제어 장치를 다루는 작업자와 발밑의 소형 주행 장비', cap: '차량의 제어 장치와 소형 주행 장비' },
   R42: { id: 'R42', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '카메라 헤드와 바퀴를 갖춘 소형 주행 장비', cap: '카메라 헤드를 갖춘 소형 주행 장비' },
@@ -2156,8 +2162,8 @@ ${WHY_PAIR.map((w, i) => `        <figure>
         ${unmPair('(max-width:860px) 42vw, 340px')}
       </div>
       <div class="u14__sub"><h3>${esc(c.jobsTitle || '로봇이 하는 일')}</h3></div>
-      <ul class="u14__jobs" data-reveal>
-${UNM14.map((b) => `        <li><a class="u14-job" href="${b.href}"><span class="u14-job__ph${b.fit ? ' is-fit' : ''}">${photo(P(b.photo), '(max-width:860px) 104px, (max-width:1100px) 30vw, 250px')}</span>${unmFn(b)}<p>${unmJob(b)}</p><small>${esc(b.name)}</small></a></li>`).join('\n')}
+      <ul class="u14__jobs u14__jobs--6" data-reveal>
+${RL22.map((b) => `        <li><a class="u14-job" href="unmanned.html#${b.id}"><span class="u14-job__ph${b.fit ? ' is-fit' : ''}">${photo(P(b.photos[0]), '(max-width:860px) 104px, (max-width:1100px) 30vw, 210px')}</span>${unmFn(b)}<p>${unmJob(b)}</p><small>${b.grp === 'rd' ? '<i>연구개발 시제품</i> · ' : ''}${esc(b.name)}</small></a></li>`).join('\n')}
       </ul>
       <a class="u14__more" href="${c.moreHref || 'unmanned.html'}">${esc(c.more)}</a>
     </div>
@@ -3396,6 +3402,145 @@ ${CASES.map(block).join('\n')}
    → 한눈에 비교(#compare) → 작업 절차 안/밖 두 줄(#how, 탈수 과정 #dewater 포함) → 개발 배경(#why) → 적용 시 고려사항(#conditions)
    → 연구개발 · 특허(#rnd, 흡입 로봇 세대 포함) → 문의. #why · #conditions · #rnd · #dewater · 문의 칸은 9차 글 그대로 옮겼다.
    스크립트(js/unmanned.js)가 없으면 로봇 다섯이 차례로 모두 보인다. 9차 판은 unmannedPageV9 로 남긴다(쓰지 않음) */
+/* ===================== 시안C 22차: 로봇 라인업 — 현장 장비 셋 + 연구개발 시제품 셋 (2026-11-02 이다결 님 결정) =====================
+   기술소개서(2025)의 분류 그대로: 2-2 장비 보유 현황(무인 Vacuum 로봇 1~5세대 · 기타 Cleaning 로봇 무인 로더 大·小 · 무인 Jet Cleaner)
+   + 6. 무인 로봇 현황(벽면/천장 부착형 · 흡입/준설 · 파쇄 시제품). 14차의 '흡입 로봇' · '파쇄형 로봇' 두 칸은 같은 Vacuum 로봇 계열이라 한 칸으로,
+   '관로 CCTV 로봇'은 기술소개서의 로봇 소개에 없는 조사 장비라 '로봇과 함께 쓰는 장비'로 옮긴다.
+   글 · 숫자는 두 문서 글 그대로(① 회사소개서(2024) ② 기술소개서(2025), 쪽수는 src). 사진 RB01~RB06 = 로봇 ZIP(문서 6장 사진과 같은 로봇).
+   예전 주소: #r-suction · #r-crusher → #r-vacuum, #r-cctv → #with (js/unmanned.js). UNM14 · UNMANNED_BOTS 는 지우지 않는다(다른 곳에서 씀) */
+const RL22_GRP = { field: ['현장 장비', '장비 보유 현황'], rd: ['연구개발 시제품', '무인 로봇 현황 · 성능시험'] };
+const RL22 = [
+  { id: 'r-vacuum', grp: 'field', key: 'suction', fn: '흡입 · 파쇄', name: '무인 Vacuum 로봇', en: '1~5세대 · 흡입형 · 파쇄 흡입형 · 파쇄형',
+    job: '탱크 · Pond 안의 위험 물질을 빨아들이거나 부숴서 회수합니다', verb: '빨아들이거나 부숴서 회수합니다',
+    photos: ['W05', 'W06'],
+    kn: [['5', '세대', '1세대 흡입형부터 5세대 파쇄형까지'], ['130', '%', '연속 작업 능률 — Tank/Pond Cleaning 적용 예시'], ['유압', '', '구동 — 2세대만 전기 · 유압']],
+    where: ['Tank', 'Pond', 'Open Ditch', 'Reactor', '관로'],
+    vary: ['세대', 4, [
+      ['1세대', [['방식', '흡입형'], ['적용', 'Pond, Tank (관로)'], ['수중 작업', '가능'], ['구동', '유압']]],
+      ['2세대', [['방식', '파쇄 흡입형'], ['적용', 'Pond, Open Ditch'], ['수중 작업', '불가'], ['구동', '전기, 유압']]],
+      ['3세대', [['방식', '파쇄 흡입형'], ['적용', 'Pond, Tank'], ['수중 작업', '가능'], ['구동', '유압']]],
+      ['4세대', [['방식', '흡입형 · 소형화'], ['적용', 'Pond, Tank'], ['수중 작업', '가능'], ['구동', '유압']]],
+      ['5세대', [['방식', '파쇄형 · 소형화'], ['적용', 'Pond, Reactor'], ['수중 작업', '가능'], ['구동', '유압']]]
+    ]],
+    extra: [['적용 범위 — Tank/Pond Cleaning', ['방폭지역(고위험가스 설비) 작업 가능 — 유압 구동, 궤도부 고무 · 파쇄 및 접촉 부분 Non-spark 재질', '수중 작업과 Water Jet Cleaning 동시 작업 가능', 'CCTV, Jet 등 추가 장비 장착 가능']],
+            ['주요 장비 — 무인 Cleaning 로봇(5세대)', ['유압 구동 · 원격 제어 · 방폭 카메라로 작업 원격 감시', 'Aluminum Body · 전면부 Jet Nozzle', '스크류형 · 체인형 바퀴로 유동체 작업', 'Tank/Reactor 내부 Liquid, Sludge 제거']]],
+    src: '② 7쪽 장비 보유 현황 · 9쪽 용도별 적용 예시 · 13~15쪽 주요 장비 소개' },
+  { id: 'r-loader', grp: 'field', key: 'loader', fn: '퇴적물 처리', name: '무인 로더', en: '大 · 小',
+    job: 'Pond · 배수로 바닥에 쌓인 흙과 슬러지를 치웁니다', verb: '치웁니다',
+    photos: ['X01', 'X02'], fit: true,
+    kn: [['大 · 小', '', '두 가지 크기'], ['원격', '', 'Control'], ['불가', '', '수중 작업']],
+    where: ['Open Ditch', 'Pond', '협소 공간', '실외'],
+    vary: ['크기', 0, [
+      ['大', [['대상', '토사, Sludge (실외)'], ['조종', '원격 Control'], ['수중 작업', '불가'], ['구동', '전기, 유압']]],
+      ['小', [['대상', '토사, Sludge (협소 공간)'], ['조종', '원격 Control'], ['수중 작업', '불가'], ['구동', '전기, 유압']]]
+    ], true],   // true = 크기를 바꾸면 사진도 (大 = 첫 사진, 小 = 둘째 사진)
+    extra: [['적용 범위 — Pond Cleaning', ['Open Ditch, Pond 하부 퇴적물 처리', '작동 설비 하부 퇴적물 처리', '오염 지역 진입로 확보', '인력 작업이 힘든 고착 Sludge 제거']],
+            ['유의할 점', ['배터리 교체 · 충전 시간이 필요합니다', '비방폭지역에서 사용합니다']]],
+    src: '② 8쪽 기타 Cleaning 로봇 · 10쪽 용도별 적용 예시' },
+  { id: 'r-jet', grp: 'field', key: 'jet', fn: '고압 세척', name: '무인 Jet Cleaner', en: '고압 세척',
+    job: '좁은 공간의 설비를 고압수로 씻어 냅니다', verb: '씻어 냅니다',
+    photos: ['X03'], fit: true,
+    kn: [['8+', '노즐', '설비 고압 세척'], ['가능', '', '구동부 수중 작업'], ['전기', '', '구동']],
+    where: ['협소 공간', '오염 지역'],
+    spec: [['대상', '설비 고압 세척 (8+@ Nozzle)'], ['조종', '원격 Control'], ['수중 작업', '구동부 가능'], ['구동', '전기']],
+    extra: [['적용 범위 — Jet Cleaning', ['협소 공간 Water Jet Cleaning', '오염 지역 무인 방제 (유해물질 제거)', '협소 공간 Inspection']],
+            ['유의할 점', ['내부가 복잡하면 간섭으로 일부만 Cleaning 될 수 있습니다', '세정수가 튀어 시야가 흐려지면 CCTV로 확인합니다']]],
+    src: '② 8쪽 기타 Cleaning 로봇 · 11쪽 용도별 적용 예시' },
+  { id: 'r-wall', grp: 'rd', key: 'wall', fn: '벽면 · 천장', name: '벽면/천장 부착형 무인 로봇', en: 'Wall/Ceiling Mobile Robot',
+    job: '저장 탱크 벽면과 천장에 붙어 움직입니다', verb: '움직입니다',
+    photos: ['RB01', 'RB02'],
+    kn: [['206', 'kg', '벽면 견인력 최대 — 100kg 이상, KCL 입회시험'], ['59.5', 'kg', '무게'], ['140', 'bar', '유압 구동압력']],
+    where: ['저장 탱크 안 · 밖 벽면', '천장'],
+    spec: [['크기 (폭 × 길이 × 높이)', '480 × 660 × 325 mm'], ['구동 방식', '독립 구동 캐터필러'], ['구동원', '유압 (Hydraulic system)'], ['운영 방식', '조이스틱 수동 조종 · 카메라 모니터링 자율 제어']],
+    extra: [['성능시험', ['벽면 견인력 100kg 이상 (Max. 206kg) — KCL 성능시험(입회시험)', '천장 부착력 시험', '철판 두께 1.5mm 시험']]],
+    src: '② 41~45쪽 무인 로봇 현황 6-1 · ① 34쪽 로봇시스템 보유현황(탱크 내외벽 부착형 이동 로봇)' },
+  { id: 'r-screw', grp: 'rd', key: 'screw', fn: '흡입 · 준설', name: '흡입/준설 무인 로봇', en: 'Screw · Grinding Mobile Robot',
+    job: '스크류로 움직이며 흡입 · 준설합니다', verb: '흡입 · 준설합니다',
+    photos: ['RB03', 'RB04'],
+    kn: [['61.2', 'kg', 'Screw Mobile Robot 무게'], ['81', 'kg', 'Grinding Mobile Robot 무게 (분쇄기 19.8kg 포함)'], ['140', 'bar', '최대 구동압력']],
+    where: ['흡입', '준설', '수중'],
+    vary: ['모델', 0, [
+      ['Screw', [['크기 (폭 × 길이 × 높이)', '490 × 730 × 260 mm'], ['구동 방식', '독립 구동 스크류'], ['구동원 · 압력', '유압 · 최대 140 bar'], ['무게', '61.2 kg'], ['운영 방식', '조이스틱 수동 조종 · 카메라 모니터링 자율 제어']]],
+      ['Grinding', [['크기 (폭 × 길이 × 높이)', '490 × 1,010 × 260 mm'], ['구동 방식', '독립 구동 스크류'], ['구동원 · 압력', '유압 · 최대 140 bar'], ['무게', '81 kg (분쇄기 19.8 kg 포함)'], ['운영 방식', '조이스틱 수동 조종 · 카메라 모니터링 자율 제어']]]
+    ]],
+    extra: [['성능시험', ['주행시험', '수중시험']]],
+    src: '② 46~50쪽 무인 로봇 현황 6-2' },
+  { id: 'r-splinter', grp: 'rd', key: 'crusher', fn: '파쇄', name: '파쇄 무인 로봇', en: 'Splinter Robot',
+    job: '파쇄 장치로 대상물을 부숩니다', verb: '부숩니다',
+    photos: ['RB05', 'RB06'],
+    kn: [['79.2', 'kg', 'Caterpillar Type 무게'], ['87.5', 'kg', 'Screw Type 무게'], ['140', 'bar', '최대 구동압력']],
+    where: ['파쇄'],
+    vary: ['모델', 0, [
+      ['Caterpillar', [['크기 (폭 × 길이 × 높이)', '415 × 1,140 × 400 mm'], ['구동 방식', '독립 구동 캐터필러'], ['구동원 · 압력', '유압 · 최대 140 bar'], ['무게', '79.2 kg'], ['운영 방식', '조이스틱 수동 조종']]],
+      ['Screw', [['크기 (폭 × 길이 × 높이)', '490 × 1,010 × 260 mm'], ['구동 방식', '독립 구동 스크류'], ['구동원 · 압력', '유압 · 최대 140 bar'], ['무게', '87.5 kg'], ['운영 방식', '조이스틱 수동 조종']]]
+    ]],
+    extra: [['성능시험', ['파쇄 및 주행시험']]],
+    src: '② 51~54쪽 무인 로봇 현황 6-3' }
+].map((b, i) => Object.assign(b, { no: String(i + 1).padStart(2, '0') }));
+/* 로봇과 함께 쓰는 장비 — ① 33 · 36쪽(작업지원 로봇시스템), ② 18~20쪽(작업 Procedure), ① 22~23쪽(보유 장비) */
+const RL22_SYS = [
+  ['R26', '작업운용 제어반 (OCV)', '설비 밖 제어 차량에서 로봇을 원격으로 조종합니다', '① 36쪽'],
+  ['P16', '원격제어 · 모니터링 (RCMS)', 'CCTV 화면으로 설비 안을 보며 작업합니다', '① 36쪽'],
+  ['W01', 'Vacuum Car', '1차 Washing — 외부에서 잔여 물질을 흡입해 제거합니다', '① 33쪽 · ② 18~20쪽'],
+  ['R42', '관로 CCTV 로봇', '관로 조사용 1대 · CCTV 조사차량 2대 (D=250~600mm)', '① 22~23쪽']
+];
+UNM_ICON.wall = '<rect x="3" y="3" width="18" height="18" rx="1"/><rect x="7" y="8" width="10" height="7" rx="1"/><path d="M9 15v2M15 15v2"/>';
+UNM_ICON.screw = '<path d="M3 8h18M3 16h18"/><path d="M5 8l3 8M10 8l3 8M15 8l3 8"/>';
+const RL22_N = ['', '하나', '둘', '셋', '넷', '다섯', '여섯'];
+const rlCount = (g) => RL22_N[RL22.filter((b) => b.grp === g).length] || RL22.filter((b) => b.grp === g).length;
+
+/* 무인 솔루션 '로봇 라인업' 화면 — 고르기(두 묶음) → 고른 로봇 상세 하나 → 로봇과 함께 쓰는 장비. 스크립트가 없으면 여섯 모두 보인다 */
+function rlLineup() {
+  const dl = (rows) => `<dl class="rl-spec">${rows.map(([a, c]) => `<div><dt>${esc(a)}</dt><dd>${esc(c)}</dd></div>`).join('')}</dl>`;
+  const pick = (b) => `          <li><a class="rl-b" href="#${b.id}" role="tab" id="tab-${b.id}" aria-controls="${b.id}" aria-selected="${b.no === '01'}"><span class="rl-b__ph${b.fit ? ' is-fit' : ''}">${photo(P(b.photos[0]), '(max-width:860px) 30vw, 200px')}</span><span class="rl-b__tx"><em>${b.no} · ${esc(b.fn)}</em><b>${esc(b.name)}</b></span></a></li>`;
+  const grp = (g) => `        <div class="rl-g rl-g--${g}"><p class="rl-g__h"><b>${RL22_GRP[g][0]}</b><span>${RL22_GRP[g][1]}</span></p><ul role="presentation">
+${RL22.filter((b) => b.grp === g).map(pick).join('\n')}
+        </ul></div>`;
+  const detail = (b, i) => {
+    const nx = RL22[(i + 1) % RL22.length];
+    const p0 = P(b.photos[0]);
+    const thumbs = b.photos.length > 1 ? `<div class="rl-th">${b.photos.map((id, k) => `<button type="button" class="rl-th__b" aria-pressed="${k === 0}" data-cap="${esc(P(id).cap || P(id).alt)}">${photo(P(id), '96px')}<span class="sr">${esc(P(id).cap || P(id).alt)} 크게 보기</span></button>`).join('')}</div>` : '';
+    const kn = `<dl class="rl-kn">${b.kn.map(([v, u, l]) => `<div><dt>${esc(l)}</dt><dd><b>${esc(v)}</b>${u ? `<small>${esc(u)}</small>` : ''}</dd></div>`).join('')}</dl>`;
+    const vary = b.vary ? `<div class="rl-var"${b.vary[3] ? ' data-photo' : ''}><p class="rl-var__h">${esc(b.vary[0])}</p><div class="rl-seg" role="group" aria-label="${esc(b.vary[0])} 고르기">${b.vary[2].map(([t], k) => `<button type="button" aria-pressed="${k === b.vary[1]}" data-v="${k}">${esc(t)}</button>`).join('')}</div>${b.vary[2].map(([, rows], k) => `<div class="rl-var__p" data-p="${k}"${k === b.vary[1] ? '' : ' hidden'}><p class="rl-var__t">${esc(b.vary[2][k][0])}</p>${dl(rows)}</div>`).join('')}</div>` : dl(b.spec);
+    return `        <article class="rl-d" id="${b.id}" role="tabpanel" aria-labelledby="${b.id}-h">
+          <div class="rl-d__grid">
+            <div><figure class="rl-ph${b.fit ? ' is-fit' : ''}">${photo(p0, '(max-width:860px) 100vw, 620px', i === 0)}<figcaption>${esc(p0.cap || p0.alt)}</figcaption></figure>${thumbs}</div>
+            <div class="rl-d__t">
+              <p class="rl-d__k"><span class="rl-tag rl-tag--${b.grp}">${RL22_GRP[b.grp][0]}</span>${b.no} / ${String(RL22.length).padStart(2, '0')}</p>
+              <h3 id="${b.id}-h">${esc(b.name)}<small>${esc(b.en)}</small></h3>
+              <p class="rl-job">${unmJob(b)}</p>
+              ${kn}
+              <p class="rl-where"><span>들어가는 곳</span>${b.where.map((w) => `<i>${esc(w)}</i>`).join('')}</p>
+              ${vary}
+            </div>
+          </div>
+          <div class="rl-d__ex">${b.extra.map(([h, items]) => `<div class="rl-ex"><h4>${esc(h)}</h4><ul>${items.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>`).join('')}</div>
+          <div class="rl-d__f"><p class="rl-src">출처: ${esc(b.src)} — ① 회사소개서(2024) ② 기술소개서(2025)</p><a class="rl-nx" href="#${nx.id}">다음 로봇 · ${esc(nx.name)} ${arrow(18)}</a></div>
+        </article>`;
+  };
+  return `  <section class="rl" id="robots" aria-labelledby="rl-h">
+    <div class="wrap">
+      <div class="um-vh um-vh--row"><div><p class="um-k2">로봇 라인업</p><h2 id="rl-h">현장 장비 ${rlCount('field')}, 연구개발 시제품 ${rlCount('rd')}</h2></div><p class="um-vh__l">기술소개서(2025)의 분류대로 나눴습니다. 로봇을 고르면 하는 일 · 사양 · 시험 결과가 바로 아래에 나옵니다.</p></div>
+      <div class="rl-pick" role="tablist" aria-label="로봇 고르기">
+${grp('field')}
+${grp('rd')}
+      </div>
+      <div class="rl-ds">
+${RL22.map(detail).join('\n')}
+      </div>
+    </div>
+  </section>
+  <section class="rl-sys" id="with" aria-labelledby="rl-sys-h">
+    <div class="wrap">
+      <div class="rl-sys__h"><h3 id="rl-sys-h">로봇과 함께 쓰는 장비</h3><p>로봇은 설비 안에서, 사람은 밖의 제어 차량에서 일합니다.</p></div>
+      <ul class="rl-sys__l">
+${RL22_SYS.map(([id, t, d, s]) => `        <li><span class="rl-sys__ph">${photo(P(id), '(max-width:860px) 46vw, 290px')}</span><b>${esc(t)}</b><span>${esc(d)}</span><small>${esc(s)}</small></li>`).join('\n')}
+      </ul>
+    </div>
+  </section>
+`;
+}
+
 pages['unmanned.html'] = () => {
   const c = CFG.pages.unmanned;
   const v = c.v14;
@@ -3458,7 +3603,7 @@ ${UNM14.map((b) => `          <li><a href="#${b.id}"><span class="um-cmpm__h">${
   return head({
     file: 'unmanned.html', page: 'unmanned',
     title: `${c.title} | ${C.brand}`,
-    desc: '위험한 설비 안에는 로봇이 먼저 들어갑니다. 신정개발 무인 로봇 다섯 종류 — 하는 일과 들어가는 곳, 작업 절차, 적용 시 고려사항, 연구개발·특허.'
+    desc: '위험한 설비 안에는 로봇이 먼저 들어갑니다. 신정개발 무인 로봇 — 현장 장비 셋 · 연구개발 시제품 셋의 하는 일과 사양, 작업 절차, 적용 시 고려사항, 연구개발·특허.'
   }) + header('unmanned', null, 'unmanned.html') + `
 <main id="main">
   <section class="um-top" aria-labelledby="um-h">
@@ -3476,19 +3621,7 @@ ${UNM14.map((b) => `          <li><a href="#${b.id}"><span class="um-cmpm__h">${
   <nav class="um-lnb" aria-label="무인 솔루션 안"><div class="wrap"><div class="um-lnb__t"><a href="#robots" data-view="robots">로봇 라인업</a><a href="#method" data-view="method">작업 방식</a><a href="#rnd" data-view="rnd">연구개발 · 특허</a></div><a class="um-lnb__q" href="#ask">현장 문의 ${arrow(14)}</a></div></nav>   <!-- 시안C 21차: 세 화면 메뉴(대기업 사이트의 2단 메뉴처럼). 로봇 고르기는 화면 안 · 14차 .um-nav 는 쓰지 않음 -->
 
   <div class="um-view" id="v-robots" data-view="robots">
-  <section class="um-line" id="robots" aria-labelledby="um-line-h">
-    <div class="wrap">
-      <div class="um-vh um-vh--row"><div><p class="um-k2">로봇 라인업</p><h2 id="um-line-h">현장에 들어가는 로봇 ${['', '하나', '둘', '셋', '넷', '다섯', '여섯', '일곱'][UNM14.length] || UNM14.length}</h2></div><p class="um-vh__l">로봇을 고르면 하는 일 · 들어가는 곳 · 사양이 바로 아래에 나옵니다.</p></div>
-      <ul class="um-bots">
-${UNM14.map((b) => `        <li><a class="um-bot" href="#${b.id}"><span class="um-bot__ph${b.fit ? ' is-fit' : ''}">${photo(P(b.photo), '96px')}</span><span class="um-bot__tx">${unmFn(b)}<b>${esc(b.name)}</b></span></a></li>`).join('\n')}
-      </ul>
-    </div>
-  </section>
-
-  <div class="um-details">
-${UNM14.map(detail).join('\n')}
-  </div>
-
+${rlLineup()}
 
     <div class="wrap"><a class="um-next" href="#method"><span><small>다음</small><b>작업 방식</b><em>개발 배경 · 작업 절차 · 적용 시 고려사항</em></span>${arrow(28)}</a></div>
   </div>
@@ -3566,7 +3699,7 @@ ${UNM_STEPS.map((s) => `        <li class="${s.in && s.in[0] === 'r' ? 'is-robot
   <!-- 5. 연구개발·특허 -->
   <section class="section" id="rnd">
     <div class="wrap">
-      <div class="head"><div><h2>연구개발 · 특허</h2></div><p class="lead">2017년 11월 기업부설연구소를 세웠습니다. 로봇과 준설 관련 특허를 등록했고, 로봇 시제품을 만들어 성능시험을 했습니다. 시제품은 위의 현장 장비와 따로 적었습니다.</p></div>
+      <div class="head"><div><h2>연구개발 · 특허</h2></div><p class="lead">2017년 11월 기업부설연구소를 세웠습니다. 로봇과 준설 관련 특허를 등록했고, 로봇 시제품을 만들어 성능시험을 했습니다. 시제품 사양과 시험 결과는 로봇 라인업에 있습니다.</p></div>
       <div class="stats stats--flush" style="margin-bottom:36px">
         <div class="stat"><b>2017<i>.11</i></b><span>기업부설연구소 설립</span></div>
         <div class="stat"><b>${COMPANY17.patents.length}<i>건</i></b><span>등록 특허</span></div>   <!-- 2026-11-01: 대표 5건 → 전체 8건(① 28~29쪽 특허증) — 메인 · 회사 소개와 같은 수 -->
@@ -3580,32 +3713,19 @@ ${COMPANY17.patents.map(([, name, , d]) => `            <tr><td>${esc(name)}</td
           <p class="us-src">회사소개서(2024) 28~29쪽 특허증 · 이 밖에 출원 4건 <a class="tlink" href="company.html#credentials">특허증 원본 보기 →</a></p>
         </div>
       </div>
-      <details class="us-fold us-fold--rnd" style="margin-top:28px"><summary>로봇 세대 · 시제품 · 연구개발 과제 자세히</summary>   <!-- 2026-11-01 빼기: 로봇 제조사처럼 읽히지 않게 접어 둔다 -->
-${UNM_GENS_HTML}
-        <div class="us-fold__b">
-          <h3>로봇 시제품</h3>
-          <p class="note">벽면/천장 부착형은 KCL 성능시험(입회시험)을 거쳤습니다.</p>
-          <table><thead><tr><th>로봇</th><th>크기 · 무게</th><th>구동 · 조종</th></tr></thead><tbody>
-            <tr><td>벽면/천장 부착형 (Wall/Ceiling Mobile Robot)</td><td>480×660×325mm · 59.5kg</td><td>유압 140bar 캐터필러 · 조이스틱/카메라 자율 제어</td></tr>
-            <tr><td>흡입/준설 (Screw Mobile Robot)</td><td>490×730×260mm · 61.2kg</td><td>유압 최대 140bar 스크류 · 조이스틱/카메라 자율 제어</td></tr>
-            <tr><td>흡입/준설 (Grinding Mobile Robot)</td><td>490×1,010×260mm · 81kg</td><td>유압 최대 140bar 스크류 · 조이스틱/카메라 자율 제어</td></tr>
-            <tr><td>파쇄 (Splinter Robot, Caterpillar)</td><td>415×1,140×400mm · 79.2kg</td><td>유압 최대 140bar 캐터필러 · 조이스틱</td></tr>
-            <tr><td>파쇄 (Splinter Robot, Screw)</td><td>490×1,010×260mm · 87.5kg</td><td>유압 최대 140bar 스크류 · 조이스틱</td></tr>
-          </tbody></table>
-        </div>
-        <h3 class="us-fold__h">연구개발 과제 ${PROCESS.projects.length}건</h3>
+      <div class="um-proj"><h3>연구개발 과제 ${PROCESS.projects.length}건</h3>
         <ul>
           <li>능동형 촉매 적재장치 — 촉매 반응탑 내 고체 촉매의 고밀도 적층 · 공압</li>
           <li>석유화학 저장탱크 협업형 클리닝 시스템 — 고위험물 저장탱크 내부 세정 · 유압</li>
           <li>수중 슬러지 수거 무인 자율 이동 로봇 시스템 — 하수도 슬러지 제거 · 유압</li>
         </ul>
-        <p class="us-src">출처: 기술소개서(2025) 연구개발 (PROCESS.projects 과제 · 활용 · 구동)</p>
-      </details>
+        <p class="us-src">출처: 기술소개서(2025) 연구개발 (PROCESS.projects 과제 · 활용 · 구동) · 로봇 세대와 시제품 사양은 로봇 라인업에 있습니다 <a class="tlink" href="#r-wall">연구개발 시제품 보기 →</a></p>
+      </div>
       <p class="doc-link"><a class="tlink" href="${DOC_TECH}" target="_blank" rel="noopener">기술소개서 (2025) 보기 →</a></p>
 ${SRC_LINE}    </div>
   </section>
 
-    <div class="wrap"><a class="um-next" href="#robots"><span><small>처음으로</small><b>로봇 라인업</b><em>현장에 들어가는 로봇</em></span>${arrow(28)}</a></div>
+    <div class="wrap"><a class="um-next" href="#robots"><span><small>처음으로</small><b>로봇 라인업</b><em>현장 장비 ${rlCount('field')} · 연구개발 시제품 ${rlCount('rd')}</em></span>${arrow(28)}</a></div>
   </div>
 
   <section class="c7-end um-ask" id="ask" aria-labelledby="um-ask-h"><div class="wrap">   <!-- 시안C 21차: 회사 소개(18차)와 같은 문의 띠 — 글은 예전 띠 문장을 줄임 -->
