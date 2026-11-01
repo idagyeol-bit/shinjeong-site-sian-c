@@ -3991,3 +3991,148 @@ main.s6--bare .s6-nav { margin-top: 0; }
   .um-next { padding: 20px 0; } .um-next b { font-size: 20px; } .um-next em { font-size: 13px; }
 }
 @media (prefers-reduced-motion: reduce) { .um-next svg { transition: none; } }
+
+/* ===== 시안C 22차: 무인 솔루션 로봇 라인업 — 현장 장비 셋 + 연구개발 시제품 셋 · 로봇과 함께 쓰는 장비 =====
+   색: 남색(고른 것) · 회색 선 · 연회색 바탕. 초록은 '연구개발 시제품' 글자 · 꼬리표만(14차 --um-g). 21차 .um-line · .um-bot · .um-rd 규칙은 남겨 둔다(쓰지 않음) */
+.rl { padding: clamp(48px, 5vw, 72px) 0 clamp(40px, 4vw, 56px); background: #fff; }
+.rl .um-vh { margin-bottom: clamp(24px, 3vw, 36px); }
+
+/* 고르기 줄 — 두 묶음 */
+.rl-pick { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; }
+.rl-g__h { display: flex; align-items: baseline; gap: 10px; margin: 0 0 10px; font-size: 14px; }
+.rl-g__h b { font-weight: 800; color: var(--ink); }
+.rl-g__h span { color: var(--muted); font-size: 13px; }
+.rl-g--rd .rl-g__h b { color: var(--um-g, #1d7a4c); }
+.rl-g ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); }
+.rl-g li + li { border-left: 1px solid var(--line); }
+.rl-b { position: relative; display: flex; text-decoration: none; flex-direction: column; gap: 10px; width: 100%; height: 100%; padding: 14px 14px 16px; border: 0; background: none; text-align: left; font: inherit; color: var(--ink); cursor: pointer; }
+.rl-b::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 3px; background: transparent; }
+.rl-b:hover { background: var(--soft); }
+.rl-b[aria-selected="true"] { background: var(--soft); }
+.rl-b[aria-selected="true"]::before { background: var(--navy); }
+.rl-b__ph { display: block; aspect-ratio: 3 / 2; overflow: hidden; background: #eef0f2; }
+.rl-b__ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rl-b__tx em { display: block; font-style: normal; font-size: 12.5px; font-weight: 700; color: var(--muted); }
+.rl-b__tx b { display: block; margin-top: 3px; font-size: 15.5px; line-height: 1.35; letter-spacing: -0.02em; word-break: keep-all; }
+.rl-b[aria-selected="true"] .rl-b__tx b { color: var(--navy); }
+.rl-b:focus-visible { outline: 2px solid var(--brand); outline-offset: -2px; }
+
+/* 상세 */
+.rl-ds { margin-top: clamp(36px, 4vw, 56px); scroll-margin-top: calc(var(--header-h) + 64px); }
+.rl-d[hidden] { display: none; }
+.rl-d__grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 64px); align-items: start; }
+.rl-ph { margin: 0; }
+.rl-ph img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; background: #eef0f2; }
+.rl-ph figcaption { margin-top: 8px; font-size: 13px; color: var(--muted); }
+.rl-th { display: flex; gap: 8px; margin-top: 12px; }
+.rl-th__b { width: 96px; padding: 0; border: 1px solid var(--line); background: none; cursor: pointer; }
+.rl-th__b img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; opacity: .7; }
+.rl-th__b { position: relative; }
+.rl-th__b[aria-pressed="true"] { border-color: var(--navy); box-shadow: inset 0 0 0 1px var(--navy); }
+.rl-th__b[aria-pressed="true"] img, .rl-th__b:hover img { opacity: 1; }
+.rl-d .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.rl-ph img, .rl-th__b img { height: auto; }
+
+.rl-d__k { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font-size: 13px; font-weight: 700; color: var(--muted); }
+.rl-tag { padding: 3px 8px; font-size: 12px; font-weight: 800; border: 1px solid currentColor; }
+.rl-tag--field { color: var(--navy); }
+.rl-tag--rd { color: var(--um-g, #1d7a4c); }
+.rl-d__t h3 { margin: 0; font-size: clamp(28px, 3vw, 42px); line-height: 1.2; letter-spacing: -0.04em; color: var(--ink); word-break: keep-all; }
+.rl-d__t h3 small { display: block; margin-top: 6px; font-size: 15px; font-weight: 600; letter-spacing: 0; color: var(--muted); }
+.rl-job { margin: 18px 0 0; padding-bottom: 22px; border-bottom: 1px solid var(--ink); font-size: 18px; line-height: 1.6; color: var(--text); word-break: keep-all; }
+.rl-job b { color: var(--ink); }
+
+/* 숫자 셋 */
+.rl-kn { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; border-bottom: 1px solid var(--line); }
+.rl-kn div { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 6px; padding: 18px 14px 18px 0; }
+.rl-kn div + div { padding-left: 16px; border-left: 1px solid var(--line); }
+.rl-kn dd { margin: 0; color: var(--navy); }
+.rl-kn dd b { font-size: clamp(26px, 2.4vw, 34px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
+.rl-kn dd small { margin-left: 3px; font-size: 14px; font-weight: 700; }
+.rl-kn dt { font-size: 13px; line-height: 1.45; color: var(--muted); word-break: keep-all; }
+
+.rl-where { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 16px 0 0; }
+.rl-where span { margin-right: 8px; font-size: 13px; color: var(--muted); }
+.rl-where i { padding: 4px 10px; border: 1px solid var(--line); font-style: normal; font-size: 13.5px; font-weight: 600; color: var(--ink); }
+
+/* 세대 · 크기 · 모델 고르기 */
+.rl-var { margin-top: 22px; }
+.rl-var__h { margin: 0 0 8px; font-size: 13px; font-weight: 700; color: var(--muted); }
+.rl-seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--line); }
+.rl-seg button { min-width: 64px; padding: 9px 14px; border: 0; background: #fff; font: inherit; font-size: 14px; font-weight: 700; color: var(--muted); cursor: pointer; }
+.rl-seg button + button { border-left: 1px solid var(--line); }
+.rl-seg button[aria-pressed="true"] { background: var(--navy); color: #fff; }
+.rl-var__p[hidden] { display: none; }
+.rl-spec { margin: 14px 0 0; }
+.rl-spec div { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.rl-spec dt { color: var(--muted); }
+.rl-spec dd { margin: 0; color: var(--ink); font-weight: 600; word-break: keep-all; }
+.rl-d__t > .rl-spec { margin-top: 22px; }
+
+/* 적용 범위 · 성능시험 */
+.rl-d__ex { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: clamp(28px, 3vw, 40px); }
+.rl-ex { padding: 22px 24px; background: var(--soft); }
+.rl-ex h4 { margin: 0 0 10px; font-size: 15px; color: var(--ink); }
+.rl-ex ul { margin: 0; padding-left: 18px; }
+.rl-ex li { margin: 4px 0; font-size: 14.5px; line-height: 1.6; color: var(--text); }
+.rl-d__f { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+.rl-src { margin: 0; font-size: 12.5px; color: var(--muted); }
+.rl-nx { flex: none; display: inline-flex; text-decoration: none; align-items: center; gap: 8px; padding: 10px 0; border: 0; background: none; font: inherit; font-size: 15px; font-weight: 700; color: var(--navy); cursor: pointer; }
+.rl-nx:hover svg { transform: translateX(4px); } .rl-nx svg { transition: transform .2s; }
+
+/* 함께 쓰는 장비 */
+.rl-sys { padding: clamp(40px, 4vw, 64px) 0; background: var(--soft); }
+.rl-sys__h { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 22px; }
+.rl-sys__h h3 { margin: 0; font-size: clamp(22px, 2vw, 28px); letter-spacing: -0.03em; color: var(--ink); }
+.rl-sys__h p { margin: 0; font-size: 15px; color: var(--text); }
+.rl-sys__l { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+.rl-sys__l li { display: flex; flex-direction: column; gap: 6px; padding-bottom: 16px; background: #fff; }
+.rl-sys__ph { display: block; aspect-ratio: 3 / 2; overflow: hidden; margin-bottom: 8px; }
+.rl-sys__ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rl-sys__l b, .rl-sys__l span, .rl-sys__l small { padding: 0 16px; }
+.rl-sys__l b { font-size: 16px; color: var(--ink); }
+.rl-sys__l span { font-size: 14px; line-height: 1.55; color: var(--text); word-break: keep-all; }
+.rl-sys__l small { font-size: 12px; color: var(--muted); }
+
+/* 스크립트가 없으면 여섯 · 세대 · 모델이 모두 보인다(고르기 단추는 숨김, 세대 이름은 표 위에) */
+.rl-var__t { margin: 16px 0 0; font-size: 14px; font-weight: 800; color: var(--ink); }
+.um-js .rl-var__t { display: none; }
+html:not(.um-js) .rl-seg { display: none; }
+html:not(.um-js) .rl-var__p[hidden] { display: block !important; }   /* 22차 고침: 맨 앞 [hidden] { display: none !important } 를 이기게 */
+html:not(.um-js) .rl-d + .rl-d { margin-top: 72px; padding-top: 48px; border-top: 1px solid var(--line); }
+.rl-sys { scroll-margin-top: 0; }
+
+/* 메인 '로봇이 하는 일' — 여섯 칸 (22차) */
+.u14__jobs--6 { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 18px; }
+.u14__jobs--6 .u14-job p { font-size: 15.5px; }
+.u14-job small i { font-style: normal; font-weight: 700; color: var(--um-g, #1d7a4c); }
+@media (max-width: 1100px) and (min-width: 861px) { .u14__jobs--6 { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 32px; } }
+
+@media (max-width: 1100px) {
+  .rl-pick { grid-template-columns: 1fr; gap: 22px; }
+}
+@media (max-width: 860px) {
+  .rl-b { padding: 10px 8px 12px; gap: 8px; }
+  .rl-b__tx em { font-size: 11.5px; }
+  .rl-b__tx b { font-size: 14px; }
+  .rl-g__h span { font-size: 12px; }
+  .rl-d__grid { grid-template-columns: 1fr; }
+  .rl-th__b { width: 72px; }
+  .rl-job { font-size: 16.5px; }
+  .rl-kn div { padding: 14px 8px 14px 0; } .rl-kn div + div { padding-left: 10px; }
+  .rl-kn dd b { font-size: 24px; } .rl-kn dd small { font-size: 12.5px; }
+  .rl-kn dt { font-size: 12px; }
+  .rl-spec div { grid-template-columns: 112px minmax(0, 1fr); gap: 12px; font-size: 14.5px; }
+  .rl-seg { display: flex; } .rl-seg button { flex: 1; min-width: 0; padding: 10px 4px; }
+  .rl-d__f { flex-direction: column-reverse; align-items: stretch; }
+  .rl-nx { justify-content: space-between; padding: 14px 16px; border: 1px solid var(--line); }
+  .rl-sys__h { flex-direction: column; align-items: start; gap: 6px; }
+  .rl-sys__l { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .rl-sys__l b, .rl-sys__l span, .rl-sys__l small { padding: 0 12px; }
+  .rl-sys__l b { font-size: 15px; } .rl-sys__l span { font-size: 13px; }
+}
+/* 연구개발 · 특허 화면의 과제 셋 (22차: 접기 → 펼침, 세대 · 시제품은 라인업으로) */
+.um-proj { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); }
+.um-proj h3 { margin: 0 0 10px; font-size: 17px; color: var(--ink); }
+.um-proj ul { margin: 0 0 10px; padding-left: 18px; }
+.um-proj li { margin: 4px 0; font-size: 15px; line-height: 1.6; color: var(--text); }
