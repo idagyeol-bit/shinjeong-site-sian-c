@@ -3829,3 +3829,7 @@ html:has(.c7-lb.is-open), html:has(.c7-lb.is-open) body, .c7-lb, .c7-lb__st { ov
   .c7-tb { margin-top: 20px; } .c7-tb div { padding: 11px 0; }
   .c7-lab { margin-top: 20px; padding: 14px 16px; }
 }
+
+/* 사업분야 상세 — 공통 머리 없이 분야부터 (2026-11-01, 설정 look.svcDetailTop:false) */
+main.s6--bare { padding-top: var(--header-h); }
+main.s6--bare .s6-nav { margin-top: 0; }

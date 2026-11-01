@@ -2823,6 +2823,7 @@ SERVICES.forEach((s, idx) => {
     const N = String(SERVICES.length).padStart(2, '0'), n = s16Num(s);
     const prev = SERVICES[idx - 1], next = SERVICES[idx + 1] || SERVICES[0];
     const eg = EQUIP_GROUPS.find((g) => g.svc === s.id);
+    /* 2026-11-01: 설정 look.svcDetailTop:false 면 상세 쪽은 공통 머리(svc16Top) 없이 분야부터 — 공통 머리는 services.html 에만 */
     const use = v.use ? SVC15_USE[v.use] : null;
     const hasNote = !!(use || v.tech.length || s.id === 'S01');
     const ch = (lab) => `<p class="s6-ch"><i>${n}</i>${esc(s.title)}<span>${lab}</span></p>`;
@@ -2861,8 +2862,8 @@ SERVICES.forEach((s, idx) => {
       desc: s.desc,
       jsonld: { '@context': 'https://schema.org', '@type': 'Service', name: s.title, description: s.summary, provider: { '@type': 'Organization', name: C.name, url: SITE_URL } }
     }) + header('services', s.id, s.file) + `
-<main id="main" class="s6">
-` + svc16Top(s) + nav + `
+<main id="main" class="s6${CFG.look && CFG.look.svcDetailTop === false ? ' s6--bare' : ''}">
+` + (CFG.look && CFG.look.svcDetailTop === false ? '' : svc16Top(s)) + nav + `
   <section class="s6-ov" id="sv-ov" aria-labelledby="sv-h"><div class="wrap">
     <div class="s6-pg"><a href="${prev ? prev.file + '#sv-ov' : 'services.html'}">‹ ${prev ? '이전' : '전체'}</a><span><b>${n}</b> / ${N}</span><a href="${next.file}#sv-ov">다음 ›</a></div>
     <div class="s6-ov__grid">
