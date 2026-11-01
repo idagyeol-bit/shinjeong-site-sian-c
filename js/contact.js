@@ -18,17 +18,27 @@
     var boxWrap = document.getElementById('copyWrap');
 
     /* 주소로 넘어온 맥락(#/contact?service=S04 형태)을 업무 선택에 반영 */
+    var presetTitle = '';
     (function preset() {
-      var sel = form.querySelector('[name="service"]');
-      if (!sel) return;
       var params = new URLSearchParams(window.location.search);
       var v = params.get('service');
       if (!v && window.location.hash.indexOf('?') !== -1) {
         v = new URLSearchParams(window.location.hash.split('?')[1]).get('service');
       }
       if (!v) return;
-      var opt = sel.querySelector('option[value="' + v.replace(/"/g, '') + '"]');
-      if (opt) sel.value = opt.value;
+      var sel = form.querySelector('[name="service"]');
+      if (sel) {
+        var opt = sel.querySelector('option[value="' + v.replace(/"/g, '') + '"]');
+        if (opt) sel.value = opt.value;
+        return;
+      }
+      /* 2026-11-01: 업무 선택 칸이 없는 양식(시안B 33차 슬림)에서는 문의 내용 첫 줄과 메일 제목에 업무 이름을 넣는다 */
+      var map = {};
+      try { map = JSON.parse(form.getAttribute('data-svc') || '{}'); } catch (err) { map = {}; }
+      var body = form.querySelector('[name="body"]');
+      if (!map[v] || !body) return;
+      presetTitle = map[v];
+      if (!body.value.trim()) body.value = '문의 업무: ' + presetTitle + '\n';
     })();
 
     function setBad(field, bad, msg) {
@@ -59,7 +69,7 @@
       setBad(email, emailBad, emailVal ? '이메일 주소 형식을 확인해 주세요.' : '회신받으실 이메일을 입력해 주세요.');
       if (emailBad && !bad) bad = email;
 
-      var bodyBad = body.value.trim().length < 5;
+      var bodyBad = body.value.replace(/^문의 업무: .*\n?/, '').trim().length < 5;   // 미리 채운 업무 줄만 있으면 아직 안 쓴 것으로 본다
       setBad(body, bodyBad, '문의 내용을 조금 더 적어 주세요.');
       if (bodyBad && !bad) bad = body;
 
@@ -78,7 +88,7 @@
       };
 
       var has = function (n) { return !!form.querySelector('[name="' + n + '"]'); };   // 시안B 33차: 양식에 없는 칸(문의 업무·대상 설비·현장 위치)은 메일 본문에서도 뺀다
-      var service = get('service');
+      var service = get('service') || presetTitle;
       var subject = '[현장 문의] ' + (service || '문의') + ' — ' + get('name');
 
       var lines = [

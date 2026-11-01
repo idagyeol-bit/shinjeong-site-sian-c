@@ -3320,7 +3320,7 @@ pages['cases.html'] = () => {
       ${x.robotRows.length ? `<div><h3>로봇 투입 기록 <em class="r">${x.robotRows.length}건</em></h3><ul class="csd__rows">${rowsHtml(x.robotRows, true)}</ul><button type="button" class="csd__more" hidden></button><p class="csd__src">${esc(CASE_SRC.robot)}</p></div>` : ''}
       <div><h3>주요 수행 실적 <em class="n">2020~2023</em></h3><ul class="csd__rows">${rowsHtml(x.rows, false)}</ul><button type="button" class="csd__more" hidden></button><p class="csd__src">${esc(CASE_SRC.rows)}</p></div>
     </div>
-    <div class="wrap csd__foot"><a class="btn btn--line btn--sm" href="contact.html">${esc(x.name)} ${esc(c.ask)} ${arrow(16)}</a><a class="tlink" href="${svc(x.svc).file}">${esc(svc(x.svc).title)} 업무 보기 ${arrow(14)}</a></div>
+    <div class="wrap csd__foot"><a class="btn btn--line btn--sm" href="contact.html?service=${x.svc}">${esc(x.name)} ${esc(c.ask)} ${arrow(16)}</a><a class="tlink" href="${svc(x.svc).file}">${esc(svc(x.svc).title)} 업무 보기 ${arrow(14)}</a></div>
   </article>`;
   };
   return head({
@@ -3958,7 +3958,7 @@ pages['contact.html'] = () => head({
         <div data-reveal>
           <h2>문의 양식</h2>
 
-          <form class="form mt-28" id="inquiryForm" novalidate>
+          <form class="form mt-28" id="inquiryForm" novalidate data-svc="${esc(JSON.stringify(Object.fromEntries(SERVICES.map((x) => [x.id, x.title]))))}">   <!-- 2026-11-01: 업무 이름표 — 주소의 ?service=S0x 를 문의 내용 첫 줄로(js/contact.js) -->
             <div class="form__row">
               <div class="field">
                 <label for="f-name">이름 또는 회사명 <em aria-hidden="true">*</em><span class="sr-only">(필수)</span></label>
