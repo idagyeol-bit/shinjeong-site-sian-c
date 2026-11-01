@@ -3933,3 +3933,61 @@ main.s6--bare .s6-nav { margin-top: 0; }
   .cs9__st { grid-template-columns: repeat(2, minmax(0, 1fr)); } .cs9__st dd { font-size: 28px; } .cs9__st > div:nth-child(3) { grid-column: 1 / -1; padding-left: 0; border-left: 0; }
   .cs9__act { flex-direction: column; align-items: stretch; } .cs9__btn { justify-content: center; } .cs9__act .tlink { align-self: flex-start; }
 }
+
+/* ===================== 시안C 21차: 무인 솔루션을 세 화면으로 — 로봇 라인업 · 작업 방식 · 연구개발 · 특허 (미리보기 '무인 솔루션 세 화면', 이다결 님 B) =====================
+   남색은 맨 위 머리 한 번. 그 아래 흰 메뉴 줄(.um-lnb) 세 칸 + '현장 문의'. 로봇 고르기는 '로봇 라인업' 화면 안의 흰 줄. 화면 끝마다 '다음' 칸(.um-next).
+   14차 .um-nav 와 남색 라인업 띠 규칙은 지우지 않는다(새 페이지는 .um-view 안에서 덮어쓴다) */
+.um-lnb { position: sticky; top: var(--header-h); z-index: 40; background: #fff; border-bottom: 1px solid var(--line); }
+.um-lnb .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.um-lnb__t { display: flex; gap: clamp(28px, 3vw, 48px); }
+.um-lnb__t a { position: relative; padding: 20px 0 19px; font-size: 17px; font-weight: 700; color: var(--muted); }
+.um-lnb__t a:hover { color: var(--ink); }
+.um-lnb__t a[aria-current="page"] { color: var(--navy); }
+.um-lnb__t a[aria-current="page"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--navy); }
+.um-lnb__q { flex: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; padding: 9px 16px; border: 1px solid var(--line); font-size: 14px; font-weight: 700; color: var(--navy); }
+.um-lnb__q:hover { border-color: var(--navy); }
+.um-lnb a:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.um-view[hidden] { display: none !important; }
+.um-k2 { display: flex; align-items: center; gap: 12px; margin: 0 0 14px; font-size: 14px; font-weight: 800; color: var(--brand); } .um-k2::before { content: ""; width: 28px; height: 2px; background: currentColor; }
+.um-vh { margin-bottom: clamp(24px, 3vw, 40px); }
+.um-vh h2 { margin: 0; font-size: clamp(26px, 2.6vw, 38px); line-height: 1.25; letter-spacing: -0.04em; color: var(--ink); }
+.um-vh--row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: end; }
+.um-vh__l { margin: 0; font-size: 16px; line-height: 1.75; color: var(--text); }
+/* 로봇 고르기: 남색 띠 → 흰 줄 */
+.um-view .um-line { background: #fff; color: var(--ink); padding: clamp(48px, 5vw, 72px) 0 0; margin: 0; }
+.um-view .um-bots { gap: 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); }
+.um-view .um-bots li + li { border-left: 1px solid var(--line); }
+.um-view .um-bot { position: relative; height: 100%; border: 0; border-radius: 0; padding: 16px; color: var(--ink); grid-template-columns: 72px minmax(0, 1fr); }
+.um-view .um-bot::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 3px; background: transparent; }
+.um-view .um-bot:hover { background: var(--soft); }
+.um-view .um-bot[aria-current="true"] { background: var(--soft); color: var(--ink); } .um-view .um-bot[aria-current="true"]::before { background: var(--navy); }
+.um-view .um-bot[aria-current="true"] b { color: var(--navy); }
+.um-view .um-bot .um-fn, .um-view .um-bot .um-fn em, .um-view .um-bot[aria-current="true"] .um-fn { color: var(--muted); }
+.um-view .um-bot__ph { width: 72px; height: 54px; border-radius: 0; }
+.um-view .um-bot:focus-visible { outline: 2px solid var(--brand); outline-offset: -2px; }
+.um-view .um-rd { padding-top: clamp(36px, 4vw, 56px); }
+.um-view .us-key .um-vh { margin-bottom: 26px; }
+/* 화면 끝 '다음' 칸 */
+.um-next { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin: 0 0 clamp(56px, 6vw, 88px); padding: 26px 0; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--line); color: var(--ink); }
+.um-next small { display: block; font-size: 13px; font-weight: 800; color: var(--brand); }
+.um-next b { display: block; margin-top: 4px; font-size: clamp(22px, 2vw, 28px); letter-spacing: -0.03em; }
+.um-next em { display: block; margin-top: 4px; font-style: normal; font-size: 14.5px; color: var(--muted); }
+.um-next svg { flex: none; width: 28px; height: 28px; color: var(--navy); transition: transform .2s; } .um-next:hover svg { transform: translateX(6px); }
+.um-next:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
+.um-ask { scroll-margin-top: calc(var(--header-h) + 60px); }
+@media (max-width: 860px) {
+  .um-lnb .wrap { padding-inline: 0; } .um-lnb__t { flex: 1; gap: 0; }
+  .um-lnb__t a { flex: 1; text-align: center; padding: 15px 4px 14px; font-size: 15px; } .um-lnb__q { display: none; }
+  .um-vh--row { grid-template-columns: 1fr; gap: 10px; } .um-vh__l { font-size: 14.5px; }
+  .um-view .um-line { padding-top: 32px; }
+  .um-view .um-bots { display: grid; grid-auto-flow: column; grid-auto-columns: 132px; grid-template-columns: none; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); border: 0; }
+  .um-view .um-bots::-webkit-scrollbar { display: none; }
+  .um-view .um-bots li { border: 0 !important; scroll-snap-align: start; }
+  .um-view .um-bot { display: flex; flex-direction: column; align-items: stretch; gap: 8px; padding: 0 0 10px; background: none !important; border-bottom: 3px solid transparent; }
+  .um-view .um-bot::before, .um-view .um-bot::after { display: none; }
+  .um-view .um-bot[aria-current="true"] { border-bottom-color: var(--navy); }
+  .um-view .um-bot__ph { width: 100%; height: 88px; }
+  .um-view .um-bot b { font-size: 14px; }
+  .um-next { padding: 20px 0; } .um-next b { font-size: 20px; } .um-next em { font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) { .um-next svg { transition: none; } }
