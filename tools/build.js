@@ -4450,12 +4450,22 @@ const variantOut = loadVariants(ONLY).map((v) => {
 VARIANT = null;
 CFG = BASE_CFG;
 
+/* 시안C 20차: 고친 CSS · JS 가 방문자 브라우저에 바로 반영되게 — 페이지의 css/ · js/ 주소 끝에 파일 내용 지문(?v=8글자)을 붙인다.
+   파일 내용이 바뀌면 지문도 바뀌어 브라우저가 새 파일을 받는다(예전 파일을 기억해 새 HTML 과 어긋나 화면이 깨지는 일 방지). 파일이 없으면 주소를 그대로 둔다 */
+const BUST = {};
+function bust(html) {
+  return html.replace(/(href|src)="((?:\.\.\/)?)((?:css|js)\/[^"?#]+\.(?:css|js))"/g, (m, a, up, f) => {
+    if (!(f in BUST)) { const p = path.join(OUT, f); BUST[f] = fs.existsSync(p) ? require('crypto').createHash('sha1').update(fs.readFileSync(p)).digest('hex').slice(0, 8) : ''; }
+    return BUST[f] ? `${a}="${up}${f}?v=${BUST[f]}"` : m;
+  });
+}
+
 /* 3) 쓰기 — 기본판 */
 fs.writeFileSync(path.join(OUT, 'css', 'tokens.css'), tokens, 'utf8');
 
 let n = 0;
 Object.keys(pages).forEach((file) => {
-  fs.writeFileSync(path.join(OUT, file), pageHtml[file], 'utf8');
+  fs.writeFileSync(path.join(OUT, file), bust(pageHtml[file]), 'utf8');   // 시안C 20차: css/js 주소에 지문
   n++;
 });
 
@@ -4480,7 +4490,7 @@ console.log(`생성 완료: HTML ${n}개 + css/tokens.css + ${PREVIEW ? 'robots.
 /* 4) 쓰기 — 시안 (설정 파일이 없어진 시안의 폴더는 지우지 않는다. 지우는 법은 CLAUDE.md "시안 (41차)") */
 variantOut.forEach((v) => {
   fs.mkdirSync(path.join(OUT, v.name), { recursive: true });
-  Object.keys(v.html).forEach((f) => fs.writeFileSync(path.join(OUT, v.name, f), v.html[f], 'utf8'));
-  fs.writeFileSync(path.join(OUT, 'css', `tokens.${v.name}.css`), v.css, 'utf8');
+  fs.writeFileSync(path.join(OUT, 'css', `tokens.${v.name}.css`), v.css, 'utf8');   // 시안C 20차: 지문을 만들려고 CSS 를 먼저 쓴다
+  Object.keys(v.html).forEach((f) => fs.writeFileSync(path.join(OUT, v.name, f), bust(v.html[f]), 'utf8'));
   console.log(`시안 ${v.name} (${v.label}): HTML ${Object.keys(v.html).length}개 + css/tokens.${v.name}.css → ${v.name}/`);
 });
