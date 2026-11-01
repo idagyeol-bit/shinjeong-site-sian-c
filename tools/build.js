@@ -1413,7 +1413,7 @@ function cta(o) {
 `;
 }
 
-function footer() {
+function footer(o) {   // 시안C 18차: o.noAsk — 본문 끝에 문의 띠가 있는 페이지(회사 소개 · 사업분야 상세)는 바닥글 윗줄 문의 줄을 그리지 않는다
   const g = CFG.common.footerGroups;   // 바닥글 묶음 제목 (40차, 설정 파일)
   const map = [
     { h: g.services, items: SERVICES.map((s) => ({ href: s.file, label: s.title })) },
@@ -1422,7 +1422,7 @@ function footer() {
     { h: g.contact, items: [{ href: 'contact.html', label: '현장 문의' }, { href: `mailto:${C.email}`, label: '이메일로 문의' }] }
   ];
   return `<footer class="ftr">
-  <div class="wrap">${contactFooterOnly() ? `
+  <div class="wrap">${contactFooterOnly() && !(o && o.noAsk) ? `
     <div class="ftrB-ask">   <!-- 시안B 26차: 바닥글 윗줄 소형 문의 줄 — 머리말 낱말·문의 버튼 문구·이메일 재사용(새 문장 없음) -->
       <span class="ftrB-ask__label">${esc(CFG.common.headerCta)}</span>
       <div class="ftrB-ask__act">
@@ -2891,7 +2891,7 @@ ${hasNote ? `  <section class="s6-sec s6-sec--soft" id="sv-note"><div class="wra
     <div><p class="s6-ch s6-ch--on"><i>${n}</i>${esc(s.title)}</p><h2>${esc(v.endQ)}</h2><p>${s.inquiryHint.map(esc).join(' · ')} 등을 알려 주시면 가능한 작업 범위와 진행 방법을 안내해 드립니다.</p></div>
     <ul><li><a href="contact.html?service=${s.id}">이 업무로 문의하기 ${arrow(18)}</a></li><li><a href="cases.html#${v15.case}"><span>${esc(s.title)} 적용 사례<small>이 분야에서 한 일과 로봇 투입 기록</small></span>${arrow(18)}</a></li><li><a href="${next.file}#sv-ov"><span>다음 분야 · ${esc(next.title)}<small>${s16Num(next)} / ${N}</small></span>${arrow(18)}</a></li></ul>
   </div></section>
-` + MAIN_END + footer() + foot(['service16.js']);
+` + MAIN_END + footer({ noAsk: true }) + foot(['service16.js']);
   };
 });
 
@@ -3898,9 +3898,9 @@ pages['company.html'] = () => {
       <div class="c7-loc"><div><h3>여수 본사</h3><p>${esc(C.address)}</p><p class="c7-map"><a href="${NV}${encodeURIComponent(C.address)}" target="_blank" rel="noopener">네이버 지도 ↗</a><a href="${KK}${encodeURIComponent(C.address)}" target="_blank" rel="noopener">카카오맵 ↗</a></p></div>
         <div><h3>서산 지사</h3><p>${esc(C.branch)}</p><p class="c7-map"><a href="${NV}${encodeURIComponent(C.branch)}" target="_blank" rel="noopener">네이버 지도 ↗</a></p></div></div>
       <dl class="c7-tb"><div><dt>회사명</dt><dd>${esc(C.name)} <small>${esc(C.brandEn)} CO., LTD.</small></dd></div><div><dt>대표 전화</dt><dd><a href="tel:${C.tel.replace(/-/g, '')}">${C.tel}</a></dd></div><div><dt>문의 가능 시간</dt><dd>${esc(C.hours)}</dd></div><div><dt>팩스</dt><dd>${C.fax}</dd></div><div><dt>이메일</dt><dd><a href="mailto:${C.email}">${C.email}</a></dd></div></dl>`, false) + `
-  <section class="c7-end"><div class="wrap">
-    <div><h2>어떤 업무에 해당하는지<br>모르셔도 괜찮습니다</h2><p>대상 설비와 작업 목적을 알려 주시면 맞는 업무와 진행 방법을 안내해 드립니다.</p></div>
-    <ul><li><a href="contact.html">${esc(CFG.common.cta.button)} ${arrow(18)}</a></li><li><a href="services.html"><span>사업분야<small>다섯 분야의 작업 방식과 장비</small></span>${arrow(18)}</a></li><li><a href="cases.html"><span>적용 사례<small>2020~2023년 수행 기록</small></span>${arrow(18)}</a></li></ul>
+  <section class="c7-end" aria-labelledby="c7-end-h"><div class="wrap">   <!-- 시안C 18차: 담백한 문의 띠 — 제목 · 한 문장 | 문의하기 · 이메일(누르면 복사, 글자 안내 없이 그림으로) -->
+    <div><h2 id="c7-end-h">현장 문의</h2><p>작업이 필요한 설비와 일정을 알려 주세요.</p></div>
+    <div class="c7-end__act"><a class="c7-end__go" href="contact.html">문의하기 ${arrow(18)}</a><button type="button" class="c7-end__mail" data-copy="${C.email}" title="눌러서 이메일 주소 복사" aria-label="이메일 주소 ${C.email} 복사"><span class="c7-end__ic"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3.5 6l8.5 7 8.5-7"/></svg></span><span class="c7-end__addr">${C.email}</span><span class="c7-end__cp" aria-hidden="true"><span class="c7-i-copy"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg></span><span class="c7-i-ok"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></span><span class="sr-only" aria-live="polite"></span></button></div>
   </div></section>
 
   <div class="c7-lb" role="dialog" aria-modal="true" aria-label="확대 보기" hidden>
@@ -3908,7 +3908,7 @@ pages['company.html'] = () => {
     <div class="c7-lb__st"><img alt=""></div>
     <div class="c7-lb__f"><button type="button" data-go="-1">‹ 이전</button><button type="button" class="c7-lb__zb">확대 / 줄이기</button><button type="button" data-go="1">다음 ›</button></div>
   </div>
-` + MAIN_END + footer() + foot(['company17.js']);
+` + MAIN_END + footer({ noAsk: true }) + foot(['company17.js']);
 };
 
 const contactSlim = () => !!(CFG.look && CFG.look.contactSlim);

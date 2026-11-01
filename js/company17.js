@@ -34,3 +34,16 @@
   var sx = null; st.addEventListener('touchstart', function (e) { if (!st.classList.contains('is-zoom')) sx = e.touches[0].clientX; }, { passive: true });
   st.addEventListener('touchend', function (e) { if (sx === null) return; var dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 50) show(cur + (dx < 0 ? 1 : -1)); sx = null; });
 })();
+
+/* 시안C 18차: 문의 띠의 이메일 — 누르면 주소 복사(안 되면 주소 글자를 선택해 둔다). 화면 표시는 그림만 바뀌고, 화면낭독기에만 글로 알린다 */
+(function () {
+  [].forEach.call(document.querySelectorAll('.c7-end [data-copy]'), function (b) {
+    var sr = b.querySelector('.sr-only'), addr = b.querySelector('.c7-end__addr'), t = null;
+    function done() { b.classList.add('is-done'); sr.textContent = '이메일 주소를 복사했습니다'; clearTimeout(t); t = setTimeout(function () { b.classList.remove('is-done'); sr.textContent = ''; }, 1600); }
+    function pick() { var r = document.createRange(); r.selectNodeContents(addr); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+    b.addEventListener('click', function () {
+      try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(b.dataset.copy).then(done, function () { pick(); done(); }); return; } } catch (e) {}
+      pick(); done();
+    });
+  });
+})();
