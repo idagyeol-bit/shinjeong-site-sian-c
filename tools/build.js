@@ -1418,7 +1418,7 @@ function footer() {
   const map = [
     { h: g.services, items: SERVICES.map((s) => ({ href: s.file, label: s.title })) },
     { h: g.tech, items: [{ href: 'unmanned.html', label: '무인 솔루션' }, { href: 'unmanned.html#robots', label: '현장 투입 로봇' }, { href: 'unmanned.html#how', label: '작업 절차' }, { href: 'service-dredging-sludge.html#dewater', label: '회수물 탈수 과정' }, { href: 'company.html#equipment', label: '보유 장비' }] },   // 시안C 9차: 장비·로봇 · 현장 진행 방식 페이지가 무인 솔루션(unmanned.html) 한 페이지로 합쳐져 모두 그쪽 구역으로, 보유 장비 표는 회사 소개로
-    { h: g.company, items: [{ href: 'cases.html', label: '적용 사례' }, { href: 'company.html', label: '회사 소개' }, { href: 'news.html', label: '소식' }, { href: DOC_PROFILE, label: '회사소개서 (PDF)', blank: true }, { href: DOC_TECH, label: '기술소개서 (PDF)', blank: true }] },
+    { h: g.company, items: [{ href: 'cases.html', label: '적용 사례' }, { href: 'company.html', label: '회사 소개' }, ...(CFG.nav.some((n) => n.key === 'news') ? [{ href: 'news.html', label: '소식' }] : []), { href: DOC_PROFILE, label: '회사소개서 (PDF)', blank: true }, { href: DOC_TECH, label: '기술소개서 (PDF)', blank: true }] },
     { h: g.contact, items: [{ href: 'contact.html', label: '현장 문의' }, { href: `mailto:${C.email}`, label: '이메일로 문의' }] }
   ];
   return `<footer class="ftr">

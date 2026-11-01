@@ -300,7 +300,7 @@ module.exports = {
     { href: 'unmanned.html', label: '무인 솔루션', key: 'unmanned' },        // 9차: 새 페이지 unmanned.html (7차엔 메인의 무인 솔루션 칸 index.html#unmanned)
     { href: 'cases.html', label: '적용 사례', key: 'cases' },   // 시안C 13차: '수행 이력' → '적용 사례'. projects.html 은 남아 있다
     { href: 'company.html', label: '회사 소개', key: 'company' },
-    { href: 'news.html', label: '소식', key: 'news' }                        // 7차 신설
+    // { href: 'news.html', label: '소식', key: 'news' }                     // 7차 신설. 2026-11-01 이다결 님 결정: 메뉴 · 바닥글에서 뺌(최근 항목이 2023.05, 연혁은 회사 소개에 있음). news.html 은 그대로 만든다 — 줄 앞의 // 를 지우면 다시 생긴다
   ],
   pages: {                                 // 7차: 메인 밖 새 페이지의 글
     cases: {                               // 시안C 13차: 적용 사례 페이지(cases.html)
@@ -313,7 +313,7 @@ module.exports = {
     news: {
       title: '소식',
       lead: '인증·수상·연구소 소식을 날짜순으로 정리했습니다.',
-      src: '출처: 회사소개서(2024) 연혁. 새 소식은 tools/build.js 의 NEWS_EXTRA 에 더합니다.'
+      src: '출처: 회사소개서(2024) 연혁'   // 2026-11-01: 화면에 보이던 작업 안내('새 소식은 tools/build.js 의 NEWS_EXTRA 에 더합니다')를 뺌 — 안내는 build.js 주석에 있다
     },
     unmanned: {                            // 9차: 무인 솔루션 페이지(unmanned.html) 머리 글. 본문 글자는 tools/build.js(지시서 9차 부록 4 그대로)
       title: '무인 솔루션',
