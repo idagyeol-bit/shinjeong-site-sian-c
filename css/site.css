@@ -3833,3 +3833,16 @@ html:has(.c7-lb.is-open), html:has(.c7-lb.is-open) body, .c7-lb, .c7-lb__st { ov
 /* 사업분야 상세 — 공통 머리 없이 분야부터 (2026-11-01, 설정 look.svcDetailTop:false) */
 main.s6--bare { padding-top: var(--header-h); }
 main.s6--bare .s6-nav { margin-top: 0; }
+
+/* 적용 사례 (2026-11-01): 머리 아래 결과 요약 · 로봇 기록이 없는 분야는 실적 한 칸 */
+.csd-sum { background: #fff; color: var(--ink); border-bottom: 1px solid var(--line); }
+.csd-sum ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.csd-sum li { display: flex; flex-direction: column; gap: 8px; padding: 26px 26px 22px 0; } .csd-sum li + li { padding-left: 26px; border-left: 1px solid var(--line); }
+.csd-sum b { font-size: clamp(30px, 2.6vw, 40px); font-weight: 800; letter-spacing: -0.04em; line-height: 1; } .csd-sum b i { margin-left: 3px; font-style: normal; font-size: 16px; font-weight: 700; letter-spacing: 0; }
+.csd-sum b { color: var(--navy); } .csd-sum li.r b { color: var(--cs-robot); } .csd-sum span { font-size: 14px; color: var(--text); }
+.csd-sum p { margin: 0; padding: 0 0 14px; font-size: 12.5px; color: var(--muted); text-align: right; }
+.csd__grid--one { grid-template-columns: minmax(0, 1fr); } .csd__grid--one > div { max-width: 760px; }
+@media (max-width: 860px) {
+  .csd-sum ul { grid-template-columns: 1fr 1fr 1fr; } .csd-sum li { padding: 16px 10px 14px 0; gap: 6px; } .csd-sum li + li { padding-left: 10px; }
+  .csd-sum b { font-size: 24px; } .csd-sum b i { font-size: 12.5px; } .csd-sum span { font-size: 11.5px; line-height: 1.4; } .csd-sum p { text-align: left; font-size: 11.5px; }
+}

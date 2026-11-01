@@ -3316,8 +3316,8 @@ pages['cases.html'] = () => {
       <figure class="csd__ph">${photo(p, '(max-width:860px) 100vw, 50vw', i === 0)}<figcaption>${esc(p.cap || p.alt)}</figcaption></figure>
     </div></div>
     <div class="wrap"><ul class="csd__stats" style="--n:${x.stats.length}">${x.stats.map((s) => `<li${s.r ? ' class="r"' : ''}><b>${esc(s.n)}<i>${esc(s.u)}</i></b><span>${esc(s.l)}</span></li>`).join('')}</ul></div>
-    <div class="wrap csd__grid">
-      <div><h3>로봇 투입 기록 <em class="r">${x.robotRows.length}건</em></h3><ul class="csd__rows">${rowsHtml(x.robotRows, true)}</ul><button type="button" class="csd__more" hidden></button><p class="csd__src">${esc(CASE_SRC.robot)}</p></div>
+    <div class="wrap csd__grid${x.robotRows.length ? '' : ' csd__grid--one'}">   <!-- 2026-11-01: 로봇 투입 기록이 없는 분야는 '0건' 칸을 두지 않는다 -->
+      ${x.robotRows.length ? `<div><h3>로봇 투입 기록 <em class="r">${x.robotRows.length}건</em></h3><ul class="csd__rows">${rowsHtml(x.robotRows, true)}</ul><button type="button" class="csd__more" hidden></button><p class="csd__src">${esc(CASE_SRC.robot)}</p></div>` : ''}
       <div><h3>주요 수행 실적 <em class="n">2020~2023</em></h3><ul class="csd__rows">${rowsHtml(x.rows, false)}</ul><button type="button" class="csd__more" hidden></button><p class="csd__src">${esc(CASE_SRC.rows)}</p></div>
     </div>
     <div class="wrap csd__foot"><a class="btn btn--line btn--sm" href="contact.html">${esc(x.name)} ${esc(c.ask)} ${arrow(16)}</a><a class="tlink" href="${svc(x.svc).file}">${esc(svc(x.svc).title)} 업무 보기 ${arrow(14)}</a></div>
@@ -3330,6 +3330,11 @@ pages['cases.html'] = () => {
   }) + header('cases', null, 'cases.html') + `
 <main id="main">
 ` + phero({ h1: c.title, keepLead: c.lead, crumbs: [{ label: c.title }] }) + `
+  <section class="csd-sum" aria-label="2020~2023 결과 요약"><div class="wrap"><ul>   <!-- 2026-11-01: 결과 요약(숫자는 자료에서: 수행 실적 = 숫자 띠 TRUST, 로봇 투입 = CASES 합계) -->
+    <li><b>${TRUST[1].n}<i>${esc(TRUST[1].unit)}</i></b><span>${esc(TRUST[1].l)}</span></li>
+    <li><b>4<i>년 연속</i></b><span>4개 발주처와 단가계약 (2020~2023)</span></li>
+    <li class="r"><b>${caseRobotTotal()}<i>건</i></b><span>로봇 투입 기록 (2021~2023)</span></li>
+  </ul><p>${esc(CASE_SRC.rows)}</p></div></section>
   <nav class="csd-nav" aria-label="분야"><div class="wrap">${CASES.map((x) => `<a href="#${x.id}">${esc(x.name)}${x.robot ? '<i class="d" aria-label="로봇 적용"></i>' : ''}</a>`).join('')}</div></nav>
 ${CASES.map(block).join('\n')}
 ` + cta({ h2: CFG.common.cta.title, p: CFG.common.cta.text }) + MAIN_END + footer() + foot(['cases.js']);
