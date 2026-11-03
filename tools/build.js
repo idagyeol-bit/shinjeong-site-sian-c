@@ -1990,6 +1990,7 @@ function heroStatement() {
     founded: C.founded,
     gens: KOR_NUM_S[PROCESS.generations.length] || PROCESS.generations.length,
     patents: KOR_NUM_S[PROCESS.patents.length] || PROCESS.patents.length,
+    gensN: PROCESS.generations.length, patentsAllN: COMPANY17.patents.length, projects: `${PROJECT_SUMMARY.n}${PROJECT_SUMMARY.unit}`,   // 시안C 23차: 숫자 그대로(5 · 8 · 170여 건)
     patentsAll: KOR_NUM_S[COMPANY17.patents.length] || COMPANY17.patents.length   // 메인 빼기(2026-11-01): 전체 등록 특허 수(① 28~29쪽 특허증 8장) — 숫자 띠 '8건 등록 특허'와 같은 수
   };
   const f = (x) => esc(fill(x, vars));
@@ -2006,13 +2007,12 @@ ${s.photos.map((sc, i) => `      ${img(sc, i)}`).join('\n')}
     </div>
     <p class="heroS__cap" aria-hidden="true"><span>${esc(s.photos[0].cap || '')}</span></p>
     <div class="heroS__msg"><div class="wrap">
-      <p class="heroS__eyebrow">${f(s.eyebrow)}</p>
-      <h1 class="heroS__h">${s.title.map((t) => `<span>${f(t)}</span>`).join('')}</h1>
-      <p class="heroS__lead">${f(s.lead)}</p>
+${s.eyebrow ? `      <p class="heroS__eyebrow">${f(s.eyebrow)}</p>\n` : ''}      <h1 class="heroS__h">${s.title.map((t) => `<span>${f(t)}</span>`).join('')}</h1>
+      <p class="heroS__lead">${Array.isArray(s.lead) ? s.lead.map((x) => `<span>${f(x)}</span>`).join(' ') : f(s.lead)}</p>
       <div class="heroS__links">${s.buttons.map((b) => `<a class="heroS__btn${b.fill ? ' heroS__btn--fill' : ''}" href="${esc(b.href)}">${esc(b.label)} ${ar}</a>`).join('')}</div>
     </div></div>
     <nav class="heroS__glance" aria-label="한눈에 보는 신정개발"><div class="wrap"><ul>
-${s.items.map((it, i) => `      <li data-i="${i}"><a href="${esc(it.href)}"><em>${f(it.label)}</em><b>${f(it.big)}</b><span>${f(it.small)}${ar}</span></a></li>`).join('\n')}
+${s.items.map((it, i) => `      <li data-i="${i}"><a href="${esc(it.href)}">${it.label ? `<em>${f(it.label)}</em>` : ''}<b>${f(it.big)}</b><span>${f(it.small)}${ar}</span></a></li>`).join('\n')}
     </ul></div></nav>
   </section>
 `;

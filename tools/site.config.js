@@ -86,9 +86,9 @@ module.exports = {
        photos = 바뀌는 사진(photo = 사진 번호 · pos·posM = PC·휴대폰 보일 부분 · cap = 오른쪽 아래 한 줄 설명, 사진에 보이는 것만 · item = 이 사진일 때 밝아질 아래 칸 번호(0부터) · fit 'right' = 검은 바탕 그림을 오른쪽에)
        items = 아래 네 칸(label 작은 이름 · big 큰 글 · small 한 줄 · href 누르면 가는 곳). {gens} = 로봇 세대 수, {patents} = 대표 등록 특허 수 — 생성기가 자료에서 센다(한글 수사) */
     statement: {
-      eyebrow: '{founded}년부터 산업설비 클리닝',
-      title: ['설비는 깨끗하게,', '사람은 안전하게.'],
-      lead: '탱크·반응기·배수로·관로를 클리닝하는 신정개발은 작업자가 들어가기 전에 위험부터 줄이기 위해, 로봇을 개발해 우리 현장에 먼저 투입합니다.',   // 근거: ② 3쪽 Cleaning 업체 · ② 5쪽 개발 목적 '작업자 투입 전 유해물질 사전 제거' · ①43~47·②25 로봇 투입 기록
+      eyebrow: '',   // 시안C 23차: 위 작은 줄 없음(연도는 큰 제목에). 빈 글이면 생성하지 않는다
+      title: ['산업설비 클리닝,', '{founded}년부터.'],   // 시안C 23차 C안(2026-11-02 이다결 님 결정): 업종과 연도만. 근거: ① 연혁 1992 설립 · ② 3쪽 산업설비 … Cleaning 업체
+      lead: ['탱크 · 반응기 · 배수로 · 관로를 클리닝합니다.', '작업자가 들어가기 전에 로봇이 먼저 들어갑니다.'],   // 시안C 23차: 두 문장(PC 는 한 문장씩 한 줄). 근거: 사업분야 다섯 · ② 5쪽 개발 목적 '작업자 투입 전 위험요인 제거 · 무인 로봇 투입'
       buttons: [ { label: '무인 솔루션 보기', href: 'unmanned.html', fill: true }, { label: '회사 소개', href: 'company.html' } ],
       photos: [
         { photo: 'R01', pos: '50% 72%', posM: '50% 72%', cap: '차고에 모은 로봇 차량과 로봇들' },
@@ -97,11 +97,11 @@ module.exports = {
         { photo: 'R26', pos: '56% 72%', posM: '48% 52%', cap: '제어 차량에서 조종하는 작업자와 로봇', item: 2 },
         { photo: 'W05', pos: '50% 55%', posM: '50% 55%', cap: '\'SUCTION ROBOT\' 스크루 궤도형 흡입 로봇', item: 3 }
       ],
-      items: [
-        { label: '신뢰', big: '4년 연속', small: '같은 고객이 다시 맡긴 회사', href: 'cases.html' },            // ① 39·42·44·46쪽 2020~2023 같은 발주처 4곳 단가계약
-        { label: '안전', big: '안전 · 배려 · 희망', small: '현장마다 지키는 핵심가치', href: 'company.html' },    // ① 7쪽 핵심가치
-        { label: '로봇', big: '{gens} 세대', small: '작업자보다 먼저 들어가는 로봇', href: 'unmanned.html' },     // ② 7쪽 1~5세대 · ② 5쪽
-        { label: '연구개발', big: '특허 {patentsAll} 건', small: '등록 특허 · 특허증 원본 보기', href: 'company.html#credentials' }   // 메인 빼기(2026-11-01): 전체 등록 특허(① 28~29쪽 특허증 8장) — 숫자 띠 '8건'과 맞춤. 예전: 대표 특허 {patents}건(② 6쪽) → 무인 솔루션
+      items: [   // 시안C 23차: 꼬리표(label) 없이 숫자만. {projects} = 수행 실적(PROJECT_SUMMARY), {gensN} · {patentsAllN} = 세대 수 · 전체 등록 특허 수(숫자)
+        { label: '', big: '4년 연속', small: '4개 발주처 단가계약 · 2020~2023', href: 'cases.html' },        // ① 39·42·44·46쪽 2020~2023 같은 발주처 4곳 단가계약(적용 사례 머리와 같은 말)
+        { label: '', big: '{projects}', small: '수행 실적 · 2020~2023', href: 'cases.html' },                 // ① 2020~2023 실적표 170여 건
+        { label: '', big: '1~{gensN}세대', small: '무인 Vacuum 로봇', href: 'unmanned.html#r-vacuum' },      // ② 7쪽 1~5세대 (22차 라인업 이름)
+        { label: '', big: '{patentsAllN}건', small: '등록 특허 · 특허증 원본', href: 'company.html#credentials' }   // ① 28~29쪽 특허증 8장
       ]
     },
     /* 시안C 12차 (2026-10-29 이다결 님 결정): 큰 틀 'lines' 첫 화면 — 장면마다 세 줄(1줄 증거 · 2줄 이어짐 · 3줄 결론), 7초마다 바뀐다.

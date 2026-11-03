@@ -4136,3 +4136,20 @@ html:not(.um-js) .rl-d + .rl-d { margin-top: 72px; padding-top: 48px; border-top
 .um-proj h3 { margin: 0 0 10px; font-size: 17px; color: var(--ink); }
 .um-proj ul { margin: 0 0 10px; padding-left: 18px; }
 .um-proj li { margin: 4px 0; font-size: 15px; line-height: 1.6; color: var(--text); }
+
+/* ===== 시안C 23차: 메인 첫 화면 문구 C — '산업설비 클리닝, 1992년부터.' (2026-11-02 이다결 님 결정) =====
+   큰 제목은 낮고 덜 굵게(88px · 800 → 66px · 700), 위 작은 줄 없음, 아래 두 문장은 PC 에서 한 문장씩 두 줄, 아래 네 칸은 숫자만(꼬리표 없음) */
+.heroS__h { font-size: clamp(40px, 4.3vw, 66px); font-weight: 700; line-height: 1.2; letter-spacing: -0.035em; text-shadow: 0 1px 14px #00000040; }
+.heroS__lead { margin-top: 26px; max-width: 31em; font-size: clamp(16px, 1.22vw, 19px); line-height: 1.7; color: #e8eef4; }
+.heroS__links { margin-top: 34px; }
+.heroS__btn { height: 50px; }
+.heroS__glance b { margin-top: 0; font-size: clamp(26px, 2.1vw, 34px); font-weight: 700; letter-spacing: -0.02em; }
+.heroS__glance span { margin-top: 6px; }
+@media (min-width: 961px) { .heroS__lead { max-width: none; } .heroS__lead span { display: block; } }
+@media (max-width: 960px) {
+  .heroS__h { font-size: min(8.4vw, 36px); line-height: 1.24; }
+  .heroS__lead { margin-top: 14px; font-size: 15.5px; }
+  .heroS__links { margin-top: 22px; }
+  .heroS__glance b { margin-top: 0; font-size: 24px; }
+  .heroS__glance a, .heroS__glance li:first-child a { min-height: 92px; }
+}
