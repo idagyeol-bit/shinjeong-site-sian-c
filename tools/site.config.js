@@ -86,9 +86,9 @@ module.exports = {
        photos = 바뀌는 사진(photo = 사진 번호 · pos·posM = PC·휴대폰 보일 부분 · cap = 오른쪽 아래 한 줄 설명, 사진에 보이는 것만 · item = 이 사진일 때 밝아질 아래 칸 번호(0부터) · fit 'right' = 검은 바탕 그림을 오른쪽에)
        items = 아래 네 칸(label 작은 이름 · big 큰 글 · small 한 줄 · href 누르면 가는 곳). {gens} = 로봇 세대 수, {patents} = 대표 등록 특허 수 — 생성기가 자료에서 센다(한글 수사) */
     statement: {
-      eyebrow: '{founded}년부터 산업설비 클리닝',
-      title: ['설비는 깨끗하게,', '사람은 안전하게.'],
-      lead: '탱크·반응기·배수로·관로를 클리닝하는 신정개발은 작업자가 들어가기 전에 위험부터 줄이기 위해, 로봇을 개발해 우리 현장에 먼저 투입합니다.',   // 근거: ② 3쪽 Cleaning 업체 · ② 5쪽 개발 목적 '작업자 투입 전 유해물질 사전 제거' · ①43~47·②25 로봇 투입 기록
+      eyebrow: '',   // 시안C 23차: 위 작은 줄 없음(연도는 큰 제목에). 빈 글이면 생성하지 않는다
+      title: ['산업설비 클리닝,', '{founded}년부터.'],   // 시안C 23차 C안(2026-11-02 이다결 님 결정): 업종과 연도만. 근거: ① 연혁 1992 설립 · ② 3쪽 산업설비 … Cleaning 업체
+      lead: ['탱크 · 반응기 · 배수로 · 관로를 클리닝합니다.', '작업자가 들어가기 전에 로봇이 먼저 들어갑니다.'],   // 시안C 23차: 두 문장(PC 는 한 문장씩 한 줄). 근거: 사업분야 다섯 · ② 5쪽 개발 목적 '작업자 투입 전 위험요인 제거 · 무인 로봇 투입'
       buttons: [ { label: '무인 솔루션 보기', href: 'unmanned.html', fill: true }, { label: '회사 소개', href: 'company.html' } ],
       photos: [
         { photo: 'R01', pos: '50% 72%', posM: '50% 72%', cap: '차고에 모은 로봇 차량과 로봇들' },
@@ -97,11 +97,24 @@ module.exports = {
         { photo: 'R26', pos: '56% 72%', posM: '48% 52%', cap: '제어 차량에서 조종하는 작업자와 로봇', item: 2 },
         { photo: 'W05', pos: '50% 55%', posM: '50% 55%', cap: '\'SUCTION ROBOT\' 스크루 궤도형 흡입 로봇', item: 3 }
       ],
-      items: [
-        { label: '신뢰', big: '4년 연속', small: '같은 고객이 다시 맡긴 회사', href: 'cases.html' },            // ① 39·42·44·46쪽 2020~2023 같은 발주처 4곳 단가계약
-        { label: '안전', big: '안전 · 배려 · 희망', small: '현장마다 지키는 핵심가치', href: 'company.html' },    // ① 7쪽 핵심가치
-        { label: '로봇', big: '{gens} 세대', small: '작업자보다 먼저 들어가는 로봇', href: 'unmanned.html' },     // ② 7쪽 1~5세대 · ② 5쪽
-        { label: '연구개발', big: '특허 {patentsAll} 건', small: '등록 특허 · 특허증 원본 보기', href: 'company.html#credentials' }   // 메인 빼기(2026-11-01): 전체 등록 특허(① 28~29쪽 특허증 8장) — 숫자 띠 '8건'과 맞춤. 예전: 대표 특허 {patents}건(② 6쪽) → 무인 솔루션
+      items: [   // 시안C 23차: 꼬리표(label) 없이 숫자만. {projects} = 수행 실적(PROJECT_SUMMARY), {gensN} · {patentsAllN} = 세대 수 · 전체 등록 특허 수(숫자)
+        { label: '', big: '4년 연속', small: '4개 발주처 단가계약 · 2020~2023', href: 'cases.html' },        // ① 39·42·44·46쪽 2020~2023 같은 발주처 4곳 단가계약(적용 사례 머리와 같은 말)
+        { label: '', big: '{projects}', small: '수행 실적 · 2020~2023', href: 'cases.html' },                 // ① 2020~2023 실적표 170여 건
+        { label: '', big: '1~{gensN}세대', small: '무인 Vacuum 로봇', href: 'unmanned.html#r-vacuum' },      // ② 7쪽 1~5세대 (22차 라인업 이름)
+        { label: '', big: '{patentsAllN}건', small: '등록 특허 · 특허증 원본', href: 'company.html#credentials' }   // ① 28~29쪽 특허증 8장
+      ]
+    },
+    /* 시안C 24차: 큰 틀 'film' — 실사 사진 일곱 장을 3.9초씩 천천히 확대 · 교차하는 첫 화면. 글 · 단추는 위 statement 를 그대로 쓴다.
+       photo = 사진 번호(HF01~HF07: 기존 사진 M04 · M10 · P03 · P15 · R26 · W10 · R24 를 같은 톤으로 보정한 것) · pos · posM = PC · 휴대폰에서 보일 부분. 순서 = 이야기 순서(여수 → 도착 → 설비 안 → 설비 밖 → 다른 현장 → 한 조) */
+    film: {
+      shots: [
+      { photo: 'HF01', pos: '50% 62%', posM: '38% 58%' },   // M04 — 여수 산업단지, 해 질 녘 — 신정개발이 일하는 곳
+      { photo: 'HF02', pos: '50% 55%', posM: '58% 52%' },   // M10 — 현장 도착 — 안전 구획 · 진공흡입차 · 제어 차량
+      { photo: 'HF03', pos: '50% 50%', posM: '50% 50%' },   // P03 — 설비 안 — 로봇이 먼저 들어가 촉매 · 잔류물을 회수
+      { photo: 'HF04', pos: '50% 50%', posM: '55% 50%' },   // P15 — 설비 안 — 바닥의 충진물을 빨아들이는 로봇
+      { photo: 'HF05', pos: '50% 74%', posM: '46% 62%' },   // R26 — 설비 밖 — 제어 차량에서 CCTV 화면을 보며 원격 조종
+      { photo: 'HF06', pos: '50% 58%', posM: '50% 56%' },   // W10 — 다른 현장 — 맨홀 · 관로 · 준설
+      { photo: 'HF07', pos: '50% 60%', posM: '36% 56%' }   // R24 — 마무리 — 본사 마당, 제어 차량 · 흡입차 · 로봇이 한 조
       ]
     },
     /* 시안C 12차 (2026-10-29 이다결 님 결정): 큰 틀 'lines' 첫 화면 — 장면마다 세 줄(1줄 증거 · 2줄 이어짐 · 3줄 결론), 7초마다 바뀐다.
@@ -175,10 +188,14 @@ module.exports = {
        (주의: 'process' 구역의 버튼은 남색 바탕에 맞춘 흰 테두리 버튼이라, 다른 바탕에서는 잘 안 보일 수 있다) */
     sections: [
       // { id: 'why', bg: 'navy' },  // 11차: principle 로 바꿈 — 시안C 7차: 왜 로봇을 먼저 넣는가 — 큰 제목 + 사진 두 장(이전/지금). 글은 copy.why, 사실은 tools/build.js WHY_*
-      { id: 'principle', bg: 'white' }, // 시안C 11차: 신정개발의 원칙 — 표어 · 실천 한 줄 · 숫자 셋 · 넓은 사진(흰 바탕 고정). 글은 copy.principle
+      // { id: 'principle', bg: 'white' },  // 시안C 24차: 빼기 — 문장은 how2(단면도)로, 숫자는 numbers 로 // 시안C 11차: 신정개발의 원칙 — 표어 · 실천 한 줄 · 숫자 셋 · 넓은 사진(흰 바탕 고정). 글은 copy.principle
+      { id: 'numbers', bg: 'white' },   // 시안C 24차: 숫자 줄 — 첫 화면 바로 아래 흰 줄 네 칸(4년 연속 · 170여 건 · 1~5세대 · 특허 8건)
+      { id: 'why2', bg: 'white' },      // 시안C 24차: 왜 로봇인가 — 기술소개서 4쪽 숫자(1.5명 · 50명 · 200회) → 그래서 로봇이 먼저
+      { id: 'how2', bg: 'soft' },       // 시안C 24차: 어떻게 일하나 — 단면도(선이 그려진다) · 설비 안/밖/그다음 · "사람이 없는 곳에 인명 사고도 없다."
+      { id: 'what5', bg: 'white' },     // 시안C 24차: 무슨 일을 하나 — 사업 다섯 칸(사진 · 번호 · 이름 · 현장)
       { id: 'unmanned14', bg: 'soft' },  // 시안C 14차: 새 모양(안/밖 사진 한 쌍 + 로봇 다섯, 색은 초록 하나 · 10차 모양은 id 'unmanned'). 11차: 연회색. 시안C 7차: 무인 솔루션 — 로봇 네 대(이름 + 세 단어). 글은 copy.unmanned, 목록은 tools/build.js UNMANNED_BOTS
-      { id: 'trust', bg: 'navy' },     // 숫자 띠 (200회 · 170여 건 · 특허 · 면허, 주요 현장) — 7차: 무인 솔루션 아래로. 시안B 24차: 남색 풀블리드 띠
-      { id: 'whatList', bg: 'soft' },  // 메인 빼기(2026-11-01): 사업분야 + 적용 사례를 한 줄 목록 하나로. 예전 카드는 { id: 'whatChart', bg: 'soft' } · { id: 'cases', bg: 'white' }
+      // { id: 'trust', bg: 'navy' },  // 시안C 24차: 빼기 — numbers · why2 와 겹침(영문판 숫자는 생성기가 남기는 주석 trust-numbers 에서 읽는다)     // 숫자 띠 (200회 · 170여 건 · 특허 · 면허, 주요 현장) — 7차: 무인 솔루션 아래로. 시안B 24차: 남색 풀블리드 띠
+      // { id: 'whatList', bg: 'soft' },  // 시안C 24차: 빼기 — what5(사업 다섯 칸)로  // 메인 빼기(2026-11-01): 사업분야 + 적용 사례를 한 줄 목록 하나로. 예전 카드는 { id: 'whatChart', bg: 'soft' } · { id: 'cases', bg: 'white' }
       // { id: 'whatChart', bg: 'soft' }, // 시안C 4차: 사업분야 차트. 배치는 look.chartLayout('compact' 5차 / 'five' / 'lead')
       // { id: 'cases', bg: 'white' },      // 시안C 13차: 적용 사례(분야 다섯 카드 → cases.html). 예전 분류 탭은 { id: 'projTabs', bg: 'white' }
       // { id: 'process', bg: 'navy' },   // 현장 진행 방식 — 7차: 메인에서 뺐다(무인 솔루션이 맡음). 줄 앞의 // 를 지우면 다시 생긴다
@@ -255,6 +272,7 @@ module.exports = {
       unmanned: {                           // 시안C 7차: 무인 솔루션 (흰 칸). 로봇 목록은 tools/build.js UNMANNED_BOTS — 10차: 뜻 한 문단 + 설비 안/밖 사진 + '로봇이 하는 일' 5칸
         eyebrow: 'UNMANNED SOLUTION',                                      // 시안C 14차: 제목 위 작은 영문
         jobsTitle: '로봇이 하는 일',                                          // 시안C 14차: 로봇 다섯 칸 제목
+        pair: false,                                                         // 시안C 24차: 안/밖 사진 한 쌍은 메인 단면도(how2)와 겹쳐서 뺀다. true 로 바꾸면 다시 생긴다
         title: '무인 솔루션',                                                // 구역 제목
         lead: '로봇이 탱크·반응기·배수로·관로 안에 들어가 작업합니다. 작업자는 밖에서 조종하고, 위험이 줄어든 뒤에 들어갑니다.',   // 제목 아래 문단 (11차). '다섯 종류'는 글자 그대로 — tools/build.js UNMANNED_BOTS 의 로봇 수가 바뀌면 이 문장도 같이 고친다
         more: '로봇별 작업 방법 자세히 →',                                    // 아래 링크 글자 (10차)
@@ -346,7 +364,7 @@ module.exports = {
 
   /* ===================== ⑨ 큰 틀 ===================== */
   frame: {                                 // 화면의 큰 틀 — 지금은 'base' 하나뿐이다. 새 큰 틀은 지시서로 추가한다
-    hero: 'statement',   // 시안C 12차 v4: 'statement'(한 문장 + 바뀌는 현장 사진 + 네 칸). 되돌리려면 'slides'
+    hero: 'film',        // 시안C 24차: 'film'(실사 사진 영화 + 한 문장 — 글은 hero.statement, 사진은 hero.film). 되돌리려면 'statement'
     sections: 'base',                      // 메인 구역 틀
     header: 'base'                         // 머리말(맨 위 메뉴 줄) 틀
   },

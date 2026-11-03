@@ -24,8 +24,9 @@ const pick = (html, re, what) => { const m = html.match(re); if (!m) fail(`국�
 
 /* ---------- 사실 값: 국문 생성 결과에서 ---------- */
 const ko = { index: read('index.html'), company: read('company.html'), technology: read('unmanned.html'), contact: read('contact.html') };
-const statsBlock = pick(ko.index, /<section[^>]*class="[^"]*\btrust\b[^"]*"[\s\S]*?<div class="stats"[^>]*>([\s\S]*?)<\/div>\s*<div class="trust__info"/, '숫자 띠');
-const stats = [...statsBlock.matchAll(/data-count="(\d+)"/g)].map((m) => +m[1]);
+const trustNote = ko.index.match(/<!-- trust-numbers ((?:\d+\s*)+)-->/);   // 시안C 24차: 메인에 숫자 띠가 없으면 생성기가 남긴 주석에서
+const statsBlock = trustNote ? '' : pick(ko.index, /<section[^>]*class="[^"]*\btrust\b[^"]*"[\s\S]*?<div class="stats"[^>]*>([\s\S]*?)<\/div>\s*<div class="trust__info"/, '숫자 띠');
+const stats = trustNote ? trustNote[1].trim().split(/\s+/).map(Number) : [...statsBlock.matchAll(/data-count="(\d+)"/g)].map((m) => +m[1]);
 if (stats.length !== 4) fail(`숫자 띠 값이 4개가 아닙니다: ${stats.join(', ')}`);
 const founded = +pick(ko.company, /<dt>설립<\/dt><dd>(\d{4})(?:<small>)?년/, '설립 연도');   // 회사 소개 '한눈에 보기' 표(설립 1992년)
 const rnd = +pick(ko.company, /<dt>기업부설연구소<\/dt><dd>(\d{4})(?:<small>)?년/, '기업부설연구소 설립 연도');
