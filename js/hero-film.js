@@ -18,7 +18,7 @@
     segs.forEach(function (s, j) { s.classList.toggle('is-on', j === k); s.classList.toggle('is-done', j < k); });
     if (cap) cap.textContent = imgs[k].getAttribute('data-cap') || '';
     /* 다음 사진 미리 받기 */
-    var n = imgs[(k + 1) % imgs.length]; if (n && n.dataset.src) { n.src = n.dataset.src; delete n.dataset.src; }
+    var n = imgs[(k + 1) % imgs.length]; if (n && n.dataset.src) { if (n.dataset.srcset) { n.srcset = n.dataset.srcset; delete n.dataset.srcset; } n.src = n.dataset.src; delete n.dataset.src; }
   }
   function next() { i = (i + 1) % imgs.length; show(i); }
   function start() { if (reduce || timer || imgs.length < 2) return; timer = setInterval(next, DUR); }

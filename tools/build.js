@@ -88,44 +88,44 @@ const C = {
    설명(alt/cap)은 사진에 보이는 것만 적습니다. 모델명·세대·성능·발주처는 적지 않습니다. */
 const PHOTOS = {
   /* 모든 사진은 3:2로 크롭했고, 크롭·번호판/얼굴 흐림 외의 합성은 없습니다. 원본 대응: tools/photo-plan.json */
-  M02: { id: 'M02', w: 1599, h: 1066, sizes: [720, 1200, 1599], alt: '신정개발 상호가 보이는 본사 건물과 차량', cap: '여수 본사 · ' + C.address },   // 설명의 주소는 푸터와 같은 C.address
+  M02: { id: 'M02', w: 3198, h: 2132, sizes: [720, 1200, 1599, 2400, 3198], alt: '신정개발 상호가 보이는 본사 건물과 차량', cap: '여수 본사 · ' + C.address },   // 설명의 주소는 푸터와 같은 C.address
   M04: { id: 'M04', w: 980, h: 653, sizes: [640, 980], alt: '해질녘 산업단지 전경', cap: '산업단지 전경' },
-  M05: { id: 'M05', w: 1400, h: 933, sizes: [800, 1400], alt: '산업설비 현장에 설치된 안전 구획과 차량', cap: '산업설비 현장의 안전 구획과 차량' },
-  M06: { id: 'M06', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '안전제일 표시가 있는 작업자의 안전모', cap: '작업자의 안전모' },
-  M08: { id: 'M08', w: 1600, h: 1067, sizes: [960, 1600, 2400], alt: '산업설비 야간 전경' },
-  M10: { id: 'M10', w: 1000, h: 667, sizes: [640, 1000, 1351, 2400], alt: '안전 구획을 설치한 산업설비 현장에 배치된 진공흡입차', cap: '안전 구획을 설치한 현장의 진공흡입차' },
-  W01: { id: 'W01', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '산업설비 현장에 배치된 진공흡입차와 연결 호스', cap: '산업설비 현장의 진공흡입차와 연결 호스' },
-  W03: { id: 'W03', w: 1000, h: 667, sizes: [640, 1000, 1496], alt: '맨홀에 호스를 넣어 작업하는 두 작업자', cap: '맨홀에 호스를 넣어 작업하는 두 작업자' },
-  W04: { id: 'W04', w: 1000, h: 667, sizes: [640, 1000, 1600, 2400], alt: '도로 위 맨홀 교체 공사 현장에서 작업하는 작업자들', cap: '맨홀 교체 공사 현장' },
-  W05: { id: 'W05', w: 1000, h: 667, sizes: [640, 1000, 1600, 2400], alt: '스크루 궤도형 흡입 로봇', cap: '스크루 궤도형 흡입 로봇' },
-  W06: { id: 'W06', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '전면에 파쇄 장치를 갖춘 궤도형 장비와 흡입 호스', cap: '전면에 파쇄 장치를 갖춘 궤도형 장비' },
-  W07: { id: 'W07', w: 1000, h: 667, sizes: [640, 1000, 1263], alt: '산업설비 현장에 배치된 신정개발 진공흡입차', cap: '산업설비 현장의 진공흡입차' },
-  W09: { id: 'W09', w: 1000, h: 667, sizes: [640, 1000, 1600, 2400], alt: '산업설비 현장의 작업 차량과 보호구를 착용한 작업자들', cap: '산업설비 현장의 작업 차량과 작업자' },
-  W10: { id: 'W10', w: 1000, h: 667, sizes: [640, 1000, 1600, 2400], alt: '진공흡입차 옆에서 맨홀에 호스를 연결해 작업하는 작업자들', cap: '진공흡입차와 맨홀 호스 작업' },
-  R01: { id: 'R01', w: 1000, h: 667, sizes: [640, 1000, 1600, 2400], alt: '차고에 정렬된 신정개발 차량 두 대와 로봇 장비들', cap: '차고의 차량과 로봇 장비' },
-  R07: { id: 'R07', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '차량에 설치된 모니터·제어 장치 앞에 선 조종자', cap: '차량의 모니터·제어 장치와 조작자' },
-  R10: { id: 'R10', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '전면에 작업 헤드를 갖춘 주황색 궤도형 장비', cap: '전면 작업 헤드를 갖춘 궤도형 장비' },
-  R13: { id: 'R13', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '소형 주행 장비, 흡입 헤드 유닛, 유압 호스 묶음', cap: '소형 주행 장비와 흡입 헤드, 호스' },
-  R15: { id: 'R15', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '본사 앞에 세워 둔 스키드 로더와 소형 굴삭기', cap: '스키드 로더와 소형 굴삭기' },
-  R20: { id: 'R20', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '작업 장치를 장착한 스키드 로더', cap: '스키드 로더' },
-  R25: { id: 'R25', w: 1000, h: 667, sizes: [640, 1000, 1600, 2400], alt: '본사 앞에서 제어 차량과 호스로 연결된 로봇', cap: '본사 앞 — 제어 차량과 호스로 연결된 궤도형 장비' },
-  R26: { id: 'R26', w: 1000, h: 870, sizes: [1000, 2400], alt: '제어 차량에서 로봇을 조종하는 작업자와 호스로 연결된 궤도형 로봇', cap: '제어 차량에서 조종하는 작업자와 로봇' },   // 시안C 12차 v4: 첫 화면 '로봇' 사진(로봇 폴더 517A5365.JPG, 번호판 흐림)
-  R24: { id: 'R24', w: 1000, h: 667, sizes: [1000, 2400], alt: '본사 마당의 제어 차량과 진공흡입차, 호스로 연결된 로봇', cap: '본사 마당의 제어 차량 · 흡입차 · 로봇' },   // 시안C 12차: 원칙 구역 사진(로봇 폴더 517A5363.JPG). R25 는 첫 화면 R26 과 거의 같은 장면이라 바꿈
+  M05: { id: 'M05', w: 2400, h: 1599, sizes: [800, 1400, 2400], alt: '산업설비 현장에 설치된 안전 구획과 차량', cap: '산업설비 현장의 안전 구획과 차량' },
+  M06: { id: 'M06', w: 1600, h: 1067, sizes: [640, 1000, 1600], alt: '안전제일 표시가 있는 작업자의 안전모', cap: '작업자의 안전모' },
+  M08: { id: 'M08', w: 2400, h: 1600, sizes: [960, 1600, 2400], alt: '산업설비 야간 전경' },
+  M10: { id: 'M10', w: 3200, h: 1802, sizes: [640, 1000, 1600, 2400, 3200], alt: '안전 구획을 설치한 산업설비 현장에 배치된 진공흡입차', cap: '안전 구획을 설치한 현장의 진공흡입차' },
+  W01: { id: 'W01', w: 1600, h: 1067, sizes: [640, 1000, 1600], alt: '산업설비 현장에 배치된 진공흡입차와 연결 호스', cap: '산업설비 현장의 진공흡입차와 연결 호스' },
+  W03: { id: 'W03', w: 1496, h: 997, sizes: [640, 1000, 1496], alt: '맨홀에 호스를 넣어 작업하는 두 작업자', cap: '맨홀에 호스를 넣어 작업하는 두 작업자' },
+  W04: { id: 'W04', w: 2400, h: 1600, sizes: [640, 1000, 1600, 2400], alt: '도로 위 맨홀 교체 공사 현장에서 작업하는 작업자들', cap: '맨홀 교체 공사 현장' },
+  W05: { id: 'W05', w: 2400, h: 1600, sizes: [640, 1000, 1600, 2400], alt: '스크루 궤도형 흡입 로봇', cap: '스크루 궤도형 흡입 로봇' },
+  W06: { id: 'W06', w: 1600, h: 1067, sizes: [640, 1000, 1600], alt: '전면에 파쇄 장치를 갖춘 궤도형 장비와 흡입 호스', cap: '전면에 파쇄 장치를 갖춘 궤도형 장비' },
+  W07: { id: 'W07', w: 1263, h: 842, sizes: [640, 1000, 1263], alt: '산업설비 현장에 배치된 신정개발 진공흡입차', cap: '산업설비 현장의 진공흡입차' },
+  W09: { id: 'W09', w: 2400, h: 1600, sizes: [640, 1000, 1600, 2400], alt: '산업설비 현장의 작업 차량과 보호구를 착용한 작업자들', cap: '산업설비 현장의 작업 차량과 작업자' },
+  W10: { id: 'W10', w: 2400, h: 1600, sizes: [640, 1000, 1600, 2400], alt: '진공흡입차 옆에서 맨홀에 호스를 연결해 작업하는 작업자들', cap: '진공흡입차와 맨홀 호스 작업' },
+  R01: { id: 'R01', w: 2400, h: 1600, sizes: [640, 1000, 1600, 2400], alt: '차고에 정렬된 신정개발 차량 두 대와 로봇 장비들', cap: '차고의 차량과 로봇 장비' },
+  R07: { id: 'R07', w: 1600, h: 1067, sizes: [640, 1000, 1600], alt: '차량에 설치된 모니터·제어 장치 앞에 선 조종자', cap: '차량의 모니터·제어 장치와 조작자' },
+  R10: { id: 'R10', w: 1600, h: 1067, sizes: [640, 1000, 1600], alt: '전면에 작업 헤드를 갖춘 주황색 궤도형 장비', cap: '전면 작업 헤드를 갖춘 궤도형 장비' },
+  R13: { id: 'R13', w: 1600, h: 1067, sizes: [640, 1000, 1600], alt: '소형 주행 장비, 흡입 헤드 유닛, 유압 호스 묶음', cap: '소형 주행 장비와 흡입 헤드, 호스' },
+  R15: { id: 'R15', w: 1600, h: 1067, sizes: [640, 1000, 1600], alt: '본사 앞에 세워 둔 스키드 로더와 소형 굴삭기', cap: '스키드 로더와 소형 굴삭기' },
+  R20: { id: 'R20', w: 1600, h: 1067, sizes: [640, 1000, 1600], alt: '작업 장치를 장착한 스키드 로더', cap: '스키드 로더' },
+  R25: { id: 'R25', w: 2400, h: 1600, sizes: [640, 1000, 1600, 2400], alt: '본사 앞에서 제어 차량과 호스로 연결된 로봇', cap: '본사 앞 — 제어 차량과 호스로 연결된 궤도형 장비' },
+  R26: { id: 'R26', w: 2400, h: 2088, sizes: [1000, 2400], alt: '제어 차량에서 로봇을 조종하는 작업자와 호스로 연결된 궤도형 로봇', cap: '제어 차량에서 조종하는 작업자와 로봇' },   // 시안C 12차 v4: 첫 화면 '로봇' 사진(로봇 폴더 517A5365.JPG, 번호판 흐림)
+  R24: { id: 'R24', w: 2400, h: 1600, sizes: [1000, 1600, 2400], alt: '본사 마당의 제어 차량과 진공흡입차, 호스로 연결된 로봇', cap: '본사 마당의 제어 차량 · 흡입차 · 로봇' },   // 시안C 12차: 원칙 구역 사진(로봇 폴더 517A5363.JPG). R25 는 첫 화면 R26 과 거의 같은 장면이라 바꿈
   /* 시안C 13차: 적용 사례 사진 — 기존 사진의 원본에서 다시 만든 보정판(잡티·명암·선명도, 원본에 없는 세부는 만들지 않음) */
-  K01: { id: 'K01', w: 1000, h: 667, sizes: [1000, 1600], alt: '탱크 바닥에서 흡입 호스를 끌고 작업하는 로봇', cap: '탱크 바닥에서 작업하는 로봇' },        // P11(기술소개서 26쪽 960px)을 1600px로 보정
-  K03: { id: 'K03', w: 1000, h: 667, sizes: [1000, 1800], alt: '진공흡입차 옆에서 맨홀에 호스를 연결해 작업하는 작업자들', cap: '진공흡입차와 맨홀 호스 작업' },   // W10 보정
-  K04: { id: 'K04', w: 1000, h: 667, sizes: [1000, 1600], alt: '산업설비 현장에 배치된 진공흡입차와 연결 호스', cap: '산업설비 현장의 진공흡입차와 연결 호스' },   // W01 보정
-  K05: { id: 'K05', w: 1000, h: 667, sizes: [1000, 1800], alt: '도로 위 맨홀 교체 공사 현장에서 작업하는 작업자들', cap: '맨홀 교체 공사 현장' },              // W04 보정
+  K01: { id: 'K01', w: 1600, h: 1067, sizes: [1000, 1600], alt: '탱크 바닥에서 흡입 호스를 끌고 작업하는 로봇', cap: '탱크 바닥에서 작업하는 로봇' },        // P11(기술소개서 26쪽 960px)을 1600px로 보정
+  K03: { id: 'K03', w: 1800, h: 1198, sizes: [1000, 1800], alt: '진공흡입차 옆에서 맨홀에 호스를 연결해 작업하는 작업자들', cap: '진공흡입차와 맨홀 호스 작업' },   // W10 보정
+  K04: { id: 'K04', w: 1600, h: 1067, sizes: [1000, 1600], alt: '산업설비 현장에 배치된 진공흡입차와 연결 호스', cap: '산업설비 현장의 진공흡입차와 연결 호스' },   // W01 보정
+  K05: { id: 'K05', w: 1800, h: 1200, sizes: [1000, 1800], alt: '도로 위 맨홀 교체 공사 현장에서 작업하는 작업자들', cap: '맨홀 교체 공사 현장' },              // W04 보정
   B01: { id: 'B01', w: 960, h: 960, sizes: [960], alt: '줄지어 선 여과판', cap: '줄지어 선 여과판' },   // 시안C 15차: 회사소개서(2024) 10쪽 주요사업 안내 사진 보정판
-  B02: { id: 'B02', w: 596, h: 960, sizes: [596], alt: '구멍이 줄지어 난 설비 안 판', cap: '구멍이 줄지어 난 설비 안 판' },   // 시안C 15차: 회사소개서(2024) 10쪽 주요사업 안내 사진 보정판
-  B03: { id: 'B03', w: 616, h: 560, sizes: [616], alt: '설비 옆에서 받이 통을 다루는 작업자', cap: '설비 옆에서 받이 통을 다루는 작업자' },   // 시안C 15차: 회사소개서(2024) 11쪽 주요사업 안내 사진 보정판
-  B04: { id: 'B04', w: 612, h: 558, sizes: [612], alt: '설비 위에 매단 큰 자루', cap: '설비 위에 매단 큰 자루' },   // 시안C 15차: 회사소개서(2024) 11쪽 주요사업 안내 사진 보정판
+  B02: { id: 'B02', w: 1192, h: 1920, sizes: [596, 1192], alt: '구멍이 줄지어 난 설비 안 판', cap: '구멍이 줄지어 난 설비 안 판' },   // 시안C 15차: 회사소개서(2024) 10쪽 주요사업 안내 사진 보정판
+  B03: { id: 'B03', w: 1232, h: 1120, sizes: [616, 1232], alt: '설비 옆에서 받이 통을 다루는 작업자', cap: '설비 옆에서 받이 통을 다루는 작업자' },   // 시안C 15차: 회사소개서(2024) 11쪽 주요사업 안내 사진 보정판
+  B04: { id: 'B04', w: 1224, h: 1116, sizes: [612, 1224], alt: '설비 위에 매단 큰 자루', cap: '설비 위에 매단 큰 자루' },   // 시안C 15차: 회사소개서(2024) 11쪽 주요사업 안내 사진 보정판
   B05: { id: 'B05', w: 612, h: 558, sizes: [612], alt: '반응기 옆의 진공흡입차와 분리장치', cap: '반응기 옆의 진공흡입차와 분리장치' },   // 시안C 15차: 회사소개서(2024) 11쪽 주요사업 안내 사진 보정판
   B06: { id: 'B06', w: 1312, h: 819, sizes: [1312], alt: '야간 작업 중인 작업 차량', cap: '야간 작업 중인 작업 차량' },   // 시안C 15차: 회사소개서(2024) 12쪽 주요사업 안내 사진 보정판
   B07: { id: 'B07', w: 900, h: 1200, sizes: [900], alt: '맨홀로 이어진 호스와 작업자', cap: '맨홀로 이어진 호스와 작업자' },   // 시안C 15차: 회사소개서(2024) 12쪽 주요사업 안내 사진 보정판
   B08: { id: 'B08', w: 1076, h: 1076, sizes: [1076], alt: '구덩이 안의 호스', cap: '구덩이 안의 호스' },   // 시안C 15차: 회사소개서(2024) 12쪽 주요사업 안내 사진 보정판
-  B09: { id: 'B09', w: 800, h: 1346, sizes: [800], alt: '진공흡입차 옆의 신정개발 작업자', cap: '진공흡입차 옆의 신정개발 작업자' },   // 시안C 15차: 회사소개서(2024) 13쪽 주요사업 안내 사진 보정판
-  B10: { id: 'B10', w: 1076, h: 752, sizes: [1076], alt: '설비 바닥 틈으로 들어간 호스', cap: '설비 바닥 틈으로 들어간 호스' },   // 시안C 15차: 회사소개서(2024) 13쪽 주요사업 안내 사진 보정판
+  B09: { id: 'B09', w: 1600, h: 2692, sizes: [800, 1600], alt: '진공흡입차 옆의 신정개발 작업자', cap: '진공흡입차 옆의 신정개발 작업자' },   // 시안C 15차: 회사소개서(2024) 13쪽 주요사업 안내 사진 보정판
+  B10: { id: 'B10', w: 1600, h: 1118, sizes: [1076, 1600], alt: '설비 바닥 틈으로 들어간 호스', cap: '설비 바닥 틈으로 들어간 호스' },   // 시안C 15차: 회사소개서(2024) 13쪽 주요사업 안내 사진 보정판
   B11: { id: 'B11', w: 484, h: 814, sizes: [484], alt: '격자를 그린 땅 위의 GPR 조사', cap: '격자를 그린 땅 위의 GPR 조사' },   // 시안C 15차: 회사소개서(2024) 14쪽 주요사업 안내 사진 보정판
   B12: { id: 'B12', w: 596, h: 960, sizes: [596], alt: 'GPR 조사 장비', cap: 'GPR 조사 장비' },   // 시안C 15차: 회사소개서(2024) 14쪽 주요사업 안내 사진 보정판
   CF01: { id: 'CF01', w: 1386, h: 1732, sizes: [440, 1386], alt: 'ISO 9001:2015 품질경영시스템 인증서', cap: 'ISO 9001:2015 품질경영시스템 인증서' },   // 시안C 17차: 회사소개서(2024) 26~27쪽 원본 이미지 2배 보정 · 개인 정보 가림
@@ -144,22 +144,22 @@ const PHOTOS = {
   PT06: { id: 'PT06', w: 1212, h: 1558, sizes: [440, 1212], alt: '특허증 — 저장소 내부 검사장치', cap: '특허증 — 저장소 내부 검사장치' },   // 시안C 17차: 회사소개서(2024) 28~29쪽 원본 이미지 2배 보정 · 개인 정보 가림
   PT07: { id: 'PT07', w: 1214, h: 1558, sizes: [440, 1214], alt: '특허증 — 협업형 무인로봇을 이용한 산업용 저장소의 자율 클리닝 시스템', cap: '특허증 — 협업형 무인로봇을 이용한 산업용 저장소의 자율 클리닝 시스템' },   // 시안C 17차: 회사소개서(2024) 28~29쪽 원본 이미지 2배 보정 · 개인 정보 가림
   PT08: { id: 'PT08', w: 1214, h: 1558, sizes: [440, 1214], alt: '특허증 — 레이다를 이용한 파이프 두께 측정장치', cap: '특허증 — 레이다를 이용한 파이프 두께 측정장치' },   // 시안C 17차: 회사소개서(2024) 28~29쪽 원본 이미지 2배 보정 · 개인 정보 가림
-  RB01: { id: 'RB01', w: 1000, h: 667, sizes: [640, 1000], alt: '벽면/천장 부착형 무인 로봇', cap: '벽면/천장 부착형 무인 로봇' },   // 시안C 22차: 로봇 ZIP 517A5349.JPG (tools/photo-plan.json)
+  RB01: { id: 'RB01', w: 1600, h: 1067, sizes: [640, 1000, 1600], alt: '벽면/천장 부착형 무인 로봇', cap: '벽면/천장 부착형 무인 로봇' },   // 시안C 22차: 로봇 ZIP 517A5349.JPG (tools/photo-plan.json)
   RB02: { id: 'RB02', w: 1000, h: 667, sizes: [640, 1000], alt: '위에서 본 벽면/천장 부착형 무인 로봇', cap: '벽면/천장 부착형 무인 로봇 — 위에서 본 모습' },   // 시안C 22차: 로봇 ZIP 517A5383.JPG (tools/photo-plan.json)
-  RB03: { id: 'RB03', w: 1000, h: 667, sizes: [640, 1000], alt: '스크류 바퀴를 단 흡입/준설 무인 로봇', cap: '흡입/준설 무인 로봇' },   // 시안C 22차: 로봇 ZIP 517A5343.JPG (tools/photo-plan.json)
+  RB03: { id: 'RB03', w: 1600, h: 1067, sizes: [640, 1000, 1600], alt: '스크류 바퀴를 단 흡입/준설 무인 로봇', cap: '흡입/준설 무인 로봇' },   // 시안C 22차: 로봇 ZIP 517A5343.JPG (tools/photo-plan.json)
   RB04: { id: 'RB04', w: 1000, h: 667, sizes: [640, 1000], alt: '앞에서 본 흡입/준설 무인 로봇', cap: '흡입/준설 무인 로봇 — 앞에서 본 모습' },   // 시안C 22차: 로봇 ZIP 517A5381.JPG (tools/photo-plan.json)
-  RB05: { id: 'RB05', w: 1000, h: 667, sizes: [640, 1000], alt: '노란 파쇄 장치를 단 궤도형 파쇄 무인 로봇', cap: '파쇄 무인 로봇 (Caterpillar Type)' },   // 시안C 22차: 로봇 ZIP 517A5380.JPG (tools/photo-plan.json)
+  RB05: { id: 'RB05', w: 1600, h: 1067, sizes: [640, 1000, 1600], alt: '노란 파쇄 장치를 단 궤도형 파쇄 무인 로봇', cap: '파쇄 무인 로봇 (Caterpillar Type)' },   // 시안C 22차: 로봇 ZIP 517A5380.JPG (tools/photo-plan.json)
   RB06: { id: 'RB06', w: 1000, h: 667, sizes: [640, 1000], alt: '위에서 본 궤도형 파쇄 무인 로봇', cap: '파쇄 무인 로봇 — 위에서 본 모습' },   // 시안C 22차: 로봇 ZIP 517A5339.JPG (tools/photo-plan.json)
-  HF01: { id: 'HF01', w: 1600, h: 1066, sizes: [1600], alt: '해 질 녘 산업단지 전경', cap: '해 질 녘 산업단지 전경' },   // 시안C 24차: M04 보정판(첫 화면 사진 영화) — tools/photo-plan.json
-  HF02: { id: 'HF02', w: 1600, h: 902, sizes: [1600], alt: '안전 구획을 설치한 현장의 진공흡입차', cap: '안전 구획을 설치한 현장의 진공흡입차' },   // 시안C 24차: M10 보정판(첫 화면 사진 영화) — tools/photo-plan.json
-  HF03: { id: 'HF03', w: 1600, h: 1067, sizes: [1600], alt: '반응기 안에서 촉매를 제거하는 로봇', cap: '반응기 안에서 촉매를 제거하는 로봇' },   // 시안C 24차: P03 보정판(첫 화면 사진 영화) — tools/photo-plan.json
-  HF04: { id: 'HF04', w: 1600, h: 1066, sizes: [1600], alt: '충진물 위에서 흡입 작업 중인 로봇', cap: '충진물 위에서 흡입 작업 중인 로봇' },   // 시안C 24차: P15 보정판(첫 화면 사진 영화) — tools/photo-plan.json
-  HF05: { id: 'HF05', w: 1600, h: 1392, sizes: [1600], alt: '제어 차량에서 조종하는 작업자와 호스로 연결된 로봇', cap: '제어 차량에서 조종하는 작업자와 호스로 연결된 로봇' },   // 시안C 24차: R26 보정판(첫 화면 사진 영화) — tools/photo-plan.json
-  HF06: { id: 'HF06', w: 1600, h: 1067, sizes: [1600], alt: '진공흡입차와 맨홀 호스 작업', cap: '진공흡입차와 맨홀 호스 작업' },   // 시안C 24차: W10 보정판(첫 화면 사진 영화) — tools/photo-plan.json
-  HF07: { id: 'HF07', w: 1600, h: 1067, sizes: [1600], alt: '본사 마당의 제어 차량 · 흡입차 · 로봇', cap: '본사 마당의 제어 차량 · 흡입차 · 로봇' },   // 시안C 24차: R24 보정판(첫 화면 사진 영화) — tools/photo-plan.json
-  R27: { id: 'R27', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '야외에서 흡입차와 호스로 연결된 로봇', cap: '흡입차와 호스로 연결된 로봇' },
-  R34: { id: 'R34', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '차량에 실린 제어 장치를 다루는 작업자와 발밑의 소형 주행 장비', cap: '차량의 제어 장치와 소형 주행 장비' },
-  R42: { id: 'R42', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '카메라 헤드와 바퀴를 갖춘 소형 주행 장비', cap: '카메라 헤드를 갖춘 소형 주행 장비' },
+  HF01: { id: 'HF01', w: 2940, h: 1959, sizes: [1600, 2400, 2940], alt: '해 질 녘 산업단지 전경', cap: '해 질 녘 산업단지 전경' },   // 시안C 24차: M04 보정판(첫 화면 사진 영화) — tools/photo-plan.json
+  HF02: { id: 'HF02', w: 3200, h: 1802, sizes: [1600, 2400, 3200], alt: '안전 구획을 설치한 현장의 진공흡입차', cap: '안전 구획을 설치한 현장의 진공흡입차' },   // 시안C 24차: M10 보정판(첫 화면 사진 영화) — tools/photo-plan.json
+  HF03: { id: 'HF03', w: 3200, h: 2134, sizes: [1600, 2400, 3200], alt: '반응기 안에서 촉매를 제거하는 로봇', cap: '반응기 안에서 촉매를 제거하는 로봇' },   // 시안C 24차: P03 보정판(첫 화면 사진 영화) — tools/photo-plan.json
+  HF04: { id: 'HF04', w: 2880, h: 1920, sizes: [1600, 2400, 2880], alt: '충진물 위에서 흡입 작업 중인 로봇', cap: '충진물 위에서 흡입 작업 중인 로봇' },   // 시안C 24차: P15 보정판(첫 화면 사진 영화) — tools/photo-plan.json
+  HF05: { id: 'HF05', w: 3200, h: 2783, sizes: [1600, 2400, 3200], alt: '제어 차량에서 조종하는 작업자와 호스로 연결된 로봇', cap: '제어 차량에서 조종하는 작업자와 호스로 연결된 로봇' },   // 시안C 24차: R26 보정판(첫 화면 사진 영화) — tools/photo-plan.json
+  HF06: { id: 'HF06', w: 3200, h: 2133, sizes: [1600, 2400, 3200], alt: '진공흡입차와 맨홀 호스 작업', cap: '진공흡입차와 맨홀 호스 작업' },   // 시안C 24차: W10 보정판(첫 화면 사진 영화) — tools/photo-plan.json
+  HF07: { id: 'HF07', w: 3200, h: 2133, sizes: [1600, 2400, 3200], alt: '본사 마당의 제어 차량 · 흡입차 · 로봇', cap: '본사 마당의 제어 차량 · 흡입차 · 로봇' },   // 시안C 24차: R24 보정판(첫 화면 사진 영화) — tools/photo-plan.json
+  R27: { id: 'R27', w: 1600, h: 1067, sizes: [640, 1000, 1600], alt: '야외에서 흡입차와 호스로 연결된 로봇', cap: '흡입차와 호스로 연결된 로봇' },
+  R34: { id: 'R34', w: 1600, h: 1067, sizes: [640, 1000, 1600], alt: '차량에 실린 제어 장치를 다루는 작업자와 발밑의 소형 주행 장비', cap: '차량의 제어 장치와 소형 주행 장비' },
+  R42: { id: 'R42', w: 1600, h: 1067, sizes: [640, 1000, 1600], alt: '카메라 헤드와 바퀴를 갖춘 소형 주행 장비', cap: '카메라 헤드를 갖춘 소형 주행 장비' },
   /* P 사진(11차, 이다결 님 결정으로 '사진은 ZIP에서만' 규칙의 예외): 회사소개서(2024)·기술소개서(2025) PDF에 실린 작업 사진.
      파일은 준비된 것을 그대로 쓴다(다시 만들거나 크기를 바꾸지 않음). sizes는 실제 있는 파일 폭만. 출처는 tools/photo-plan.json */
   P01: { id: 'P01', w: 1000, h: 667, sizes: [640, 800], alt: '탱크 안에서 고압 세척을 하는 작업자 두 명', cap: '탱크 내부 세척 작업' },
@@ -186,24 +186,24 @@ const PHOTOS = {
   AI09: { id: 'AI09', w: 4096, h: 2304, sizes: [960, 1600, 2400], alt: '원격 조종기를 든 작업자 앞에서 호스를 끌며 작업하는 주황색 궤도형 로봇', cap: '연출 영상 — 작업자와 무인 로봇' },
   /* 시안B 27차: 현장 진행 방식 '현장 배치와 작업 순서' 전용 연출 영상(assets/video/AI10-process.mp4·webm, 4클립 합본 30.8초)의 포스터 — 클립 1의 로봇 진입 장면. 이다결 님이 ChatGPT(Sora)로 만들어 준 클립 4개(2026-10-19). 출처 tools/photo-plan.json */
   AI10: { id: 'AI10', w: 3840, h: 2160, sizes: [960, 1600, 2400], alt: '은색 설비의 둥근 점검구로 호스를 끌며 들어가는 주황색 궤도형 로봇', cap: '연출 영상 — 현장 배치와 작업 순서' },
-  P03: { id: 'P03', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '촉매가 쌓인 반응기 안에 투입된 흡입 로봇과 호스', cap: '반응기 안에서 촉매를 제거하는 로봇' },
+  P03: { id: 'P03', w: 1600, h: 1067, sizes: [640, 1000, 1600], alt: '촉매가 쌓인 반응기 안에 투입된 흡입 로봇과 호스', cap: '반응기 안에서 촉매를 제거하는 로봇' },
   P06: { id: 'P06', w: 1000, h: 667, sizes: [640], alt: '진공흡입차 앞에서 호스 작업을 지켜보는 신정개발 작업자', cap: '흡입차와 신정개발 작업자' },
-  P08: { id: 'P08', w: 1000, h: 667, sizes: [640, 800], alt: '도로 위에서 GPR 장비를 밀며 조사하는 작업자', cap: '도로 GPR 조사' },
+  P08: { id: 'P08', w: 1200, h: 800, sizes: [640, 800, 1200], alt: '도로 위에서 GPR 장비를 밀며 조사하는 작업자', cap: '도로 GPR 조사' },
   P10: { id: 'P10', w: 1000, h: 667, sizes: [640, 1000], alt: '방호복을 입고 탱크 안에서 흡입 호스를 다루는 작업자', cap: '기존 작업 · 작업자가 탱크 안에서 직접 흡입' },
   P11: { id: 'P11', w: 1000, h: 667, sizes: [640, 960], alt: '탱크 바닥에서 흡입 호스를 끌고 작업하는 로봇', cap: '무인장비 적용 · 로봇이 탱크 안에서 흡입' },
   /* 시안C 4차 (2026-10-27 이다결 님 결정): 메인 사업분야 차트용. P13·P14 는 회사소개서(2024) PDF 사진 예외, U03·U04 는 이다결 님 제공 사진. 출처 tools/photo-plan.json */
   P13: { id: 'P13', w: 306, h: 279, sizes: [306], alt: '반응기 옆에 배치된 진공흡입차와 분리장치', cap: '반응기 옆의 진공흡입차와 분리장치' },
   P14: { id: 'P14', w: 537, h: 539, sizes: [537], alt: '도로에서 GPR 장비를 밀며 지하매설물을 조사하는 작업자', cap: '도로 위 GPR 조사' },
-  U03: { id: 'U03', w: 1600, h: 1067, sizes: [640, 1000, 1600, 2400], alt: '야간 조명이 켜진 플랜트의 배관과 설비', cap: '야간 플랜트 배관 설비' },
-  U04: { id: 'U04', w: 1600, h: 901, sizes: [640, 1000, 1600], alt: '석유화학 단지 안에서 안전 구획을 세우고 작업 중인 신정개발 흡입차', cap: '안전 구획을 세운 석유화학 단지 안 작업 현장' },
+  U03: { id: 'U03', w: 2400, h: 1600, sizes: [640, 1000, 1600, 2400], alt: '야간 조명이 켜진 플랜트의 배관과 설비', cap: '야간 플랜트 배관 설비' },
+  U04: { id: 'U04', w: 2400, h: 1352, sizes: [640, 1000, 1600, 2400], alt: '석유화학 단지 안에서 안전 구획을 세우고 작업 중인 신정개발 흡입차', cap: '안전 구획을 세운 석유화학 단지 안 작업 현장' },
   /* 시안C 6차 (2026-10-27 이다결 님 결정): 메인 주요 수행 이력(분류 탭)용. 셋 다 기술소개서(2025) PDF 사진 예외 — 파일은 축소·크롭·얼굴 흐림만(확대 없음). 출처 tools/photo-plan.json */
-  P15: { id: 'P15', w: 720, h: 480, sizes: [720, 1280], alt: '알갱이 충진물 위에서 흡입 작업 중인 로봇', cap: '충진물 위에서 흡입 작업 중인 로봇' },
-  P16: { id: 'P16', w: 761, h: 507, sizes: [761], alt: '제어 차량 안에서 모니터를 보며 조종하는 작업자들', cap: '제어 차량 안에서 모니터를 보는 작업자들' },
+  P15: { id: 'P15', w: 1280, h: 853, sizes: [720, 1280], alt: '알갱이 충진물 위에서 흡입 작업 중인 로봇', cap: '충진물 위에서 흡입 작업 중인 로봇' },
+  P16: { id: 'P16', w: 1522, h: 1014, sizes: [761, 1522], alt: '제어 차량 안에서 모니터를 보며 조종하는 작업자들', cap: '제어 차량 안에서 모니터를 보는 작업자들' },
   P17: { id: 'P17', w: 815, h: 543, sizes: [815], alt: '설비 내부를 네 화면으로 보여 주는 CCTV 모니터', cap: '설비 내부를 보여 주는 CCTV 모니터' },
   /* 시안C 10차: 기술소개서(2025) 8쪽 '기타 Cleaning 로봇'의 장비 사진(PDF 사진 예외 — CLAUDE.md, tools/photo-plan.json). 검은 바탕 그대로, 확대 없음 */
-  X01: { id: 'X01', w: 604, h: 403, sizes: [604], alt: '앞에 버킷을 단 궤도형 무인 로더', cap: '앞에 버킷을 단 궤도형 무인 로더' },
-  X02: { id: 'X02', w: 674, h: 531, sizes: [674], alt: '앞에 버킷을 단 소형 궤도형 무인 로더', cap: '앞에 버킷을 단 소형 궤도형 무인 로더' },
-  X03: { id: 'X03', w: 598, h: 448, sizes: [598], alt: '노즐 여러 개를 단 바퀴형 세척 로봇', cap: '노즐 여러 개를 단 바퀴형 세척 로봇' }
+  X01: { id: 'X01', w: 1208, h: 806, sizes: [604, 1208], alt: '앞에 버킷을 단 궤도형 무인 로더', cap: '앞에 버킷을 단 궤도형 무인 로더' },
+  X02: { id: 'X02', w: 1348, h: 1062, sizes: [674, 1348], alt: '앞에 버킷을 단 소형 궤도형 무인 로더', cap: '앞에 버킷을 단 소형 궤도형 무인 로더' },
+  X03: { id: 'X03', w: 1196, h: 896, sizes: [598, 1196], alt: '노즐 여러 개를 단 바퀴형 세척 로봇', cap: '노즐 여러 개를 단 바퀴형 세척 로봇' }
 };
 const P = (id) => PHOTOS[id];
 
@@ -2170,7 +2170,7 @@ ${WHY_PAIR.map((w, i) => `        <figure>
       </div>
       <div class="u14__sub"><h3>${esc(c.jobsTitle || '로봇이 하는 일')}</h3></div>
       <ul class="u14__jobs u14__jobs--6" data-reveal>
-${RL22.map((b) => `        <li><a class="u14-job" href="unmanned.html#${b.id}"><span class="u14-job__ph${b.fit ? ' is-fit' : ''}">${photo(P(b.photos[0]), '(max-width:860px) 104px, (max-width:1100px) 30vw, 210px')}</span>${unmFn(b)}<p>${unmJob(b)}</p><small>${b.grp === 'rd' ? '<i>연구개발 시제품</i> · ' : ''}${esc(b.name)}</small></a></li>`).join('\n')}
+${RL22.map((b) => `        <li><a class="u14-job" href="unmanned.html#${b.id}"><span class="u14-job__ph${b.fit ? ' is-fit' : ''}">${photo(P(b.photos[0]), '(max-width:860px) 120px, (max-width:1100px) 30vw, 210px')}</span>${unmFn(b)}<p>${unmJob(b)}</p><small>${b.grp === 'rd' ? '<i>연구개발 시제품</i> · ' : ''}${esc(b.name)}</small></a></li>`).join('\n')}
       </ul>
       <a class="u14__more" href="${c.moreHref || 'unmanned.html'}">${esc(c.more)}</a>
     </div>
@@ -2510,7 +2510,7 @@ ${pcards(c.cards.map((k) => k.photo), c.cards.map((k) => k.title), null, c.cards
   <section class="section${BG_CLASS[bg]} co" id="company" aria-labelledby="co-title">
     <div class="co__grid">
       <figure class="co__media" data-reveal>
-        ${photo(ph, '(max-width:960px) 100vw, 50vw')}
+        ${photo(ph, '(max-width:960px) 100vw, 60vw')}
         <figcaption>${esc(ph.cap)}</figcaption>
       </figure>
       <div class="co__body" data-reveal data-delay="90">
@@ -2666,7 +2666,9 @@ function heroFilm() {
   const t = (x) => esc(fill(x, vars));
   const imgs = f.shots.map((sc, i) => {
     const p = P(sc.photo);
-    return `        <img class="hf__img${i ? '' : ' is-on'}" ${i ? `data-src="assets/photos/${p.id}-${p.sizes[p.sizes.length - 1]}.jpg"` : `src="assets/photos/${p.id}-${p.sizes[p.sizes.length - 1]}.jpg" fetchpriority="high"`} width="${p.w}" height="${p.h}" alt="" style="--pos: ${sc.pos || '50% 50%'}; --pos-m: ${sc.posM || sc.pos || '50% 50%'}" data-cap="${esc(p.cap || p.alt)}" decoding="async">`;
+    const big = `assets/photos/${p.id}-${p.sizes[p.sizes.length - 1]}.jpg`, set = p.sizes.map((w) => `assets/photos/${p.id}-${w}.jpg ${w}w`).join(', ');
+    /* 시안C 25차: 화면 크기 · 해상도에 맞는 판을 고르게 srcset · sizes(휴대폰은 4:3 상자를 세로로 채우므로 135vw) — 다음 장면은 data-src · data-srcset */
+    return `        <img class="hf__img${i ? '' : ' is-on'}" ${i ? `data-src="${big}" data-srcset="${set}"` : `src="${big}" srcset="${set}" fetchpriority="high"`} sizes="(max-width:700px) 135vw, 100vw" width="${p.w}" height="${p.h}" alt="" style="--pos: ${sc.pos || '50% 50%'}; --pos-m: ${sc.posM || sc.pos || '50% 50%'}" data-cap="${esc(p.cap || p.alt)}" decoding="async">`;
   }).join('\n');
   const lead = Array.isArray(s.lead) ? s.lead.map((x) => `<span>${t(x)}</span>`).join(' ') : t(s.lead);
   return `  <!-- ===== 히어로: 실사 사진 영화 + 한 문장 (큰 틀 'film', 시안C 24차) ===== -->
@@ -2741,7 +2743,7 @@ HOME_SECTIONS.what5 = () => {
     const wc = WHAT_CHART.find((x) => x.svc === sv.id) || {};
     const [pid, pos] = w.photos[sv.id];
     const p = P(pid);
-    return `        <li><a href="${sv.file}"><img src="assets/photos/${p.id}-${p.sizes[p.sizes.length - 1]}.jpg" srcset="${p.sizes.map((x) => `assets/photos/${p.id}-${x}.jpg ${x}w`).join(', ')}" sizes="(max-width:960px) 66vw, 260px" width="${p.w}" height="${p.h}" alt="" loading="lazy" decoding="async" style="--pos: ${pos}"><span class="sv5__t"><em>${String(i + 1).padStart(2, '0')}</em><b>${esc(sv.title)}</b><small>${esc(wc.where || '')}</small>${arrow(18)}</span></a></li>`;
+    return `        <li><a href="${sv.file}"><img src="assets/photos/${p.id}-${p.sizes[p.sizes.length - 1]}.jpg" srcset="${p.sizes.map((x) => `assets/photos/${p.id}-${x}.jpg ${x}w`).join(', ')}" sizes="(max-width:960px) 140vw, 540px" width="${p.w}" height="${p.h}" alt="" loading="lazy" decoding="async" style="--pos: ${pos}"><span class="sv5__t"><em>${String(i + 1).padStart(2, '0')}</em><b>${esc(sv.title)}</b><small>${esc(wc.where || '')}</small>${arrow(18)}</span></a></li>`;
   }).join('\n');
   return `  <!-- ===== 무슨 일을 하나: 사업 다섯 (시안C 24차) ===== -->
   <section class="sv5" id="what" aria-labelledby="sv5-h">
@@ -3013,7 +3015,7 @@ function svc16Top(cur) {
   const line = cur ? `
   <section class="s6-line" aria-label="사업분야 다섯"><div class="wrap"><ul class="s6-fds">${SERVICES.map((s) => `<li><a class="s6-fd" href="${s.file}#sv-ov"${s === cur ? ' aria-current="page"' : ''}><span class="s6-fd__ph">${photo(P(SVC15[s.id].head), '80px')}</span><span class="s6-fd__tx">${s16Fn(s)}<b>${esc(s.title)}</b></span></a></li>`).join('')}</ul></div></section>` : '';
   return `
-  <section class="s6-top${cur ? '' : ' s6-top--list'}" aria-label="사업분야 소개"><div class="s6-top__bg">${photo(hp, '100vw', true)}</div><div class="wrap">
+  <section class="s6-top${cur ? '' : ' s6-top--list'}" aria-label="사업분야 소개"><div class="s6-top__bg">${photo(hp, '(max-width:700px) 150vw, 100vw', true)}</div><div class="wrap">
     ${crumb}
     ${k}
     <p class="s6-top__h">${SVC16_HEAD.line}</p>
@@ -3038,7 +3040,7 @@ SERVICES.forEach((s, idx) => {
     const steps = v.steps();
     const stepHtml = steps.map(([t, d, pl, phs, chips], k) => {
       const media = phs.length
-        ? `<span class="s6-st__ph s6-st__ph--${phs.length}">${phs.map((id) => photo(P(id), '(max-width:860px) 104px, 420px')).join('')}</span>`
+        ? `<span class="s6-st__ph s6-st__ph--${phs.length}">${phs.map((id) => photo(P(id), '(max-width:860px) 120px, 500px')).join('')}</span>`
         : `<span class="s6-st__ph s6-st__ph--none"><b>${String(k + 1).padStart(2, '0')}</b><small>${esc(t)}</small></span>`;
       const desc = s.id === 'S04' && / → /.test(d) ? `<ol class="s6-flow">${d.split(' → ').map((x) => `<li>${esc(x)}</li>`).join('')}</ol>` : `<p>${esc(d)}</p>`;
       return `<li class="s6-st${pl === 'in' ? ' is-robot' : ''}" id="${s.id === 'S04' && k === 2 ? 'dewater' : 'st-' + (k + 1)}">${media}<div class="s6-st__tx"><div class="s6-st__h"><em>${String(k + 1).padStart(2, '0')}</em>${pl ? `<span class="s6-pl s6-pl--${PL[pl][0]}">${PL[pl][1]}</span>` : ''}</div><h3>${esc(t)}</h3>${desc}${chips.length ? `<div class="s6-chips">${chips.map(chip).join('')}</div>` : ''}</div></li>`;
@@ -3058,7 +3060,7 @@ SERVICES.forEach((s, idx) => {
     const ex = v.extra;
     const exHtml = ex ? `<div class="s6-ex"><div><h3>${esc(ex[0])}</h3><p>${esc(ex[1])}</p><p class="us-src">${esc(ex[3])}</p></div><div class="s6-ex__ph s6-ex__ph--${ex[2].length}">${ex[2].map((id) => `<figure>${photo(P(id), '(max-width:860px) 46vw, 380px')}<figcaption>${esc(P(id).cap || P(id).alt)}</figcaption></figure>`).join('')}</div></div>` : '';
     const eqRows = eg.rows.filter((r) => !r[4]).map(([a, b, c, d]) => `<tr><th scope="row">${esc(a)}</th><td>${esc(b)}</td><td>${esc(c)}</td><td class="q">${esc(d)}</td></tr>`).join('');
-    const eqPh = (v.eqph || []).map((id) => `<figure>${photo(P(id), '(max-width:860px) 100vw, 420px')}<figcaption>${esc(P(id).cap || P(id).alt)}</figcaption></figure>`).join('');
+    const eqPh = (v.eqph || []).map((id) => `<figure>${photo(P(id), '(max-width:860px) 100vw, 460px')}<figcaption>${esc(P(id).cap || P(id).alt)}</figcaption></figure>`).join('');
     const nav = `  <nav class="s6-nav" aria-label="사업분야 · 이 분야 안"><div class="wrap">${SERVICES.map((x) => `<a class="s6-nav__f" href="${x.file}#sv-ov"${x === s ? ' aria-current="page"' : ''}>${esc(x.title)}</a>`).join('')}<span class="s6-nav__sep" aria-hidden="true"></span><b class="s6-nav__cur">${n} ${esc(s.title)}</b><a href="#sv-ov" data-s>개요</a><a href="#sv-how" data-s>작업 방식</a><a href="#sv-eq" data-s>보유 장비</a>${hasNote ? '<a href="#sv-note" data-s>알아 두실 점</a>' : ''}<a href="#sv-end" data-s><span class="s6-w">문의 · </span>사례</a></div></nav>`;
     return head({
       file: s.file, page: 'services',
@@ -3071,7 +3073,7 @@ SERVICES.forEach((s, idx) => {
   <section class="s6-ov" id="sv-ov" aria-labelledby="sv-h"><div class="wrap">
     <div class="s6-pg"><a href="${prev ? prev.file + '#sv-ov' : 'services.html'}">‹ ${prev ? '이전' : '전체'}</a><span><b>${n}</b> / ${N}</span><a href="${next.file}#sv-ov">다음 ›</a></div>
     <div class="s6-ov__grid">
-      <figure class="s6-ov__ph">${photo(hp, '(max-width:860px) 100vw, 640px')}<figcaption>${esc(hp.cap || hp.alt)}</figcaption></figure>
+      <figure class="s6-ov__ph">${photo(hp, '(max-width:860px) 100vw, 660px')}<figcaption>${esc(hp.cap || hp.alt)}</figcaption></figure>
       <div>
         ${s16Fn(s)}
         <h1 id="sv-h">${esc(s.title)}</h1>
@@ -4187,7 +4189,7 @@ pages['company.html'] = () => {
   const ic = (d, s = 18) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
   const BOT = '<rect x="4" y="8" width="16" height="10" rx="2"/><path d="M12 4v4M9 13h.01M15 13h.01"/>';
   const kick = (t) => `<p class="c7-k">${t}</p>`;
-  const fig = (id, sizes) => { const p = P(id); return `<figure class="c7-ph">${photo(p, sizes || '(max-width:860px) 100vw, 50vw')}<figcaption>${esc(p.cap || p.alt)}</figcaption></figure>`; };
+  const fig = (id, sizes) => { const p = P(id); return `<figure class="c7-ph">${photo(p, sizes || '(max-width:860px) 100vw, 90vw')}<figcaption>${esc(p.cap || p.alt)}</figcaption></figure>`; };
   const split = (id, label, side, media, body, soft) => `  <section class="c7-sec c7-sec--${side}${soft ? ' c7-sec--soft' : ''}" id="${id}" aria-label="${label}"><div class="c7-split">
     <div class="c7-split__m">${media}</div>
     <div class="c7-split__t">${body}</div>
@@ -4260,7 +4262,7 @@ pages['company.html'] = () => {
       <div><h3 class="c7-h3">수상 <small>${CREDS.awards.length}회</small></h3><ul class="c7-yr">${aw}</ul></div>
     </div>
   </div></section>
-` + split('organization', '사람과 조직', 'l', fig(K.photos.org, '(max-width:860px) 100vw, 50vw'), `${kick('사람과 조직')}<h2 class="c7-h2">조직과 기술 인력</h2>
+` + split('organization', '사람과 조직', 'l', fig(K.photos.org, '(max-width:860px) 100vw, 90vw'), `${kick('사람과 조직')}<h2 class="c7-h2">조직과 기술 인력</h2>
       <p class="c7-lead">대표이사 아래 경영지원팀 · 안전 · 공무 · 기업부설연구소와 C&amp;M · C&amp;S · SAP 다섯 개 팀이 있습니다.</p>
       <div class="c7-oc" role="img" aria-label="${esc(ORG_LABEL)}">
         <div class="c7-oc__ceo">대표이사</div>
@@ -4743,7 +4745,7 @@ function relocate(html) {
   const up = (u) => (/^(\.\/)?(assets|css|js)\//.test(u) ? '../' + u.replace(/^\.\//, '') : u);
   return html
     .replace(/(\s)(href|src|data-src|poster|data-fallback|data-scene|data-models)="([^"]*)"/g, (m, sp, a, u) => `${sp}${a}="${up(u)}"`)
-    .replace(/(\s)srcset="([^"]*)"/g, (m, sp, v) => `${sp}srcset="${v.split(',').map((p) => { const t = p.trim().split(/\s+/); t[0] = up(t[0]); return t.join(' '); }).join(', ')}"`);
+    .replace(/(\s)(srcset|data-srcset)="([^"]*)"/g, (m, sp, a, v) => `${sp}${a}="${v.split(',').map((p) => { const t = p.trim().split(/\s+/); t[0] = up(t[0]); return t.join(' '); }).join(', ')}"`);
 }
 
 /* 42차: 시안 편집기(tools/editor)가 이 생성기를 브라우저에서 그대로 부를 때 읽는 정보(사진 목록·페이지·큰 틀 이름 등).
