@@ -150,6 +150,13 @@ const PHOTOS = {
   RB04: { id: 'RB04', w: 1000, h: 667, sizes: [640, 1000], alt: '앞에서 본 흡입/준설 무인 로봇', cap: '흡입/준설 무인 로봇 — 앞에서 본 모습' },   // 시안C 22차: 로봇 ZIP 517A5381.JPG (tools/photo-plan.json)
   RB05: { id: 'RB05', w: 1000, h: 667, sizes: [640, 1000], alt: '노란 파쇄 장치를 단 궤도형 파쇄 무인 로봇', cap: '파쇄 무인 로봇 (Caterpillar Type)' },   // 시안C 22차: 로봇 ZIP 517A5380.JPG (tools/photo-plan.json)
   RB06: { id: 'RB06', w: 1000, h: 667, sizes: [640, 1000], alt: '위에서 본 궤도형 파쇄 무인 로봇', cap: '파쇄 무인 로봇 — 위에서 본 모습' },   // 시안C 22차: 로봇 ZIP 517A5339.JPG (tools/photo-plan.json)
+  HF01: { id: 'HF01', w: 1600, h: 1066, sizes: [1600], alt: '해 질 녘 산업단지 전경', cap: '해 질 녘 산업단지 전경' },   // 시안C 24차: M04 보정판(첫 화면 사진 영화) — tools/photo-plan.json
+  HF02: { id: 'HF02', w: 1600, h: 902, sizes: [1600], alt: '안전 구획을 설치한 현장의 진공흡입차', cap: '안전 구획을 설치한 현장의 진공흡입차' },   // 시안C 24차: M10 보정판(첫 화면 사진 영화) — tools/photo-plan.json
+  HF03: { id: 'HF03', w: 1600, h: 1067, sizes: [1600], alt: '반응기 안에서 촉매를 제거하는 로봇', cap: '반응기 안에서 촉매를 제거하는 로봇' },   // 시안C 24차: P03 보정판(첫 화면 사진 영화) — tools/photo-plan.json
+  HF04: { id: 'HF04', w: 1600, h: 1066, sizes: [1600], alt: '충진물 위에서 흡입 작업 중인 로봇', cap: '충진물 위에서 흡입 작업 중인 로봇' },   // 시안C 24차: P15 보정판(첫 화면 사진 영화) — tools/photo-plan.json
+  HF05: { id: 'HF05', w: 1600, h: 1392, sizes: [1600], alt: '제어 차량에서 조종하는 작업자와 호스로 연결된 로봇', cap: '제어 차량에서 조종하는 작업자와 호스로 연결된 로봇' },   // 시안C 24차: R26 보정판(첫 화면 사진 영화) — tools/photo-plan.json
+  HF06: { id: 'HF06', w: 1600, h: 1067, sizes: [1600], alt: '진공흡입차와 맨홀 호스 작업', cap: '진공흡입차와 맨홀 호스 작업' },   // 시안C 24차: W10 보정판(첫 화면 사진 영화) — tools/photo-plan.json
+  HF07: { id: 'HF07', w: 1600, h: 1067, sizes: [1600], alt: '본사 마당의 제어 차량 · 흡입차 · 로봇', cap: '본사 마당의 제어 차량 · 흡입차 · 로봇' },   // 시안C 24차: R24 보정판(첫 화면 사진 영화) — tools/photo-plan.json
   R27: { id: 'R27', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '야외에서 흡입차와 호스로 연결된 로봇', cap: '흡입차와 호스로 연결된 로봇' },
   R34: { id: 'R34', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '차량에 실린 제어 장치를 다루는 작업자와 발밑의 소형 주행 장비', cap: '차량의 제어 장치와 소형 주행 장비' },
   R42: { id: 'R42', w: 1000, h: 667, sizes: [640, 1000, 1600], alt: '카메라 헤드와 바퀴를 갖춘 소형 주행 장비', cap: '카메라 헤드를 갖춘 소형 주행 장비' },
@@ -1275,7 +1282,7 @@ ${V ? '' : `<link rel="canonical" href="${SITE_URL}${here}">
 <link rel="stylesheet" href="css/${V ? `tokens.${V.name}.css` : 'tokens.css'}">
 <link rel="stylesheet" href="css/site.css">
 ${!marked && o.jsonld ? `<script type="application/ld+json">${JSON.stringify(o.jsonld)}</script>\n` : ''}</head>
-<body class="moB-root" data-page="${o.page}"${o.page === 'home' && (CFG.frame.hero === 'reel' || CFG.frame.hero === 'slides' || CFG.frame.hero === 'lines' || CFG.frame.hero === 'statement') ? ` data-hero="${CFG.frame.hero}"` : ''}>
+<body class="moB-root" data-page="${o.page}"${o.page === 'home' && (CFG.frame.hero === 'reel' || CFG.frame.hero === 'slides' || CFG.frame.hero === 'lines' || CFG.frame.hero === 'statement' || CFG.frame.hero === 'film') ? ` data-hero="${CFG.frame.hero}"` : ''}>
 <a class="skip-link" href="#main">본문 바로가기</a>
 ${V ? `<div class="pvbar" role="note">검토용 ${esc(V.label)}입니다 · <a href="../index.html">기본판 보기</a> · 공식 홈페이지 <a href="${OFFICIAL_SITE.url}" target="_blank" rel="noopener">${OFFICIAL_SITE.label}</a></div>\n`
     : S ? `<div class="sianbar" role="note" style="--sian: ${S.color}"><span class="sianbar__name">${esc(S.name)}</span>${S.direction ? `<span class="sianbar__dir">${esc(S.direction)}</span>` : ''}<span class="sianbar__note">최종본과 다른 작업용 판입니다</span></div>\n`
@@ -2153,13 +2160,13 @@ ${WHY_PAIR.map((w, i) => `        <figure>
     return `  <!-- ===== 무인 솔루션 (시안C 14차) ===== -->
   <section class="section${BG_CLASS[bg]} u14" id="unmanned" aria-labelledby="u14-title">
     <div class="wrap">
-      <div class="u14__top" data-reveal>
+      <div class="u14__top${c.pair === false ? ' u14__top--one' : ''}" data-reveal>
         <div>
           <p class="u14__eb">${esc(c.eyebrow || 'UNMANNED SOLUTION')}</p>
           <h2 id="u14-title">${esc(c.title)}</h2>
           <p class="u14__lead">${esc(c.lead)}</p>
         </div>
-        ${unmPair('(max-width:860px) 42vw, 340px')}
+        ${c.pair === false ? '' : unmPair('(max-width:860px) 42vw, 340px')}
       </div>
       <div class="u14__sub"><h3>${esc(c.jobsTitle || '로봇이 하는 일')}</h3></div>
       <ul class="u14__jobs u14__jobs--6" data-reveal>
@@ -2557,6 +2564,197 @@ const FRAMES = {
   sections: { base: HOME_SECTIONS },
   header: { base: headerBase }
 };
+
+/* ===================== 시안C 24차: 메인 — 첫 화면 '사진 영화'(큰 틀 'film') · 숫자 줄 · 왜 로봇인가 · 어떻게(단면도) · 무엇을(사업 다섯) =====================
+   2026-11-03 이다결 님 결정(미리보기 '메인 제안 v2'). 글 · 숫자는 두 문서와 사이트에 이미 있는 것만:
+   - 첫 화면 글 = hero.statement(23차 그대로). 사진 = hero.film.shots(HF01~HF07, 실사 일곱 장을 같은 톤으로 보정한 것)
+   - 숫자 줄 = 23차 네 칸과 같은 수(4년 연속 · PROJECT_SUMMARY · PROCESS.generations · COMPANY17.patents)
+   - 왜 로봇인가 = PROCESS.bgfacts(기술소개서 4쪽: 일반 산업재해 100명당 1.5명 · 밀폐공간 질식 100명당 50명 · 연간 200회 · 800명 · 1,200시간)
+   - 어떻게 = UNM_PAIR · UNM_STEPS 의 사실(설비 안 로봇 · 설비 밖 제어 차량 CCTV · 작업자 마무리) + 기술소개서 4쪽 문장 "사람이 없는 곳에 인명 사고도 없다."
+   - 무엇을 = SERVICES(이름 · 파일) + WHAT_CHART(현장) + 사진 다섯
+   predecessors(heroStatement · trust · whatList · principle)는 지우지 않는다 — 설정으로 되돌릴 수 있다 */
+const HOME24 = {
+  dur: 3900,                                   // 장면 하나 길이(ms) — js/hero-film.js 가 같은 값을 쓴다
+  glance: () => [                              // 숫자 줄 네 칸(23차 statement.items 와 같은 사실)
+    { big: '4년 연속', small: '4개 발주처 단가계약 · 2020~2023', href: 'cases.html' },
+    { big: `${PROJECT_SUMMARY.n}<small>${esc(PROJECT_SUMMARY.unit)}</small>`, small: '수행 실적 · 2020~2023', href: 'cases.html' },
+    { big: `1~${PROCESS.generations.length}<small>세대</small>`, small: '무인 Vacuum 로봇', href: 'unmanned.html#r-vacuum' },
+    { big: `${COMPANY17.patents.length}<small>건</small>`, small: '등록 특허 · 특허증 원본', href: 'company.html#credentials' }
+  ],
+  why: {                                       // 기술소개서(2025) 4쪽 개발 배경 — 숫자는 글 그대로
+    k: '왜 로봇인가',
+    h: '일반 산업재해는 100명 중 1.5명이,<br>밀폐공간 질식 재해는 <em>100명 중 50명</em>이 목숨을 잃습니다.',
+    p: '신정개발은 한 해 200회, 연인원 800명이 1,200시간을 밀폐공간에서 일합니다. 그래서 사람이 들어가기 전에 로봇을 먼저 넣습니다.',
+    n: [['일반 산업재해 사망', '1.5', '명 / 100명', 'bad'], ['밀폐공간 질식 재해 사망', '50', '명 / 100명', ''], ['신정개발 연간 밀폐공간 작업', '200', '회', '']],
+    src: '출처: 고용노동부 2014~2023 산업재해조사 · 신정개발 연간 작업 기준 — 기술소개서(2025) 4쪽'
+  },
+  how: {
+    k: '어떻게 일하나', h: '로봇은 안에서,<br>사람은 밖에서.',
+    rows: [['설비 안', '로봇이 먼저 들어가 위험 물질을 회수합니다.', true], ['설비 밖', '작업자는 제어 차량에서 CCTV 화면을 보며 조종합니다.', false], ['그다음', '위험이 줄어든 뒤에 작업자가 들어가 마무리합니다.', false]],
+    q: '“사람이 없는 곳에 인명 사고도 없다.”', qs: '— 신정개발 기술소개서(2025)',
+    more: '작업 방식 자세히', moreHref: 'unmanned.html#method'
+  },
+  what: {
+    k: '무슨 일을 하나', h: '다섯 가지 일을 합니다.', more: '사업분야 전체', moreHref: 'services.html',
+    photos: { S01: ['U04', '30% 50%'], S02: ['P03', '45% 50%'], S03: ['U03', '55% 50%'], S04: ['W10', '45% 50%'], S05: ['R42', '40% 50%'] }   // 분야별 사진 · 보일 부분
+  }
+};
+/* 설비 단면 선 그림 — 설비 안 로봇 · 점검구 · 호스 · Vacuum Car · 제어 차량과 작업자 · 원격 조종 점선. 글자는 PC 용(.sx-t--pc) · 휴대폰 용(.sx-t--m) 두 벌 */
+const SX_SVG = `<svg class="sx" viewBox="0 60 1200 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="설비 단면도 — 설비 안에서 로봇이 일하고, 설비 밖 제어 차량에서 작업자가 조종한다">
+<path class="sx-d g-ground" d="M30 560 H1170" fill="none" stroke="#14181c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<path class="sx-d g-tank" d="M600 560 V540" fill="none" stroke="#14181c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<path class="sx-d g-tank" d="M600 460 V170 Q875 56 1150 170 V560" fill="none" stroke="#14181c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<path class="sx-d g-tank" d="M600 460 H562 M600 540 H562" fill="none" stroke="#14181c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<path class="sx-d g-tank" d="M562 452 V548" fill="none" stroke="#14181c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<path class="sx-d g-tank" d="M552 464 h6 M552 486 h6 M552 514 h6 M552 536 h6" fill="none" stroke="#14181c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<path class="sx-d g-tank" d="M862 113 V86 H888 V113" fill="none" stroke="#14181c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<path class="sx-d g-tank" d="M1118 200 V540 M1134 200 V540" fill="none" stroke="#14181c" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<path class="sx-d g-tank" d="M1118 230 H1134 M1118 290 H1134 M1118 350 H1134 M1118 410 H1134 M1118 470 H1134 M1118 530 H1134" fill="none" stroke="#14181c" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<path class="sx-f g-sludge" d="M846 548 C 880 536, 920 548, 960 540 S 1040 548, 1080 538 S 1140 546, 1148 544 V558 H846 Z" fill="#e3e8ec"/>
+<path class="sx-d g-sludge" d="M846 548 C 880 536, 920 548, 960 540 S 1040 548, 1080 538 S 1140 546, 1148 544" fill="none" stroke="#646c74" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<path class="sx-d g-cars" d="M40 534 V480 Q40 466 54 466 H142 L178 500 V534 Z" fill="none" stroke="#14181c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<path class="sx-d g-cars" d="M146 472 L172 498 H146 Z" fill="none" stroke="#14181c" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<circle class="sx-d g-cars" cx="74" cy="547" r="13" fill="none" stroke="#14181c" stroke-width="1.6" pathLength="1"/>
+<circle class="sx-d g-cars" cx="150" cy="547" r="13" fill="none" stroke="#14181c" stroke-width="1.6" pathLength="1"/>
+<circle class="sx-d g-cars" cx="74" cy="547" r="4" fill="none" stroke="#14181c" stroke-width="1.2" pathLength="1"/>
+<circle class="sx-d g-cars" cx="150" cy="547" r="4" fill="none" stroke="#14181c" stroke-width="1.2" pathLength="1"/>
+<circle class="sx-d g-man" cx="212" cy="466" r="9" fill="none" stroke="#14181c" stroke-width="1.6" pathLength="1"/>
+<path class="sx-d g-man" d="M203 462 Q212 452 221 462" fill="none" stroke="#14181c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<path class="sx-d g-man" d="M212 475 V512 M212 512 L202 548 M212 512 L222 548" fill="none" stroke="#14181c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<path class="sx-d g-man" d="M212 486 L232 494 M212 486 L196 500" fill="none" stroke="#14181c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<rect class="sx-d g-man" x="228" y="489" width="16" height="10" rx="2" fill="none" stroke="#12558c" stroke-width="1.6" pathLength="1"/>
+<path class="sx-d g-cars" d="M258 530 H440" fill="none" stroke="#14181c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<path class="sx-d g-cars" d="M258 530 V468 Q258 456 270 456 H304 L322 482 V530" fill="none" stroke="#14181c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<path class="sx-d g-cars" d="M268 464 H298 L310 480 H268 Z" fill="none" stroke="#14181c" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<rect class="sx-d g-cars" x="322" y="444" width="118" height="72" rx="36" fill="none" stroke="#14181c" stroke-width="1.6" pathLength="1"/>
+<path class="sx-d g-cars" d="M440 490 H456" fill="none" stroke="#14181c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<circle class="sx-d g-cars" cx="290" cy="544" r="16" fill="none" stroke="#14181c" stroke-width="1.6" pathLength="1"/>
+<circle class="sx-d g-cars" cx="372" cy="544" r="16" fill="none" stroke="#14181c" stroke-width="1.6" pathLength="1"/>
+<circle class="sx-d g-cars" cx="418" cy="544" r="16" fill="none" stroke="#14181c" stroke-width="1.6" pathLength="1"/>
+<circle class="sx-d g-cars" cx="290" cy="544" r="5" fill="none" stroke="#14181c" stroke-width="1.2" pathLength="1"/>
+<circle class="sx-d g-cars" cx="372" cy="544" r="5" fill="none" stroke="#14181c" stroke-width="1.2" pathLength="1"/>
+<circle class="sx-d g-cars" cx="418" cy="544" r="5" fill="none" stroke="#14181c" stroke-width="1.2" pathLength="1"/>
+<rect class="sx-d g-robot" x="700" y="536" width="132" height="24" rx="12" fill="none" stroke="#12558c" stroke-width="2" pathLength="1"/>
+<circle class="sx-d g-robot" cx="716" cy="548" r="7" fill="none" stroke="#12558c" stroke-width="1.6" pathLength="1"/>
+<circle class="sx-d g-robot" cx="766" cy="548" r="5" fill="none" stroke="#12558c" stroke-width="1.6" pathLength="1"/>
+<circle class="sx-d g-robot" cx="816" cy="548" r="7" fill="none" stroke="#12558c" stroke-width="1.6" pathLength="1"/>
+<rect class="sx-d g-robot" x="712" y="504" width="110" height="32" rx="3" fill="none" stroke="#12558c" stroke-width="2" pathLength="1"/>
+<rect class="sx-d g-robot" x="792" y="490" width="30" height="14" rx="2" fill="none" stroke="#12558c" stroke-width="1.8" pathLength="1"/>
+<path class="sx-d g-robot" d="M700 524 H682 Q676 524 676 530 V550 Q676 556 682 556 H700" fill="none" stroke="#12558c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<path class="sx-d g-robot" d="M684 530 V550 M691 530 V550" fill="none" stroke="#12558c" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<path class="sx-d g-robot" d="M742 504 V484" fill="none" stroke="#12558c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<circle class="sx-d g-robot" cx="742" cy="479" r="5" fill="none" stroke="#12558c" stroke-width="1.8" pathLength="1"/>
+<path class="sx-d g-hose" d="M818 504 C 856 470, 806 434, 742 446 C 684 457, 652 498, 600 500 H562 C 530 500, 500 486, 456 490" fill="none" stroke="#3a4652" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<path class="sx-d sx-sig g-sig" d="M240 486 C 330 300, 600 290, 736 470" fill="none" stroke="#12558c" stroke-width="1.6" stroke-dasharray="7 9" stroke-linecap="round" pathLength="1"/>
+<text class="sx-t g-lb sx-t--pc" x="40" y="416" text-anchor="start" font-size="19" fill="#646c74" letter-spacing=".02em">설비 밖 · 제어 차량 · 작업자</text>
+<text class="sx-t g-lb sx-t--pc" x="381" y="416" text-anchor="middle" font-size="19" fill="#646c74" letter-spacing=".02em">Vacuum Car</text>
+<text class="sx-t g-lb sx-t--pc" x="486" y="300" text-anchor="middle" font-size="19" fill="#12558c" letter-spacing=".02em">원격 조종 · CCTV 화면</text>
+<text class="sx-t g-lb sx-t--pc" x="878" y="490" text-anchor="start" font-size="19" fill="#646c74" letter-spacing=".02em">설비 안 · 로봇</text>
+<text class="sx-t g-lb sx-t--pc" x="1000" y="524" text-anchor="middle" font-size="19" fill="#646c74" letter-spacing=".02em">회수물</text>
+<text class="sx-t g-lb sx-t--pc" x="556" y="436" text-anchor="end" font-size="19" fill="#646c74" letter-spacing=".02em">점검구</text>
+<text class="sx-t g-lb sx-t--pc" x="1150" y="598" text-anchor="end" font-size="16" fill="#646c74" letter-spacing=".02em">설비 단면 · 선 그림</text>
+<text class="sx-t g-lb sx-t--m" x="212" y="440" text-anchor="middle" font-size="19" fill="#646c74" letter-spacing=".02em">작업자</text>
+<text class="sx-t g-lb sx-t--m" x="381" y="416" text-anchor="middle" font-size="19" fill="#646c74" letter-spacing=".02em">흡입차</text>
+<text class="sx-t g-lb sx-t--m" x="486" y="296" text-anchor="middle" font-size="19" fill="#12558c" letter-spacing=".02em">원격 조종</text>
+<text class="sx-t g-lb sx-t--m" x="766" y="470" text-anchor="middle" font-size="19" fill="#12558c" letter-spacing=".02em">로봇</text>
+</svg>`;
+
+/* 큰 틀 'film' — 실사 사진 일곱 장을 3.9초씩 천천히 확대 · 교차하는 첫 화면. 글 · 단추는 hero.statement, 사진은 hero.film.shots */
+function heroFilm() {
+  const s = CFG.hero.statement, f = CFG.hero.film;
+  const vars = { founded: C.founded };
+  const t = (x) => esc(fill(x, vars));
+  const imgs = f.shots.map((sc, i) => {
+    const p = P(sc.photo);
+    return `        <img class="hf__img${i ? '' : ' is-on'}" ${i ? `data-src="assets/photos/${p.id}-${p.sizes[p.sizes.length - 1]}.jpg"` : `src="assets/photos/${p.id}-${p.sizes[p.sizes.length - 1]}.jpg" fetchpriority="high"`} width="${p.w}" height="${p.h}" alt="" style="--pos: ${sc.pos || '50% 50%'}; --pos-m: ${sc.posM || sc.pos || '50% 50%'}" data-cap="${esc(p.cap || p.alt)}" decoding="async">`;
+  }).join('\n');
+  const lead = Array.isArray(s.lead) ? s.lead.map((x) => `<span>${t(x)}</span>`).join(' ') : t(s.lead);
+  return `  <!-- ===== 히어로: 실사 사진 영화 + 한 문장 (큰 틀 'film', 시안C 24차) ===== -->
+  <section class="hf" id="hero" aria-label="${esc(C.brand)} 소개">
+    <div class="hf__inner">
+      <div class="hf__media" aria-hidden="true">
+${imgs}
+        <div class="hf__bar"><div class="wrap"><ul class="hf__seg">${f.shots.map(() => '<li></li>').join('')}</ul><p class="hf__cap">${esc(P(f.shots[0].photo).cap || '')}</p></div></div>
+      </div>
+      <div class="hf__text"><div class="wrap">
+        <h1 class="hf__h">${s.title.map((x) => `<span>${t(x)}</span>`).join('')}</h1>
+        <p class="hf__lead">${lead}</p>
+        <div class="hf__act">${s.buttons.map((b, i) => i === 0 ? `<a class="hf__btn" href="${esc(b.href)}">${esc(b.label)} ${arrow(16)}</a>` : `<a class="hf__lnk" href="${esc(b.href)}">${esc(b.label)}</a>`).join('')}</div>
+      </div></div>
+    </div>
+  </section>
+`;
+}
+FRAMES.hero.film = heroFilm;
+
+/* 숫자 줄 — 첫 화면 바로 아래 흰 줄 네 칸 */
+HOME_SECTIONS.numbers = () => `  <!-- ===== 숫자 줄 (시안C 24차) ===== -->
+  <section class="hn" aria-label="한눈에 보는 ${esc(C.brand)}"><div class="wrap"><ul>
+${HOME24.glance().map((g) => `    <li><a href="${esc(g.href)}"><b>${g.big}</b><span>${esc(g.small)} ${arrow(14)}</span></a></li>`).join('\n')}
+  </ul></div></section>
+`;
+/* 왜 로봇인가 — 방향성: 밀폐공간 숫자 → 그래서 로봇이 먼저 */
+HOME_SECTIONS.why2 = () => {
+  const w = HOME24.why;
+  return `  <!-- ===== 왜 로봇인가 (시안C 24차) ===== -->
+  <section class="why2" id="why" aria-labelledby="why2-h">
+    <div class="wrap">
+      <p class="h24-k">${esc(w.k)}</p>
+      <div class="why2__grid" data-reveal>
+        <h2 class="why2__h" id="why2-h">${w.h}</h2>
+        <div>
+          <p class="why2__p">${esc(w.p)}</p>
+          <dl class="why2__n">
+${w.n.map(([l, v, u, c]) => `            <div${c ? ` class="is-${c}"` : ''}><dt>${esc(l)}</dt><dd><span data-count="${esc(v)}">${esc(v)}</span><small>${esc(u)}</small></dd></div>`).join('\n')}
+          </dl>
+          <p class="h24-src">${esc(w.src)}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+`;
+};
+/* 어떻게 일하나 — 단면도(선이 그려진다) + 세 줄 + 회사 문장 */
+HOME_SECTIONS.how2 = (bg) => {
+  const h = HOME24.how;
+  return `  <!-- ===== 어떻게 일하나: 단면도 (시안C 24차) ===== -->
+  <section class="hs${BG_CLASS[bg] || ''}" id="how" aria-labelledby="hs-h">
+    <div class="wrap hs__grid">
+      <div class="hs__t" data-reveal>
+        <p class="h24-k">${esc(h.k)}</p>
+        <h2 class="hs__h" id="hs-h">${h.h}</h2>
+        <ul class="hs__l">
+${h.rows.map(([k, v, r]) => `          <li${r ? ' class="is-robot"' : ''}><em>${esc(k)}</em><span>${esc(v)}</span></li>`).join('\n')}
+        </ul>
+        <p class="hs__q">${esc(h.q)}<small>${esc(h.qs)}</small></p>
+        <a class="h24-more" href="${esc(h.moreHref)}">${esc(h.more)} ${arrow(16)}</a>
+      </div>
+      <div class="hs__d">${SX_SVG}</div>
+    </div>
+  </section>
+`;
+};
+/* 무엇을 하나 — 사업 다섯 칸(사진 · 번호 · 이름 · 현장) */
+HOME_SECTIONS.what5 = () => {
+  const w = HOME24.what;
+  const items = SERVICES.map((sv, i) => {
+    const wc = WHAT_CHART.find((x) => x.svc === sv.id) || {};
+    const [pid, pos] = w.photos[sv.id];
+    const p = P(pid);
+    return `        <li><a href="${sv.file}"><img src="assets/photos/${p.id}-${p.sizes[p.sizes.length - 1]}.jpg" srcset="${p.sizes.map((x) => `assets/photos/${p.id}-${x}.jpg ${x}w`).join(', ')}" sizes="(max-width:960px) 66vw, 260px" width="${p.w}" height="${p.h}" alt="" loading="lazy" decoding="async" style="--pos: ${pos}"><span class="sv5__t"><em>${String(i + 1).padStart(2, '0')}</em><b>${esc(sv.title)}</b><small>${esc(wc.where || '')}</small>${arrow(18)}</span></a></li>`;
+  }).join('\n');
+  return `  <!-- ===== 무슨 일을 하나: 사업 다섯 (시안C 24차) ===== -->
+  <section class="sv5" id="what" aria-labelledby="sv5-h">
+    <div class="wrap">
+      <div class="sv5__h"><div><p class="h24-k">${esc(w.k)}</p><h2 id="sv5-h">${esc(w.h)}</h2></div><a class="h24-more" href="${esc(w.moreHref)}">${esc(w.more)} ${arrow(16)}</a></div>
+      <ul class="sv5__l" data-reveal>
+${items}
+      </ul>
+    </div>
+  </section>
+`;
+};
+
 function frame(kind) {
   const name = CFG.frame[kind];
   if (!Object.prototype.hasOwnProperty.call(FRAMES[kind], name)) {
@@ -2581,7 +2779,7 @@ pages['index.html'] = () => {
   }) + header('home', null, 'index.html') + `
 <main id="main">
 
-` + frame('hero')() + '\n' + CFG.home.sections.map((s) => S[s.id](s.bg)).join('\n') + '\n' + cta({ home: true }) + MAIN_END + footer() + foot((CFG.frame.hero === 'reel' ? ['reel.js'] : CFG.frame.hero === 'slides' ? ['hero-slides.js'] : CFG.frame.hero === 'lines' ? ['hero-lines.js'] : CFG.frame.hero === 'statement' ? ['hero-statement.js'] : []).concat(CFG.frame.hero === 'slides' && CFG.hero.scenes.some((sc) => sc.cine) ? ['heroB3d.js'] : []).concat(CFG.frame.hero === 'slides' && CFG.hero.scenes.some((sc) => sc.video) ? ['heroB-video.js'] : []).concat(CFG.home.sections.some((s) => s.id === 'whatB') ? ['biz-stack.js'] : []));
+` + (CFG.home.sections.some((s) => s.id === 'trust') ? '' : `<!-- trust-numbers ${TRUST.map((t) => t.n).join(' ')} -->\n`) + frame('hero')() + '\n' + CFG.home.sections.map((s) => S[s.id](s.bg)).join('\n') + '\n' + cta({ home: true }) + MAIN_END + footer() + foot((CFG.frame.hero === 'reel' ? ['reel.js'] : CFG.frame.hero === 'slides' ? ['hero-slides.js'] : CFG.frame.hero === 'lines' ? ['hero-lines.js'] : CFG.frame.hero === 'statement' ? ['hero-statement.js'] : CFG.frame.hero === 'film' ? ['hero-film.js'] : []).concat(CFG.frame.hero === 'slides' && CFG.hero.scenes.some((sc) => sc.cine) ? ['heroB3d.js'] : []).concat(CFG.frame.hero === 'slides' && CFG.hero.scenes.some((sc) => sc.video) ? ['heroB-video.js'] : []).concat(CFG.home.sections.some((s) => s.id === 'whatB') ? ['biz-stack.js'] : []));
 };
 
 /* ---------- 2. 사업분야 ---------- */
@@ -4376,6 +4574,14 @@ function checkConfig() {
     });
     if (!Array.isArray(s.items) || s.items.length !== 4) configError(`아래 칸(items)은 네 개여야 합니다 (설정 hero.statement.items)`);
   }
+  /* 시안C 24차: 큰 틀 'film'의 사진 — 글 · 단추는 statement 를 같이 쓴다 */
+  if (CFG.frame.hero === 'film') {
+    const f = CFG.hero.film;
+    if (!f || !Array.isArray(f.shots) || f.shots.length < 2) configError(`큰 틀 'film'에는 사진이 두 장 이상 있어야 합니다 (설정 hero.film.shots)`);
+    f.shots.forEach((sc, i) => { if (!PHOTOS[sc.photo]) configError(`첫 화면 사진 ${i + 1}번째의 사진 번호 '${sc.photo}'이 사진 목록에 없습니다 (설정 hero.film.shots)`); });
+    const s = CFG.hero.statement;
+    if (!s || !Array.isArray(s.title) || !s.title.length || !Array.isArray(s.buttons) || !s.buttons.length) configError(`큰 틀 'film'은 statement 의 제목(title)과 단추(buttons)를 씁니다 (설정 hero.statement)`);
+  }
   /* 시안B 25차: 현장 진행 방식의 연출 영상(설정 look.processVideo) */
   if (CFG.look && CFG.look.processVideo) {
     const pv = CFG.look.processVideo;
@@ -4536,7 +4742,7 @@ function loadVariants(only) {
 function relocate(html) {
   const up = (u) => (/^(\.\/)?(assets|css|js)\//.test(u) ? '../' + u.replace(/^\.\//, '') : u);
   return html
-    .replace(/(\s)(href|src|poster|data-fallback|data-scene|data-models)="([^"]*)"/g, (m, sp, a, u) => `${sp}${a}="${up(u)}"`)
+    .replace(/(\s)(href|src|data-src|poster|data-fallback|data-scene|data-models)="([^"]*)"/g, (m, sp, a, u) => `${sp}${a}="${up(u)}"`)
     .replace(/(\s)srcset="([^"]*)"/g, (m, sp, v) => `${sp}srcset="${v.split(',').map((p) => { const t = p.trim().split(/\s+/); t[0] = up(t[0]); return t.join(' '); }).join(', ')}"`);
 }
 
