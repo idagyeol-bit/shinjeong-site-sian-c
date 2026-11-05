@@ -22,9 +22,9 @@
 <link rel="apple-touch-icon" href="../assets/logo/shinjeong-symbol.png">
 <link rel="preload" href="../assets/fonts/sub/PretendardVariable-0.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../css/tokens.test.css?v=818fd80b">
-<link rel="stylesheet" href="../css/site.css?v=a84bb53b">
+<link rel="stylesheet" href="../css/site.css?v=981cd173">
 </head>
-<body class="moB-root" data-page="home" data-hero="film">
+<body class="moB-root" data-page="home" data-hero="story">
 <a class="skip-link" href="#main">본문 바로가기</a>
 <div class="pvbar" role="note">검토용 시험 시안입니다 · <a href="../index.html">기본판 보기</a> · 공식 홈페이지 <a href="https://sjdevel.com/" target="_blank" rel="noopener">sjdevel.com</a></div>
 <header class="hdr">
@@ -83,25 +83,21 @@
 
 <main id="main">
 
-  <!-- ===== 히어로: 실사 사진 영화 + 한 문장 (큰 틀 'film', 시안C 24차) ===== -->
-  <section class="hf" id="hero" aria-label="신정개발 소개">
-    <div class="hf__inner">
-      <div class="hf__media" aria-hidden="true">
-        <img class="hf__img is-on" src="../assets/photos/HF01-2940.jpg" srcset="../assets/photos/HF01-1600.jpg 1600w, ../assets/photos/HF01-2400.jpg 2400w, ../assets/photos/HF01-2940.jpg 2940w" fetchpriority="high" sizes="(max-width:700px) 135vw, 100vw" width="2940" height="1959" alt="" style="--pos: 50% 62%; --pos-m: 38% 58%" data-cap="해 질 녘 산업단지 전경" decoding="async">
-        <img class="hf__img" data-src="../assets/photos/HF02-3200.jpg" data-srcset="../assets/photos/HF02-1600.jpg 1600w, ../assets/photos/HF02-2400.jpg 2400w, ../assets/photos/HF02-3200.jpg 3200w" sizes="(max-width:700px) 135vw, 100vw" width="3200" height="1802" alt="" style="--pos: 50% 55%; --pos-m: 58% 52%" data-cap="안전 구획을 설치한 현장의 진공흡입차" decoding="async">
-        <img class="hf__img" data-src="../assets/photos/HF03-3200.jpg" data-srcset="../assets/photos/HF03-1600.jpg 1600w, ../assets/photos/HF03-2400.jpg 2400w, ../assets/photos/HF03-3200.jpg 3200w" sizes="(max-width:700px) 135vw, 100vw" width="3200" height="2134" alt="" style="--pos: 50% 50%; --pos-m: 50% 50%" data-cap="반응기 안에서 촉매를 제거하는 로봇" decoding="async">
-        <img class="hf__img" data-src="../assets/photos/HF04-2880.jpg" data-srcset="../assets/photos/HF04-1600.jpg 1600w, ../assets/photos/HF04-2400.jpg 2400w, ../assets/photos/HF04-2880.jpg 2880w" sizes="(max-width:700px) 135vw, 100vw" width="2880" height="1920" alt="" style="--pos: 50% 50%; --pos-m: 55% 50%" data-cap="충진물 위에서 흡입 작업 중인 로봇" decoding="async">
-        <img class="hf__img" data-src="../assets/photos/HF05-3200.jpg" data-srcset="../assets/photos/HF05-1600.jpg 1600w, ../assets/photos/HF05-2400.jpg 2400w, ../assets/photos/HF05-3200.jpg 3200w" sizes="(max-width:700px) 135vw, 100vw" width="3200" height="2783" alt="" style="--pos: 50% 74%; --pos-m: 46% 62%" data-cap="제어 차량에서 조종하는 작업자와 호스로 연결된 로봇" decoding="async">
-        <img class="hf__img" data-src="../assets/photos/HF06-3200.jpg" data-srcset="../assets/photos/HF06-1600.jpg 1600w, ../assets/photos/HF06-2400.jpg 2400w, ../assets/photos/HF06-3200.jpg 3200w" sizes="(max-width:700px) 135vw, 100vw" width="3200" height="2133" alt="" style="--pos: 50% 58%; --pos-m: 50% 56%" data-cap="진공흡입차와 맨홀 호스 작업" decoding="async">
-        <img class="hf__img" data-src="../assets/photos/HF07-3200.jpg" data-srcset="../assets/photos/HF07-1600.jpg 1600w, ../assets/photos/HF07-2400.jpg 2400w, ../assets/photos/HF07-3200.jpg 3200w" sizes="(max-width:700px) 135vw, 100vw" width="3200" height="2133" alt="" style="--pos: 50% 60%; --pos-m: 36% 56%" data-cap="본사 마당의 제어 차량 · 흡입차 · 로봇" decoding="async">
-        <div class="hf__bar"><div class="wrap"><ul class="hf__seg"><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul><p class="hf__cap">해 질 녘 산업단지 전경</p></div></div>
+  <!-- ===== 히어로: 3D 작업 이야기 (큰 틀 'story', 시안C 26차 — 기술소개서 2025 · 19쪽 Robot-Tank Cleaning System 절차 여섯 단계) ===== -->
+  <section class="h3d" id="hero" data-model="assets/models/robot5-hero.glb" data-human="assets/models/xbot.glb" data-hdr="assets/hdr/quarry_01_1k.hdr" aria-label="신정개발 소개">
+    <div class="h3d__gl" aria-hidden="true"><div class="hl__pic" style="--pos: 50% 62%; --pos-m: 38% 58%"><img src="../assets/photos/HF01-2940.jpg" srcset="../assets/photos/HF01-1600.jpg 1600w, ../assets/photos/HF01-2400.jpg 2400w, ../assets/photos/HF01-2940.jpg 2940w" sizes="100vw" width="2940" height="1959" alt="해 질 녘 산업단지 전경" fetchpriority="high" decoding="async"></div><div class="h3s__pip"><b>CCTV · 로봇 전면 카메라</b><em>REC</em><span class="h3s__tc"></span></div><p class="h3s__ff">빠르게 보기 ▸▸</p><div class="h3s__veil"></div></div>
+    <div class="hl__inner wrap">
+      <div class="hl__text">
+        <h1 class="hl__h"><span>산업설비 클리닝,</span><span>1992년부터.</span></h1>
+        <p class="hl__lead"><span>탱크 · 반응기 · 배수로 · 관로를 클리닝합니다.</span> <span>작업자가 들어가기 전에 로봇이 먼저 들어갑니다.</span></p>
+        <div class="hl__act"><a class="hl__btn" href="unmanned.html">무인 솔루션 보기 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a><a class="hl__lnk" href="company.html">회사 소개</a></div>
       </div>
-      <div class="hf__text"><div class="wrap">
-        <h1 class="hf__h"><span>산업설비 클리닝,</span><span>1992년부터.</span></h1>
-        <p class="hf__lead"><span>탱크 · 반응기 · 배수로 · 관로를 클리닝합니다.</span> <span>작업자가 들어가기 전에 로봇이 먼저 들어갑니다.</span></p>
-        <div class="hf__act"><a class="hf__btn" href="unmanned.html">무인 솔루션 보기 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a><a class="hf__lnk" href="company.html">회사 소개</a></div>
-      </div></div>
     </div>
+    <div class="h3s" aria-hidden="true"><div class="wrap">
+      <div class="h3s__cap"><div class="h3s__card"><div class="h3s__in"><p class="h3s__where"></p><p class="h3s__t"></p><p class="h3s__d"></p></div><p class="h3s__q">“사람이 없는 곳에 인명 사고도 없다.”<small>— 신정개발 기술소개서(2025)</small></p></div></div>
+      <ol class="h3s__steps"><li><i></i><b>01</b>System 설치</li><li><i></i><b>02</b>1차 Washing</li><li><i></i><b>03</b>내부 Cleaning</li><li><i></i><b>04</b>2차 Washing</li><li><i></i><b>05</b>Final Cleaning</li><li><i></i><b>06</b>폐기물 처리</li></ol>
+      <p class="h3s__note">※ 3D 연출 장면 · 작업 순서는 기술소개서(2025) 19쪽</p>
+    </div></div>
   </section>
 
   <!-- ===== 신뢰 숫자 ===== -->
@@ -346,6 +342,6 @@
 </nav>
 <script src="../js/site.js?v=30f861b1"></script>
 <script src="../js/moB.js?v=e965b8f9"></script>
-<script src="../js/hero-film.js?v=fd386308"></script>
+<script src="../js/hero-story.js?v=0fa90321"></script>
 </body>
 </html>
