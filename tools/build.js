@@ -1282,7 +1282,7 @@ ${V ? '' : `<link rel="canonical" href="${SITE_URL}${here}">
 <link rel="stylesheet" href="css/${V ? `tokens.${V.name}.css` : 'tokens.css'}">
 <link rel="stylesheet" href="css/site.css">
 ${!marked && o.jsonld ? `<script type="application/ld+json">${JSON.stringify(o.jsonld)}</script>\n` : ''}</head>
-<body class="moB-root" data-page="${o.page}"${o.page === 'home' && (CFG.frame.hero === 'reel' || CFG.frame.hero === 'slides' || CFG.frame.hero === 'lines' || CFG.frame.hero === 'statement' || CFG.frame.hero === 'film') ? ` data-hero="${CFG.frame.hero}"` : ''}>
+<body class="moB-root" data-page="${o.page}"${o.page === 'home' && (CFG.frame.hero === 'reel' || CFG.frame.hero === 'slides' || CFG.frame.hero === 'lines' || CFG.frame.hero === 'statement' || CFG.frame.hero === 'film' || CFG.frame.hero === 'story') ? ` data-hero="${CFG.frame.hero}"` : ''}>
 <a class="skip-link" href="#main">본문 바로가기</a>
 ${V ? `<div class="pvbar" role="note">검토용 ${esc(V.label)}입니다 · <a href="../index.html">기본판 보기</a> · 공식 홈페이지 <a href="${OFFICIAL_SITE.url}" target="_blank" rel="noopener">${OFFICIAL_SITE.label}</a></div>\n`
     : S ? `<div class="sianbar" role="note" style="--sian: ${S.color}"><span class="sianbar__name">${esc(S.name)}</span>${S.direction ? `<span class="sianbar__dir">${esc(S.direction)}</span>` : ''}<span class="sianbar__note">최종본과 다른 작업용 판입니다</span></div>\n`
@@ -2689,6 +2689,35 @@ ${imgs}
 }
 FRAMES.hero.film = heroFilm;
 
+/* 큰 틀 'story' — 3D 작업 이야기(시안C 26차). 글 · 단추는 film 과 같은 hero.statement, 단계 이름 · 대기 사진 · 모형 자리는 hero.story. 움직임은 js/hero-story.js
+   장면 설명 문장(장면마다 어디 · 제목 · 한 줄)은 js/hero-story.js 의 SHOTS 에 있다 — 기술소개서(2025) 19쪽 절차 글을 그대로 옮긴 것이라 설정으로 빼지 않았다 */
+function heroStory() {
+  const s = CFG.hero.statement, st = CFG.hero.story;
+  const vars = { founded: C.founded };
+  const t = (x) => esc(fill(x, vars));
+  const p = P(st.fallback);
+  const steps = st.steps.map((n, i) => `<li><i></i><b>${String(i + 1).padStart(2, '0')}</b>${esc(n)}</li>`).join('');
+  const lead = Array.isArray(s.lead) ? s.lead.map((x) => `<span>${t(x)}</span>`).join(' ') : t(s.lead);
+  return `  <!-- ===== 히어로: 3D 작업 이야기 (큰 틀 'story', 시안C 26차 — 기술소개서 2025 · 19쪽 Robot-Tank Cleaning System 절차 여섯 단계) ===== -->
+  <section class="h3d" id="hero" data-model="${esc(st.model)}" data-human="${esc(st.human)}" data-hdr="${esc(st.hdr)}" aria-label="${esc(C.brand)} 소개">
+    <div class="h3d__gl" aria-hidden="true"><div class="hl__pic" style="--pos: ${esc(st.pos || '50% 50%')}; --pos-m: ${esc(st.posM || st.pos || '50% 50%')}">${photo(p, '100vw', true)}</div><div class="h3s__pip"><b>${esc(st.pipLabel)}</b><em>REC</em><span class="h3s__tc"></span></div><p class="h3s__ff">${esc(st.fast)}</p><div class="h3s__veil"></div></div>
+    <div class="hl__inner wrap">
+      <div class="hl__text">
+${s.eyebrow ? `        <p class="hl__k">${t(s.eyebrow)}</p>\n` : ''}        <h1 class="hl__h">${s.title.map((x) => `<span>${t(x)}</span>`).join('')}</h1>
+        <p class="hl__lead">${lead}</p>
+        <div class="hl__act">${s.buttons.map((b, i) => i === 0 ? `<a class="hl__btn" href="${esc(b.href)}">${esc(b.label)} ${arrow(16)}</a>` : `<a class="hl__lnk" href="${esc(b.href)}">${esc(b.label)}</a>`).join('')}</div>
+      </div>
+    </div>
+    <div class="h3s" aria-hidden="true"><div class="wrap">
+      <div class="h3s__cap"><div class="h3s__card"><div class="h3s__in"><p class="h3s__where"></p><p class="h3s__t"></p><p class="h3s__d"></p></div><p class="h3s__q">${esc(st.quote)}<small>${esc(st.quoteSrc)}</small></p></div></div>
+      <ol class="h3s__steps">${steps}</ol>
+      <p class="h3s__note">${esc(st.note)}</p>
+    </div></div>
+  </section>
+`;
+}
+FRAMES.hero.story = heroStory;
+
 /* 숫자 줄 — 첫 화면 바로 아래 흰 줄 네 칸 */
 HOME_SECTIONS.numbers = () => `  <!-- ===== 숫자 줄 (시안C 24차) ===== -->
   <section class="hn" aria-label="한눈에 보는 ${esc(C.brand)}"><div class="wrap"><ul>
@@ -2781,7 +2810,7 @@ pages['index.html'] = () => {
   }) + header('home', null, 'index.html') + `
 <main id="main">
 
-` + (CFG.home.sections.some((s) => s.id === 'trust') ? '' : `<!-- trust-numbers ${TRUST.map((t) => t.n).join(' ')} -->\n`) + frame('hero')() + '\n' + CFG.home.sections.map((s) => S[s.id](s.bg)).join('\n') + '\n' + cta({ home: true }) + MAIN_END + footer() + foot((CFG.frame.hero === 'reel' ? ['reel.js'] : CFG.frame.hero === 'slides' ? ['hero-slides.js'] : CFG.frame.hero === 'lines' ? ['hero-lines.js'] : CFG.frame.hero === 'statement' ? ['hero-statement.js'] : CFG.frame.hero === 'film' ? ['hero-film.js'] : []).concat(CFG.frame.hero === 'slides' && CFG.hero.scenes.some((sc) => sc.cine) ? ['heroB3d.js'] : []).concat(CFG.frame.hero === 'slides' && CFG.hero.scenes.some((sc) => sc.video) ? ['heroB-video.js'] : []).concat(CFG.home.sections.some((s) => s.id === 'whatB') ? ['biz-stack.js'] : []));
+` + (CFG.home.sections.some((s) => s.id === 'trust') ? '' : `<!-- trust-numbers ${TRUST.map((t) => t.n).join(' ')} -->\n`) + frame('hero')() + '\n' + CFG.home.sections.map((s) => S[s.id](s.bg)).join('\n') + '\n' + cta({ home: true }) + MAIN_END + footer() + foot((CFG.frame.hero === 'reel' ? ['reel.js'] : CFG.frame.hero === 'slides' ? ['hero-slides.js'] : CFG.frame.hero === 'lines' ? ['hero-lines.js'] : CFG.frame.hero === 'statement' ? ['hero-statement.js'] : CFG.frame.hero === 'film' ? ['hero-film.js'] : CFG.frame.hero === 'story' ? ['hero-story.js'] : []).concat(CFG.frame.hero === 'slides' && CFG.hero.scenes.some((sc) => sc.cine) ? ['heroB3d.js'] : []).concat(CFG.frame.hero === 'slides' && CFG.hero.scenes.some((sc) => sc.video) ? ['heroB-video.js'] : []).concat(CFG.home.sections.some((s) => s.id === 'whatB') ? ['biz-stack.js'] : []));
 };
 
 /* ---------- 2. 사업분야 ---------- */
@@ -4583,6 +4612,16 @@ function checkConfig() {
     f.shots.forEach((sc, i) => { if (!PHOTOS[sc.photo]) configError(`첫 화면 사진 ${i + 1}번째의 사진 번호 '${sc.photo}'이 사진 목록에 없습니다 (설정 hero.film.shots)`); });
     const s = CFG.hero.statement;
     if (!s || !Array.isArray(s.title) || !s.title.length || !Array.isArray(s.buttons) || !s.buttons.length) configError(`큰 틀 'film'은 statement 의 제목(title)과 단추(buttons)를 씁니다 (설정 hero.statement)`);
+  }
+  /* 시안C 26차: 큰 틀 'story'의 손잡이 — 글 · 단추는 statement 를 같이 쓴다. 모형 · 빛 그림은 저장소 안 파일만(바깥 주소 금지) */
+  if (CFG.frame.hero === 'story') {
+    const st = CFG.hero.story;
+    if (!st || !Array.isArray(st.steps) || st.steps.length !== 6) configError(`큰 틀 'story'에는 단계 이름 여섯 개가 있어야 합니다 (설정 hero.story.steps)`);
+    if (!st || !st.fallback || !PHOTOS[st.fallback]) configError(`큰 틀 'story'의 대기 사진 번호가 사진 목록에 없습니다 (설정 hero.story.fallback)`);
+    ['model', 'human', 'hdr'].forEach((k) => { if (!st[k] || /^([a-z]+:)?\/\//i.test(st[k]) || !fs.existsSync(path.join(OUT, st[k]))) configError(`큰 틀 'story'의 ${k} 파일이 저장소 안에 없습니다 (설정 hero.story.${k})`); });
+    ['pipLabel', 'fast', 'quote', 'quoteSrc', 'note'].forEach((k) => { if (!st[k]) configError(`큰 틀 'story'의 ${k} 문구가 비어 있습니다 (설정 hero.story.${k})`); });
+    const s = CFG.hero.statement;
+    if (!s || !Array.isArray(s.title) || !s.title.length || !Array.isArray(s.buttons) || !s.buttons.length) configError(`큰 틀 'story'는 statement 의 제목(title)과 단추(buttons)를 씁니다 (설정 hero.statement)`);
   }
   /* 시안B 25차: 현장 진행 방식의 연출 영상(설정 look.processVideo) */
   if (CFG.look && CFG.look.processVideo) {

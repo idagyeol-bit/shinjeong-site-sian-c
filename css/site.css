@@ -4336,3 +4336,80 @@ html:not(.js-on) .hf__bar { opacity: 1; }
 
 html:not(.js-on) .sx-d { stroke-dashoffset: 0; animation: none; }
 html:not(.js-on) .sx-t, html:not(.js-on) .sx-f { opacity: 1; }
+
+/* ===== 시안C 26차: 첫 화면 큰 틀 'story' — 3D 작업 이야기(.h3d) + 단계 표시(.h3s). 글 · 단추는 film 과 같은 hero.statement ===== */
+/* 머리말은 24차 film 과 같은 흰 바탕(밝은 3D 장면 위) */
+body[data-hero="story"] .hdr, body[data-hero="story"] .hdr:not(.is-scrolled) { background: #fff; color: var(--ink); border-color: var(--line); }
+body[data-hero="story"] .hdr:not(.is-scrolled)::before { display: none; }
+body[data-hero="story"] .hdr:not(.is-scrolled) .hdr__logo { filter: none; }
+body[data-hero="story"] .hdr:not(.is-scrolled) .hdr__cta:hover { background: var(--navy); border-color: var(--navy); color: #fff; }
+body[data-hero="story"] .hdr:not(.is-scrolled) .hdr__lang { color: var(--ink); border-color: var(--line); }
+.h3d { position: relative; display: flex; flex-direction: column; margin-top: var(--header-h, 72px); background: linear-gradient(180deg, #e9f0f7 0%, #f5f8fb 55%, #e8edf3 100%); overflow: hidden; color: #0e1a26; }
+.h3d__gl { position: absolute; inset: 0; }
+.h3d__gl canvas { display: block; width: 100% !important; height: 100% !important; opacity: 0; transition: opacity 1.2s ease; }
+.h3d.is-ready .h3d__gl canvas { opacity: 1; }
+/* 3D 가 준비될 때까지(또는 WebGL 이 없을 때) 보이는 사진 — 받는 동안 빈 화면이 없게 */
+.h3d .hl__pic { position: absolute; inset: 0; z-index: 0; transition: opacity 1.2s ease .3s; }
+.h3d .hl__pic img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 50%); }
+.h3d.is-ready .hl__pic { opacity: 0; }
+.h3d.is-fallback .h3s, .h3d.is-fallback .h3s__pip, .h3d.is-fallback .h3s__ff, .h3d.is-fallback .h3s__veil { display: none; }
+.h3d.is-fallback .hl__text::before { background: radial-gradient(closest-side, #f4f7fae6, #f4f7fa00); }
+.hl__inner { position: relative; z-index: 1; width: 100%; height: calc(100svh - var(--header-h, 72px)); min-height: 560px; max-height: 900px; }
+.hl__text { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: center; padding-bottom: 6vh; max-width: 560px; }
+.hl__text::before { content: ""; position: absolute; z-index: -1; left: -14vw; right: -6vw; top: 10%; bottom: 10%; background: radial-gradient(closest-side, #f4f7faf2, #f4f7fa00); pointer-events: none; }
+.hl__k { margin: 0 0 18px; font-size: 13px; font-weight: 700; letter-spacing: .06em; color: #2f6fb3; display: flex; align-items: center; gap: 12px; }
+.hl__k::before { content: ""; width: 28px; height: 2px; background: currentColor; }
+.hl__h { margin: 0; font-size: clamp(38px, 5vw, 72px); line-height: 1.1; letter-spacing: -.03em; font-weight: 800; color: #0e1a26; text-wrap: balance; }
+.hl__h span { display: block; }
+.hl__lead { margin: 26px 0 0; font-size: clamp(16px, 1.25vw, 19px); line-height: 1.7; color: #3b4b5a; max-width: 34em; }
+.hl__lead span { display: block; }
+.hl__act { display: flex; align-items: center; gap: 10px 22px; margin-top: 34px; flex-wrap: wrap; }
+.hl__btn { display: inline-flex; align-items: center; gap: 10px; background: #0e2e4a; color: #fff; font-weight: 700; padding: 15px 22px; border-radius: 4px; text-decoration: none; letter-spacing: -.01em; transition: background .3s; }
+.hl__btn:hover { background: #163f63; }
+.hl__lnk { color: #0e2e4a; font-weight: 700; text-decoration: none; border-bottom: 1px solid #0e2e4a55; padding-bottom: 2px; }
+/* 장면 사이 아주 짧은 밝은 덮개(컷) */
+.h3s__veil { position: absolute; inset: 0; background: #eef3f8; opacity: 0; pointer-events: none; }
+/* CCTV 작은 창: 같은 자리에 WebGL 이 로봇 전면 카메라 화면을 그린다(js 가 자리를 읽어 캔버스에 겹쳐 그림) */
+.h3s__pip { position: absolute; right: var(--gutter, 40px); top: 26px; width: clamp(240px, 21vw, 330px); aspect-ratio: 16 / 9; opacity: 0; pointer-events: none; border-radius: 4px; box-shadow: 0 0 0 1px rgba(255,255,255,.85), 0 10px 30px rgba(10,25,40,.28); overflow: hidden; }
+.h3s__pip::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0,0,0,.07) 0 1px, transparent 1px 3px); }
+.h3s__pip::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 40px rgba(0,0,0,.45); }
+.h3s__pip b, .h3s__pip em { position: absolute; z-index: 1; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: #fff; letter-spacing: .04em; text-shadow: 0 1px 2px rgba(0,0,0,.6); font-style: normal; }
+.h3s__pip b { left: 10px; top: 10px; } .h3s__pip em { right: 10px; top: 10px; } .h3s__pip em::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #e5483d; margin-right: 6px; vertical-align: 0; }
+.h3s__pip .h3s__tc { position: absolute; z-index: 1; left: 10px; bottom: 9px; font: 600 10.5px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: #fff; opacity: .85; text-shadow: 0 1px 2px rgba(0,0,0,.6); }
+.h3s__ff { position: absolute; right: calc(var(--gutter, 40px) + clamp(240px, 21vw, 330px) + 14px); top: 26px; opacity: 0; font-size: 12.5px; font-weight: 800; letter-spacing: .02em; color: #0e2e4a; background: rgba(255,255,255,.86); padding: 7px 12px; border-radius: 999px; box-shadow: 0 4px 16px rgba(14,46,74,.12); }
+/* 단계 표시(아래): 장면 설명 카드 + 여섯 단계 줄 */
+.h3s { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; pointer-events: none; }
+.h3s .wrap { position: relative; }
+.h3s__cap { position: absolute; right: 0; bottom: 78px; width: min(430px, 34vw); opacity: 0; }
+.h3s__card { position: relative; background: rgba(255,255,255,.9); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-radius: 6px; padding: 16px 20px 18px; box-shadow: 0 10px 34px rgba(14,46,74,.14); }
+.h3s__where { display: inline-block; font-size: 12px; font-weight: 800; color: #2f6fb3; letter-spacing: .02em; margin: 0 0 6px; }
+.h3s__t { margin: 0; font-size: 18px; font-weight: 800; color: #0e1a26; letter-spacing: -.02em; }
+.h3s__d { margin: 6px 0 0; font-size: 14.5px; line-height: 1.6; color: #3b4b5a; word-break: keep-all; }
+.h3s__q { position: absolute; left: 20px; right: 20px; top: 50%; transform: translateY(-50%); margin: 0; opacity: 0; font-size: 18px; font-weight: 800; color: #0e2e4a; letter-spacing: -.02em; line-height: 1.5; }
+.h3s__q small { display: block; margin-top: 4px; font-size: 12px; font-weight: 600; color: #6b7c8d; }
+.h3s__steps { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0 14px; list-style: none; margin: 0; padding: 0 0 26px; }
+.h3s__steps li { position: relative; border-top: 2px solid rgba(14,46,74,.16); padding-top: 10px; font-size: 12.5px; font-weight: 700; color: #7a8a99; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.h3s__steps li b { font-weight: 800; margin-right: 6px; }
+.h3s__steps li i { position: absolute; left: 0; top: -2px; width: 100%; height: 2px; background: #0e2e4a; transform: scaleX(0); transform-origin: left; }
+.h3s__steps li.is-on { color: #0e2e4a; } .h3s__steps li.is-done { color: #4b6077; } .h3s__steps li.is-done i { background: #0e2e4a8c; }
+.h3s__note { position: absolute; right: 0; bottom: 6px; font-size: 11px; color: #8a98a6; }
+@media (max-width: 860px) {
+  .hl__inner { height: auto; min-height: 0; max-height: none; }
+  .hl__text { height: auto; padding: 44px 0 10px; max-width: none; justify-content: flex-start; }
+  .hl__text::before { display: none; }
+  .hl__h { font-size: clamp(32px, 9.2vw, 40px); }
+  .hl__lead { margin-top: 16px; font-size: 15.5px; }
+  .hl__act { margin-top: 22px; }
+  .hl__btn { padding: 13px 18px; font-size: 15px; }
+  .h3d__gl { position: relative; order: 2; width: 100%; aspect-ratio: 1 / 0.9; }
+  .h3d .hl__pic img { object-position: var(--pos-m, var(--pos, 50% 50%)); }
+  .h3s { position: relative; order: 3; }
+  .h3s__cap { position: relative; right: auto; bottom: auto; width: auto; margin: 14px 0 0; }
+  .h3s__card { box-shadow: none; background: #fff; border: 1px solid #e3e9ef; padding: 14px 16px 15px; }
+  .h3s__t { font-size: 16.5px; } .h3s__d { font-size: 14px; }
+  .h3s__steps { gap: 0 6px; padding: 14px 0 6px; } .h3s__steps li { font-size: 0; padding-top: 6px; } .h3s__steps li b { font-size: 11px; margin: 0; }
+  .h3s__note { position: static; display: block; padding: 2px 0 16px; }
+  .h3s__pip { width: 132px; top: 10px; right: 10px; } .h3s__pip b { font-size: 9px; left: 6px; top: 6px; } .h3s__pip em { font-size: 9px; right: 6px; top: 6px; } .h3s__pip .h3s__tc { display: none; }
+  .h3s__ff { top: 10px; left: 10px; right: auto; font-size: 11px; padding: 5px 9px; }
+}
+@media (prefers-reduced-motion: reduce) { .h3s__steps li i, .h3d__gl canvas, .h3d .hl__pic { transition: none; } }

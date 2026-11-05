@@ -117,6 +117,17 @@ module.exports = {
       { photo: 'HF07', pos: '50% 60%', posM: '36% 56%' }   // R24 — 마무리 — 본사 마당, 제어 차량 · 흡입차 · 로봇이 한 조
       ]
     },
+    /* 시안C 26차 (2026-11-05 이다결 님 결정): 큰 틀 'story' 첫 화면 — 3D 작업 이야기(기술소개서 2025 · 19쪽 절차 여섯 단계, 64초 한 바퀴). 글 · 단추는 위 statement 그대로(23차).
+       steps = 아래 여섯 단계 이름(19쪽 그대로 · 순서 고정 — 장면마다의 설명 문장은 js/hero-story.js 의 SHOTS) · fallback = 3D 가 뜨기 전 · WebGL 이 없을 때 보이는 사진 번호 · pos·posM = 그 사진의 PC·휴대폰 보일 부분
+       model · human · hdr = 로봇 모형 · 사람 뼈대 모형 · 빛 그림(저장소 안 파일만, 바깥 주소 금지) · pipLabel = CCTV 작은 창 이름 · fast = '빠르게 보기' 표시 · quote · quoteSrc = 마지막 장면 문장(기술소개서 4쪽) · note = 오른쪽 아래 작은 고지 */
+    story: {
+      steps: ['System 설치', '1차 Washing', '내부 Cleaning', '2차 Washing', 'Final Cleaning', '폐기물 처리'],
+      fallback: 'HF01', pos: '50% 62%', posM: '38% 58%',
+      model: 'assets/models/robot5-hero.glb', human: 'assets/models/xbot.glb', hdr: 'assets/hdr/quarry_01_1k.hdr',
+      pipLabel: 'CCTV · 로봇 전면 카메라', fast: '빠르게 보기 ▸▸',
+      quote: '“사람이 없는 곳에 인명 사고도 없다.”', quoteSrc: '— 신정개발 기술소개서(2025)',
+      note: '※ 3D 연출 장면 · 작업 순서는 기술소개서(2025) 19쪽'
+    },
     /* 시안C 12차 (2026-10-29 이다결 님 결정): 큰 틀 'lines' 첫 화면 — 장면마다 세 줄(1줄 증거 · 2줄 이어짐 · 3줄 결론), 7초마다 바뀐다.
        name = 아래 이름표 · photo = 사진 번호(사진 목록에 있는 것만) · pos·posM = PC·휴대폰에서 보일 사진 부분(가로% 세로%)
        lines = 세 줄(<b> = 초록 증거 낱말). {founded} = 설립 연도, {gens} = 로봇 세대 수, {patents} = 등록 특허 수 — 생성기가 자료에서 넣는다(한글 수사)
@@ -364,7 +375,7 @@ module.exports = {
 
   /* ===================== ⑨ 큰 틀 ===================== */
   frame: {                                 // 화면의 큰 틀 — 지금은 'base' 하나뿐이다. 새 큰 틀은 지시서로 추가한다
-    hero: 'film',        // 시안C 24차: 'film'(실사 사진 영화 + 한 문장 — 글은 hero.statement, 사진은 hero.film). 되돌리려면 'statement'
+    hero: 'story',       // 시안C 26차: 'story'(3D 작업 이야기 — 글은 hero.statement, 장면 손잡이는 hero.story, 움직임은 js/hero-story.js). 되돌리려면 'film'(24차 사진 영화) 또는 'statement'
     sections: 'base',                      // 메인 구역 틀
     header: 'base'                         // 머리말(맨 위 메뉴 줄) 틀
   },
