@@ -1282,7 +1282,7 @@ ${V ? '' : `<link rel="canonical" href="${SITE_URL}${here}">
 <link rel="stylesheet" href="css/${V ? `tokens.${V.name}.css` : 'tokens.css'}">
 <link rel="stylesheet" href="css/site.css">
 ${!marked && o.jsonld ? `<script type="application/ld+json">${JSON.stringify(o.jsonld)}</script>\n` : ''}</head>
-<body class="moB-root" data-page="${o.page}"${o.page === 'home' && (CFG.frame.hero === 'reel' || CFG.frame.hero === 'slides' || CFG.frame.hero === 'lines' || CFG.frame.hero === 'statement' || CFG.frame.hero === 'film' || CFG.frame.hero === 'story') ? ` data-hero="${CFG.frame.hero}"` : ''}>
+<body class="moB-root" data-page="${o.page}"${o.page === 'home' && (CFG.frame.hero === 'reel' || CFG.frame.hero === 'slides' || CFG.frame.hero === 'lines' || CFG.frame.hero === 'statement' || CFG.frame.hero === 'film' || CFG.frame.hero === 'story' || CFG.frame.hero === 'flow') ? ` data-hero="${CFG.frame.hero}"` : ''}>
 <a class="skip-link" href="#main">본문 바로가기</a>
 ${V ? `<div class="pvbar" role="note">검토용 ${esc(V.label)}입니다 · <a href="../index.html">기본판 보기</a> · 공식 홈페이지 <a href="${OFFICIAL_SITE.url}" target="_blank" rel="noopener">${OFFICIAL_SITE.label}</a></div>\n`
     : S ? `<div class="sianbar" role="note" style="--sian: ${S.color}"><span class="sianbar__name">${esc(S.name)}</span>${S.direction ? `<span class="sianbar__dir">${esc(S.direction)}</span>` : ''}<span class="sianbar__note">최종본과 다른 작업용 판입니다</span></div>\n`
@@ -2721,7 +2721,7 @@ FRAMES.hero.story = heroStory;
 /* 숫자 줄 — 첫 화면 바로 아래 흰 줄 네 칸 */
 HOME_SECTIONS.numbers = () => `  <!-- ===== 숫자 줄 (시안C 24차) ===== -->
   <section class="hn" aria-label="한눈에 보는 ${esc(C.brand)}"><div class="wrap"><ul>
-${HOME24.glance().map((g) => `    <li><a href="${esc(g.href)}"><b>${g.big}</b><span>${esc(g.small)} ${arrow(14)}</span></a></li>`).join('\n')}
+${HOME24.glance().slice(0, (CFG.home.copy.numbers || {}).keep || 4).map((g) => `    <li><a href="${esc(g.href)}"><b>${g.big}</b><span>${esc(g.small)} ${arrow(14)}</span></a></li>`).join('\n')}
   </ul></div></section>
 `;
 /* 왜 로봇인가 — 방향성: 밀폐공간 숫자 → 그래서 로봇이 먼저 */
@@ -2772,17 +2772,64 @@ HOME_SECTIONS.what5 = () => {
     const wc = WHAT_CHART.find((x) => x.svc === sv.id) || {};
     const [pid, pos] = w.photos[sv.id];
     const p = P(pid);
-    return `        <li><a href="${sv.file}"><img src="assets/photos/${p.id}-${p.sizes[p.sizes.length - 1]}.jpg" srcset="${p.sizes.map((x) => `assets/photos/${p.id}-${x}.jpg ${x}w`).join(', ')}" sizes="(max-width:960px) 140vw, 540px" width="${p.w}" height="${p.h}" alt="" loading="lazy" decoding="async" style="--pos: ${pos}"><span class="sv5__t"><em>${String(i + 1).padStart(2, '0')}</em><b>${esc(sv.title)}</b><small>${esc(wc.where || '')}</small>${arrow(18)}</span></a></li>`;
+    const o = CFG.home.copy.what5 || {};   // 시안C 27차: num false = 번호(01~05) 빼기 · rec true = 분야별 실적 한 줄(FLOW.rec)
+    return `        <li><a href="${sv.file}"><img src="assets/photos/${p.id}-${p.sizes[p.sizes.length - 1]}.jpg" srcset="${p.sizes.map((x) => `assets/photos/${p.id}-${x}.jpg ${x}w`).join(', ')}" sizes="(max-width:960px) 140vw, 540px" width="${p.w}" height="${p.h}" alt="" loading="lazy" decoding="async" style="--pos: ${pos}"><span class="sv5__t">${o.num === false ? '' : `<em>${String(i + 1).padStart(2, '0')}</em>`}<b>${esc(sv.title)}</b><small>${esc(wc.where || '')}</small>${o.rec && FLOW.rec[sv.id] ? `<i class="sv5__rec">${esc(FLOW.rec[sv.id])}</i>` : ''}${arrow(18)}</span></a></li>`;
   }).join('\n');
   return `  <!-- ===== 무슨 일을 하나: 사업 다섯 (시안C 24차) ===== -->
   <section class="sv5" id="what" aria-labelledby="sv5-h">
     <div class="wrap">
-      <div class="sv5__h"><div><p class="h24-k">${esc(w.k)}</p><h2 id="sv5-h">${esc(w.h)}</h2></div><a class="h24-more" href="${esc(w.moreHref)}">${esc(w.more)} ${arrow(16)}</a></div>
+      <div class="sv5__h"><div><p class="h24-k">${esc(w.k)}</p><h2 id="sv5-h">${esc(w.h)}</h2>${(CFG.home.copy.what5 || {}).sum ? `<p class="sec-sum">${esc(CFG.home.copy.what5.sum)}</p>` : ''}</div><a class="h24-more" href="${esc(w.moreHref)}">${esc(w.more)} ${arrow(16)}</a></div>
       <ul class="sv5__l" data-reveal>
 ${items}
-      </ul>
+      </ul>${(CFG.home.copy.what5 || {}).ask ? `
+      <p class="sv5__ask"><a href="contact.html">${esc(CFG.home.copy.what5.ask)}</a></p>` : ''}
     </div>
   </section>
+`;
+};
+
+/* ===== 시안C 27차 (2026-11-07 이다결 님 결정): 큰 틀 'flow' 첫 화면 — 표어 + 소개 글 + 숫자 넷 + '신정개발이 일하는 순서' 다섯 칸 =====
+   칸마다 코드로 그린 연출 그림(assets/hero-flow/*.webp)과 4초 무음 반복 영상(assets/hero-flow/v*.mp4). 그림 · 영상은 신정개발의 현장 사진이 아니라 연출 그림이며 화면에 '※ 연출 그림' 고지를 단다.
+   글자 · 단추는 설정 hero.flow, 칸 문장(사실)은 아래 FLOW.steps. 움직임(칸 선택 · 자동 넘김 · 영상 재생)은 js/hero-flow.js
+   사실 근거: 순서 = 기술소개서(2025) 19쪽 절차 · 9쪽 장점(인명사고 위험 감소 · 방폭지역 · 수중 작업 · 유해성 감소 후 Final Cleaning) · 7쪽 세대표(1~5세대) · 회사소개서(2024) 연혁 2017.11 기업부설연구소 · 28~29쪽 특허증 8장
+   ※ '자체 개발'은 이다결 님 지시(2026-11-07)로 넣은 표현 — 삼촌(대표) 확인 전. 9차 · 17차의 '자체 · 직접 금지'를 이 첫 화면에서만 바꾼다 */
+const FLOW = {
+  lab: 2017,                                   // ① 연혁 2017.11 기업부설연구소 설립
+  steps: [                                     // title · tag(파란 한 줄) · desc(**굵게**) · eff(효과 줄) · th(접힌 칸 그림) · fr(펼친 칸 그림, 1.8초마다 교차) · vd(펼친 칸 영상)
+    { title: '연구소 개발 · 특허', tag: '자체 개발 로봇', desc: '{lab}년 설립한 기업부설연구소에서 1~{gensN}세대 무인 Vacuum 로봇을 **자체 개발**하고, 관련 기술을 **특허로 등록**했습니다.', eff: '기업부설연구소 자체 개발 · 등록 특허 기반', th: 't1', fr: ['f1b', 'f1a'], vd: 'v1' },
+    { title: '설비별 로봇 선정 · 투입', tag: '방폭 · 수중 대응', desc: 'Tank · Pond · Reactor 등 설비 조건에 맞는 로봇을 선정해 맨홀로 투입합니다. **유압 구동**이라 **방폭지역**에서도 작업할 수 있습니다.', eff: '방폭지역 · 수중 작업 대응', th: 't2', fr: ['f2a', 'f2b'], vd: 'v2' },
+    { title: '로봇 선투입 · 위험 물질 회수', tag: '인명사고 위험 감소', desc: '작업자 대신 로봇이 설비 내부에 진입해 **슬러지와 잔류 위험 물질을 회수**합니다. 작업자는 외부 제어 차량에서 CCTV로 확인하며 **원격 조정**합니다.', eff: '질식 · 매몰 · 협착 등 인명사고 위험 감소', th: 't3', fr: ['f3a', 'f3b', 'f3c'], vd: 'v3' },
+    { title: '유해성 저감 후 최종 클리닝', tag: '유해성 감소 후 진입', desc: '로봇 전면부 Jet Nozzle로 내부를 세정해 **유해성을 낮춘 뒤**, 보호구를 착용한 작업자가 진입해 **최종 잔여물을 제거**합니다.', eff: '유해성 감소 후 Final Cleaning', th: 't4', fr: ['f4a', 'f4b', 'f4c'], vd: 'v4' },
+    { title: '고액 분리 · 폐기물 감량', tag: '폐기물 감량', desc: '회수물은 Screw Decanter · Filter-Press로 **고액 분리해 양을 줄이고**, 일반 · 지정폐기물 **수집 · 운반까지** 맡습니다.', eff: '처리량 감량 · 처리비용 감소 · 처리시간 단축', th: 't5', fr: ['f5a', 'f5b'], vd: 'v5' }
+  ],
+  rec: {                                       // 메인 '다섯 가지 일' 카드의 실적 한 줄 — 적용 사례(cases.html)와 같은 숫자(회사소개서 2024 실적표 · 기술소개서 2025 25쪽)
+    S01: 'Pond Cleaning 단가계약 4년 연속', S02: '로봇 투입 기록 12건 · 2021~2023', S03: '보일러 · 튜브 · APH 세정 15건', S04: '준설작업 단가계약 4년 연속', S05: '하수관로 CCTV 조사 용역 8건'
+  },
+  field: [['K01', '탱크 내부'], ['P03', '반응기 내부'], ['R26', '제어 차량 원격 조정'], ['P01', '작업자 최종 세척']]   // 메인 '실제 현장' 사진 넷 — 굵은 이름 아래 설명은 사진 목록의 alt(사진에 보이는 것만)
+};
+function heroFlow() {
+  const f = CFG.hero.flow;
+  const vars = { founded: C.founded, lab: FLOW.lab, gensN: PROCESS.generations.length, patentsN: COMPANY17.patents.length };
+  const t = (x) => esc(fill(x, vars));
+  const b = (x) => t(x).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');   // **굵게**
+  const A = 'assets/hero-flow/';
+  const li = FLOW.steps.map((st, i) => `<li><i class="bar"></i><button type="button" class="sb" aria-expanded="false"><span class="ph"><img src="${A}${st.th}.webp" alt="" class="th" decoding="async">${st.fr.map((x, k) => `<img src="${A}${x}.webp" alt="" class="fa${k ? '' : ' v'}" decoding="async">`).join('')}<video class="vd" muted playsinline loop preload="${i ? 'none' : 'auto'}" src="${A}${st.vd}.mp4"></video></span><span class="tx"><em>${String(i + 1).padStart(2, '0')}</em><b>${t(st.title)}</b><span class="tg">${t(st.tag)}</span><span class="ds">${b(st.desc)}</span><span class="ef">${t(st.eff)}</span></span><i class="cv" aria-hidden="true">+</i></button></li>`).join('');
+  return `  <!-- ===== 히어로: 표어 + 일하는 순서 다섯 칸 (큰 틀 'flow', 시안C 27차) ===== -->
+<section class="hx" id="hx" aria-label="${esc(C.brand)} 소개"><div class="wrap"><div class="hxh"><div class="hxl"><p class="eb" id="hxe">${t(f.eyebrow)}</p><h1 id="hxt" class="qt">${f.title.map((x, i) => `<span${i ? ' class="q2"' : ''}>${t(x)}</span>`).join('')}</h1></div>
+<div class="hxr2"><p class="lede"><span class="lw">${b(f.lede.pc)}</span><span class="lm">${b(f.lede.m)}</span>${b(f.lede.tail)}</p>
+<ul class="meta">${f.meta.map(([n, u, l]) => `<li><b>${t(n)}${u ? `<small>${t(u)}</small>` : ''}</b>${t(l)}</li>`).join('')}</ul></div></div>
+<div class="hsh"><b>${t(f.stripTitle)}</b><span class="hsp">${t(f.hintPc)}</span><span class="hsm">${t(f.hintM)}</span></div><ol class="hs" id="hs">${li}</ol>
+<div class="hxa">${f.actions.map((a) => `<a class="${a.main ? 'btn' : 'lnk'}${a.cls ? ' ' + a.cls : ''}" href="${esc(a.tel ? 'tel:' + C.tel : a.href)}"${a.blank ? ' target="_blank" rel="noopener"' : ''}>${t(a.label)}${a.tel ? ' ' + esc(C.tel) : ''}</a>`).join('')}</div><p class="hxn">${t(f.note)}</p></div></section>
+`;
+}
+FRAMES.hero.flow = heroFlow;
+
+/* 시안C 27차: 실제 현장 — 첫 화면 그림 순서를 실제 현장 사진 넷으로 잇는다(사진 · 이름은 FLOW.field, 글은 설정 home.copy.field) */
+HOME_SECTIONS.field = () => {
+  const c = CFG.home.copy.field;
+  const fig = FLOW.field.map(([id, name]) => { const p = P(id); return `<figure><img src="assets/photos/${p.id}-${p.sizes[p.sizes.length - 1]}.jpg" srcset="${p.sizes.map((w) => `assets/photos/${p.id}-${w}.jpg ${w}w`).join(', ')}" sizes="(max-width:820px) 80vw, 300px" width="${p.w}" height="${p.h}" alt="${esc(p.alt)}" loading="lazy" decoding="async"><figcaption><b>${esc(name)}</b>${esc(p.alt)}</figcaption></figure>`; }).join('');
+  return `  <!-- ===== 실제 현장 (시안C 27차) ===== -->
+  <section class="rf" id="field" aria-labelledby="rf-h"><div class="wrap"><div class="rf__h"><div><p class="h24-k">${esc(c.k)}</p><h2 id="rf-h">${esc(c.h)}</h2></div><a class="h24-more" href="${esc(c.moreHref)}">${esc(c.more)} ${arrow(16)}</a></div><div class="rf__l">${fig}</div></div></section>
 `;
 };
 
@@ -2810,7 +2857,7 @@ pages['index.html'] = () => {
   }) + header('home', null, 'index.html') + `
 <main id="main">
 
-` + (CFG.home.sections.some((s) => s.id === 'trust') ? '' : `<!-- trust-numbers ${TRUST.map((t) => t.n).join(' ')} -->\n`) + frame('hero')() + '\n' + CFG.home.sections.map((s) => S[s.id](s.bg)).join('\n') + '\n' + cta({ home: true }) + MAIN_END + footer() + foot((CFG.frame.hero === 'reel' ? ['reel.js'] : CFG.frame.hero === 'slides' ? ['hero-slides.js'] : CFG.frame.hero === 'lines' ? ['hero-lines.js'] : CFG.frame.hero === 'statement' ? ['hero-statement.js'] : CFG.frame.hero === 'film' ? ['hero-film.js'] : CFG.frame.hero === 'story' ? ['hero-story.js'] : []).concat(CFG.frame.hero === 'slides' && CFG.hero.scenes.some((sc) => sc.cine) ? ['heroB3d.js'] : []).concat(CFG.frame.hero === 'slides' && CFG.hero.scenes.some((sc) => sc.video) ? ['heroB-video.js'] : []).concat(CFG.home.sections.some((s) => s.id === 'whatB') ? ['biz-stack.js'] : []));
+` + (CFG.home.sections.some((s) => s.id === 'trust') ? '' : `<!-- trust-numbers ${TRUST.map((t) => t.n).join(' ')} -->\n`) + frame('hero')() + '\n' + CFG.home.sections.map((s) => S[s.id](s.bg)).join('\n') + '\n' + cta({ home: true }) + MAIN_END + footer() + foot((CFG.frame.hero === 'reel' ? ['reel.js'] : CFG.frame.hero === 'slides' ? ['hero-slides.js'] : CFG.frame.hero === 'lines' ? ['hero-lines.js'] : CFG.frame.hero === 'statement' ? ['hero-statement.js'] : CFG.frame.hero === 'film' ? ['hero-film.js'] : CFG.frame.hero === 'story' ? ['hero-story.js'] : CFG.frame.hero === 'flow' ? ['hero-flow.js'] : []).concat(CFG.frame.hero === 'slides' && CFG.hero.scenes.some((sc) => sc.cine) ? ['heroB3d.js'] : []).concat(CFG.frame.hero === 'slides' && CFG.hero.scenes.some((sc) => sc.video) ? ['heroB-video.js'] : []).concat(CFG.home.sections.some((s) => s.id === 'whatB') ? ['biz-stack.js'] : []));
 };
 
 /* ---------- 2. 사업분야 ---------- */
