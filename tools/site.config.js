@@ -125,7 +125,7 @@ module.exports = {
        lede.pc = 노트북 앞 문장 · lede.m = 휴대폰 앞 문장(줄 수를 줄인 판) · lede.tail = 둘이 함께 쓰는 뒤 문장. actions: main = 남색 단추 · tel = 대표 전화 · cls 'qtel' 'qpdf' = 휴대폰에서 숨김(아래 고정 문의 띠와 겹침) */
     flow: {
       eyebrow: '{founded}년부터, 산업설비 클리닝 한 길',
-      title: ['“사람이 없는 곳에', '인명 사고도 없다”'],   // 표어 — 회사소개서(2024) 32쪽 · 기술소개서(2025) 4쪽
+      title: ['사람이 없는 곳에', '**인명 사고**도 없다'],   // 표어 — 회사소개서(2024) 32쪽 · 기술소개서(2025) 4쪽. 따옴표(“ ”)는 생성기가 붙인다 · **굵게** = 초록 밑줄 강조 (28차)
       lede: {
         pc: '{founded}년부터 석유화학 · 정유 플랜트의 탱크와 반응기를 클리닝해 왔습니다. {lab}년 기업부설연구소를 설립해 ',
         m: '{founded}년부터 플랜트 설비를 클리닝해 온 신정개발은 {lab}년 기업부설연구소에서 ',
@@ -134,12 +134,13 @@ module.exports = {
       meta: [['{founded}', '', '설립'], ['{lab}', '', '기업부설연구소 설립'], ['1~{gensN}', '세대', '자체 개발 무인 로봇'], ['{patentsN}', '건', '등록 특허']],
       stripTitle: '신정개발이 일하는 순서',
       hintPc: '칸에 마우스를 올리면 작업 장면이 재생됩니다',
-      hintM: '단계를 누르면 작업 장면이 재생됩니다',
+      hintM: '옆으로 넘기면 다음 단계 장면이 재생됩니다',   // 30차: 휴대폰은 가로로 넘기는 칸
+      // 28차: 다섯 칸 아래 '문의 띠' — 왼쪽 제목 · 설명, 오른쪽 대표 전화 · 기술소개서 PDF · 현장 문의 단추 (휴대폰은 아래 고정 띠가 전화 · 문의를 맡으므로 PDF 만 보인다)
+      ask: { title: '현장 상담 · 문의', sub: '설비 종류 · 일정 · 현장 위치를 알려 주시면 상담 시 안내해 드립니다.' },
       actions: [
-        { label: '현장 문의 →', href: 'contact.html', main: true },
-        { label: '전화', tel: true, cls: 'qtel' },
-        { label: '무인 솔루션 자세히', href: 'unmanned.html' },
-        { label: '기술소개서 PDF', href: 'assets/docs/shinjeong-robot-cleaning-system-2025-public.pdf', cls: 'qpdf', blank: true }
+        { kind: 'tel', small: '대표 전화' },
+        { kind: 'pdf', small: '자료 받기', label: '기술소개서 PDF', href: 'assets/docs/shinjeong-robot-cleaning-system-2025-public.pdf' },
+        { kind: 'btn', label: '현장 문의', href: 'contact.html' }
       ],
       note: '※ 연출 그림 · 작업 순서는 기술소개서(2025) 19쪽'
     },
