@@ -4591,3 +4591,226 @@ body[data-hero="story"] .hdr:not(.is-scrolled) .hdr__lang, body[data-hero="flow"
 .rf__l{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -20px;padding:0 20px 6px}
 .rf figure{flex:0 0 78%;scroll-snap-align:start}}
 .u14 .um-fn em{display:none}
+
+/* ===== 시안C 28차 (2026-11-08 이다결 님 요청): 첫 화면을 '흰 장표'에서 '회사 첫 화면'으로 =====
+   - 위쪽(표어 · 소개 글 · 숫자)을 남색 무대로: 로고의 남색 · 초록을 쓰고, 옅은 설비 윤곽선(.hxsky)으로 현장 분위기
+   - 표어: 큰 흰 글자 + 초록 따옴표 + '인명 사고' 초록 밑줄(들어올 때 그어짐)
+   - 소개 글: 흐린 흰 글자 속 강조 두 곳만 흰 굵은 글자 + 초록 밑줄
+   - 숫자 넷: 큰 흰 숫자 + 초록 단위 + 위쪽 초록 선, 차례로 떠오름
+   - 다섯 칸: 남색 무대 위에 걸친 흰 카드(그림자 · 둥근 모서리) — 남색은 카드 중간까지(--dk, js/hero-flow.js 가 잰다). 휴대폰은 첫 화면 전체가 남색 */
+#hx.hx{--g:#47a948;--g2:#7fd381;--nv0:#081a30;--nv1:#0e2e4a;--nv2:#14406a;position:relative;isolation:isolate;background:#fff!important;padding-top:clamp(40px,5.2vw,72px)!important;padding-bottom:28px!important}
+#hx.hx::before{content:"";position:absolute;left:0;right:0;top:0;height:var(--dk,74%);z-index:-2;
+  background:radial-gradient(60% 80% at 88% 0%,rgba(71,169,72,.16),transparent 60%),radial-gradient(50% 70% at 0% 100%,rgba(41,57,138,.35),transparent 70%),linear-gradient(160deg,var(--nv0) 0%,var(--nv1) 52%,var(--nv2) 100%)}
+#hx.hx::after{content:"";position:absolute;left:0;right:0;top:0;height:var(--dk,74%);z-index:-1;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:56px 56px;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.4) 70%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.4) 70%,transparent 100%)}
+#hx .hxsky{position:absolute;left:0;right:0;top:calc(var(--dk,74%) - 230px);height:230px;width:100%;color:#fff;opacity:.075;z-index:-1;pointer-events:none}
+#hx .hxh{margin-bottom:clamp(40px,4.6vw,64px)!important;align-items:end!important}
+/* 머리글 */
+#hx .hxl .eb,#hx .hxh .eb{display:inline-flex!important;align-items:center;gap:12px;margin:0 0 20px!important;font-size:14px!important;font-weight:700!important;letter-spacing:.02em;color:var(--g2)!important}
+#hx .hxl .eb::before{content:"";width:28px;height:2px;background:var(--g)}
+/* 표어 */
+#hx .qt{font-size:clamp(44px,4.5vw,68px)!important;line-height:1.1!important;letter-spacing:-.05em!important;font-weight:800!important;color:#fff!important;text-wrap:nowrap}
+#hx .qt span{display:block!important;margin:0!important;padding:0!important;background:none!important}
+#hx .qt .q1{color:rgba(255,255,255,.78)!important;font-weight:700}
+#hx .qt .q2{color:#fff!important}
+#hx .qt .qo,#hx .qt .qc{font-style:normal;color:var(--g);font-weight:800;font-family:Georgia,"Times New Roman",serif;font-size:1.06em;line-height:0}
+#hx .qt .qo{display:inline-block;width:.5em;margin-left:-.5em}
+#hx .qt .qc{margin-left:.04em}
+#hx .qt strong{font-weight:800;color:#fff;background:linear-gradient(var(--g),var(--g)) 0 88%/0% .16em no-repeat;animation:hxUl 1s .45s cubic-bezier(.2,.7,.2,1) forwards;padding-bottom:.04em}
+@keyframes hxUl{to{background-size:100% .16em}}
+/* 소개 글 */
+#hx .lede{color:rgba(255,255,255,.66)!important;font-size:clamp(18px,1.45vw,21px)!important;line-height:1.7!important;font-weight:500}
+#hx .lede strong{color:#fff!important;font-weight:700;background:linear-gradient(transparent 68%,rgba(71,169,72,.55) 68%,rgba(71,169,72,.55) 92%,transparent 92%)}
+/* 숫자 넷 */
+#hx .meta{border-top:1px solid rgba(255,255,255,.16)!important;margin-top:30px!important;padding-top:0!important;gap:0!important;flex-wrap:nowrap!important}
+#hx .meta li{position:relative;flex:1 1 0;padding:22px 20px 0!important;border-left:1px solid rgba(255,255,255,.12)!important;color:rgba(255,255,255,.62)!important;font-size:13.5px!important;white-space:normal!important;gap:8px!important}
+#hx .meta li:first-child{padding-left:0!important;border-left:0!important}
+#hx .meta li::before{content:"";position:absolute;top:-1px;left:20px;width:22px;height:2px;background:var(--g)}
+#hx .meta li:first-child::before{left:0}
+#hx .meta b{color:#fff!important;font-size:clamp(34px,3vw,46px)!important;font-weight:800!important;letter-spacing:-.035em!important;line-height:1!important}
+#hx .meta b small{color:var(--g2);font-size:.42em!important;font-weight:700;margin-left:3px;letter-spacing:0}
+/* 들어올 때 차례로 */
+@keyframes hxUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+#hx .eb,#hx .qt .q1,#hx .qt .q2,#hx .lede,#hx .meta li,#hx .hsh,#hx .hs{animation:hxUp .8s cubic-bezier(.2,.7,.2,1) both}
+#hx .qt .q1{animation-delay:.08s}#hx .qt .q2{animation-delay:.16s}#hx .lede{animation-delay:.24s}
+#hx .meta li:nth-child(1){animation-delay:.34s}#hx .meta li:nth-child(2){animation-delay:.42s}#hx .meta li:nth-child(3){animation-delay:.5s}#hx .meta li:nth-child(4){animation-delay:.58s}
+#hx .hsh{animation-delay:.6s}#hx .hs{animation-delay:.68s}
+/* 순서 머리 */
+#hx .hsh{margin:0 0 16px!important;align-items:center!important}
+#hx .hsh b{color:#fff!important;font-size:16px!important;display:inline-flex;align-items:center;gap:10px}
+#hx .hsh b::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--g);box-shadow:0 0 0 4px rgba(71,169,72,.22)}
+#hx .hsh span{color:rgba(255,255,255,.55)!important}
+/* 다섯 칸 = 남색 위에 걸친 흰 카드 */
+#hx .hs{gap:14px!important}
+#hx .sb{border:0!important;border-radius:14px;overflow:hidden;background:#fff!important;box-shadow:0 1px 0 rgba(255,255,255,.06),0 18px 40px -18px rgba(4,14,28,.55);transition:box-shadow .4s,transform .4s}
+#hx .hs li:not(.on) .sb:hover{transform:translateY(-3px)}
+#hx .hs li.on .sb{box-shadow:0 28px 60px -22px rgba(4,14,28,.65),0 0 0 2px var(--g)}
+#hx .ph{background:#f3f5f7!important}
+#hx .tx{border-top:1px solid #eef0f2!important}
+#hx .hs li.on .tx{background:#fff!important}
+#hx .tx em{color:var(--g)!important;font-size:12.5px!important;letter-spacing:.06em}
+#hx .hs li.on .ef,#hx .hs li.on .ef::before{color:var(--nv1)}
+#hx .hs li.on .ef::before{background:var(--g)!important}
+#hx .tx strong{color:var(--nv1)!important;background:linear-gradient(transparent 70%,rgba(71,169,72,.22) 70%)}
+#hx .bar{background:var(--g)!important;height:4px!important;border-radius:14px 14px 0 0}
+#hx .hxa{margin-top:26px!important}
+@media (max-width:1100px){#hx .qt{text-wrap:balance}#hx .meta{flex-wrap:wrap!important}}
+/* 휴대폰: 첫 화면 전체가 남색 */
+@media (max-width:820px){
+  #hx.hx{--dk:100%;padding-top:28px!important;padding-bottom:30px!important}
+  #hx .hxsky{top:auto;bottom:0;height:120px;opacity:.06}
+  #hx .hxh{margin-bottom:24px!important}
+  #hx .hxl .eb,#hx .hxh .eb{font-size:12.5px!important;margin-bottom:12px!important;gap:9px}
+  #hx .hxl .eb::before{width:20px}
+  #hx .qt{font-size:clamp(31px,8.6vw,38px)!important;text-wrap:wrap}
+  #hx .qt .qo{width:auto;margin-left:0;margin-right:.04em}
+  #hx .lede{font-size:15.5px!important;line-height:1.7!important}
+  #hx .meta{display:grid!important;grid-template-columns:1fr 1fr!important;margin-top:20px!important;border-top:0!important;gap:10px!important}
+  #hx .meta li{padding:14px 14px 12px!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:12px;background:rgba(255,255,255,.04);font-size:12px!important}
+  #hx .meta li:first-child{padding-left:14px!important;border-left:1px solid rgba(255,255,255,.12)!important}
+  #hx .meta li::before,#hx .meta li:first-child::before{left:14px;top:-1px}
+  #hx .meta b{font-size:28px!important}
+  #hx .hsh{flex-wrap:wrap;gap:4px 10px!important}
+  #hx .hsh b{font-size:15px!important}
+  #hx .hs{gap:8px!important}
+  #hx .sb{border-radius:12px}
+  #hx .tx{border-left:1px solid #eef0f2!important}
+  #hx .hs li.on .tx{border-left:0!important}
+  #hx .hs li.on .sb{box-shadow:0 0 0 2px var(--g),0 20px 40px -20px rgba(0,0,0,.6)}
+  #hx .cv{border-color:#dfe3e7!important}
+  #hx .hxa .btn{background:#fff!important;color:var(--nv1)!important;border-color:#fff!important}
+  #hx .hxa .lnk{color:#fff!important}
+  #hx .hxn{color:rgba(255,255,255,.5)!important}
+}
+@media (prefers-reduced-motion:reduce){#hx .eb,#hx .qt .q1,#hx .qt .q2,#hx .lede,#hx .meta li,#hx .hsh,#hx .hs{animation:none}#hx .qt strong{animation:none;background-size:100% .16em}}
+#hx.hx{margin-top:var(--header-h,80px)!important}   /* 28차: 남색 무대를 머리말 바로 아래에 붙인다(시안 띠 높이를 두 번 빼던 30px 흰 틈 없앰) */
+@media (max-width:820px){#hx .meta li:nth-child(n){padding:12px 14px 11px!important;border:1px solid rgba(255,255,255,.12)!important;gap:6px!important}
+  #hx .meta li:nth-child(n)::before{left:14px}}
+@media (max-width:1339px){#hx .qt .qo{width:auto;margin-left:0;margin-right:.03em}}   /* 28차: 화면이 좁으면 여는 따옴표를 바깥에 걸지 않는다(왼쪽 잘림 방지) */
+/* 28차: 첫 화면 바로 아래 실적 숫자 줄 — 첫 화면과 같은 말투(남색 큰 숫자 · 초록 선 · 화살표 보임) */
+body[data-hero="flow"] .hn{background:#f4f6f8;border-color:#e6eaee}
+body[data-hero="flow"] .hn li{position:relative;padding-top:30px;padding-bottom:28px}
+body[data-hero="flow"] .hn li::before{content:"";position:absolute;top:-1px;left:0;width:26px;height:2px;background:#47a948}
+body[data-hero="flow"] .hn li+li::before{left:28px}
+body[data-hero="flow"] .hn b{font-size:clamp(30px,2.7vw,40px);font-weight:800;color:var(--navy);letter-spacing:-.035em}
+body[data-hero="flow"] .hn b small{color:#3e9a40;font-weight:700}
+body[data-hero="flow"] .hn span{font-size:14px;color:var(--text)}
+body[data-hero="flow"] .hn span svg{opacity:.55;transform:none;color:var(--navy)}
+body[data-hero="flow"] .hn a:hover span svg{opacity:1;transform:translateX(3px)}
+@media (max-width:820px){body[data-hero="flow"] .hn li{padding-top:20px;padding-bottom:18px}body[data-hero="flow"] .hn li+li::before{left:12px}body[data-hero="flow"] .hn li+li{padding-left:12px}}
+
+/* ===== 시안C 28차-2 (2026-11-08): 다섯 칸 그림 · 설명 · 문의 띠 =====
+   그림: 밤 현장처럼 어두운 남색 배경 위에 로봇 · 작업자 · 장비만 원래 색으로 밝게(명도 대비) + 주변 빛. 이름표는 흰 굵은 글자 · 초록 선
+   설명: 'STEP 01' 표시 · 굵은 제목 · 핵심 말 초록 형광 밑줄 · 효과는 남색 띠(체크 표시) · 접힌 칸은 초록 꼬리표와 ▶ 표시
+   문의 띠: 흰 카드 한 장(제목 · 설명 | 대표 전화 · 기술소개서 PDF · 초록 '현장 문의' 단추) */
+#hx .ph{background:#0b1b2f!important}
+#hx .hs li:not(.on) .ph img{filter:none!important}
+#hx .hs li:not(.on) .ph::after{content:"";position:absolute;left:14px;bottom:14px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.92) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 7l9 5-9 5z' fill='%230e2e4a'/%3E%3C/svg%3E") center/18px no-repeat;box-shadow:0 6px 16px rgba(0,0,0,.35);transition:transform .3s}
+#hx .hs li:not(.on) .sb:hover .ph::after{transform:scale(1.1);background-color:#fff}
+#hx .tx{padding:16px 18px 18px!important}
+#hx .tx em{display:inline-flex!important;align-items:center;gap:6px;font-size:11.5px!important;font-weight:800!important;letter-spacing:.12em!important;color:#2f8f31!important;margin-bottom:6px!important}
+#hx .tx em::before{content:"STEP"}
+#hx .tx b{font-size:17.5px!important;font-weight:800!important;letter-spacing:-.03em;color:#0e1a26!important}
+#hx .hs li.on .tx b{font-size:23px!important;margin-bottom:8px}
+#hx .tg{display:inline-block!important;margin-top:8px!important;padding:4px 10px;border-radius:999px;background:#e9f5ea;color:#2a7d2c!important;font-size:12.5px!important;font-weight:700!important;letter-spacing:-.01em}
+#hx .hs li.on .ds{font-size:16px!important;line-height:1.7!important;color:#3a434c!important}
+#hx .tx strong{color:#0e2e4a!important;font-weight:800!important;background:linear-gradient(transparent 52%,rgba(71,169,72,.34) 52%,rgba(71,169,72,.34) 94%,transparent 94%)!important;padding:0 1px}
+#hx .hs li.on .ef{display:inline-flex!important;align-items:center;gap:9px;margin-top:12px!important;padding:9px 14px 9px 10px;border-radius:10px;background:#0e2e4a;color:#fff!important;font-size:14.5px!important;font-weight:700!important;letter-spacing:-.01em;line-height:1.35}
+#hx .hs li.on .ef::before{content:""!important;flex:none;width:20px!important;height:20px!important;border-radius:50%;background:#47a948 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/13px no-repeat!important}
+/* 문의 띠 */
+#hx .hxa{display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:20px 32px!important;margin-top:28px!important;padding:22px 24px 22px 30px;background:#fff;border:1px solid #e3e8ee;border-radius:16px;box-shadow:0 16px 40px -24px rgba(14,46,74,.35);position:relative;overflow:hidden}
+#hx .hxa::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(#47a948,#2f8f31)}
+#hx .hxa__t b{display:block;font-size:20px;font-weight:800;color:#0e1a26;letter-spacing:-.03em}
+#hx .hxa__t span{display:block;margin-top:4px;font-size:14.5px;color:#5a646d}
+#hx .hxa__l{display:flex;align-items:center;gap:12px}
+#hx .hxa__i{display:flex;align-items:center;gap:12px;padding:10px 18px 10px 12px;border-radius:12px;border:1px solid #e3e8ee;color:#0e1a26;text-decoration:none;transition:border-color .2s,background .2s}
+#hx .hxa__i:hover{border-color:#0e2e4a;background:#f6f8fa}
+#hx .hxa__i i{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#eef3f8;color:#0e2e4a}
+#hx .hxa__i small{display:block;font-size:12px;color:#6b7580;font-weight:600}
+#hx .hxa__i b{display:block;font-size:17px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+#hx .hxa__btn{display:inline-flex;align-items:center;gap:10px;height:62px;padding:0 26px;border-radius:12px;background:#2f8f31;color:#fff;font-size:17px;font-weight:800;text-decoration:none;box-shadow:0 10px 24px -10px rgba(47,143,49,.7);transition:background .2s,transform .2s}
+#hx .hxa__btn:hover{background:#277a29;transform:translateY(-1px)}
+#hx .hxa__btn svg{width:18px;height:18px}
+#hx .hxn{margin-top:12px!important}
+@media (max-width:1100px){#hx .hxa{grid-template-columns:1fr!important}}
+@media (max-width:820px){
+  #hx .tx{padding:10px 12px!important}
+  #hx .tx em{margin:0 6px 0 0!important}
+  #hx .tx b{font-size:15.5px!important}
+  #hx .hs li.on .tx b{font-size:19px!important}
+  #hx .tg{margin-top:5px!important;font-size:11.5px!important;padding:3px 8px}
+  #hx .hs li.on .ds{font-size:15px!important}
+  #hx .hs li.on .ef{font-size:13px!important;padding:8px 12px 8px 9px}
+  #hx .hs li:not(.on) .ph::after{width:24px;height:24px;left:6px;bottom:6px;background-size:13px}
+  #hx .hxa{padding:18px 18px 18px 22px;gap:12px!important;margin-top:18px!important}
+  #hx .hxa__t b{font-size:17px}
+  #hx .hxa__t span{font-size:13px}
+  #hx .hxa__tel,#hx .hxa__btn{display:none!important}
+  #hx .hxa__l{width:100%}
+  #hx .hxa__i{flex:1}
+}
+#hx .hs .ph{border-radius:0!important;padding:0!important}
+#hx .hs li.on .tg{display:none!important}
+
+/* ===== 시안C 29차 (2026-11-08): 펼친 칸 그림이 잘리지 않게 · 로봇 칸 강조 =====
+   - 노트북: 줄 높이를 고정하지 않고, 펼친 칸 그림은 원래 비율(1.7:1) 그대로 다 보인다. 접힌 칸은 같은 높이로 늘어나 그림이 채운다
+   - 로봇이 들어가는 칸(01~04): 그림 왼쪽 위 초록 '로봇' 꼬리표 + 접힌 칸 위쪽 초록 선. 05(고액 분리)는 꼬리표 없음 */
+@media (min-width:821px){
+  #hx .hs{height:auto!important;align-items:stretch}
+  #hx .hs>li{display:flex}
+  #hx .sb{height:auto!important;min-height:100%}
+  #hx .ph{flex:1 1 auto!important;min-height:260px}
+  #hx .hs li.on .ph{flex:none!important;aspect-ratio:1400/826!important;min-height:0;height:auto}
+  #hx .hs li:not(.on) .tx{min-height:150px}
+}
+#hx .rbadge{position:absolute;z-index:3;left:12px;top:12px;display:inline-flex;align-items:center;gap:6px;padding:5px 11px 5px 7px;border-radius:999px;background:#47a948;color:#fff;font-size:12.5px;font-weight:800;letter-spacing:-.01em;line-height:1.2;box-shadow:0 6px 14px -6px rgba(0,0,0,.6);white-space:nowrap}
+#hx .rbadge::before{content:"";width:18px;height:18px;border-radius:50%;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f8f31' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5' y='8' width='14' height='7' rx='2'/%3E%3Cpath d='M12 8V5M9.5 5h5M4 18h16'/%3E%3Ccircle cx='7.5' cy='18' r='1.4'/%3E%3Ccircle cx='12' cy='18' r='1.4'/%3E%3Ccircle cx='16.5' cy='18' r='1.4'/%3E%3C/svg%3E") center/14px no-repeat}
+#hx .hs li:not(.on) .rbadge{font-size:11.5px;padding:4px 9px 4px 6px}
+#hx .hs li:not(.on) .rbadge::before{width:16px;height:16px;background-size:12px}
+#hx .hs li.rbt .tg{background:#47a948!important;color:#fff!important}
+#hx .hs li.rbt:not(.on) .sb{box-shadow:inset 0 3px 0 #47a948,0 18px 40px -18px rgba(4,14,28,.55)}
+@media (max-width:820px){
+  #hx .rbadge{left:6px;top:6px;font-size:10.5px!important;padding:3px 7px 3px 4px!important;gap:4px}
+  #hx .rbadge::before{width:13px!important;height:13px!important;background-size:10px!important}
+  #hx .hs li:not(.on) .rbadge{display:none}
+  #hx .hs li:not(.on) .ph::after{left:auto;right:6px}
+  #hx .hs li.on .ph{aspect-ratio:1400/826!important}
+}
+
+/* ===== 시안C 30차 (2026-11-08): 휴대폰 '일하는 순서'를 가로로 넘기는 칸으로 =====
+   - 세로 목록 대신, 노트북처럼 그림이 큰 카드를 옆으로 밀어 넘긴다(스냅). 가운데 온 카드가 고른 칸 = 그 칸 영상 재생
+   - 카드는 모두 같은 모양(그림 · 번호 · 제목 · 설명 · 효과). 다음 카드 끝이 살짝 보여 '옆에 더 있다'는 것을 알린다
+   - 아래 점 다섯 개 = 지금 위치(누르면 그 칸으로) */
+#hx .hsd{display:none}
+@media (max-width:820px){
+  #hx .hs{display:flex!important;flex-direction:row!important;height:auto!important;gap:12px!important;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain;margin:0 -20px!important;padding:4px 20px 6px!important;scroll-padding-inline:20px;align-items:stretch!important}
+  #hx .hs::-webkit-scrollbar{display:none}
+  #hx .hs>li{flex:0 0 84%!important;min-width:0;scroll-snap-align:center;scroll-snap-stop:always;display:flex;transition:opacity .35s}
+  #hx .hs>li:not(.on){opacity:.62}
+  #hx .hs .bar,#hx .hs .cv{display:none!important}
+  #hx .hs .sb,#hx .hs li.on .sb{display:flex!important;flex-direction:column;grid-template-columns:none!important;width:100%;height:auto!important;min-height:100%;text-align:left}
+  #hx .hs li:not(.on) .sb:hover{transform:none}
+  #hx .hs .sb{align-items:stretch!important}
+  #hx .hs .ph,#hx .hs li.on .ph{width:100%!important;flex:none!important;height:auto!important;aspect-ratio:1400/826!important;min-height:0}
+  #hx .hs .ph img.th{opacity:0!important}
+  #hx .hs li:not(.on) .ph img.fa.v{opacity:1!important}
+  #hx .hs li:not(.on) .ph::after{display:none}
+  #hx .hs li:not(.on) .rbadge{display:inline-flex!important}
+  #hx .hs .tx,#hx .hs li.on .tx{flex:1 1 auto;border:0!important;border-top:1px solid #eef0f2!important;padding:13px 15px 15px!important;background:#fff!important}
+  #hx .hs .tx em{display:inline;margin:0 7px 0 0!important}
+  #hx .hs .tx b,#hx .hs li.on .tx b{display:inline;font-size:18px!important}
+  #hx .hs .tg,#hx .hs li:not(.on) .tg{display:none!important}
+  #hx .hs .ds,#hx .hs li.on .ds{display:block;max-height:none!important;opacity:1!important;font-size:14.5px!important;line-height:1.62;margin-top:7px}
+  #hx .hs .ef,#hx .hs li.on .ef{display:inline-flex!important;align-items:center;gap:7px;margin-top:10px;font-size:12.5px!important;font-weight:700;color:var(--nv1,#0e2e4a)}
+  #hx .hs .ef::before{content:"";width:14px;height:2px;background:var(--g,#47a948)}
+  #hx .hs li.on .sb{box-shadow:0 0 0 2px var(--g),0 20px 40px -20px rgba(0,0,0,.6)}
+  #hx .hsd{display:flex;justify-content:center;align-items:center;gap:4px;margin-top:12px}
+  #hx .hsd button{appearance:none;border:0;background:none;padding:9px 4px;cursor:pointer;display:grid;place-items:center}
+  #hx .hsd button i{display:block;width:7px;height:7px;border-radius:99px;background:rgba(255,255,255,.32);transition:width .3s,background .3s}
+  #hx .hsd button.on i{width:22px;background:var(--g,#47a948)}
+  #hx .hsd button.rbt:not(.on) i{background:rgba(71,169,72,.55)}
+  #hx .hsd span{margin-left:8px;font-size:12px;font-weight:700;color:rgba(255,255,255,.6);font-variant-numeric:tabular-nums;min-width:34px}
+  #hx .hsh .hsm::before{content:"↔ ";color:var(--g,#47a948);font-weight:800}
+}
+@media (max-width:820px) and (prefers-reduced-motion:reduce){#hx .hs>li{transition:none}#hx .hsd button i{transition:none}}
