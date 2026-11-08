@@ -989,29 +989,43 @@ const NEWS_ICON = {
   star: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
   heart: '<path d="M12 20s-7-4.4-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.6-9 9-9 9z"/>',
   bus: '<rect x="4" y="4" width="16" height="13" rx="2"/><path d="M4 11h16M8 17v2M16 17v2M8 14h.01M16 14h.01"/>',
-  mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>'
+  mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
+  cam: '<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>'
 };
-/* 대표 기사 — 로봇 개발 인터뷰(공식 홈페이지 sjdevel.com '뉴스'에도 걸린 기사). 요약은 기사 내용이며 두 소개서 밖의 사실이므로 '기사에 따르면'으로만 쓴다 */
+/* 대표 기사 — 로봇 개발 인터뷰(공식 홈페이지 sjdevel.com '뉴스'에도 걸린 기사, 남해안신문 '사람들' 2023.02.23).
+   39차: 요약은 모두 기사 내용이며 두 소개서 밖의 사실이 섞여 있으므로 화면에 '기사 내용 요약'으로 묶어 보인다. 대표자 이름 · 기사 사진은 쓰지 않는다(지면 그림은 코드로 그린 본뜬 그림). */
 const NEWS_FEATURE = {
-  d: '2023.02.23', outlet: '남해안신문', url: 'https://www.nhanews.com/news/articleView.html?idxno=79002',
+  d: '2023.02.23', outlet: '남해안신문', section: '사람들', url: 'https://www.nhanews.com/news/articleView.html?idxno=79002',
   title: '화학공장 설비 크리닝 외길 30년, 지역대표 강소기업으로 성장',
-  points: [
-    ['2014', '설비 크리닝 작업의 위험을 줄이려고 무인 크리닝 로봇 개발을 시작'],
-    ['2021', '개발한 로봇을 현장에 적용하기 시작, 쓰는 범위를 넓혀 가는 중'],
-    ['다음', '밀폐공간에서 움직일 수 있는 방폭 구조 로봇 개발을 우선 과제로']
+  titleHtml: '화학공장 설비 크리닝 <em>외길 30년</em>,<br>지역대표 <em>강소기업</em>으로 성장',
+  quote: 'Cleaning으로 안전한 환경을 만든다',          // 인터뷰에서 밝힌 회사의 사명(기사 속 문장 그대로, 15자 안팎 한 줄만)
+  photos: ['인터뷰 사진', '화학공장 크리닝 개념도', '개발한 작업용 로봇을 설명하는 사진'],   // 기사에 실린 사진 3장의 설명(사람 이름 뺌) — 사진은 원문에서
+  pic: 'R25',   // 40차: 카드 사진은 신정개발 사진(로봇 ZIP). 기사 사진 · 캡처는 언론사 권리 · 인물 사진이라 쓰지 않는다 — 화면에 '기사 사진이 아닙니다' 표시
+  facts: [['2014', '년', '무인 크리닝 로봇 개발 시작'], ['2021', '년', '로봇을 현장에 적용하기 시작'], ['50', '%', '그해 목표로 밝힌 위험 작업 무인화 비율']],
+  qa: [
+    ['어떤 회사로 소개됐나요?', '1992년 세척제 납품으로 시작해, 1993년부터 화학공장 설비 크리닝 · 유지보수를 해 온 회사입니다.'],
+    ['왜 로봇을 만들었나요?', '폭발 · 질식 위험이 있는 설비 크리닝 작업의 위험을 줄이기 위해서입니다. 저장탱크처럼 폭발 위험이 큰 곳까지 로봇을 넓혀 쓰고 있습니다.'],
+    ['무엇이 어려웠나요?', "'지방에서 만든 로봇'에 대한 선입견입니다. 현장과 연구소가 정기적으로 회의하고, 시제품 전에 3D 프린팅으로 현장 적용 가능성을 먼저 확인합니다."],
+    ['다음 목표는요?', '밀폐공간에서 자유롭게 움직이는 AI · 방폭 구조 로봇, 그리고 단순 반복 작업을 맡을 로봇을 개발하고 있습니다.']
   ]
 };
+/* 보도 기사 — 새것부터. head = 기사 원문 제목(첫 번째 언론사 기준, 그대로), title = 무슨 일인지 우리 말, sub = 한 줄 요약 (key 는 41차부터 화면에 쓰지 않음) */
 const NEWS2 = [
-  { d: '2026.10', kind: 'share', icon: 'heart', title: '장애인 거주시설 생활방 온풍기 설치 지원', sub: '지역 봉사 단체의 나눔 활동에 함께해, 장애인 거주시설 생활방 세 곳에 온풍기를 설치할 지원금을 전달했습니다.',
+  { d: '2026.10', kind: 'share', icon: 'heart', title: '장애인 거주시설 생활방에 온풍기 지원', key: '생활방 3곳', sub: '거주시설 환경개선을 위해 생활방 세 곳에 온풍기를 설치할 지원금을 전달했습니다.',
+    head: '여수출입국·외국인사무소 사회통합위, 동백원서 ‘정’ 나눠',
     press: [['남해안신문', 'https://www.nhanews.com/news/articleView.html?idxno=93862', '2026.10.29'], ['뉴스탑전남', 'https://www.dbltv.com/news/articleView.html?idxno=44985', '2026.11.02']] },
   // 2026.08 스타기업: 기사에 업종이 없어 같은 (주)신정개발인지 삼촌 확인 전 — 아니면 이 줄을 지운다
-  { d: '2026.08', kind: 'pick', icon: 'star', title: "여수시 '2026년 스타기업' 선정", sub: '여수시가 기술 수준 · 성장 여력 · 재무 안정성을 검토해 고른 올해의 스타기업 세 곳에 들었고, 지정서와 현판을 받았습니다.',
+  { d: '2026.08', kind: 'pick', icon: 'star', title: "여수시 '2026년 스타기업' 선정", key: '올해 3개사 중 하나', sub: '기술 수준 · 성장 여력 · 재무 안정성 검토를 거쳐 지정서와 현판을 받았습니다.',
+    head: '지역경제 이끌 ‘여수시 스타기업’ 3개사 선정',
     press: [['헤럴드경제', 'https://biz.heraldcorp.com/article/10844144', '2026.08.18'], ['NSP통신', 'https://www.nspna.com/country/?mode=view&newsid=824529', '2026.08.18'], ['일간투데이', 'https://www.dtoday.co.kr/news/articleView.html?idxno=786612', '2026.08.18']] },
-  { d: '2024.12', kind: 'pick', icon: 'award', title: "전라남도 '2024년 일자리 우수기업' 선정", sub: '전라남도 일자리 우수기업 인증에 여수 지역 다섯 기업과 함께 선정돼 인증패를 받았습니다.',
+  { d: '2024.12', kind: 'pick', icon: 'award', title: "전라남도 '2024년 일자리 우수기업' 선정", key: '여수 5개 기업 중 하나', sub: '전라남도 일자리 우수기업 인증패를 받았습니다.',
+    head: '여수에 뿌리내린 5개 기업, ‘일자리 우수기업’ 선정',
     press: [['남해안신문', 'https://www.nhanews.com/news/articleView.html?idxno=90641', '2024.12.16']] },
-  { d: '2024.09', kind: 'share', icon: 'bus', title: '장애인 거주시설에 이동용 미니버스 지원', sub: "지역 기업과 함께 후원해, 전남사회복지공동모금회 '기획 버스 지원사업'으로 중증장애인 거주시설에 미니버스를 전달했습니다.",
+  { d: '2024.09', kind: 'share', icon: 'bus', title: '장애인 거주시설에 이동용 미니버스 지원', key: '이동용 미니버스', sub: "지역 기업과 함께 후원해, 공동모금회 '기획 버스 지원사업'으로 미니버스를 전달했습니다.",
+    head: '여수 동백원, 장애인 이동 도울 ‘미니버스’ 선물받아',
     press: [['남해안신문', 'https://www.nhanews.com/news/articleView.html?idxno=90188', '2024.09.24']] },
-  { d: '2023.02', kind: 'share', icon: 'bus', title: '복지관에 승합차 기증', sub: '복지관 차량이 낡았다는 소식을 듣고, 거동이 불편한 이용자가 복지관을 오갈 수 있도록 승합차를 기증했습니다.',
+  { d: '2023.02', kind: 'share', icon: 'bus', title: '복지관에 승합차 기증', key: '승합차 기증', sub: '거동이 불편한 이용자가 복지관을 오갈 수 있도록 승합차를 기증했습니다.',
+    head: '우리 이웃들을 하나로 잇는 발이 되어 줄께요',   // 원문 제목은 큰따옴표로 감싼 문장 — 카드가 따옴표를 달아 준다
     press: [['남해안신문', 'https://www.nhanews.com/news/articleView.html?idxno=78930', '2023.02.10']] }
 ];
 const PROJ_TAB_ORDER = ['S01', 'S02', 'S04', 'S03', 'S05'];   // 실적이 많은 분야부터
@@ -3602,57 +3616,68 @@ ${SRC_LINE}    </div>
 };
 
 /* ---------- 4-1. 소식 (시안C 7차 신설) — 회사소개서 연혁의 최근 항목을 날짜순으로. 새 소식은 NEWS_EXTRA ---------- */
-/* 시안C 38차: 소식 — 대표 기사(로봇 개발 인터뷰) + 해마다 묶은 기사 카드(날짜 칸 · 분류 · 제목 · 요약 · 원문 링크). 기사만 싣는다 */
-const NEWS_SVG = (k, s = 22) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${NEWS_ICON[k]}</svg>`;
-const NEWS_OUT = (o, u, d) => `<a href="${u}" target="_blank" rel="noopener" aria-label="${esc(o)} ${esc(d)} 기사 (새 창)">${esc(o)} <small>${esc(d)}</small> ${upArrow(12)}</a>`;
-const newsCard = (n) => {
+/* 시안C 41차: 소식 = 회사 홈페이지의 '언론 보도' 게시판 모양. 큰 카드 · 큰 숫자 · 남색 상자 없이, 흰 바탕 목록 한 줄씩.
+   맨 위 줄 = 분류 단추(전체 · 인터뷰 · 기업 선정 · 지역 나눔, js/news.js) + 건수. 첫 줄은 '주요' 인터뷰(신정개발 사진 · 기사 요약 펼치기), 그다음은 새 기사부터.
+   줄 = 날짜 칸 · 분류 · 제목(무슨 일) · 기사 원문 제목(따옴표) · 한 줄 요약 · 언론사 링크. 스크립트가 없으면 모두 보인다 */
+const NEWS_OUT = (o, u, d) => `<a href="${u}" target="_blank" rel="noopener">${esc(o)} <small>${esc(d)}</small> ${upArrow(12)}<span class="sr-only"> 기사 (새 창)</span></a>`;
+const newsRow = (n) => {
   const [y, m] = n.d.split('.');
   const [o0, u0, d0] = n.press[0];
-  return `<li class="nw2-card nw2-card--${n.kind}"><article>
-        <span class="nw2-date" aria-hidden="true">${NEWS_SVG(n.icon, 20)}<b>${m}</b><small>${y}</small></span>
-        <div class="nw2-tx"><p class="nw2-meta"><span class="nw2-kind">${esc(NEWS_KIND[n.kind])}</span><time datetime="${y}-${m}">${esc(n.d)}</time></p>
-          <h3><a href="${u0}" target="_blank" rel="noopener">${esc(n.title)}<span class="sr-only"> — ${esc(o0)} 기사 (새 창)</span></a></h3>
-          <p class="nw2-sub">${esc(n.sub)}</p></div>
-        <p class="nw2-out"><span>기사 원문</span>${n.press.map(([o, u, d]) => NEWS_OUT(o, u, d)).join('')}</p>
+  return `<li class="nr" data-kind="${n.kind}"><article class="nr__a">
+        <p class="nr__d"><time datetime="${d0.replace(/\./g, '-')}">${esc(d0)}</time></p>
+        <div class="nr__b">
+          <p class="nr__k nr__k--${n.kind}">${esc(NEWS_KIND[n.kind])}</p>
+          <h3 class="nr__t"><a href="${u0}" target="_blank" rel="noopener">${esc(n.title)}<span class="sr-only"> — ${esc(o0)} 기사 (새 창)</span></a></h3>
+          <p class="nr__h">기사 제목 「${esc(n.head)}」</p>
+          <p class="nr__s">${esc(n.sub)}</p>
+          <p class="nr__o">${n.press.map(([o, u, d]) => NEWS_OUT(o, u, d)).join('')}</p>
+        </div>
+        <span class="nr__go" aria-hidden="true">${upArrow(18)}</span>
       </article></li>`;
 };
 pages['news.html'] = () => {
   const c = CFG.pages.news, F = NEWS_FEATURE;
-  const years = [...new Set(NEWS2.map((n) => n.d.slice(0, 4)))];
-  const outlets = new Set([F.outlet].concat(...NEWS2.map((n) => n.press.map((p) => p[0])))).size;
-  const total = NEWS2.length + 1;
+  const kinds = ['all', 'talk', 'pick', 'share'];
+  const cnt = (k) => k === 'all' ? NEWS2.length + 1 : k === 'talk' ? 1 : NEWS2.filter((n) => n.kind === k).length;
+  const [fy, fm] = F.d.split('.');
   return head({
     file: 'news.html', page: 'news',
     title: `소식 | ${C.brand}`,
     desc: '언론에 실린 신정개발 이야기 — 로봇 개발 인터뷰, 기업 선정, 지역 나눔 기사를 모았습니다.'
   }) + header('news', null, 'news.html') + `
-<main id="main" class="nw2">
+<main id="main" class="nw4">
 ` + phero({ h1: c.title, keepLead: c.lead, crumbs: [{ label: c.title }] }) + `
-  <section class="section nw2-ft" aria-labelledby="nw2-ft-h"><div class="wrap">
-    <p class="nw2-k">대표 기사</p>
-    <article class="nw2-ftc">
-      <div class="nw2-ftc__l">
-        <p class="nw2-meta nw2-meta--inv"><span class="nw2-kind">${esc(NEWS_KIND.talk)}</span><span>${esc(F.outlet)} · <time datetime="${F.d.replace(/\./g, '-')}">${esc(F.d)}</time></span></p>
-        <h2 id="nw2-ft-h"><span class="nw2-q" aria-hidden="true">“</span>${esc(F.title)}</h2>
-        <p class="nw2-ftc__note">신정개발의 로봇 개발 이야기를 다룬 언론 인터뷰입니다.</p>
-        <a class="nw2-btn" href="${F.url}" target="_blank" rel="noopener">기사 원문 읽기 ${upArrow(14)}<span class="sr-only"> (새 창)</span></a>
-      </div>
-      <div class="nw2-ftc__r">
-        <p class="nw2-ftc__h">기사에 실린 로봇 이야기</p>
-        <ol class="nw2-pts">${F.points.map(([k, t]) => `<li><b>${esc(k)}</b><span>${esc(t)}</span></li>`).join('')}</ol>
-        <p class="nw2-ftc__src">기사 내용을 짧게 줄인 것입니다. 자세한 내용은 원문에서 보실 수 있습니다.</p>
-      </div>
-    </article>
+  <section class="section nw4-sec" aria-labelledby="nw4-h"><div class="wrap">
+    <h2 id="nw4-h" class="sr-only">언론 보도 목록</h2>
+    <div class="nw4-bar">
+      <p class="nw4-cnt">전체 <b data-nw-n>${cnt('all')}</b>건</p>
+      <div class="nw4-f" role="group" aria-label="분류로 보기">${kinds.map((k) => `<button type="button" data-f="${k}" aria-pressed="${k === 'all'}">${k === 'all' ? '전체' : esc(NEWS_KIND[k])}<small>${cnt(k)}</small></button>`).join('')}</div>
+    </div>
+    <ol class="nw4-list">
+      <li class="nr nr--pin" data-kind="talk"><article class="nr__a">
+        <p class="nr__d"><time datetime="${F.d.replace(/\./g, '-')}">${esc(F.d)}</time><span class="nr__pin">주요 기사</span></p>
+        <div class="nr__b">
+          <p class="nr__k nr__k--talk">${esc(NEWS_KIND.talk)}</p>
+          <h3 class="nr__t nr__t--pin"><a href="${F.url}" target="_blank" rel="noopener">${esc(F.title)}<span class="sr-only"> — ${esc(F.outlet)} 기사 (새 창)</span></a></h3>
+          <p class="nr__s">신정개발이 위험한 설비 크리닝 작업을 줄이려고 무인 로봇을 직접 개발하게 된 이야기를 담은 인터뷰입니다. 인터뷰에서 밝힌 회사의 사명은 “${esc(F.quote)}”입니다.</p>
+          <p class="nr__o">${NEWS_OUT(F.outlet, F.url, F.d)}<span class="nr__ph">원문에 사진 ${F.photos.length}장</span></p>
+          <details class="nr__more"><summary>기사 내용 요약 보기</summary>
+            <div class="nr__sum">
+              <ul class="nr__facts">${F.facts.map(([n, u, t]) => `<li><b>${esc(n)}${esc(u)}</b> ${esc(t)}</li>`).join('')}</ul>
+              <dl class="nr__qa">${F.qa.map(([q, a]) => `<div><dt>${esc(q)}</dt><dd>${esc(a)}</dd></div>`).join('')}</dl>
+              <p class="nr__note">기사 내용을 짧게 정리한 것입니다. 두 소개서에 없는 내용이 섞여 있어 기사 기준으로 적었습니다.</p>
+            </div>
+          </details>
+        </div>
+        <figure class="nr__pic">${photo(P(F.pic), '(max-width:860px) 92vw, 320px')}<figcaption>신정개발 사진 · 기사 사진이 아닙니다</figcaption></figure>
+      </article></li>
+${NEWS2.map(newsRow).join('\n')}
+    </ol>
+    <p class="nw4-empty" hidden>이 분류의 기사가 없습니다.</p>
+    <p class="us-src nw4-src">${esc(c.src)}</p>
   </div></section>
 
-  <section class="section nw2-list" aria-labelledby="nw2-list-h"><div class="wrap">
-    <div class="nw2-list__h"><div><p class="nw2-k">보도 기사</p><h2 id="nw2-list-h">언론에 실린 신정개발</h2></div>
-      <p class="nw2-sum"><b>${total}</b>건 · <b>${outlets}</b>개 언론사 · ${years[years.length - 1] > '2023' ? years[years.length - 1] : '2023'}~${years[0]}</p></div>
-${years.map((y) => `    <div class="nw2-yr"><h3 class="nw2-yr__y"><span>${y}</span></h3><ul class="nw2-cards">${NEWS2.filter((n) => n.d.startsWith(y)).map(newsCard).join('')}</ul></div>`).join('\n')}
-    <p class="us-src nw2-src">${esc(c.src)}</p>
-  </div></section>
-
-` + cta({ h2: CFG.common.cta.title, p: CFG.common.cta.text }) + MAIN_END + footer() + foot();
+` + cta({ h2: CFG.common.cta.title, p: CFG.common.cta.text }) + MAIN_END + footer() + foot(['news.js']);
 };
 
 
