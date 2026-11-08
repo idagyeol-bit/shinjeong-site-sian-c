@@ -5232,3 +5232,12 @@ body .cs9 [id^="s0"],body main section[id^="s0"],body .s6-st{scroll-margin-top:c
   .nr__qa{grid-template-columns:1fr}
   .nr__o a{min-height:40px}
 }
+
+/* ===== 시안C 43차 (2026-11-09): 첫 화면을 '손님에게 하는 말'로 — 칸 제목 한 문장 · 꼬리표 하나 · 숫자는 첫 화면 한 곳 ===== */
+/* 접힌 칸의 초록 알약(tag)은 제목과 겹쳐 쓰지 않는다 · 펼친 칸 설명의 형광펜 밑줄 → 굵은 글자만(발표 자료 느낌 줄임) */
+#hx .hs .tg{display:none!important}
+#hx .hs .ds strong{background:none!important;color:var(--ink,#14181c)!important;font-weight:800}
+#hx .lede strong{background:none!important;color:#fff!important;font-weight:800}
+/* 그림 위 꼬리표 = 그 칸에서 누가 일하는지(로봇 · 작업자) — 같은 모양 하나 */
+#hx .hs .rbadge{letter-spacing:-.01em}
+#hx .hxr2 .meta li b{white-space:nowrap}

@@ -32,17 +32,17 @@ function size(file) {
 const h = read('index.html');
 const main = h.slice(h.indexOf('<main'), h.indexOf('</main>'));
 const ids = [...main.matchAll(/<section([^>]*)>/g)].map((m) => (m[1].match(/\bid="([^"]+)"/) || m[1].match(/class="([\w-]+)/) || [])[1]);
-ok(ids.join(',') === 'hx,hn,what,field,unmanned,company', `메인 구역 순서 hx,hn,what,field,unmanned,company (지금: ${ids.join(',')})`);
+ok(ids.join(',') === 'hx,what,field,unmanned,company', `메인 구역 순서 hx,what,field,unmanned,company (지금: ${ids.join(',')})`);
 ok(/<body[^>]*data-hero="flow"/.test(h), "body data-hero=\"flow\"");
 ok(!/class="h3d"|hero-story\.js|class="why2"|id="how"/.test(h), '3D 첫 화면 · 왜 로봇인가 · 어떻게 일하나 없음');
 ok(/<script src="js\/hero-flow\.js\?v=/.test(h), 'js/hero-flow.js 연결');
 ok((main.match(/<li(?: class="rbt")?><i class="bar"><\/i><button type="button" class="sb"/g) || []).length === 5, '일하는 순서 다섯 칸');
 ok((h.match(/assets\/hero-flow\/[a-z0-9]+\.webp/g) || []).length === 22 && (h.match(/assets\/hero-flow\/v\d\.mp4/g) || []).length === 5, '그림 22장(영상 첫 장면 5 포함) · 영상 5개 연결');
-ok((main.match(/<section class="hn"[\s\S]*?<\/section>/)[0].match(/<li>/g) || []).length === 2, '숫자 줄 두 칸');
+ok(!/<section class="hn"/.test(main), '숫자 줄은 첫 화면으로 합침(43차)');
 ok((main.match(/class="sv5__rec"/g) || []).length === 5 && !/<span class="sv5__t"><em>/.test(main), '다섯 가지 일: 실적 한 줄 5개 · 번호 없음');
 ok((main.match(/<section class="rf"[\s\S]*?<\/section>/)[0].match(/<figure>/g) || []).length === 4, '실제 현장 사진 넷');
-ok(h.includes('1992년 설립 · 산업설비 클리닝 전문기업') && h.includes('사람이 없는 곳에') && h.includes('<strong>무인 로봇을 자체 개발</strong>'), '첫 화면 글자');
-ok(/<li><b>1992<\/b>설립<\/li><li><b>2017<\/b>기업부설연구소 설립<\/li><li><b>1~5<small>세대<\/small><\/b>자체 개발 무인 로봇<\/li><li><b>8<small>건<\/small><\/b>등록 특허<\/li>/.test(h), '숫자 넷 1992 · 2017 · 1~5세대 · 8건');
+ok(h.includes('1992년 설립 · 산업설비 클리닝 전문기업') && h.includes('사람이 없는 곳에') && h.includes('<strong>신정개발이 직접 개발한 무인 로봇</strong>'), '첫 화면 글자');
+ok(/<li><b>1992<\/b>설립<\/li><li><b>170<small>여 건<\/small><\/b>수행 실적 · 2020~2023<\/li><li><b>4<small>년 연속<\/small><\/b>4개 발주처 단가계약<\/li><li><b>8<small>건<\/small><\/b>등록 특허<\/li>/.test(h), '숫자 넷 1992 · 170여 건 · 4년 연속 · 8건 (43차)');
 ok(!/1992년부터 (석유|플랜트)|작업자 대신 로봇|보호구를 착용한 작업자가 진입/.test(h) && !h.includes('1992년부터 한 길.<br>') && !h.includes('그다음에 들어갑니다.</p>'), '회사 소개 반복 문장 뺌 · 32차 근거 없는 문구 없음');
 ok(/<!-- trust-numbers [\d ]+-->/.test(h), '영문판용 trust-numbers 주석 남음');
 
