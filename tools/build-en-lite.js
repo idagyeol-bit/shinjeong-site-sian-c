@@ -86,7 +86,7 @@ function head(o) {
 </head>
 <body class="moB-root" data-page="${o.page}">
 <a class="skip-link" href="#main">${esc(C.skip)}</a>
-<div class="sianbar" role="note" style="--sian: ${SIAN.color || '#c2410c'}"><span class="sianbar__name">${esc(SIAN.name ? 'Draft B' : 'Draft')}</span><span class="sianbar__note">${esc(C.draftBar.replace(/^Draft B — /, ''))}</span></div>
+<div class="sianbar" role="note" style="--sian: ${SIAN.color || '#c2410c'}"><span class="sianbar__name">${esc(SIAN.name ? 'Draft ' + ((SIAN.name.match(/[A-Z]\s*$/) || [''])[0].trim()) : 'Draft')}</span><span class="sianbar__note">${esc(C.draftBar.replace(/^Draft B — /, ''))}</span></div>
 `;
 }
 function header(page) {
