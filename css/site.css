@@ -4854,3 +4854,183 @@ body[data-hero="flow"] .hn a:hover span svg{opacity:1;transform:translateX(3px)}
 #hx .ph img.po{transition:opacity .55s ease}
 #hx .hs li.on .ph img.po{opacity:1}
 @media (prefers-reduced-motion:reduce){#hx .hs li.on .ph img.po{opacity:0}}
+
+/* =====================================================================
+   시안C 33차 (2026-11-08): 한 홈페이지로 이어지게 — 첫 화면의 말투(남색 무대 · 초록 점 · 흰 둥근 카드)를 모든 쪽에
+   - 쪽 머리: 사업분야 · 분야 상세 · 무인 솔루션 · 적용 사례 · 수행 이력 · 소식 · 문의 · 회사 소개 모두 첫 화면과 같은 남색 무대
+     (같은 그라데이션 · 같은 설비 윤곽선 · 초록 점 머리글 · 흰 굵은 제목 + 초록 막대)
+   - 구역 머리: '— 글자' 줄 머리글을 모두 '● 글자' 초록 점으로, 제목은 같은 굵기 · 같은 남색 글자
+   - 사진 · 칸: 모서리 둥글게(14px) · 같은 그림자, 단추는 초록(주 단추) · 남색 테두리(보조)
+   - 메인 아래쪽: 숫자 줄 → 흰 카드, 무인 솔루션 → 남색 무대(첫 화면과 짝), 바닥글 → 남색
+   ===================================================================== */
+:root{--g:#47a948;--g-d:#2f8f31;--g-l:#e9f5ea;--nv0:#081a30;--nv1:#0e2e4a;--nv2:#14406a;--ink2:#0e1a26;--rd:14px;
+  --stg:radial-gradient(60% 80% at 88% 0%,rgba(71,169,72,.16),transparent 60%),radial-gradient(50% 70% at 0% 100%,rgba(41,57,138,.35),transparent 70%),linear-gradient(160deg,var(--nv0) 0%,var(--nv1) 52%,var(--nv2) 100%);
+  --sky:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1440 260%22 preserveAspectRatio=%22xMidYMax slice%22%3E%3Cg fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%221.2%22%3E%3Cpath d=%22M0 259.5H1440%22/%3E%3Cpath d=%22M60 259V170h120v89M60 170q60-22 120 0M70 200h100M70 230h100%22/%3E%3Cpath d=%22M200 259V150h150v109M200 150q75-26 150 0M210 185h130M210 220h130%22/%3E%3Cpath d=%22M420 259V60h26v199M415 60h36M415 110h36M415 160h36M415 210h36M433 60V30%22/%3E%3Cpath d=%22M480 259V95h20v164M476 95h28M476 140h28M476 185h28M490 95V70%22/%3E%3Cpath d=%22M540 259V120h52v139M540 160h52M540 200h52M566 120V96%22/%3E%3Cpath d=%22M620 259V200h300v59M620 225h300M650 200v59M710 200v59M770 200v59M830 200v59M890 200v59%22/%3E%3Cpath d=%22M955 259V40h10v219M960 40V20M950 30h20%22/%3E%3Cpath d=%22M1000 259V178h170v81M1000 178q85-26 170 0M1012 212h146M1012 240h146%22/%3E%3Cpath d=%22M1190 259V140h40v119M1184 140h52M1184 180h52M1184 220h52%22/%3E%3Cpath d=%22M1260 259V190h150v69M1260 190q75-20 150 0M1272 225h126%22/%3E%3Cpath d=%22M180 240h20M350 240h70M446 240h34M592 240h28M920 240h35M965 240h35M1170 240h20M1230 240h30%22 stroke-dasharray=%223 4%22/%3E%3C/g%3E%3C/svg%3E");
+  --shd:0 1px 0 rgba(14,46,74,.04),0 18px 40px -22px rgba(14,46,74,.38)}
+
+/* ---------- 1. 쪽 머리 = 남색 무대 ---------- */
+body .s6-top,body .um-top,body .cs9-head,body .phero,body .pstg{position:relative;isolation:isolate;background:var(--stg)!important;color:#fff;overflow:hidden}
+body .s6-top::after,body .um-top::after,body .cs9-head::after,body .phero::after,body .pstg::after{content:"";position:absolute;left:0;right:0;bottom:0;height:200px;background:var(--sky) center bottom/1440px 260px repeat-x;opacity:.075;pointer-events:none;z-index:-1}
+body .phero__grid{display:none!important}
+/* 머리글(작은 글) = 초록 점 */
+body .s6-top__k,body .um-top h1 small,body .pstg__k,body .phero h1+.pk{display:inline-flex!important;align-items:center;gap:10px;font-size:14px!important;font-weight:700!important;letter-spacing:.01em!important;color:#fff!important;opacity:.92}
+body .s6-top__k::before,body .um-top h1 small::before,body .pstg__k::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--g);box-shadow:0 0 0 4px rgba(71,169,72,.22)}
+body .um-top h1 small{display:flex!important;margin-bottom:18px!important}
+/* 큰 제목 */
+body .s6-top__h,body .um-top h1,body .cs9-head h1,body .phero h1,body .pstg h1{color:#fff!important;font-weight:800!important;letter-spacing:-.04em!important;line-height:1.16!important}
+body .s6-top__h::after,body .um-top h1::after,body .cs9-head h1::after,body .phero h1::after,body .pstg h1::after{content:"";display:block;width:56px;height:4px;margin-top:20px;border-radius:4px;background:var(--g)}
+body .cs9-head h1,body .phero h1,body .pstg h1{font-size:clamp(34px,3.6vw,52px)!important}
+body .s6-top__l,body .um-top__desc,body .cs9-head__l,body .phero__lead,body .pstg__l{color:rgba(255,255,255,.74)!important}
+body .s6-crumb,body .um-crumb,body .cs9-head__crumb,body .pstg .s6-pg{color:rgba(255,255,255,.55)!important}
+body .s6-crumb a,body .um-crumb a,body .cs9-head__crumb a,body .pstg .s6-pg a{color:rgba(255,255,255,.72)!important}
+body .um-top__quote{color:#fff!important}
+body .um-top__quote::before{background:var(--g)!important}
+/* 사업분야 머리: 배경 사진 → 오른쪽 둥근 사진 카드 */
+body .s6-top{padding-block:clamp(56px,6vw,96px)!important}
+body .s6-top__bg{left:auto!important;right:max(24px,calc((100vw - var(--wrap,1200px))/2));top:clamp(44px,5vw,72px)!important;bottom:clamp(44px,5vw,72px)!important;width:min(44%,560px);border-radius:18px;overflow:hidden;box-shadow:0 30px 60px -28px rgba(0,0,0,.7)}
+body .s6-top__bg::after{background:linear-gradient(180deg,transparent 55%,rgba(8,26,48,.45))!important}
+body .s6-top .wrap{position:relative}
+body .s6-top .wrap>*{max-width:min(52%,620px)}
+/* 적용 사례 숫자 = 첫 화면 숫자 넷과 같은 모양 */
+body .cs9-head__sum dd{color:#fff!important;font-weight:800!important;letter-spacing:-.03em}
+body .cs9-head__sum dd small{color:var(--g2,#7fd381)!important}
+body .cs9-head__sum dt{color:rgba(255,255,255,.62)!important}
+body .cs9-head__sum .is-r dd{color:#7fd381!important}
+body .cs9-head__src{color:rgba(255,255,255,.45)!important}
+/* 회사 소개 첫 칸: 사진 옆 글 쪽이 남색 무대 */
+body .c7-msg{background:var(--stg)!important;position:relative;isolation:isolate}
+body .c7-msg::after{content:"";position:absolute;left:0;right:0;bottom:0;height:200px;background:var(--sky) center bottom/1440px 260px repeat-x;opacity:.06;pointer-events:none;z-index:-1}
+body .c7-msg__t,body .c7-msg__t p{color:rgba(255,255,255,.78)!important}
+body .c7-msg h1{color:#fff!important}
+body .c7-msg h1::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--g);box-shadow:0 0 0 4px rgba(71,169,72,.22)}
+body .c7-msg h1 span{color:rgba(255,255,255,.6)!important}
+body .c7-msg__q{color:#fff!important;font-weight:800!important}
+body .c7-msg__q::after{content:"";display:block;width:56px;height:4px;margin-top:20px;border-radius:4px;background:var(--g)}
+body .c7-msg .c7-crumb,body .c7-msg .c7-crumb a{color:rgba(255,255,255,.6)!important}
+body .c7-msg [class*="sign"],body .c7-msg__s{color:#fff!important}
+body .c7-msg *{border-color:rgba(255,255,255,.14)}
+
+/* 분야 상세 머리(33차 새 틀: .pstg) — 남색 무대 아래로 흰 카드가 걸친다(첫 화면과 같은 짜임) */
+body .pstg{padding-block:clamp(40px,5vw,72px) clamp(120px,12vw,170px)}
+body .pstg .s6-pg{margin-bottom:26px}
+body .pstg .s6-pg span,body .pstg .s6-pg b{color:#fff!important}
+body .pstg .s6-fn{color:rgba(255,255,255,.88)!important}
+body .pstg .s6-fn em{color:var(--g)!important}
+body .pstg .s6-fn svg{color:var(--g)}
+body .pstg h1{margin:12px 0 0!important}
+body .pstg .s6-ov__d{max-width:760px;margin-top:22px!important;font-size:clamp(15.5px,1.15vw,17.5px)!important;line-height:1.75!important;color:rgba(255,255,255,.76)!important}
+body .s6-ov{padding-top:0!important;background:#fff}
+body .s6-ov>.wrap{position:relative;margin-top:calc(-1 * clamp(96px,10vw,140px))}
+body .s6-ov .s6-ov__grid{background:#fff;border-radius:20px;padding:clamp(18px,2.2vw,30px);box-shadow:0 30px 70px -36px rgba(8,26,48,.55),0 0 0 1px rgba(14,46,74,.06);align-items:start}
+body .s6-ov .s6-ov__ph{border-radius:14px;overflow:hidden}
+
+/* ---------- 2. 구역 머리 = 초록 점 + 굵은 제목 ---------- */
+body .h24-k,body .c7-k,body .um-kick,body .u14__eb,body .co__eyebrow{display:inline-flex!important;align-items:center;gap:10px!important;font-size:14px!important;font-weight:800!important;letter-spacing:.01em!important;color:var(--nv1)!important}
+body .h24-k::before,body .c7-k::before,body .um-kick::before,body .u14__eb::before,body .co__eyebrow::before{content:""!important;flex:none;width:8px!important;height:8px!important;border-radius:50%;background:var(--g)!important;box-shadow:0 0 0 4px rgba(71,169,72,.18)}
+body .s6-ch{color:var(--nv1)!important}
+body .s6-ch i{background:var(--g)!important;border-radius:6px}
+body .c7-h2,body .s6-h2,body .um-h2,body .h24-k+h2,body main .head h2,body .u14 h2,body .co h2,body .sv5 h2,body .rf h2{font-weight:800!important;letter-spacing:-.035em!important;color:var(--ink2)!important}
+
+/* ---------- 3. 사진 · 칸 · 단추 ---------- */
+body main section:not(#hx):not(.c7-msg):not(.s6-top) img{border-radius:var(--rd)}
+body main figure img[width][height]{border-radius:var(--rd)}
+body .c7-msg img,body .s6-top img,body #hx img{border-radius:0}
+body .section--soft,body .s6-sec--soft,body .c7-sec--soft{background:#f2f5f9!important}
+body .hdr__cta{background:var(--g-d)!important;border-color:var(--g-d)!important;color:#fff!important;border-radius:10px!important}
+body .hdr__cta:hover{background:#277a29!important;border-color:#277a29!important}
+body .gnb>a[aria-current],body .gnb .gnb__item>a[aria-current]{box-shadow:inset 0 -2px 0 var(--g)}
+body .btn{border-radius:10px}
+body .btn:not(.btn--line):not(.btn--ghost){background:var(--nv1);border-color:var(--nv1)}
+body .mcta__go{background:var(--g-d)!important}
+body .mcta__tel{border-radius:0}
+
+/* ---------- 4. 메인 아래쪽 ---------- */
+/* 숫자 줄: 연회색 띠 → 흰 카드 둘 */
+body[data-hero="flow"] .hn{background:#fff!important;border:0!important;padding:8px 0 clamp(28px,4vw,48px)}
+body[data-hero="flow"] .hn ul{gap:16px!important}
+body[data-hero="flow"] .hn li{background:#fff;border:1px solid #e3e8ee!important;border-radius:16px;box-shadow:var(--shd);padding-left:clamp(20px,2vw,30px)!important}
+body[data-hero="flow"] .hn li+li::before{display:none!important}
+/* 다섯 가지 일 · 실제 현장: 둥근 카드 */
+body .sv5 a,body .sv5 li>a,body .sv5__card{border-radius:16px;overflow:hidden}
+body .rf figure{border-radius:16px}
+/* 무인 솔루션: 남색 무대(첫 화면과 짝) */
+body .u14{background:var(--stg)!important;color:#fff;position:relative;isolation:isolate}
+body .u14::after{content:"";position:absolute;left:0;right:0;bottom:0;height:220px;background:var(--sky) center bottom/1440px 260px repeat-x;opacity:.06;pointer-events:none;z-index:-1}
+body .u14 h2,body .u14 .u14__eb{color:#fff!important}
+body .u14 p,body .u14 small,body .u14 span:not(.um-k){color:rgba(255,255,255,.72)}
+body .u14 b,body .u14 strong,body .u14 h3{color:#fff!important}
+body .u14 a{color:#fff}
+body .u14 img{background:#fff}
+body .u14 [class*="__lead"]{color:rgba(255,255,255,.72)!important}
+
+/* ---------- 5. 바닥글 = 남색 ---------- */
+body .ftr{background:var(--stg)!important;border-top:0!important;color:rgba(255,255,255,.7);position:relative;isolation:isolate;overflow:hidden}
+body .ftr::after{content:"";position:absolute;left:0;right:0;bottom:0;height:200px;background:var(--sky) center bottom/1440px 260px repeat-x;opacity:.05;pointer-events:none;z-index:-1}
+body .ftr a{color:rgba(255,255,255,.82)}
+body .ftr a:hover{color:#fff}
+body .ftr b,body .ftr h3{color:#fff!important}
+body .ftr__info{color:rgba(255,255,255,.6)!important}
+body .ftr [aria-hidden="true"]{color:rgba(255,255,255,.45)}
+body .ftr *{border-color:rgba(255,255,255,.12)!important}
+body .ftrB-ask{background:#fff;border-radius:16px;padding:18px 22px 18px 26px!important;position:relative;overflow:hidden;box-shadow:0 20px 50px -30px rgba(0,0,0,.6)}
+body .ftrB-ask::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(var(--g),var(--g-d))}
+body .ftrB-ask__label{color:var(--ink2)!important;font-weight:800!important;font-size:17px!important}
+body .ftrB-ask a{color:var(--nv1)}
+body .ftrB-ask .btn{background:var(--g-d)!important;border-color:var(--g-d)!important;color:#fff!important}
+body .ftr__logo{filter:brightness(0) invert(1);opacity:.95}
+body .ftr [class*="wm"],body .ftr__wm{color:rgba(255,255,255,.04)!important;-webkit-text-stroke:0}
+
+/* ---------- 6. 휴대폰 ---------- */
+@media (max-width:860px){
+  body .s6-top__bg{position:relative!important;inset:auto!important;width:auto!important;height:200px;margin:0 20px 24px;right:auto}
+  body .s6-top .wrap>*{max-width:none}
+  body .s6-top{display:flex;flex-direction:column-reverse;padding-block:28px 36px!important}
+  body .pstg{padding-block:22px 112px}
+  body .s6-ov>.wrap{margin-top:-88px}
+  body .s6-ov .s6-ov__grid{border-radius:16px;padding:14px}
+  body .s6-top__h::after,body .um-top h1::after,body .cs9-head h1::after,body .phero h1::after,body .pstg h1::after,body .c7-msg__q::after{width:40px;height:3px;margin-top:14px}
+  body .cs9-head h1,body .phero h1,body .pstg h1{font-size:clamp(28px,8vw,34px)!important}
+  body .ftrB-ask{padding:16px 16px 16px 20px!important}
+  body[data-hero="flow"] .hn ul{gap:10px!important}
+  body[data-hero="flow"] .hn li{border-radius:14px;padding-left:16px!important}
+}
+/* 33차 보충: 남은 '— 글자' 머리글도 초록 점으로 · 첫 화면 머리글도 같은 점 */
+body .pc__k,body .cs__kick,body .sv-kicker,body .um-k2,body .hl__k{display:inline-flex!important;align-items:center;gap:10px!important;font-size:14px!important;font-weight:800!important;color:var(--nv1)!important}
+body .pc__k::before,body .cs__kick::before,body .sv-kicker::before,body .um-k2::before,body .hl__k::before{content:""!important;flex:none;width:8px!important;height:8px!important;border-radius:50%;background:var(--g)!important;box-shadow:0 0 0 4px rgba(71,169,72,.18)}
+#hx .hxl .eb::before,#hx .hxh .eb::before{width:8px!important;height:8px!important;border-radius:50%;box-shadow:0 0 0 4px rgba(71,169,72,.22)}
+/* 문의 띠(c7-end)가 있는 쪽은 바닥글 문의 카드를 숨겨 같은 말을 두 번 하지 않는다 · 띠도 남색 무대 */
+body:has(.c7-end) .ftrB-ask{display:none!important}
+body .c7-end{background:var(--stg)!important;position:relative;isolation:isolate}
+body .c7-end .btn,body .c7-end a[class*="go"]{background:var(--g-d)!important;border-color:var(--g-d)!important;color:#fff!important}
+body .ftr{border-top:1px solid rgba(255,255,255,.08)!important}
+/* 33차: 회사 소개 숫자 띠 · 분야 끝 문의 띠도 같은 남색 무대, 인사말 따옴표 초록 */
+body .c7-facts{background:var(--stg)!important}
+body .c7-msg__t [class*="q"]::before,body .c7-msg__q::before{color:var(--g)!important}
+body:has(.s6-end) .ftrB-ask{display:none!important}
+body .s6-end{background:var(--stg)!important;position:relative;isolation:isolate}
+/* 사업분야 목록: 줄 → 흰 둥근 카드(번호 · 큰 사진 · 분야 이름) */
+body .finder__rows{border-top:0!important;display:grid;gap:14px;counter-reset:fd}
+body .finder__row{counter-increment:fd;grid-template-columns:200px minmax(0,1.1fr) minmax(0,1fr) 44px!important;padding:14px 22px 14px 14px!important;border:1px solid #e3e8ee!important;border-radius:18px;background:#fff;box-shadow:var(--shd);transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s,border-color .35s}
+body .finder__row:hover{background:#fff!important;transform:translateY(-3px);border-color:rgba(71,169,72,.55)!important;box-shadow:0 26px 50px -28px rgba(14,46,74,.5)}
+body .finder__th{border-radius:12px!important}
+body .finder__have{position:relative;padding-top:22px}
+body .finder__have::before{content:"STEP " counter(fd,decimal-leading-zero);position:absolute;top:0;left:0;font-size:11.5px;font-weight:800;letter-spacing:.12em;color:var(--g-d)}
+body .finder__have b{font-weight:800!important;font-size:17px!important;letter-spacing:-.02em}
+body .finder__do{font-weight:800!important;font-size:clamp(19px,1.6vw,23px)!important;letter-spacing:-.03em!important;color:var(--ink2)}
+body .finder__do small{display:inline-flex!important;margin-top:8px!important;padding:4px 10px;border-radius:999px;background:var(--g-l);color:#2a7d2c!important;font-weight:700!important}
+body .finder__arrow{width:44px;height:44px;border-radius:50%;background:#eef3f8;display:grid!important;place-items:center;color:var(--nv1)!important;transition:background .3s,color .3s}
+body .finder__row:hover .finder__arrow{background:var(--g-d);color:#fff!important}
+@media (max-width:860px){
+  body .finder__row{grid-template-columns:96px minmax(0,1fr) 32px!important;grid-template-areas:"th have ar" "th do ar";padding:10px 12px 10px 10px!important;gap:4px 14px!important;border-radius:14px}
+  body .finder__th{grid-area:th;align-self:stretch;aspect-ratio:auto!important}
+  body .finder__have{grid-area:have;padding-top:18px}
+  body .finder__do{grid-area:do;font-size:17px!important}
+  body .finder__do small{font-size:11px!important;padding:3px 8px}
+  body .finder__arrow{grid-area:ar;width:32px;height:32px}
+}
+/* 시안C 33차 보정 (2026-11-08, 이다결 님 "직접 고쳐 줘"): 남색이 된 바탕 위에서 안 보이던 글자색 3곳
+   — 분야 상세 끝 남색 띠의 분야 이름 · 바닥글 저작권 줄 · '맨 위로'. 색만 바꾸고 글 · 짜임은 그대로 */
+body .s6-end .s6-ch--on{color:var(--on-navy-sub)!important}
+body .ftr__bot{color:rgba(255,255,255,.6)}
+body .totop{color:rgba(255,255,255,.82)}
+body .totop:hover{color:#fff}
