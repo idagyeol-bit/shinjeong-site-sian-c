@@ -1397,7 +1397,8 @@ ${SERVICES.map((s) => `              <li><a href="${s.file}"${cur(s.id)}><b>${es
 ${nav}
   </nav>
   <div class="hdr__act">
-${VARIANT || (CFG.sian && CFG.sian.lang === false) ? '' : `    ${lang}\n`}${!VARIANT && CFG.look && CFG.look.enLite ? `    <a class="hdr__lang" href="en/index.html" hreflang="en" lang="en">ENG</a>   <!-- 시안B 34차: 축약 영문판(3쪽)으로 가는 소형 링크. 쪽별 대응이 없어 늘 영문 홈으로 -->\n` : ''}    <a class="hdr__cta" href="contact.html"${page === 'contact' ? ' aria-current="page"' : ''}>${CFG.common.headerCta} ${arrow(14)}</a>
+${VARIANT || (CFG.sian && CFG.sian.lang === false) ? '' : `    ${lang}\n`}${!VARIANT && CFG.look && CFG.look.enLite ? `    <a class="hdr__lang" href="en/index.html" hreflang="en" lang="en">ENG</a>   <!-- 시안B 34차: 축약 영문판(3쪽)으로 가는 소형 링크. 쪽별 대응이 없어 늘 영문 홈으로 -->\n` : ''}    <a class="hdr__tel" href="tel:${C.tel.replace(/-/g, '')}" aria-label="대표 전화 ${C.tel}"><small>대표 전화</small>${C.tel}</a>   <!-- 시안C 45차: 바로 전화하려는 손님 — 넓은 화면에서만(휴대폰은 아래 '전화 문의' 띠) -->
+    <a class="hdr__cta" href="contact.html"${page === 'contact' ? ' aria-current="page"' : ''}>${CFG.common.headerCta} ${arrow(14)}</a>
     <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="메뉴 열기"><i></i><i></i><i></i></button>
   </div>
 </header>
@@ -2873,7 +2874,8 @@ function heroFlow() {
   return `  <!-- ===== 히어로: 표어 + 일하는 순서 다섯 칸 (큰 틀 'flow', 시안C 27차) ===== -->
 <section class="hx" id="hx" aria-label="${esc(C.brand)} 소개"><svg class="hxsky" viewBox="0 0 1440 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M0 259.5H1440"/><path d="M60 259V170h120v89M60 170q60-22 120 0M70 200h100M70 230h100"/><path d="M200 259V150h150v109M200 150q75-26 150 0M210 185h130M210 220h130"/><path d="M420 259V60h26v199M415 60h36M415 110h36M415 160h36M415 210h36M433 60V30"/><path d="M480 259V95h20v164M476 95h28M476 140h28M476 185h28M490 95V70"/><path d="M540 259V120h52v139M540 160h52M540 200h52M566 120V96"/><path d="M620 259V200h300v59M620 225h300M650 200v59M710 200v59M770 200v59M830 200v59M890 200v59"/><path d="M955 259V40h10v219M960 40V20M950 30h20"/><path d="M1000 259V178h170v81M1000 178q85-26 170 0M1012 212h146M1012 240h146"/><path d="M1190 259V140h40v119M1184 140h52M1184 180h52M1184 220h52"/><path d="M1260 259V190h150v69M1260 190q75-20 150 0M1272 225h126"/><path d="M180 240h20M350 240h70M446 240h34M592 240h28M920 240h35M965 240h35M1170 240h20M1230 240h30" stroke-dasharray="3 4"/></g></svg><div class="wrap"><div class="hxh"><div class="hxl"><p class="eb" id="hxe">${t(f.eyebrow)}</p><h1 id="hxt" class="qt">${f.title.map((x, i) => `<span class="${i ? 'q2' : 'q1'}">${i ? '' : '<i class="qo" aria-hidden="true">“</i>'}${b(x)}${i === f.title.length - 1 ? '<i class="qc" aria-hidden="true">”</i>' : ''}</span>`).join('')}</h1></div>
 <div class="hxr2"><p class="lede"><span class="lw">${b(f.lede.pc)}</span><span class="lm">${b(f.lede.m)}</span>${b(f.lede.tail)}</p>
-<ul class="meta">${f.meta.map(([n, u, l]) => `<li><b>${t(n)}${u ? `<small>${t(u)}</small>` : ''}</b>${t(l)}</li>`).join('')}</ul></div></div>
+<ul class="meta">${f.meta.map(([n, u, l]) => `<li><b>${t(n)}${u ? `<small>${t(u)}</small>` : ''}</b>${t(l)}</li>`).join('')}</ul>
+<nav class="hxgo" aria-label="분야 바로 가기"><span class="hxgo__k">분야 바로 가기</span>${SERVICES.map((x) => `<a href="${x.file}">${esc(x.title)}</a>`).join('')}</nav></div></div>   <!-- 시안C 46차: 신정개발을 이미 아는 손님은 첫 화면에서 바로 자기 분야로 -->
 <div class="hsh"><b>${t(f.stripTitle)}</b><span class="hsp">${t(f.hintPc)}</span><span class="hsm">${t(f.hintM)}</span></div><ol class="hs" id="hs">${li}</ol>
 <div class="hxa"><div class="hxa__t"><b>${t(f.ask.title)}</b><span>${t(f.ask.sub)}</span></div><div class="hxa__l">${f.actions.map((a) => a.kind === 'btn' ? `<a class="hxa__btn" href="${esc(a.href)}">${t(a.label)} ${arrow(18)}</a>` : `<a class="hxa__i hxa__${a.kind}" href="${esc(a.kind === 'tel' ? 'tel:' + C.tel : a.href)}"${a.kind === 'pdf' ? ' target="_blank" rel="noopener"' : ''}><i aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${a.kind === 'tel' ? '<path d="M6.6 3.5h3l1.5 4.2-2 1.4a12 12 0 0 0 5.8 5.8l1.4-2 4.2 1.5v3a2 2 0 0 1-2.2 2A16.6 16.6 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z"/>' : '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 11v6M9.5 14.5 12 17l2.5-2.5"/>'}</svg></i><span><small>${t(a.small)}</small><b>${a.kind === 'tel' ? esc(C.tel) : t(a.label)}</b></span></a>`).join('')}</div></div><p class="hxn">${t(f.note)}</p></div></section>
 `;
@@ -2881,6 +2883,22 @@ function heroFlow() {
 FRAMES.hero.flow = heroFlow;
 
 /* 시안C 27차: 실제 현장 — 첫 화면 그림 순서를 실제 현장 사진 넷으로 잇는다(사진 · 이름은 FLOW.field, 글은 설정 home.copy.field) */
+/* 시안C 45차 (2026-11-09 이다결 님 요청 '잠깐 들러 필요한 것만 보고 가는 손님'): 첫 화면 바로 아래 '무엇을 확인하러 오셨나요?' —
+   손님이 실제로 묻는 질문 다섯 개 → 한 줄 답(사이트에 이미 있는 사실) → 그 답이 있는 쪽으로 바로. 새 사실 0. */
+const QUICK = [
+  { q: '우리 설비도 맡길 수 있나요?', a: '탱크 · Pond · 반응기 · 배관 · 하수관까지 다섯 분야를 작업합니다.', go: '사업분야 보기', href: 'services.html' },
+  { q: '로봇은 어떤 일을 하나요?', a: '작업자보다 먼저 설비 안에 들어가 위험 물질을 회수합니다.', go: '무인 솔루션 보기', href: 'unmanned.html' },
+  { q: '실제로 해 본 현장이 있나요?', a: '2020~2023년 수행 실적 170여 건, 4개 발주처와 4년 연속 단가계약.', go: '적용 사례 보기', href: 'cases.html' },
+  { q: '인증 · 특허를 확인하고 싶어요', a: '인증서 · 확인서 {certs}가지와 등록 특허 {patents}건을 원본으로 보여 드립니다.', go: '인증 · 특허 보기', href: 'company.html#credentials' },
+  { q: '바로 상담하고 싶어요', a: '설비 종류 · 일정 · 현장 위치를 알려 주시면 상담 시 안내해 드립니다.', go: '현장 문의', href: 'contact.html', tel: true }
+];
+HOME_SECTIONS.quick = () => {
+  const K = { certs: COMPANY17.certs.length, patents: COMPANY17.patents.length };   // 회사 소개 인증 · 특허와 같은 수
+  const li = QUICK.map((x) => `<li class="qk__i${x.tel ? ' qk__i--ask' : ''}"><a href="${x.href}"><b>${esc(x.q)}</b><span>${esc(x.a.replace('{certs}', K.certs).replace('{patents}', K.patents))}</span><em>${esc(x.go)} ${arrow(14)}</em></a>${x.tel ? `<p class="qk__tel">대표 전화 <b>${esc(C.tel)}</b></p>` : ''}</li>`).join('');
+  return `  <!-- ===== 무엇을 확인하러 오셨나요 (시안C 45차) ===== -->
+  <section class="qk" id="quick" aria-labelledby="qk-h"><div class="wrap"><h2 id="qk-h" class="qk__h">무엇을 확인하러 오셨나요?</h2><ol class="qk__l">${li}</ol></div></section>
+`;
+};
 HOME_SECTIONS.field = () => {
   const c = CFG.home.copy.field;
   const fig = FLOW.field.map(([id, name]) => { const p = P(id); return `<figure><img src="assets/photos/${p.id}-${p.sizes[p.sizes.length - 1]}.jpg" srcset="${p.sizes.map((w) => `assets/photos/${p.id}-${w}.jpg ${w}w`).join(', ')}" sizes="(max-width:820px) 80vw, 300px" width="${p.w}" height="${p.h}" alt="${esc(p.alt)}" loading="lazy" decoding="async"><figcaption><b>${esc(name)}</b>${esc(p.alt)}</figcaption></figure>`; }).join('');
@@ -3180,6 +3198,7 @@ SERVICES.forEach((s, idx) => {
     const robots = v15.gear.filter((g) => g[0] === 'robot');
     const spec = [['주요 장비', s.equip.map(esc).join(' · ')]]
       .concat(s.worktime ? [['작업 시기', esc(s.worktime)]] : [])
+      .concat(FLOW.rec[s.id] ? [['수행 실적', `<a href="cases.html#${s.id.toLowerCase()}">${esc(FLOW.rec[s.id])}</a>`]] : [])   // 46차: 분야 첫 카드에서 바로 실적까지(적용 사례와 같은 숫자)
       .concat([['투입 로봇', robots.length ? robots.map((g) => `<a href="${g[4]}">${svc15Ic('bot', 15)}${esc(g[1])}</a>`).join(' · ') : '—']])
       .concat(s.id === 'S04' ? [['회수 뒤', '데칸타·필터프레스로 탈수해 처리량을 줄입니다']] : [])
       .concat([['문의 시', s.inquiryHint.map(esc).join(' · ')]]);
@@ -4630,8 +4649,8 @@ ${contactSlim() ? '' : `        <div class="ct-guide" data-reveal data-delay="90
       </div>
     </div>
   </section>
-${contactSlim() ? '' : `
-  <!-- 03 자주 묻는 질문 -->
+${contactSlim() && !(CFG.look && CFG.look.contactFaq) ? '' : `
+  <!-- 03 자주 묻는 질문 (시안C 45차: look.contactFaq 이면 슬림 문의 쪽에도 — 문의 전에 손님이 스스로 확인) -->
   <section class="section">
     <div class="wrap">
       <div class="head">
