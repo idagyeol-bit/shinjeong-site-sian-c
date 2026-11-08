@@ -5261,3 +5261,46 @@ body .cs9 [id^="s0"],body main section[id^="s0"],body .s6-st{scroll-margin-top:c
 .s6-scene__go{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;min-height:44px;font-size:14.5px;font-weight:800;color:#fff;border-bottom:2px solid rgba(255,255,255,.5)}
 .s6-scene__go:hover{border-color:#fff}
 @media (max-width:860px){.s6-scene{grid-template-columns:1fr;padding:12px 12px 16px}.s6-scene__t{padding:0 4px}}
+
+/* ===== 시안C 45차 (2026-11-09): 잠깐 들른 손님이 바로 찾게 — 메인 '무엇을 확인하러 오셨나요?' · 머리말 대표 전화 · 문의 쪽 자주 묻는 질문 ===== */
+.qk{padding-block:clamp(40px,4.4vw,64px) clamp(8px,1vw,16px);background:#fff}
+.qk__h{display:flex;align-items:center;gap:10px;margin:0 0 18px;font-size:clamp(20px,1.8vw,24px);font-weight:800;letter-spacing:-.03em;color:var(--ink2,#121820)}
+.qk__h::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--g);box-shadow:0 0 0 4px rgba(71,169,72,.18)}
+.qk__l{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.qk__i{display:flex;flex-direction:column;border:1px solid #e3e8ee;border-radius:var(--rd,14px);background:#fff;box-shadow:var(--shd);transition:transform .25s,border-color .25s,box-shadow .25s}
+.qk__i:hover{transform:translateY(-3px);border-color:rgba(71,169,72,.55);box-shadow:0 22px 44px -28px rgba(14,46,74,.5)}
+.qk__i>a{flex:1;display:flex;flex-direction:column;gap:8px;padding:20px 20px 18px;color:inherit}
+.qk__i b{font-size:17px;font-weight:800;line-height:1.4;letter-spacing:-.025em;color:var(--ink2,#121820)}
+.qk__i span{font-size:14px;line-height:1.6;color:#5a646d}
+.qk__i em{margin-top:auto;padding-top:6px;display:inline-flex;align-items:center;gap:5px;font-style:normal;font-size:14px;font-weight:800;color:#2a7d2c}
+.qk__i--ask{background:var(--stg);border-color:transparent}
+.qk__i--ask b{color:#fff}.qk__i--ask span{color:rgba(255,255,255,.76)}.qk__i--ask em{color:#8fd88f}
+.qk__tel{margin:0;padding:0 20px 18px;font-size:13px;color:rgba(255,255,255,.7)}
+.qk__tel b{display:block;font-size:20px;font-weight:800;color:#fff;letter-spacing:-.01em;font-variant-numeric:tabular-nums;user-select:all}
+@media (max-width:1100px){.qk__l{grid-template-columns:repeat(2,minmax(0,1fr))}.qk__i--ask{grid-column:1/-1}}
+@media (max-width:860px){
+  .qk{padding-block:32px 4px}
+  .qk__l{grid-template-columns:1fr;gap:8px}
+  .qk__i>a{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"q go" "a go";gap:4px 12px;padding:15px 16px;align-items:center}
+  .qk__i b{grid-area:q;font-size:16px}.qk__i span{grid-area:a;font-size:13.5px}
+  .qk__i em{grid-area:go;margin:0;padding:0;font-size:0;width:36px;height:36px;border-radius:50%;justify-content:center;background:var(--g-l,#e8f4e8)}
+  .qk__i em svg{width:16px;height:16px}
+  .qk__i--ask em{background:rgba(255,255,255,.14)}
+  .qk__tel{padding:0 16px 14px}
+}
+/* 머리말 대표 전화 — 넓은 화면에서만 */
+.hdr__tel{display:none}
+@media (min-width:1280px){.hdr__tel{display:inline-flex;flex-direction:column;align-items:flex-end;margin-right:14px;line-height:1.2;font-size:17px;font-weight:800;color:var(--nv1,#0e2e4a);font-variant-numeric:tabular-nums;letter-spacing:-.01em}.hdr__tel small{font-size:12px;font-weight:700;color:#6b7580}}
+
+/* ===== 시안C 46차 (2026-11-09): 처음 온 손님 · 이미 아는 손님 둘 다 — 첫 화면 '분야 바로 가기' · 분야 첫 카드 '수행 실적' ===== */
+#hx .hxgo{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14)}
+#hx .hxgo__k{margin-right:4px;font-size:13px;font-weight:800;color:#8fd88f;letter-spacing:.01em}
+#hx .hxgo a{display:inline-flex;align-items:center;min-height:38px;padding:0 14px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.06);color:#fff;font-size:14px;font-weight:700;transition:background .2s,border-color .2s}
+#hx .hxgo a:hover{background:#fff;color:var(--nv1,#0e2e4a);border-color:#fff}
+@media (max-width:860px){
+  #hx .hxr2,#hx .hxh{min-width:0}
+  #hx .hxgo{flex-wrap:nowrap;overflow-x:auto;max-width:calc(100vw - 0px);margin:18px -24px 0;padding:16px 24px 2px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}
+  #hx .hxgo::-webkit-scrollbar{display:none}
+  #hx .hxgo a{flex:none;min-height:42px}
+  #hx .hxgo__k{flex:none}
+}
