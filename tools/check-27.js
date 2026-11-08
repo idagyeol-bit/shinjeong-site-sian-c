@@ -32,7 +32,7 @@ function size(file) {
 const h = read('index.html');
 const main = h.slice(h.indexOf('<main'), h.indexOf('</main>'));
 const ids = [...main.matchAll(/<section([^>]*)>/g)].map((m) => (m[1].match(/\bid="([^"]+)"/) || m[1].match(/class="([\w-]+)/) || [])[1]);
-ok(ids.join(',') === 'hx,hn,what,field,unmanned,company', `메인 구역 순서 hx,hn,what,field,unmanned,company (지금: ${ids.join(',')})`);
+ok(ids.join(',') === 'hx,hn,what,field,unmanned,news,company', `메인 구역 순서 hx,hn,what,field,unmanned,news,company (지금: ${ids.join(',')})`);
 ok(/<body[^>]*data-hero="flow"/.test(h), "body data-hero=\"flow\"");
 ok(!/class="h3d"|hero-story\.js|class="why2"|id="how"/.test(h), '3D 첫 화면 · 왜 로봇인가 · 어떻게 일하나 없음');
 ok(/<script src="js\/hero-flow\.js\?v=/.test(h), 'js/hero-flow.js 연결');
