@@ -4814,3 +4814,43 @@ body[data-hero="flow"] .hn a:hover span svg{opacity:1;transform:translateX(3px)}
   #hx .hsh .hsm::before{content:"↔ ";color:var(--g,#47a948);font-weight:800}
 }
 @media (max-width:820px) and (prefers-reduced-motion:reduce){#hx .hs>li{transition:none}#hx .hsd button i{transition:none}}
+
+/* ===== 시안C 31차 (2026-11-08): 노트북 · PC 다섯 칸이 부드럽게 열리게 =====
+   버벅임 원인: 칸이 넓어질 때 그림 비율 · 줄 높이 · 글 줄바꿈이 함께 바뀌어 매 순간 다시 그리고, 그림이 커졌다 작아졌다 하며 덜컥거렸다.
+   - 줄 높이 고정: 그림 높이(--phH) · 글 칸 높이(--txH)를 처음에 한 번 재서 고정 → 칸이 열려도 아래 문의 카드가 움직이지 않는다
+   - 그림 크기 고정: 그림 · 영상은 '펼친 칸 너비(--aw)'로 늘 같은 크기, 칸은 창문처럼 가운데를 넓게 보여 줄 뿐 → 그림을 다시 늘리지 않는다
+   - 접힌 칸 그림(t*)도 접힌 너비(--cw) 고정, 열리면 천천히 사라지고 큰 그림이 드러난다
+   - 설명 · 효과는 자리를 차지한 채 투명도만 바뀐다(칸이 거의 열린 뒤 나타남) · 제목 크기 변화도 부드럽게
+   - 마우스가 지나가기만 하면 열리지 않게(0.14초 머문 뒤 열림) · 영상은 칸이 열린 뒤에 재생 (js/hero-flow.js) */
+@media (min-width:821px){
+  #hx .hs.sm{height:auto!important;align-items:flex-start!important}
+  #hx .hs.sm>li{display:block!important;flex:1 1 0!important;flex-grow:1!important;transition:flex-grow .72s cubic-bezier(.33,0,.15,1)!important;contain:layout style}
+  #hx .hs.sm>li.on{flex-grow:2.9!important}
+  #hx .hs.sm .sb{display:block!important;height:auto!important;min-height:0!important}
+  #hx .hs.sm .ph,#hx .hs.sm li.on .ph{display:block;flex:none!important;height:var(--phH)!important;min-height:0!important;aspect-ratio:auto!important}
+  #hx .hs.sm .ph img,#hx .hs.sm .ph .vd{inset:auto!important;top:0!important;left:50%!important;width:var(--aw)!important;max-width:none!important;height:100%!important;transform:translate3d(-50%,0,0);backface-visibility:hidden}
+  #hx .hs.sm .ph img.th{width:var(--cw)!important;transition:opacity .55s ease!important}
+  #hx .hs.sm .ph img.fa{transition:opacity .7s ease!important}
+  #hx .hs.sm .ph .vd{transition:opacity .5s ease!important}
+  #hx .hs.sm .tx{height:var(--txH)!important;min-height:0!important;overflow:hidden;box-sizing:border-box}
+  #hx .hs.sm .tx>*{max-width:none}
+  #hx .hs.sm li:not(.on) .tx>em,#hx .hs.sm li:not(.on) .tx>b,#hx .hs.sm li:not(.on) .tx>.tg{width:calc(var(--cw) - 36px)}
+  #hx .hs.sm .tx>.ds,#hx .hs.sm .tx>.ef,#hx .hs.sm li.on .tx>b{width:calc(var(--aw) - 36px)}
+  #hx .hs.sm .tx b{transition:font-size .5s cubic-bezier(.33,0,.15,1)}
+  #hx .hs.sm .ds,#hx .hs.sm li.on .ds{display:block!important;max-height:none!important;opacity:0!important;transition:opacity .18s ease!important}
+  #hx .hs.sm .ef{display:inline-flex!important;opacity:0;transition:opacity .18s ease}
+  #hx .hs.sm li:not(.on) .ef{position:absolute;visibility:hidden}
+  #hx .hs.sm li.on .ds{opacity:1!important;transition:opacity .5s ease .34s!important}
+  #hx .hs.sm li.on .ef{opacity:1;transition:opacity .5s ease .42s}
+  #hx .hs.sm li:not(.on) .sb:hover{transform:none}
+  #hx .hs.sm li:not(.on) .sb:hover .ph img.th{transform:translate3d(-50%,0,0) scale(1.03)}
+  #hx .hs.sm .ph img.th{transition:opacity .55s ease,transform .5s ease!important}
+  #hx .hs.hsmx{position:absolute!important;left:-99999px!important;top:0;visibility:hidden;pointer-events:none;display:block!important}
+  #hx .hs.hsmx>li{display:block!important}
+  #hx .hs.hsmx .tx{height:auto!important;overflow:visible}
+}
+@media (min-width:821px) and (prefers-reduced-motion:reduce){#hx .hs.sm>li{transition:none!important}#hx .hs.sm .ds,#hx .hs.sm .ef,#hx .hs.sm .tx b{transition:none!important}}
+/* 31차: 펼친 칸은 영상 첫 장면(p1~p5)을 먼저 보여 주고, 영상은 같은 장면 위로 겹쳐 나타난다(두 그림이 어긋나 겹쳐 보이지 않게) */
+#hx .ph img.po{transition:opacity .55s ease}
+#hx .hs li.on .ph img.po{opacity:1}
+@media (prefers-reduced-motion:reduce){#hx .hs li.on .ph img.po{opacity:0}}

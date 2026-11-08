@@ -100,7 +100,7 @@ module.exports = {
       items: [   // 시안C 23차: 꼬리표(label) 없이 숫자만. {projects} = 수행 실적(PROJECT_SUMMARY), {gensN} · {patentsAllN} = 세대 수 · 전체 등록 특허 수(숫자)
         { label: '', big: '4년 연속', small: '4개 발주처 단가계약 · 2020~2023', href: 'cases.html' },        // ① 39·42·44·46쪽 2020~2023 같은 발주처 4곳 단가계약(적용 사례 머리와 같은 말)
         { label: '', big: '{projects}', small: '수행 실적 · 2020~2023', href: 'cases.html' },                 // ① 2020~2023 실적표 170여 건
-        { label: '', big: '1~{gensN}세대', small: '무인 Vacuum 로봇', href: 'unmanned.html#r-vacuum' },      // ② 7쪽 1~5세대 (22차 라인업 이름)
+        { label: '', big: '1~{gensN}세대', small: '무인 Vacuum 로봇', href: 'unmanned.html#r-vacuum' },      // ② 6쪽 1~5세대 (22차 라인업 이름)
         { label: '', big: '{patentsAllN}건', small: '등록 특허 · 특허증 원본', href: 'company.html#credentials' }   // ① 28~29쪽 특허증 8장
       ]
     },
@@ -124,12 +124,12 @@ module.exports = {
        칸 문장(사실)은 tools/build.js FLOW.steps, 그림 · 영상은 assets/hero-flow/. **굵게** = 굵은 글자. {founded} {lab} {gensN} {patentsN} = 생성기가 자료에서 채우는 숫자
        lede.pc = 노트북 앞 문장 · lede.m = 휴대폰 앞 문장(줄 수를 줄인 판) · lede.tail = 둘이 함께 쓰는 뒤 문장. actions: main = 남색 단추 · tel = 대표 전화 · cls 'qtel' 'qpdf' = 휴대폰에서 숨김(아래 고정 문의 띠와 겹침) */
     flow: {
-      eyebrow: '{founded}년부터, 산업설비 클리닝 한 길',
+      eyebrow: '{founded}년 설립 · 산업설비 클리닝 전문기업',   // 32차: '1992년부터 … 한 길'은 근거 없음(연혁 1992 = 신학상사 설립) → 설립 연도만
       title: ['사람이 없는 곳에', '**인명 사고**도 없다'],   // 표어 — 회사소개서(2024) 32쪽 · 기술소개서(2025) 4쪽. 따옴표(“ ”)는 생성기가 붙인다 · **굵게** = 초록 밑줄 강조 (28차)
       lede: {
-        pc: '{founded}년부터 석유화학 · 정유 플랜트의 탱크와 반응기를 클리닝해 왔습니다. {lab}년 기업부설연구소를 설립해 ',
-        m: '{founded}년부터 플랜트 설비를 클리닝해 온 신정개발은 {lab}년 기업부설연구소에서 ',
-        tail: '**무인 로봇을 자체 개발**했고, 지금은 그 로봇이 **작업자보다 먼저 설비에 투입됩니다.**'   // '자체 개발' = 이다결 님 지시(2026-11-07), 삼촌 확인 전
+        pc: '석유화학 · 정유 플랜트의 탱크와 반응기를 클리닝합니다. {lab}년 기업부설연구소를 설립했고, ',
+        m: '플랜트 설비를 클리닝하는 신정개발은 {lab}년 기업부설연구소를 설립했고, ',
+        tail: '**무인 로봇을 자체 개발**해 지금은 그 로봇이 **작업자보다 먼저 설비에 투입됩니다.**'   // '자체 개발' = 이다결 님 지시(2026-11-07), 삼촌 확인 전
       },
       meta: [['{founded}', '', '설립'], ['{lab}', '', '기업부설연구소 설립'], ['1~{gensN}', '세대', '자체 개발 무인 로봇'], ['{patentsN}', '건', '등록 특허']],
       stripTitle: '신정개발이 일하는 순서',
@@ -142,7 +142,7 @@ module.exports = {
         { kind: 'pdf', small: '자료 받기', label: '기술소개서 PDF', href: 'assets/docs/shinjeong-robot-cleaning-system-2025-public.pdf' },
         { kind: 'btn', label: '현장 문의', href: 'contact.html' }
       ],
-      note: '※ 연출 그림 · 작업 순서는 기술소개서(2025) 19쪽'
+      note: '※ 연출 그림 · 작업 순서는 기술소개서(2025) 18쪽'
     },
     story: {
       steps: ['System 설치', '1차 Washing', '내부 Cleaning', '2차 Washing', 'Final Cleaning', '폐기물 처리'],
@@ -150,7 +150,7 @@ module.exports = {
       model: 'assets/models/robot5-hero.glb', human: 'assets/models/xbot.glb', hdr: 'assets/hdr/quarry_01_1k.hdr',
       pipLabel: 'CCTV · 로봇 전면 카메라', fast: '빠르게 보기 ▸▸',
       quote: '“사람이 없는 곳에 인명 사고도 없다.”', quoteSrc: '— 신정개발 기술소개서(2025)',
-      note: '※ 3D 연출 장면 · 작업 순서는 기술소개서(2025) 19쪽'
+      note: '※ 3D 연출 장면 · 작업 순서는 기술소개서(2025) 18쪽'
     },
     /* 시안C 12차 (2026-10-29 이다결 님 결정): 큰 틀 'lines' 첫 화면 — 장면마다 세 줄(1줄 증거 · 2줄 이어짐 · 3줄 결론), 7초마다 바뀐다.
        name = 아래 이름표 · photo = 사진 번호(사진 목록에 있는 것만) · pos·posM = PC·휴대폰에서 보일 사진 부분(가로% 세로%)
@@ -165,7 +165,7 @@ module.exports = {
       { name: '안전', photo: 'W03', pos: '50% 45%', posM: '50% 50%',
         lines: ['현장마다 <b>안전</b>을 지키고,', '고객을 <b>배려</b>하며,', '내일의 <b>희망</b>을 만듭니다.'] },     // 근거: ① 7쪽 핵심가치 '안전 / 배려 / 희망'
       { name: '로봇', photo: 'AI10', pos: '50% 50%', posM: '42% 50%', mark: '※ 연출 이미지',
-        lines: ['<b>{gens} 세대</b>의 무인 로봇이', '작업자보다 먼저', '위험한 설비 안에 들어갑니다.'] },        // 근거: ② 7쪽 1~5세대 · ② 5쪽 개발 목적 '작업자 투입 전 유해물질 사전 제거'
+        lines: ['<b>{gens} 세대</b>의 무인 로봇이', '작업자보다 먼저', '위험한 설비 안에 들어갑니다.'] },        // 근거: ② 6쪽 1~5세대 · ② 5쪽 개발 목적 '작업자 투입 전 유해물질 사전 제거'
       { name: '미래', photo: 'AI01', fit: 'right', posM: '82% 50%', mark: '※ 3D 그림',
         lines: ['등록 특허 <b>{patents} 건</b>,', '멈추지 않는 연구개발로', 'Cleaning 최고의 기업이 되겠습니다.'] }  // 근거: ② 6쪽 등록 특허 5건 · ① 5쪽 인사말 제목 '변함없는 노력과 연구개발로 Cleaning분야의 최고의 기업이 되겠습니다'
     ],
