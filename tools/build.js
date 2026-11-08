@@ -1028,6 +1028,16 @@ const NEWS2 = [
     head: '우리 이웃들을 하나로 잇는 발이 되어 줄께요',   // 원문 제목은 큰따옴표로 감싼 문장 — 카드가 따옴표를 달아 준다
     press: [['남해안신문', 'https://www.nhanews.com/news/articleView.html?idxno=78930', '2023.02.10']] }
 ];
+/* 시안C 44차: 메인 첫 화면의 연출 그림 · 영상을 맞는 분야 상세 '작업 방식' 첫머리에 한 장면씩 잇는다(메인과 다른 쪽이 한 사이트로 읽히게).
+   그림 · 영상 파일은 27~31차 그대로(다시 그리거나 크기를 바꾸지 않음) · '※ 연출 그림' 고지를 단다. 화학세정 · 관로 조사는 맞는 장면이 없어 넣지 않는다 */
+const FLOW_SCENE = { S01: 2, S02: 1, S04: 4 };   // 분야 → FLOW.steps 번호(0부터): 설비 클리닝 = 03 로봇이 먼저 들어가 회수 · 촉매 = 02 설비에 맞는 로봇 투입 · 준설 = 05 회수물 처리
+function flowScene(id) {
+  const k = FLOW_SCENE[id]; if (k == null) return '';
+  const st = FLOW.steps[k], n = k + 1;
+  const d = esc(st.desc).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  return `<div class="s6-scene"><figure class="s6-scene__m"><video muted playsinline loop preload="none" poster="assets/hero-flow/p${n}.webp" src="assets/hero-flow/v${n}.mp4" width="1000" height="590" data-scene aria-hidden="true"></video><figcaption>※ 작업 순서를 쉽게 보여 드리기 위한 연출 그림입니다.</figcaption></figure>
+      <div class="s6-scene__t"><p class="s6-scene__k">작업 장면</p><h3>${esc(st.title)}</h3><p>${d}</p><p class="s6-scene__ef">${esc(st.eff)}</p><a class="s6-scene__go" href="index.html#hs">작업 장면 모두 보기 ${arrow(14)}</a></div></div>`;
+}
 const PROJ_TAB_ORDER = ['S01', 'S02', 'S04', 'S03', 'S05'];   // 실적이 많은 분야부터
 
 /* ===================== 시안C 13차: 적용 사례 (2026-10-31 이다결 님 결정) =====================
@@ -3217,6 +3227,7 @@ ${lnb}
   <div class="s6-view" id="v-how" data-view="how">
   <section class="s6-sec s6-sec--how" id="sv-how"><div class="wrap">
     ${ch('작업 방식')}<h2 class="s6-h2">${esc(v.howT)}</h2><p class="s6-lead">${esc(v.howS)}</p>
+    ${flowScene(s.id)}
     <ol class="s6-sts" style="--c:${steps.length === 4 ? 4 : 3}">${stepHtml}</ol>
     ${v.dew ? `<div class="s6-eff"><b>탈수 효과</b>${PROCESS.dewaterEffect.map((x) => `<span>${svc15Ic('check', 16)}${esc(x)}</span>`).join('')}</div>` : ''}
     <p class="us-src">${esc(v.stepsSrc)}</p>${exHtml}
@@ -4427,7 +4438,7 @@ pages['company.html'] = () => {
     <p class="us-src">회사소개서(2024) 6쪽 연혁</p>
   </div></section>
 ` + split('overview', '하는 일', 'r', fig(K.photos.overview), `${kick('하는 일')}<h2 class="c7-h2">산업설비와 환경시설을 다루는<br>다섯 가지 업무</h2>
-      <p class="c7-lead">설비 유지보수, 촉매·충진물 작업, 준설과 시설 조사·보수를 해 왔습니다. 분야를 누르면 작업 방식과 장비를 볼 수 있습니다.</p>
+      <p class="c7-lead">설비 유지보수, 촉매·충진물 작업, 준설과 시설 조사·보수를 해 왔습니다. 분야마다 작업 방식과 장비를 소개합니다.</p>
       <ul class="c7-sv">${svl}</ul>
       <a class="c7-rec" href="cases.html"><span><small>수행 실적</small><b>2020~2023년 ${PROJECT_SUMMARY.n}${PROJECT_SUMMARY.unit}</b></span><em>적용 사례 보기 ${arrow(14)}</em></a>
       <h3 class="c7-h3">회사 자료</h3>
@@ -4437,7 +4448,7 @@ pages['company.html'] = () => {
   </div>
   <div class="c7-view" id="v-cred" data-view="cred">
   <section class="c7-sec c7-sec--full" id="credentials" aria-label="인증 · 특허"><div class="wrap">
-    <div class="c7-fh"><div>${kick('인증 · 특허')}<h2 class="c7-h2">인증서와 특허증,<br>원본으로 확인하세요</h2></div><p class="c7-lead">회사소개서(2024)에 실린 인증서 ${K.certs.length}가지와 등록 특허 ${K.patents.length}건입니다. 옆으로 넘기고, 누르면 크게 볼 수 있습니다.</p></div>
+    <div class="c7-fh"><div>${kick('인증 · 특허')}<h2 class="c7-h2">인증서와 특허증,<br>원본으로 확인하세요</h2></div><p class="c7-lead">인증서 · 확인서 ${K.certs.length}가지와 등록 특허 ${K.patents.length}건을 원본 그대로 보여 드립니다.</p></div>
     ${rail('인증서', K.certs.length, '품질 · 환경 · 안전보건 · 기업 인증', cg, '인증서')}
     ${rail('특허증', K.patents.length, '등록 8건 · 이 밖에 출원 4건', pg, '특허증')}
     <p class="us-src">회사소개서(2024) 26~29쪽 · 인증서 사진은 2024년 자료 그대로이며, 유효 기간과 갱신 여부는 상담 시 안내합니다 · 대표자 이름과 발명자 개인 정보는 가렸습니다.</p>
@@ -4460,7 +4471,7 @@ pages['company.html'] = () => {
       <h3 class="c7-h3">보유 기술자격 <small>${CREDS.qualFields.length}개 분야</small></h3>
       <ul class="c7-q">${CREDS.quals.map((q, i) => `<li><b>${esc(CREDS.qualFields[i])}</b><span>${esc(q)}</span></li>`).join('')}</ul>
       <p class="us-src">회사소개서(2024) 7쪽 조직도 · 18쪽 기술자격 · 27쪽 인정서 · 확인서</p>`, false) + split('equipment', '보유 장비', 'r', fig(K.photos.equipment), `${kick('보유 장비')}<h2 class="c7-h2">분야마다 쓰는 장비를<br>갖추고 있습니다</h2>
-      <p class="c7-lead">분야를 누르면 그 분야 페이지의 장비표(규격 · 용도 · 보유 대수)로 갑니다.</p>
+      <p class="c7-lead">분야별 장비의 규격 · 용도 · 보유 대수는 각 분야 페이지에서 보실 수 있습니다.</p>
       <ul class="c7-eq">${eqRows}</ul>
       <h3 class="c7-h3">공통 장비 <small>운반 · 지원</small></h3>
       <table class="c7-eqt"><thead><tr><th scope="col">장비</th><th scope="col">규격</th><th scope="col">용도</th><th scope="col">보유</th></tr></thead><tbody>${cmRows}</tbody></table>
@@ -4975,7 +4986,31 @@ if (ONLY_AT >= 0 && !ONLY) { console.error('시안 이름을 함께 적어 주�
 checkConfig();
 const tokens = tokensCss();
 const pageHtml = {};
-Object.keys(pages).forEach((file) => { pageHtml[file] = pages[file](); });
+/* 시안C 44차 (2026-11-09 이다결 님 요청 '한 단계 더'): 화면 속 근거 쪽 번호를 걷어 내고(손님에게 하는 말), 바닥글 한 줄로 모은다.
+   근거 자료는 이 파일의 자료 주석에 그대로 있다. 손님에게 필요한 안내(상담 시 안내 · 문의 시 안내 · 가린 정보 · 출원 · 공개용 파일 · 링크)는 남긴다. */
+const SRC_CLS = /^(us-src|rl-src|csd__src|cs9-head__src|c7-facts__src)\b/;
+const SRC_KEEP = /안내합니다|안내해 드립니다|적지 않습니다|가렸습니다|출원|뺀 파일|있습니다|<a\b/;
+const SRC_CITE = /쪽|^출처|회사소개서|기술소개서|①|②|PROCESS|글 그대로|실적표|장소가 적힌/;
+function custVoice(html) {
+  html = html.replace(/<p class="([^"]*)"([^>]*)>([\s\S]*?)<\/p>/g, (all, cls, rest, inner) => {
+    if (!SRC_CLS.test(cls) || /nw4-src/.test(cls)) return all;
+    const segs = [];   // ' · ' · ' — ' 로 나누되 괄호 안은 나누지 않는다
+    { let d = 0, cur = ''; const t = inner.replace(/^\s*출처:\s*/, '');
+      for (let i = 0; i < t.length; i++) { const ch = t[i]; if (ch === '(') d++; if (ch === ')') d--;
+        if (d === 0 && (t.startsWith(' · ', i) || t.startsWith(' — ', i))) { segs.push(cur.trim()); cur = ''; i += 2; continue; } cur += ch; }
+      if (cur.trim()) segs.push(cur.trim()); }
+    const keep = segs.filter((x) => SRC_KEEP.test(x) || (!SRC_CITE.test(x.replace(/<[^>]+>/g, '')) && x.replace(/<[^>]+>/g, '').length >= 8)).map((x) => x.replace('발주처 이름은 적지 않습니다', '발주처 이름은 공개하지 않습니다'));
+    if (!keep.length) return '';
+    return `<p class="${cls} src-note"${rest}>${keep.join(' · ')}</p>`;
+  });
+  html = html.replace(/<small>((?:①|②|회사소개서|기술소개서)[^<]*?\d+(?:~\d+)?쪽)<\/small>/g, '');   // 칸 속 쪽 번호(①36쪽 · 기술소개서(2025) 6쪽 등). 'PDF · 24쪽' 같은 파일 정보는 남김
+  html = html.replace(/ — 기술소개서\(2025\) \d+쪽의 구성/g, '');
+  html = html.replace('<p class="s6-lead">회사소개서(2024) 9쪽 주요사업 안내 — 원문 표기를 함께 적음</p>', '<p class="s6-lead">신정개발이 화학세정하는 설비입니다.</p>');
+  html = html.replace('<p class="s6-lead">Robot-Tank Cleaning System — 기술소개서(2025) 18쪽의 6단계 그대로</p>', '<p class="s6-lead">Robot-Tank Cleaning System, 여섯 단계로 작업합니다.</p>');
+  html = html.replace('<div class="ftr__bot">', '<div class="ftr__bot"><p class="ftr__basis">회사 정보 · 실적 · 장비 · 인증 내용은 신정개발 회사소개서(2024) · 기술소개서(2025)를 기준으로 합니다.</p>');
+  return html;
+}
+Object.keys(pages).forEach((file) => { pageHtml[file] = custVoice(pages[file]()); });
 
 /* 2) 시안마다 설정 확인 → 디자인 토큰 → 페이지 12쪽 (아직 쓰지 않는다). 하나라도 틀리면 여기서 멈추고 아무 파일도 쓰지 않는다 */
 const variantOut = loadVariants(ONLY).map((v) => {
