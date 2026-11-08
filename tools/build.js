@@ -898,11 +898,11 @@ const WHY_PAIR = [
 ];
 /* 시안C 10차: 메인 무인 솔루션 — 로봇이 하는 일. fn=기능 배지, job=하는 일(굵게), name=로봇 이름(작게). 글자 근거: ② 6·7·9·10·11쪽, ① 22쪽 */
 const UNMANNED_BOTS = [
-  { photo: 'W05', fn: '흡입', job: '탱크 · Pond 바닥의 위험 물질을 빨아들입니다', name: '흡입 로봇', href: 'unmanned.html#r-suction' },
-  { photo: 'W06', fn: '파쇄', job: '굳은 슬러지 · 충진물을 부숴서 회수합니다', name: '파쇄형 로봇', href: 'unmanned.html#r-crusher' },
+  { photo: 'W05', fn: '흡입', job: '탱크 · Pond 바닥의 위험 물질을 빨아들입니다', name: '흡입 로봇', href: 'unmanned.html#r-vacuum' },
+  { photo: 'W06', fn: '파쇄', job: '굳은 슬러지 · 충진물을 부숴서 회수합니다', name: '파쇄형 로봇', href: 'unmanned.html#r-vacuum' },
   { photo: 'X01', fn: '퇴적물 처리', job: 'Pond · 배수로 바닥에 쌓인 것을 치웁니다', name: '무인 로더', href: 'unmanned.html#r-loader', fit: true },
   { photo: 'X03', fn: '고압 세척', job: '좁은 공간을 고압수로 씻어 냅니다', name: '무인 Jet Cleaner', href: 'unmanned.html#r-jet', fit: true },
-  { photo: 'R42', fn: '관로 조사', job: '하수관 안을 카메라로 조사합니다', name: '관로 CCTV 로봇', href: 'unmanned.html#r-cctv' }
+  { photo: 'R42', fn: '관로 조사', job: '하수관 안을 카메라로 조사합니다', name: '관로 CCTV 로봇', href: 'unmanned.html#with' }
 ];
 /* ===================== 시안C 14차: 무인 솔루션 (2026-10-31 이다결 님 결정) =====================
    메인 '무인 솔루션' 구역(HOME_SECTIONS.unmanned14)과 무인 솔루션 페이지(unmanned.html)가 함께 쓰는 자료.
@@ -1030,18 +1030,18 @@ const caseRobotTotal = () => CASES.reduce((a, c) => a + Math.max(0, c.robot), 0)
    how = '어떻게 하나요' 칸 종류. case = 적용 사례 분야(cases.html#…). gallery = 현장 사진 [사진, 설명(보이는 것만)] — B01~B12 는 회사소개서(2024) 10~14쪽 주요사업 안내에 회사가 그 업무로 넣은 사진 */
 const SVC15 = {
   S01: { en: 'EQUIPMENT CLEANING', head: 'W09', how: 'tank', case: 's01',
-    gear: [['robot', '흡입 로봇', 'W05', '보유 장비표: 무인준설로봇 흡입형', 'unmanned.html#r-suction'], ['eq', '진공흡입차', 'W07', '산업설비 현장의 진공흡입차', null], ['eq', '제어 차량', 'R07', '차량의 모니터·제어 장치와 조작자', null]],
+    gear: [['robot', '흡입 로봇', 'W05', '보유 장비표: 무인준설로봇 흡입형', 'unmanned.html#r-vacuum'], ['eq', '진공흡입차', 'W07', '산업설비 현장의 진공흡입차', null], ['eq', '제어 차량', 'R07', '차량의 모니터·제어 장치와 조작자', null]],
     gallery: [['P01', '탱크 내부 세척 작업'], ['B01', '줄지어 선 여과판'], ['B02', '구멍이 줄지어 난 설비 안 판']] },
   S02: { en: 'EQUIPMENT CLEANING (CATALYST)', head: 'P03', how: 'catalyst', case: 's02',
-    gear: [['robot', '흡입 로봇', 'W05', '보유 장비표: 무인준설로봇 흡입형', 'unmanned.html#r-suction'], ['eq', '제어 차량', 'P16', '제어 차량 안에서 모니터를 보는 작업자들', null], ['eq', '진공흡입차 · 분리장치', 'B05', '반응기 옆의 진공흡입차와 분리장치', null]],
+    gear: [['robot', '흡입 로봇', 'W05', '보유 장비표: 무인준설로봇 흡입형', 'unmanned.html#r-vacuum'], ['eq', '제어 차량', 'P16', '제어 차량 안에서 모니터를 보는 작업자들', null], ['eq', '진공흡입차 · 분리장치', 'B05', '반응기 옆의 진공흡입차와 분리장치', null]],
     gallery: [['B03', '설비 옆에서 받이 통을 다루는 작업자'], ['B04', '설비 위에 매단 큰 자루']] },
   S03: { en: 'CHEMICAL CLEANING', head: 'W01', how: 'chemical', case: 's03', gear: [],
     gallery: [['B06', '야간 작업 중인 작업 차량'], ['B07', '맨홀로 이어진 호스와 작업자'], ['B08', '구덩이 안의 호스']] },
   S04: { en: 'DREDGING CONSTRUCTION', head: 'W03', how: 'dredge', case: 's04',
-    gear: [['robot', '파쇄형 로봇', 'W06', '보유 장비표: 무인준설로봇 파쇄형', 'unmanned.html#r-crusher'], ['robot', '무인 로더', 'X01', '보유 장비표: 무인로더 · 무인궤도로더', 'unmanned.html#r-loader'], ['eq', '스키드 로더 · 굴삭기', 'R15', '보유 장비표: 스키드 로더 0.2㎡ · 굴삭기 1.8ton', null]],
+    gear: [['robot', '파쇄형 로봇', 'W06', '보유 장비표: 무인준설로봇 파쇄형', 'unmanned.html#r-vacuum'], ['robot', '무인 로더', 'X01', '보유 장비표: 무인로더 · 무인궤도로더', 'unmanned.html#r-loader'], ['eq', '스키드 로더 · 굴삭기', 'R15', '보유 장비표: 스키드 로더 0.2㎡ · 굴삭기 1.8ton', null]],
     gallery: [['P06', '흡입차와 신정개발 작업자'], ['B09', '진공흡입차 옆의 신정개발 작업자'], ['B10', '설비 바닥 틈으로 들어간 호스']] },
   S05: { en: 'CCTV · GPR', head: 'R34', how: 'pipe', case: 's05',
-    gear: [['robot', '관로 CCTV 로봇', 'R42', '보유 장비표: 관로CCTV로봇 · 관로조사용 1대', 'unmanned.html#r-cctv'], ['eq', 'CCTV 조사차량', null, 'D=250~600mm · 관로조사용 2대', null], ['eq', '스키드 로더', 'R20', '보유 장비표: 스키드 로더 0.52㎡ · 맨홀보수작업 1대', null]],
+    gear: [['robot', '관로 CCTV 로봇', 'R42', '보유 장비표: 관로CCTV로봇 · 관로조사용 1대', 'unmanned.html#with'], ['eq', 'CCTV 조사차량', null, 'D=250~600mm · 관로조사용 2대', null], ['eq', '스키드 로더', 'R20', '보유 장비표: 스키드 로더 0.52㎡ · 맨홀보수작업 1대', null]],
     gallery: [['P08', '도로 GPR 조사'], ['B11', '격자를 그린 땅 위의 GPR 조사'], ['B12', 'GPR 조사 장비']] }
 };
 /* 용도별 적용 예시 — 기술소개서(2025) 8·9·11쪽 글 그대로(장점·단점·적용 범위, 수치 포함). 무인 솔루션 페이지의 '용도별 적용 예시' 접기는 15차에 이리로 옮겼다 */
@@ -1093,7 +1093,7 @@ const SVC16 = {
     howT: '탱크 · Pond 클리닝은 이렇게 합니다', howS: 'Robot-Tank Cleaning System — 기술소개서(2025) 18쪽의 6단계 그대로',
     steps: () => {
       const ph = [['R25'], ['W07'], ['R27'], [], ['P01'], []];
-      const ch = [[['제어 차량', 0], ['흡입 로봇', 1, 'unmanned.html#r-suction']], [['진공흡입차(습식) 5대', 0]], [['흡입 로봇', 1, 'unmanned.html#r-suction'], ['제어 차량 원격 조정', 0]], [['흡입 로봇', 1, 'unmanned.html#r-suction']], [], [['데칸타 · 필터프레스 → 준설·슬러지 회수', 0, 'service-dredging-sludge.html#dewater']]];
+      const ch = [[['제어 차량', 0], ['흡입 로봇', 1, 'unmanned.html#r-vacuum']], [['진공흡입차(습식) 5대', 0]], [['흡입 로봇', 1, 'unmanned.html#r-vacuum'], ['제어 차량 원격 조정', 0]], [['흡입 로봇', 1, 'unmanned.html#r-vacuum']], [], [['데칸타 · 필터프레스 → 준설·슬러지 회수', 0, 'service-dredging-sludge.html#dewater']]];
       return UNM_STEPS.map((u, k) => [u.t, u.all || (u.in ? u.in[1] : u.out), s16Place(u), ph[k], ch[k]]);
     },
     stepsSrc: '기술소개서(2025) 18쪽 Robot-Tank Cleaning System · 설비 밖 원격 조정은 18·20쪽 공사개략도',
@@ -1105,7 +1105,7 @@ const SVC16 = {
     howT: '반응기 촉매 작업은 이렇게 구성합니다', howS: '공사개략도(촉매) — 기술소개서(2025) 17쪽의 구성',
     steps: () => {
       const ph = [['R13'], ['P16', 'P17'], ['W07'], ['B05']];
-      const ch = [[['흡입 로봇', 1, 'unmanned.html#r-suction']], [['제어 차량', 0]], [['진공흡입차(건식) 4대', 0]], [['AUTO SEPARATOR 6SET', 0]]];
+      const ch = [[['흡입 로봇', 1, 'unmanned.html#r-vacuum']], [['제어 차량', 0]], [['진공흡입차(건식) 4대', 0]], [['AUTO SEPARATOR 6SET', 0]]];
       return PROCESS.crew.map(([a, b, c], k) => [a, c, b === '설비 내부' ? 'in' : 'out', ph[k], ch[k]]);
     },
     stepsSrc: '기술소개서(2025) 17쪽 공사개략도(촉매) · 회사소개서(2024) 21~24쪽 보유 장비',
@@ -1124,7 +1124,7 @@ const SVC16 = {
     io: [['로봇이 하는 일', 1, '하수 · 오수관과 처리시설의 퇴적물을 <b>준설합니다</b>', '01 준설', 'st-1'],
          ['사람이 하는 일', 0, '무인준설로봇과 무인로더를 <b>원격으로 조종합니다</b>', '01 준설', 'st-1']],
     howT: '준설부터 탈수까지', howS: '무인 장비로 회수하고, 회수한 슬러지는 탈수해 양을 줄입니다',
-    steps: () => [['원격 조종으로 준설', '무인준설로봇과 무인로더를 원격으로 조종해 퇴적물을 준설합니다', '', ['W06', 'X01'], [['파쇄형 로봇', 1, 'unmanned.html#r-crusher'], ['무인 로더', 1, 'unmanned.html#r-loader'], ['흡입 로봇', 1, 'unmanned.html#r-suction']]],
+    steps: () => [['원격 조종으로 준설', '무인준설로봇과 무인로더를 원격으로 조종해 퇴적물을 준설합니다', '', ['W06', 'X01'], [['파쇄형 로봇', 1, 'unmanned.html#r-vacuum'], ['무인 로더', 1, 'unmanned.html#r-loader'], ['흡입 로봇', 1, 'unmanned.html#r-vacuum']]],
       ['흡입 · 운반', '진공흡입차(습식)로 회수물을 흡입해 옮깁니다', '', ['B09'], [['진공흡입차(습식) 5대', 0]]],
       ['탈수 — 데칸타', PROCESS.decanter.join(' → '), '', [], [['데칸타 10마력 1대', 0]]],
       ['탈수 — 필터프레스', PROCESS.filterpress.join(' → '), '', [], []]],
@@ -1137,7 +1137,7 @@ const SVC16 = {
     howT: '조사부터 보수까지', howS: '세 가지 업무와 그때 쓰는 장비',
     steps: () => {
       const ph = [['R42'], ['P08', 'B11'], ['R20']];
-      const ch = [[['관로 CCTV 로봇', 1, 'unmanned.html#r-cctv'], ['CCTV 조사차량 2대 (D=250~600mm)', 0], ['탈취제거 SYSTEM', 0]], [], [['스키드 로더 (맨홀 보수)', 0]]];
+      const ch = [[['관로 CCTV 로봇', 1, 'unmanned.html#with'], ['CCTV 조사차량 2대 (D=250~600mm)', 0], ['탈취제거 SYSTEM', 0]], [], [['스키드 로더 (맨홀 보수)', 0]]];
       return svc('S05').rows.map((r, k) => [r.label, r.text, '', ph[k], ch[k]]);
     },
     stepsSrc: '회사소개서(2024) 9쪽 주요사업 안내 · 22~24쪽 보유 장비',
@@ -1353,25 +1353,15 @@ ${dnav}
 `;
 }
 
-function phero(o) {
+function phero(o) {   /* 시안C 34차: 현재 위치(홈 › …)를 남색 무대 안 제목 위로 — 다른 쪽 머리(사업분야 · 무인 솔루션 · 적용 사례)와 같은 자리 */
+  const cr = o.crumbs.map((c) => c.href ? `<a href="${c.href}">${esc(c.label)}</a>` : `<span aria-current="page">${esc(c.label)}</span>`).join('<span aria-hidden="true">›</span>');
   return `  <section class="phero">
-    <div class="phero__grid" aria-hidden="true"></div>
     <div class="wrap">
+      <nav class="s6-crumb phero__crumb" aria-label="현재 위치"><a href="index.html">홈</a><span aria-hidden="true">›</span>${cr}</nav>
       <h1>${o.h1}</h1>
       ${o.keepLead ? `<p class="phero__lead">${o.quote ? `<span class="phero__quote">${esc(o.quote)}</span>` : ''}${esc(o.keepLead)}</p>` : ''}
     </div>
   </section>
-
-  <nav class="crumb" aria-label="현재 위치">
-    <div class="wrap">
-      <ol>
-        <li><a href="index.html">홈</a></li>
-${o.crumbs.map((c) => c.href
-    ? `        <li><a href="${c.href}">${esc(c.label)}</a></li>`
-    : `        <li><span aria-current="page">${esc(c.label)}</span></li>`).join('\n')}
-      </ol>
-    </div>
-  </nav>
 `;
 }
 
@@ -1437,7 +1427,7 @@ function footer(o) {   // 시안C 18차: o.noAsk — 본문 끝에 문의 띠가
   return `<footer class="ftr">
   <div class="wrap">${contactFooterOnly() && !(o && o.noAsk) ? `
     <div class="ftrB-ask">   <!-- 시안B 26차: 바닥글 윗줄 소형 문의 줄 — 머리말 낱말·문의 버튼 문구·이메일 재사용(새 문장 없음) -->
-      <span class="ftrB-ask__label">${esc(CFG.common.headerCta)}</span>
+      <span class="ftrB-ask__label">${esc(CFG.common.headerCta)}<small class="ftrB-ask__sub">설비 종류 · 일정 · 현장 위치를 알려 주시면 상담 시 안내해 드립니다.</small></span>
       <div class="ftrB-ask__act">
         <a class="btn btn--line btn--sm" href="contact.html">${esc(CFG.common.cta.button)} ${arrow(18)}</a>
         <a class="ftrB-ask__mail" href="mailto:${C.email}">${C.email}</a>
@@ -1466,7 +1456,7 @@ ${g.items.map((i) => `            <li><a href="${i.href}"${i.blank ? ' target="_
     </div>
     <div class="ftr__bot">
       <p>&copy; <span data-year>2026</span> ${esc(C.name)}. All rights reserved.</p>
-      <button class="totop" type="button" data-totop>맨 위로 ${icon('up', 13)}</button>
+      <button class="totop" type="button" data-totop>맨 위로 <span aria-hidden="true">↑</span></button>
     </div>${aiNotice() ? `
     <p class="ftr__ai">${esc(aiNotice())}</p>   <!-- 시안B 23차: AI 연출 이미지 공통 고지(설정 look.aiNotice, look.aiMark 가 'footer' 일 때) — 개별 배지 대신 바닥글 한 줄 -->` : ''}
   </div>
@@ -4290,6 +4280,8 @@ pages['company.html'] = () => {
   const cm = EQUIP_GROUPS.find((g) => g.id === 'eq-common');
   const cmRows = cm.rows.map(([a, b, c, d]) => `<tr><th scope="row">${esc(a)}</th><td${b === '—' ? ' class="z"' : ''}>${esc(b)}</td><td>${esc(c)}</td><td class="q">${esc(d)}</td></tr>`).join('');
   const NV = 'https://map.naver.com/p/search/', KK = 'https://map.kakao.com/link/search/';
+  /* 시안C 34차: 회사 소개 네 화면 [이름, 메뉴 글자, 휴대폰 짧은 글자] — 화면 안 구역: hist = 걸어온 길 · 하는 일 / cred = 인증 · 특허 / org = 사람과 조직 · 보유 장비 / loc = 오시는 길 (js/company17.js 34차) */
+  const C7_VIEWS = [['hist', '연혁 · 사업', '연혁 · 사업'], ['cred', '인증 · 특허', '인증 · 특허'], ['org', '조직 · 장비', '조직 · 장비'], ['loc', '오시는 길', '오시는 길']];
   const nav = [['greeting', '인사말', '인사말'], ['history', '걸어온 길', '연혁'], ['overview', '하는 일', '사업'], ['credentials', '인증 · 특허', '인증'], ['organization', '사람과 조직', '조직'], ['equipment', '보유 장비', '장비'], ['location', '오시는 길', '위치']];
   return head({
     file: 'company.html', page: 'company',
@@ -4315,7 +4307,8 @@ pages['company.html'] = () => {
     <div><dt>수행 실적 2020~2023</dt><dd>${PROJECT_SUMMARY.n}<small>${PROJECT_SUMMARY.unit}</small></dd></div>
     <div><dt>등록 특허</dt><dd>${K.patents.length}<small>건</small></dd></div>
   </dl><p class="c7-facts__src">회사소개서(2024) 기준</p></div></section>
-  <nav class="c7-nav" aria-label="회사 소개 안"><div class="wrap"><b>회사 소개</b>${nav.map(([id, l, s]) => `<a href="#${id}"><span class="c7-n__l">${l}</span><span class="c7-n__s">${s}</span></a>`).join('')}</div></nav>
+  <nav class="um-lnb c7-lnb" aria-label="회사 소개 안"><div class="wrap"><div class="um-lnb__t">${C7_VIEWS.map(([v, l, sh]) => `<a href="#v-${v}" data-view="${v}"><span class="c7-n__l">${l}</span><span class="c7-n__s">${sh}</span></a>`).join('')}</div><a class="um-lnb__q" href="contact.html">현장 문의 ${arrow(14)}</a></div></nav>   <!-- 시안C 34차: 무인 솔루션과 같은 흰 메뉴 줄 · 네 화면(누르면 그 화면만) -->
+  <div class="c7-view" id="v-hist" data-view="hist">
 
   <section class="c7-sec c7-sec--full" id="history" aria-label="걸어온 길"><div class="wrap">
     <div class="c7-fh"><div>${kick('걸어온 길')}<h2 class="c7-h2">1992년 신학상사로 출발했습니다</h2></div><p class="c7-lead">1995년 신정개발로 상호를 바꾸고, 2007년 법인으로 전환했습니다. 굵은 점은 주요 연혁입니다.</p></div>
@@ -4330,6 +4323,9 @@ pages['company.html'] = () => {
       <h3 class="c7-h3">회사 자료</h3>
       <ul class="c7-doc"><li><a href="${DOC_PROFILE}" target="_blank" rel="noopener"><span><b>회사소개서 (2024)</b><small>PDF · 24쪽 · 9.5MB</small></span><em>내려받기 ↓</em></a></li><li><a href="${DOC_TECH}" target="_blank" rel="noopener"><span><b>기술소개서 (2025)</b><small>PDF · 54쪽 · 9.1MB</small></span><em>내려받기 ↓</em></a></li></ul>
       <p class="us-src">홈페이지 공개용으로 일부 쪽을 뺀 파일입니다.</p>`, true) + `
+  <div class="wrap"><a class="um-next c7-next" href="#v-cred"><span><small>다음</small><b>인증 · 특허</b><em>인증서 ${K.certs.length}가지 · 등록 특허 ${K.patents.length}건 · 면허 · 허가 · 수상</em></span>${arrow(28)}</a></div>
+  </div>
+  <div class="c7-view" id="v-cred" data-view="cred">
   <section class="c7-sec c7-sec--full" id="credentials" aria-label="인증 · 특허"><div class="wrap">
     <div class="c7-fh"><div>${kick('인증 · 특허')}<h2 class="c7-h2">인증서와 특허증,<br>원본으로 확인하세요</h2></div><p class="c7-lead">회사소개서(2024)에 실린 인증서 ${K.certs.length}가지와 등록 특허 ${K.patents.length}건입니다. 옆으로 넘기고, 누르면 크게 볼 수 있습니다.</p></div>
     ${rail('인증서', K.certs.length, '품질 · 환경 · 안전보건 · 기업 인증', cg, '인증서')}
@@ -4340,6 +4336,9 @@ pages['company.html'] = () => {
       <div><h3 class="c7-h3">수상 <small>${CREDS.awards.length}회</small></h3><ul class="c7-yr">${aw}</ul></div>
     </div>
   </div></section>
+  <div class="wrap"><a class="um-next c7-next" href="#v-org"><span><small>다음</small><b>조직 · 장비</b><em>조직도 · 보유 기술자격 · 분야별 보유 장비</em></span>${arrow(28)}</a></div>
+  </div>
+  <div class="c7-view" id="v-org" data-view="org">
 ` + split('organization', '사람과 조직', 'l', fig(K.photos.org, '(max-width:860px) 100vw, 90vw'), `${kick('사람과 조직')}<h2 class="c7-h2">조직과 기술 인력</h2>
       <p class="c7-lead">대표이사 아래 경영지원팀 · 안전 · 공무 · 기업부설연구소와 C&amp;M · C&amp;S · SAP 다섯 개 팀이 있습니다.</p>
       <div class="c7-oc" role="img" aria-label="${esc(ORG_LABEL)}">
@@ -4355,10 +4354,15 @@ pages['company.html'] = () => {
       <ul class="c7-eq">${eqRows}</ul>
       <h3 class="c7-h3">공통 장비 <small>운반 · 지원</small></h3>
       <table class="c7-eqt"><thead><tr><th scope="col">장비</th><th scope="col">규격</th><th scope="col">용도</th><th scope="col">보유</th></tr></thead><tbody>${cmRows}</tbody></table>
-      <p class="us-src">회사소개서(2024) 21~24쪽 보유 장비 · 보유 대수는 회사소개서(2024) 수록 기준이며, 현재 수량과 가동 상태는 문의 시 안내합니다.</p>`, true) + split('location', '오시는 길', 'l', fig(K.photos.location), `${kick('오시는 길 · 연락처')}<h2 class="c7-h2">여수 본사 · 서산 지사</h2>
+      <p class="us-src">회사소개서(2024) 21~24쪽 보유 장비 · 보유 대수는 회사소개서(2024) 수록 기준이며, 현재 수량과 가동 상태는 문의 시 안내합니다.</p>`, true) + `
+  <div class="wrap"><a class="um-next c7-next" href="#v-loc"><span><small>다음</small><b>오시는 길</b><em>여수 본사 · 서산 지사 · 대표 전화 · 이메일</em></span>${arrow(28)}</a></div>
+  </div>
+  <div class="c7-view" id="v-loc" data-view="loc">
+` + split('location', '오시는 길', 'l', fig(K.photos.location), `${kick('오시는 길 · 연락처')}<h2 class="c7-h2">여수 본사 · 서산 지사</h2>
       <div class="c7-loc"><div><h3>여수 본사</h3><p>${esc(C.address)}</p><p class="c7-map"><a href="${NV}${encodeURIComponent(C.address)}" target="_blank" rel="noopener">네이버 지도 ↗</a><a href="${KK}${encodeURIComponent(C.address)}" target="_blank" rel="noopener">카카오맵 ↗</a></p></div>
         <div><h3>서산 지사</h3><p>${esc(C.branch)}</p><p class="c7-map"><a href="${NV}${encodeURIComponent(C.branch)}" target="_blank" rel="noopener">네이버 지도 ↗</a></p></div></div>
       <dl class="c7-tb"><div><dt>회사명</dt><dd>${esc(C.name)} <small>${esc(C.brandEn)} CO., LTD.</small></dd></div><div><dt>대표 전화</dt><dd><a href="tel:${C.tel.replace(/-/g, '')}">${C.tel}</a></dd></div><div><dt>문의 가능 시간</dt><dd>${esc(C.hours)}</dd></div><div><dt>팩스</dt><dd>${C.fax}</dd></div><div><dt>이메일</dt><dd><a href="mailto:${C.email}">${C.email}</a></dd></div></dl>`, false) + `
+  </div>
   <section class="c7-end" aria-labelledby="c7-end-h"><div class="wrap">   <!-- 시안C 18차: 담백한 문의 띠 — 제목 · 한 문장 | 문의하기 · 이메일(누르면 복사, 글자 안내 없이 그림으로) -->
     <div><h2 id="c7-end-h">현장 문의</h2><p>작업이 필요한 설비와 일정을 알려 주세요.</p></div>
     <div class="c7-end__act"><a class="c7-end__go" href="contact.html">문의하기 ${arrow(18)}</a><button type="button" class="c7-end__mail" data-copy="${C.email}" title="눌러서 이메일 주소 복사" aria-label="이메일 주소 ${C.email} 복사"><span class="c7-end__ic"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3.5 6l8.5 7 8.5-7"/></svg></span><span class="c7-end__addr">${C.email}</span><span class="c7-end__cp" aria-hidden="true"><span class="c7-i-copy"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg></span><span class="c7-i-ok"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></span><span class="sr-only" aria-live="polite"></span></button></div>

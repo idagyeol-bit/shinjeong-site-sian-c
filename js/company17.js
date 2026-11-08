@@ -1,18 +1,41 @@
-/* 시안C 17차: 회사 소개 — 위에 붙는 줄 표시 · 가로 줄(연혁 · 인증서 · 특허증) ‹ › · 인증서 · 특허증 확대 보기 */
+/* 시안C 17차: 회사 소개 — 가로 줄(연혁 · 인증서 · 특허증) ‹ › · 인증서 · 특허증 확대 보기
+   34차: 위 메뉴 줄을 무인 솔루션과 같은 흰 메뉴 줄 · 네 화면으로 — 누르면 그 화면만 보인다(.c7-view). 예전 주소(#history · #credentials · #location 등)도 맞는 화면으로 간다.
+   스크립트가 없으면 네 화면이 차례로 모두 보인다. */
 (function () {
-  var nav = document.querySelector('.c7-nav'); if (!nav) return;
-  var ls = [].slice.call(nav.querySelectorAll('a'));
-  function spy() { var y = nav.getBoundingClientRect().bottom + 80, on = null; ls.forEach(function (l) { var el = document.getElementById(l.getAttribute('href').slice(1)); if (el && el.getBoundingClientRect().top < y) on = l; }); ls.forEach(function (l) { l.classList.toggle('is-on', l === on); }); }
-  addEventListener('scroll', spy, { passive: true }); spy();
-  /* 다른 페이지에서 #location 같은 주소로 들어올 때: 글꼴 · 사진이 다 들어온 뒤 자리를 한 번 더 맞춘다 */
-  addEventListener('load', function () { var id = location.hash.slice(1), el = id && document.getElementById(id); if (!el) return;
-    /* 17차 보정(지시서 밖): 브라우저가 # 자리로 부드럽게 내려가는 도중에 맞추면 휴대폰에서 자리가 크게 어긋나는 경우가 있어, 지금 자리에 먼저 멈춘 뒤 맞추고, 조금 뒤와 글꼴이 다 들어온 뒤 한 번 더 맞춘다. 그 사이 사용자가 움직였으면 맞추지 않는다 */
-    var moved = false;
-    ['wheel', 'touchstart', 'keydown'].forEach(function (t) { addEventListener(t, function () { moved = true; }, { once: true, passive: true }); });
-    var fix = function () { if (moved) return; window.scrollTo({ top: scrollY, behavior: 'instant' }); el.scrollIntoView({ block: 'start', behavior: 'instant' }); spy(); };
-    setTimeout(fix, 60); setTimeout(fix, 450);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { setTimeout(fix, 250); });
-  });
+  var lnb = document.querySelector('.c7-lnb'), views = [].slice.call(document.querySelectorAll('.c7-view'));
+  if (lnb && views.length) {
+    var tabs = [].slice.call(lnb.querySelectorAll('.um-lnb__t a'));
+    var MAP = { 'v-hist': 'hist', history: 'hist', overview: 'hist', greeting: 'hist', 'v-cred': 'cred', credentials: 'cred', 'v-org': 'org', organization: 'org', equipment: 'org', 'v-loc': 'loc', location: 'loc' };
+    var hh = function () { var h = document.querySelector('header'); return h ? Math.max(0, h.getBoundingClientRect().bottom) : 80; };
+    var go = function (el, smooth) { if (!el) return; var y = el.getBoundingClientRect().top + pageYOffset - hh() - lnb.offsetHeight + 1; scrollTo({ top: y, behavior: smooth ? 'smooth' : 'auto' }); };
+    var view = function (v) { views.forEach(function (x) { x.hidden = x.dataset.view !== v; }); tabs.forEach(function (a) { if (a.dataset.view === v) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); }); window.dispatchEvent(new Event('resize')); };
+    var route = function (h, scroll, smooth) {
+      var v = MAP[h]; if (!v) return false; view(v);
+      if (!scroll) return true;
+      var el = /^v-/.test(h) || h === 'greeting' ? (h === 'greeting' ? null : lnb) : document.getElementById(h);
+      if (h === 'greeting') { scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' }); return true; }
+      if (el === lnb) { var top = lnb.getBoundingClientRect().top; if (top < hh() + 2 || top > innerHeight * .6) { var y = views.filter(function (x) { return !x.hidden; })[0]; go(y, smooth); } }
+      else go(el, smooth);
+      return true;
+    };
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="#"]'); if (!a) return;
+      var h = a.getAttribute('href').slice(1); if (!MAP[h]) return;
+      e.preventDefault(); if (history.replaceState) history.replaceState(null, '', '#' + h);
+      route(h, true, true);
+    });
+    addEventListener('hashchange', function () { route(location.hash.slice(1), true, true); });
+    var h0 = location.hash.slice(1);
+    if (!route(h0, false)) view('hist');
+    /* 다른 쪽에서 #location 같은 주소로 들어올 때: 글꼴 · 사진이 다 들어온 뒤 자리를 맞춘다(사용자가 이미 움직였으면 그대로) */
+    if (MAP[h0] && h0 !== 'greeting') {
+      var moved = false;
+      ['wheel', 'touchstart', 'keydown'].forEach(function (t) { addEventListener(t, function () { moved = true; }, { once: true, passive: true }); });
+      var fix = function () { if (!moved) route(h0, true, false); };
+      addEventListener('load', function () { setTimeout(fix, 60); setTimeout(fix, 450); });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { setTimeout(fix, 250); });
+    }
+  }
   [].forEach.call(document.querySelectorAll('[data-rail]'), function (r) {
     var tr = r.querySelector('.c7-rail__track'), pr = r.querySelector('.c7-rail__prog i'), bs = [].slice.call(r.querySelectorAll('.c7-rail__b'));
     function upd() { var max = tr.scrollWidth - tr.clientWidth, w = tr.clientWidth / tr.scrollWidth, x = max ? tr.scrollLeft / max : 0; pr.style.width = (w * 100) + '%'; pr.style.transform = 'translateX(' + (x * (1 / w - 1) * 100) + '%)'; bs[0].disabled = tr.scrollLeft < 4; bs[1].disabled = tr.scrollLeft > max - 4; }

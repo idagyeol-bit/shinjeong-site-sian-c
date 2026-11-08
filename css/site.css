@@ -5034,3 +5034,63 @@ body .s6-end .s6-ch--on{color:var(--on-navy-sub)!important}
 body .ftr__bot{color:rgba(255,255,255,.6)}
 body .totop{color:rgba(255,255,255,.82)}
 body .totop:hover{color:#fff}
+
+/* ===== 시안C 34차 (2026-11-08): 회사 소개 메뉴 줄 = 무인 솔루션과 같은 흰 메뉴 줄 · 네 화면 ===== */
+.c7-view[hidden]{display:none!important}
+.c7-lnb .c7-n__s{display:none}
+.c7-lnb .um-lnb__t a{display:inline-flex;align-items:center}
+.c7-next{margin-top:clamp(40px,5vw,72px)}
+@media (max-width:860px){.c7-lnb .c7-n__l{display:none}.c7-lnb .c7-n__s{display:inline}.c7-lnb .um-lnb__t a{justify-content:center;font-size:14.5px!important;padding-inline:2px}}
+main.c7{--c7-nh:63px}
+@media (max-width:860px){main.c7{--c7-nh:50px}}
+body .um-lnb__q{border-radius:10px;border-color:#d5dde6}
+body .um-lnb__q:hover{border-color:var(--nv1);background:var(--nv1);color:#fff}
+
+/* ===== 시안C 34차 다듬기 (전체 점검 결과) ===== */
+/* 1) 사진 없는 작업 단계 칸: 빈 회색 → 남색 무대 타일(큰 번호 · 초록 STEP) — 사진이 안 뜬 것처럼 보이지 않게 */
+body .s6-st__ph--none{position:relative;isolation:isolate;overflow:hidden;background:var(--stg)!important;color:#fff!important;display:flex!important;flex-direction:column;align-items:flex-start!important;justify-content:flex-end!important;padding:18px 20px!important;border-radius:var(--rd)}
+body .s6-st__ph--none::after{content:"";position:absolute;inset:auto 0 0 0;height:70%;background:var(--sky) center bottom/900px 160px repeat-x;opacity:.12;z-index:-1}
+body .s6-st__ph--none::before{content:"STEP";font-size:11.5px;font-weight:800;letter-spacing:.14em;color:var(--g);margin-bottom:2px}
+body .s6-st__ph--none b{color:#fff!important;font-size:clamp(40px,4vw,56px)!important;font-weight:800;line-height:1;letter-spacing:-.03em}
+body .s6-st__ph--none small{display:none!important}
+/* 2) 각진 칸 → 둥글게 (분야 상세 작업 순서 · 좋아지는 점 표 · 고려사항 띠) */
+body .s6-st__ph,body .s6-st__ph img{border-radius:var(--rd)!important;overflow:hidden}
+body .s6-sec [class*="s6-pc"],body .s6-sec [class*="s6-cmp"],body .s6-sec [class*="s6-nt"],body .s6-sec [class*="s6-risk"],body .s6-sec [class*="s6-band"],body .s6-sec [class*="s6-xr"]{border-radius:16px}
+/* 3) 주요 행동 단추 = 초록 (문의 · 보내기) */
+body .btn--fill,body .cs9__btn,body .c7-end__go,body .um-ask .c7-end__go{background:var(--g-d)!important;border-color:var(--g-d)!important;color:#fff!important;border-radius:10px}
+body .btn--fill:hover,body .cs9__btn:hover,body .c7-end__go:hover{background:#277a29!important;border-color:#277a29!important}
+body .s6-down{border-radius:10px}
+html[lang="en"] main a[href^="mailto"].btn,html[lang="en"] main .btn:not(.btn--line){background:var(--g-d)!important;border-color:var(--g-d)!important;color:#fff!important}
+/* 4) 문의 쪽 · 메인(첫 화면에 문의 카드)에는 바닥글 문의 카드를 숨겨 같은 말을 두 번 하지 않는다 */
+body[data-page="contact"] .ftrB-ask{display:none!important}
+body .ftrB-ask__label{display:flex;flex-direction:column;gap:3px}
+body .ftrB-ask__sub{font-size:13.5px;font-weight:500;color:#5a646d;letter-spacing:0}
+/* 5) 회사 소개 좌우 나눔 글 칸을 다른 구역과 같은 세로줄(본문 폭)에 맞춤 */
+@media (min-width:1101px){
+  body .c7-sec--r .c7-split__t{padding-left:max(24px,calc((100vw - 1200px) / 2))!important}
+  body .c7-sec--l .c7-split__t{padding-right:max(24px,calc((100vw - 1200px) / 2))!important}
+}
+/* 6) 문의 · 수행 이력 · 소식 머리: 다른 쪽 머리와 같은 높이 · 현재 위치는 무대 안 */
+body .phero{padding-block:clamp(48px,5.5vw,88px) clamp(56px,6vw,96px)!important}
+body .phero .phero__crumb{margin:0 0 22px}
+/* 7) 사진 설명 글자: 밝은 사진 위에서도 읽히게 아래쪽 어둡게 */
+body .s6-ov__ph{position:relative}
+body .s6-ov__ph figcaption{background:linear-gradient(transparent,rgba(8,26,48,.72))!important;color:#fff!important;padding:28px 16px 12px!important}
+/* 8) 사업분야 목록: 순서가 아니라 고르는 목록이므로 'STEP' 대신 '분야' */
+body .finder__have::before{content:"분야 " counter(fd,decimal-leading-zero)!important}
+/* 9) 메인: 숫자 줄 · 다섯 가지 일 사이 빈 여백 줄이기, 회사 소개 사진이 글보다 길지 않게 */
+body[data-hero="flow"] .hn{padding-bottom:clamp(20px,3vw,36px)!important}
+body[data-hero="flow"] .sv5{padding-top:clamp(40px,5vw,72px)!important;padding-bottom:clamp(48px,5vw,80px)!important}
+body[data-hero="flow"] .rf{padding-top:clamp(40px,5vw,72px)!important}
+body[data-hero="flow"] #company .co__media,body[data-hero="flow"] #company figure{max-height:560px}
+body[data-hero="flow"] #company figure img{height:100%;max-height:560px;object-fit:cover}
+/* 10) 휴대폰: 옆으로 넘기는 메뉴 줄 오른쪽 흐림(더 있다는 표시) · 바닥글 사이트맵 접기(메뉴는 위 ☰ 에) */
+@media (max-width:860px){
+  body .s6-nav .wrap,body .cs9-nav .wrap,body .cs9-nav__l{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}
+  body .ftr__map{display:none!important}
+}
+body .s6-use{border-radius:16px;border-top:0!important;box-shadow:var(--shd);border:1px solid #e3e8ee;overflow:hidden}
+body .s6-lnk{border-radius:16px;border-left:5px solid var(--g)!important;box-shadow:var(--shd)}
+body .s6-lnk em{color:var(--g-d)!important}
+body .s6-st__ph--none::before{content:none!important}
+body .phero{padding-block:calc(var(--header-h) + clamp(40px,5vw,80px)) clamp(52px,6vw,92px)!important}
