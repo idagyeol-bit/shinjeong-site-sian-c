@@ -14,7 +14,7 @@
       if (!scroll) return true;
       var el = /^v-/.test(h) || h === 'greeting' ? (h === 'greeting' ? null : lnb) : document.getElementById(h);
       if (h === 'greeting') { scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' }); return true; }
-      if (el === lnb) { var top = lnb.getBoundingClientRect().top; if (top < hh() + 2 || top > innerHeight * .6) { var y = views.filter(function (x) { return !x.hidden; })[0]; go(y, smooth); } }
+      if (el === lnb) { var top = lnb.getBoundingClientRect().top; if (Math.abs(top - hh()) > 2) { var y = views.filter(function (x) { return !x.hidden; })[0]; go(y, smooth); } }
       else go(el, smooth);
       return true;
     };
