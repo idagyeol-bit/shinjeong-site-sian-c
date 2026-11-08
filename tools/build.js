@@ -1344,7 +1344,7 @@ ${VARIANT || (CFG.sian && CFG.sian.lang === false) ? '' : `    ${lang}\n`}${!VAR
 ${dnav}
   </nav>
   <div class="drawer__foot">
-    ${esc(C.name)} · ${esc(C.tagline)} 전문기업 · ${C.founded}년부터<br>
+    ${esc(C.name)} · ${esc(C.tagline)} 전문기업 · ${C.founded}년 설립<br>
     ${esc(C.address)}<br>
     <a href="tel:${C.tel.replace(/-/g, '')}">${C.tel}</a><br>
     <a href="mailto:${C.email}">${C.email}</a>
@@ -1448,7 +1448,7 @@ function footer(o) {   // 시안C 18차: o.noAsk — 본문 끝에 문의 띠가
         <img class="ftr__logo" src="assets/logo/shinjeong-symbol.svg" width="30" height="37" alt="" aria-hidden="true">
         <b>${esc(C.name)}</b><span aria-hidden="true">${esc(C.brandEn)}</span>
         <p class="ftr__info">
-          ${esc(C.name)} · ${esc(C.tagline)} 전문기업 · ${C.founded}년부터<br>
+          ${esc(C.name)} · ${esc(C.tagline)} 전문기업 · ${C.founded}년 설립<br>
           본사 ${esc(C.address)}<br>
           지사 ${esc(C.branch)}<br>
           TEL <a href="tel:${C.tel.replace(/-/g, '')}">${C.tel}</a> · FAX ${C.fax}<br>
@@ -3146,14 +3146,15 @@ SERVICES.forEach((s, idx) => {
     }) + header('services', s.id, s.file) + `
 <main id="main" class="s6${CFG.look && CFG.look.svcDetailTop === false ? ' s6--bare' : ''}">
 ` + (CFG.look && CFG.look.svcDetailTop === false ? '' : svc16Top(s)) + nav + `
-  <section class="s6-ov" id="sv-ov" aria-labelledby="sv-h"><div class="wrap">
+  <section class="s6-ov" id="sv-ov" aria-labelledby="sv-h"><div class="pstg"><div class="wrap">   <!-- 시안C 33차: 분야 이름 · 설명을 남색 무대(첫 화면과 같은 짜임)로 올리고, 사진 · 할 일은 아래 흰 카드로 -->
     <div class="s6-pg"><a href="${prev ? prev.file + '#sv-ov' : 'services.html'}">‹ ${prev ? '이전' : '전체'}</a><span><b>${n}</b> / ${N}</span><a href="${next.file}#sv-ov">다음 ›</a></div>
+    ${s16Fn(s)}
+    <h1 id="sv-h">${esc(s.title)}</h1>
+    <p class="s6-ov__d">${esc(s.body)}</p>
+  </div></div><div class="wrap">
     <div class="s6-ov__grid">
       <figure class="s6-ov__ph">${photo(hp, '(max-width:860px) 100vw, 660px')}<figcaption>${esc(hp.cap || hp.alt)}</figcaption></figure>
       <div>
-        ${s16Fn(s)}
-        <h1 id="sv-h">${esc(s.title)}</h1>
-        <p class="s6-ov__d">${esc(s.body)}</p>
         <dl class="s6-io">${v.io.map(([a, g, c, go, to]) => `<div${g ? ' class="is-r"' : ''}><dt>${a}</dt><dd>${c}</dd><a class="s6-go" href="#${to}">${esc(go)} ${arrow(13)}</a></div>`).join('')}</dl>
         <ul class="s6-tg"><li class="s6-tg__k">작업 범위</li>${s.targets.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
         <dl class="s6-spec">${spec.map(([a, b]) => `<div><dt>${a}</dt><dd>${b}</dd></div>`).join('')}</dl>
