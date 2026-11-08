@@ -231,7 +231,6 @@ module.exports = {
       { id: 'what5', bg: 'white' },     // 시안C 24차: 무슨 일을 하나 — 사업 다섯 칸(사진 · 번호 · 이름 · 현장). 27차: 번호 빼고 실적 한 줄(copy.what5)
       { id: 'field', bg: 'white' },     // 시안C 27차: 실제 현장 — 사진 넷(tools/build.js FLOW.field)
       { id: 'unmanned14', bg: 'soft' },  // 시안C 14차: 새 모양(안/밖 사진 한 쌍 + 로봇 다섯, 색은 초록 하나 · 10차 모양은 id 'unmanned'). 11차: 연회색. 시안C 7차: 무인 솔루션 — 로봇 네 대(이름 + 세 단어). 글은 copy.unmanned, 목록은 tools/build.js UNMANNED_BOTS
-      { id: 'news3', bg: 'white' },      // 시안C 37차: 최근 소식 세 장(가로형 작은 카드)
       // { id: 'trust', bg: 'navy' },  // 시안C 24차: 빼기 — numbers · why2 와 겹침(영문판 숫자는 생성기가 남기는 주석 trust-numbers 에서 읽는다)     // 숫자 띠 (200회 · 170여 건 · 특허 · 면허, 주요 현장) — 7차: 무인 솔루션 아래로. 시안B 24차: 남색 풀블리드 띠
       // { id: 'whatList', bg: 'soft' },  // 시안C 24차: 빼기 — what5(사업 다섯 칸)로  // 메인 빼기(2026-11-01): 사업분야 + 적용 사례를 한 줄 목록 하나로. 예전 카드는 { id: 'whatChart', bg: 'soft' } · { id: 'cases', bg: 'white' }
       // { id: 'whatChart', bg: 'soft' }, // 시안C 4차: 사업분야 차트. 배치는 look.chartLayout('compact' 5차 / 'five' / 'lead')
@@ -359,7 +358,7 @@ module.exports = {
     { href: 'unmanned.html', label: '무인 솔루션', key: 'unmanned' },        // 9차: 새 페이지 unmanned.html (7차엔 메인의 무인 솔루션 칸 index.html#unmanned)
     { href: 'cases.html', label: '적용 사례', key: 'cases' },   // 시안C 13차: '수행 이력' → '적용 사례'. projects.html 은 남아 있다
     { href: 'company.html', label: '회사 소개', key: 'company' },
-    { href: 'news.html', label: '소식', key: 'news' }   // 시안C 37차(2026-11-08 이다결 님 요청): 다시 메뉴 맨 끝에 — 로봇 이야기 · 언론 보도 · 지역 나눔을 담은 새 소식 쪽
+    { href: 'news.html', label: '소식', key: 'news' }   // 시안C 37~38차(2026-11-08 이다결 님 요청): 다시 메뉴 맨 끝에 — 인터넷에 실린 기사만 모은 소식 쪽
     // 예전: { href: 'news.html', label: '소식', key: 'news' }                     // 7차 신설. 2026-11-01 이다결 님 결정: 메뉴 · 바닥글에서 뺌(최근 항목이 2023.05, 연혁은 회사 소개에 있음). news.html 은 그대로 만든다 — 줄 앞의 // 를 지우면 다시 생긴다
   ],
   pages: {                                 // 7차: 메인 밖 새 페이지의 글
@@ -372,8 +371,8 @@ module.exports = {
     },
     news: {
       title: '소식',
-      lead: '로봇 · 연구, 인증 · 수상, 언론 보도와 지역 나눔까지 — 신정개발의 소식을 모았습니다.',
-      src: '출처: 회사소개서(2024) 연혁 · 특허증 · 실적표, 기술소개서(2025) · 언론 보도는 기사 원문으로 연결됩니다. 카드 사진은 신정개발 장비 · 로봇 사진이며 그 작업의 현장 사진은 아닙니다.'
+      lead: '언론에 실린 신정개발 이야기를 모았습니다. 제목을 누르면 기사 원문이 새 창으로 열립니다.',
+      src: '기사 제목은 원문 그대로, 요약은 기사 내용을 짧게 줄인 것입니다. 기사의 글 · 사진에 대한 권리는 각 언론사에 있습니다.'
     },
     unmanned: {                            // 9차: 무인 솔루션 페이지(unmanned.html) 머리 글. 본문 글자는 tools/build.js(지시서 9차 부록 4 그대로)
       title: '무인 솔루션',
