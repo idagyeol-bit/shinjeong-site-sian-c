@@ -37,3 +37,12 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { setTimeout(fix, 250); });
   } else if (h0 === 'sv-ov') { addEventListener('load', function () { scrollTo(0, 0); }); }
 })();
+/* 시안C 44차: '작업 장면' 영상 — 화면에 보일 때만 재생(무음 반복), 움직임 줄이기 설정이면 첫 장면 그림만 */
+(function () {
+  var vs = [].slice.call(document.querySelectorAll('video[data-scene]'));
+  if (!vs.length || matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { var v = e.target; if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else { try { v.pause(); } catch (x) {} } });
+  }, { threshold: 0.3 });
+  vs.forEach(function (v) { io.observe(v); });
+})();
