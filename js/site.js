@@ -271,3 +271,22 @@
     if (y) y.textContent = String(new Date().getFullYear());
   });
 })();
+
+/* 시안C 36차: 휴대폰 — ① 아래로 읽어 내려가면 머리말을 위로 숨기고(메뉴 줄만 남김), 위로 올리면 다시 보인다
+   ② 아래 고정 문의 띠는 첫 화면을 조금 내린 뒤에 나타나고, 문의 양식에 글을 쓰는 동안에는 숨긴다(키보드 위 입력칸을 가리지 않게) */
+(function () {
+  var mq = matchMedia('(max-width:860px)'), b = document.body, last = scrollY, tk = 0;
+  function upd() {
+    tk = 0; var y = scrollY, dy = y - last;
+    var drawer = document.querySelector('.drawer.is-open');
+    if (!mq.matches || drawer || y < 140) b.classList.remove('hdr-up');
+    else if (dy > 6) b.classList.add('hdr-up');
+    else if (dy < -6) b.classList.remove('hdr-up');
+    b.classList.toggle('mcta-on', y > 260 || (innerHeight + y >= document.documentElement.scrollHeight - 4));
+    last = y;
+  }
+  addEventListener('scroll', function () { if (!tk) tk = requestAnimationFrame(upd); }, { passive: true });
+  addEventListener('resize', upd); upd();
+  document.addEventListener('focusin', function (e) { if (e.target.closest && e.target.closest('form') && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) b.classList.add('typing'); });
+  document.addEventListener('focusout', function () { setTimeout(function () { var a = document.activeElement; if (!(a && a.closest && a.closest('form') && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName))) b.classList.remove('typing'); }, 60); });
+})();

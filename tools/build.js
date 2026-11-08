@@ -3127,7 +3127,11 @@ SERVICES.forEach((s, idx) => {
     const exHtml = ex ? `<div class="s6-ex"><div><h3>${esc(ex[0])}</h3><p>${esc(ex[1])}</p><p class="us-src">${esc(ex[3])}</p></div><div class="s6-ex__ph s6-ex__ph--${ex[2].length}">${ex[2].map((id) => `<figure>${photo(P(id), '(max-width:860px) 46vw, 380px')}<figcaption>${esc(P(id).cap || P(id).alt)}</figcaption></figure>`).join('')}</div></div>` : '';
     const eqRows = eg.rows.filter((r) => !r[4]).map(([a, b, c, d]) => `<tr><th scope="row">${esc(a)}</th><td>${esc(b)}</td><td>${esc(c)}</td><td class="q">${esc(d)}</td></tr>`).join('');
     const eqPh = (v.eqph || []).map((id) => `<figure>${photo(P(id), '(max-width:860px) 100vw, 460px')}<figcaption>${esc(P(id).cap || P(id).alt)}</figcaption></figure>`).join('');
-    const nav = `  <nav class="s6-nav" aria-label="사업분야 · 이 분야 안"><div class="wrap">${SERVICES.map((x) => `<a class="s6-nav__f" href="${x.file}#sv-ov"${x === s ? ' aria-current="page"' : ''}>${esc(x.title)}</a>`).join('')}<span class="s6-nav__sep" aria-hidden="true"></span><b class="s6-nav__cur">${n} ${esc(s.title)}</b><a href="#sv-ov" data-s>개요</a><a href="#sv-how" data-s>작업 방식</a><a href="#sv-eq" data-s>보유 장비</a>${hasNote ? '<a href="#sv-note" data-s>알아 두실 점</a>' : ''}<a href="#sv-end" data-s><span class="s6-w">문의 · </span>사례</a></div></nav>`;
+    /* 시안C 35차: 위 메뉴 줄 = 회사 소개 · 무인 솔루션과 같은 흰 메뉴 줄(.um-lnb.s6-lnb) — 개요(남색 머리 + 흰 카드) 아래, 세 화면(작업 방식 · 보유 장비 · 알아 두실 점, 누르면 그 화면만). 다섯 분야 바꾸기는 남색 머리 안 알약 줄(.pstg__svc) */
+    const VIEWS = [['how', '작업 방식'], ['eq', '보유 장비']].concat(hasNote ? [['note', '알아 두실 점']] : []);
+    const nav = '';
+    const lnb = `  <nav class="um-lnb s6-lnb" aria-label="이 분야 안"><div class="wrap"><div class="um-lnb__t">${VIEWS.map(([v, l]) => `<a href="#v-${v}" data-view="${v}">${l}</a>`).join('')}</div><a class="um-lnb__q" href="contact.html?service=${s.id}">현장 문의 ${arrow(14)}</a></div></nav>`;
+    const nxt = (v, l, em) => `  <div class="wrap"><a class="um-next s6-next" href="#v-${v}"><span><small>다음</small><b>${l}</b><em>${em}</em></span>${arrow(28)}</a></div>`;
     return head({
       file: s.file, page: 'services',
       title: `${s.title} | 여수 산업설비 클리닝 ${C.brand}`,
@@ -3137,6 +3141,7 @@ SERVICES.forEach((s, idx) => {
 <main id="main" class="s6${CFG.look && CFG.look.svcDetailTop === false ? ' s6--bare' : ''}">
 ` + (CFG.look && CFG.look.svcDetailTop === false ? '' : svc16Top(s)) + nav + `
   <section class="s6-ov" id="sv-ov" aria-labelledby="sv-h"><div class="pstg"><div class="wrap">   <!-- 시안C 33차: 분야 이름 · 설명을 남색 무대(첫 화면과 같은 짜임)로 올리고, 사진 · 할 일은 아래 흰 카드로 -->
+    <nav class="pstg__svc" aria-label="사업분야 다섯">${SERVICES.map((x, k) => `<a href="${x.file}#sv-ov"${x === s ? ' aria-current="page"' : ''}><em>${String(k + 1).padStart(2, '0')}</em>${esc(x.title)}</a>`).join('')}</nav>
     <div class="s6-pg"><a href="${prev ? prev.file + '#sv-ov' : 'services.html'}">‹ ${prev ? '이전' : '전체'}</a><span><b>${n}</b> / ${N}</span><a href="${next.file}#sv-ov">다음 ›</a></div>
     ${s16Fn(s)}
     <h1 id="sv-h">${esc(s.title)}</h1>
@@ -3152,15 +3157,24 @@ SERVICES.forEach((s, idx) => {
       </div>
     </div>
   </div></section>
+${lnb}
+  <div class="s6-view" id="v-how" data-view="how">
   <section class="s6-sec s6-sec--how" id="sv-how"><div class="wrap">
     ${ch('작업 방식')}<h2 class="s6-h2">${esc(v.howT)}</h2><p class="s6-lead">${esc(v.howS)}</p>
     <ol class="s6-sts" style="--c:${steps.length === 4 ? 4 : 3}">${stepHtml}</ol>
     ${v.dew ? `<div class="s6-eff"><b>탈수 효과</b>${PROCESS.dewaterEffect.map((x) => `<span>${svc15Ic('check', 16)}${esc(x)}</span>`).join('')}</div>` : ''}
     <p class="us-src">${esc(v.stepsSrc)}</p>${exHtml}
   </div></section>
+${nxt('eq', '보유 장비', '장비 이름 · 규격 · 용도 · 보유 대수')}
+  </div>
+  <div class="s6-view" id="v-eq" data-view="eq">
   <section class="s6-sec" id="sv-eq"><div class="wrap s6-eqs"><div>${ch('보유 장비')}<h2 class="s6-h2">${esc(v.eqT)}</h2><p class="s6-eqs__d">${esc(eg.desc)}</p>${eqPh}<p class="us-src">회사소개서(2024) 21~24쪽 보유 장비</p></div>
     <table class="s6-eqt"><thead><tr><th scope="col">장비</th><th scope="col">규격</th><th scope="col">용도</th><th scope="col">보유</th></tr></thead><tbody>${eqRows}</tbody></table></div></section>
-${hasNote ? `  <section class="s6-sec s6-sec--soft" id="sv-note"><div class="wrap">${ch('알아 두실 점')}${useBlock}${techBlock}${condLink}</div></section>\n` : ''}  <section class="s6-end" id="sv-end"><div class="wrap">
+${hasNote ? nxt('note', '알아 두실 점', '좋아지는 점 · 유의할 점 · 적용 범위') + `
+  </div>
+  <div class="s6-view" id="v-note" data-view="note">
+  <section class="s6-sec s6-sec--soft" id="sv-note"><div class="wrap">${ch('알아 두실 점')}${useBlock}${techBlock}${condLink}</div></section>\n` : ''}  </div>
+  <section class="s6-end" id="sv-end"><div class="wrap">
     <div><p class="s6-ch s6-ch--on"><i>${n}</i>${esc(s.title)}</p><h2>${esc(v.endQ)}</h2><p>${s.inquiryHint.map(esc).join(' · ')} 등을 알려 주시면 가능한 작업 범위와 진행 방법을 안내해 드립니다.</p></div>
     <ul><li><a href="contact.html?service=${s.id}">이 업무로 문의하기 ${arrow(18)}</a></li><li><a href="cases.html#${v15.case}"><span>${esc(s.title)} 적용 사례<small>이 분야에서 한 일과 로봇 투입 기록</small></span>${arrow(18)}</a></li><li><a href="${next.file}#sv-ov"><span>다음 분야 · ${esc(next.title)}<small>${s16Num(next)} / ${N}</small></span>${arrow(18)}</a></li></ul>
   </div></section>
