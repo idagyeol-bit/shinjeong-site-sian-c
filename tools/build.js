@@ -980,65 +980,40 @@ const NEWS = C.history.filter((h) => h.year >= NEWS_FROM).flatMap((h) => h.items
    cat: 'robot' 로봇 · 연구 / 'cert' 인증 · 수상 / 'press' 언론 보도 / 'share' 지역 나눔
    사실 출처: 회사소개서(2024) 6쪽 연혁 · 28~29쪽 특허증 · 43~47쪽 실적(로봇 투입), 기술소개서(2025) 24쪽.
    언론 보도(2026.08 · 2026.10)는 기사 원문 링크만 두고 글은 요약(기사 문장 · 사진을 옮기지 않는다). 대표자 이름 · 발주처 이름은 쓰지 않는다. */
-const NEWS_CAT = { robot: '로봇 · 연구', cert: '인증 · 수상', press: '언론 보도', share: '지역 나눔' };
+/* 시안C 38차(2026-11-08 이다결 님 요청): 소식 = 인터넷에 실린 기사만. 사이트 다른 곳(연혁 · 인증 · 특허 · 로봇 투입 기록)과 겹치는 항목은 넣지 않는다.
+   기사 사진 · 문장은 옮기지 않고 제목(원문 그대로) · 짧은 요약(우리 말) · 원문 링크만. 기사 속 대표자 · 개인 이름은 쓰지 않는다.
+   새 기사는 NEWS2 맨 위에 넣는다(날짜 새것부터). kind: pick 기업 선정 · share 지역 나눔 */
+const NEWS_KIND = { pick: '기업 선정', share: '지역 나눔', talk: '인터뷰' };
 const NEWS_ICON = {
-  robot: '<rect x="5" y="8" width="14" height="10" rx="2"/><path d="M12 4v4M9 13h.01M15 13h.01M3 13h2M19 13h2M8 18v2M16 18v2"/>',
-  patent: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>',
-  lab: '<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6A2 2 0 0 0 19 18l-5-9V3"/><path d="M7.5 14h9"/>',
   award: '<circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 21l5-3 5 3-1.5-7"/>',
-  shield: '<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/>',
   star: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
-  heart: '<path d="M12 20s-7-4.4-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.6-9 9-9 9z"/>'
+  heart: '<path d="M12 20s-7-4.4-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.6-9 9-9 9z"/>',
+  bus: '<rect x="4" y="4" width="16" height="13" rx="2"/><path d="M4 11h16M8 17v2M16 17v2M8 14h.01M16 14h.01"/>',
+  mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>'
+};
+/* 대표 기사 — 로봇 개발 인터뷰(공식 홈페이지 sjdevel.com '뉴스'에도 걸린 기사). 요약은 기사 내용이며 두 소개서 밖의 사실이므로 '기사에 따르면'으로만 쓴다 */
+const NEWS_FEATURE = {
+  d: '2023.02.23', outlet: '남해안신문', url: 'https://www.nhanews.com/news/articleView.html?idxno=79002',
+  title: '화학공장 설비 크리닝 외길 30년, 지역대표 강소기업으로 성장',
+  points: [
+    ['2014', '설비 크리닝 작업의 위험을 줄이려고 무인 크리닝 로봇 개발을 시작'],
+    ['2021', '개발한 로봇을 현장에 적용하기 시작, 쓰는 범위를 넓혀 가는 중'],
+    ['다음', '밀폐공간에서 움직일 수 있는 방폭 구조 로봇 개발을 우선 과제로']
+  ]
 };
 const NEWS2 = [
-  { d: '2026.10', cat: 'share', icon: 'heart', title: '장애인 거주시설 생활방 온풍기 설치 지원', sub: '여수출입국 · 외국인사무소 사회통합위원회의 나눔 봉사 때, 여수의 장애인 거주시설 생활방 세 곳에 온풍기를 설치할 지원금을 전달했습니다.',
+  { d: '2026.10', kind: 'share', icon: 'heart', title: '장애인 거주시설 생활방 온풍기 설치 지원', sub: '지역 봉사 단체의 나눔 활동에 함께해, 장애인 거주시설 생활방 세 곳에 온풍기를 설치할 지원금을 전달했습니다.',
     press: [['남해안신문', 'https://www.nhanews.com/news/articleView.html?idxno=93862', '2026.10.29'], ['뉴스탑전남', 'https://www.dbltv.com/news/articleView.html?idxno=44985', '2026.11.02']] },
-  { d: '2026.08', cat: 'press', icon: 'star', title: "여수시 '2026년 스타기업' 선정", sub: '기술력 · 성장 잠재력 · 재무 건전성 평가를 거쳐 여수시 스타기업으로 지정됐습니다. 지정서와 현판을 받았습니다.',
+  // 2026.08 스타기업: 기사에 업종이 없어 같은 (주)신정개발인지 삼촌 확인 전 — 아니면 이 줄을 지운다
+  { d: '2026.08', kind: 'pick', icon: 'star', title: "여수시 '2026년 스타기업' 선정", sub: '여수시가 기술 수준 · 성장 여력 · 재무 안정성을 검토해 고른 올해의 스타기업 세 곳에 들었고, 지정서와 현판을 받았습니다.',
     press: [['헤럴드경제', 'https://biz.heraldcorp.com/article/10844144', '2026.08.18'], ['NSP통신', 'https://www.nspna.com/country/?mode=view&newsid=824529', '2026.08.18'], ['일간투데이', 'https://www.dtoday.co.kr/news/articleView.html?idxno=786612', '2026.08.18']] },
-  // 시안C 37차 보강: 공식 홈페이지(sjdevel.com) '뉴스'에 걸린 남해안신문 기사 4건(기사 링크만 · 기사 속 대표자명 쓰지 않음)
-  { d: '2024.12', cat: 'cert', icon: 'award', title: "전라남도 '2024년 일자리 우수기업' 선정", sub: '여수 지역 다섯 기업과 함께 일자리 우수기업 인증패를 받았습니다.',
+  { d: '2024.12', kind: 'pick', icon: 'award', title: "전라남도 '2024년 일자리 우수기업' 선정", sub: '전라남도 일자리 우수기업 인증에 여수 지역 다섯 기업과 함께 선정돼 인증패를 받았습니다.',
     press: [['남해안신문', 'https://www.nhanews.com/news/articleView.html?idxno=90641', '2024.12.16']] },
-  { d: '2024.09', cat: 'share', icon: 'heart', title: '장애인 거주시설에 이동용 미니버스 지원', sub: "전남사회복지공동모금회 '기획 버스 지원사업'에 지역 기업과 함께 후원해, 장애인 거주시설에 미니버스를 전달했습니다.",
+  { d: '2024.09', kind: 'share', icon: 'bus', title: '장애인 거주시설에 이동용 미니버스 지원', sub: "지역 기업과 함께 후원해, 전남사회복지공동모금회 '기획 버스 지원사업'으로 중증장애인 거주시설에 미니버스를 전달했습니다.",
     press: [['남해안신문', 'https://www.nhanews.com/news/articleView.html?idxno=90188', '2024.09.24']] },
-  { d: '2023.09', cat: 'robot', photo: 'R27', title: '로봇으로 폐수처리장 유량조정조 슬러지 준설', sub: '2023년 9~11월 · 로봇 투입 작업' },
-  { d: '2023.07', cat: 'robot', icon: 'patent', title: "특허 등록 — '협업형 무인로봇을 이용한 산업용 저장소의 자율 클리닝 시스템'", sub: '특허 제 10-2556408 호' },
-  { d: '2023.07', cat: 'robot', icon: 'patent', title: "특허 등록 — '레이다를 이용한 파이프 두께 측정장치'", sub: '특허 제 10-2562019 호' },
-  { d: '2023.05', cat: 'cert', icon: 'shield', title: '신용등급 우수기업 인증 (신용등급 BBB-)' },
-  { d: '2023.02', cat: 'press', icon: 'robot', title: "인터뷰 — '화학공장 설비 크리닝 외길 30년, 지역대표 강소기업으로 성장'", sub: '기사에 따르면 2014년부터 무인 크리닝 로봇을 개발해 2021년부터 현장에 적용해 왔고, 위험한 공간의 작업을 로봇으로 옮기는 개발을 이어 가고 있습니다.',
-    press: [['남해안신문', 'https://www.nhanews.com/news/articleView.html?idxno=79002', '2023.02.23']] },
-  { d: '2023.02', cat: 'share', icon: 'heart', title: '복지관에 승합차 기증', sub: '거동이 불편한 이용자가 복지관을 오갈 수 있도록 지역 종합사회복지관에 승합차를 기증했습니다.',
-    press: [['남해안신문', 'https://www.nhanews.com/news/articleView.html?idxno=78930', '2023.02.10']] },
-  { d: '2023.02', cat: 'robot', photo: 'W05', title: 'Reactor 촉매 Unloading에 로봇 투입', sub: '2023년 2~4월 · 촉매 · 무인로봇' },
-  { d: '2022.05', cat: 'robot', icon: 'patent', title: "특허 등록 — '저장소 내부 검사장치'", sub: '특허 제 10-2403678 호' },
-  { d: '2022.05', cat: 'robot', photo: 'R24', title: 'MDEA Storage Tank 내부를 로봇으로 Cleaning', sub: '2022년 5월 · 무인로봇' },
-  { d: '2022.01', cat: 'robot', icon: 'robot', title: '전처리반응기 촉매 교체 — 무인화 작업', sub: '2022년 1월 · 촉매 · 무인로봇' },
-  { d: '2021.11', cat: 'cert', icon: 'award', title: '산업통상자원부 표창' },
-  { d: '2021.06', cat: 'robot', photo: 'R25', title: '로봇을 활용한 충진물 Unloading Test', sub: '로봇 투입 기록 17건(2021~2023) 가운데 가장 이른 기록' },
-  { d: '2020.12', cat: 'cert', icon: 'shield', title: '기술혁신형 중소기업(INNOBIZ) 인증' },
-  { d: '2020.11', cat: 'cert', icon: 'award', title: '중소기업 경영혁신 공모전 우수상' },
-  { d: '2020.11', cat: 'share', icon: 'heart', title: '지역사회 공헌 인정기업 승인' },
-  { d: '2020.07', cat: 'robot', icon: 'patent', title: "특허 등록 — '워터젯 유닛을 구비한 세정로봇 장치'", sub: '특허 제 10-2140282 호' },
-  { d: '2020.05', cat: 'robot', icon: 'patent', title: "특허 등록 — '소형관로 준설로봇 및 그 운전방법'", sub: '특허 제 10-2114302 호' },
-  { d: '2020.01', cat: 'robot', icon: 'patent', title: "특허 등록 — '스크류 바퀴를 구비한 수륙양용 준설로봇'", sub: '특허 제 10-2066976 호' },
-  { d: '2018.07', cat: 'cert', icon: 'award', title: '서비스분야 안전보건활동 우수사례 대상' },
-  { d: '2018.07', cat: 'cert', icon: 'shield', title: '위험성평가 인증 — 산업안전보건공단' },
-  { d: '2017.11', cat: 'robot', icon: 'lab', title: '기업부설연구소 설립', sub: '한국산업기술진흥협회 인정 (2017.11.14)' },
-  { d: '2017.07', cat: 'cert', icon: 'shield', title: '경영혁신형 중소기업(MAINBIZ) 인증' },
-  { d: '2017.06', cat: 'cert', icon: 'shield', title: '전남형 강소기업 인증' },
-  { d: '2017.05', cat: 'cert', icon: 'shield', title: 'ISO 14001 인증' },
-  { d: '2017.04', cat: 'robot', icon: 'patent', title: "특허 등록 — '관내부 무인 준설 처리 시스템'", sub: '특허 제 10-1726660 호' },
-  { d: '2017.03', cat: 'robot', icon: 'patent', title: "특허 등록 — '정합식 맨홀'", sub: '특허 제 10-1736394 호' },
-  { d: '2016.05', cat: 'cert', icon: 'shield', title: 'KOSHA 18001 인증' }
+  { d: '2023.02', kind: 'share', icon: 'bus', title: '복지관에 승합차 기증', sub: '복지관 차량이 낡았다는 소식을 듣고, 거동이 불편한 이용자가 복지관을 오갈 수 있도록 승합차를 기증했습니다.',
+    press: [['남해안신문', 'https://www.nhanews.com/news/articleView.html?idxno=78930', '2023.02.10']] }
 ];
-/* 로봇 이야기 띠(소식 맨 위, 남색 무대) — 연구소 → 특허 → 현장 투입 */
-const NEWS_ROBOT_STEPS = [
-  ['2017.11', '기업부설연구소 설립', '한국산업기술진흥협회 인정'],
-  ['2020', '로봇 특허 3건 등록', '수륙양용 준설로봇 · 소형관로 준설로봇 · 워터젯 세정로봇'],
-  ['2021.06', '로봇 현장 투입', '충진물 Unloading Test — 가장 이른 기록'],
-  ['2021~2023', '로봇 투입 기록 17건', '탱크 · 반응기 · 저장소 · 유량조정조'],
-  ['2023.07', '협업형 무인로봇 특허', '산업용 저장소 자율 클리닝 시스템']
-];
-
 const PROJ_TAB_ORDER = ['S01', 'S02', 'S04', 'S03', 'S05'];   // 실적이 많은 분야부터
 
 /* ===================== 시안C 13차: 적용 사례 (2026-10-31 이다결 님 결정) =====================
@@ -2779,11 +2754,6 @@ ${HOME24.glance().slice(0, (CFG.home.copy.numbers || {}).keep || 4).map((g) => `
   </ul></div></section>
 `;
 /* 시안C 37차: 메인 '소식' — 최근 소식 세 장(가로형 작은 카드) + 소식 전체 */
-HOME_SECTIONS.news3 = () => `  <section class="section nw-home" id="news" aria-labelledby="nwh-h"><div class="wrap">
-    <div class="nw-list__h"><div><p class="nw-k nw-k--d">소식</p><h2 id="nwh-h">신정개발 소식</h2></div><a class="nw-go nw-go--line" href="news.html">소식 전체 ${arrow(16)}</a></div>
-    <ul class="nw-grid nw-grid--3">${NEWS2.slice(0, 3).map(newsCard).join('')}</ul>
-  </div></section>
-`;
 /* 왜 로봇인가 — 방향성: 밀폐공간 숫자 → 그래서 로봇이 먼저 */
 HOME_SECTIONS.why2 = () => {
   const w = HOME24.why;
@@ -3632,38 +3602,59 @@ ${SRC_LINE}    </div>
 };
 
 /* ---------- 4-1. 소식 (시안C 7차 신설) — 회사소개서 연혁의 최근 항목을 날짜순으로. 새 소식은 NEWS_EXTRA ---------- */
-/* 시안C 37차: 소식 — 남색 '로봇 이야기' 띠(연구소 → 특허 → 현장 투입) + 가로형 작은 카드(사진 · 날짜 · 제목) 목록, 분류 단추로 거르기(js/news.js) */
-const newsThumb = (n, lazy) => n.photo
-  ? `<span class="nw-th">${photo(P(n.photo), '(max-width:860px) 112px, 168px')}</span>`
-  : `<span class="nw-th nw-th--tile nw-th--${n.cat}"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${NEWS_ICON[n.icon || 'robot']}</svg></span>`;
-const newsCard = (n) => `<li class="nw-card" data-cat="${n.cat}"><article>${newsThumb(n)}<div class="nw-tx"><p class="nw-meta"><span class="nw-cat nw-cat--${n.cat}">${esc(NEWS_CAT[n.cat])}</span><time datetime="${n.d.replace('.', '-')}">${esc(n.d)}</time></p><h3>${esc(n.title)}</h3>${n.sub ? `<p class="nw-sub">${esc(n.sub)}</p>` : ''}${n.press ? `<p class="nw-press"><span>기사</span>${n.press.map(([o, u, d]) => `<a href="${u}" target="_blank" rel="noopener">${esc(o)} <small>${esc(d)}</small> ${upArrow(12)}</a>`).join('')}</p>` : ''}</div></article></li>`;
+/* 시안C 38차: 소식 — 대표 기사(로봇 개발 인터뷰) + 해마다 묶은 기사 카드(날짜 칸 · 분류 · 제목 · 요약 · 원문 링크). 기사만 싣는다 */
+const NEWS_SVG = (k, s = 22) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${NEWS_ICON[k]}</svg>`;
+const NEWS_OUT = (o, u, d) => `<a href="${u}" target="_blank" rel="noopener" aria-label="${esc(o)} ${esc(d)} 기사 (새 창)">${esc(o)} <small>${esc(d)}</small> ${upArrow(12)}</a>`;
+const newsCard = (n) => {
+  const [y, m] = n.d.split('.');
+  const [o0, u0, d0] = n.press[0];
+  return `<li class="nw2-card nw2-card--${n.kind}"><article>
+        <span class="nw2-date" aria-hidden="true">${NEWS_SVG(n.icon, 20)}<b>${m}</b><small>${y}</small></span>
+        <div class="nw2-tx"><p class="nw2-meta"><span class="nw2-kind">${esc(NEWS_KIND[n.kind])}</span><time datetime="${y}-${m}">${esc(n.d)}</time></p>
+          <h3><a href="${u0}" target="_blank" rel="noopener">${esc(n.title)}<span class="sr-only"> — ${esc(o0)} 기사 (새 창)</span></a></h3>
+          <p class="nw2-sub">${esc(n.sub)}</p></div>
+        <p class="nw2-out"><span>기사 원문</span>${n.press.map(([o, u, d]) => NEWS_OUT(o, u, d)).join('')}</p>
+      </article></li>`;
+};
 pages['news.html'] = () => {
-  const c = CFG.pages.news;
-  const cats = ['all'].concat(Object.keys(NEWS_CAT));
-  const cnt = (k) => k === 'all' ? NEWS2.length : NEWS2.filter((n) => n.cat === k).length;
+  const c = CFG.pages.news, F = NEWS_FEATURE;
+  const years = [...new Set(NEWS2.map((n) => n.d.slice(0, 4)))];
+  const outlets = new Set([F.outlet].concat(...NEWS2.map((n) => n.press.map((p) => p[0])))).size;
+  const total = NEWS2.length + 1;
   return head({
     file: 'news.html', page: 'news',
     title: `소식 | ${C.brand}`,
-    desc: '신정개발의 로봇 · 연구, 인증 · 수상, 언론 보도, 지역 나눔 소식입니다.'
+    desc: '언론에 실린 신정개발 이야기 — 로봇 개발 인터뷰, 기업 선정, 지역 나눔 기사를 모았습니다.'
   }) + header('news', null, 'news.html') + `
-<main id="main" class="nw">
+<main id="main" class="nw2">
 ` + phero({ h1: c.title, keepLead: c.lead, crumbs: [{ label: c.title }] }) + `
-  <section class="nw-robot" aria-labelledby="nw-robot-h"><div class="wrap">
-    <div class="nw-robot__h"><div><p class="nw-k">로봇 이야기</p><h2 id="nw-robot-h">현장에 들어가는 로봇,<br><span>신정개발이 자체 개발합니다</span></h2></div>
-      <p class="nw-robot__l">${C.founded}년 설립 · ${'2017'}년 기업부설연구소 설립. 1~${PROCESS.generations.length}세대 무인 Vacuum 로봇과 로봇 관련 특허, 2021~2023년 로봇 투입 기록 ${ROBOT_RECORDS.length}건이 있습니다.</p></div>
-    <ol class="nw-steps">${NEWS_ROBOT_STEPS.map(([d, t, sub], k) => `<li><em>${String(k + 1).padStart(2, '0')}</em><time>${esc(d)}</time><b>${esc(t)}</b><span>${esc(sub)}</span></li>`).join('')}</ol>
-    <div class="nw-robot__go"><a class="nw-go nw-go--g" href="unmanned.html">무인 솔루션 자세히 ${arrow(16)}</a><a class="nw-go" href="cases.html">로봇 투입 기록 · 적용 사례 ${arrow(16)}</a><a class="nw-go" href="https://www.nhanews.com/news/articleView.html?idxno=79002" target="_blank" rel="noopener">로봇 개발 인터뷰 · 남해안신문 2023.02 ${upArrow(14)}</a></div>
+  <section class="section nw2-ft" aria-labelledby="nw2-ft-h"><div class="wrap">
+    <p class="nw2-k">대표 기사</p>
+    <article class="nw2-ftc">
+      <div class="nw2-ftc__l">
+        <p class="nw2-meta nw2-meta--inv"><span class="nw2-kind">${esc(NEWS_KIND.talk)}</span><span>${esc(F.outlet)} · <time datetime="${F.d.replace(/\./g, '-')}">${esc(F.d)}</time></span></p>
+        <h2 id="nw2-ft-h"><span class="nw2-q" aria-hidden="true">“</span>${esc(F.title)}</h2>
+        <p class="nw2-ftc__note">신정개발의 로봇 개발 이야기를 다룬 언론 인터뷰입니다.</p>
+        <a class="nw2-btn" href="${F.url}" target="_blank" rel="noopener">기사 원문 읽기 ${upArrow(14)}<span class="sr-only"> (새 창)</span></a>
+      </div>
+      <div class="nw2-ftc__r">
+        <p class="nw2-ftc__h">기사에 실린 로봇 이야기</p>
+        <ol class="nw2-pts">${F.points.map(([k, t]) => `<li><b>${esc(k)}</b><span>${esc(t)}</span></li>`).join('')}</ol>
+        <p class="nw2-ftc__src">기사 내용을 짧게 줄인 것입니다. 자세한 내용은 원문에서 보실 수 있습니다.</p>
+      </div>
+    </article>
   </div></section>
 
-  <section class="section nw-list" aria-labelledby="nw-list-h"><div class="wrap">
-    <div class="nw-list__h"><div><p class="nw-k nw-k--d">전체 소식</p><h2 id="nw-list-h">신정개발 소식</h2></div>
-      <div class="nw-f" role="group" aria-label="분류">${cats.map((k) => `<button type="button" data-f="${k}" aria-pressed="${k === 'all'}">${k === 'all' ? '전체' : esc(NEWS_CAT[k])}<small>${cnt(k)}</small></button>`).join('')}</div></div>
-    <ul class="nw-grid">${NEWS2.map(newsCard).join('')}</ul>
-    <p class="us-src nw-src">${esc(c.src)}</p>
+  <section class="section nw2-list" aria-labelledby="nw2-list-h"><div class="wrap">
+    <div class="nw2-list__h"><div><p class="nw2-k">보도 기사</p><h2 id="nw2-list-h">언론에 실린 신정개발</h2></div>
+      <p class="nw2-sum"><b>${total}</b>건 · <b>${outlets}</b>개 언론사 · ${years[years.length - 1] > '2023' ? years[years.length - 1] : '2023'}~${years[0]}</p></div>
+${years.map((y) => `    <div class="nw2-yr"><h3 class="nw2-yr__y"><span>${y}</span></h3><ul class="nw2-cards">${NEWS2.filter((n) => n.d.startsWith(y)).map(newsCard).join('')}</ul></div>`).join('\n')}
+    <p class="us-src nw2-src">${esc(c.src)}</p>
   </div></section>
 
-` + cta({ h2: CFG.common.cta.title, p: CFG.common.cta.text }) + MAIN_END + footer() + foot(['news.js']);
+` + cta({ h2: CFG.common.cta.title, p: CFG.common.cta.text }) + MAIN_END + footer() + foot();
 };
+
 
 /* ---------- 시안C 13차: 적용 사례 페이지 (cases.html) — 분야 탭 + 분야별 상세 다섯 개 ----------
    주소 끝 #s01 · #s02 · #s04 · #s03 · #s05 로 그 분야가 열린다(js/cases.js). 스크립트가 없으면 다섯 분야가 차례로 모두 보인다.
