@@ -1568,7 +1568,7 @@ ${map.map((g) => `      <div><h3><a href="${g.href}">${esc(g.h)}</a></h3><ul>${g
 
 <nav class="mcta" aria-label="빠른 문의">
   <a class="mcta__tel" href="tel:${C.tel.replace(/-/g, '')}">전화 문의</a>
-  <a class="mcta__go" href="contact.html">${CFG.common.mobileCta} ${arrow(17)}</a>
+  <a class="mcta__go" href="contact.html#inquiry">${CFG.common.mobileCta} ${arrow(17)}</a>   <!-- 56차: 누르면 문의 양식으로 바로 -->
 </nav>
 `;
 }
@@ -2917,7 +2917,7 @@ function heroFlow() {
   const li = FLOW.steps.map((st, i) => `<li${st.robot ? ' class="rbt"' : ''}><i class="bar"></i><button type="button" class="sb" aria-expanded="false"><span class="ph">${st.robot ? `<span class="rbadge">${t(st.robot)}</span>` : ''}<img src="${A}${st.vd.replace('v', 'p')}.webp" alt="" class="po" width="1600" height="944" decoding="async"${i ? ' loading="eager"' : ' fetchpriority="high"'}><video class="vd" muted playsinline preload="${i ? 'none' : 'auto'}" src="${A}${st.vd}.mp4"></video><span class="pins" data-v="${st.vd}" aria-hidden="true">${(st.pins || []).map((q) => `<span class="pin" data-id="${q[0]}" data-side="${q[3]}" data-dy="${q[4]}"${q[6] ? ` data-dx="${q[6]}"` : ''}${q[5] ? ' data-m="1"' : ''}><i class="pd"></i><i class="pk"></i><b>${esc(q[1])}${q[2] ? `<small>${esc(q[2])}</small>` : ''}</b></span>`).join('')}</span></span><span class="tx"><em>${String(i + 1).padStart(2, '0')}</em><b>${t(st.title)}</b><span class="tg">${t(st.tag)}</span><span class="ds">${b(st.desc)}</span><span class="ef">${t(st.eff)}</span></span><i class="cv" aria-hidden="true">+</i></button></li>`).join('');
   return `  <!-- ===== 히어로: 표어 + 일하는 순서 다섯 칸 (큰 틀 'flow', 시안C 27차) ===== -->
 <section class="hx" id="hx" aria-label="${esc(C.brand)} 소개"><svg class="hxsky" viewBox="0 0 1440 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M0 259.5H1440"/><path d="M60 259V170h120v89M60 170q60-22 120 0M70 200h100M70 230h100"/><path d="M200 259V150h150v109M200 150q75-26 150 0M210 185h130M210 220h130"/><path d="M420 259V60h26v199M415 60h36M415 110h36M415 160h36M415 210h36M433 60V30"/><path d="M480 259V95h20v164M476 95h28M476 140h28M476 185h28M490 95V70"/><path d="M540 259V120h52v139M540 160h52M540 200h52M566 120V96"/><path d="M620 259V200h300v59M620 225h300M650 200v59M710 200v59M770 200v59M830 200v59M890 200v59"/><path d="M955 259V40h10v219M960 40V20M950 30h20"/><path d="M1000 259V178h170v81M1000 178q85-26 170 0M1012 212h146M1012 240h146"/><path d="M1190 259V140h40v119M1184 140h52M1184 180h52M1184 220h52"/><path d="M1260 259V190h150v69M1260 190q75-20 150 0M1272 225h126"/><path d="M180 240h20M350 240h70M446 240h34M592 240h28M920 240h35M965 240h35M1170 240h20M1230 240h30" stroke-dasharray="3 4"/></g></svg><div class="wrap"><div class="hxh"><div class="hxl"><p class="eb" id="hxe">${t(f.eyebrow)}</p><h1 id="hxt" class="qt">${f.title.map((x, i) => `<span class="${i ? 'q2' : 'q1'}">${i ? '' : '<i class="qo" aria-hidden="true">“</i>'}${b(x)}${i === f.title.length - 1 ? '<i class="qc" aria-hidden="true">”</i>' : ''}</span>`).join('')}</h1>${f.gain ? `<p class="hxg">${b(f.gain)}</p>` : ''}</div>
-<div class="hxr2"><p class="lede"><span class="lw">${b(f.lede.pc)}</span><span class="lm">${b(f.lede.m)}</span>${b(f.lede.tail)}</p>
+<div class="hxr2"><p class="lede"><span class="lw">${b(f.lede.pc)}</span><span class="lm">${b(f.lede.m)}</span><span class="lt">${b(f.lede.tail)}</span></p>   <!-- 56차: 휴대폰은 표어 아래 한 줄(gain)과 겹치는 뒷문장을 줄여 다섯 장면이 첫 화면에 보이게 -->
 <ul class="meta">${f.meta.map(([n, u, l]) => `<li><b>${t(n)}${u ? `<small>${t(u)}</small>` : ''}</b>${t(l)}</li>`).join('')}</ul>
 <nav class="hxgo" aria-label="분야 바로 가기"><span class="hxgo__k">분야 바로 가기</span>${SERVICES.map((x) => `<a href="${x.file}">${esc(x.title)}</a>`).join('')}</nav></div></div>   <!-- 시안C 46차: 신정개발을 이미 아는 손님은 첫 화면에서 바로 자기 분야로 -->
 <div class="hsh"><b>${t(f.stripTitle)}</b><span class="hsp">${t(f.hintPc)}</span><span class="hsm">${t(f.hintM)}</span></div><ol class="hs" id="hs">${li}</ol>
@@ -4487,7 +4487,7 @@ pages['company.html'] = () => {
       <nav class="c7-crumb" aria-label="현재 위치"><a href="index.html">홈</a><span aria-hidden="true">›</span><span aria-current="page">회사 소개</span></nav>
       <h1 id="c7-h">회사 소개 <span>인사말</span></h1>
       <p class="c7-msg__q">${G.q}</p>
-      <div class="c7-msg__b">${G.paras.map((x) => `<p>${esc(x)}</p>`).join('')}</div>
+      <div class="c7-msg__b"><p>${esc(G.paras[0])}</p><div class="c7-msg__rest">${G.paras.slice(1).map((x) => `<p>${esc(x)}</p>`).join('')}</div><button type="button" class="c7-msg__more" aria-expanded="false" hidden>인사말 전체 보기</button></div>   <!-- 56차: 휴대폰은 첫 문단만, 나머지는 펼쳐 읽기(js/company17.js) -->
       <p class="c7-msg__s">${esc(G.sign)}</p>
       <p class="us-src">${esc(G.src)}</p>
     </div>
