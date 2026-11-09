@@ -809,7 +809,7 @@ const WHAT_TILES = [
 const TILE_TARGETS = (svcId) => CARD_CHIPS[svcId].slice(0, 4).join(' · ');   // 타일 둘째 줄: 대상 설비 네 개까지
 const FINDER = {
   title: '우리 설비는 어디에 해당할까요',
-  lead: '설비 상태로 찾으면 맡길 일이 바로 보입니다.',
+  lead: '설비 상태로 찾으면 맡길 일이 바로 보입니다. 현장 조건까지 함께 보시려면 <a class="tlink" href="contact.html#diag">4문항 현장 진단 →</a>',   // 51차: 현장 진단으로 가는 길
   rows: [
     { svc: 'S01', have: '탱크 · Pond · 배수로 · R.T.O', situation: '잔류물과 퇴적물이 쌓였다면', gear: '흡입 로봇 · 제어 차량 투입' },
     { svc: 'S02', have: '반응기', situation: '촉매·충진물을 교체해야 한다면', gear: '흡입 로봇 · 분리장치 투입' },
@@ -818,13 +818,49 @@ const FINDER = {
     { svc: 'S05', have: '관로 · 맨홀', situation: '상태를 조사하거나 보수해야 한다면', gear: '관로 CCTV 로봇 투입' }
   ]
 };
+/* 시안C 51차: 문의 쪽 '우리 현장 진단' 4문항 — 고르면 맞는 분야 · 장비 · 준비할 것이 나오고, 문의 양식을 채운다(js/contact.js 51차).
+   글은 모두 사이트에 이미 있는 사실(FINDER · FLOW · 분야 상세)에서. 로봇 여부: S03 화학세정은 로봇 투입 기록이 없어 '내산장비' */
+const DIAG = {
+  q1: [['탱크 · Pond · 배수로', 'S01'], ['R.T.O · Filter Press', 'S01'], ['반응기 (촉매 · 충진물)', 'S02'], ['배관 · 열교환기 · 냉각탑 · 보일러', 'S03'], ['하수관 · 오수관 · 처리시설', 'S04'], ['관로 · 맨홀 (조사 · 보수)', 'S05']],
+  q2: [['예, 위험합니다', 'y'], ['아니요', 'n'], ['잘 모르겠습니다', 'u']],
+  q3: [['예, 방폭지역입니다', 'y'], ['아니요', 'n'], ['잘 모르겠습니다', 'u']],
+  q4: [['정기보수 · 대정비 기간', '정기보수 · 대정비 기간'], ['가능한 빨리', '가능한 빨리'], ['아직 정하지 않았습니다', '미정']],
+  robot: { S01: '위험한 내부에는 흡입 로봇이 먼저 들어가고, 작업자는 밖의 제어 차량에서 원격으로 조종합니다.', S02: '반응기 안에는 로봇이 먼저 들어가 촉매 · 충진물을 회수합니다.', S03: '화학세정용 내산장비로 작업합니다.', S04: '무인준설로봇으로 퇴적물과 슬러지를 회수합니다.', S05: '관로 안은 CCTV 로봇으로 조사합니다.' },
+  ex: '유압 구동 로봇이라 방폭지역에서도 작업할 수 있습니다.',
+  prep: ['설비 종류와 크기 · 구조 (도면이 있으면 함께)', '안에 쌓인 물질과 상태', '희망 일정과 현장 위치', '현장 사진']
+};
+function diagSection() {
+  const g = (k, name, label, n) => `<fieldset class="dg-q" data-q="${k}"><legend><em>${n}</em>${esc(label)}</legend><div class="dg-ops">${DIAG[k].map(([t, v], i) => `<label><input type="radio" name="dg-${k}" value="${esc(v)}"${k === 'q1' ? ` data-i="${i}"` : ''}><span>${esc(t)}</span></label>`).join('')}</div></fieldset>`;
+  const svc = SERVICES.map((x) => { const f = FINDER.rows.find((r) => r.svc === x.id) || {}; return `<div class="dg-svc" data-svc="${x.id}" hidden><p class="dg-r__k">맞는 분야</p><p class="dg-r__h"><a href="${x.file}">${esc(x.title)} ${arrow(16)}</a></p><p class="dg-r__g">${esc(f.gear || '')}</p><p class="dg-r__rb">${esc(DIAG.robot[x.id])}</p></div>`; }).join('');
+  return `  <section class="section dg" id="diag" aria-labelledby="dg-h">
+    <div class="wrap">
+      <div class="head"><div><p class="h24-k">현장 진단</p><h2 id="dg-h">네 가지만 알려 주시면,<br>맞는 작업을 찾아 드립니다</h2></div><p class="lead">설비와 현장 조건에 맞는 분야 · 장비와, 상담 전에 준비하시면 좋은 것을 바로 보실 수 있습니다.</p></div>
+      <form class="dg-box" onsubmit="return false" novalidate>
+        <div class="dg-qs">
+          ${g('q1', '', '어떤 설비인가요?', '01')}
+          ${g('q2', '', '설비 안에 사람이 들어가기 위험한가요? (밀폐공간 · 유해물질)', '02')}
+          ${g('q3', '', '방폭지역인가요?', '03')}
+          ${g('q4', '', '언제 작업하시려고 하나요?', '04')}
+        </div>
+        <aside class="dg-r" aria-live="polite">
+          <div class="dg-r__empty"><p class="dg-r__k">진단 결과</p><p>설비를 고르시면 맞는 분야가 여기에 나옵니다.</p></div>
+          ${svc}
+          <p class="dg-r__ex" hidden>${esc(DIAG.ex)}</p>
+          <div class="dg-r__prep" hidden><p class="dg-r__k">상담 전에 준비하시면 좋은 것</p><ul>${DIAG.prep.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>
+          <button class="btn btn--fill dg-go" type="button" disabled>이 내용으로 문의 양식 채우기 ${arrow(16)}</button>
+        </aside>
+      </form>
+    </div>
+  </section>
+`;
+}
 function finderSection() {
   return `  <!-- ===== 설비로 찾기 (시안C 3차, 안 B) ===== -->
   <section class="section finder" aria-labelledby="finder-title">
     <div class="wrap">
       <div class="head">
         <div data-reveal><h2 id="finder-title">${esc(FINDER.title)}</h2></div>
-        <p class="lead">${esc(FINDER.lead)}</p>
+        <p class="lead">${FINDER.lead}</p>
       </div>
       <div class="finder__rows" data-reveal>
 ${FINDER.rows.map((r) => { const s = svc(r.svc); const ph = P((SVC15[r.svc] && SVC15[r.svc].head) || WHAT_TILES.find((w) => w.svc === r.svc).photo);   /* 시안C 15차: 상세 맨 위 사진과 같게 */ return `        <a class="finder__row" href="${s.file}">
@@ -1310,6 +1346,13 @@ function photo(p, sizesAttr, eager) {
    제목 앞 표시는 [시안 이름], 맨 위 안내 줄에 "기본판 보기"(../index.html). 기본판의 결과는 41차 전과 같다 */
 /* 43차: 시안 갈래(sian-a·sian-b)에서는 설정의 sian.name 이 채워져 있다. 그때만 맨 위 안내 줄 대신 시안 띠(.sianbar)를 넣고
    제목 앞 표시를 [시안 A] 처럼 바꾼다. dev·main 에서는 sian.name 이 비어 있어 결과가 43차 전과 같다 */
+/* 시안C 51차: 링크를 보낼 때 뜨는 그림 — 쪽마다 맞는 사진(클라이언트 ZIP 사진을 1200x630 으로 자른 assets/og/<쪽>.jpg). 없으면 예전 M08 */
+const OG_PICS = { index: 'R26', services: 'M10', 'service-equipment-cleaning': 'W09', 'service-catalyst-media': 'W06', 'service-chemical-cleaning': 'W01', 'service-dredging-sludge': 'W03', 'service-inspection-repair': 'R34', unmanned: 'W05', cases: 'R25', projects: 'W07', company: 'M02', news: 'R25', contact: 'R24' };
+function ogTag(file) {
+  const b = String(file || '').replace(/\.html$/, '');
+  if (OG_PICS[b] && fs.existsSync(path.join(OUT, 'assets/og', b + '.jpg'))) return `<meta property="og:image" content="${SITE_URL}assets/og/${b}.jpg">\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">`;
+  return `<meta property="og:image" content="${SITE_URL}assets/photos/M08-1600.jpg">\n<meta property="og:image:width" content="1600">\n<meta property="og:image:height" content="1067">`;
+}
 function head(o) {
   const V = VARIANT;
   const S = CFG.sian && CFG.sian.name ? CFG.sian : null;
@@ -1335,9 +1378,7 @@ ${V ? '' : `<link rel="canonical" href="${SITE_URL}${here}">
 <meta property="og:description" content="${esc(o.desc)}">
 <meta property="og:url" content="${SITE_URL}${here}">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:image" content="${SITE_URL}assets/photos/M08-1600.jpg">
-<meta property="og:image:width" content="1600">
-<meta property="og:image:height" content="1067">
+${ogTag(o.file)}
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/logo/shinjeong-symbol.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/logo/shinjeong-symbol.png">
@@ -2877,7 +2918,7 @@ function heroFlow() {
   const A = 'assets/hero-flow/';
   const li = FLOW.steps.map((st, i) => `<li${st.robot ? ' class="rbt"' : ''}><i class="bar"></i><button type="button" class="sb" aria-expanded="false"><span class="ph">${st.robot ? `<span class="rbadge">${t(st.robot)}</span>` : ''}<img src="${A}${st.vd.replace('v', 'p')}.webp" alt="" class="po" width="1600" height="944" decoding="async"${i ? ' loading="eager"' : ' fetchpriority="high"'}><video class="vd" muted playsinline preload="${i ? 'none' : 'auto'}" src="${A}${st.vd}.mp4"></video><span class="pins" data-v="${st.vd}" aria-hidden="true">${(st.pins || []).map((q) => `<span class="pin" data-id="${q[0]}" data-side="${q[3]}" data-dy="${q[4]}"${q[6] ? ` data-dx="${q[6]}"` : ''}${q[5] ? ' data-m="1"' : ''}><i class="pd"></i><i class="pk"></i><b>${esc(q[1])}${q[2] ? `<small>${esc(q[2])}</small>` : ''}</b></span>`).join('')}</span></span><span class="tx"><em>${String(i + 1).padStart(2, '0')}</em><b>${t(st.title)}</b><span class="tg">${t(st.tag)}</span><span class="ds">${b(st.desc)}</span><span class="ef">${t(st.eff)}</span></span><i class="cv" aria-hidden="true">+</i></button></li>`).join('');
   return `  <!-- ===== 히어로: 표어 + 일하는 순서 다섯 칸 (큰 틀 'flow', 시안C 27차) ===== -->
-<section class="hx" id="hx" aria-label="${esc(C.brand)} 소개"><svg class="hxsky" viewBox="0 0 1440 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M0 259.5H1440"/><path d="M60 259V170h120v89M60 170q60-22 120 0M70 200h100M70 230h100"/><path d="M200 259V150h150v109M200 150q75-26 150 0M210 185h130M210 220h130"/><path d="M420 259V60h26v199M415 60h36M415 110h36M415 160h36M415 210h36M433 60V30"/><path d="M480 259V95h20v164M476 95h28M476 140h28M476 185h28M490 95V70"/><path d="M540 259V120h52v139M540 160h52M540 200h52M566 120V96"/><path d="M620 259V200h300v59M620 225h300M650 200v59M710 200v59M770 200v59M830 200v59M890 200v59"/><path d="M955 259V40h10v219M960 40V20M950 30h20"/><path d="M1000 259V178h170v81M1000 178q85-26 170 0M1012 212h146M1012 240h146"/><path d="M1190 259V140h40v119M1184 140h52M1184 180h52M1184 220h52"/><path d="M1260 259V190h150v69M1260 190q75-20 150 0M1272 225h126"/><path d="M180 240h20M350 240h70M446 240h34M592 240h28M920 240h35M965 240h35M1170 240h20M1230 240h30" stroke-dasharray="3 4"/></g></svg><div class="wrap"><div class="hxh"><div class="hxl"><p class="eb" id="hxe">${t(f.eyebrow)}</p><h1 id="hxt" class="qt">${f.title.map((x, i) => `<span class="${i ? 'q2' : 'q1'}">${i ? '' : '<i class="qo" aria-hidden="true">“</i>'}${b(x)}${i === f.title.length - 1 ? '<i class="qc" aria-hidden="true">”</i>' : ''}</span>`).join('')}</h1></div>
+<section class="hx" id="hx" aria-label="${esc(C.brand)} 소개"><svg class="hxsky" viewBox="0 0 1440 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M0 259.5H1440"/><path d="M60 259V170h120v89M60 170q60-22 120 0M70 200h100M70 230h100"/><path d="M200 259V150h150v109M200 150q75-26 150 0M210 185h130M210 220h130"/><path d="M420 259V60h26v199M415 60h36M415 110h36M415 160h36M415 210h36M433 60V30"/><path d="M480 259V95h20v164M476 95h28M476 140h28M476 185h28M490 95V70"/><path d="M540 259V120h52v139M540 160h52M540 200h52M566 120V96"/><path d="M620 259V200h300v59M620 225h300M650 200v59M710 200v59M770 200v59M830 200v59M890 200v59"/><path d="M955 259V40h10v219M960 40V20M950 30h20"/><path d="M1000 259V178h170v81M1000 178q85-26 170 0M1012 212h146M1012 240h146"/><path d="M1190 259V140h40v119M1184 140h52M1184 180h52M1184 220h52"/><path d="M1260 259V190h150v69M1260 190q75-20 150 0M1272 225h126"/><path d="M180 240h20M350 240h70M446 240h34M592 240h28M920 240h35M965 240h35M1170 240h20M1230 240h30" stroke-dasharray="3 4"/></g></svg><div class="wrap"><div class="hxh"><div class="hxl"><p class="eb" id="hxe">${t(f.eyebrow)}</p><h1 id="hxt" class="qt">${f.title.map((x, i) => `<span class="${i ? 'q2' : 'q1'}">${i ? '' : '<i class="qo" aria-hidden="true">“</i>'}${b(x)}${i === f.title.length - 1 ? '<i class="qc" aria-hidden="true">”</i>' : ''}</span>`).join('')}</h1>${f.gain ? `<p class="hxg">${b(f.gain)}</p>` : ''}</div>
 <div class="hxr2"><p class="lede"><span class="lw">${b(f.lede.pc)}</span><span class="lm">${b(f.lede.m)}</span>${b(f.lede.tail)}</p>
 <ul class="meta">${f.meta.map(([n, u, l]) => `<li><b>${t(n)}${u ? `<small>${t(u)}</small>` : ''}</b>${t(l)}</li>`).join('')}</ul>
 <nav class="hxgo" aria-label="분야 바로 가기"><span class="hxgo__k">분야 바로 가기</span>${SERVICES.map((x) => `<a href="${x.file}">${esc(x.title)}</a>`).join('')}</nav></div></div>   <!-- 시안C 46차: 신정개발을 이미 아는 손님은 첫 화면에서 바로 자기 분야로 -->
@@ -2904,9 +2945,16 @@ HOME_SECTIONS.quick = () => {
   <section class="qk" id="quick" aria-labelledby="qk-h"><div class="wrap"><h2 id="qk-h" class="qk__h">무엇을 확인하러 오셨나요?</h2><ol class="qk__l">${li}</ol></div></section>
 `;
 };
+/* 시안C 51차: 메인 '실제 현장' 사진 위 설명표 — 사진에 보이는 것만(절대 규칙 3). [이름, 가로 %, 세로 %(원본 사진 기준), 이름표 쪽 l/r] */
+const FIELD_PINS = {
+  K01: [['흡입 로봇', 28, 38, 'r'], ['흡입 호스', 56, 84, 'l']],
+  P03: [['흡입 로봇', 55, 33, 'l'], ['촉매', 30, 62, 'r'], ['흡입 호스', 82, 22, 'l']],
+  R26: [['제어 차량', 32, 34, 'r'], ['흡입 로봇', 47, 88, 'l'], ['흡입 호스', 74, 82, 'l']],
+  P01: [['작업자', 61, 36, 'l'], ['고압수 세척', 13, 47, 'r']]
+};
 HOME_SECTIONS.field = () => {
   const c = CFG.home.copy.field;
-  const fig = FLOW.field.map(([id, name]) => { const p = P(id); return `<figure><img src="assets/photos/${p.id}-${p.sizes[p.sizes.length - 1]}.jpg" srcset="${p.sizes.map((w) => `assets/photos/${p.id}-${w}.jpg ${w}w`).join(', ')}" sizes="(max-width:820px) 80vw, 300px" width="${p.w}" height="${p.h}" alt="${esc(p.alt)}" loading="lazy" decoding="async"><figcaption><b>${esc(name)}</b>${esc(p.alt)}</figcaption></figure>`; }).join('');
+  const fig = FLOW.field.map(([id, name]) => { const p = P(id), pn = FIELD_PINS[id] || []; return `<figure${pn.length ? ' class="rf__pin"' : ''}><span class="rf__ph"><img src="assets/photos/${p.id}-${p.sizes[p.sizes.length - 1]}.jpg" srcset="${p.sizes.map((w) => `assets/photos/${p.id}-${w}.jpg ${w}w`).join(', ')}" sizes="(max-width:820px) 80vw, 300px" width="${p.w}" height="${p.h}" alt="${esc(p.alt)}" loading="lazy" decoding="async">${pn.length ? `<span class="rpins" aria-hidden="true">${pn.map((q) => `<span class="rpin" style="--x:${q[1]};--y:${q[2]}" data-x="${q[1]}" data-y="${q[2]}" data-side="${q[3]}"><i></i><b>${esc(q[0])}</b></span>`).join('')}</span>` : ''}</span><figcaption><b>${esc(name)}</b>${esc(p.alt)}</figcaption></figure>`; }).join('');
   return `  <!-- ===== 실제 현장 (시안C 27차) ===== -->
   <section class="rf" id="field" aria-labelledby="rf-h"><div class="wrap"><div class="rf__h"><div><p class="h24-k">${esc(c.k)}</p><h2 id="rf-h">${esc(c.h)}</h2></div><a class="h24-more" href="${esc(c.moreHref)}">${esc(c.more)} ${arrow(16)}</a></div><div class="rf__l">${fig}</div></div></section>
 `;
@@ -4564,6 +4612,7 @@ pages['contact.html'] = () => head({
   </section>
 
   <!-- 02 문의 양식 (32차: 대상 설비 칸 추가, 양식 옆 안내) -->
+${diagSection()}
   <section class="section section--soft" id="inquiry">
     <div class="wrap">
       <div class="${contactSlim() ? 'ctB-form' : 'split split--top split--wide'}">
@@ -5037,7 +5086,11 @@ function custVoice(html) {
   html = html.replace('<div class="ftr__bot">', '<div class="ftr__bot"><p class="ftr__basis">회사 정보 · 실적 · 장비 · 인증 내용은 신정개발 회사소개서(2024) · 기술소개서(2025)를 기준으로 합니다.</p>');
   return html;
 }
-Object.keys(pages).forEach((file) => { pageHtml[file] = custVoice(pages[file]()); });
+/* 시안C 51차: 가운뎃점 — 둘은 붙이고(촉매·충진물), 셋 이상 나열은 띄운다(탱크 · Pond · 배수로). 화면 글(태그 밖)만, script · style 안은 그대로 */
+function dotFix(html) {
+  return html.split(/(<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<[^>]+>)/).map((seg) => seg.startsWith('<') ? seg : seg.replace(/[^\s·<>()]+(?:·[^\s·<>()]+){2,}/g, (m) => m.split('·').join(' · '))).join('');
+}
+Object.keys(pages).forEach((file) => { pageHtml[file] = dotFix(custVoice(pages[file]())); });
 
 /* 2) 시안마다 설정 확인 → 디자인 토큰 → 페이지 12쪽 (아직 쓰지 않는다). 하나라도 틀리면 여기서 멈추고 아무 파일도 쓰지 않는다 */
 const variantOut = loadVariants(ONLY).map((v) => {

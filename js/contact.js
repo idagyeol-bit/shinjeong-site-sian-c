@@ -171,3 +171,29 @@
     });
   });
 })();
+
+/* 시안C 51차: '우리 현장 진단' 4문항 — 설비를 고르면 맞는 분야 · 장비 · 로봇 한 줄 · 준비할 것이 나오고, 단추를 누르면 문의 양식(업무 · 대상 설비 · 희망 시기 · 내용)을 채운다 */
+(function () {
+  var box = document.querySelector('.dg-box'); if (!box) return;
+  var go = box.querySelector('.dg-go'), empty = box.querySelector('.dg-r__empty'), ex = box.querySelector('.dg-r__ex'), prep = box.querySelector('.dg-r__prep');
+  function val(q) { var r = box.querySelector('input[name="dg-' + q + '"]:checked'); return r ? r : null; }
+  function txt(r) { return r ? r.parentNode.querySelector('span').textContent : ''; }
+  function upd() {
+    var a = val('q1'), svc = a ? a.value : '';
+    [].forEach.call(box.querySelectorAll('.dg-svc'), function (d) { d.hidden = d.dataset.svc !== svc; });
+    empty.hidden = !!svc; prep.hidden = !svc; go.disabled = !svc;
+    var e = val('q3'); ex.hidden = !(svc && (svc === 'S01' || svc === 'S02') && e && e.value !== 'n');
+  }
+  box.addEventListener('change', upd);
+  go.addEventListener('click', function () {
+    var a = val('q1'); if (!a) return;
+    var f = document.querySelector('#inquiry form') || document.querySelector('form.ct-form') || document.querySelector('#inquiry');
+    var set = function (n, v) { var el = document.querySelector('#inquiry [name="' + n + '"]'); if (el && v != null && (!el.value || n === 'service')) { el.value = v; el.dispatchEvent(new Event('change', { bubbles: true })); } };
+    set('service', a.value); set('target', txt(a)); var w = val('q4'); if (w) set('when', w.value === '미정' ? '' : w.value);
+    var lines = ['[현장 진단]', '· 설비: ' + txt(a), '· 내부 위험: ' + (txt(val('q2')) || '-'), '· 방폭지역: ' + (txt(val('q3')) || '-'), '· 희망 시기: ' + (txt(w) || '-'), ''];
+    var body = document.querySelector('#inquiry [name="body"]'); if (body && body.value.indexOf('[현장 진단]') < 0) { body.value = lines.join('\n') + body.value; }
+    var t = document.getElementById('inquiry'); if (t) t.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+    var n = document.querySelector('#inquiry [name="name"]'); if (n) setTimeout(function () { try { n.focus({ preventScroll: true }); } catch (x) {} }, 600);
+  });
+  upd();
+})();
