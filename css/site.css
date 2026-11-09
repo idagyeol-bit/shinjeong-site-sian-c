@@ -5507,3 +5507,64 @@ body .phero h1 small::before,body .cs9-head h1 small::before{content:"";flex:non
 @media (max-width:860px){.pv__l p{padding-left:0}}
 .pv__l h2 em{display:inline-block;min-width:22px;margin-right:10px}
 .pv__go .btn{background:var(--g,#2f8f31)!important;border-color:var(--g,#2f8f31)!important;color:#fff!important}
+
+/* ===================== 시안C 54차: 실제 회사 홈페이지 같은 바닥글(.ftr2) ===================== */
+body .ftr2{padding:0 0 28px!important}
+body .ftr2>.wrap{position:relative;z-index:1}
+body .ftr2 .ftrB-ask{margin-top:clamp(36px,4vw,56px)}
+.ftr2__head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 28px;padding:clamp(36px,4vw,52px) 0 26px;border-bottom:1px solid rgba(255,255,255,.12)}
+.ftr2__brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none}
+.ftr2__brand img{filter:brightness(0) invert(1);width:28px;height:auto}
+.ftr2__brand span{display:flex;flex-direction:column;gap:2px}
+.ftr2__brand b{font-size:19px;font-weight:800;letter-spacing:-.02em;color:#fff}
+body .ftr2 .ftr2__brand small{font-size:11px;font-weight:700;letter-spacing:.16em;color:rgba(255,255,255,.5)!important}
+.ftr2__docs{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.ftr2__docs span{margin-right:4px;font-size:13px;font-weight:700;color:rgba(255,255,255,.55)}
+body .ftr2 .ftr2__docs a{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border:1px solid rgba(255,255,255,.28)!important;border-radius:999px;font-size:13.5px;font-weight:700;color:#fff;text-decoration:none;transition:background .2s,border-color .2s}
+.ftr2__docs a::after{content:"";width:9px;height:9px;border:solid currentColor;border-width:0 1.6px 1.6px 0;transform:translateY(-2px) rotate(45deg);opacity:.8}
+body .ftr2 .ftr2__docs a:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.6)!important}
+.ftr2__map{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;padding:32px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.ftr2__map h3{margin:0 0 14px;font-size:15px;font-weight:800;letter-spacing:-.01em}
+body .ftr2 .ftr2__map h3 a{color:#fff;text-decoration:none}
+.ftr2__map ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+body .ftr2 .ftr2__map li a{font-size:14px;color:rgba(255,255,255,.62);text-decoration:none}
+body .ftr2 .ftr2__map a:hover{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.ftr2__info{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px 40px;padding:26px 0 22px}
+.ftr2__addr{font-style:normal;display:grid;gap:6px;font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.6)}
+.ftr2__addr p{margin:0;display:flex;flex-wrap:wrap;row-gap:2px}
+.ftr2__addr span+span::before{content:"";display:inline-block;width:1px;height:11px;margin:0 12px;background:rgba(255,255,255,.25);vertical-align:-1px}
+body .ftr2 .ftr2__addr b{color:rgba(255,255,255,.9)!important;font-weight:700}
+body .ftr2 .ftr2__addr a{color:rgba(255,255,255,.8);text-decoration:none}
+.ftr2__cs{display:flex;flex-direction:column;align-items:flex-end;gap:2px;text-align:right}
+.ftr2__cs small{font-size:12.5px;font-weight:700;color:var(--g,#5fbf62);letter-spacing:.02em}
+body .ftr2 .ftr2__cs a{font-size:26px;font-weight:800;letter-spacing:-.01em;color:#fff;text-decoration:none;line-height:1.25}
+.ftr2__cs span{font-size:12.5px;color:rgba(255,255,255,.55)}
+.ftr2__bot{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12)}
+.ftr2__pol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center}
+.ftr2__pol li+li::before{content:"";display:inline-block;width:1px;height:11px;margin:0 12px;background:rgba(255,255,255,.25);vertical-align:-1px}
+body .ftr2 .ftr2__pol a{font-size:13.5px;color:rgba(255,255,255,.7);text-decoration:none}
+body .ftr2 .ftr2__pol a.is-b{color:#fff;font-weight:800}
+body .ftr2 .ftr2__pol a:hover{text-decoration:underline;text-underline-offset:3px}
+.ftr2__copy{margin:0 0 0 auto;font-size:12.5px;letter-spacing:.02em;color:rgba(255,255,255,.45)}
+body .ftr2 .totop{margin:0;min-height:40px;color:rgba(255,255,255,.75)}
+@media (max-width:1100px){.ftr2__map{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:860px){
+  .ftr2__map{display:none!important}
+  .ftr2__head{padding:32px 0 20px}
+  .ftr2__docs{width:100%}.ftr2__docs span{width:100%;margin:0 0 2px}
+  body .ftr2 .ftr2__docs a{flex:1 1 0;justify-content:center;min-height:44px}
+  .ftr2__info{flex-direction:column-reverse;align-items:flex-start;padding:22px 0 18px}
+  .ftr2__cs{align-items:flex-start;text-align:left}
+  body .ftr2 .ftr2__cs a{display:inline-flex;align-items:center;min-height:44px}
+  .ftr2__addr p{flex-direction:column}.ftr2__addr span+span::before{display:none}
+  body .ftr2 .ftr2__addr a{display:inline-flex;align-items:center;min-height:40px}
+  .ftr2__bot{flex-direction:column;align-items:flex-start;gap:10px}
+  body .ftr2 .ftr2__pol a{display:inline-flex;align-items:center;min-height:40px}
+  .ftr2__copy{margin:0;font-size:12.5px}
+  body .ftr2{padding-bottom:96px!important}
+}
+@media print{.ftr2__map,.ftr2__docs,.ftr2 .totop{display:none!important}.ftr2 *{color:#111!important}}
+/* 개인정보 처리방침: 이메일 무단 수집 거부 */
+.pv__ne{margin-top:28px;padding:20px 22px;border-radius:var(--rd,14px);background:#f4f7fa;scroll-margin-top:120px}
+.pv__ne h2{margin:0 0 6px;font-size:16px}
+.pv__ne p{margin:0;font-size:14.5px;line-height:1.7}
