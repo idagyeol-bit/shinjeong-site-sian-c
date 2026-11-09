@@ -1438,7 +1438,7 @@ ${SERVICES.map((s) => `              <li><a href="${s.file}"${cur(s.id)}><b>${es
 ${nav}
   </nav>
   <div class="hdr__act">
-${VARIANT || (CFG.sian && CFG.sian.lang === false) ? '' : `    ${lang}\n`}${!VARIANT && CFG.look && CFG.look.enLite ? `    <a class="hdr__lang" href="en/index.html" hreflang="en" lang="en">ENG</a>   <!-- 시안B 34차: 축약 영문판(3쪽)으로 가는 소형 링크. 쪽별 대응이 없어 늘 영문 홈으로 -->\n` : ''}    <a class="hdr__tel" href="tel:${C.tel.replace(/-/g, '')}" aria-label="대표 전화 ${C.tel}"><small>대표 전화</small>${C.tel}</a>   <!-- 시안C 45차: 바로 전화하려는 손님 — 넓은 화면에서만(휴대폰은 아래 '전화 문의' 띠) -->
+${VARIANT || (CFG.sian && CFG.sian.lang === false) ? '' : `    ${lang}\n`}${!VARIANT && CFG.look && CFG.look.enLite ? `    <a class="hdr__lang" href="en/${({ 'unmanned.html': 'technology.html', 'contact.html': 'contact.html' })[file] || 'index.html'}" hreflang="en" lang="en" translate="no">ENG</a>   <!-- 시안B 34차: 축약 영문판(3쪽)으로 가는 소형 링크. 쪽별 대응이 없어 늘 영문 홈으로 -->\n` : ''}    <a class="hdr__tel" href="tel:${C.tel.replace(/-/g, '')}" aria-label="대표 전화 ${C.tel}"><small>대표 전화</small>${C.tel}</a>   <!-- 시안C 45차: 바로 전화하려는 손님 — 넓은 화면에서만(휴대폰은 아래 '전화 문의' 띠) -->
     <a class="hdr__cta" href="contact.html"${page === 'contact' ? ' aria-current="page"' : ''}>${CFG.common.headerCta} ${arrow(14)}</a>
     <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="메뉴 열기"><i></i><i></i><i></i></button>
   </div>
