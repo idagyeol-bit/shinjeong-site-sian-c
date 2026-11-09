@@ -22,7 +22,7 @@
 <link rel="apple-touch-icon" href="../assets/logo/shinjeong-symbol.png">
 <link rel="preload" href="../assets/fonts/sub/PretendardVariable-0.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../css/tokens.test.css?v=818fd80b">
-<link rel="stylesheet" href="../css/site.css?v=41507c7b">
+<link rel="stylesheet" href="../css/site.css?v=b06289e6">
 </head>
 <body class="moB-root" data-page="projects">
 <a class="skip-link" href="#main">본문 바로가기</a>
@@ -49,7 +49,7 @@
         </div>
       </div>
       <a href="unmanned.html">무인 솔루션</a>
-      <a href="cases.html">적용 사례</a>
+      <a href="cases.html" aria-current="page">적용 사례</a>
       <a href="company.html">회사 소개</a>
       <a href="news.html">소식</a>
   </nav>
@@ -71,7 +71,7 @@
       <a href="service-inspection-repair.html">관로·지하 조사 및 보수</a>
     </div>
     <a href="unmanned.html">무인 솔루션<span>02</span></a>
-    <a href="cases.html">적용 사례<span>03</span></a>
+    <a href="cases.html" aria-current="page">적용 사례<span>03</span></a>
     <a href="company.html">회사 소개<span>04</span></a>
     <a href="news.html">소식<span>05</span></a>
     <a href="contact.html">현장 문의<span>06</span></a>
@@ -83,11 +83,11 @@
     <a href="mailto:shinjeong@sjdevel.com">shinjeong@sjdevel.com</a>
   </div>
 </div>
-
+   /* 50차: 수행 이력은 적용 사례 아래 쪽 — 메뉴의 '적용 사례'에 밑줄 */
 <main id="main">
   <section class="phero">
     <div class="wrap">
-      <nav class="s6-crumb phero__crumb" aria-label="현재 위치"><a href="index.html">홈</a><span aria-hidden="true">›</span><span aria-current="page">수행 이력</span></nav>
+      <nav class="s6-crumb phero__crumb" aria-label="현재 위치"><a href="index.html">홈</a><span aria-hidden="true">›</span><a href="cases.html">적용 사례</a><span aria-hidden="true">›</span><span aria-current="page">수행 이력</span></nav>
       <h1><small>수행 이력</small>4년 동안 170여 건,<br>현장에서 쌓은 기록입니다</h1>
       <p class="phero__lead">2020~2023년 4년간 170여 건의 작업을 수행했고, 이 가운데 4개 발주처와는 4년 연속 단가계약을 맺었습니다. 그중 대표 이력을 정리했습니다.</p>
     </div>
@@ -242,6 +242,7 @@
           <h3>회사</h3>   <!-- 35차: h4 → h3 (제목 단계 건너뜀 'heading-order' 수리, 글자·모양 그대로) -->
           <ul>
             <li><a href="cases.html">적용 사례</a></li>
+            <li><a href="projects.html">수행 이력</a></li>
             <li><a href="company.html">회사 소개</a></li>
             <li><a href="news.html">소식</a></li>
             <li><a href="../assets/docs/shinjeong-company-profile-2024-public.pdf" target="_blank" rel="noopener">회사소개서 (PDF)</a></li>

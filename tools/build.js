@@ -1485,7 +1485,7 @@ function footer(o) {   // 시안C 18차: o.noAsk — 본문 끝에 문의 띠가
   const map = [
     { h: g.services, items: SERVICES.map((s) => ({ href: s.file, label: s.title })) },
     { h: g.tech, items: [{ href: 'unmanned.html', label: '무인 솔루션' }, { href: 'unmanned.html#robots', label: '현장 투입 로봇' }, { href: 'unmanned.html#how', label: '작업 절차' }, { href: 'service-dredging-sludge.html#dewater', label: '회수물 탈수 과정' }, { href: 'company.html#equipment', label: '보유 장비' }] },   // 시안C 9차: 장비·로봇 · 현장 진행 방식 페이지가 무인 솔루션(unmanned.html) 한 페이지로 합쳐져 모두 그쪽 구역으로, 보유 장비 표는 회사 소개로
-    { h: g.company, items: [{ href: 'cases.html', label: '적용 사례' }, { href: 'company.html', label: '회사 소개' }, ...(CFG.nav.some((n) => n.key === 'news') ? [{ href: 'news.html', label: '소식' }] : []), { href: DOC_PROFILE, label: '회사소개서 (PDF)', blank: true }, { href: DOC_TECH, label: '기술소개서 (PDF)', blank: true }] },
+    { h: g.company, items: [{ href: 'cases.html', label: '적용 사례' }, { href: 'projects.html', label: '수행 이력' }, { href: 'company.html', label: '회사 소개' }, ...(CFG.nav.some((n) => n.key === 'news') ? [{ href: 'news.html', label: '소식' }] : []), { href: DOC_PROFILE, label: '회사소개서 (PDF)', blank: true }, { href: DOC_TECH, label: '기술소개서 (PDF)', blank: true }] },
     { h: g.contact, items: [{ href: 'contact.html', label: '현장 문의' }, { href: `mailto:${C.email}`, label: '이메일로 문의' }] }
   ];
   return `<footer class="ftr">
@@ -3697,12 +3697,12 @@ pages['news.html'] = () => {
           <p class="nr__k nr__k--talk">${esc(NEWS_KIND.talk)}</p>
           <h3 class="nr__t nr__t--pin"><a href="${F.url}" target="_blank" rel="noopener">${esc(F.title)}<span class="sr-only"> — ${esc(F.outlet)} 기사 (새 창)</span></a></h3>
           <p class="nr__s">신정개발이 위험한 설비 크리닝 작업을 줄이려고 무인 로봇을 직접 개발하게 된 이야기를 담은 인터뷰입니다. 인터뷰에서 밝힌 회사의 사명은 “${esc(F.quote)}”입니다.</p>
-          <p class="nr__o">${NEWS_OUT(F.outlet, F.url, F.d)}<span class="nr__ph">원문에 사진 ${F.photos.length}장</span></p>
+          <p class="nr__o">${NEWS_OUT(F.outlet, F.url, F.d)}</p>
           <details class="nr__more"><summary>기사 내용 요약 보기</summary>
             <div class="nr__sum">
               <ul class="nr__facts">${F.facts.map(([n, u, t]) => `<li><b>${esc(n)}${esc(u)}</b> ${esc(t)}</li>`).join('')}</ul>
               <dl class="nr__qa">${F.qa.map(([q, a]) => `<div><dt>${esc(q)}</dt><dd>${esc(a)}</dd></div>`).join('')}</dl>
-              <p class="nr__note">기사 내용을 짧게 정리한 것입니다. 두 소개서에 없는 내용이 섞여 있어 기사 기준으로 적었습니다.</p>
+              <p class="nr__note">기사에 실린 이야기를 짧게 옮겼습니다.</p>
             </div>
           </details>
         </div>
@@ -3803,6 +3803,7 @@ pages['cases.html'] = () => {
       <div class="is-r"><dt>로봇 투입 기록 (2021~2023)</dt><dd>${caseRobotTotal()}<small>건</small></dd></div>
     </dl>
     <p class="cs9-head__src">${esc(CASE_SRC.rows)}</p>
+    <a class="cs9-head__all" href="projects.html">2020~2023 전체 수행 이력 보기 ${arrow(14)}</a>   <!-- 50차: 수행 이력 쪽으로 가는 길 -->
   </div></section>
   <nav class="csd-nav cs9-nav" aria-label="분야"><div class="wrap"><div class="cs9-nav__l">${CASES.map((x) => `<a href="#${x.id}">${esc(x.name)}${x.robot ? '<i class="d" aria-label="로봇 투입 기록 있음"></i>' : ''}</a>`).join('')}</div><span class="cs9-nav__k" aria-hidden="true"><i class="d"></i>로봇 투입 기록 있음</span></div></nav>
 ${CASES.map(block).join('\n')}
@@ -3932,7 +3933,7 @@ ${RL22.filter((b) => b.grp === g).map(pick).join('\n')}
   };
   return `  <section class="rl" id="robots" aria-labelledby="rl-h">
     <div class="wrap">
-      <div class="um-vh um-vh--row"><div><p class="um-k2">로봇 라인업</p><h2 id="rl-h">현장 장비 ${rlCount('field')}, 연구개발 시제품 ${rlCount('rd')}</h2></div><p class="um-vh__l">현장에 투입하는 장비 세 가지와, 기업부설연구소에서 개발한 시제품 세 가지입니다. 로봇마다 하는 일 · 사양 · 시험 결과를 함께 소개합니다.</p></div>
+      <div class="um-vh um-vh--row"><div><p class="um-k2">로봇 라인업</p><h2 id="rl-h">설비마다 들어가는 로봇이 다릅니다</h2></div><p class="um-vh__l">현장에 투입하는 장비 세 가지와, 기업부설연구소에서 개발한 시제품 세 가지입니다. 로봇마다 하는 일 · 사양 · 시험 결과를 함께 소개합니다.</p></div>
       <div class="rl-pick" role="tablist" aria-label="로봇 고르기">
 ${grp('field')}
 ${grp('rd')}
@@ -4137,7 +4138,7 @@ ${COMPANY17.patents.map(([, name, , d]) => `            <tr><td>${esc(name)}</td
 ${SRC_LINE}    </div>
   </section>
 
-    <div class="wrap"><a class="um-next" href="#robots"><span><small>처음으로</small><b>로봇 라인업</b><em>현장 장비 ${rlCount('field')} · 연구개발 시제품 ${rlCount('rd')}</em></span>${arrow(28)}</a></div>
+    <div class="wrap"><a class="um-next" href="#robots"><span><small>처음으로</small><b>로봇 라인업</b><em>설비마다 들어가는 로봇</em></span>${arrow(28)}</a></div>
   </div>
 
   <section class="c7-end um-ask" id="ask" aria-labelledby="um-ask-h"><div class="wrap">   <!-- 시안C 21차: 회사 소개(18차)와 같은 문의 띠 — 글은 예전 띠 문장을 줄임 -->
@@ -4153,13 +4154,13 @@ pages['projects.html'] = () => head({
   file: 'projects.html', page: 'projects',
   title: `수행 이력 | ${C.brand}`,
   desc: '석유화학·정유 플랜트, 발전 설비, 상·하수도 현장에서 신정개발이 수행한 대표 이력입니다.' + (SHOW_SEARCH ? ' 분야를 선택하거나 검색해 살펴볼 수 있습니다.' : '') // 검색창을 숨기면 안내 문장도 뺀다
-}) + header('projects', null, 'projects.html') + `
+}) + header('cases', null, 'projects.html') + `   /* 50차: 수행 이력은 적용 사례 아래 쪽 — 메뉴의 '적용 사례'에 밑줄 */
 <main id="main">
 ` + phero({
   kick: '수행 이력',
   h1: '4년 동안 170여 건,<br>현장에서 쌓은 기록입니다',   // 49차: 손님에게 하는 말(숫자는 TRUST · 회사소개서 2024 실적표와 같음)
   keepLead: '2020~2023년 4년간 170여 건의 작업을 수행했고, 이 가운데 4개 발주처와는 4년 연속 단가계약을 맺었습니다. 그중 대표 이력을 정리했습니다.',
-  crumbs: [{ label: '수행 이력' }]
+  crumbs: [{ label: '적용 사례', href: 'cases.html' }, { label: '수행 이력' }]   // 50차: 적용 사례 아래 쪽
 }) + `
   <section class="section">
     <div class="wrap">
@@ -4473,7 +4474,7 @@ pages['company.html'] = () => {
   </div>
   <div class="c7-view" id="v-cred" data-view="cred">
   <section class="c7-sec c7-sec--full" id="credentials" aria-label="인증 · 특허"><div class="wrap">
-    <div class="c7-fh"><div>${kick('인증 · 특허')}<h2 class="c7-h2">인증서와 특허증,<br>원본으로 확인하세요</h2></div><p class="c7-lead">인증서 · 확인서 ${K.certs.length}가지와 등록 특허 ${K.patents.length}건을 원본 그대로 보여 드립니다.</p></div>
+    <div class="c7-fh"><div>${kick('인증 · 특허')}<h2 class="c7-h2">인증서와 특허증,<br>원본으로 확인하세요</h2></div><p class="c7-lead">인증서 · 확인서 ${K.certs.length}가지와 등록 특허 ${K.patents.length}건을 보실 수 있습니다.</p></div>
     ${rail('인증서', K.certs.length, '품질 · 환경 · 안전보건 · 기업 인증', cg, '인증서')}
     ${rail('특허증', K.patents.length, '등록 8건 · 이 밖에 출원 4건', pg, '특허증')}
     <p class="us-src">회사소개서(2024) 26~29쪽 · 인증서 사진은 2024년 자료 그대로이며, 유효 기간과 갱신 여부는 상담 시 안내합니다 · 대표자 이름과 발명자 개인 정보는 가렸습니다.</p>
@@ -4500,7 +4501,7 @@ pages['company.html'] = () => {
       <ul class="c7-eq">${eqRows}</ul>
       <h3 class="c7-h3">공통 장비 <small>운반 · 지원</small></h3>
       <table class="c7-eqt"><thead><tr><th scope="col">장비</th><th scope="col">규격</th><th scope="col">용도</th><th scope="col">보유</th></tr></thead><tbody>${cmRows}</tbody></table>
-      <p class="us-src">회사소개서(2024) 21~24쪽 보유 장비 · 보유 대수는 회사소개서(2024) 수록 기준이며, 현재 수량과 가동 상태는 문의 시 안내합니다.</p>`, true) + `
+      <p class="us-src">회사소개서(2024) 21~24쪽 보유 장비 · 보유 대수는 2024년 기준이며, 현재 수량과 가동 상태는 문의 주시면 안내해 드립니다.</p>`, true) + `
   <div class="wrap"><a class="um-next c7-next" href="#v-loc"><span><small>다음</small><b>오시는 길</b><em>여수 본사 · 서산 지사 · 대표 전화 · 이메일</em></span>${arrow(28)}</a></div>
   </div>
   <div class="c7-view" id="v-loc" data-view="loc">
