@@ -5461,3 +5461,49 @@ body .phero h1 small::before,body .cs9-head h1 small::before{content:"";flex:non
 @media print{.cq-form{display:none!important}.cq-side{background:#fff!important;color:#111!important;border:1px solid #999}.cq-side *{color:#111!important}}
 .cq-side__tel a,.cq-side__mail a{display:inline-flex;align-items:center;min-height:44px}
 .cq-copy{min-height:40px}
+
+/* ===================== 시안C 53차: 숫자 줄 정리 · 단계 손님 말 · 적용 사례 사진 · 로봇 카드 · 개인정보 처리방침 ===================== */
+/* 적용 사례: 대표 사진 아래 현장 사진 두 장 */
+.cs9__phs{display:grid;gap:10px;min-width:0}
+.cs9__phs .cs9__ph{border-radius:var(--rd,14px)}
+.cs9__more{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cs9__more figure{margin:0;position:relative;aspect-ratio:3/2;overflow:hidden;border-radius:var(--rd,14px);background:#0b0e12}
+.cs9__more img{width:100%;height:100%;object-fit:cover;display:block}
+.cs9__more figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 10px 8px;font-size:12.5px;line-height:1.35;color:#fff;background:linear-gradient(transparent,#000a)}
+.cs9__g{align-items:start}
+@media (max-width:860px){.cs9__phs .cs9__ph{border-radius:0}.cs9__more{gap:8px}}
+/* 분야 상세: 단계 원래 이름은 작게, 사진 없는 단계는 글 카드 */
+.s6-st h3 small{display:block;margin-top:3px;font-size:12.5px;font-weight:600;letter-spacing:0;color:var(--muted,#5b6675)}
+.s6-st--np{background:#f4f7fa!important;border-radius:var(--rd,14px);box-shadow:inset 0 3px 0 #d5dde6}
+.s6-st--np.is-robot{box-shadow:inset 0 3px 0 var(--g,#2f8f31)}
+.s6-st--np .s6-st__tx{padding-top:22px}
+@media (max-width:860px){.s6-st--np{display:block!important;background:none!important;box-shadow:none;border-radius:0;padding-left:118px!important}.s6-st--np.is-robot{box-shadow:inset 3px 0 0 var(--g,#2f8f31)}}
+/* 무인 솔루션 로봇 카드: 이런 작업 · 알아 둘 점을 먼저, 사양은 접기 */
+.rl-use{margin-top:16px}
+.rl-use h4{margin:0 0 8px;font-size:15px;font-weight:800;color:var(--navy)}
+.rl-use ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.rl-use li{position:relative;padding-left:22px;font-size:14.5px;line-height:1.55}
+.rl-use li::before{content:"";position:absolute;left:2px;top:.45em;width:12px;height:7px;border:solid var(--g,#2f8f31);border-width:0 0 2.5px 2.5px;transform:rotate(-45deg)}
+.rl-use--note li::before{border:0;width:7px;height:7px;top:.55em;left:4px;border-radius:50%;background:#c27a12;transform:none}
+.rl-more{margin-top:18px;border-top:1px solid var(--line)}
+.rl-more>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;min-height:44px;font-size:14.5px;font-weight:700;color:var(--navy)}
+.rl-more>summary::-webkit-details-marker{display:none}
+.rl-more>summary::after{content:"+";font-size:22px;font-weight:400;line-height:1}
+.rl-more[open]>summary::after{content:"−"}
+.rl-more .rl-kn{margin-top:4px}
+.rl-more .rl-d__ex{margin-top:16px;padding:0;border:0}
+/* 개인정보 처리방침 */
+.pv__b .wrap{max-width:860px}
+.pv__l{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink,#111)}
+.pv__l li{padding:22px 0;border-bottom:1px solid var(--line)}
+.pv__l h2{display:flex;align-items:baseline;gap:12px;margin:0 0 8px;font-size:18px;letter-spacing:-.02em}
+.pv__l h2 em{font-style:normal;font-size:13px;font-weight:800;color:var(--g,#2f8f31)}
+.pv__l p{margin:4px 0 0;font-size:15px;line-height:1.7;padding-left:34px}
+.pv__d{margin:22px 0 0;font-size:13.5px;color:var(--muted,#5b6675)}
+.pv__go{margin:22px 0 0}
+.pv__go .btn{background:var(--g,#2f8f31);color:#fff;border-color:var(--g,#2f8f31)}
+.cq-note a,.ftr__pv{text-decoration:underline;text-underline-offset:3px}
+.ftr__pv{margin-left:10px;color:inherit;font-weight:700}
+@media (max-width:860px){.pv__l p{padding-left:0}}
+.pv__l h2 em{display:inline-block;min-width:22px;margin-right:10px}
+.pv__go .btn{background:var(--g,#2f8f31)!important;border-color:var(--g,#2f8f31)!important;color:#fff!important}
