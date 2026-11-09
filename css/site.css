@@ -5415,3 +5415,49 @@ body .phero h1 small::before,body .cs9-head h1 small::before{content:"";flex:non
   a{color:#111!important;text-decoration:none!important}
   .ftr{border-top:1px solid #999;margin-top:12mm}
 }
+
+/* ===== 시안C 52차: 현장 문의 — 한 화면(왼쪽 바로 연락 · 오른쪽 문의 남기기) ===== */
+.cq{padding-top:clamp(40px,5vw,72px)!important}
+.cq__grid{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.5fr);gap:clamp(20px,3vw,40px);align-items:start}
+.cq-side{position:sticky;top:calc(var(--header-h,72px) + 20px);padding:clamp(22px,2.4vw,32px);border-radius:var(--rd,14px);background:var(--stg,#0e2e4a);color:#fff;box-shadow:var(--shd)}
+.cq-side__k{display:flex;align-items:center;gap:8px;margin:0 0 6px;font-size:13px;font-weight:800;color:#8fd88f}
+.cq-side__k::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--g,#47a948)}
+.cq-side__tel{margin:0;font-size:clamp(28px,2.6vw,36px);font-weight:800;letter-spacing:-.02em}
+.cq-side__tel a{color:#fff;text-decoration:none}
+.cq-side__mail{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin:0;font-size:17px;font-weight:700}
+.cq-side__mail a{color:#fff;text-decoration:none;word-break:break-all}
+.cq-copy{min-height:32px;padding:0 12px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;font-size:13px;font-weight:700;cursor:pointer}
+.cq-copy:hover{background:rgba(255,255,255,.1)}
+.cq-side__s{margin:6px 0 22px;font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.72)}
+.cq-side__s a{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.cq-side__box{margin:0 0 18px;padding:16px 16px 14px;border-radius:12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12)}
+.cq-side__box ul,.cq-side__box ol{margin:4px 0 0;padding-left:18px;display:grid;gap:5px;font-size:14px;line-height:1.55;color:rgba(255,255,255,.88)}
+.cq-side__loc{margin-bottom:0}
+.cq-form{padding:clamp(22px,2.6vw,36px);border-radius:var(--rd,14px);background:#fff;border:1px solid var(--line,#e3e7eb);box-shadow:var(--shd)}
+.cq-form__h{margin:0 0 18px;font-size:clamp(22px,2vw,28px);font-weight:800;letter-spacing:-.03em;color:var(--ink2,#0e2e4a)}
+.cq-q{margin:0 0 18px;padding:0;border:0}
+.cq-q legend{padding:0;margin:0 0 10px;font-size:15.5px;font-weight:800;color:var(--ink2,#0e2e4a)}
+.cq-q legend small,.cq-form label small{margin-left:6px;font-size:12.5px;font-weight:600;color:#7a8590}
+.cq-ops{display:flex;flex-wrap:wrap;gap:8px}
+.cq-ops label{position:relative;cursor:pointer}
+.cq-ops input{position:absolute;opacity:0;width:1px;height:1px}
+.cq-ops span{display:inline-flex;align-items:center;min-height:42px;padding:0 15px;border-radius:999px;border:1px solid #d6dde3;background:#f7f9fa;font-size:14.5px;font-weight:600;color:#33404c;transition:background .2s,border-color .2s,color .2s}
+.cq-ops label:hover span{border-color:#47a948}
+.cq-ops input:checked+span{background:#0e2e4a;border-color:#0e2e4a;color:#fff}
+.cq-ops input:focus-visible+span{outline:3px solid rgba(71,169,72,.55);outline-offset:2px}
+.cq-fit{margin-top:12px;padding:12px 14px;border-radius:10px;background:rgba(71,169,72,.1);border:1px solid rgba(71,169,72,.25)}
+.cq-fit p{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-size:14px;font-weight:700;color:#2f8f31}
+.cq-fit p a{display:inline-flex;align-items:center;gap:6px;color:var(--ink2,#0e2e4a);font-size:16px;font-weight:800;text-decoration:none}
+.cq-fit p a:hover{text-decoration:underline;text-underline-offset:3px}
+.cq-fit p small{font-size:13.5px;font-weight:600;color:#33404c}
+.cq-fit .cq-fit__ex{margin-top:6px;font-weight:600;color:#33404c}
+.cq-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cq-form .field{margin-bottom:14px}
+.cq-form textarea{min-height:110px}
+.cq-send{width:100%;justify-content:center;min-height:52px}
+.cq-note{margin:10px 0 0;font-size:13px;line-height:1.6;color:#646c74;text-align:center}
+.cq-faq{padding-top:clamp(40px,5vw,64px)!important}
+@media (max-width:900px){.cq__grid{grid-template-columns:1fr}.cq-side{position:static;order:2}.cq-form{order:1}.cq-row{grid-template-columns:1fr;gap:0}.cq-ops span{min-height:44px;font-size:14px}}
+@media print{.cq-form{display:none!important}.cq-side{background:#fff!important;color:#111!important;border:1px solid #999}.cq-side *{color:#111!important}}
+.cq-side__tel a,.cq-side__mail a{display:inline-flex;align-items:center;min-height:44px}
+.cq-copy{min-height:40px}
