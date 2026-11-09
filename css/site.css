@@ -5336,3 +5336,18 @@ body .cs9 [id^="s0"],body main section[id^="s0"],body .s6-st{scroll-margin-top:c
 #hx .ph .pin b small{display:block;margin-top:2px;font-size:12.5px;font-weight:500;color:#cfe3f5}
 @media (max-width:820px){#hx .ph .pin b{padding:4px 8px 5px;font-size:12.5px;border-radius:7px}#hx .ph .pin b small{display:none}#hx .ph .pin .pd{width:8px;height:8px;left:-4px;top:-4px}}
 @media (prefers-reduced-motion:reduce){#hx .ph .pins.on .pin .pd::after{animation:none}}
+/* ===== 시안C 49차: 쪽 머리 = '쪽 이름(작은 머리글)' + '손님에게 하는 한 문장(제목)' — 무인 솔루션 머리와 같은 모양 ===== */
+body .phero h1 small,body .cs9-head h1 small{display:flex!important;align-items:center;gap:10px;margin-bottom:18px;font-size:14px!important;font-weight:700!important;letter-spacing:.01em!important;color:#fff;opacity:.92;line-height:1.3}
+body .phero h1 small::before,body .cs9-head h1 small::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--g);box-shadow:0 0 0 4px rgba(71,169,72,.22)}
+@media (max-width:820px){body .phero h1 small,body .cs9-head h1 small{font-size:13px!important;margin-bottom:12px}}
+/* 49차: 분야 상세 '작업 장면' 위 설명표(첫 화면 .pins 와 같은 모양) */
+.s6-scene__v{position:relative;display:block;border-radius:10px;overflow:hidden}
+.s6-scene__v .pins{position:absolute;inset:0;z-index:2;pointer-events:none}
+.s6-scene__v .pin{position:absolute;inset:0;opacity:0;transition:opacity .25s ease}
+.s6-scene__v .pins.on .pin{opacity:1;transition:opacity .45s ease}
+.s6-scene__v .pins.on .pin:nth-child(2){transition-delay:.12s}.s6-scene__v .pins.on .pin:nth-child(3){transition-delay:.24s}.s6-scene__v .pins.on .pin:nth-child(4){transition-delay:.36s}.s6-scene__v .pins.on .pin:nth-child(5){transition-delay:.48s}
+.s6-scene__v .pin .pd{position:absolute;left:-5px;top:-5px;width:10px;height:10px;border-radius:50%;background:#47a948;box-shadow:0 0 0 2px #fff,0 0 0 6px rgba(71,169,72,.28),0 2px 8px rgba(0,0,0,.45)}
+.s6-scene__v .pin .pk{position:absolute;left:0;top:0;height:1.5px;background:rgba(255,255,255,.85);transform-origin:0 50%;box-shadow:0 0 3px rgba(0,0,0,.5)}
+.s6-scene__v .pin b{position:absolute;left:0;top:0;display:block;padding:5px 9px 6px;border-radius:8px;background:rgba(7,21,38,.88);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:13px;font-weight:700;line-height:1.25;white-space:nowrap}
+.s6-scene__v .pin b small{display:block;margin-top:2px;font-size:12.5px;font-weight:500;color:#cfe3f5}
+@media (max-width:820px){.s6-scene__v .pin b{font-size:12.5px;padding:4px 8px}.s6-scene__v .pin b small{display:none}}
