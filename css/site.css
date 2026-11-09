@@ -5764,3 +5764,10 @@ html[lang="en"] .ftr2__pol small{margin-left:4px}
   .cs9__more img{aspect-ratio:3/2;border-radius:10px;object-fit:cover}
 }
 @media (max-width:860px){.cs9__phs{margin-bottom:14px}}
+/* 시안C 56차 보완: 영문 쪽 — 한국어 브라우저에게만 '한국어로 보기' 띠(기계 번역 대신 한국어 쪽으로) */
+.enC-ko{display:none}
+html.ko-user .enC-ko{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 14px;padding:10px 16px;background:#eaf6ea;color:#1f5f21;font-size:14px;font-weight:600;text-align:center}
+html.ko-user .enC-ko a{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:999px;background:var(--g-d,#2f8f31);color:#fff;font-weight:800;text-decoration:none}
+html.ko-user .enC-ko{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:60;width:max-content;max-width:calc(100vw - 24px);padding:8px 8px 8px 18px;border-radius:999px;box-shadow:0 10px 30px rgba(14,46,74,.25);border:1px solid #cfe7cf}
+@media (max-width:860px){html.ko-user .enC-ko{bottom:86px;font-size:13px;padding:6px 6px 6px 14px}html.ko-user .enC-ko a{min-height:40px}}
+@media print{.enC-ko{display:none!important}}

@@ -98,12 +98,14 @@ function head(o) {
 <link rel="alternate" hreflang="ko" href="${SITE_URL}${o.ko}">
 <link rel="icon" href="../assets/logo/shinjeong-symbol.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/logo/shinjeong-symbol.png">
-<link rel="preload" href="../assets/fonts/sub/PretendardVariable-0.woff2" as="font" type="font/woff2" crossorigin>
+<script>/* 56차: 한국어로 설정된 브라우저는 이 영문 쪽을 기계 번역하지 않고 한국어 쪽으로 안내한다(번역 중 오류 · 엉뚱한 번역 방지). 다른 언어 브라우저는 번역 그대로 쓸 수 있다 */
+(function(){try{var L=(navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||'']).join(',').toLowerCase();if(/(^|,)ko/.test(L)){document.documentElement.classList.add('ko-user');var m=document.createElement('meta');m.name='google';m.content='notranslate';document.head.appendChild(m);document.documentElement.setAttribute('translate','no');}}catch(e){}})();</script>
 <link rel="stylesheet" href="../css/tokens.css">
 <link rel="stylesheet" href="../css/site.css">
 </head>
 <body class="moB-root enC" data-page="${o.page}">
 <a class="skip-link" href="#main">${esc(C.skip)}</a>
+<div class="enC-ko" lang="ko" translate="no" role="note"><span>신정개발 한국어 홈페이지가 따로 있습니다.</span><a href="../${o.ko || 'index.html'}" hreflang="ko">한국어로 보기 →</a></div>
 <div class="sianbar" role="note" style="--sian: ${SIAN.color || '#c2410c'}"><span class="sianbar__name">${esc(SIAN.name ? 'Draft ' + ((SIAN.name.match(/[A-Z]\s*$/) || [''])[0].trim()) : 'Draft')}</span><span class="sianbar__note">${esc(C.draftNote)}</span></div>
 `;
 }
@@ -113,13 +115,13 @@ function header(page, koFile) {
   return `<header class="hdr">
   <a class="hdr__brand" href="index.html">
     <img class="hdr__logo" src="../assets/logo/shinjeong-symbol.svg" width="36" height="44" alt="" aria-hidden="true">
-    <span class="hdr__brandtext"><b>${esc(C.brand)}</b><span aria-hidden="true">${esc(C.brandUpper)}</span></span>
+    <span class="hdr__brandtext" translate="no"><b>${esc(C.brand)}</b><span aria-hidden="true">${esc(C.brandUpper)}</span></span>
   </a>
   <nav class="gnb" aria-label="${esc(C.navLabel)}">
 ${NAV.map((n) => `      ${a(n)}`).join('\n')}
   </nav>
   <div class="hdr__act">
-    <a class="hdr__lang" href="../${koFile}" hreflang="ko" lang="ko">${esc(C.toKorean)}</a>
+    <a class="hdr__lang" href="../${koFile}" hreflang="ko" lang="ko" translate="no">한국어</a>
     <a class="hdr__tel" href="${telHref}"><small>${esc(C.telSmall)}</small>${esc(intl(tel))}</a>
     <a class="hdr__cta" href="contact.html">${esc(C.cta)} ${arrow(14)}</a>
     <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="${esc(C.menuOpen)}"><i></i><i></i><i></i></button>
@@ -160,12 +162,12 @@ function footer(koFile) {
     </div>
     <nav class="ftr2__map enC-map" aria-label="Site map"><ul>${NAV.map((n) => `<li><a href="${n[0]}">${esc(n[1])}</a></li>`).join('')}<li><a href="../${koFile}" hreflang="ko" lang="ko">${esc(C.koreanSite)}</a></li></ul></nav>
     <div class="ftr2__info">
-      <address class="ftr2__addr">
+      <address class="ftr2__addr" translate="no">
         <p><span><b>${esc(C.brandCo)}</b></span><span>${esc(C.hq)} ${esc(C.hqLine)}</span></p>
         <p><span>${esc(C.branch)} ${esc(C.branchLine)}</span></p>
         <p><span>${esc(C.tel)} <a href="${telHref}">${esc(intl(tel))}</a></span><span>${esc(C.fax)} ${esc(intl(fax))}</span><span>${esc(C.email)} <a href="mailto:${email}">${email}</a></span></p>
       </address>
-      <div class="ftr2__cs"><small>${esc(C.csSmall)}</small><a href="${telHref}">${esc(intl(tel))}</a><span>${t(C.hoursLine)}</span></div>
+      <div class="ftr2__cs" translate="no"><small>${esc(C.csSmall)}</small><a href="${telHref}">${esc(intl(tel))}</a><span>${t(C.hoursLine)}</span></div>
     </div>
     <div class="ftr2__bot">
       <ul class="ftr2__pol"><li><a class="is-b" href="../privacy.html" hreflang="ko">${esc(C.privacy)} <small>(${esc(C.docNote)})</small></a></li><li><a href="../privacy.html#no-email" hreflang="ko">${esc(C.noEmail)}</a></li><li><a href="../${koFile}" hreflang="ko" lang="ko">${esc(C.koreanSite)}</a></li></ul>
@@ -305,10 +307,10 @@ const contactPage = head({ file: 'contact.html', page: 'contact', title: K.title
       <aside class="enC-ct__side">
         <h2>${esc(K.directTitle)}</h2>
         <p class="enC-ct__k">${esc(K.phone)}</p>
-        <a class="enC-ct__tel" href="${telHref}">${esc(intl(tel))}</a>
+        <a class="enC-ct__tel" href="${telHref}" translate="no">${esc(intl(tel))}</a>
         <p class="enC-ct__s">${t(C.hoursLine)} · ${t(K.faxLine)}</p>
         <p class="enC-ct__k">${esc(K.email)}</p>
-        <p class="enC-ct__mail"><a href="mailto:${email}">${email}</a> <button type="button" class="enC-copy" data-copy="${email}" data-done="${esc(K.copied)}">${esc(K.copy)}</button></p>
+        <p class="enC-ct__mail" translate="no"><a href="mailto:${email}">${email}</a> <button type="button" class="enC-copy" data-copy="${email}" data-done="${esc(K.copied)}">${esc(K.copy)}</button></p>
         <p class="enC-ct__s">${esc(K.emailNote)}</p>
         <div class="enC-ct__box"><h3>${esc(K.prepTitle)}</h3><ul>${K.prep.map((x) => `<li>${t(x)}</li>`).join('')}</ul></div>
         <div class="enC-ct__box"><h3>${esc(K.nextTitle)}</h3><ol>${K.next.map((x) => `<li>${t(x)}</li>`).join('')}</ol></div>
