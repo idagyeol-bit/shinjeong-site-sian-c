@@ -5304,3 +5304,35 @@ body .cs9 [id^="s0"],body main section[id^="s0"],body .s6-st{scroll-margin-top:c
   #hx .hxgo a{flex:none;min-height:42px}
   #hx .hxgo__k{flex:none}
 }
+
+/* ===== 시안C 47차 (2026-11-09 이다결 님 요청): 첫 화면 '일하는 순서' 그림을 다시 그림 — 칸마다 한 장면 =====
+   예전에는 접힌 칸 그림(t*) → 펼친 칸 그림(f*, 1.8초 교차) → 영상 첫 장면(p*) → 영상(v*)이 차례로 바뀌어, 마우스를 올릴 때 그림이 서너 번 갈아 끼워졌다.
+   이제 칸마다 그림은 한 장(pN = 영상 vN 의 첫 장면)뿐: 접힌 칸은 그 그림의 가운데를, 펼친 칸은 같은 그림을 넓게 보여 주고, 영상은 같은 장면 위로 이어서 나타난다 → 바뀌어 보이는 순간이 없다 */
+#hx .hs .ph img.po{opacity:1!important;transition:filter .45s ease!important}
+#hx .hs li:not(.on) .sb:hover .ph img.po{filter:brightness(1.1)}
+#hx .hs .ph .vd{transition:opacity .6s ease!important}
+@media (prefers-reduced-motion:reduce){#hx .hs .ph img.po{opacity:1!important;transition:none!important}}
+/* 47차: 칸이 열리고 닫힐 때 제목이 커졌다 작아지며 줄이 바뀌거나 칸 끝에서 잘려 보이던 것 — 제목 크기는 한 번에 바꾸고, 그동안은 제목을 잠깐 숨겼다가(칸이 거의 다 열리거나 닫힌 뒤) 부드럽게 보인다 */
+@media (min-width:821px){
+  #hx .hs.sm .tx b{transition:none!important}
+  #hx .hs.sm li.on .tx>b{animation:hf47in .38s ease .44s both}
+  #hx .hs.sm li:not(.on) .tx>b{animation:hf47out .32s ease .3s both}
+  #hx .hs.sm li:not(.on) .ds,#hx .hs.sm li:not(.on) .ef{transition:opacity .1s ease!important}
+}
+@keyframes hf47in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@keyframes hf47out{from{opacity:0}to{opacity:1}}
+@media (min-width:821px) and (prefers-reduced-motion:reduce){#hx .hs.sm .tx>b{animation:none!important}}
+/* 47차: 펼친 칸 그림 위 설명표(.pins) — 점 · 선 · 이름표. 칸이 열린 뒤 하나씩(--i) 나타난다 */
+#hx .ph .pins{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden}
+#hx .ph .pin{position:absolute;inset:0;opacity:0;transition:opacity .25s ease}
+#hx .ph .pins.on .pin{opacity:1;transition:opacity .45s ease}
+#hx .ph .pins.on .pin:nth-child(2){transition-delay:.12s}#hx .ph .pins.on .pin:nth-child(3){transition-delay:.24s}#hx .ph .pins.on .pin:nth-child(4){transition-delay:.36s}#hx .ph .pins.on .pin:nth-child(5){transition-delay:.48s}#hx .ph .pins.on .pin:nth-child(6){transition-delay:.6s}
+#hx .ph .pin.out{opacity:0!important}
+#hx .ph .pin .pd{position:absolute;left:-5px;top:-5px;width:10px;height:10px;border-radius:50%;background:#47a948;box-shadow:0 0 0 2px #fff,0 0 0 6px rgba(71,169,72,.28),0 2px 8px rgba(0,0,0,.45)}
+#hx .ph .pins.on .pin .pd::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid #7fd36f;animation:pin47 2.2s ease-out infinite}
+@keyframes pin47{from{transform:scale(1);opacity:.9}to{transform:scale(2.6);opacity:0}}
+#hx .ph .pin .pk{position:absolute;left:0;top:0;height:1.5px;background:rgba(255,255,255,.85);transform-origin:0 50%;box-shadow:0 0 3px rgba(0,0,0,.5)}
+#hx .ph .pin b{position:absolute;left:0;top:0;display:block;padding:6px 10px 7px;border-radius:9px;background:rgba(7,21,38,.88);border:1px solid rgba(255,255,255,.22);box-shadow:0 8px 20px -8px rgba(0,0,0,.6);color:#fff;font-size:13.5px;font-weight:700;line-height:1.25;letter-spacing:-.01em;white-space:nowrap;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+#hx .ph .pin b small{display:block;margin-top:2px;font-size:12.5px;font-weight:500;color:#cfe3f5}
+@media (max-width:820px){#hx .ph .pin b{padding:4px 8px 5px;font-size:12.5px;border-radius:7px}#hx .ph .pin b small{display:none}#hx .ph .pin .pd{width:8px;height:8px;left:-4px;top:-4px}}
+@media (prefers-reduced-motion:reduce){#hx .ph .pins.on .pin .pd::after{animation:none}}

@@ -1,0 +1,801 @@
+<title>시안C 첫 화면 A안</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>
+/*FONT*/
+/* 사이트(시안C)의 색 · 글꼴 그대로: 흰 바탕 · 남색 · 가는 선. 그림은 도면 말투, 주황은 로봇에만, 파랑은 흐름과 신호에만. 사이트와 맞추려고 밝은 화면 하나로 고정. */
+:root{color-scheme:light;--ink:#14181c;--text:#424a52;--muted:#646c74;--line:#e2e5e8;--soft:#f5f6f8;--navy:#0e2e4a;--brand:#12558c;--tint:#eaf1f7;--robot:#d9591a;--sky:#b9c5cf;--steel:#e4e9ee;--sludge:#50493f;--hh:72px;--font:Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif}
+*{box-sizing:border-box}h1,h2,p,span{word-break:keep-all}html{background:#fff}body{margin:0;background:#fff;color:var(--text);font-family:var(--font);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}.wrap{max-width:1240px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.pv{background:#c5450f;color:#fff;font-size:13px;text-align:center;padding:5px 16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.pv b{font-weight:700}.pv a{color:#fff;text-underline-offset:3px}.pvb{all:unset;cursor:pointer;text-decoration:underline;text-underline-offset:3px}@media (max-width:820px){.pvb{display:none}}
+.hd{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;height:var(--hh);background:#fff;border-bottom:1px solid var(--line)}
+.hd .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none}.logo svg{height:40px;width:auto}.logo b{display:block;font-size:20px;line-height:1.15;color:#2c3238;font-weight:700;letter-spacing:-.02em}.logo small{display:block;font-size:9.5px;letter-spacing:.13em;color:var(--muted)}
+.nav{display:flex;gap:38px;font-size:15px;color:var(--ink);font-weight:500}.nav span{white-space:nowrap}
+.hcta{border:1px solid var(--ink);border-radius:3px;padding:9px 20px;font-size:14px;font-weight:600;color:var(--ink);text-decoration:none;white-space:nowrap}
+.track{position:relative;height:1400vh}
+.stage{position:sticky;top:var(--hh);height:calc(100vh - var(--hh));height:calc(100svh - var(--hh));overflow:hidden;background:#fff}
+#w{position:absolute;inset:0;width:100%;height:100%;display:block}
+#w *{vector-effect:non-scaling-stroke}#w .sc,#w .sc *{vector-effect:none}#w text{font-family:var(--font)}
+.veil{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#fff 0,#fff 20%,rgba(255,255,255,.82) 30%,rgba(255,255,255,0) 38%)}
+.layer{position:absolute;left:0;right:0;top:0;bottom:64px;pointer-events:none}.layer .wrap{height:100%;display:flex;align-items:center}
+.box{width:min(380px,30vw)}
+.open .box{width:min(560px,46vw)}.open a{pointer-events:auto}
+h1{margin:0 0 20px;font-size:clamp(38px,4.3vw,60px);line-height:1.14;letter-spacing:-.035em;font-weight:700;color:var(--ink)}h1 span{display:block}
+.lead{margin:0 0 30px;font-size:17px;line-height:1.7}.lead span{display:block}
+.act{display:flex;gap:24px;align-items:center;flex-wrap:wrap}.btn{background:var(--navy);color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:14px 22px;border-radius:3px;white-space:nowrap}.lnk{color:var(--ink);font-weight:600;font-size:15px;text-underline-offset:7px;text-decoration-thickness:1px}
+.tag{display:flex;align-items:center;gap:8px;margin:0 0 12px;font-size:13.5px;font-weight:600;color:var(--brand)}.tag i{width:18px;height:1.5px;background:currentColor}.tag.in{color:#b7470f}
+.ct{margin:0 0 12px;font-size:clamp(28px,3vw,42px);line-height:1.18;letter-spacing:-.03em;font-weight:700;color:var(--ink);text-wrap:balance}
+.cd{margin:0;font-size:17px;line-height:1.65}.cd+.cd{margin-top:8px}.cd b{font-weight:600;color:var(--ink);margin-right:7px}
+.quote{font-size:clamp(32px,3.7vw,52px);line-height:1.2;letter-spacing:-.035em;font-weight:700;color:var(--ink);margin:0 0 12px;text-wrap:balance}
+.fact{margin:22px 0 0;font-size:13.5px;color:var(--muted)}.qs{font-size:13.5px;color:var(--muted);margin:0 0 26px}
+.rail{position:absolute;left:0;right:0;bottom:0;height:64px;background:#fff;border-top:1px solid var(--line)}.rail .wrap{height:100%;display:flex;align-items:stretch}
+.rail button{all:unset;cursor:pointer;flex:1;min-width:0;position:relative;display:flex;align-items:center;gap:9px;font-size:13.5px;color:#7b838a;white-space:nowrap;font-family:var(--font)}.rail button em{font-style:normal;font-variant-numeric:tabular-nums;font-size:12.5px}
+.rail button.on{color:var(--ink);font-weight:600}.rail button:focus-visible{outline:2px solid var(--brand);outline-offset:-3px}
+.rail button u{position:absolute;left:0;right:12px;top:-1px;height:2px;background:var(--navy);transform-origin:left;transform:scaleX(0);text-decoration:none}
+.rnow{display:none}.mcta{display:none}.skipp{all:unset;cursor:pointer;position:absolute;right:max(24px,env(safe-area-inset-right,0px));bottom:18px;z-index:3;font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px}.rail .wrap{padding-right:96px}@media (max-width:820px){.skipp{display:none}.rail .wrap{padding-right:max(24px,env(safe-area-inset-right,0px))}}
+#pf{background:var(--soft);padding-block:36px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.pfw{max-width:980px;margin:0 auto;display:flex;gap:56px;align-items:center;justify-content:center}.pft{flex:0 1 340px;min-width:0}.pft h1{font-size:30px;margin-bottom:12px}.pft p{margin:0 0 16px}.pfb{display:flex;gap:18px;align-items:center;flex-wrap:wrap}.pfb button{all:unset;cursor:pointer;background:var(--navy);color:#fff;font-weight:600;font-size:15px;padding:12px 18px;border-radius:3px}.pfb button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.ph{flex:none;padding:10px;background:#14181c;border-radius:34px}.ph iframe{display:block;width:390px;height:min(780px,calc(100vh - 92px));border:0;border-radius:24px;background:#fff}
+body.pm>.pv,body.pm>.hd,body.pm>.track,body.pm>.nums,body.pm>.why{display:none}body.pm .fr{display:inline-block;width:min(330px,100%);margin:0 18px 34px 0;vertical-align:top}body.pm .fr img:first-of-type{display:none}body.pm .fr img{margin-top:8px}body.pm #stillp{display:none}body:not(.pm) #stillm{display:none}body.inph .pv{display:none}
+.note{position:absolute;right:max(24px,env(safe-area-inset-right,0px));bottom:72px;font-size:11.5px;color:var(--muted);background:rgba(255,255,255,.8);padding:1px 5px}
+.inset{position:absolute;right:max(24px,env(safe-area-inset-right,0px));top:20px;width:290px;background:#fff;border:1px solid var(--navy);box-shadow:0 8px 24px rgba(14,46,74,.16);pointer-events:none}.inset svg{display:block;width:100%;height:auto;background:#f6f7f9}.inset span{display:block;font-size:12.5px;font-weight:600;color:var(--navy);padding:6px 9px;border-top:1px solid var(--line)}
+.hint{position:absolute;left:50%;bottom:76px;transform:translateX(-50%);font-size:13px;color:var(--muted);display:flex;align-items:center;gap:7px}
+.hd-m{display:none}@media (max-width:820px){.hd-pc{display:none}.hd-m{display:inline}}.hint svg{animation:b 1.8s ease-in-out infinite}@keyframes b{50%{transform:translateY(4px)}}
+.nums{border-bottom:1px solid var(--line);background:#fff}.nums .wrap{display:grid;grid-template-columns:repeat(4,1fr)}.nums div div{padding:26px 24px 24px;border-left:1px solid var(--line)}.nums div div:first-child{border-left:0;padding-left:0}.nums b{display:block;font-size:26px;font-weight:700;color:var(--ink);letter-spacing:-.02em;line-height:1.25}.nums span{font-size:13px;color:var(--muted)}
+.why{padding:92px 0;background:#fff}.k{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--brand);margin:0 0 18px}.k:before{content:"";width:28px;height:1.5px;background:var(--navy)}
+.why h2{margin:0;font-size:clamp(26px,2.8vw,38px);line-height:1.3;letter-spacing:-.03em;font-weight:700;color:var(--ink);max-width:24em}.why h2 em{font-style:normal;color:var(--brand)}
+.st{background:var(--soft);padding-block:72px 90px;border-top:1px solid var(--line)}.st h2{font-size:28px;letter-spacing:-.025em;color:var(--ink);margin:0 0 8px}.st>.wrap>p{margin:0 0 34px;max-width:42em}
+.wk{background:#fff}.wg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 24px}.wg figure{margin:0;min-width:0}.wg img{display:block;width:100%;height:auto;border:1px solid var(--line)}.wg figcaption{font-size:14.5px;padding-top:9px}.wg b{display:block;color:var(--ink);font-weight:600}@media (max-width:820px){.wg{grid-template-columns:1fr}}
+.fr{margin:0 0 34px;display:grid;grid-template-columns:minmax(0,1fr) 248px;gap:18px;align-items:start}.fr img{display:block;width:100%;height:auto;background:#fff;border:1px solid var(--line)}.fr figcaption{grid-column:1/-1;font-size:14.5px;color:var(--ink);font-weight:600;margin-bottom:-6px}.fr figcaption small{font-weight:400;color:var(--muted);margin-left:8px;font-size:13.5px}
+@media (max-width:820px){:root{--hh:60px}.track{height:820vh}.rail .skip{all:unset;display:block;cursor:pointer;margin-left:auto;font-size:13px;font-weight:500;color:var(--muted);padding:12px 0 12px 12px;pointer-events:auto}.rail .skip:focus-visible{outline:2px solid var(--brand)}.nav,.hcta{display:none}.logo svg{height:32px}.logo b{font-size:17px}
+.veil{background:linear-gradient(180deg,#fff 0,#fff 34%,rgba(255,255,255,.88) 42%,rgba(255,255,255,0) 50%)}
+.layer{bottom:52px}.layer .wrap{align-items:flex-start;padding-top:22px}.box,.open .box{width:100%}h1{font-size:34px;margin-bottom:12px}.lead{font-size:15.5px;margin-bottom:18px}.btn{padding:12px 18px;font-size:14.5px}.ct{font-size:27px;margin-bottom:8px}.cd{font-size:15.5px;line-height:1.55}.tag{margin-bottom:8px}.quote{font-size:30px}
+.rail{height:52px}.rail button{display:none}.rnow{display:flex;align-items:center;gap:10px;width:100%;font-size:14px;font-weight:600;color:var(--ink)}.rnow em{font-style:normal;font-weight:400;color:var(--muted);font-size:13px}.rbar{position:absolute;left:0;top:-1px;height:2px;background:var(--navy);width:100%;transform-origin:left}
+.inset{right:12px;top:150px;bottom:auto;width:176px}.inset span{font-size:11px;padding:4px 7px}.note{bottom:58px;font-size:10.5px}.hint{bottom:84px;font-size:14px;font-weight:600;color:var(--navy);white-space:nowrap}
+.mcta{display:flex;position:fixed;z-index:30;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));height:54px;transition:transform .35s ease,opacity .35s ease;box-shadow:0 8px 24px rgba(14,46,74,.18)}.mcta a{flex:1;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;text-decoration:none;background:var(--navy);color:#fff}.mcta .tel{background:#fff;color:var(--navy);border:1px solid var(--navy)}.mcta.off{transform:translateY(calc(100% + 24px));opacity:0;pointer-events:none}.st{padding-bottom:110px}
+.nums .wrap{grid-template-columns:1fr 1fr}.nums div div{padding:18px 0 18px 16px;border-left:0}.nums div div:nth-child(odd){padding-left:0}.nums b{font-size:22px}.why{padding:60px 0}
+.fr{grid-template-columns:minmax(0,1fr) 34%}}
+:root{--gut:max(24px,calc((100vw - 1240px)/2));--pw:calc(var(--gut) + clamp(380px,29vw,430px))}
+#w{left:var(--pw);width:calc(100% - var(--pw));right:auto}
+.panel{position:absolute;left:0;top:0;bottom:0;width:var(--pw);background:#fff;border-right:1px solid var(--line)}
+.layer{position:absolute;left:var(--gut);width:calc(var(--pw) - var(--gut) - 32px);top:clamp(24px,5vh,48px);right:auto;bottom:auto;pointer-events:none}
+.sn{margin:0 0 10px;font-size:15px;font-weight:600;color:var(--brand);font-variant-numeric:tabular-nums}
+.layer .ct{font-size:clamp(34px,3vw,42px);margin:0 0 14px}
+.layer .cd{font-size:19px;line-height:1.5;color:var(--ink);font-weight:500;margin:0;text-wrap:pretty}
+.lead strong{display:block;font-weight:700;color:var(--ink);margin-top:6px;font-size:18px}.lead{font-size:18px;color:var(--text)}
+.layer h1{font-size:clamp(38px,3.6vw,50px)}
+.wh{display:grid;grid-template-columns:1fr 1fr;margin-top:20px;border:1px solid var(--line)}.wh span{padding:10px 12px;font-size:16px;font-weight:700;color:#9aa2a9;min-width:0}.wh span+span{border-left:1px solid var(--line)}.wh em{display:block;font-style:normal;font-size:12.5px;font-weight:500;color:var(--muted);margin-bottom:2px}.wh .on{color:var(--navy);background:var(--tint)}
+.gn{display:flex;align-items:center;gap:6px;margin-top:18px}.gn i{font-style:normal;width:30px;height:30px;display:grid;place-items:center;border:1px solid var(--line);font-size:14px;color:var(--muted);font-weight:600}.gn i.on{background:var(--navy);border-color:var(--navy);color:#fff}.gn span{font-size:13.5px;color:var(--muted);margin-left:4px}
+.sp{margin:16px 0 0;border-top:1px solid var(--line)}.sp div{display:grid;grid-template-columns:88px minmax(0,1fr);padding:8px 0;border-bottom:1px solid var(--line);font-size:15.5px}.sp dt{color:var(--muted)}.sp dd{margin:0;color:var(--ink);font-weight:600}
+.pt{margin:14px 0 0;font-size:15.5px;font-weight:600;color:var(--brand)}.fact{font-size:14px!important}
+.rail{left:0;width:var(--pw);right:auto;height:auto;bottom:0;border-top:0;background:transparent;pointer-events:none}.rail .wrap{display:block;max-width:none;margin:0;padding:0 32px 16px var(--gut);height:auto}
+.rail button{display:flex;flex:none;pointer-events:auto;padding:3.500px 0;font-size:14.500px;color:#9aa2a9}.rail button.dn{color:var(--muted)}.rail button.on{color:var(--navy);font-weight:700}.rail button u{display:none}.rail button em{width:22px;font-size:13px}
+.skipp{left:auto;right:calc(100% - var(--pw) + 32px);bottom:18px}.rail .wrap{padding-right:32px}
+.note{right:16px;bottom:10px}.hint{left:calc(var(--pw) + (100% - var(--pw))/2);bottom:40px}
+.inset{left:calc(var(--pw) + 16px);right:auto;top:16px;width:270px}
+.open a{pointer-events:auto}.layer .act{margin-top:6px}
+@media (max-height:760px){.rail button{padding:1px 0;font-size:13px}.layer .ct{margin-bottom:8px}.sp div{padding:6px 0;font-size:14.500px}}
+@media (max-width:820px){:root{--pw:0px;--ph:47%}
+#w{left:0;width:100%;top:var(--ph);height:calc(100% - var(--ph) - 52px);bottom:auto}.panel{width:100%;bottom:auto;height:var(--ph);border-right:0;border-bottom:1px solid var(--line)}
+.layer{left:16px;width:calc(100% - 32px);top:14px}.sn{margin-bottom:4px;font-size:13.500px}.layer .ct{font-size:27px;margin-bottom:6px}.layer .cd{font-size:15.500px;line-height:1.45}.layer h1{font-size:31px;margin-bottom:8px}.lead,.lead strong{font-size:14.500px;margin-bottom:10px}.lead strong{margin:3px 0 0}.fact{margin-top:10px!important;font-size:12px!important}
+.wh{margin-top:10px}.wh span{padding:6px 10px;font-size:14px}.wh em{font-size:11.500px;margin:0}.gn{margin-top:8px}.gn i{width:25px;height:25px;font-size:12.500px}.sp{margin-top:8px}.sp div{grid-template-columns:72px minmax(0,1fr);padding:4px 0;font-size:13.500px}.pt{margin-top:7px;font-size:13.500px}.quote{font-size:28px!important}
+.rail{left:0;right:0;width:100%;height:52px;bottom:0;background:#fff;border-top:1px solid var(--line);pointer-events:auto}.rail .wrap{display:flex;padding:0 16px;height:100%;max-width:none}.rail button{display:none}.rail .skip{display:block}
+.note{right:8px;bottom:56px;font-size:10px}.hint{left:50%;bottom:76px;transform:translateX(-50%)}.inset{left:auto;right:10px;top:calc(var(--ph) + 8px);width:150px}.inset span{font-size:10.500px;padding:3px 6px}.layer .act{gap:16px}.btn{padding:10px 14px;font-size:14px}.layer .act{margin-top:0}}
+.gt{margin-top:14px;border-top:1px solid var(--line)}.gr{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:48px minmax(0,1.15fr) minmax(0,1.2fr) 54px;gap:6px;align-items:center;width:100%;padding:8px 6px;border-bottom:1px solid var(--line);font-size:14px;color:var(--text);pointer-events:auto;font-family:var(--font)}.gr b{color:var(--ink);font-weight:700}.gr:focus-visible{outline:2px solid var(--brand);outline-offset:-2px}.gr.on{background:var(--navy);color:#fff}.gr.on b{color:#fff}
+@media (max-width:820px){.gt{margin-top:7px}.gr{padding:4px 5px;font-size:12.500px;grid-template-columns:42px minmax(0,1.2fr) minmax(0,1.2fr) 48px}}
+.er{grid-template-columns:118px minmax(0,1.3fr) minmax(0,1fr)}@media (max-width:820px){.er{grid-template-columns:96px minmax(0,1.3fr) minmax(0,.9fr)}}
+#pf .nv{display:flex;gap:8px;margin-bottom:16px}.nv button{all:unset;cursor:pointer;border:1px solid var(--navy);color:var(--navy);padding:9px 16px;font-size:15px;font-weight:600;border-radius:3px}.nv button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+body.pm .fr{width:min(520px,100%)!important;margin:0 24px 44px 0!important}
+.track{height:auto!important}.stage{position:relative;top:auto;height:calc(100vh - var(--hh));height:calc(100svh - var(--hh));min-height:620px}
+.hd{position:relative;top:auto}
+.head{position:absolute;z-index:3;left:var(--gut);top:clamp(24px,5vh,46px);width:calc(var(--pw) - var(--gut) - 28px)}.eb{margin:0 0 10px;font-size:15.500px;font-weight:600;color:var(--brand)}.head h1{margin:0;font-size:clamp(33px,2.900vw,41px);line-height:1.2;letter-spacing:-.035em}
+.layer{top:clamp(190px,27vh,245px)}.layer .ct{font-size:clamp(24px,2vw,29px);margin:0 0 8px}.layer .cd{font-size:17.500px}.sn{margin-bottom:7px}.wh{margin-top:14px}
+.cta{position:absolute;z-index:3;left:var(--gut);top:calc(clamp(190px,27vh,245px) + 212px);display:flex;gap:20px;align-items:center}
+.rail button em{width:24px}.rail .wrap{padding-bottom:18px}.pause{all:unset;cursor:pointer;position:absolute;z-index:3;left:calc(var(--pw) + 16px);bottom:14px;font-size:13px;font-weight:600;color:var(--navy);background:#fff;border:1px solid var(--line);padding:6px 11px}.pause:focus-visible{outline:2px solid var(--brand)}
+#fadev{position:absolute;inset:0;left:var(--pw);background:#fff;opacity:0;pointer-events:none;z-index:2}
+.lineup{padding:64px 0 54px;background:#fff;border-top:1px solid var(--line)}.lineup h2{margin:0 0 26px;font-size:clamp(24px,2.300vw,32px);letter-spacing:-.03em;color:var(--ink)}.lg{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}.lg figure{margin:0;min-width:0}.lg svg{display:block;width:100%;height:auto;aspect-ratio:16/10}.lg figcaption{padding-top:10px;border-top:1px solid var(--line);font-size:13.500px;color:var(--muted)}.lg b{display:block;font-size:17px;color:var(--ink)}.lg span{display:block}
+@media (max-height:760px){.cta{top:calc(clamp(190px,27vh,245px) + 196px)}.rail button{font-size:12.500px;padding:0}}
+@media (max-width:820px){.stage{height:calc(100svh - var(--hh) - 78px);min-height:540px}
+.head{left:16px;width:calc(100% - 32px);top:12px;z-index:3}.eb{font-size:13px;margin-bottom:3px}.head h1{font-size:25px;line-height:1.22}
+.layer{top:98px}.layer .ct{font-size:20px;margin-bottom:3px}.layer .cd{font-size:14.500px;line-height:1.4}.sn{font-size:12.500px;margin-bottom:2px}.wh{margin-top:7px}
+.cta{display:none}.pause{left:auto;right:10px;bottom:60px;padding:4px 9px;font-size:12px}#fadev{left:0;top:var(--ph)}
+.note{right:auto;left:8px}.mcta{display:flex!important}.mcta.off{transform:none!important;opacity:1!important;pointer-events:auto!important}
+.lg{display:flex;overflow-x:auto;gap:14px;scroll-snap-type:x proximity;padding-bottom:6px}.lg figure{flex:0 0 62%;scroll-snap-align:start}.lineup{padding:44px 0 34px}
+body{padding-bottom:78px}}
+.hint,#skip,#skipp{display:none!important}
+.dev{display:flex;flex-wrap:wrap;align-items:center;gap:5px 6px;margin:14px 0 0;font-size:14.500px}.dev b{background:var(--navy);color:#fff;padding:5px 9px;font-weight:600;white-space:nowrap}.dev i{font-style:normal;color:var(--navy);font-weight:700}
+.head h1{font-size:clamp(31px,2.700vw,38px)}.layer{top:clamp(262px,37vh,310px)}.sn{font-size:14.500px}.layer .ct{font-size:clamp(25px,2.100vw,30px)}.layer .cd{font-size:18px;color:var(--ink)}
+.cta{top:auto;bottom:196px}.rail .wrap{padding-bottom:14px}.rail button{padding:2.500px 0;font-size:14.500px}
+@media (max-height:800px){.rail{display:none}.cta{bottom:18px}.layer{top:232px}.wh{margin-top:8px}.head h1{font-size:30px}}
+.lineup{padding:72px 0 64px}.lineup h2{margin:0 0 10px;font-size:clamp(28px,3vw,42px)}.ls{margin:0 0 30px;font-size:18px;color:var(--ink);font-weight:500}
+.rs{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}.rb{all:unset;box-sizing:border-box;cursor:pointer;border:1px solid var(--line);background:#fff;padding:8px 6px 9px;text-align:center;min-width:0}.rb svg{display:block;width:100%;height:auto;aspect-ratio:16/9}.rb b{display:block;margin-top:4px;font-size:14px;font-weight:600;color:var(--ink);white-space:nowrap}.rb:focus-visible{outline:2px solid var(--brand)}.rb.on{border-color:var(--navy);box-shadow:inset 0 0 0 2px var(--navy);background:var(--tint)}
+.rd{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:40px;align-items:center;margin-top:16px;background:var(--soft);padding:30px 34px}.rp svg{display:block;width:100%;height:auto;max-height:420px}.rt{margin:0 0 6px;font-size:15px;font-weight:600;color:var(--brand)}.ri h3{margin:0 0 10px;font-size:clamp(30px,3vw,40px);line-height:1.15;letter-spacing:-.03em;color:var(--ink)}.rw2{margin:0 0 18px;font-size:20px;line-height:1.45;font-weight:600;color:var(--ink);text-wrap:pretty}.ri dl{margin:0;border-top:1px solid #d6dde3}.ri dl div{display:grid;grid-template-columns:98px minmax(0,1fr);padding:10px 0;border-bottom:1px solid #d6dde3;font-size:16px}.ri dt{color:var(--muted)}.ri dd{margin:0;font-weight:600;color:var(--ink)}.rx{margin:12px 0 0;font-size:15px;font-weight:600;color:var(--brand)}.rx:empty{display:none}.rft{margin:16px 0 0;font-size:14px;color:var(--muted)}
+.nums{background:var(--navy);border:0}.nums .wrap{grid-template-columns:repeat(4,minmax(0,1fr))}.nums .wrap>div{padding:46px 26px 44px;border-left:1px solid rgba(255,255,255,.2)}.nums .wrap>div:first-child{border-left:0;padding-left:0}.nums b{color:#fff;font-size:clamp(36px,4vw,56px);line-height:1.05;letter-spacing:-.04em;margin-bottom:12px;white-space:nowrap}.nums small{font-size:.5em;font-weight:600;letter-spacing:-.02em;margin-left:2px}.nums span{display:block;color:#d8e3ec;font-size:15.500px;line-height:1.5}
+@media (max-width:820px){.rail{display:block}.head h1{font-size:23px;line-height:1.22}.head h1 br:nth-of-type(1){display:none}.dev{margin-top:7px;font-size:12px;gap:3px 4px}.dev b{padding:3px 6px}.layer{top:120px}.layer .ct{font-size:21px}.layer .cd{font-size:15px}.sn{font-size:12.500px}
+.lineup{padding:46px 0 40px}.lineup h2{font-size:26px}.ls{font-size:15.500px;margin-bottom:18px}.rs{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.rb{padding:5px 3px}.rb b{font-size:11.500px;white-space:normal;line-height:1.2}.rd{grid-template-columns:1fr;gap:14px;padding:18px 16px}.rw2{font-size:17.500px;margin-bottom:12px}.ri dl div{grid-template-columns:82px minmax(0,1fr);font-size:14.500px;padding:8px 0}
+.nums .wrap{grid-template-columns:1fr 1fr}.nums .wrap>div{padding:26px 14px 24px 0!important;border-left:0;border-top:1px solid rgba(255,255,255,.2)}.nums .wrap>div:nth-child(-n+2){border-top:0}.nums .wrap>div:nth-child(even){padding-left:14px!important;border-left:1px solid rgba(255,255,255,.2)}.nums b{font-size:38px}.nums span{font-size:13.500px}}
+.cta{bottom:214px}@media (max-height:800px){.cta{bottom:18px}}@media (max-width:820px){.layer{top:134px}}
+.track.off{display:none!important}
+.head .h1x{margin:0;font-size:clamp(31px,2.7vw,38px);line-height:1.2;letter-spacing:-.035em;color:var(--ink)}
+.hvl{display:inline-flex;gap:6px;align-items:center}.hvl select{font:inherit;font-size:12.5px;max-width:300px;padding:1px 4px}
+.hx{padding-block:26px 30px;background:#fff}
+.hxh{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:10px 56px;align-items:end;margin-bottom:22px}.hxh .eb{grid-column:1/-1;margin:0;font-size:15.5px;font-weight:600;color:var(--brand)}
+.hx h1{margin:0;font-size:clamp(34px,3.2vw,48px);line-height:1.17;letter-spacing:-.04em;color:var(--ink);text-wrap:balance}
+.hxs{margin:0;font-size:17.5px;line-height:1.6;color:var(--ink);font-weight:500;text-wrap:pretty}.hxr .dev{margin-top:12px}
+.hs{list-style:none;margin:0;padding:0;display:flex;gap:10px;height:clamp(350px,47vh,480px)}
+.hs>li{position:relative;flex:1 1 0;min-width:0;transition:flex-grow .6s cubic-bezier(.2,.7,.2,1)}.hs>li.on{flex-grow:2.9}
+.sb{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;width:100%;height:100%;border:1px solid var(--line);background:#fff;font-family:var(--font)}.sb:focus-visible{outline:2px solid var(--brand);outline-offset:2px}.hs li.on .sb{border-color:var(--navy)}
+.ph{position:relative;display:block;flex:1;min-height:0;overflow:hidden;background:var(--soft)}.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;opacity:0;transition:opacity .8s}.ph img.v{opacity:1}.hs li:not(.on) .ph img{filter:saturate(.7)}
+.tx{display:block;padding:12px 15px 14px;border-top:1px solid var(--line);min-height:104px}.tx em{display:block;font-style:normal;font-size:13px;font-weight:700;color:var(--brand);margin-bottom:3px;font-variant-numeric:tabular-nums}
+.tx b{display:block;font-size:17px;line-height:1.3;color:var(--ink);font-weight:700}.hs li.on .tx b{font-size:21px}.hs li.on .tx{background:var(--tint)}
+.ds{display:block;font-size:15.5px;line-height:1.5;color:var(--ink);margin-top:5px;max-height:0;opacity:0;overflow:hidden;transition:opacity .5s}.hs li.on .ds{max-height:7em;opacity:1}
+.bar{position:absolute;left:0;right:0;top:0;height:3px;background:var(--navy);transform-origin:left;transform:scaleX(0);z-index:2}.hs li:not(.on) .bar{display:none}
+.hxa{display:flex;gap:26px;align-items:center;flex-wrap:wrap;margin-top:20px}#openLive{all:unset;cursor:pointer;font-weight:600;font-size:15px;color:var(--ink);text-decoration:underline;text-underline-offset:7px;text-decoration-thickness:1px}#openLive:focus-visible{outline:2px solid var(--brand)}.hxn{margin:12px 0 0;font-size:12px;color:var(--muted)}
+@media (max-width:820px){.head .h1x{font-size:23px}.hvl{display:none}
+.hx{padding-block:16px 18px}.hxh{grid-template-columns:1fr;gap:5px;margin-bottom:14px}.hxh .eb{font-size:13px}.hx h1{font-size:25px;line-height:1.22}.hxs{font-size:14.5px;line-height:1.5}.hxr .dev{display:none}
+.hs{flex-direction:column;height:auto;gap:6px}.hs>li{flex:none}.sb{display:grid;grid-template-columns:72px minmax(0,1fr);align-items:center;height:auto}.ph{height:52px;flex:none}.tx{border-top:0;min-height:0;padding:7px 12px;border-left:1px solid var(--line)}.tx em{display:inline;margin-right:7px}.tx b{display:inline;font-size:16px}
+.hs li.on .sb{grid-template-columns:1fr}.hs li.on .ph{height:auto;aspect-ratio:16/9}.hs li.on .tx{border-left:0;border-top:1px solid var(--line);padding:10px 13px 12px}.hs li.on .tx b{font-size:18.5px}.ds{font-size:14.5px}.hxa{gap:18px;margin-top:14px}.hxa .btn{padding:11px 15px;font-size:14px}}
+.hxh{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.15fr);gap:20px 56px;align-items:end;margin-bottom:26px}
+.hxl .eb{margin:0 0 14px}.qt{margin:0;font-size:clamp(40px,3.9vw,58px)!important;line-height:1.12!important;letter-spacing:-.045em;font-weight:800;color:var(--ink)}.qt span{display:block}.qt .q2{color:var(--navy);background:linear-gradient(transparent 70%,#dbe7f1 70%);display:inline;padding-right:2px}
+.qa{margin:14px 0 0;font-size:13.5px;color:var(--muted);display:flex;align-items:center;gap:8px}.qa:before{content:"";width:22px;height:1px;background:var(--muted)}
+.tl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr 1.15fr;position:relative}
+.tl li{position:relative;padding:22px 18px 18px;border-top:2px solid var(--navy);min-width:0}
+.tl li:before{content:"";position:absolute;left:18px;top:-7px;width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid var(--navy)}
+.tl .y{display:block;font-size:34px;font-weight:800;line-height:1;letter-spacing:-.03em;color:var(--navy);font-variant-numeric:tabular-nums;margin-bottom:10px}
+.tl b{display:block;font-size:17px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:6px}.tl .d{display:block;font-size:14px;line-height:1.5;color:var(--text)}
+.tl li.now{background:var(--navy)}.tl li.now:before{background:#7fb3dc;border-color:#fff}.tl li.now .y{color:#9ec8ea}.tl li.now b{color:#fff;font-size:19px}.tl li.now .d{color:#d8e3ec}
+@media (max-width:1100px){.hxh{grid-template-columns:1fr;gap:18px}}
+@media (max-width:820px){.hxh{gap:12px;margin-bottom:14px}.hxl .eb{margin-bottom:6px}.qt{font-size:29px!important}.qa{margin-top:6px;font-size:12px}
+.tl{grid-template-columns:1fr 1fr 1.2fr}.tl li{padding:13px 8px 9px}.tl li:before{left:8px;top:-6px;width:10px;height:10px}.tl .y{font-size:21px;margin-bottom:5px}.tl b,.tl li.now b{font-size:13px;margin:0}.tl .d{display:none}}
+.sm2{display:none}@media (max-width:820px){.lg2{display:none}.sm2{display:inline}}
+.hxh{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr)!important;align-items:end;gap:24px 64px!important;margin-bottom:30px!important}
+.qt .q2{background:none!important;display:block!important;padding:0!important;color:var(--navy)}.qt span:first-child{margin-left:-.42em}.qt .q2{margin-left:0}
+.lede{margin:0;font-size:clamp(19px,1.55vw,22px);line-height:1.6;letter-spacing:-.02em;color:#8a9299;font-weight:500;text-wrap:pretty}.lede strong{color:var(--ink);font-weight:700}
+.meta{list-style:none;margin:22px 0 0;padding:16px 0 0;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px 0;font-size:14px;color:var(--muted)}
+.meta li{display:flex;align-items:baseline;gap:6px;padding:0 15px;border-left:1px solid var(--line);white-space:nowrap}.meta li:first-child{padding-left:0;border-left:0}.meta b{font-size:17px;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+@media (max-width:1100px){.hxh{grid-template-columns:1fr!important;gap:16px!important}}
+@media (max-width:820px){.hxh{gap:10px!important;margin-bottom:16px!important}.qt span:first-child{margin-left:-.4em}.lede{font-size:15.5px;line-height:1.55}.meta{margin-top:12px;padding-top:10px;font-size:12px;gap:6px 0}.meta li{padding:0 10px;gap:5px}.meta b{font-size:14px}.meta li:nth-child(3){padding-left:0;border-left:0}}
+.hsh{display:flex;align-items:baseline;gap:14px;margin:0 0 12px;padding-top:4px}.hsh b{font-size:15px;font-weight:700;color:var(--ink)}.hsh span{font-size:13.5px;color:var(--muted)}.hsm{display:none}
+.hs{height:clamp(380px,50vh,500px)!important}.ph img{object-position:center center!important}
+.ph img.th{opacity:1}.hs li.on .ph img.th{opacity:0}.hs li:not(.on) .ph img.fa{opacity:0!important}
+.tg{display:block;margin-top:6px;font-size:13.5px;font-weight:600;color:var(--brand);line-height:1.35}.hs li.on .tg{display:none}
+.ef{display:none}.hs li.on .ef{display:inline-flex;align-items:center;gap:7px;margin-top:9px;font-size:14.5px;font-weight:700;color:var(--navy)}.hs li.on .ef:before{content:"";width:16px;height:2px;background:var(--navy)}
+.hs li.on .ds{font-size:15.5px}.tx{min-height:118px}
+@media (max-width:820px){.hsp{display:none}.hsm{display:inline}.hsh{margin-bottom:8px}.hsh b{font-size:14px}.hsh span{font-size:12px}.hs{height:auto!important}.tg{display:inline;margin:0 0 0 8px;font-size:12px}.tx{min-height:0}.hs li.on .ef{font-size:13px;margin-top:6px}.hs li.on .ph{aspect-ratio:1.7/1!important}}
+@media (max-width:820px){.meta{display:grid!important;grid-template-columns:1fr 1fr;gap:6px 10px!important}.meta li,.meta li:nth-child(3){padding:0!important;border:0!important}}
+.lede{color:#7d868e!important}.lede strong{color:var(--ink)}
+.meta{gap:0!important;padding-top:20px!important;margin-top:24px!important}.meta li{flex-direction:column;align-items:flex-start!important;gap:4px!important;padding:0 26px!important;font-size:13.5px;color:var(--text)}.meta li:first-child{padding-left:0!important}
+.meta b{font-size:clamp(28px,2.4vw,34px)!important;font-weight:800!important;line-height:1;letter-spacing:-.03em!important;color:var(--navy)}.meta b small{font-size:.5em;font-weight:700;margin-left:2px}
+.vd{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s;pointer-events:none}.hs li.on .ph.pl .vd{opacity:1}
+.tx strong{font-weight:700;color:var(--navy)}.cv{display:none}
+@media (max-width:820px){.lede{font-size:15px!important;line-height:1.65!important}.meta{display:grid!important;grid-template-columns:1.05fr 1fr 1.1fr .8fr;gap:0 8px!important;padding-top:12px!important;margin-top:14px!important}.meta li{padding:0!important;border:0!important;font-size:11px;line-height:1.35;word-break:keep-all}.meta b{font-size:21px!important}
+.hs li:not(.on) .tg{display:block;margin:3px 0 0!important}
+.sb{position:relative}.cv{display:grid;place-items:center;position:absolute;right:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;border:1px solid var(--line);border-radius:50%;font-style:normal;font-size:16px;color:var(--navy);line-height:1}.hs li.on .cv{display:none}.hs li:not(.on) .tx{padding-right:44px}}
+.lm{display:none}@media (max-width:820px){.lw{display:none}.lm{display:inline}}
+</style>
+<div id="pf" hidden><div class="pfw"><div class="pft"><h1>휴대폰 화면 미리보기</h1><p>실제 휴대폰 너비(390px)입니다. 아래 단추나 마우스 휠로 한 장면씩 넘겨 보세요. 휴대폰에서 한 번 미는 것과 같습니다.</p><div class="nv"><button type="button" id="pPrev">↑ 이전 장면</button><button type="button" id="pNext">다음 장면 ↓</button></div><p class="pfb"><button type="button" id="toLap">노트북 화면으로 보기</button> <a href="#stills">휴대폰 장면 크게 보기</a></p></div><div class="ph"><iframe id="pfi" name="sjphone" title="휴대폰 화면"></iframe></div></div></div>
+<div class="pv"><span><b>시안 C · 첫 화면 미리보기</b></span><label class="hvl">첫 문장 후보 <select id="hv"><option value="0">1. “사람이 없는 곳에 인명 사고도 없다”</option><option value="1">2. 30년 넘게 쌓은 현장 경험, 이제 로봇이 먼저 들어갑니다</option><option value="2">3. Cleaning으로 안전한 현장을 만듭니다</option><option value="3">4. 작업자는 안전하게, 설비는 깨끗하게</option><option value="4">5. 위험한 현장에서 30년 넘게 일해 왔습니다</option></select></label><a href="#workers">첫 화면 크게 보기</a><a href="#stills">그림 크게 보기</a><button type="button" id="toPh" class="pvb">휴대폰 화면으로 보기</button></div>
+<header class="hd"><div class="wrap"><a class="logo" href="https://idagyeol-bit.github.io/shinjeong-site-sian-c/" target="_blank" rel="noopener"><!--LOGO--><span><b>(주)신정개발</b><small>SHINJEONG DEVELOPMENT</small></span></a><nav class="nav"><span>사업분야</span><span>무인 솔루션</span><span>적용 사례</span><span>회사 소개</span></nav><a class="hcta" href="https://idagyeol-bit.github.io/shinjeong-site-sian-c/contact.html" target="_blank" rel="noopener">현장 문의 →</a></div></header>
+<section class="hx" id="hx" aria-label="신정개발 소개"><div class="wrap"><div class="hxh"><div class="hxl"><p class="eb" id="hxe">1992년부터, 산업설비 클리닝 한 길</p><h1 id="hxt" class="qt"><span>“사람이 없는 곳에</span><span class="q2">인명 사고도 없다”</span></h1></div>
+<div class="hxr2"><p class="lede"><span class="lw">1992년부터 석유화학 · 정유 플랜트의 탱크와 반응기를 클리닝해 왔습니다. 2017년 기업부설연구소를 설립해 </span><span class="lm">1992년부터 플랜트 설비를 클리닝해 온 신정개발은 2017년 기업부설연구소에서 </span><strong>무인 로봇을 자체 개발</strong>했고, 지금은 그 로봇이 <strong>작업자보다 먼저 설비에 투입됩니다.</strong></p>
+<ul class="meta"><li><b>1992</b>설립</li><li><b>2017</b>기업부설연구소 설립</li><li><b>1~5<small>세대</small></b>자체 개발 무인 로봇</li><li><b>8<small>건</small></b>등록 특허</li></ul></div></div>
+<div class="hsh"><b>신정개발이 일하는 순서</b><span class="hsp">칸에 마우스를 올리면 작업 장면이 재생됩니다</span><span class="hsm">단계를 누르면 작업 장면이 재생됩니다</span></div><ol class="hs" id="hs"><li><i class="bar"></i><button type="button" class="sb" aria-expanded="false"><span class="ph"><img src="<!--F:t1-->" alt="" class="th" decoding="async"><img src="<!--F:f1b-->" alt="" class="fa v" decoding="async"><img src="<!--F:f1a-->" alt="" class="fa" decoding="async"><video class="vd" muted playsinline loop preload="auto" src="<!--V:v1-->"></video></span><span class="tx"><em>01</em><b>연구소 개발 · 특허</b><span class="tg">자체 개발 로봇</span><span class="ds">2017년 설립한 기업부설연구소에서 1~5세대 무인 Vacuum 로봇을 <strong>자체 개발</strong>하고, 관련 기술을 <strong>특허로 등록</strong>했습니다.</span><span class="ef">기업부설연구소 자체 개발 · 등록 특허 기반</span></span><i class="cv" aria-hidden="true">+</i></button></li><li><i class="bar"></i><button type="button" class="sb" aria-expanded="false"><span class="ph"><img src="<!--F:t2-->" alt="" class="th" decoding="async"><img src="<!--F:f2a-->" alt="" class="fa v" decoding="async"><img src="<!--F:f2b-->" alt="" class="fa" decoding="async"><video class="vd" muted playsinline loop preload="auto" src="<!--V:v2-->"></video></span><span class="tx"><em>02</em><b>설비별 로봇 선정 · 투입</b><span class="tg">방폭 · 수중 대응</span><span class="ds">Tank · Pond · Reactor 등 설비 조건에 맞는 로봇을 선정해 맨홀로 투입합니다. <strong>유압 구동</strong>이라 <strong>방폭지역</strong>에서도 작업할 수 있습니다.</span><span class="ef">방폭지역 · 수중 작업 대응</span></span><i class="cv" aria-hidden="true">+</i></button></li><li><i class="bar"></i><button type="button" class="sb" aria-expanded="false"><span class="ph"><img src="<!--F:t3-->" alt="" class="th" decoding="async"><img src="<!--F:f3a-->" alt="" class="fa v" decoding="async"><img src="<!--F:f3b-->" alt="" class="fa" decoding="async"><img src="<!--F:f3c-->" alt="" class="fa" decoding="async"><video class="vd" muted playsinline loop preload="auto" src="<!--V:v3-->"></video></span><span class="tx"><em>03</em><b>로봇 선투입 · 위험 물질 회수</b><span class="tg">인명사고 위험 감소</span><span class="ds">작업자 대신 로봇이 설비 내부에 진입해 <strong>슬러지와 잔류 위험 물질을 회수</strong>합니다. 작업자는 외부 제어 차량에서 CCTV로 확인하며 <strong>원격 조정</strong>합니다.</span><span class="ef">질식 · 매몰 · 협착 등 인명사고 위험 감소</span></span><i class="cv" aria-hidden="true">+</i></button></li><li><i class="bar"></i><button type="button" class="sb" aria-expanded="false"><span class="ph"><img src="<!--F:t4-->" alt="" class="th" decoding="async"><img src="<!--F:f4a-->" alt="" class="fa v" decoding="async"><img src="<!--F:f4b-->" alt="" class="fa" decoding="async"><img src="<!--F:f4c-->" alt="" class="fa" decoding="async"><video class="vd" muted playsinline loop preload="auto" src="<!--V:v4-->"></video></span><span class="tx"><em>04</em><b>유해성 저감 후 최종 클리닝</b><span class="tg">유해성 감소 후 진입</span><span class="ds">로봇 전면부 Jet Nozzle로 내부를 세정해 <strong>유해성을 낮춘 뒤</strong>, 보호구를 착용한 작업자가 진입해 <strong>최종 잔여물을 제거</strong>합니다.</span><span class="ef">유해성 감소 후 Final Cleaning</span></span><i class="cv" aria-hidden="true">+</i></button></li><li><i class="bar"></i><button type="button" class="sb" aria-expanded="false"><span class="ph"><img src="<!--F:t5-->" alt="" class="th" decoding="async"><img src="<!--F:f5a-->" alt="" class="fa v" decoding="async"><img src="<!--F:f5b-->" alt="" class="fa" decoding="async"><video class="vd" muted playsinline loop preload="auto" src="<!--V:v5-->"></video></span><span class="tx"><em>05</em><b>고액 분리 · 폐기물 감량</b><span class="tg">폐기물 감량</span><span class="ds">회수물은 Screw Decanter · Filter-Press로 <strong>고액 분리해 양을 줄이고</strong>, 일반 · 지정폐기물 <strong>수집 · 운반까지</strong> 맡습니다.</span><span class="ef">처리량 감량 · 처리비용 감소 · 처리시간 단축</span></span><i class="cv" aria-hidden="true">+</i></button></li></ol>
+<div class="hxa"><a class="btn" href="https://idagyeol-bit.github.io/shinjeong-site-sian-c/unmanned.html" target="_blank" rel="noopener">무인 솔루션 보기 →</a><button type="button" id="openLive">▶ 움직이는 작업 장면 보기</button><a class="lnk" href="https://idagyeol-bit.github.io/shinjeong-site-sian-c/contact.html" target="_blank" rel="noopener">현장 문의</a></div><p class="hxn">※ 연출 그림 · 작업 순서는 기술소개서(2025) 19쪽</p></div></section>
+<script>window.__HV=[["1992년부터, 산업설비 클리닝 한 길", "“사람이 없는 곳에<br>인명 사고도 없다”", "1992년부터 쌓은 현장 경험 위에, 2017년 기업부설연구소를 세워 무인 로봇을 개발했습니다. 위험한 설비 안은 로봇이 먼저 치우고, 작업자가 마무리합니다."], ["1992년부터 이어 온 현장", "30년 넘게 쌓은 현장 경험,<br>이제 로봇이 먼저 들어갑니다", "탱크 · 반응기 · 배수로 · 관로를 클리닝해 왔습니다. 2017년부터는 직접 개발한 로봇이 가장 위험한 작업을 먼저 맡습니다."], ["신정개발이 생각하는 Cleaning", "Cleaning으로<br>안전한 현장을 만듭니다", "작업자의 생명을 지키고, 맡겨 주신 설비는 끝까지 마무리합니다. 고객님의 믿음에 최고의 품질로 보답하겠습니다."], ["1992년부터, 산업설비 클리닝", "작업자는 안전하게,<br>설비는 깨끗하게", "30년 넘는 현장 경험과 2017년부터 직접 개발해 온 무인 로봇으로, 위험한 작업부터 줄입니다."], ["1992년부터", "위험한 현장에서<br>30년 넘게 일해 왔습니다", "그 경험으로 로봇을 만들었습니다. 로봇이 먼저 들어가고, 작업자가 마무리합니다."]]</script>
+<section class="track off" id="track" aria-label="움직이는 작업 장면"><div class="stage" id="stage">
+<svg id="w" aria-hidden="true"></svg><div class="panel"></div><div id="fadev"></div>
+<div class="head"><p class="eb">움직이는 작업 장면</p><h2 class="h1x">로봇이 먼저 들어가고<br>유해성 저감 후 최종 클리닝합니다</h2><p class="dev"><b>2017 기업부설연구소</b><i>→</i><b>로봇 자체 개발</b><i>→</i><b>특허 등록</b><i>→</i><b>현장 투입</b></p></div>
+<div class="cta"><a class="btn" href="https://idagyeol-bit.github.io/shinjeong-site-sian-c/unmanned.html" target="_blank" rel="noopener">무인 솔루션 보기 →</a><a class="lnk" href="https://idagyeol-bit.github.io/shinjeong-site-sian-c/contact.html" target="_blank" rel="noopener">현장 문의</a></div>
+<button type="button" class="pause" id="pause" aria-pressed="false" aria-label="장면 멈추기">❚❚ 멈춤</button>
+<div class="layer" data-a="-9,-9,-3.05,-3"><p class="sn">2017 기업부설연구소</p><h2 class="ct">직접 개발한 무인 로봇</h2><p class="cd">1세대부터 5세대까지 개발해 특허를 내고 실제 현장에 투입합니다</p></div>
+<div class="layer" data-a=".95,1.1,1.75,1.85"><p class="sn">1단계 · System 설치</p><h2 class="ct">먼저 현장을 확인합니다</h2><p class="cd">이 현장에 로봇을 쓸 수 있는지 검토하고 사전 시험을 합니다</p><div class="wh"><span class=""><em>설비 안</em>아무도 없음</span><span class="on"><em>설비 밖</em>작업자</span></div></div>
+<div class="layer" data-a="1.85,2,2.55,2.65"><p class="sn">2단계 · 1차 Washing</p><h2 class="ct">밖에서 먼저 빼냅니다</h2><p class="cd">흡입차(Vacuum Car)로 설비 밖에서 남아 있는 물질을 빼냅니다</p><div class="wh"><span class=""><em>설비 안</em>아무도 없음</span><span class="on"><em>설비 밖</em>작업자 · 흡입차</span></div></div>
+<div class="layer" data-a="2.65,2.8,3.72,3.8"><p class="sn">3단계 · 내부 Cleaning</p><h2 class="ct">로봇이 먼저 들어갑니다</h2><p class="cd">사람 대신 로봇이 설비 안으로 들어가 위험 물질을 회수합니다</p><div class="wh"><span class="on"><em>설비 안</em>로봇</span><span class="on"><em>설비 밖</em>작업자</span></div></div>
+<div class="layer" data-a="3.8,3.88,4.35,4.45"><p class="sn">3단계 · 내부 Cleaning</p><h2 class="ct">사람은 밖에서 조종합니다</h2><p class="cd">작업자는 제어 차량에서 CCTV 화면을 보며 로봇을 조종합니다</p><div class="wh"><span class="on"><em>설비 안</em>로봇</span><span class="on"><em>설비 밖</em>작업자 · 제어 차량</span></div></div>
+<div class="layer" data-a="4.45,4.55,5,5.1"><p class="sn">3단계 · 내부 Cleaning</p><h2 class="ct">로봇은 안에서, 사람은 밖에서</h2><p class="cd">“사람이 없는 곳에 인명 사고도 없다.”</p><div class="wh"><span class="on"><em>설비 안</em>로봇</span><span class="on"><em>설비 밖</em>작업자 · 제어 차량</span></div></div>
+<div class="layer" data-a="5.1,5.25,5.8,5.95"><p class="sn">4단계 · 2차 Washing</p><h2 class="ct">로봇이 안을 씻어 냅니다</h2><p class="cd">로봇 앞쪽의 Jet Nozzle로 씻어 위험 물질을 최소화합니다</p><div class="wh"><span class="on"><em>설비 안</em>로봇</span><span class="on"><em>설비 밖</em>작업자 · 제어 차량</span></div></div>
+<div class="layer" data-a="5.95,6.05,6.75,6.85"><p class="sn">5단계 · Final Cleaning</p><h2 class="ct">그다음 유해성 저감 후 최종 클리닝합니다</h2><p class="cd">위험이 줄어든 뒤에 작업자가 들어가 남은 것을 제거합니다</p><div class="wh"><span class="on"><em>설비 안</em>작업자</span><span class="on"><em>설비 밖</em>작업자</span></div></div>
+<div class="layer" data-a="7.05,7.2,7.9,8"><p class="sn">6단계 · Screw Decanter</p><h2 class="ct">회수물을 나눕니다</h2><p class="cd">회수물을 돌려서 덩어리(Cake)와 액체(분리액)로 나눕니다</p></div>
+<div class="layer" data-a="8,8.15,8.55,8.7"><p class="sn">6단계 · Filter-Press</p><h2 class="ct">눌러서 물기를 뺍니다</h2><p class="cd">판으로 눌러 덩어리(Cake)와 액체(여과액)로 나눕니다</p></div>
+<div class="layer" data-a="8.7,8.8,12,12"><p class="sn">6단계 · 폐기물 처리</p><h2 class="ct">폐기물을 줄여서 처리합니다</h2><p class="cd">처리량은 줄고, 처리비용과 처리시간도 줄어듭니다</p></div>
+<div class="inset" id="ins"><svg viewBox="232 560 176 108" aria-hidden="true"><use href="#car"/></svg><span>제어 차량 · 원격 조정</span></div>
+<div class="hint" id="hint" hidden><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v11M2.5 7.5 7 12l4.500-4.500"/></svg><span class="hd-pc">스크롤하면 작업 순서가 이어집니다</span><span class="hd-m">아래로 밀면 작업 순서가 이어집니다</span></div>
+<div class="note">※ 연출 그림 · 작업 순서는 기술소개서(2025) 19쪽</div>
+<button type="button" hidden id="skipp"></button><div class="rail"><div class="wrap" id="rail"><div class="rnow"><span id="rnow"></span><div class="rbar" id="rbar"></div><button type="button" hidden id="skip"></button></div></div></div>
+</div></section>
+<div class="mcta" id="mcta"><a class="tel" href="tel:0616825537">전화 문의</a><a class="go" href="https://idagyeol-bit.github.io/shinjeong-site-sian-c/contact.html" target="_blank" rel="noopener">현장 문의 →</a></div>
+<section class="lineup" id="robots"><div class="wrap"><p class="k">현장에 들어가는 로봇</p><h2>2017년 기업부설연구소에서 직접 개발한 로봇</h2><p class="ls">빌려 온 장비가 아닙니다. 직접 개발해 특허를 내고, 실제 현장에 투입합니다.</p><div class="rs" role="tablist"><button type="button" class="rb" data-r="0"><svg viewBox="-4030 560 330 165" aria-hidden="true"><use href="#fleetuse"/></svg><b>1세대</b></button><button type="button" class="rb" data-r="1"><svg viewBox="-3650 560 300 165" aria-hidden="true"><use href="#fleetuse"/></svg><b>2세대</b></button><button type="button" class="rb" data-r="2"><svg viewBox="-3290 565 300 150" aria-hidden="true"><use href="#fleetuse"/></svg><b>3세대</b></button><button type="button" class="rb" data-r="3"><svg viewBox="-2950 590 290 125" aria-hidden="true"><use href="#fleetuse"/></svg><b>4세대</b></button><button type="button" class="rb" data-r="4"><svg viewBox="-2560 570 260 145" aria-hidden="true"><use href="#fleetuse"/></svg><b>5세대</b></button><button type="button" class="rb" data-r="5"><svg viewBox="-2160 560 590 165" aria-hidden="true"><use href="#fleetuse"/></svg><b>무인 로더</b></button><button type="button" class="rb" data-r="6"><svg viewBox="-1240 490 390 225" aria-hidden="true"><use href="#fleetuse"/></svg><b>무인 Jet Cleaner</b></button></div><div class="rd"><div class="rp"><svg id="rdv" viewBox="-2560 570 260 145" role="img" aria-label="선택한 로봇 그림"><use href="#fleetuse"/></svg></div><div class="ri"><p class="rt" id="rdt"></p><h3 id="rdn"></h3><p class="rw2" id="rdd"></p><dl><div><dt>어느 현장에</dt><dd id="rds"></dd></div><div><dt>물속 작업</dt><dd id="rdw"></dd></div><div><dt>움직이는 힘</dt><dd id="rdp"></dd></div></dl><p class="rx" id="rdx"></p></div></div><p class="rft">로봇·준설 관련 등록 특허 5건 포함, 등록 특허 8건</p></div></section>
+<script>window.__RB=[{"n": "1세대", "t": "흡입형", "v": "-4030 560 330 165", "d": "위험 물질을 빨아들여 회수합니다", "s": "Pond, Tank (관로)", "w": "가능", "p": "유압", "x": ""}, {"n": "2세대", "t": "파쇄 흡입형", "v": "-3650 560 300 165", "d": "부수고 빨아들여 회수합니다", "s": "Pond, Open Ditch", "w": "불가", "p": "전기, 유압", "x": ""}, {"n": "3세대", "t": "파쇄 흡입형", "v": "-3290 565 300 150", "d": "부수고 빨아들여 회수합니다", "s": "Pond, Tank", "w": "가능", "p": "유압", "x": ""}, {"n": "4세대", "t": "흡입형 · 소형화", "v": "-2950 590 290 125", "d": "작은 몸체로 빨아들여 회수합니다", "s": "Pond, Tank", "w": "가능", "p": "유압", "x": ""}, {"n": "5세대", "t": "파쇄형 · 소형화", "v": "-2560 570 260 145", "d": "Tank/Reactor 안의 Liquid, Sludge를 제거합니다", "s": "Pond, Reactor", "w": "가능", "p": "유압", "x": "방폭 카메라 · Aluminum Body · 전면부 Jet Nozzle"}, {"n": "무인 로더", "t": "흙 · 슬러지 치우기", "v": "-2160 560 590 165", "d": "바닥에 쌓인 흙과 슬러지를 치웁니다", "s": "大 실외(Open Ditch, Pond) · 小 협소 공간", "w": "불가", "p": "전기, 유압", "x": "원격 Control"}, {"n": "무인 Jet Cleaner", "t": "설비 고압 세척", "v": "-1240 490 390 225", "d": "좁은 공간의 설비를 고압수로 씻어 냅니다", "s": "협소 공간 · 오염 지역", "w": "구동부 가능", "p": "전기", "x": "8+@ Nozzle · 원격 Control"}]</script>
+<section class="nums"><div class="wrap"><div><b>4년 연속</b><span>4개 발주처 단가계약<br>2020~2023</span></div><div><b>170<small>여 건</small></b><span>수행 실적<br>2020~2023</span></div><div><b>1~5<small>세대</small></b><span>직접 개발한<br>무인 Vacuum 로봇</span></div><div><b>8<small>건</small></b><span>등록 특허<br>특허증 원본</span></div></div></section>
+<section class="why"><div class="wrap"><p class="k">왜 로봇인가</p><h2>일반 산업재해는 100명 중 1.5명이,<br>밀폐공간 질식 재해는 <em>100명 중 50명</em>이 목숨을 잃습니다.</h2></div></section>
+<!--WORKERS--><section class="st" id="stills"><div class="wrap"><h2 id="sth">그림 크게 보기</h2><p id="stillp">다섯 칸에 들어가는 그림 12장입니다. 연출 그림이며 보호구와 안전 장비는 현장 확인이 필요합니다.</p><!--STILLS--></div></section>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg',svg=document.getElementById('w'),stage=document.getElementById('stage'),track=document.getElementById('track');
+var C={ink:'#0e2e4a',sky:'#b9c5cf',sky2:'#d6dde3',steel:'#e4e9ee',robot:'#d9591a',brand:'#12558c',sl:'#50493f'};
+var G=700;
+function E(id){return document.getElementById(id)}
+function ss(a,b,x){if(a===b)return x<a?0:1;x=Math.min(1,Math.max(0,(x-a)/(b-a)));return x*x*x*(x*(6*x-15)+10)}
+function lin(a,b,x){return Math.min(1,Math.max(0,(x-a)/(b-a)))}
+function L(a,b,k){return a+(b-a)*k}
+function rep(n,f){var s='';for(var i=0;i<n;i++)s+=f(i);return s}
+
+/* ---------- 먼 공단 선 그림 ---------- */
+function column(x,w,h,o){var t=G-h,s='<g fill="#fff" stroke="'+(o||C.sky)+'" stroke-width=".9"><rect x="'+x+'" y="'+t+'" width="'+w+'" height="'+h+'"/><path d="M'+x+' '+t+'q'+w/2+' -'+w*.55+' '+w+' 0"/>';s+=rep(Math.floor(h/46),function(i){return '<path d="M'+(x-3)+' '+(t+30+i*46)+'h'+(w+6)+'"/>'});return s+'<path d="M'+(x+w/2)+' '+(t-w*.28)+'v-16"/></g>'}
+function stack(x,h,o){return '<g fill="#fff" stroke="'+(o||C.sky)+'" stroke-width=".9"><path d="M'+(x-9)+' '+G+'L'+(x-4)+' '+(G-h)+'h8L'+(x+9)+' '+G+'z"/><path d="M'+(x-5)+' '+(G-h+14)+'h10M'+(x-5.500)+' '+(G-h+24)+'h11"/></g>'}
+function sphere(x,r,o){return '<g fill="#fff" stroke="'+(o||C.sky)+'" stroke-width=".9"><path d="M'+(x-r*.7)+' '+G+'v-'+r*.9+'M'+(x+r*.7)+' '+G+'v-'+r*.9+'M'+x+' '+G+'v-'+r*.8+'"/><circle cx="'+x+'" cy="'+(G-r*1.15)+'" r="'+r+'"/><path d="M'+(x-r)+' '+(G-r*1.15)+'h'+2*r+'"/></g>'}
+function rack(x,w,h,o){var s='<g fill="none" stroke="'+(o||C.sky)+'" stroke-width=".9">';for(var i=0;i<=Math.floor(w/70);i++)s+='<path d="M'+(x+i*70)+' '+G+'v-'+h+'M'+(x+i*70-8)+' '+(G-h)+'l8 16 8-16"/>';s+='<path d="M'+x+' '+(G-h)+'h'+w+'M'+x+' '+(G-h+7)+'h'+w+'M'+x+' '+(G-h*.55)+'h'+w+'"/></g>';return s}
+function far(){return column(-120,44,280,C.sky2)+stack(-30,330,C.sky2)+rack(-260,560,90,C.sky2)+sphere(200,62,C.sky2)+column(330,36,220,C.sky2)+column(390,58,300)+stack(490,380)+column(520,34,190)+rack(560,520,110)+sphere(690,58)+column(800,40,300)+column(860,66,370)+stack(965,430)+column(1000,30,230)+rack(1780,520,95)+column(1820,52,330)+column(1890,38,250)+stack(1970,400)+sphere(2080,60,C.sky2)+column(2170,50,300,C.sky2)+stack(2260,350,C.sky2)}
+
+/* ---------- 탱크 ---------- */
+var TX=1150,TW=600,TT=270,FL=690,MT=598,MB=672,TC=1450,TR=300;
+function thx(d){return TC+TR*Math.sin(d*Math.PI/180)}
+function thc(d){return Math.cos(d*Math.PI/180)}
+function sagAt(d,s){return s*thc(d)}
+function tankBase(){var s='<rect x="1132" y="'+G+'" width="636" height="15" fill="#d9dee2" stroke="'+C.ink+'" stroke-width=".9"/>';for(var x=1138;x<1764;x+=12)s+='<path d="M'+x+' '+(G+14)+'l10 -13" stroke="#8d9aa5" stroke-width=".55"/>';return s}
+/* 단면: 안쪽 원통 벽 · 돔 지붕 밑 서까래 · 가운데 기둥 · 바닥 철판 · 사다리 · 맨홀 · 배관 */
+function tankBack(){var s=tankBase();
+ s+='<path d="M1160 276Q1450 174 1740 276V'+FL+'H1160z" fill="url(#inw)"/>';
+ s+='<path d="M1160 276Q1450 174 1740 276Q1450 240 1160 276z" fill="#cfd7dd"/>';
+ s+='<g fill="none" stroke="'+C.ink+'" stroke-width=".6" opacity=".7">';
+ for(var d=-75;d<=75;d+=15){var x=thx(d),y=276-18*thc(d);s+='<path d="M'+TC+' 225Q'+L(TC,x,.55)+' '+(226+Math.abs(d)*.03)+' '+x+' '+y+'"/>'}
+ s+='<path d="M1250 251Q1450 214 1650 251" opacity=".7"/><path d="M1340 236Q1450 220 1560 236" opacity=".7"/></g>';
+ s+='<path d="M1160 276Q1450 240 1740 276" fill="none" stroke="'+C.ink+'" stroke-width="1"/><path d="M1160 288Q1450 252 1740 288" fill="none" stroke="'+C.ink+'" stroke-width=".7"/>';
+ s+='<g fill="none" stroke="#8d9aa5" stroke-width=".6">';
+ for(var i=1;i<6;i++){var yy=TT+i*70;s+='<path d="M1160 '+yy+'Q1450 '+(yy-36)+' 1740 '+yy+'"/>';
+  for(var d2=(i%2?-75:-60);d2<=75;d2+=30){var x2=thx(d2),y2=yy-18*thc(d2);s+='<path d="M'+x2+' '+y2+'v-70"/>'}}
+ s+='</g>';
+ s+='<path d="M1160 '+FL+'Q1450 638 1740 '+FL+'z" fill="#c6ced5" stroke="'+C.ink+'" stroke-width=".8"/>';
+ s+='<g fill="none" stroke="#8d9aa5" stroke-width=".55"><path d="M1230 '+FL+'Q1450 655 1670 '+FL+'"/><path d="M1320 '+FL+'Q1450 668 1580 '+FL+'"/><path d="M1450 664V'+FL+'M1350 672L1320 '+FL+'M1550 672L1580 '+FL+'M1260 680L1210 '+FL+'M1640 680L1690 '+FL+'"/></g>';
+ /* 얼룩 */
+ var dd='M1160 '+FL;for(var x3=1160;x3<=1740;x3+=14){var c=1-Math.pow((x3-TC)/290,2);dd+='L'+x3+' '+(FL-86-22*c-4*Math.sin(x3*.031)-2.500*Math.sin(x3*.09))}dd+='L1740 '+FL+'z';s+='<path id="stain" d="'+dd+'" fill="#7a6f60" opacity=".3"/>';
+ /* 가운데 기둥 */
+ s+='<rect x="1445" y="224" width="10" height="440" fill="url(#col)" stroke="'+C.ink+'" stroke-width=".8"/><rect x="1436" y="660" width="28" height="5" fill="#eef1f4" stroke="'+C.ink+'" stroke-width=".8"/><path d="M1436 232h28l-6 8h-16z" fill="#eef1f4" stroke="'+C.ink+'" stroke-width=".8"/>';
+ /* 지붕 조명 · 바닥 집수정 */
+ [1290,1610].forEach(function(x){s+='<path d="M'+x+' 244v8" stroke="'+C.ink+'" stroke-width=".8"/><rect x="'+(x-7)+'" y="252" width="14" height="5" rx="1" fill="#fffbe6" stroke="'+C.ink+'" stroke-width=".7"/>'});s+='<ellipse cx="1560" cy="672" rx="26" ry="4.500" fill="#8d9aa5" stroke="'+C.ink+'" stroke-width=".8"/><ellipse cx="1560" cy="673" rx="20" ry="3" fill="#59666f"/>';
+ [1290,1610].forEach(function(x){s+='<path class="lampc" d="M'+(x-6)+' 257L'+(x-90)+' '+FL+'H'+(x+90)+'L'+(x+6)+' 257z" fill="url(#lmp)"/><ellipse class="lampc" cx="'+x+'" cy="'+(FL-16)+'" rx="110" ry="14" fill="url(#flr)"/>'});
+ /* 안쪽 사다리 */
+ var lx=thx(32),ly=668;s+='<g fill="none" stroke="'+C.ink+'" stroke-width=".8"><path d="M'+(lx-6)+' 266V'+ly+'M'+(lx+6)+' 266V'+ly+'"/>'+rep(26,function(i){return '<path d="M'+(lx-6)+' '+(276+i*15)+'h12"/>'})+'</g>';
+ /* 안쪽 맨홀 · 들어오는 배관 */
+ var mx=thx(-34);s+='<g stroke="'+C.ink+'" stroke-width=".9"><ellipse cx="'+mx+'" cy="640" rx="20" ry="27" fill="#aeb9c2"/><ellipse cx="'+mx+'" cy="640" rx="15" ry="22" fill="#59666f"/></g>';
+ var px=thx(58);s+='<path d="M'+px+' 300V565q0 12 12 12h18" fill="none" stroke="'+C.ink+'" stroke-width="7" class="sc"/><path d="M'+px+' 300V565q0 12 12 12h18" fill="none" stroke="#e4e9ee" stroke-width="5" class="sc"/><rect x="'+(px-6)+'" y="360" width="12" height="4" fill="#fff" stroke="'+C.ink+'" stroke-width=".7"/><rect x="'+(px-6)+'" y="480" width="12" height="4" fill="#fff" stroke="'+C.ink+'" stroke-width=".7"/>';
+ return s}
+/* 단면 자른 면: 아래로 갈수록 두꺼운 벽 · 돔 지붕 · 모서리 앵글 · 바닥판 */
+function tankCut(){var s='<g fill="'+C.ink+'"><path d="M1150 270h7v70h1v70h1v70h1v70h1v'+(MT-550)+'h-11z"/><path d="M1150 '+MB+'h12v'+(G-MB)+'h-12z"/><path d="M1750 270h-7v70h-1v70h-1v70h-1v70h-1V700h-12h11z"/><path d="M1738 690h12v10h-12z"/><path d="M1150 '+FL+'H1750V'+G+'H1150z"/><path d="M1143 268h16v6h-16zM1741 268h16v6h-16z"/></g>';
+ s+='<path d="M1150 271Q1450 175 1750 271" fill="none" stroke="'+C.ink+'" stroke-width="6" class="sc"/>';
+ s+='<g fill="none" stroke="'+C.ink+'" stroke-width=".9"><path d="M1150 256V268M1176 248V260M1202 240V252M1724 248V260M1750 256V268M1698 240V252"/><path d="M1150 256L1202 240M1750 256L1698 240"/></g>';
+ s+='<g fill="#fff" stroke="'+C.ink+'" stroke-width=".9"><rect x="1438" y="208" width="24" height="14"/><path d="M1450 208v-16q0-8 8-8h8v8" fill="none"/></g>';
+ return s}
+function flange(){return '<g fill="#fff" stroke="'+C.ink+'" stroke-width="1.1"><rect x="1118" y="'+(MT-6)+'" width="34" height="8"/><rect x="1118" y="'+(MB-2)+'" width="34" height="8"/><rect x="1112" y="'+(MT-16)+'" width="7" height="18"/><rect x="1112" y="'+(MB-2)+'" width="7" height="18"/></g>'+[MT-11,MT-3,MB+3,MB+11].map(function(y){return '<circle cx="1115.500" cy="'+y+'" r="1.200" fill="'+C.ink+'" stroke="none"/>'}).join('')+'<path d="M1138 '+(MT-22)+'h12M1138 '+(MB+16)+'h12" stroke="'+C.ink+'" stroke-width=".7"/>'}
+/* 오른쪽으로 나가는 배관 · 밸브(항상 보임) */
+function pipeOut(){var s='<g><path d="M1750 650H2320" stroke="'+C.ink+'" stroke-width="10" class="sc"/><path d="M1750 650H2320" stroke="#e8ecf0" stroke-width="8" class="sc"/>';
+ [1782,1860,2040,2200].forEach(function(x){s+='<rect x="'+(x-2)+'" y="642" width="4" height="16" fill="#fff" stroke="'+C.ink+'" stroke-width=".8"/>'});
+ s+='<path d="M1809 642L1821 658V642L1809 658z" fill="#fff" stroke="'+C.ink+'" stroke-width=".9"/><path d="M1815 650V628M1802 628h26" stroke="'+C.ink+'" stroke-width="1.300"/><ellipse cx="1815" cy="626" rx="13" ry="2.500" fill="none" stroke="'+C.ink+'" stroke-width="1"/>';
+ [1900,2100,2280].forEach(function(x){s+='<path d="M'+(x-10)+' '+G+'L'+x+' 656L'+(x+10)+' '+G+'" fill="none" stroke="'+C.ink+'" stroke-width=".9"/><path d="M'+(x-14)+' 656h28" stroke="'+C.ink+'" stroke-width="1.100"/>'});return s+'</g>'}
+/* 바깥: 곡면이 보이게 — 철판 줄 · 세로 이음이 원통을 따라 휘고, 돔 지붕 · 난간 · 보강 링 · 나선 계단 · 액위계 · 맨홀 · 볼트 · 앵커 */
+function shell(){var s='<g id="shell" clip-path="url(#shellc)">';
+ s+='<path d="M1132 '+(G+1)+'Q1450 '+(G+30)+' 1768 '+(G+1)+'V'+(G+15)+'H1132z" fill="#d9dee2" stroke="'+C.ink+'" stroke-width=".9"/>';
+ s+='<path d="M1150 270Q1450 174 1750 270Q1450 298 1150 270z" fill="url(#rf)" stroke="'+C.ink+'" stroke-width="1.100"/>';
+ s+='<path d="M1150 270Q1450 298 1750 270V700Q1450 728 1150 700z" fill="url(#cyl)" stroke="'+C.ink+'" stroke-width="1.200"/>';
+ /* 지붕 철판 */
+ s+='<g fill="none" stroke="'+C.ink+'" stroke-width=".55" opacity=".7">';for(var r=-82;r<=82;r+=14){var xr=thx(r),yr=270+14*thc(r);s+='<path d="M'+TC+' 224Q'+L(TC,xr,.62)+' '+(226+Math.abs(r)*.1)+' '+xr+' '+yr+'"/>'}s+='<path d="M1240 249Q1450 264 1660 249"/><path d="M1340 234Q1450 244 1560 234"/></g>';
+ s+='<ellipse cx="'+TC+'" cy="224" rx="24" ry="5" fill="#eef1f4" stroke="'+C.ink+'" stroke-width=".9"/><path d="M1450 222v-17q0-8 8-8h9v8" fill="none" stroke="'+C.ink+'" stroke-width="2.200" class="sc"/><ellipse cx="1330" cy="250" rx="15" ry="3.800" fill="#dfe4e9" stroke="'+C.ink+'" stroke-width=".8"/><ellipse cx="1590" cy="246" rx="10" ry="2.600" fill="#dfe4e9" stroke="'+C.ink+'" stroke-width=".8"/>';
+ /* 난간 */
+ s+='<g fill="none" stroke="'+C.ink+'" stroke-width=".8">';s+='<path d="M1150 256Q1450 284 1750 256"/>';for(var h=-84;h<=84;h+=12){var xh=thx(h),yh=270+14*thc(h);s+='<path d="M'+xh+' '+yh+'v-14"/>'}s+='</g>';
+ /* 철판 줄 · 세로 이음 */
+ s+='<g fill="none" stroke="'+C.ink+'" stroke-width=".55" opacity=".6">';for(var i=0;i<6;i++){var y0=TT+i*72;if(i)s+='<path d="M1150 '+y0+'Q1450 '+(y0+28)+' 1750 '+y0+'"/>';for(var t=(i%2?-75:-60);t<=75;t+=30){var xs=thx(t),ys=y0+14*thc(t);s+='<path d="M'+xs+' '+ys+'v72"/>'}}s+='</g>';
+ /* 보강 링 */
+ s+='<path d="M1150 292Q1450 320 1750 292V300Q1450 328 1150 300z" fill="#f2f4f6" stroke="'+C.ink+'" stroke-width=".9"/><path d="M1150 300Q1450 330 1750 300" fill="none" stroke="#6f7f8c" stroke-width="3" opacity=".3" class="sc"/>';
+ for(var b=-80;b<=80;b+=20){s+='<path d="M'+thx(b)+' '+(300+14*thc(b))+'v9" stroke="'+C.ink+'" stroke-width=".7"/>'}
+ /* 앵커 · 바닥 */
+ s+='<path d="M1150 690Q1450 718 1750 690" fill="none" stroke="'+C.ink+'" stroke-width=".8"/>';for(var a=-84;a<=84;a+=14){var xa=thx(a),ya=700+14*thc(a);s+='<rect x="'+(xa-3.500)+'" y="'+(ya-12)+'" width="7" height="12" fill="#eef1f4" stroke="'+C.ink+'" stroke-width=".7"/><circle cx="'+xa+'" cy="'+(ya-13.500)+'" r="1.300" fill="'+C.ink+'"/>'}
+ /* 액위계 */
+ var gx=thx(-50);s+='<rect x="'+(gx-1.500)+'" y="288" width="3" height="414" fill="#fff" stroke="'+C.ink+'" stroke-width=".7"/><rect x="'+(gx+6)+'" y="340" width="11" height="300" fill="#fff" stroke="'+C.ink+'" stroke-width=".8"/><g stroke="'+C.ink+'" stroke-width=".55">'+rep(16,function(i){return '<path d="M'+(gx+6)+' '+(350+i*18)+'h'+(i%4?4:7)+'"/>'})+'</g><path d="M'+(gx+6)+' 548h11v8h-11z" fill="'+C.brand+'"/>';
+ /* 맨홀 */
+ var mx=thx(-10),my=640;s+='<path d="M'+(mx+18)+' 612h26v8" fill="none" stroke="'+C.ink+'" stroke-width="1.300"/><ellipse cx="'+mx+'" cy="'+my+'" rx="26" ry="31" fill="#f3f5f7" stroke="'+C.ink+'" stroke-width="1"/><ellipse cx="'+mx+'" cy="'+my+'" rx="19" ry="24" fill="#e4e9ee" stroke="'+C.ink+'" stroke-width=".9"/>'+rep(14,function(i){var q=i/14*6.283;return '<circle cx="'+(mx+Math.cos(q)*22.500)+'" cy="'+(my+Math.sin(q)*27.500)+'" r="1.100" fill="'+C.ink+'"/>'})+'<path d="M'+(mx-7)+' '+my+'h14" stroke="'+C.ink+'" stroke-width="1.500"/>';
+ /* 노즐 */
+ s+='<ellipse cx="'+thx(38)+'" cy="330" rx="8" ry="10" fill="#fff" stroke="'+C.ink+'" stroke-width=".9"/><ellipse cx="'+thx(38)+'" cy="330" rx="4" ry="5.500" fill="#dfe4e9" stroke="'+C.ink+'" stroke-width=".7"/><rect x="'+(thx(-24)-13)+'" y="372" width="26" height="17" fill="#fff" stroke="'+C.ink+'" stroke-width=".8"/><path d="M'+(thx(-24)-9)+' 378h18M'+(thx(-24)-9)+' 383h12" stroke="'+C.ink+'" stroke-width=".5"/>';
+ /* 세로 배관 · 전선관 · 접지 · 흘러내린 자국 */
+ var fx=thx(22);s+='<path d="M'+fx+' 305V708" stroke="'+C.ink+'" stroke-width="5.500" class="sc"/><path d="M'+fx+' 305V708" stroke="#eff2f4" stroke-width="3.800" class="sc"/>'+rep(7,function(i){return '<rect x="'+(fx-5)+'" y="'+(330+i*55)+'" width="10" height="3" fill="#fff" stroke="'+C.ink+'" stroke-width=".6"/>'})+'<rect x="'+(fx-9)+'" y="308" width="18" height="15" rx="1" fill="#f7f8f9" stroke="'+C.ink+'" stroke-width=".8"/><circle cx="'+fx+'" cy="315.500" r="3.500" fill="none" stroke="'+C.ink+'" stroke-width=".6"/>';
+ var cx=thx(46);s+='<path d="M'+cx+' 314V690" stroke="#55636e" stroke-width=".9"/>'+rep(8,function(i){return '<path d="M'+(cx-2)+' '+(335+i*44)+'h4" stroke="'+C.ink+'" stroke-width=".7"/>'})+'<rect x="'+(cx-7)+'" y="566" width="14" height="19" fill="#eef1f4" stroke="'+C.ink+'" stroke-width=".7"/><circle cx="'+cx+'" cy="575" r="2" fill="#7b868e"/>';
+ s+='<path d="M'+thx(-72)+' 696q-6 12 -14 12" fill="none" stroke="#7b5a2c" stroke-width="1.300"/>';
+ [[38,330,46],[-24,389,34],[-10,671,28]].forEach(function(a){s+='<path d="M'+(thx(a[0])-3)+' '+a[1]+'q1 '+a[2]/2+' -2 '+a[2]+'M'+(thx(a[0])+3)+' '+a[1]+'q-1 '+a[2]/2+' 1 '+a[2]+'" fill="none" stroke="#7a6f60" stroke-width=".9" opacity=".32"/>'});
+ for(var bt=-80;bt<=80;bt+=8){s+='<circle cx="'+thx(bt)+'" cy="'+(296+14*thc(bt))+'" r=".9" fill="'+C.ink+'"/>'}
+ /* 나선 계단: 원통을 따라 돈다 */
+ function hy(d){return L(696,312,(78-d)/158)+14*thc(d)}
+ var low='',up='',rail='',tr='',po='';for(var d=78;d>=-80;d-=2){var x=thx(d),y=hy(d),c=low?'L':'M';low+=c+x.toFixed(1)+' '+y.toFixed(1);up+=c+x.toFixed(1)+' '+(y-9).toFixed(1);rail+=c+x.toFixed(1)+' '+(y-33).toFixed(1)}
+ for(var d3=78;d3>=-80;d3-=3){tr+='M'+thx(d3).toFixed(1)+' '+hy(d3).toFixed(1)+'V'+(hy(d3)-9).toFixed(1)}
+ for(var d4=75;d4>=-78;d4-=12){po+='M'+thx(d4).toFixed(1)+' '+(hy(d4)-9).toFixed(1)+'V'+(hy(d4)-33).toFixed(1)}
+ s+='<path d="'+low+'" fill="none" stroke="#ffffff" stroke-width="3" opacity=".7" class="sc" transform="translate(0 3)"/><g fill="none" stroke="'+C.ink+'"><path d="'+low+'" stroke-width="1.200"/><path d="'+up+'" stroke-width="1.200"/><path d="'+tr+'" stroke-width=".7"/><path d="'+rail+'" stroke-width=".9"/><path d="'+po+'" stroke-width=".7"/></g>';
+ s+='<rect x="'+(thx(-80)-14)+'" y="'+(hy(-80)-9)+'" width="26" height="5" fill="#eef1f4" stroke="'+C.ink+'" stroke-width=".8"/><path d="M'+(thx(78)+2)+' 708h16v-12" fill="none" stroke="'+C.ink+'" stroke-width=".8"/>';
+ return s+'</g>'}
+
+/* ---------- 바퀴 · 차량 ---------- */
+function wheel(x,y,r,cl){return '<g transform="translate('+x+' '+y+')"><circle r="'+r+'" fill="#26313a"/><circle r="'+r*.55+'" fill="#e6eaee"/><g class="'+cl+'" stroke="#26313a" stroke-width=".8"><path d="M-'+r*.5+' 0H'+r*.5+'M0 -'+r*.5+'V'+r*.5+'"/></g><circle r="'+r*.14+'" fill="#26313a"/></g>'}
+var IK=C.ink;
+function truck(){var s='<g id="truck"><ellipse cx="730" cy="'+(G+2)+'" rx="195" ry="5" fill="#0e2e4a" opacity=".13"/>';
+ /* 프레임 · 사이드 가드 · 공구함 */
+ s+='<rect x="566" y="662" width="344" height="12" fill="#26313a"/><rect x="664" y="674" width="84" height="5" fill="#eef1f4" stroke="'+IK+'" stroke-width=".7"/><rect x="664" y="676" width="70" height="17" rx="1" fill="#dfe4e9" stroke="'+IK+'" stroke-width=".8"/><path d="M670 684h58M699 676v17" stroke="'+IK+'" stroke-width=".55"/>';
+ /* 탱크(기울어지는 부분) */
+ s+='<g id="tkg"><path d="M892 664L872 610" stroke="#59666f" stroke-width="4" class="sc"/><path d="M892 664L880 632" stroke="#c9d2d9" stroke-width="2" class="sc"/>';
+ s+='<rect x="664" y="568" width="226" height="94" rx="46" fill="url(#tk)" stroke="'+IK+'" stroke-width="1.100"/>'+rep(5,function(i){return '<path d="M'+(692+i*40)+' 568.500Q'+(686+i*40)+' 615 '+(692+i*40)+' 661.500" fill="none" stroke="'+IK+'" stroke-width=".7"/><path d="M'+(695+i*40)+' 568.500Q'+(689+i*40)+' 615 '+(695+i*40)+' 661.500" fill="none" stroke="#fff" stroke-width=".8" opacity=".8"/>'});
+ s+='<rect x="664" y="622" width="226" height="7" fill="'+C.brand+'" opacity=".9"/>';
+ [716,800].forEach(function(x){s+='<rect x="'+(x-20)+'" y="556" width="40" height="12" rx="2" fill="#f2f4f6" stroke="'+IK+'" stroke-width=".9"/><ellipse cx="'+x+'" cy="556" rx="17" ry="3" fill="#dfe4e9" stroke="'+IK+'" stroke-width=".8"/><path d="M'+(x-12)+' 552h24" stroke="'+IK+'" stroke-width=".8"/>'});
+ s+='<path d="M740 560h36" stroke="'+IK+'" stroke-width="3" class="sc"/><path d="M660 545h202M660 545v22M730 545v18M800 545v10M862 545v22" fill="none" stroke="'+IK+'" stroke-width=".9"/>';
+ s+='<g fill="none" stroke="'+IK+'" stroke-width=".8"><path d="M846 568v94M855 568v94"/>'+rep(6,function(i){return '<path d="M846 '+(578+i*14)+'h9"/>'})+'</g>';
+ s+='<rect x="802" y="580" width="5" height="44" fill="#fff" stroke="'+IK+'" stroke-width=".7"/><rect x="803" y="604" width="3" height="20" fill="#5a5044"/>';
+ s+='<ellipse cx="889" cy="615" rx="13" ry="45" fill="#f4f6f8" stroke="'+IK+'" stroke-width="1.100"/><ellipse cx="889" cy="615" rx="9" ry="36" fill="none" stroke="'+IK+'" stroke-width=".6"/>'+rep(8,function(i){var a=i/8*6.283;return '<circle cx="'+(889+Math.cos(a)*11)+'" cy="'+(615+Math.sin(a)*41)+'" r="1" fill="'+IK+'"/>'})+'<path d="M878 578l-8 -4M878 652l-8 4" stroke="'+IK+'" stroke-width="1.500"/></g>';
+ /* 펌프 · 배관 · 계기판 */
+ s+='<rect x="654" y="602" width="22" height="60" fill="#d4dbe1" stroke="'+IK+'" stroke-width=".9"/><circle cx="665" cy="618" r="7" fill="#fff" stroke="'+IK+'" stroke-width=".8"/><path d="M665 618l3 -5" stroke="#b7470f" stroke-width="1" class="sc"/><rect x="658" y="634" width="14" height="22" fill="#c0c9d1" stroke="'+IK+'" stroke-width=".7"/><path d="M659 638h12M659 642h12M659 646h12M659 650h12" stroke="'+IK+'" stroke-width=".5"/><path d="M665 602v-16q0-6 6-6h6" fill="none" stroke="#59666f" stroke-width="3" class="sc"/>';
+ /* 뒤쪽 조작반 · 배출 밸브 */
+ s+='<rect x="897" y="628" width="17" height="14" fill="#fff" stroke="'+IK+'" stroke-width=".9"/><rect x="896" y="625" width="3" height="20" fill="#59666f"/><path d="M905 628v-10M899 618h12" stroke="'+IK+'" stroke-width="1.300"/>';
+ s+='<rect x="893" y="590" width="20" height="26" rx="1" fill="#eaeef1" stroke="'+IK+'" stroke-width=".9"/><circle cx="899" cy="597" r="3.500" fill="#fff" stroke="'+IK+'" stroke-width=".7"/><circle cx="907" cy="597" r="3.500" fill="#fff" stroke="'+IK+'" stroke-width=".7"/><path id="lev" d="M903 616v-9" stroke="'+IK+'" stroke-width="1.500"/><circle id="levb" cx="903" cy="606" r="2" fill="#b7470f"/><rect x="905" y="668" width="10" height="9" fill="#b7310f"/>';
+ /* 캡 */
+ s+='<path d="M566 674V606q0-20 18-20h40q10 0 15 10l14 34q2 5 2 10v34z" fill="#fff" stroke="'+IK+'" stroke-width="1.200" transform="translate(-4 0)"/><path d="M578 598h40q6 0 8 5l11 28h-59z" fill="#cfe0ec" stroke="'+IK+'" stroke-width=".9"/><path d="M584 598l-6 33M604 598l-3 33" stroke="#fff" stroke-width="1.200" opacity=".7"/>';
+ s+='<path d="M582 634h60v38" fill="none" stroke="'+IK+'" stroke-width=".7"/><rect x="622" y="638" width="10" height="3" fill="#59666f"/><path d="M562 648h88" stroke="'+C.brand+'" stroke-width="6" class="sc"/><rect x="556" y="662" width="16" height="12" rx="1" fill="#26313a"/><path d="M558 655h6v5h-6z" fill="#ffe9a8" stroke="'+IK+'" stroke-width=".6"/>';
+ s+='<path d="M640 606l5 -2v14l-5 -2" fill="#26313a"/><rect x="595" y="580" width="20" height="5" rx="2" fill="#d9591a"/><path d="M650 586v-36q0-4 4-4" fill="none" stroke="#59666f" stroke-width="2.200" class="sc"/>';
+ s+='<path d="M640 678l3 -10h-20l-2 10zM600 690q0-30 12-30" fill="none" stroke="none"/><rect x="646" y="677" width="11" height="3" fill="#59666f"/>';
+ s+=wheel(610,678,22,'tw')+wheel(786,678,22,'tw')+wheel(838,678,22,'tw')+'</g>';return s}
+function car(){var s='<g id="car"><ellipse cx="350" cy="'+(G+2)+'" rx="145" ry="5" fill="#0e2e4a" opacity=".13"/><rect x="232" y="668" width="248" height="12" fill="#26313a"/>';
+ /* 캡 */
+ s+='<path d="M408 678V602h28q8 0 12 7l27 38q10 3 10 14v17z" fill="#fff" stroke="'+IK+'" stroke-width="1.200"/><path d="M420 612h17q4 0 6 3l20 30h-43z" fill="#cfe0ec" stroke="'+IK+'" stroke-width=".9"/><path d="M416 650h46v26M416 608v68" fill="none" stroke="'+IK+'" stroke-width=".7"/><rect x="443" y="654" width="10" height="3" fill="#59666f"/><path d="M408 664h78" stroke="'+C.brand+'" stroke-width="3.500" class="sc"/><path d="M478 655h7v6h-7z" fill="#ffe9a8" stroke="'+IK+'" stroke-width=".6"/><rect x="478" y="668" width="10" height="11" rx="1" fill="#26313a"/><path d="M463 617l5 -2v14l-5 -2" fill="#26313a"/>';
+ /* 작업실(옆면을 잘라 안이 보임) */
+ s+='<rect x="228" y="562" width="178" height="108" fill="#f6f7f9" stroke="'+IK+'" stroke-width="1.200"/><rect x="238" y="570" width="158" height="92" fill="#e9eff4" stroke="'+IK+'" stroke-width="1"/><rect x="238" y="656" width="158" height="6" fill="#aab6c0"/><path d="M228 666h178" stroke="'+C.brand+'" stroke-width="3" class="sc"/>';
+ s+='<rect x="276" y="572" width="40" height="3" fill="#fffbe6" stroke="'+IK+'" stroke-width=".4"/>';
+ /* 화면 3대 */
+ s+='<rect x="242" y="578" width="46" height="32" fill="#2a3640" stroke="#0b0f12" stroke-width=".7"/><svg x="244" y="580" width="42" height="28" viewBox="0 0 42 28"><rect width="42" height="28" fill="#142530"/><path d="M0 28L16 12H26L42 28z" fill="#2d3b45"/><path id="camS" fill="#5f5548"/><path d="M0 12H42" stroke="#3d4e5a" stroke-width=".4"/><g id="camD"><rect width="1.300" height="1.300" fill="#c9b79c"/><rect width="1" height="1" fill="#c9b79c"/><rect width="1.200" height="1.200" fill="#c9b79c"/></g><path d="M13 28L18 21H25L30 28z" fill="#a8b2ba"/><path d="M21 3v3M21 9v3M17 7.500h3M22 7.500h3" stroke="#7fe0a4" stroke-width=".35"/><circle cx="38" cy="3" r="1" fill="#e04a2a" class="rec"/></svg>';
+ s+='<rect x="291" y="578" width="27" height="15" fill="#2a3640" stroke="#0b0f12" stroke-width=".6"/><rect x="292.500" y="579.500" width="24" height="12" fill="#142530"/><path id="cam2" fill="none" stroke="#7fe0a4" stroke-width=".5"/>';
+ s+='<rect x="291" y="595" width="27" height="15" fill="#2a3640" stroke="#0b0f12" stroke-width=".6"/><rect x="292.500" y="596.500" width="24" height="12" fill="#142530"/><rect id="cam3" x="294" y="599" width="10" height="2" fill="#d9591a"/><rect x="294" y="603" width="16" height="2" fill="#3d7ea8"/>';
+ /* 콘솔 · 의자 · 장비 선반 */
+ s+='<path d="M240 626h78l6 5H240z" fill="#c8d1d8" stroke="'+IK+'" stroke-width=".8"/><rect x="242" y="631" width="26" height="25" fill="#d6dde3" stroke="'+IK+'" stroke-width=".7"/><path d="M246 636h18M246 641h18M246 646h18" stroke="'+IK+'" stroke-width=".5"/><circle cx="262" cy="651" r="1.300" fill="#7fe0a4"/>';
+ s+='<g transform="translate(348 656)"><path d="M-12 -32h22v4h-22zM-11 -32l-5 -30h5l6 30M-1 -28v24M-11 -2q10-4 20 0" fill="#3a4650" stroke="#0e2436" stroke-width=".7"/></g>';
+ s+='<rect x="372" y="578" width="20" height="78" fill="#d6dde3" stroke="'+IK+'" stroke-width=".8"/>'+rep(6,function(i){return '<rect x="375" y="'+(583+i*12)+'" width="14" height="8" fill="#eef1f4" stroke="'+IK+'" stroke-width=".5"/><circle cx="385" cy="'+(587+i*12)+'" r="1" fill="'+(i%2?'#7fe0a4':'#e9a23b')+'"/>'})+'';
+ s+='<g id="op"></g>';
+ /* 지붕 · 안테나 · 카메라 기둥 · 에어컨 · 호스 릴 */
+ s+='<rect x="286" y="552" width="46" height="10" fill="#eef1f4" stroke="'+IK+'" stroke-width=".8"/><path d="M290 557h38" stroke="'+IK+'" stroke-width=".5"/><path d="M372 562v-26M362 536h20M366 530h12" stroke="'+IK+'" stroke-width="1"/><circle cx="372" cy="536" r="2.500" fill="'+C.brand+'"/><path d="M250 562v-20" stroke="'+IK+'" stroke-width="1.300"/><rect x="244" y="534" width="14" height="8" rx="1.500" fill="#26313a"/>';
+ s+='<circle cx="218" cy="648" r="16" fill="#eef1f4" stroke="'+IK+'" stroke-width=".9"/><circle cx="218" cy="648" r="10" fill="none" stroke="#26313a" stroke-width="3" class="sc"/><circle cx="218" cy="648" r="3" fill="#59666f"/><path d="M218 664v10M204 678h28M228 668h10" stroke="'+IK+'" stroke-width="1"/>';
+ s+=wheel(280,680,20,'tw')+wheel(442,680,20,'tw')+'</g>';return s}
+/* 폐기물 함 */
+function waste(){var s='<g id="waste"><path d="M954 '+G+'V642H1086V'+G+'z" fill="#d9dee2" stroke="'+IK+'" stroke-width="1.100"/><clipPath id="wc"><rect x="956" y="644" width="128" height="54"/></clipPath>';s+='<path id="chute" d="M893 642Q925 636 975 660" fill="none" stroke="#50493f" stroke-width="8" stroke-linecap="round" class="sc"/><rect id="wfill" x="956" y="698" width="128" height="0" fill="url(#sp)"/>';for(var i=0;i<5;i++)s+='<path d="M'+(972+i*24)+' 642v58" stroke="'+IK+'" stroke-width=".7"/>';s+='<path d="M950 642h140v5H950z" fill="#eef1f4" stroke="'+IK+'" stroke-width=".9"/><circle cx="968" cy="697" r="4" fill="#26313a"/><circle cx="1072" cy="697" r="4" fill="#26313a"/></g>';return s}
+
+function kit(){var c=C.ink,s='<g id="kit">';
+ /* 차단 띠 */
+ s+='<g stroke="#efc21f" stroke-width="2.500" class="sc" fill="none"><path d="M964 '+(G-22)+'L1044 '+(G-22)+'" stroke-dasharray="7 7"/></g><path d="M964 '+(G-22)+'H1044" stroke="#14191d" stroke-width="2.500" stroke-dasharray="7 7" stroke-dashoffset="7" class="sc"/>';
+ /* 경고 표지 */
+ s+='<path d="M952 '+G+'V'+(G-62)+'" stroke="#59666f" stroke-width="2" class="sc"/><path d="M952 '+(G-92)+'l16 28h-32z" fill="#efc21f" stroke="#14191d" stroke-width="1.100"/><path d="M952 '+(G-82)+'v10" stroke="#14191d" stroke-width="2" class="sc"/><circle cx="952" cy="'+(G-68.500)+'" r="1.300" fill="#14191d"/>';
+ /* 송풍기와 덕트 */
+ s+='<path d="M1050 '+(G-40)+'Q1062 '+(G-110)+' 1112 '+(MT-8)+'" fill="none" stroke="#efc21f" stroke-width="13" class="sc"/><path d="M1050 '+(G-40)+'Q1062 '+(G-110)+' 1112 '+(MT-8)+'" fill="none" stroke="#a88a10" stroke-width="13" stroke-dasharray="1 5" class="sc"/>';
+ s+='<g transform="translate(1050 '+(G-22)+')"><circle r="19" fill="#d6dde3" stroke="'+c+'" stroke-width="1"/><circle r="13" fill="#eef1f4" stroke="'+c+'" stroke-width=".6"/><g id="fan" stroke="'+c+'" stroke-width="1.300"><path d="M0 -11V11M-11 0H11M-8 -8L8 8M-8 8L8 -8"/></g><circle r="2.500" fill="#39454e"/></g><path d="M1034 '+G+'L1040 '+(G-6)+'M1066 '+G+'L1060 '+(G-6)+'" stroke="'+c+'" stroke-width="1.400"/>';
+ /* 가스 측정기 삼각대 */
+ s+='<path d="M1094 '+G+'L1100 '+(G-52)+'L1106 '+G+'M1100 '+(G-52)+'V'+G+'" fill="none" stroke="#3a4650" stroke-width="1.100"/><rect x="1091" y="'+(G-70)+'" width="18" height="20" rx="2" fill="#efc21f" stroke="#7a5d08" stroke-width=".8"/><rect x="1094" y="'+(G-67)+'" width="12" height="7" fill="#bff0d0"/><circle id="gasl" cx="1100" cy="'+(G-55)+'" r="2.200" fill="#7fe0a4"/>';
+ /* 소화기 */
+ s+='<rect x="1136" y="'+(G-30)+'" width="9" height="30" rx="4" fill="#c9311e" stroke="#7c1a0c" stroke-width=".7"/><path d="M1140.500 '+(G-30)+'v-5h6" stroke="#20282e" stroke-width="1.400" fill="none"/>';
+ /* 접지선 */
+ s+='<path d="M905 '+(G-22)+'Q935 '+(G-1)+' 1000 '+(G-2)+'T1150 '+(G-6)+'" fill="none" stroke="#2e8b57" stroke-width="1.200"/><rect x="901" y="'+(G-25)+'" width="7" height="4" fill="#efc21f"/><rect x="1147" y="'+(G-9)+'" width="7" height="4" fill="#efc21f"/>';
+ return s+'</g>'}
+function cones(){return '<g id="cones">'+[110,500,964,1044].map(function(x){return '<g transform="translate('+x+' '+G+')"><path d="M-9 0h18v-2.500h-18zM-5 -2.500L-1.800 -26h3.600L5 -2.500z" fill="#d9591a"/><path d="M-3.700 -11h7.400l.6 4h-8.600z" fill="#fff"/></g>'}).join('')+'<g id="fence">'+rep(5,function(i){var x=-60+i*120;return ''})+'</g></g>'}
+/* ---------- 작업자: 관절로 움직이는 인물(얼굴 표정 없음). 손 · 발 위치를 주면 팔다리가 따라온다 ---------- */
+function ik(a,b,l1,l2,bend){var dx=b[0]-a[0],dy=b[1]-a[1],d=Math.min(Math.hypot(dx,dy),l1+l2-.05);d=Math.max(d,.1);var c=(l1*l1+d*d-l2*l2)/(2*l1*d);c=Math.max(-1,Math.min(1,c));var t=Math.atan2(dy,dx)+bend*Math.acos(c);return[a[0]+l1*Math.cos(t),a[1]+l1*Math.sin(t)]}
+function cap(a,b,wa,wb){var dx=b[0]-a[0],dy=b[1]-a[1],n=Math.hypot(dx,dy)||1,nx=-dy/n,ny=dx/n,f=function(v){return v.toFixed(2)};return 'M'+f(a[0]+nx*wa)+' '+f(a[1]+ny*wa)+'L'+f(b[0]+nx*wb)+' '+f(b[1]+ny*wb)+'A'+wb+' '+wb+' 0 0 0 '+f(b[0]-nx*wb)+' '+f(b[1]-ny*wb)+'L'+f(a[0]-nx*wa)+' '+f(a[1]-ny*wa)+'A'+wa+' '+wa+' 0 0 0 '+f(a[0]+nx*wa)+' '+f(a[1]+ny*wa)+'z'}
+function torso(S,H,k,top){var dx=H[0]-S[0],dy=H[1]-S[1],n=Math.hypot(dx,dy)||1,ux=dx/n,uy=dy/n,nx=-uy,ny=ux,pt=function(u,o){return (S[0]+ux*u*n+nx*o).toFixed(2)+' '+(S[1]+uy*u*n+ny*o).toFixed(2)};var e=k||1,u1=top||0;return 'M'+pt(u1,6*e)+'L'+pt(u1+.08,10.800*e)+'Q'+pt(.35,11.800*e)+' '+pt(.68,9.800*e)+'L'+pt(.96,10*e)+'L'+pt(.96,-10*e)+'L'+pt(.68,-9.800*e)+'Q'+pt(.35,-11.800*e)+' '+pt(u1+.08,-10.800*e)+'L'+pt(u1,-6*e)+'Q'+pt(u1-.04,0)+' '+pt(u1,6*e)+'z'}
+function across(a,b,k,w){var x=L(a[0],b[0],k),y=L(a[1],b[1],k),dx=b[0]-a[0],dy=b[1]-a[1],n=Math.hypot(dx,dy)||1;return 'M'+(x-dy/n*w).toFixed(2)+' '+(y+dx/n*w).toFixed(2)+'L'+(x+dy/n*w).toFixed(2)+' '+(y-dx/n*w).toFixed(2)}
+var BOOT='<path d="M-6 -9.500L-6.500 -1.500H12.500Q13 -5.500 8 -7L3.500 -9.500z" fill="#20262b" stroke="#0b0f12" stroke-width=".5"/><path d="M-7 -1.800H13V0H-7z" fill="#0b0f12"/><path d="M6.500 -7.200q3.500 1.500 5 4" fill="none" stroke="#7b868e" stroke-width=".7" class="sc"/>';
+function Man(host,o){var NSs=NS,g=document.createElementNS(NSs,'g');g.setAttribute('class','man');var scba=o.scba,cloth=scba?'#e8cf3e':'#23435f',dark=scba?'#c9b02c':'#1a3248',vest=scba?'#efd94a':'#dfe24b',ref=scba?'#7a6410':'#f4f7f8',tp='fill="'+cloth+'"';
+ var head=scba?'<path d="M-9 -9q0-9 10-9t10 9v8q0 8-9 8t-11-7z" fill="#c9d4dc" stroke="#0e2436" stroke-width=".6"/><path d="M2 -9h9.500q2 4 0 10.500H3q-3-5-1-10.500z" fill="#16242e" stroke="#0b0f12" stroke-width=".6"/><path d="M4 -7l5 .3" stroke="#6f8a9c" stroke-width=".8" class="sc"/><circle cx="11" cy="4.500" r="4.200" fill="#39454e" stroke="#0b0f12" stroke-width=".5"/><circle cx="12" cy="4.500" r="1.700" fill="#7b868e"/><path d="M-10.500 -9q0-11 11.500-11t11 10.500h3v2H-10.500z" fill="#f7f8f9" stroke="#0e2436" stroke-width=".6"/><path d="M-10 -6q-3 10 1 16l8 3" fill="#e8cf3e" stroke="#9a8214" stroke-width=".6"/>'
+  :'<path d="M-7.500 -6h15.500q2.500 4 2 7l2.300 2.800q.3 .7-2 .9q.5 3.800-2.200 5.300q-6 1.800-10.500-.5q-4.500-3-5.100-8.500z" fill="#e8d9ca" stroke="#b39a84" stroke-width=".45"/><path d="M-7 2.500q-1 0-1.300 2t1.500 2.300" fill="#dcc9b6" stroke="#b39a84" stroke-width=".4"/><path d="M3 -1.800h7.200q.6 1.600-.4 2.400H4z" fill="#3f5a6b"/><path d="M-5.500 6q3.500 6 8 6.500" fill="none" stroke="#39454e" stroke-width=".7" class="sc"/>'+(o.mask?'<path d="M2.500 2.500h8q3 1 3 3.500q-1 5-5 6.500h-5q-2.500-4-1-10z" fill="#39454e" stroke="#0b0f12" stroke-width=".5"/><circle cx="9.500" cy="7" r="3" fill="#d9591a" stroke="#7d2e08" stroke-width=".4"/><path d="M3 3.500L-6 -1M3 10L-6 5" stroke="#20282e" stroke-width=".8" class="sc"/>':'')+'<path d="M-9.300 -5.500A10.300 10.300 0 0 1 10.800 -7L15.600 -5.400Q16.300 -4 15 -3.800H-9.600z" fill="#fbfcfc" stroke="#0e2436" stroke-width=".6"/><path d="M-5 -6.200A6.500 6.500 0 0 1 6.200 -8" fill="none" stroke="#d6dde3" stroke-width="1.500" class="sc"/><path d="M-9 -4.500h24" stroke="#c6cfd6" stroke-width=".7" class="sc"/>';
+ g.innerHTML='<ellipse class="cs" cx="1" cy="1.500" rx="24" ry="3.200" fill="#0e2e4a" opacity=".16"/><g class="tb"></g><path class="ub" '+tp.replace(cloth,dark)+'/><path class="fb" '+tp.replace(cloth,dark)+'/><circle class="gb" r="3.100" fill="'+(scba?'#20282e':'#e6c24b')+'" stroke="#6b5a1c" stroke-width=".5"/><path class="lb" '+tp.replace(cloth,dark)+'/><path class="sb" '+tp.replace(cloth,dark)+'/><path class="rlb" stroke="'+ref+'" stroke-width="2.300" class="sc"/><g class="bb">'+BOOT+'</g>'
+ +(scba?'<g class="pk"><rect x="-23.500" y="-30" width="11" height="33" rx="5.500" fill="url(#col)" stroke="#0e2436" stroke-width=".7"/><rect x="-22" y="-34" width="8" height="4" fill="#39454e"/><path d="M-13 -24h4M-13 -3h4" stroke="#20282e" stroke-width="2" class="sc"/></g>':'')
+ +'<path class="lf" '+tp+'/><path class="sf" '+tp+'/><path class="rlf" stroke="'+ref+'" stroke-width="2.300" class="sc"/><g class="bf">'+BOOT+'</g>'
+ +'<path class="tr" fill="'+cloth+'" stroke="#0e2436" stroke-width=".6"/><path class="vs" fill="'+vest+'" stroke="#7d7f14" stroke-width=".5"/><path class="v1" stroke="'+ref+'" stroke-width="2.600" class="sc"/><path class="v2" stroke="'+ref+'" stroke-width="2.600" class="sc"/><path class="v3" stroke="#23435f" stroke-width=".7"/>'
+ +'<path class="bt" stroke="'+(scba?'#20282e':'#14191d')+'" stroke-width="3.200" class="sc"/><path class="kpf" stroke="#39454e" stroke-width="5.500" stroke-linecap="round" class="sc"/><path class="pkt" stroke="#7d7f14" stroke-width="5" opacity=".55" class="sc"/>'+(scba?'<path class="hs" fill="none" stroke="#20282e" stroke-width="2.400" class="sc"/>':'<circle class="rdo" r="1.900" fill="#20282e"/>')+'<path class="nk" fill="'+(scba?'#e8cf3e':'#e6d7c8')+'" stroke="none"/><g class="hdm">'+head+'</g>'+(scba?'<path class="air" fill="none" stroke="#20282e" stroke-width="1.200" class="sc"/>':'')
+ +'<g class="tf"></g><path class="uf" '+tp+'/><path class="ff" '+tp+'/><path class="ra" stroke="'+ref+'" stroke-width="2.100" class="sc"/><circle class="gf" r="3.300" fill="'+(scba?'#20282e':'#efcc55')+'" stroke="#6b5a1c" stroke-width=".5"/>';
+ host.appendChild(g);var q=function(c){return g.querySelector('.'+c)},P={};['tb','ub','fb','gb','lb','sb','rlb','bb','pk','lf','sf','rlf','bf','tr','vs','v1','v2','v3','bt','kpf','pkt','hs','rdo','nk','hdm','air','tf','uf','ff','ra','gf'].forEach(function(k){P[k]=q(k)});P.tb.setAttribute('class','tb');
+ var tools={};function tool(name,hand,svg){var t=document.createElementNS(NS,'g');t.innerHTML=svg;(hand=='b'?P.tb:P.tf).appendChild(t);tools[name]={el:t,hand:hand};t.style.display='none'}
+ (o.tools||[]).forEach(function(a){tool(a[0],a[1],a[2])});
+ return{g:g,set:function(x,y,flip,p,sc){g.setAttribute('transform','translate('+x.toFixed(2)+' '+y.toFixed(2)+') scale('+(flip?-1:1)*(sc||1)+' '+(sc||1)+')');
+  var H=p.hip,lr=(p.lean||0)*Math.PI/180,S=[H[0]+Math.sin(lr)*28,H[1]-Math.cos(lr)*28],N=[S[0]+Math.sin(lr)*3,S[1]-Math.cos(lr)*5],HC=[N[0]+1.500,N[1]-9];
+  var ff=p.footF,fb=p.footB,af=[ff[0],ff[1]-8],ab=[fb[0],fb[1]-8];
+  var kf=ik(H,af,20,20,-1),kb=ik(H,ab,20,20,-1);
+  P.lf.setAttribute('d',cap(H,kf,6.600,5.200));P.sf.setAttribute('d',cap(kf,af,5.200,4));P.rlf.setAttribute('d',across(kf,af,.62,4.300));
+  P.lb.setAttribute('d',cap(H,kb,6.400,5));P.sb.setAttribute('d',cap(kb,ab,5,3.900));P.rlb.setAttribute('d',across(kb,ab,.62,4.100));
+  P.bf.setAttribute('transform','translate('+ff[0]+' '+ff[1]+') rotate('+(p.toeF||0)+')');P.bb.setAttribute('transform','translate('+fb[0]+' '+fb[1]+') rotate('+(p.toeB||0)+')');
+  var SF=[S[0]+3,S[1]+3],SB=[S[0]-2,S[1]+3],hf=p.handF,hb=p.handB,ef=ik(SF,hf,14.500,14,1),eb=ik(SB,hb,14.500,14,1);
+  P.uf.setAttribute('d',cap(SF,ef,4.600,3.800));P.ff.setAttribute('d',cap(ef,hf,3.800,3));P.ra.setAttribute('d',across(SF,ef,.6,3.900));P.gf.setAttribute('cx',hf[0]);P.gf.setAttribute('cy',hf[1]);
+  P.ub.setAttribute('d',cap(SB,eb,4.400,3.600));P.fb.setAttribute('d',cap(eb,hb,3.600,2.900));P.gb.setAttribute('cx',hb[0]);P.gb.setAttribute('cy',hb[1]);
+  P.tr.setAttribute('d',torso(S,H,1,0));P.vs.setAttribute('d',torso(S,H,1.01,.02).replace(/z$/,'z'));
+  P.v1.setAttribute('d',across(S,H,.5,11));P.v2.setAttribute('d',across(S,H,.72,9.800));P.v3.setAttribute('d','M'+L(S[0],H[0],.02)+' '+L(S[1],H[1],.02)+'L'+L(S[0],H[0],.95)+' '+L(S[1],H[1],.95));
+  P.nk.setAttribute('d',cap(S,N,4.300,3.700));P.bt.setAttribute('d',across(S,H,.96,10.300));P.kpf.setAttribute('d',across(kf,af,.06,4.300));P.pkt.setAttribute('d',across(S,H,.3,4.500));if(P.hs)P.hs.setAttribute('d','M'+(S[0]+6)+' '+(S[1]+2)+'L'+(H[0]-6)+' '+(H[1]-3)+'M'+(S[0]-6)+' '+(S[1]+2)+'L'+(H[0]+6)+' '+(H[1]-3));if(P.rdo){P.rdo.setAttribute('cx',L(S[0],H[0],.14)+6);P.rdo.setAttribute('cy',L(S[1],H[1],.14))}P.hdm.setAttribute('transform','translate('+HC[0].toFixed(2)+' '+HC[1].toFixed(2)+') rotate('+(p.head||0)+')');
+  if(P.pk){P.pk.setAttribute('transform','translate('+((S[0]+H[0])/2+4)+' '+((S[1]+H[1])/2+12)+') rotate('+(p.lean||0)+')');P.air.setAttribute('d','M'+(HC[0]+10)+' '+(HC[1]+6)+'Q'+(S[0]+18)+' '+(S[1]+10)+' '+((S[0]+H[0])/2-8)+' '+((S[1]+H[1])/2-10))}
+  for(var k in tools){var t=tools[k],on=p.tool===k||(p.tool2===k);t.el.style.display=on?'':'none';if(on){var h=t.hand=='b'?hb:hf;t.el.setAttribute('transform','translate('+h[0].toFixed(2)+' '+h[1].toFixed(2)+') rotate('+(k===p.tool?(p.toolRot||0):(p.toolRot2||0))+')')}}
+ }}}
+function stand(){return{lean:1,hip:[0,-47],footF:[6,0],footB:[-6,0],handF:[6,-46],handB:[-5,-46],head:0}}
+function walk(ph){var a=Math.sin(ph),c=Math.cos(ph);return{lean:4,hip:[0,-45.500-Math.abs(a)*.8+1],footF:[13*a,-Math.max(0,c)*5],footB:[-13*a,-Math.max(0,-c)*5],handF:[-7*a+3,-44],handB:[7*a-1,-44],head:0,toeF:Math.max(0,c)*-14,toeB:Math.max(0,-c)*-14}}
+function blend(a,b,k){var o={};for(var n in b){if(Array.isArray(b[n]))o[n]=[L(a[n]?a[n][0]:b[n][0],b[n][0],k),L(a[n]?a[n][1]:b[n][1],b[n][1],k)];else if(typeof b[n]=='number')o[n]=L(a[n]||0,b[n],k);else o[n]=b[n]}return o}
+var T_CLIP='<g transform="rotate(-8)"><rect x="-8" y="-15" width="16" height="21" rx="1" fill="#6b4f33" stroke="#2c1f13" stroke-width=".5"/><rect x="-6.500" y="-12.500" width="13" height="17" fill="#fff" stroke="#9aa5ae" stroke-width=".4"/><rect x="-3.500" y="-16" width="7" height="3" fill="#7b868e"/><path d="M-5 -9h10M-5 -6.500h10M-5 -4h7M-5 -1.500h10" stroke="#8d9aa5" stroke-width=".4"/></g>';
+var T_PEN='<path d="M0 0l6 -6" stroke="#12558c" stroke-width="1.300" class="sc"/>';
+var T_DET='<g><rect x="-3" y="-11" width="12" height="17" rx="2" fill="#2a3640" stroke="#0b0f12" stroke-width=".5"/><rect x="-1.500" y="-9.500" width="9" height="6" fill="#bff0d0" class="det"/><circle cx="1" cy="0" r="1" fill="#e9a23b"/><circle cx="5" cy="0" r="1" fill="#7b868e"/><path d="M9 -9L24 -18" stroke="#39454e" stroke-width="1.500" class="sc"/><circle cx="24" cy="-18" r="1.700" fill="#d9591a"/></g>';
+var T_LANCE='<g><path d="M-16 7L36 -2" stroke="#3a4650" stroke-width="2.300" class="sc"/><rect x="-14" y="3" width="10" height="5" rx="1" fill="#20282e" transform="rotate(-10 -9 5)"/><path d="M36 -2l6 -1" stroke="#7b868e" stroke-width="3" class="sc"/></g>';
+var T_RAD='<g><rect x="-3" y="-13" width="7" height="15" rx="1.200" fill="#20282e"/><path d="M2 -13v-7" stroke="#20282e" stroke-width="1.200" class="sc"/><rect x="-1.500" y="-11" width="4" height="3" fill="#bff0d0"/></g>';
+var T_JOY='<g><rect x="-11" y="-2" width="24" height="8" rx="2" fill="#2a3640" stroke="#0b0f12" stroke-width=".5"/><path d="M-4 -2v-6M7 -2v-6" stroke="#20282e" stroke-width="1.500" class="sc"/><circle cx="-4" cy="-8" r="1.700" fill="#d9591a"/><circle cx="7" cy="-8" r="1.700" fill="#39454e"/><circle cx="1.500" cy="2" r="1" fill="#7fe0a4"/></g>';
+
+/* ---------- 로봇 소개 구역(탱크보다 먼저) ---------- */
+function tracks(x0,x1,h){var s='<rect x="'+x0+'" y="'+(-h)+'" width="'+(x1-x0)+'" height="'+h+'" rx="'+h/2+'" fill="#20292f"/><rect x="'+(x0+5)+'" y="'+(-h+5)+'" width="'+(x1-x0-10)+'" height="'+(h-10)+'" rx="'+(h-10)/2+'" fill="#38444d"/>';var n=Math.floor((x1-x0-14)/20);for(var i=0;i<=n;i++){var cx=x0+h/2+i*((x1-x0-h)/n);s+='<g transform="translate('+cx+' '+(-h/2)+')"><circle r="'+(h*.27)+'" fill="#7e8c97"/><path class="fw" d="M-4 0H4M0 -4V4" stroke="#20292f" stroke-width="1.100"/></g>'}return s}
+function body(x0,x1,top,mast){return '<path d="M'+x0+' -25V'+(-top+5)+'q0-5 5-5H'+(x1-7)+'q7 0 7 7V-25z" fill="'+C.robot+'" stroke="#7d2e08" stroke-width=".9"/><path d="M'+x0+' -35H'+x1+'" stroke="#a9410e" stroke-width=".8"/><rect x="'+(x0+10)+'" y="'+(-top+4)+'" width="22" height="8" fill="#a9410e"/><g stroke="#f4c9ae" stroke-width=".8">'+rep(5,function(i){return '<path d="M'+(x0+38+i*5)+' '+(-top+3)+'v6"/>'})+'</g>'+(mast?'<path d="M'+(x1-20)+' '+(-top)+'v-11" stroke="#26313a" stroke-width="2.500"/><rect x="'+(x1-27)+'" y="'+(-top-19)+'" width="18" height="10" rx="2" fill="#26313a"/><circle cx="'+(x1-8)+'" cy="'+(-top-14)+'" r="3.300" fill="#ffe9a8" stroke="#26313a" stroke-width=".7"/>':'')}
+function suck(x){return '<path d="M'+x+' -40h14l32 25v15H'+(x+22)+'L'+x+' -22z" fill="#cfd7dd" stroke="#26313a" stroke-width=".9"/><path d="M'+(x+14)+' -40v40M'+(x+28)+' -26v26" stroke="#26313a" stroke-width=".7"/>'}
+function drum(x){var s='<path d="M'+x+' -38h12v16H'+x+'z" fill="#59666f"/><g transform="translate('+(x+30)+' -22)"><circle r="20" fill="#a8b2ba" stroke="#26313a" stroke-width="1"/><g class="dr">';for(var i=0;i<10;i++){var a=i/10*6.283;s+='<path d="M'+(Math.cos(a)*17)+' '+(Math.sin(a)*17)+'L'+(Math.cos(a+.18)*25)+' '+(Math.sin(a+.18)*25)+'L'+(Math.cos(a+.36)*17)+' '+(Math.sin(a+.36)*17)+'z" fill="#26313a"/>'}s+='<path d="M-14 0H14M0 -14V14" stroke="#26313a" stroke-width="1.200"/></g><circle r="5" fill="#26313a"/></g>';return s}
+function gen(n,x){var d={1:[1,'s',112,52],2:[1,'d',104,56,1],3:[1,'d',118,56],4:[.78,'s',96,50],5:[.78,'d',92,50]}[n];var s='<g transform="translate('+x+' '+G+') scale('+d[0]+')">'+tracks(-60,-60+d[2],25)+body(-58,-58+d[2],d[3],true)+(d[1]=='s'?suck(-58+d[2]):drum(-58+d[2]));if(d[4])s+='<path d="M-58 -40q-30 -4 -44 30h-20" fill="none" stroke="#2a4f6e" stroke-width="2.500" class="sc"/>';else s+='<rect x="-66" y="-44" width="9" height="14" rx="2" fill="#26313a"/>';return s+'</g>'}
+function loader(x,sc){return '<g transform="translate('+x+' '+G+') scale('+sc+')">'+tracks(-74,62,28)+body(-72,50,62,false)+'<rect x="-30" y="-92" width="44" height="30" rx="3" fill="#2a3640" stroke="#0b0f12" stroke-width=".7"/><rect x="-25" y="-88" width="34" height="16" fill="#46606f"/><g class="arm"><path d="M28 -52L104 -74L112 -58L34 -38z" fill="'+C.robot+'" stroke="#7d2e08" stroke-width=".9"/><path d="M36 -40l56 -16" stroke="#59666f" stroke-width="3.200" class="sc"/><g class="bkt" transform="translate(108 -66)"><path d="M0 -8L30 -2Q44 12 40 38H6Q-4 18 0 -8z" fill="#cfd7dd" stroke="#26313a" stroke-width="1"/><path d="M6 38h34M-1 -8l31 6" stroke="#26313a" stroke-width="1.400" /><path class="load" d="M6 -2Q22 -12 36 4L28 6Q14 2 6 -2z" fill="#6a5f51"/></g></g></g>'}
+function jetbot(x){var s='<g transform="translate('+x+' '+G+')">'+tracks(-64,64,24)+'<path d="M-58 -24V-46q0-5 5-5H50q6 0 6 6V-24z" fill="'+C.robot+'" stroke="#7d2e08" stroke-width=".9"/><rect x="-46" y="-46" width="30" height="16" fill="#a9410e"/><path d="M-4 -51V-96" stroke="#59666f" stroke-width="7" class="sc"/><path d="M26 -51v-10" stroke="#26313a" stroke-width="2.200"/><rect x="18" y="-68" width="17" height="9" rx="2" fill="#26313a"/><g transform="translate(-4 -104)"><circle r="17" fill="#eef1f4" stroke="#26313a" stroke-width="1"/><circle r="6" fill="#59666f"/><g class="noz">';for(var i=0;i<9;i++){var a=i/9*6.283;s+='<g transform="rotate('+(a*57.3)+')"><rect x="15" y="-2.500" width="10" height="5" fill="#26313a"/><path class="jt" d="M26 0H150" stroke="'+C.brand+'" stroke-width="1.200" stroke-dasharray="6 7" fill="none"/></g>'}return s+'</g></g></g>'}
+function site(kind,x){var c=C.sky,t='<g fill="none" stroke="'+c+'" stroke-width="1">';if(kind=='tank')t+='<path d="M'+(x-330)+' '+G+'V470Q'+(x-200)+' 420 '+(x-70)+' 470V'+G+'"/>'+rep(4,function(i){return '<path d="M'+(x-330)+' '+(520+i*45)+'Q'+(x-200)+' '+(538+i*45)+' '+(x-70)+' '+(520+i*45)+'"/>'})+'<path d="M'+(x+110)+' '+G+'V340Q'+(x+160)+' 270 '+(x+210)+' 340V'+G+'"/>'+rep(7,function(i){return '<path d="M'+(x+110)+' '+(370+i*46)+'h100"/>'})+'<path d="M'+(x+70)+' '+G+'v-60h30M'+(x+220)+' '+G+'v-90h40"/>';
+ if(kind=='pond')t+='<path d="M'+(x-420)+' '+G+'H'+(x-300)+'Q'+(x-240)+' 760 '+(x+40)+' 760T'+(x+420)+' '+G+'H'+(x+540)+'"/><path d="M'+(x-260)+' 725Q'+(x+40)+' 736 '+(x+380)+' 725" stroke-dasharray="6 6"/><path d="M'+(x-420)+' 590H'+(x+540)+'M'+(x-300)+' 590V'+G+'M'+(x+420)+' 590V'+G+'"/>';
+ if(kind=='pipe')t+='<path d="M'+(x+130)+' 400H'+(x+620)+'V640H'+(x+130)+'z"/><path d="M'+(x+130)+' 470H'+(x+620)+'M'+(x+130)+' 540H'+(x+620)+'M'+(x+130)+' 590H'+(x+620)+'"/><ellipse cx="'+(x+130)+'" cy="520" rx="34" ry="120"/><path d="M'+(x+270)+' 640V'+G+'M'+(x+470)+' 640V'+G+'"/>';return t+'</g>'}
+function genLabel(i,n,x){return '<text class="glab" data-x="'+x+'" text-anchor="middle" fill="'+C.ink+'" font-weight="600"><tspan x="'+x+'">'+i+'세대</tspan></text><text class="glab2" data-x="'+x+'" text-anchor="middle" fill="#646c74"><tspan x="'+x+'">'+n+'</tspan></text>'}
+/* ---------- 기술소개서 장비 사진을 보고 다시 그린 로봇들(옆모습, 앞이 오른쪽) ---------- */
+var D1='#14191d',ST='#59666f';
+function hoseL(d,w,c){return '<path d="'+d+'" fill="none" stroke="'+(c||D1)+'" stroke-width="'+(w||2.4)+'" stroke-linecap="round" class="sc"/>'}
+function bolt(x,y,r){return '<circle cx="'+x+'" cy="'+y+'" r="'+(r||1.3)+'" fill="#3a4650"/>'}
+function chain(x0,x1,h,opt){opt=opt||{};var y=-h,r=h/2,s='<path class="lug" d="M'+(x0+r)+' '+(y-1)+'H'+(x1-r)+'A'+(r+1)+' '+(r+1)+' 0 0 1 '+(x1-r)+' 1H'+(x0+r)+'A'+(r+1)+' '+(r+1)+' 0 0 1 '+(x0+r)+' '+(y-1)+'z" fill="none" stroke="'+D1+'" stroke-width="5.500" stroke-dasharray="4.500 2.800" class="sc"/>';
+ s+='<rect x="'+x0+'" y="'+y+'" width="'+(x1-x0)+'" height="'+h+'" rx="'+r+'" fill="#20272c"/><rect x="'+(x0+4)+'" y="'+(y+4)+'" width="'+(x1-x0-8)+'" height="'+(h-8)+'" rx="'+(r-4)+'" fill="#3b464e"/>';
+ var n=opt.n||5;for(var i=0;i<n;i++){var cx=x0+r+i*((x1-x0-2*r)/(n-1));s+='<g transform="translate('+cx+' '+(y+r)+')"><circle r="'+(r*.58)+'" fill="'+(opt.c||'#6f7c86')+'" stroke="#20272c" stroke-width=".6"/><path class="rw" d="M'+(-r*.42)+' 0H'+(r*.42)+'M0 '+(-r*.42)+'V'+(r*.42)+'" stroke="#20272c" stroke-width="1.100"/><circle r="'+(r*.13)+'" fill="#20272c"/></g>'}return s}
+function fit(x,y,a){return '<g transform="translate('+x+' '+y+') rotate('+(a||0)+')"><rect x="-3.200" y="-2.200" width="6.400" height="4.400" rx=".7" fill="#c9d2d9" stroke="#20272c" stroke-width=".5"/><path d="M-1.200 -2.200V2.200M1.200 -2.200V2.200" stroke="#59666f" stroke-width=".4"/></g>'}
+function clamp(x,y,a,l){return '<g transform="translate('+x+' '+y+') rotate('+(a||0)+')"><rect x="-1.800" y="'+(-(l||12))+'" width="3.600" height="'+2*(l||12)+'" rx="1" fill="#c9d2d9" stroke="#20272c" stroke-width=".5"/><circle cy="'+(-(l||12)+2)+'" r=".7" fill="#20272c"/></g>'}
+function sprk(x,y,r){var s='<g transform="translate('+x+' '+y+')"><circle r="'+r+'" fill="#7e8b95" stroke="#20272c" stroke-width=".7"/><g class="rw">';for(var i=0;i<6;i++){var a=i/6*6.283;s+='<circle cx="'+Math.cos(a)*r*.6+'" cy="'+Math.sin(a)*r*.6+'" r="'+r*.16+'" fill="#20272c"/>'}return s+'</g><circle r="'+r*.26+'" fill="#c9d2d9" stroke="#20272c" stroke-width=".5"/></g>'}
+function vents(x,y,n,d){return rep(n,function(i){return '<rect x="'+(x+i*d)+'" y="'+y+'" width="'+(d*.55)+'" height="8" rx=".6" fill="#20272c" opacity=".55"/>'})}
+function hazard(x,y,w,h){var s='<clipPath id="hz'+x+'_'+y+'"><rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'"/></clipPath><g clip-path="url(#hz'+x+'_'+y+')"><rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="#efc21f"/>';for(var i=-1;i<w/6+1;i++)s+='<path d="M'+(x+i*6)+' '+(y+h)+'l'+h+' '+(-h)+'h3l'+(-h)+' '+h+'z" fill="#14191d"/>';return s+'</g>'}
+function eye(x,y){return '<circle cx="'+x+'" cy="'+y+'" r="3.200" fill="none" stroke="#3a4650" stroke-width="1.600" class="sc"/>'}
+function d1(){return sprk(-77,-23,13)+sprk(39,-23,13)+rep(4,function(i){return fit(-52,-108+i*12)})+fit(-34,-78,20)+fit(-22,-72,20)+fit(-42,-62,30)+clamp(30,-98,0,12)+clamp(92,-70,-30,12)+clamp(112,-36,-30,12)+eye(-74,-124)+eye(-30,-66)+vents(-84,-56,8,6)+hazard(-14,-55,40,5)+'<path d="M-92 -118H-56" stroke="#7e8b95" stroke-width="1.200"/><path d="M-90 -116V-62" stroke="#7e8b95" stroke-width=".8"/>'}
+function d2(){return sprk(-82,-20,11)+sprk(24,-20,11)+eye(-70,-130)+eye(14,-130)+fit(44,-58,10)+fit(72,-44,90)+fit(38,-36,10)+fit(66,-18,40)+vents(-30,-43,8,6)+hazard(-104,-34,40,4)+'<path d="M-78 -123L-62 -71M-40 -125V-70M0 -125L4 -70" stroke="#fff" stroke-width=".9" opacity=".55"/><path d="M34 -56h18M34 -48h18M34 -40h18" stroke="#6f7c86" stroke-width=".8"/>'}
+function d3(){return sprk(-91,-17,10)+sprk(51,-17,10)+fit(34,-58,10)+fit(34,-52,10)+fit(20,-60,10)+fit(74,-66,40)+fit(82,-52,40)+eye(-82,-84)+eye(-18,-84)+eye(28,-84)+vents(-84,-40,10,6)+hazard(-46,-40,0,0)+hazard(-20,-26,50,4)+'<rect x="-96" y="-50" width="44" height="6" fill="#a9410e"/>'+rep(4,function(i){return bolt(-88+i*12,-47,.8)})}
+function d4(){return sprk(-62,-17,7)+sprk(56,-15,7)+fit(62,-36,20)+fit(-146,-28,0)+clamp(-122,-66,28,10)+clamp(38,-72,40,10)+eye(4,-68)+hazard(44,-22,22,3)+'<path d="M-20 -60Q-4 -70 12 -62" fill="none" stroke="#fff" stroke-width="1.500" opacity=".7"/>'+rep(5,function(i){return bolt(-52+i*22,-11,.9)})}
+function d5(){return sprk(-89,-23,12)+fit(-56,-116)+fit(-56,-104)+fit(-60,-130)+fit(-30,-84,90)+fit(-8,-78,60)+fit(18,-100,50)+fit(-82,-96)+fit(-82,-78)+eye(-74,-78)+eye(30,-78)+rep(3,function(i){return '<path d="M-82 '+(-118+i*12)+'h26" stroke="#a88a10" stroke-width=".9"/>'})+'<path d="M-82 -68h26" stroke="#7a5d08" stroke-width="1.600"/><rect x="-76" y="-82" width="14" height="8" fill="#fff" stroke="#7a5d08" stroke-width=".5"/><path d="M22 -108v12" stroke="#59666f" stroke-width=".6"/><path d="M26 -99h14" stroke="#7e8b95" stroke-width="1.200"/>'}
+var D={r1:d1,r2:d2,r3:d3,r4:d4,r5:d5};
+function r1(){var s=chain(-100,62,46,{n:5});
+ s+='<path d="M-82 -24H44q7 0 7 7t-7 7H-74q-8 0-12-7t4-7z" fill="#e8b320" stroke="#7a5d08" stroke-width=".8"/>'+bolt(-62,-17)+bolt(34,-17)+bolt(-20,-17)+'<rect x="-12" y="-22" width="30" height="3" fill="#7a5d08"/>';
+ s+='<path d="M-92 -48H52L66 -40L60 -46H-92z" fill="#2a3238"/><rect x="-88" y="-60" width="130" height="12" fill="#2f383f" stroke="'+D1+'" stroke-width=".6"/>';
+ s+='<path d="M-92 -118H-56V-60H-92z" fill="#39434b" stroke="'+D1+'" stroke-width=".8"/>'+rep(4,function(i){return '<rect x="-88" y="'+(-112+i*12)+'" width="28" height="7" rx="1" fill="#59666f" stroke="'+D1+'" stroke-width=".4"/><circle cx="-54" cy="'+(-108+i*12)+'" r="2.100" fill="#b9c5cf" stroke="'+D1+'" stroke-width=".4"/>'});
+ s+=hoseL('M-54 -108Q-22 -118 -34 -78',2.600)+hoseL('M-54 -96Q-16 -112 -22 -72',2.600)+hoseL('M-54 -84Q-30 -88 -42 -62',2.600)+hoseL('M-14 -96Q4 -126 22 -98',2.800);
+ s+='<path d="M-20 -60L-10 -86H14L34 -60z" fill="#3a444c" stroke="'+D1+'" stroke-width=".7"/><path d="M36 -60L62 -74L66 -66L44 -50z" fill="#2a3238"/>';
+ s+='<path d="M4 -98H52Q76 -98 90 -74L124 -14" fill="none" stroke="#3a4650" stroke-width="20" stroke-linecap="butt" class="sc"/><path d="M4 -103H52Q72 -103 86 -82L118 -28" fill="none" stroke="#7e8b95" stroke-width="3.500" class="sc"/><rect x="-2" y="-110" width="9" height="24" rx="1.500" fill="#20272c"/>'+'<path d="M112 -18L134 -32L140 -22L122 -8z" fill="#20272c"/>';return s}
+function r2(){var s=chain(-102,44,40,{n:5,c:'#8c98a1'});
+ s+='<path d="M-108 -38V-82L-82 -66V-38z" fill="#c7ced4" stroke="#2c353c" stroke-width=".8"/>';
+ s+='<path d="M-104 -66H42L58 -44V-30H-104z" fill="#a9b3ba" stroke="#2c353c" stroke-width=".9"/><circle cx="-66" cy="-48" r="15" fill="#d8dde1" stroke="#2c353c" stroke-width="1"/><circle cx="-66" cy="-48" r="9" fill="#7e8b95" stroke="#2c353c" stroke-width=".6"/><circle cx="-66" cy="-48" r="3" fill="#2c353c"/>'+rep(6,function(i){var a=i/6*6.283;return bolt(-66+Math.cos(a)*12,-48+Math.sin(a)*12,.9)})+'<rect x="-36" y="-54" width="48" height="4" fill="#5d6a74"/><rect x="-36" y="-46" width="30" height="3" fill="#5d6a74"/>';
+ s+='<path d="M-102 -68L-80 -126H24L52 -72V-66H-102z" fill="url(#alu)" stroke="#2c353c" stroke-width="1"/><path d="M-80 -126L-64 -68M24 -126L12 -68M-78 -106H36" stroke="#6f7c86" stroke-width=".7"/>'+rep(9,function(i){return bolt(-64+i*9,-72,.8)+bolt(-74+i*11,-121,.7)})+'<path d="M-64 -90H-6" stroke="#fff" stroke-width="2" opacity=".6" class="sc"/>';
+ s+='<rect x="30" y="-60" width="26" height="26" fill="#3a444c" stroke="'+D1+'" stroke-width=".7"/>'+hoseL('M44 -60Q72 -66 72 -44',3)+hoseL('M38 -36Q58 -30 66 -18',3)+'<path d="M56 -40L82 -44L92 -18L68 -6z" fill="#2c353c" stroke="'+D1+'" stroke-width=".7"/>';
+ s+='<g transform="translate(96 -26)"><circle r="22" fill="#39434b" stroke="'+D1+'" stroke-width=".8"/><g class="dr">'+rep(9,function(i){var a=i/9*6.283;return '<path d="M'+(Math.cos(a)*18)+' '+(Math.sin(a)*18)+'L'+(Math.cos(a+.2)*29)+' '+(Math.sin(a+.2)*29)+'L'+(Math.cos(a+.42)*18)+' '+(Math.sin(a+.42)*18)+'z" fill="#1d2429"/>'})+'<path d="M-13 0H13M0 -13V13" stroke="#8c98a1" stroke-width="1.500"/></g><circle r="5" fill="#8c98a1"/></g><path d="M68 -4L120 -4L126 4H62z" fill="#8c98a1" stroke="#2c353c" stroke-width=".7"/>';return s}
+function r3(){var s=chain(-108,68,34,{n:7});
+ s+='<path d="M-112 -30L-96 -58H60L88 -28V-20H-112z" fill="'+C.robot+'" stroke="#7d2e08" stroke-width="1"/><path d="M-96 -42H66" stroke="#a9410e" stroke-width=".9"/>'+rep(8,function(i){return bolt(-90+i*22,-27,1)});
+ [-90,-26].forEach(function(x){s+='<path d="M'+x+' -58V-78L'+(x+8)+' -84H'+(x+58)+'V-58z" fill="url(#alu)" stroke="#2c353c" stroke-width=".9"/><path d="M'+(x+8)+' -84V-58M'+x+' -72H'+(x+58)+'" stroke="#6f7c86" stroke-width=".7"/><rect x="'+(x+14)+'" y="-80" width="30" height="5" fill="#fff" stroke="#6f7c86" stroke-width=".5"/>'});
+ s+=hoseL('M34 -58Q56 -82 74 -66',3.200)+hoseL('M34 -52Q60 -68 82 -52',3.200)+hoseL('M20 -60Q40 -94 66 -78',2.400)+'<path d="M60 -62L86 -78L106 -56L104 -28H78z" fill="'+C.robot+'" stroke="#7d2e08" stroke-width="1"/><path d="M84 -70L100 -54" stroke="#a9410e" stroke-width="1"/><path d="M72 -74q6 -12 18 -6" fill="none" stroke="#20272c" stroke-width="5" class="sc"/>';
+ s+='<g transform="translate(92 -20)"><circle r="19" fill="#39434b" stroke="'+D1+'" stroke-width=".8"/><g class="dr">'+rep(10,function(i){var a=i/10*6.283;return '<path d="M'+(Math.cos(a)*15)+' '+(Math.sin(a)*15)+'L'+(Math.cos(a+.18)*24)+' '+(Math.sin(a+.18)*24)+'L'+(Math.cos(a+.36)*15)+' '+(Math.sin(a+.36)*15)+'z" fill="#1d2429"/>'})+'</g><circle r="4" fill="#8c98a1"/></g>';return s}
+function r4(){var s='<path class="lug" d="M-70 -5Q-90 -8 -74 -28L-22 -72Q-4 -84 16 -74L68 -22Q82 -6 62 -2z" fill="#20272c" stroke="'+D1+'" stroke-width="5.500" stroke-dasharray="4.500 2.800" class="sc"/><path d="M-66 -9Q-78 -13 -66 -26L-20 -64Q-4 -74 12 -66L60 -20Q70 -9 56 -8z" fill="#f1f3f5" stroke="#2c353c" stroke-width="1"/>';
+ s+=bolt(-48,-18,1.300)+bolt(-22,-14,1.300)+bolt(10,-14,1.300)+bolt(38,-16,1.300)+bolt(-34,-36,1.300);
+ s+='<circle cx="6" cy="-38" r="27" fill="#1f5fb5" stroke="#123c75" stroke-width="1"/><circle cx="6" cy="-38" r="18" fill="#2b70c9" stroke="#123c75" stroke-width=".6"/><circle cx="6" cy="-38" r="8" fill="#d6dde3" stroke="#123c75" stroke-width=".9"/><circle cx="6" cy="-38" r="3" fill="#3a4650"/>'+rep(6,function(i){var a=i/6*6.283;return bolt(6+Math.cos(a)*22,-38+Math.sin(a)*22,1)});
+ s+='<path d="M28 -46L92 -26L134 -8V-2H100L24 -24z" fill="#1f5fb5" stroke="#123c75" stroke-width="1"/><path d="M36 -38L104 -14" stroke="#7fa8dc" stroke-width="1.200"/>';
+ var pts='';for(var i=0;i<=40;i++){var k=i/40,x=L(-150,62,k),y=-38-Math.sin(k*3.14159)*68+(1-k)*12;pts+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}
+ s+='<path d="'+pts+'" fill="none" stroke="#3a444c" stroke-width="15" class="sc"/><path d="'+pts+'" fill="none" stroke="#b9a68c" stroke-width="13" stroke-dasharray="1.300 2.200" class="sc"/><path d="'+pts+'" fill="none" stroke="#20272c" stroke-width="2" opacity=".35" class="sc"/>';
+ return s+'<path d="M56 -40L72 -28L60 -16L44 -30z" fill="#3a4650"/>'}
+function r5(){var s=chain(-112,60,46,{n:5,c:'#7e8b95'});
+ /* 큰 살 바퀴 */
+ s+='<g transform="translate(58 -30)"><circle r="30" fill="#20272c"/><circle r="30" fill="none" stroke="'+D1+'" stroke-width="5" stroke-dasharray="4.500 2.800" class="sc lug"/><circle r="24" fill="#d8dde1" stroke="#20272c" stroke-width=".8"/><g class="dr">'+rep(14,function(i){var a=i/14*6.283;return '<path d="M0 0L'+(Math.cos(a)*23)+' '+(Math.sin(a)*23)+'" stroke="#39434b" stroke-width="1.500" class="sc"/>'})+'</g><circle r="6" fill="#39434b"/><circle r="2.200" fill="#d8dde1"/></g>';
+ /* 알루미늄 프레임 */
+ s+='<path d="M-100 -46L-74 -78H32L58 -46z" fill="none" stroke="url(#alu)" stroke-width="7" class="sc"/><path d="M-100 -46L-74 -78H32L58 -46z" fill="none" stroke="#2c353c" stroke-width=".8"/><rect x="-92" y="-54" width="148" height="9" fill="url(#alu)" stroke="#2c353c" stroke-width=".8"/>'+rep(8,function(i){return bolt(-86+i*20,-49.500,1)});
+ /* 노란 유압 모터 · 파란 실린더 */
+ s+='<rect x="-82" y="-124" width="26" height="72" rx="3" fill="#efc21f" stroke="#7a5d08" stroke-width=".9"/><rect x="-84" y="-92" width="30" height="7" fill="#3a4650"/><rect x="-78" y="-136" width="18" height="12" fill="#c9d2d9" stroke="#2c353c" stroke-width=".7"/><path d="M-78 -110h18" stroke="#7a5d08" stroke-width=".8"/>';
+ s+='<path d="M-44 -74L14 -104" stroke="#1f5fb5" stroke-width="10" class="sc"/><path d="M14 -104L38 -116" stroke="#c9d2d9" stroke-width="4.500" class="sc"/><circle cx="-44" cy="-74" r="4.500" fill="#3a4650"/><circle cx="38" cy="-116" r="3.500" fill="#3a4650"/><path d="M38 -116L56 -78" stroke="#59666f" stroke-width="4" class="sc"/>';
+ s+=hoseL('M-56 -116Q-30 -130 -30 -84',3)+hoseL('M-56 -104Q-22 -116 -8 -78',3)+hoseL('M-60 -130Q-20 -148 18 -100',2.600)+hoseL('M-82 -96Q-116 -96 -114 -60',3)+hoseL('M-82 -78Q-106 -76 -100 -52',3);
+ /* 방폭 카메라 · Jet Nozzle */
+ s+='<path d="M30 -78V-96" stroke="#39434b" stroke-width="3.500" class="sc"/><rect x="20" y="-110" width="26" height="14" rx="3" fill="#39434b" stroke="'+D1+'" stroke-width=".8"/><circle cx="47" cy="-103" r="4.500" fill="#b9d4e8" stroke="'+D1+'" stroke-width=".8"/>';
+ s+='<g class="jetn"><rect x="56" y="-82" width="30" height="7" rx="2" fill="#7e8b95" stroke="#26313a" stroke-width=".7"/><rect x="86" y="-82" width="10" height="4.500" fill="#20272c"/><path d="M60 -75V-56" stroke="#39434b" stroke-width="3" class="sc"/></g>';
+ /* 앞쪽 파쇄 · 흡입부 */
+ s+='<g transform="translate(92 -18)"><circle r="17" fill="#39434b" stroke="'+D1+'" stroke-width=".8"/><g class="dr">'+rep(9,function(i){var a=i/9*6.283;return '<path d="M'+(Math.cos(a)*14)+' '+(Math.sin(a)*14)+'L'+(Math.cos(a+.2)*22)+' '+(Math.sin(a+.2)*22)+'L'+(Math.cos(a+.4)*14)+' '+(Math.sin(a+.4)*14)+'z" fill="#1d2429"/>'})+'</g><circle r="4" fill="#efc21f" stroke="#7a5d08" stroke-width=".5"/></g><path d="M76 -38L60 -46" stroke="#39434b" stroke-width="5" class="sc"/>';
+ return s+'<rect x="-120" y="-68" width="11" height="17" rx="2" fill="#26313a"/>'}
+function loaderB(x){var s='<g transform="translate('+x+' '+G+')">'+chain(-112,62,44,{n:6});
+ s+='<path d="M-100 -24H44" stroke="#e8b320" stroke-width="5" class="sc"/>';
+ s+='<path d="M-110 -44V-104L-78 -126H26L52 -96V-44z" fill="#f4f1ec" stroke="'+C.robot+'" stroke-width="8" class="sc"/><path d="M-110 -44V-104L-78 -126H26L52 -96V-44z" fill="none" stroke="#7d2e08" stroke-width=".7"/>';
+ s+='<rect x="-92" y="-108" width="42" height="26" fill="#3a444c" stroke="'+D1+'" stroke-width=".6"/><rect x="-46" y="-112" width="38" height="20" fill="#d2d8dd" stroke="'+D1+'" stroke-width=".6"/><rect x="-4" y="-104" width="38" height="44" fill="#20272c"/><rect x="-92" y="-76" width="70" height="26" fill="#2b3238"/>'+rep(5,function(i){return '<circle cx="'+(-84+i*13)+'" cy="-68" r="4" fill="#c9d2d9" stroke="'+D1+'" stroke-width=".5"/>'})+hoseL('M-60 -82Q-40 -70 -10 -78',1.600,'#e0482a')+hoseL('M-48 -88Q-30 -64 0 -70',1.600,'#2d7fd0')+hoseL('M-30 -92Q-10 -80 8 -92',1.600,'#e8b320');
+ s+=sprk(-90,-22,12)+sprk(40,-22,12)+eye(-80,-132)+eye(16,-132)+vents(-34,-58,5,6)+hazard(-20,-44,50,4)+fit(38,-82)+fit(44,-70);return s+'<g class="arm" data-pv="44 -80"><path d="M38 -96L120 -84L128 -62L44 -68z" fill="'+C.robot+'" stroke="#7d2e08" stroke-width=".9"/><path d="M48 -80L118 -72" stroke="#c9d2d9" stroke-width="4" class="sc"/><g class="bkt" transform="translate(122 -74)"><path d="M0 -14L52 0Q70 28 62 52H8Q-8 18 0 -14z" fill="#20272c" stroke="'+D1+'" stroke-width="1"/><path d="M8 52H62L72 58H10z" fill="#59666f"/><path class="load" d="M12 0Q30 -10 56 8L48 12Q26 4 12 0z" fill="#6a5f51"/></g></g></g>'}
+function loaderS(x){var s='<g transform="translate('+x+' '+G+')">'+chain(-74,50,30,{n:4});
+ s+='<path d="M-70 -30V-74L-52 -88H30L44 -70V-30z" fill="'+C.robot+'" stroke="#7d2e08" stroke-width=".9"/><path d="M-52 -88V-30M-70 -56H44" stroke="#a9410e" stroke-width=".8"/>'+rep(4,function(i){return '<path d="M'+(-44+i*10)+' -82l6 12" stroke="#7d2e08" stroke-width="1.500" class="sc"/>'})+'<rect x="4" y="-82" width="26" height="14" fill="#a9410e"/>'+bolt(-64,-36)+bolt(38,-36);
+ s+=sprk(-59,-15,8)+sprk(35,-15,8)+eye(-48,-94)+hazard(-30,-34,40,3)+fit(30,-58);return s+'<g class="arm" data-pv="32 -56"><path d="M28 -64L78 -56L84 -40L34 -44z" fill="#20272c"/><g class="bkt" transform="translate(80 -50)"><path d="M0 -10L38 -2Q52 20 46 38H6Q-6 14 0 -10z" fill="url(#alu)" stroke="#2c353c" stroke-width="1"/><path d="M6 38H46L54 42H8z" fill="#59666f"/><path class="load" d="M9 -1Q24 -7 42 7L36 10Q20 4 9 -1z" fill="#6a5f51"/></g></g></g>'}
+function jetbot(x){var s='<g transform="translate('+x+' '+G+')">';[-82,0,82].forEach(function(w){s+='<g transform="translate('+w+' -24)"><circle r="24" fill="#1a2024"/>'+rep(14,function(i){var a=i/14*6.283;return '<path d="M'+(Math.cos(a)*22)+' '+(Math.sin(a)*22)+'L'+(Math.cos(a)*27)+' '+(Math.sin(a)*27)+'" stroke="#1a2024" stroke-width="4" class="sc"/>'})+'<circle r="12" fill="#c9d2d9" stroke="#2c353c" stroke-width=".7"/><g class="dr"><path d="M-9 0H9M0 -9V9" stroke="#2c353c" stroke-width="1.300"/></g></g>'});
+ s+='<path d="M-126 -56H128L120 -44H-118z" fill="url(#alu)" stroke="#2c353c" stroke-width="1"/><rect x="-132" y="-58" width="10" height="16" fill="#c9311e" stroke="#7c1a0c" stroke-width=".6"/>';
+ [-104,-74,-44,-14,16,46,76,106].forEach(function(px,i){var ang=-48+i*13.7;s+='<g transform="translate('+px+' -56) rotate('+ang+')"><path d="M-4 0V-22Q-4 -28 0 -36Q4 -28 4 -22V0z" fill="#3f4951" stroke="'+D1+'" stroke-width=".7"/><path d="M-3 -12H3" stroke="#d6dde3" stroke-width="1"/><path class="jt" d="M0 -38V-150" stroke="'+C.brand+'" stroke-width="1.200" stroke-dasharray="6 7" fill="none"/></g>'});
+ s+=rep(10,function(i){return bolt(-112+i*24,-50,1)})+'<path d="M-118 -47H116" stroke="#6f7c86" stroke-width="1.500"/><path d="M-112 -44H112" stroke="#3a4650" stroke-width="3" class="sc"/>'+[-104,-74,-44,-14,16,46,76,106].map(function(x){return fit(x,-44,90)}).join('')+'<rect x="-30" y="-68" width="40" height="12" rx="2" fill="#d6dde3" stroke="#2c353c" stroke-width=".7"/>'+fit(-132,-48);return s+hoseL('M-128 -48Q-170 -40 -190 -6',4,'#2a4f6e')+'</g>'}
+var GX=[-3880,-3520,-3160,-2800,-2440];
+function fleet(){var s='<g id="fleet"><g id="st2" style="opacity:0">'+site('pond',-1900)+'</g><g id="st3" style="opacity:0">'+site('pipe',-1040)+'</g><g id="gens">';
+ [r1,r2,r3,r4,r5].forEach(function(f,i){var fk=['r1','r2','r3','r4','r5'][i];s+='<ellipse cx="'+GX[i]+'" cy="'+(G+2)+'" rx="110" ry="4" fill="#0e2e4a" opacity=".12"/><g transform="translate('+GX[i]+' '+G+')'+(i>2?' scale(.86)':'')+'">'+f()+D[fk]()+'</g>'});s+='</g>';
+ [['1','흡입형'],['2','파쇄 흡입형'],['3','파쇄 흡입형'],['4','흡입형 · 소형화'],['5','파쇄형 · 소형화']].forEach(function(a,i){s+=genLabel(a[0],a[1],GX[i])});
+ s+='<g id="fleetrobots">'+loaderB(-2040)+loaderS(-1700)+'</g><clipPath id="abg"><rect x="-1800" y="100" width="1800" height="600"/></clipPath><g id="jetg" clip-path="url(#abg)">'+jetbot(-1040)+'</g></g>';return s}
+
+/* ---------- 폐기물 처리 마당: 흡입차 뒤쪽 ---------- */
+var YX=2090;
+function yard(){var c=C.ink,s='<g id="yard" style="opacity:0">';
+ /* 원액 받는 통 */
+ s+='<rect x="2070" y="620" width="46" height="80" fill="#eef1f4" stroke="'+c+'" stroke-width="1"/><path d="M2070 632h46M2070 688h46" stroke="'+c+'" stroke-width=".6"/><path d="M2116 636H2150V612" fill="none" stroke="'+c+'" stroke-width="6" class="sc"/><path d="M2116 636H2150V612" fill="none" stroke="#d6dde3" stroke-width="4" class="sc"/>';
+ /* Screw Decanter */
+ s+='<path d="M2140 700V658H2340V700M2152 700l14-42M2328 700l-14-42" fill="none" stroke="'+c+'" stroke-width="1.200"/><rect x="2130" y="600" width="26" height="46" fill="#cfd7dd" stroke="'+c+'" stroke-width=".9"/><g stroke="'+c+'" stroke-width=".5">'+rep(7,function(i){return '<path d="M2133 '+(606+i*6)+'h20"/>'})+'</g>';
+ s+='<path d="M2156 596H2300L2342 612V634L2300 650H2156z" fill="url(#tk)" stroke="'+c+'" stroke-width="1.200"/><clipPath id="dc"><path d="M2158 598H2300L2340 613V633L2300 648H2158z"/></clipPath><g clip-path="url(#dc)"><g id="scr">'+rep(24,function(i){return '<path d="M'+(2130+i*10)+' 650L'+(2146+i*10)+' 596" stroke="#6f7f8c" stroke-width="2.200" class="sc" opacity=".55"/>'})+'</g></g><path d="M2156 596v54M2300 596v54" stroke="'+c+'" stroke-width=".8"/><rect x="2170" y="582" width="30" height="14" fill="#fff" stroke="'+c+'" stroke-width=".9"/><rect x="2224" y="588" width="60" height="8" fill="#eef1f4" stroke="'+c+'" stroke-width=".7"/>';
+ /* 분리액 */
+ s+='<path d="M2198 650V672" stroke="'+c+'" stroke-width="5" class="sc"/><rect x="2170" y="672" width="58" height="28" fill="#fff" stroke="'+c+'" stroke-width="1"/><rect id="liq" x="2171" y="699" width="56" height="0" fill="#9ec3dc"/>';
+ s+='<g id="ldrop">'+rep(5,function(){return '<circle r="1.700" fill="#6da4c8"/>'})+'</g>';
+ /* Cake 함 */
+ s+='<path d="M2342 628L2376 660H2352L2332 638z" fill="#eef1f4" stroke="'+c+'" stroke-width=".9"/><path d="M2340 700V668H2424V700z" fill="#fff" stroke="'+c+'" stroke-width="1.100"/><path id="cake1" fill="#6a5f51" stroke="#3b352d" stroke-width=".7"/><g id="cdrop">'+rep(6,function(){return '<rect width="6" height="4" rx="1.200" fill="#6a5f51"/>'})+'</g>';
+ /* Filter-Press */
+ s+='<path d="M2480 700V610M2740 700V610M2474 610H2746M2474 620H2746" stroke="'+c+'" stroke-width="1.400" fill="none"/><rect x="2474" y="608" width="16" height="74" fill="#59666f"/><rect x="2730" y="608" width="16" height="74" fill="#59666f"/><path d="M2730 646H2706" stroke="#c9d2d9" stroke-width="6" class="sc"/>';
+ s+='<g id="plates">'+rep(14,function(i){return '<g class="pl"><rect x="0" y="622" width="10" height="56" fill="#cfd7dd" stroke="'+c+'" stroke-width=".8"/><rect x="1" y="632" width="8" height="36" fill="#7b868e"/></g>'})+'</g><rect id="ram" x="0" y="620" width="10" height="60" fill="#59666f" stroke="'+c+'" stroke-width=".8"/>';
+ s+='<path d="M2490 690H2726" stroke="'+c+'" stroke-width="3" class="sc"/><g id="fdrop">'+rep(6,function(){return '<circle r="1.600" fill="#6da4c8"/>'})+'</g><path d="M2486 700V694H2734V700z" fill="#fff" stroke="'+c+'" stroke-width=".8"/>';
+ s+='<g id="slabs">'+rep(5,function(){return '<rect width="10" height="36" fill="#6a5f51" stroke="#3b352d" stroke-width=".5"/>'})+'</g>';
+ s+='<rect x="2436" y="640" width="26" height="60" fill="#eaeef1" stroke="'+c+'" stroke-width=".9"/><circle cx="2449" cy="654" r="6" fill="#fff" stroke="'+c+'" stroke-width=".7"/><path id="pgn" d="M2449 654l3-4" stroke="#b7470f" stroke-width="1"/><circle cx="2443" cy="672" r="2" fill="#7fe0a4"/><circle cx="2455" cy="672" r="2" fill="#e9a23b"/>';
+ return s+'</g>'}
+
+/* 로봇 */
+function robot(){return '<g id="robot"><path id="beam" d=""/><g class="sc" id="rb"><g transform="scale(.52)">'+r5()+d5()+'</g></g></g>'}
+function label(id,txt){return '<g id="'+id+'" style="opacity:0"><path class="ld" fill="none" stroke="'+C.ink+'" stroke-width=".8"/><text class="lt" fill="'+C.ink+'" font-weight="600" paint-order="stroke" stroke="#fff" stroke-width="3.500" stroke-linejoin="round">'+txt+'</text></g>'}
+svg.innerHTML='<defs><linearGradient id="cyl" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#9eabb6"/><stop offset=".1" stop-color="#d3dae0"/><stop offset=".3" stop-color="#f9fafb"/><stop offset=".58" stop-color="#eaeef1"/><stop offset=".86" stop-color="#bcc7cf"/><stop offset="1" stop-color="#8e9ca8"/></linearGradient><linearGradient id="rf" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#c3ccd4"/><stop offset=".35" stop-color="#f4f6f8"/><stop offset="1" stop-color="#b6c1ca"/></linearGradient><linearGradient id="inw" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#b3bec7"/><stop offset=".22" stop-color="#dfe4e9"/><stop offset=".5" stop-color="#eef1f4"/><stop offset=".78" stop-color="#dfe4e9"/><stop offset="1" stop-color="#aab6c0"/></linearGradient><linearGradient id="col" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#aeb9c2"/><stop offset=".45" stop-color="#f4f6f8"/><stop offset="1" stop-color="#97a5b0"/></linearGradient><linearGradient id="in" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#d6dde3"/><stop offset="1" stop-color="#f0f3f5"/></linearGradient><linearGradient id="tk" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#f6f8f9"/><stop offset=".5" stop-color="#e7ecf0"/><stop offset="1" stop-color="#b8c3cc"/></linearGradient><pattern id="sp" width="9" height="9" patternUnits="userSpaceOnUse"><rect width="9" height="9" fill="'+C.sl+'"/><circle cx="2" cy="3" r=".9" fill="#6f665a"/><circle cx="6.500" cy="7" r=".8" fill="#3b352d"/></pattern><linearGradient id="alu" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#eef1f4"/><stop offset=".5" stop-color="#c7ced4"/><stop offset="1" stop-color="#9aa6af"/></linearGradient><linearGradient id="gls" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".32"/><stop offset=".4" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".24"/></linearGradient><linearGradient id="slg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#a39480" stop-opacity=".55"/><stop offset=".3" stop-color="#50493f" stop-opacity="0"/><stop offset="1" stop-color="#191612" stop-opacity=".6"/></linearGradient><linearGradient id="lmp" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fff6d0" stop-opacity=".5"/><stop offset="1" stop-color="#fff6d0" stop-opacity="0"/></linearGradient><radialGradient id="flr" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff6d0" stop-opacity=".55"/><stop offset="1" stop-color="#fff6d0" stop-opacity="0"/></radialGradient><clipPath id="shellc"><rect id="shellr" x="1100" y="150" width="760" height="600"/></clipPath><clipPath id="tin"><rect x="1160" y="222" width="580" height="468"/></clipPath></defs>'
+ +'<g id="far">'+far()+'</g>'
+ +'<path d="M-5000 '+G+'H3600" stroke="'+C.ink+'" stroke-width="1.2"/>'+rep(240,function(i){return '<path d="M'+(-4400+i*34)+' '+(G+1)+'l-9 9" stroke="#c6cfd6" stroke-width=".7"/>'})+'<rect x="-700" y="'+G+'" width="3700" height="30" fill="#f3f4f6"/>'+rep(30,function(i){return '<path d="M'+(-700+i*130)+' '+G+'V'+(G+30)+'" stroke="#dfe3e7" stroke-width="1"/>'})+fleet()
+ +'<g id="pipeo">'+pipeOut()+'</g>'+tankBack()+'<g clip-path="url(#tin)"><path id="beam2" fill="#fff0b8" opacity=".16"/><path id="sludge" fill="url(#sp)" stroke="#2b2620" stroke-width=".9"/><path id="sludge2" fill="url(#slg)"/><g id="mote"></g><g id="suck"></g><path id="jets" fill="none" stroke="'+C.brand+'" stroke-width="1.300" stroke-dasharray="7 6" stroke-linecap="round"/></g>'
+ +'<path id="rampi" d="M1160 '+MB+'L1216 '+FL+'" stroke="'+C.ink+'" stroke-width="2.500" />'+'<path id="rampo" d="M1046 '+G+'L1118 '+MB+'H1160" fill="none" stroke="'+C.ink+'" stroke-width="2.500" />'
+ +'<g id="trl"><rect x="16" y="672" width="200" height="8" fill="#59666f" stroke="'+C.ink+'" stroke-width=".8"/><path d="M196 676H232" stroke="#26313a" stroke-width="3" class="sc"/>'+wheel(86,684,15,'tw')+wheel(130,684,15,'tw')+'</g>'+car()+kit()+cones()+yard()+truck()
+ +'<path id="hosep" fill="none" stroke="#26313a" stroke-width="6.500" class="sc" stroke-linecap="round"/><path id="hosef" fill="none" stroke="#7f97ab" stroke-width="1.600" class="sc" stroke-dasharray="3 12" stroke-linecap="round"/>'
+ +robot()+'<g id="cutg">'+tankCut()+'</g>'+flange()+shell()+'<path id="life" fill="none" stroke="#d9591a" stroke-width="1.300"/><path id="airl" fill="none" stroke="#39454e" stroke-width="1.300"/><g id="men"></g><g id="spray"></g>'
+ +'<path id="sig" fill="none" stroke="'+C.brand+'" stroke-width="1.300" stroke-dasharray="3 6"/><circle id="sigd" r="4" fill="'+C.brand+'"/>'
+ +'<path id="wipe" stroke="'+C.brand+'" stroke-width="1.500"/>'
+ +label('lTruck','Vacuum Car(흡입차)')+label('lCar','제어 차량')+label('lRobot','Robot')+label('lJet','Jet Nozzle')+label('a1','현장 적용 가능성 검토')+label('a2','사전 Test')+label('a3','외부에서 잔여 물질 제거')+label('a4','Robot 투입')+label('a5','CCTV 화면으로 내부 확인')+label('a6','원격 조정')+label('a7','내부 최종 잔여물 제거')+label('g1','흡입')+label('g2','파쇄')+label('g3','파쇄')+label('g3b','흡입')+label('g4','흡입 · 소형화')+label('g5a','방폭 카메라')+label('g5b','전면부 Jet Nozzle')+label('g5c','체인형 바퀴')+label('g5d','Aluminum Body')+label('g5e','유압 구동')+label('rm1','슬러지 (위험 물질)')+label('rm3','치운 바닥')+label('rm4','고압수')+label('rm5','남은 잔여물')+label('w1','원액 투입')+label('w2','원심분리')+label('w3','Cake 배출')+label('w4','분리액 배출')+label('w5','여과판 압착')+label('w6','여과액 배출')+label('w7','Cake 탈거');
+(function(){var ns=NS;function gl(root){if(!root)return;[].slice.call(root.querySelectorAll('rect,path,ellipse')).forEach(function(n){var f=n.getAttribute('fill');if(!f||f==='none'||f.indexOf('url')===0||n.id||n.classList.contains('rw')||n.classList.contains('lug'))return;var op=n.getAttribute('opacity');if(op)return;var b;try{b=n.getBBox()}catch(e){return}if(b.width*b.height<140||b.width<7||b.height<5)return;var c=n.cloneNode(false);c.removeAttribute('class');c.removeAttribute('stroke');c.removeAttribute('stroke-width');c.setAttribute('fill','url(#gls)');c.setAttribute('pointer-events','none');n.parentNode.insertBefore(c,n.nextSibling)})}
+(innerWidth<=820?['gens','fleetrobots','jetg']:['gens','fleetrobots','jetg','truck','car','robot','yard']).forEach(function(i){gl(E(i))});
+var gv=E('gens').parentNode;var d=document.createElementNS(ns,'g');d.id='fleetuse';var u=document.createElementNS(ns,'use');u.setAttribute('href','#gens');var u2=document.createElementNS(ns,'use');u2.setAttribute('href','#fleetrobots');var u3=document.createElementNS(ns,'use');u3.setAttribute('href','#jetg');d.appendChild(u);d.appendChild(u2);d.appendChild(u3);var ds=svg.querySelector('defs');ds.appendChild(d)})();
+var $={};['truck','tkg','lev','levb','airl','spray','camS','camD','cam2','cam3','beam','truck','car','robot','shellr','wipe','sludge','hosep','hosef','stain','sig','sigd','jets','rampi','rampo','cones','monbar','suck','shell','far'].forEach(function(k){$[k]=E(k)});
+var men=E('men');
+var P1=Man(men,{mask:true,tools:[['clip','b',T_CLIP],['pen','f',T_PEN]]}),P2=Man(men,{mask:true,tools:[['det','f',T_DET]]}),P5=Man(men,{mask:true,tools:[['rad','b',T_RAD]]}),P3=Man(E('op'),{tools:[['joy','f',T_JOY]]}),P4=Man(men,{scba:true,tools:[['lance','f',T_LANCE]]});
+var sdrops='';for(var i=0;i<16;i++)sdrops+='<circle r="1" fill="#7aa6c6"/>';$.spray.innerHTML=sdrops;var drops=[].slice.call($.spray.children);
+var mm='';for(var mi=0;mi<12;mi++)mm+='<circle r="1.200" fill="#fff" opacity=".55"/>';E('mote').innerHTML=mm;
+var dets=[].slice.call(svg.querySelectorAll('.det'));var camD=[].slice.call($.camD.children),rec=svg.querySelector('.rec');
+var lugs=[].slice.call(svg.querySelectorAll('.lug'));var tws=[].slice.call(svg.querySelectorAll('.tw')),rws=[].slice.call(svg.querySelectorAll('.rw'));
+var sq='';for(var i=0;i<14;i++)sq+='<circle r="'+(1.4+i%3*.7)+'" fill="#2b2620"/>';$.suck.innerHTML=sq;var dots=[].slice.call($.suck.children);
+
+/* ---------- 카메라 ---------- */
+/* t, 초점 x y, 폭 w, 화면 안 초점 위치 sx sy, 휴대폰 mx my mw */
+var K=[[-3.6,-3160,520,2720,.675,.55,-3160,590,1900],[-3.1,-3160,520,2720,.675,.55,-3160,590,1900],[-3.0,-3160,600,540,.675,.5,-3160,670,350],[-2.5,-3160,600,540,.675,.5,-3160,670,350],[-2.2,-1880,560,1100,.67,.55,-1880,590,720],[-.6,-1880,560,1100,.67,.55,-1880,590,720],
+[.05,1320,420,1500,.66,.5,1450,490,980],[.6,1320,420,1500,.66,.5,1450,490,980],
+[1.05,520,585,1180,.66,.54,560,590,720],[1.22,520,585,1180,.66,.54,560,590,720],[1.42,1040,600,500,.64,.48,1050,610,380],[1.7,1040,600,480,.64,.48,1050,610,380],
+[2.1,1000,600,500,.64,.48,1010,615,420],[2.55,1000,600,470,.64,.48,1010,615,420],
+[2.92,1070,595,580,.64,.48,1090,610,470],[3.15,1070,595,580,.64,.48,1090,610,470],[3.38,1365,600,640,.68,.48,1350,600,420],[3.65,1560,600,640,.68,.48,1540,600,420],
+[3.95,335,625,420,.64,.47,345,610,290],[4.3,330,625,400,.64,.47,345,615,270],
+[4.65,1000,470,2600,.66,.55,1000,500,1720],[5.0,1000,470,2600,.66,.55,1000,500,1720],
+[5.35,1500,545,800,.6,.54,1490,520,680],[5.85,1510,540,780,.6,.54,1510,510,680],
+[6.0,1060,610,420,.66,.5,1060,630,300],[6.16,1060,610,420,.66,.5,1060,630,300],[6.36,1350,620,400,.68,.5,1360,630,310],[6.7,1580,620,400,.68,.5,1580,630,310],
+[7.2,2200,620,700,.66,.5,2200,620,470],[7.85,2240,620,700,.66,.5,2230,620,470],
+[8.15,2640,620,620,.62,.5,2600,620,470],[8.5,2640,620,620,.62,.5,2600,620,470],
+[8.8,2380,560,1300,.66,.5,2300,600,780],[9.15,2380,560,1300,.66,.5,2300,600,780],
+[9.5,1320,420,1500,.66,.5,1450,490,980],[12,1320,420,1500,.66,.5,1450,490,980]];
+function cam(t){var i=0;while(i<K.length-2&&t>K[i+1][0])i++;var a=K[i],b=K[i+1],k=ss(a[0],b[0],t);return a.map(function(v,n){return L(v,b[n],k)})}
+
+/* ---------- 슬러지 ---------- */
+function nz(x){return 8*Math.sin(x*.031)+5*Math.sin(x*.083+1.3)+2.500*Math.sin(x*.21)}
+function sludgePath(lv,front,rest){var d='M1158 '+FL;for(var x=1158;x<=1742;x+=6){var h=x>front?(lv<20?lv+nz(x)*.22:lv+nz(x)):(rest+nz(x)*.14);if(x>front&&x<front+64)h=L(rest,h,ss(front,front+64,x));d+='L'+x+' '+Math.max(FL-h,FL-200).toFixed(1)}return d+'L1742 '+FL+'z'}
+
+var rPath=function(x){ /* 로봇 바닥 궤적: 경사판 → 맨홀 → 안 경사판 → 바닥 */
+ if(x<1046)return [x,G,0];if(x<1118)return [x,L(G,MB,(x-1046)/72),-Math.atan2(28,72)];if(x<1160)return[x,MB,0];if(x<1216)return[x,L(MB,FL,(x-1160)/56),Math.atan2(18,56)];return[x,FL,0]};
+
+function hoseD(rx,ry,ang,atTruck){var hx=rx-62*Math.cos(ang)+0,hy=ry-30;var sx=912,sy=635;
+ if(rx<1040)return 'M'+sx+' '+sy+'C'+(sx+24)+' '+(sy+60)+' '+(hx-70)+' '+(G-3)+' '+(hx-30)+' '+(G-3)+'S'+hx+' '+(hy+18)+' '+hx+' '+hy;
+ var mx=Math.min(hx,1135);return 'M'+sx+' '+sy+'C'+(sx+24)+' '+(sy+60)+' 980 '+(G-3)+' 1030 '+(G-3)+'S1100 '+(MB-14)+' 1135 '+(MB-14)+(hx>1135?'S'+(hx-46)+' '+Math.min(FL-5,hy+40)+' '+hx+' '+hy:'')}
+
+var vw=0,vh=0,ptr=false,now=0;
+function setLabel(id,x,y,dx,dy,o,u){var g=E(id);if(o<=.01){g.style.opacity=0;return}g.style.opacity=o;var fs=(ptr?13:15)*u*(window.__lblScale||1);g.querySelector('.ld').setAttribute('d','M'+x+' '+y+'L'+(x+dx*u)+' '+(y+dy*u)+'h'+(dx<0?-14:14)*u);var t=g.querySelector('.lt');t.setAttribute('font-size',fs);t.setAttribute('x',x+(dx+(dx<0?-18:18))*u);t.setAttribute('y',y+(dy+4.500)*u);t.setAttribute('text-anchor',dx<0?'end':'start')}
+var layers=[].slice.call(document.querySelectorAll('[data-a]')).map(function(el){return{el:el,a:el.dataset.a.split(',').map(Number)}});
+var STEPS=[['개발한 로봇',-9,.75],['현장 확인',.95,1.75],['밖에서 먼저 빼내기',1.75,2.65],['로봇 먼저 투입',2.65,5.1],['로봇이 안을 세척',5.1,5.95],['유해성 저감 후 최종 클리닝',5.95,6.8],['폐기물 처리',6.8,9.3]];
+var rail=E('rail');STEPS.forEach(function(s,i){var b=document.createElement('button');b.type='button';b.innerHTML='<u></u><em>'+(i?'0'+i:'·')+'</em>'+s[0];b.onclick=function(){go(s[1]+.2)};rail.appendChild(b);s.b=b;s.u=b.querySelector('u')});
+
+var phNow=null,ePick=null,eK=0,eRows=[].slice.call(document.querySelectorAll('.er'));eRows.forEach(function(b,i){b.onclick=function(){ePick=i}});
+var gPick=null,gShow=0,gX=GX[0],gRows=[].slice.call(document.querySelectorAll('.gr:not(.er)'));gRows.forEach(function(b,i){b.onclick=function(){gPick=i}});
+function render(t,time){
+ var SW=stage.clientWidth,W=svg.clientWidth,H=svg.clientHeight;if(!W||!H)return;var c=cam(t),w,cx,cy,sx,sy;
+ ptr=SW<=820;if(ptr){w=c[8];cx=c[6];cy=c[7];sx=.5;sy=.62}else{w=c[3];cx=c[1];cy=c[2];sx=c[4];sy=c[5]}
+ var eh=ss(-2.4,-2.2,t)*(1-ss(-.6,-.4,t));var ei=ePick!==null?ePick:Math.floor(time/3600)%2;if(!isFinite(ei))ei=0;if(fixed!==null)eK=ei;else eK+=(ei-eK)*.07;
+ if(eh>0){var ex=ptr?[-1880,-1020]:[-1880,-1020],ey=ptr?[630,620]:[560,550],ew=ptr?[720,480]:[1100,620];cx=L(cx,L(ex[0],ex[1],eK),eh);cy=L(cy,L(ey[0],ey[1],eK),eh);w=L(w,L(ew[0],ew[1],eK),eh)}
+ eRows.forEach(function(b,i){b.classList.toggle('on',i===ei)});
+ var gh=ss(-3.05,-2.9,t)*(1-ss(-2.6,-2.45,t));var gi=gPick!==null?gPick:Math.floor(time/3200)%5;if(!isFinite(gi))gi=0;gShow=gi;if(fixed!==null)gX=GX[gi];else gX+=(GX[gi]-gX)*.07;cx=L(cx,gX,gh);
+ if(window.__co){cx=__co[0];cy=__co[1];w=__co[2];sx=.5;sy=.5}
+ var x0=cx-sx*w;if(!ptr&&!window.__co){x0+=(1-W/SW)*w;w*=W/SW}var h=w*H/W,y0=cy-sy*h,u=w/W;svg.setAttribute('viewBox',x0.toFixed(2)+' '+y0.toFixed(2)+' '+w.toFixed(2)+' '+h.toFixed(2));
+ /* 차량 들어오기 · 나가기 */
+ var arr=ss(.75,1.2,t),lea=ss(6.9,7.2,t),arr2=ss(.8,1.15,t);
+ var dxT=-1500*(1-arr)+1130*lea,dxC=-1200*(1-arr2)-1300*ss(6.95,7.25,t);
+ $.truck.setAttribute('transform','translate('+dxT+' 0)');var vv=t<.7?0:1;$.truck.style.opacity=vv*(1-ss(9.15,9.35,t));$.car.style.opacity=vv;E('trl').style.opacity=vv;E('trl').setAttribute('transform','translate('+dxC+' 0)');$.car.setAttribute('transform','translate('+dxC+' 0)');
+ var rt=(dxT*.22)%360;tws.forEach(function(g){g.setAttribute('transform','rotate('+rt+')')});
+ var con=ss(1.05,1.5,t)*(1-ss(6.95,7.15,t));$.cones.style.opacity=con;
+ /* 탱크 열림 */
+ var op=ss(2.72,3.12,t)*(1-ss(6.72,6.95,t));var wx=1140+op*640;$.shellr.setAttribute('x',wx);$.shell.style.display=op>.995?'none':'';
+ $.wipe.setAttribute('d','M'+wx+' 200V'+G);$.wipe.style.opacity=op>.01&&op<.99?1:0;
+ var ins=op>.01;E('cutg').style.opacity=ins?1:0;$.stain.style.opacity=ins?L(.24,.02,ss(5.25,5.85,t)):0;
+ /* 로봇 이동 */
+ var rx;if(t<2.5)rx=125+dxC;else if(t<2.72)rx=L(115,980,ss(2.5,2.72,t));else if(t<3.2)rx=L(980,1250,ss(2.72,3.2,t));else if(t<4.6)rx=L(1250,1660,lin(3.2,4.6,t));else if(t<5.1)rx=L(1660,1250,ss(4.6,5.1,t)*0)+0;else rx=0;
+ if(t>=3.2&&t<5.1){rx=L(1250,1650,ss(3.2,4.9,t))}
+ if(t>=5.1&&t<5.95){rx=L(1650,1640,lin(5.1,5.2,t));rx=L(1650,1480,ss(5.25,5.9,t))}
+ if(t>=5.95){rx=L(1480,870,ss(5.95,6.3,t))}
+ 
+ var rp=rPath(rx),ang=rp[2],rv=ss(.7,.8,t)*(1-ss(6.2,6.32,t));
+ if(t<2.5)rp=[125+dxC,672,0];$.robot.setAttribute('transform','translate('+rp[0]+' '+rp[1]+') rotate('+(rp[2]*180/Math.PI)+')');$.beam.style.opacity=0;$.robot.style.opacity=rv;
+ rws.forEach(function(g){g.setAttribute('transform','rotate('+(rx*2.200%360)+')')});lugs.forEach(function(g){g.style.strokeDashoffset=-rx*.7});
+ /* 경사판 */
+ var rmp=ss(2.6,2.78,t)*(1-ss(6.2,6.32,t));$.rampo.style.opacity=rmp;$.rampi.style.opacity=rmp*op;
+ /* 슬러지 */
+ var level=58,front=rx+58,rest=9;
+ if(t<3.2)front=1140;if(t>=3.2&&t<5.1){}
+ if(t>=5.1){front=2000;rest=L(9,3.5,ss(5.25,5.85,t))*(1-ss(6.2,6.6,t)*.75)}
+ if(t>=6.8)rest=2;
+ if(t>=6.22&&t<6.8){var wxs=L(1205,1610,ss(6.28,6.72,t));level=7;front=wxs+58;rest=.5}
+ var sdp=sludgePath(level,front,rest);$.sludge.setAttribute('d',sdp);$.sludge.style.opacity=ins?1:0;E('sludge2').setAttribute('d',sdp);E('sludge2').style.opacity=ins?1:0;var inR=ins&&rp[0]>1190&&t<5.95;var bm=E('beam2');bm.style.display=inR?'':'none';if(inR){var lx=rp[0]+26,ly=rp[1]-54;bm.setAttribute('d','M'+lx+' '+ly+'L'+(lx+260)+' '+(ly-70)+'L'+(lx+260)+' '+(FL+6)+'L'+(lx+18)+' '+(ly+36)+'z')}var mg=E('mote');mg.style.display=ins?'':'none';if(ins)[].forEach.call(mg.children,function(c,i){var q=(time*.00004+i*.083)%1;c.setAttribute('cx',1170+((i*97)%560)+Math.sin(time*.0004+i)*14);c.setAttribute('cy',L(640,300,q))});
+ /* 빨려 들어가는 덩어리 */
+ var sk=(t>3.22&&t<4.9)?1:0;$.suck.style.opacity=sk;
+ if(sk)dots.forEach(function(d,i){var f=((time*.0016+i*.137)%1),ax=rx+98-4*i%40,ay=FL-14-(i*7)%34,bx=rx+62,by=FL-10;d.setAttribute('cx',L(ax,bx,f*f));d.setAttribute('cy',L(ay,by,f))});
+ /* 시간(실시간으로 계속 움직임) */
+ var s1=time*.001;
+ /* P1: 검토 → 호스 잡기 → 호스 넣기 → 공기 호스 지키기 */
+ var p1x,p1=stand(),p1o=ss(1.0,1.2,t)*(1-ss(6.82,6.98,t))+ss(7.2,7.3,t)*(1-ss(9.1,9.25,t)),hand=null;
+ if(t<1.75){var mv=lin(1.0,1.28,t);p1x=L(950,1040,mv);var wr=Math.sin(s1*.8)>.1;
+  p1=mv<1?walk(p1x*.17):{lean:-3,hip:[0,-47],footF:[9,0],footB:[-7,0],handB:[17,-62],handF:wr?[20+Math.sin(s1*7)*2.5,-65+Math.sin(s1*11)*1]:[36,-92+Math.sin(s1*2)*2],head:wr?14:-20,tool:'clip',tool2:wr?'pen':'',toolRot:wr?0:10};}
+ else if(t<2.05){p1x=L(1040,1068,lin(1.75,2.05,t));p1=walk(p1x*.17);}
+ else if(t<2.72){p1x=1068;var w=Math.sin(s1*9)*1.2;p1={lean:18,hip:[-4,-38],footF:[17,0],footB:[-21,0],handF:[30+w,-38+w],handB:[20+w,-36+w],head:-4,toeB:-8};hand=[p1x+30+w,G-38+w];}
+ else if(t<2.98){p1x=L(1068,1006,lin(2.72,2.98,t));p1=lin(2.72,2.98,t)<1?walk(p1x*.17):stand();}
+ else if(t<5.95){p1x=1006;var f=s1*2.2,pu=Math.sin(f);p1={lean:24+pu*5,hip:[-6,-34],footF:[16,0],footB:[-24,0],handF:[34+pu*9,-34+pu*3],handB:[26-pu*9,-32-pu*3],head:-8,toeB:-10};hand=[p1x+30,G-33];}
+ else if(t>7){p1x=2410;p1={lean:5,hip:[0,-47],footF:[9,0],footB:[-8,0],handF:[28,-54+Math.sin(s1*1.6)],handB:[14,-46],head:-6+Math.sin(s1*.7)*7};}
+ else{p1x=L(1006,985,lin(5.95,6.15,t));p1=lin(5.95,6.15,t)<1?walk(p1x*.17):{lean:12,hip:[-3,-40],footF:[15,0],footB:[-16,0],handF:[28,-52],handB:[20+Math.sin(s1*1.5),-44],head:-3+Math.sin(s1*.7)*6};}
+ P1.g.style.display=p1o>.01?'':'none';if(p1o>.01)P1.set(p1x,G,false,p1);P1.g.style.opacity=p1o;
+ /* P2: 사전 Test → 흡입차 조작 → 폐기물 처리 */
+ var p2x,p2f=false,p2=stand(),p2o=ss(1.05,1.25,t)*(1-ss(6.82,6.95,t))+ss(7.2,7.3,t)*(1-ss(9.1,9.25,t));
+ if(t<1.75){var m2=lin(1.05,1.32,t);p2x=L(1000,1086,m2);p2=m2<1?walk(p2x*.17):{lean:6,hip:[0,-46],footF:[10,0],footB:[-8,0],handF:[20,-58+Math.sin(s1*1.3)*1.5],handB:[6,-52],head:8+Math.sin(s1*.9)*5,tool:'det',toolRot:0};}
+ else if(t<2.15){var m3=lin(1.75,2.15,t);p2x=L(1086,940,m3);p2f=m3>0;p2=walk(p2x*.17);}
+ else if(t>7){p2x=2124;p2={lean:6,hip:[0,-47],footF:[9,0],footB:[-8,0],handF:[24,-82+Math.sin(s1*1.4)*2],handB:[14,-46],head:-12+Math.sin(s1*.6)*5};}
+ else{p2x=940;p2f=true;var lv=Math.sin(s1*1.6);p2={lean:5,hip:[0,-47],footF:[9,0],footB:[-8,0],handF:[27+lv,-82+lv*2],handB:[14,-48],head:-14+Math.sin(s1*.6)*6};
+  $.lev.setAttribute('d','M903 616L'+(903+lv*3)+' 607');$.levb.setAttribute('cx',903+lv*3);}
+ P2.g.style.display=p2o>.01?'':'none';if(p2o>.01)P2.set(p2x,G,p2f,p2);P2.g.style.opacity=p2o;
+ /* P5: 맨홀 옆 감시 · 무전. Final Cleaning 때는 생명줄 잡기 */
+ var p5o=ss(2.3,2.5,t)*(1-ss(6.82,6.98,t)),p5x=t<6.2?972:L(972,1060,lin(6.2,6.32,t)),p5;
+ if(t>=6.2&&t<6.32)p5=walk(p5x*.17);
+ else if(t>=6.32){p5={lean:14,hip:[-3,-42],footF:[15,0],footB:[-17,0],handF:[28,-58],handB:[20,-50+Math.sin(s1*1.5)],head:-4}}
+ else{var tk=Math.sin(s1*.55)>.1;p5={lean:2,hip:[0,-47],footF:[8,0],footB:[-8,0],handF:[8,-46],handB:tk?[10,-74]:[9,-54],head:tk?4:-10,tool:'rad'}}
+ P5.g.style.display=p5o>.01?'':'none';if(p5o>.01)P5.set(p5x,G,false,p5);P5.g.style.opacity=p5o;
+ E('life').style.opacity=wi*(inside?1:0);if(inside)E('life').setAttribute('d','M'+(p5x+28)+' '+(G-58)+'Q1110 '+(G-58)+' 1118 '+(MB-34)+'L1160 '+(MB-30)+'Q1220 '+(FL-14)+' '+(wx2-30)+' '+(FL-12)+'Q'+(wx2-14)+' '+(FL-20)+' '+(wx2-12)+' '+(FL-64));
+ var ko=ss(1.3,1.5,t)*(1-ss(6.82,7,t));E('kit').style.opacity=ko;E('kit').style.display=ko>.01?'':'none';E('fan').setAttribute('transform','rotate('+(s1*300%360)+')');E('gasl').setAttribute('fill',Math.sin(s1*3)>0?'#7fe0a4':'#2f8f58');
+ /* P3: 제어 차량 안 원격 조정 */
+ var jy=Math.sin(s1*2.2),jx=Math.sin(s1*1.3+1);
+ P3.set(326,656,true,{lean:-2,hip:[-6,-30],footF:[16,0],footB:[10,0],handF:[19,-37],handB:[11,-38],head:-10+Math.sin(s1*.5)*7,tool:'joy',toolRot:0},.8);
+ var ps=lin(1250,1650,rx),lvl=L(14,5,ps);$.camS.setAttribute('d','M0 28L12 '+(16-lvl*.2)+'Q21 '+(14+Math.sin(s1*2)*1.2)+' 30 '+(16-lvl*.2)+'L42 28z');
+ camD.forEach(function(r,i){var q=(s1*.7+i*.33)%1;r.setAttribute('x',L(10+i*10,21,q));r.setAttribute('y',L(14,23,q))});$.camS.style.opacity=t<5.2?1:.25;rec.style.opacity=Math.sin(s1*4)>0?1:.25;
+ var wv='M293 586';for(var ix=0;ix<=8;ix++)wv+='L'+(293+ix*2.900)+' '+(585+Math.sin(ix+s1*3)*3.500);$.cam2.setAttribute('d',wv);$.cam3.setAttribute('width',8+Math.abs(Math.sin(s1*.8))*12);
+ dets.forEach(function(d){d.setAttribute('fill',Math.sin(s1*5)>0?'#bff0d0':'#8fd8ab')});
+ /* P4: 공기호흡기 작업자 — 잔여물을 밀어내며 전진 */
+ var inside=t>=6.22,wi=ss(5.96,6.04,t)*(1-ss(6.16,6.2,t))+ss(6.22,6.28,t)*(1-ss(6.72,6.9,t)),wx2=inside?L(1205,1610,ss(6.28,6.72,t)):1068,sw=Math.sin(s1*3);
+ var p4=inside?walk(wx2*.11):{lean:2,hip:[0,-47],footF:[9,0],footB:[-8,0],handF:[17,-82+Math.sin(s1*2)*1.5],handB:[13,-78+Math.sin(s1*2)*-1.5],head:-4};
+ if(inside){p4.lean=16;p4.hip=[-3,-41];p4.handF=[25,-42+sw*2];p4.handB=[14,-38+sw*2];p4.head=8;p4.tool='lance';p4.toolRot=20+sw*7}
+ P4.g.style.display=wi>.01?'':'none';if(wi>.01)P4.set(wx2,inside?FL:G,false,p4);P4.g.style.opacity=wi;
+ var sp=inside&&wi>.5;$.spray.style.opacity=sp?1:0;if(sp)drops.forEach(function(d,i){var q=(s1*1.6+i*.0625)%1,a=.26+.32*Math.sin(i*2.3);d.setAttribute('cx',wx2+58+q*48*Math.cos(a));d.setAttribute('cy',FL-22+sw*3+q*q*20+q*(i%5-2)*2)});
+ /* 호스 · 흐름 */
+ var hv=ss(1.95,2.15,t)*(1-ss(6.9,7.0,t));var hd;
+ if(hand)hand=hand;
+ if(t<2.72){var hh=hand||[1098,G-38];hd='M914 635C936 690 '+(hh[0]-80)+' '+(G-4)+' '+(hh[0]-34)+' '+(G-5)+'Q'+(hh[0]-8)+' '+(G-8)+' '+hh[0]+' '+hh[1]+'Q'+(hh[0]+8)+' '+(hh[1]-3)+' 1112 '+(MB-22);}
+ else if(rx<1120||!hand)hd=hoseD(rp[0],rp[1],ang);
+ else{var rrx=rp[0]-62*Math.cos(ang),rry=rp[1]-30;hd='M914 635C936 690 '+(hand[0]-70)+' '+(G-4)+' '+(hand[0]-30)+' '+(G-5)+'Q'+(hand[0]-6)+' '+(G-6)+' '+hand[0]+' '+hand[1]+'Q'+(hand[0]+50)+' '+(MB-34)+' 1112 '+(MB-16)+'L1135 '+(MB-14)+'S'+(rrx-46)+' '+Math.min(FL-5,rry+40)+' '+rrx+' '+rry;}
+ $.hosep.setAttribute('d',hd);$.hosef.setAttribute('d',hd);$.hosep.style.opacity=hv;
+ var flowOn=(t>2.15&&t<2.72)||(t>3.2&&t<4.95);$.hosef.style.opacity=hv*(flowOn?1:0);$.hosef.style.strokeDashoffset=(time*.03+t*160)%60;
+ /* 공기 호스 */
+ $.airl.style.opacity=wi;if(wi>.01){$.airl.style.opacity=wi*(inside?1:0);$.airl.setAttribute('d','M'+(p1x+28)+' '+(G-52)+'Q1090 '+(G-34)+' 1118 '+(MB-20)+'L1160 '+(MB-16)+'Q1200 '+(FL-4)+' '+(wx2-40)+' '+(FL-3)+'Q'+(wx2-18)+' '+(FL-3)+' '+(wx2-20)+' '+(FL-38))}
+ /* 폐기물 마당 */
+ var yd=ss(6.95,7.15,t)*(1-ss(9.2,9.45,t));var ye=E('yard');ye.style.opacity=yd;ye.style.display=yd>.01?'':'none';E('pipeo').style.opacity=1-ss(6.9,7.1,t)*(1-ss(9.3,9.5,t));
+ if(yd>.01){var ph=s1;E('scr').setAttribute('transform','translate('+((ph*60)%10)+' 0)');
+  var dcOn=t>7.15;var lq=lin(7.2,8,t)*26;E('liq').setAttribute('y',699-lq);E('liq').setAttribute('height',lq);
+  [].forEach.call(E('ldrop').children,function(d,i){var q=(ph*1.4+i*.2)%1;d.setAttribute('cx',2198);d.setAttribute('cy',L(652,696-lq,q));d.style.opacity=dcOn?1:0});
+  var ck=lin(7.25,8,t);E('cake1').setAttribute('d','M2346 700Q2360 '+(700-ck*12)+' 2382 '+(700-ck*30)+'Q2404 '+(700-ck*12)+' 2418 700z');
+  [].forEach.call(E('cdrop').children,function(d,i){var q=(ph*1.1+i*.167)%1;d.setAttribute('x',L(2342,2372+i*3,q));d.setAttribute('y',L(638,700-ck*26,q*q))});
+  var pc=(ph*.28)%1,sq=pc<.45?ss(0,.2,pc):1-ss(.45,.62,pc);var gap=L(16,8.500,sq),px0=2496,pls=E('plates').children;for(var i2=0;i2<pls.length;i2++)pls[i2].setAttribute('transform','translate('+(px0+i2*gap)+' 0)');E('ram').setAttribute('x',px0+pls.length*gap);
+  E('pgn').setAttribute('d','M2449 654l'+(sq*5-1)+' '+(-4+sq*2));
+  [].forEach.call(E('fdrop').children,function(d,i){var q=(ph*1.3+i*.17)%1;d.setAttribute('cx',px0+18+i*20);d.setAttribute('cy',L(678,690,q));d.style.opacity=sq>.8?1:0});
+  [].forEach.call(E('slabs').children,function(d,i){var o=pc>.62&&pc<.97;var q=lin(.62+i*.05,.76+i*.05,pc);d.setAttribute('x',px0+24+i*gap*2.3);d.setAttribute('y',L(632,658,q*q));d.style.opacity=o?1-lin(.86,.97,pc):0});
+ }
+ /* 로봇 소개 */
+ var fl=E('fleet');fl.style.opacity=1-ss(-.3,-.1,t);fl.style.display=t>.1?'none':'';
+ E('st2').style.opacity=eh*(1-eK);E('st3').style.opacity=eh*eK;
+ if(t<.1){[].forEach.call(svg.querySelectorAll('.dr'),function(g){g.setAttribute('transform','rotate('+(s1*140%360)+')')});
+  var aa=Math.sin(s1*.9)*.5+.5;[].forEach.call(svg.querySelectorAll('.arm'),function(g){g.setAttribute('transform','rotate('+(-(aa*14)+5)+' '+g.dataset.pv+')')});
+  [].forEach.call(svg.querySelectorAll('.bkt'),function(g,i){g.setAttribute('transform',(i?'translate(80 -50)':'translate(122 -74)')+' rotate('+(aa*24-12)+')')});
+  [].forEach.call(svg.querySelectorAll('.jt'),function(g){g.style.strokeDashoffset=-(time*.06)%13});
+  [].forEach.call(svg.querySelectorAll('.glab'),function(g){var ls=window.__lblScale||1;g.setAttribute('font-size',15*u*ls);g.setAttribute('font-weight',700);g.setAttribute('y',G+26*u*ls);g.firstChild.setAttribute('x',g.dataset.x)});[].forEach.call(svg.querySelectorAll('.glab2'),function(g){var ls2=window.__lblScale||1;g.setAttribute('font-size',13*u*ls2);g.setAttribute('y',G+45*u*ls2)});}
+ function gv(i){return i===gShow?gh*(Math.abs(gX-GX[i])<30?1:0):0}gRows.forEach(function(b,i){b.classList.toggle('on',i===gShow)});
+ var gx=GX;setLabel('g1',gx[0]+100,G-56,14,-44,gv(0),u);setLabel('g2',gx[1]+100,G-48,10,-54,gv(1),u);setLabel('g3',gx[2]+96,G-34,8,-66,gv(2),u);setLabel('g3b',gx[2]+50,G-74,-16,-50,gv(2),u);setLabel('g4',gx[3]-30,G-90,-14,-34,gv(3),u);
+ setLabel('g5a',gx[4]+28,G-96,8,-30,gv(4),u);setLabel('g5b',gx[4]+78,G-70,ptr?-6:10,ptr?-74:-50,gv(4),u);setLabel('g5c',gx[4]-92,G-28,-14,-14,gv(4),u);setLabel('g5d',gx[4]-22,G-48,-16,34,0,u);setLabel('g5e',gx[4]-58,G-108,-14,-34,gv(4),u);
+ setLabel('rm1',rx+230,FL-46,24,-64,ss(3.12,3.25,t)*(1-ss(4.2,4.4,t)),u);setLabel('rm3',1300,FL-4,-14,-74,ss(4.6,4.75,t)*(1-ss(5.05,5.15,t)),u);setLabel('rm4',1690,430,14,-34,ss(5.3,5.45,t)*(1-ss(5.8,5.92,t)),u);setLabel('rm5',wx2+120,FL-10,-10,-60,ss(6.3,6.42,t)*(1-ss(6.68,6.78,t)),u);
+ /* 이름표: 폐기물 */
+ var a1v=ss(7.25,7.4,t)*(1-ss(7.85,8,t)),a2v=ss(8.15,8.25,t)*(1-ss(8.5,8.65,t));
+ setLabel('w1',2093,620,-6,-28,a1v,u);setLabel('w2',2230,588,4,-34,a1v,u);setLabel('w3',2382,668,16,-30,a1v,u);setLabel('w4',2198,672,-16,26,a1v,u);
+ setLabel('w5',2600,620,-6,-30,a2v,u);setLabel('w6',2600,690,-16,26,a2v,u);setLabel('w7',2700,640,14,44,a2v,u);
+ /* 신호 */
+ var sg=ss(3.75,4.0,t)*(1-ss(5.05,5.2,t));var a1=[372,546],a2=[rp[0]+19,rp[1]-80];
+ var sd='M'+a1[0]+' '+a1[1]+'C'+(a1[0]+300)+' 330 '+(a2[0]-300)+' 340 '+a2[0]+' '+a2[1];$.sig.setAttribute('d',sd);$.sig.style.opacity=sg;$.sig.style.strokeDashoffset=-(time*.02)%18;
+ var pl=0;try{pl=$.sig.getTotalLength();var pt=$.sig.getPointAtLength(((time*.00018)%1)*pl);$.sigd.setAttribute('cx',pt.x);$.sigd.setAttribute('cy',pt.y);$.sigd.setAttribute('r',3*u)}catch(e){}$.sigd.style.opacity=sg;
+ /* 물줄기 */
+ var jt=ss(5.28,5.42,t)*(1-ss(5.82,5.94,t));if(jt>0.01){var nx=rp[0]+50,ny=rp[1]-41,dd='';for(var j=0;j<6;j++){var ey=[300,370,450,530,610,676][j],ex=1740,cxx=L(nx,ex,.5),cyy=Math.min(ny,ey)-55+j*11;dd+='M'+nx+' '+ny+'Q'+cxx+' '+cyy+' '+ex+' '+ey}$.jets.setAttribute('d',dd);$.jets.style.strokeDashoffset=-(time*.05)%13}$.jets.style.opacity=jt;
+ /* 먼 공단: 안으로 들어가면 옅게 */
+ $.car.style.display=(t<.7||t>7.3)?'none':'';$.truck.style.display=(t<.7||t>9.4)?'none':'';$.far.style.opacity=1-.55*ss(2.8,3.1,t)*(1-ss(6.9,7.3,t));
+ /* 이름표: 지금 무슨 일을 하는지 사람 옆에 */
+ var rO=ss(3.2,3.4,t)*(1-ss(3.6,3.75,t)),wd=ss(4.55,4.8,t)*(1-ss(4.95,5.1,t));
+ setLabel('lTruck',760+dxT,553,20,-30,ss(2.25,2.4,t)*(1-ss(2.5,2.65,t))+(ptr?0:wd),u);
+ setLabel('lCar',330+dxC,552,ptr?20:-20,-28,ss(.95,1.1,t)*(1-ss(1.2,1.3,t))+wd,u);
+ setLabel('lRobot',rp[0]+(rx>1500?-10:18),rp[1]-70,rx>1500?-16:16,-22,rO+wd,u);
+ setLabel('lJet',rp[0]+42,rp[1]-44,-20,-40,ss(5.3,5.45,t)*(1-ss(5.75,5.9,t)),u);
+ setLabel('a1',p1x-4,G-100,-12,-24,ss(1.35,1.5,t)*(1-ss(1.65,1.78,t)),u);
+ setLabel('a2',p2x+8,G-98,14,-40,ss(1.35,1.5,t)*(1-ss(1.65,1.78,t)),u);
+ 
+ 
+ setLabel('a5',265,578,8,-44,ss(3.95,4.1,t)*(1-ss(4.25,4.38,t)),u);
+ setLabel('a6',335,640,14,-92,ss(3.95,4.1,t)*(1-ss(4.25,4.38,t)),u);
+ 
+  var dimM=innerWidth<=820;[].forEach.call(svg.querySelectorAll('.lampc'),function(n){n.style.display=dimM?'none':''});var iO=ss(3.3,3.45,t)*(1-ss(3.6,3.72,t))+ss(5.3,5.45,t)*(1-ss(5.8,5.92,t));var ie=E('ins');ie.style.opacity=iO;ie.style.visibility=iO>.01?'visible':'hidden';
+ /* 글 */
+ layers.forEach(function(l){var a=l.a,o=t<a[0]||t>a[3]?0:Math.min(a[1]<=a[0]?1:lin(a[0],a[1],t),a[3]<=a[2]?1:1-lin(a[2],a[3],t));l.el.style.opacity=o;l.el.style.visibility=o>.01?'visible':'hidden';l.el.style.transform='translateY('+(1-o)*10+'px)'});
+ if(ptr){var best=null,bo=0;layers.forEach(function(l){var o=parseFloat(l.el.style.opacity)||0;if(o>bo){bo=o;best=l}});if(best){if(!best.h)best.h=best.el.offsetHeight;var tp=Math.round(best.h+146);phNow=fixed!==null||phNow===null?tp:phNow+(tp-phNow)*.14;stage.style.setProperty('--ph',phNow.toFixed(1)+'px')}}else if(phNow!==null){phNow=null;stage.style.removeProperty('--ph')}
+ E('hint').style.opacity=1-ss(-3.5,-3.2,t);
+ /* 단계 줄 */
+ var cur=-1;STEPS.forEach(function(s,i){var k=lin(s[1],s[2],t);s.u.style.transform='scaleX('+k+')';var on=t>=s[1]&&t<s[2];s.b.classList.toggle('on',on);s.b.classList.toggle('dn',t>=s[2]);if(on)cur=i});
+ E('rnow').innerHTML=cur>=0?(cur?'<em>0'+cur+' / 06</em> ':'')+STEPS[cur][0]:'<em>신정개발이 일하는 순서</em>';
+ E('skip').style.visibility=t>9.3?'hidden':'visible';E('rbar').style.transform='scaleX('+lin(.95,9.3,t)+')';
+}
+var SN=[-3.6,-2.75,-1.4,.3,1.5,2.35,3.05,3.5,4.15,4.8,5.55,6.08,6.5,7.5,8.35,8.95,9.7];
+/* 영상처럼 저절로 진행: [장면 t, 머무는 초, 다음까지 이동 초] */
+var PL=[[3.05,2.4,1],[3.5,3.2,1],[4.15,3,1.1],[4.8,3,1],[5.55,3,.9],[6.08,2.4,.9],[6.5,3.4,1.6],[7.5,3,1],[8.35,3,1],[8.95,2.6,0],[-3.4,3.6,0],[1.5,2.4,1],[2.35,2.4,.6]];
+var PTot=0;PL.forEach(function(p){p.s=PTot;PTot+=p[1]+p[2]});var clock=0,lastTs=0,playing=true;
+function playT(c){c=(c%PTot+PTot)%PTot;for(var i=0;i<PL.length;i++){var p=PL[i],n=PL[(i+1)%PL.length];if(c<p.s+p[1]+p[2]){if(c<p.s+p[1])return p[0];return L(p[0],n[0],ss(0,1,(c-p.s-p[1])/p[2]))}}return PL[0][0]}
+var TMIN=-3.6,T=10,target=TMIN,cur=TMIN,fixed=null,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var W0=-2.2,W1=-.6,WK=.25,WD=(W1-W0)*(1-WK);function v2t(v){var e=W0+(W1-W0)*WK;return v<W0?v:v<e?W0+(v-W0)/WK:v+WD}function t2v(t){return t<W0?t:t<W1?W0+(t-W0)*WK:t-WD}
+function scrollT(){var r=track.getBoundingClientRect(),span=track.offsetHeight-stage.offsetHeight;if(span<=0)return TMIN;return v2t(TMIN+Math.min(1,Math.max(0,-r.top+document.querySelector('.hd').offsetHeight)/span)*(T-WD-TMIN))}
+var mc=E('mcta');function barState(){return;var r=track.getBoundingClientRect();mc.classList.toggle('off',r.bottom>stage.offsetHeight+document.querySelector('.hd').offsetHeight+4)}
+var lf=0;function loop(ts){barState();var dt=lastTs?Math.min(.1,(ts-lastTs)/1000):0;lastTs=ts;if(fixed===null){if(playing&&!document.hidden)clock+=dt;var nt=playT(clock);render(nt,reduce?0:ts);
+  var pi=clock%PTot,nearJump=0;[9,10].forEach(function(i){var e=PL[i].s+PL[i][1]+PL[i][2];var d=Math.abs(pi-e);if(d<.3)nearJump=Math.max(nearJump,1-d/.3)});E('fadev').style.opacity=nearJump}requestAnimationFrame(loop)}
+function go(tt){var span=track.offsetHeight-stage.offsetHeight,top=track.getBoundingClientRect().top+scrollY-document.querySelector('.hd').offsetHeight;scrollTo({top:top+(t2v(tt)-TMIN)/(T-WD-TMIN)*span,behavior:reduce?'auto':'smooth'})}
+/* 휴대폰: 한 번 밀면 한 장면씩. 세게 밀어도 장면을 건너뛰지 않게 손가락 스크롤을 대신 처리한다 */
+var hdH=function(){return document.querySelector('.hd').offsetHeight},anim=0;
+function yOf(tt){var span=track.offsetHeight-stage.offsetHeight;return track.getBoundingClientRect().top+scrollY-hdH()+(t2v(tt)-TMIN)/(T-WD-TMIN)*span}
+function glide(y){cancelAnimationFrame(anim);var y0=scrollY,t0=performance.now(),d=reduce?1:720;(function f(n){var k=Math.min(1,(n-t0)/d);scrollTo(0,L(y0,y,ss(0,1,k)));if(k<1)anim=requestAnimationFrame(f);else anim=0})(t0)}
+function curT(){return Math.round(scrollT()*1000)/1000}
+function inStory(){return false}
+var sy=null,moved=0;
+document.addEventListener('touchstart',function(e){sy=e.touches[0].clientY;moved=0},{passive:true});
+document.addEventListener('touchmove',function(e){if(sy===null||!inStory())return;var dy=sy-e.touches[0].clientY;moved=dy;var tn=curT();if(dy<0&&tn<=TMIN+.02)return;if(e.cancelable)e.preventDefault()},{passive:false});
+document.addEventListener('touchend',function(){if(sy===null)return;var dy=moved;sy=null;if(!inStory()||Math.abs(dy)<28)return;var tn=curT();
+ if(dy>0){var nx=SN.filter(function(v){return v>tn+.04})[0];glide(yOf(nx===undefined?T:nx))}
+ else if(tn>TMIN+.02){var pv=SN.filter(function(v){return v<tn-.04}).pop();glide(yOf(pv===undefined?TMIN:pv))}},{passive:true});
+function step(d){var tn=curT();if(d>0){var nx=SN.filter(function(v){return v>tn+.04})[0];glide(yOf(nx===undefined?T:nx))}else{var pv=SN.filter(function(v){return v<tn-.04}).pop();glide(yOf(pv===undefined?TMIN:pv))}}
+if(window.name==='sjphone'){var wl=0;addEventListener('wheel',function(e){if(!inStory())return;if(curT()<=TMIN+.02&&e.deltaY<0)return;e.preventDefault();var n=performance.now();if(n-wl>850&&Math.abs(e.deltaY)>4){wl=n;step(e.deltaY>0?1:-1)}},{passive:false})}
+addEventListener('message',function(e){if(e.data==='next')step(1);if(e.data==='prev')step(-1)});
+E('skip').onclick=E('skipp').onclick=function(){glide(yOf(T))};
+function setPlay(v){playing=v;var b=E('pause');b.setAttribute('aria-pressed',String(!v));b.innerHTML=v?'❚❚ 멈춤':'▶ 재생';b.setAttribute('aria-label',v?'장면 멈추기':'장면 재생')}
+E('pause').onclick=function(){setPlay(!playing)};if(reduce){clock=PL[1].s;setPlay(false)}
+STEPS.forEach(function(s,i){s.b.onclick=function(){var j={0:10,1:11,2:12,3:4,4:6,5:7,6:7}[i];var tg=[10,11,12,0,4,6,7][i];clock=PL[tg].s;setPlay(true)}});
+var RB=window.__RB||[];function showR(i){var r=RB[i];if(!r)return;E('rdv').setAttribute('viewBox',r.v);E('rdn').textContent=r.n;E('rdt').textContent=r.t;E('rdd').textContent=r.d;E('rds').textContent=r.s;E('rdw').textContent=r.w;E('rdp').textContent=r.p;E('rdx').textContent=r.x;[].forEach.call(document.querySelectorAll('.rb'),function(b,k){b.classList.toggle('on',k===i);b.setAttribute('aria-selected',k===i)})}
+[].forEach.call(document.querySelectorAll('.rb'),function(b,i){b.onclick=function(){showR(i)}});showR(4);
+(function(){var Ls=[].slice.call(document.querySelectorAll('#hs>li')),cur=0,hold=0,rm=matchMedia('(prefers-reduced-motion: reduce)').matches,T0=performance.now(),F=0;
+function frames(){var im=Ls[cur].querySelectorAll('.ph img.fa');[].forEach.call(im,function(x,k){x.classList.toggle('v',k===F%im.length)})}
+function sel(i,user){var vs=document.querySelectorAll('#hs .vd');[].forEach.call(vs,function(v,k){if(k!==i){try{v.pause()}catch(e){}v.parentNode.classList.remove('pl')}});var cv=vs[i];if(cv&&!rm){try{cv.currentTime=0;var pp=cv.play();if(pp&&pp.catch)pp.catch(function(){})}catch(e){}cv.onplaying=function(){cv.parentNode.classList.add('pl')}}cur=i;Ls.forEach(function(li,k){var on=k===i;li.classList.toggle('on',on);li.querySelector('.sb').setAttribute('aria-expanded',String(on))});F=0;frames();T0=performance.now();if(user)hold=performance.now()+12000}
+Ls.forEach(function(li,i){li.querySelector('.sb').onclick=function(){sel(i,true)};li.onmouseenter=function(){if(matchMedia('(hover:hover) and (min-width:821px)').matches&&cur!==i)sel(i,true)}});
+setInterval(function(){if(!document.hidden){F++;frames()}},1800);
+function tk(n){var el=n-T0,D=5600;if(!rm&&n>hold&&el>D)sel((cur+1)%Ls.length);var b=Ls[cur].querySelector('.bar');b.style.transform='scaleX('+(rm||n<hold?1:Math.min(1,el/D))+')';requestAnimationFrame(tk)}
+sel(0);requestAnimationFrame(tk);window.__hsel=sel;
+var hv=document.getElementById('hv');if(hv)hv.onchange=function(){var v=window.__HV[+hv.value];E('hxe').textContent=v[0];E('hxt').innerHTML=v[1].split('<br>').map(function(x,i){return '<span'+(i?' class="q2"':'')+'>'+x+'</span>'}).join('')};
+var ol=E('openLive');ol.onclick=function(){var off=track.classList.toggle('off');ol.textContent=off?'▶ 움직이는 작업 장면 보기':'▲ 움직이는 작업 장면 접기';dispatchEvent(new Event('resize'));if(!off){clock=PL[0].s;track.scrollIntoView({behavior:rm?'auto':'smooth'})}}})();
+window.__t=function(tt,tm,co){fixed=tt;window.__co=co||null;render(tt,tm||12000)};
+render(TMIN,0);requestAnimationFrame(loop);
+})();
+</script>
+<script>
+(function(){
+if(window.name==='sjphone'){document.body.classList.add('inph');var s=document.getElementById('stills');if(s)s.remove();return}
+var f=document.getElementById('pfi'),pf=document.getElementById('pf'),html=null;
+function snap(){if(!html)html='<!doctype html>'+document.documentElement.outerHTML.replace(/<section class="st"[\s\S]*?<\/section>/g,'')}snap();
+function toPhone(){html=null;snap();pf.hidden=false;document.body.classList.add('pm');f.srcdoc=html;scrollTo(0,0)}
+document.getElementById('toPh').onclick=toPhone;
+document.getElementById('pNext').onclick=function(){f.contentWindow.postMessage('next','*')};document.getElementById('pPrev').onclick=function(){f.contentWindow.postMessage('prev','*')};
+document.getElementById('toLap').onclick=function(){document.body.classList.remove('pm');pf.hidden=true;f.removeAttribute('srcdoc');dispatchEvent(new Event('resize'));scrollTo(0,0)};
+})();
+</script>
