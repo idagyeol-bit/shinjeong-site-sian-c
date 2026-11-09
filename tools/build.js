@@ -723,7 +723,7 @@ const TRUST_SITES = ['석유화학·정유 플랜트', '발전 설비', '상·�
 
 /* 수행 이력 요약 띠 — 회사소개서(2024) 2020~2023 실적표 */
 const PROJECT_SUMMARY = {
-  n: 170, unit: '여 건', l: '2020~2023년 수행 실적 (회사소개서 2024)',
+  n: 170, unit: '여 건', l: '2020~2023년 수행 실적',   // 근거: 회사소개서(2024) 실적표
   sectors: ['석유화학·정유·산업가스 플랜트', '발전 설비', '지자체·공공기관 상·하수도', '건설 현장']
 };
 /* 시안B 14차: 수행 이력 비주얼판(설정 look.projects)의 숫자 띠 3칸 — 숫자·표현은 모두 소개 문장(keepLead)과 위 PROJECT_SUMMARY 에서 꺼낸 것(새 숫자 0).
@@ -1035,7 +1035,7 @@ function flowScene(id) {
   const k = FLOW_SCENE[id]; if (k == null) return '';
   const st = FLOW.steps[k], n = k + 1;
   const d = esc(st.desc).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-  return `<div class="s6-scene"><figure class="s6-scene__m"><video muted playsinline preload="none" poster="assets/hero-flow/p${n}.webp" src="assets/hero-flow/v${n}.mp4" width="1600" height="944" data-scene aria-hidden="true"></video><figcaption>※ 작업 순서를 쉽게 보여 드리기 위한 연출 그림입니다.</figcaption></figure>
+  return `<div class="s6-scene"><figure class="s6-scene__m"><span class="s6-scene__v"><video muted playsinline preload="none" poster="assets/hero-flow/p${n}.webp" src="assets/hero-flow/v${n}.mp4" width="1600" height="944" data-scene aria-hidden="true"></video><span class="pins" data-v="v${n}" aria-hidden="true">${(st.pins || []).map((q) => `<span class="pin" data-id="${q[0]}" data-side="${q[3]}" data-dy="${q[4]}"${q[6] ? ` data-dx="${q[6]}"` : ''}${q[5] ? ' data-m="1"' : ''}><i class="pd"></i><i class="pk"></i><b>${esc(q[1])}${q[2] ? `<small>${esc(q[2])}</small>` : ''}</b></span>`).join('')}</span></span><figcaption>※ 작업 순서를 쉽게 보여 드리기 위한 연출 그림입니다.</figcaption></figure>
       <div class="s6-scene__t"><p class="s6-scene__k">작업 장면</p><h3>${esc(st.title)}</h3><p>${d}</p><p class="s6-scene__ef">${esc(st.eff)}</p><a class="s6-scene__go" href="index.html#hs">작업 장면 모두 보기 ${arrow(14)}</a></div></div>`;
 }
 const PROJ_TAB_ORDER = ['S01', 'S02', 'S04', 'S03', 'S05'];   // 실적이 많은 분야부터
@@ -1138,8 +1138,8 @@ const svc15Gear = (id) => (FINDER.rows.find((r) => r.svc === id) || {}).gear || 
    extra = 작업 방식 아래 현장 사진 [제목, 글, 사진들, 출처]. tech = '알아 두실 점'의 관련 기술 [종류, 이름, 둘째 줄, 출처]. */
 const SVC16_HEAD = {
   photo: 'M10',
-  line: '탱크에서 하수관까지,<br>설비 안쪽을 비우고 씻고 살핍니다',
-  lead: '설비 클리닝 · 촉매 · 화학세정 · 준설 · 관로 조사의 다섯 분야입니다. 분야를 고르면 작업 순서와 보유 장비를 이어서 볼 수 있습니다.'
+  line: '맡기실 설비에 맞춰,<br>안쪽까지 책임지고 작업합니다',   // 49차: 손님에게 하는 말(예전: '탱크에서 하수관까지, 설비 안쪽을 비우고 씻고 살핍니다')
+  lead: '탱크 · 반응기부터 하수관까지, 설비 클리닝 · 촉매 · 화학세정 · 준설 · 관로 조사의 다섯 분야를 직접 수행합니다. 위험한 설비 안에는 로봇이 먼저 들어가고, 작업자는 밖에서 원격으로 조종합니다.'
 };
 const SVC16_IC = {
   S01: '<path d="M5 6c0-1.7 3.1-3 7-3s7 1.3 7 3v12c0 1.7-3.1 3-7 3s-7-1.3-7-3z"/><path d="M5 6c0 1.7 3.1 3 7 3s7-1.3 7-3M5 13c0 1.7 3.1 3 7 3s7-1.3 7-3"/>',
@@ -1172,7 +1172,7 @@ const SVC16 = {
       return PROCESS.crew.map(([a, b, c], k) => [a, c, b === '설비 내부' ? 'in' : 'out', ph[k], ch[k]]);
     },
     stepsSrc: '기술소개서(2025) 17쪽 공사개략도(촉매) · 회사소개서(2024) 21~24쪽 보유 장비',
-    extra: ['촉매 교체 현장', '회사소개서 촉매 쪽에 실린 현장 사진', ['B03', 'B04'], '회사소개서(2024) 11쪽 EQUIPMENT CLEANING(CATALYST)'],
+    extra: ['촉매 교체 현장', '촉매를 꺼내고 새로 채우는 현장입니다', ['B03', 'B04'], '회사소개서(2024) 11쪽 EQUIPMENT CLEANING(CATALYST)'],
     use: 'waste', tech: [['연구개발 과제', PROCESS.projects[0][0], PROCESS.projects[0][1] + ' · ' + PROCESS.projects[0][3] + ' 구동', '기술소개서(2025) 37~39쪽'],
       ['로봇 세대', '5세대 ' + PROCESS.generations[4][1] + ' · ' + PROCESS.generations[4][5], '적용 대상 ' + PROCESS.generations[4][2] + ' · 수중 작업 ' + PROCESS.generations[4][3] + ' · ' + PROCESS.generations[4][4], '기술소개서(2025) 6쪽']] },
   S03: { fn: '세정', down: '세정 대상 보기', eqT: '세관 장비', endQ: '배관 · 열교환기 세정이 필요하신가요?',
@@ -1181,7 +1181,7 @@ const SVC16 = {
     howT: '화학세정 대상', howS: '회사소개서(2024) 9쪽 주요사업 안내 — 원문 표기를 함께 적음',
     steps: () => [['Plant 배관', '건설 PLANT · PIPE류 세정', '', [], []], ['열교환기', 'HEATER EXCHANGERS', '', [], []], ['Cooling Tower 계통', 'COOLING TOWER SYSTEM', '', [], []], ['보일러 Tube', '보일러 TUBE IN/OUT 세정', '', [], []]],
     stepsSrc: '회사소개서(2024) 9쪽 주요사업 안내',
-    extra: ['화학세정 현장', '회사소개서 화학세정 쪽에 실린 현장 사진', ['B06', 'B07', 'B08'], '회사소개서(2024) 12쪽 화학세정'],
+    extra: ['화학세정 현장', '배관 · 튜브를 세정하는 현장입니다', ['B06', 'B07', 'B08'], '회사소개서(2024) 12쪽 화학세정'],
     use: null, tech: [] },
   S04: { fn: '준설', down: '준설부터 탈수까지 보기', eqT: '준설 · 탈수 장비', endQ: '퇴적물 · 슬러지 준설이 필요하신가요?', eqph: ['R15'],
     io: [['로봇이 하는 일', 1, '하수 · 오수관과 처리시설의 퇴적물을 <b>준설합니다</b>', '01 준설', 'st-1'],
@@ -1192,7 +1192,7 @@ const SVC16 = {
       ['탈수 — 데칸타', PROCESS.decanter.join(' → '), '', [], [['데칸타 10마력 1대', 0]]],
       ['탈수 — 필터프레스', PROCESS.filterpress.join(' → '), '', [], []]],
     stepsSrc: '회사소개서(2024) 23쪽 보유 장비 · 기술소개서(2025) 30~36쪽 폐기물 처리(탈수 순서)', dew: true,
-    extra: ['준설 현장', '회사소개서 준설공사 쪽에 실린 현장 사진', ['B10'], '회사소개서(2024) 13쪽 준설공사'],
+    extra: ['준설 현장', '퇴적물을 준설하는 현장입니다', ['B10'], '회사소개서(2024) 13쪽 준설공사'],
     use: 'pond', tech: [1, 2, 3].map((i) => ['등록 특허', PROCESS.patents[i][0], PROCESS.patents[i][1], '회사소개서(2024) 28~29쪽']).concat([['연구개발 과제', PROCESS.projects[2][0], PROCESS.projects[2][1] + ' · ' + PROCESS.projects[2][3] + ' 구동', '기술소개서(2025) 37~39쪽']]) },
   S05: { fn: '조사 · 보수', down: '조사 · 보수 업무 보기', eqT: '조사 · 보수 장비', endQ: '관로 조사나 보수가 필요하신가요?',
     io: [['로봇이 하는 일', 1, '하수관 안을 카메라로 <b>조사합니다</b>', '01 CCTV', 'st-1'],
@@ -1422,7 +1422,7 @@ function phero(o) {   /* 시안C 34차: 현재 위치(홈 › …)를 남색 무
   return `  <section class="phero">
     <div class="wrap">
       <nav class="s6-crumb phero__crumb" aria-label="현재 위치"><a href="index.html">홈</a><span aria-hidden="true">›</span>${cr}</nav>
-      <h1>${o.h1}</h1>
+      <h1>${o.kick ? `<small>${esc(o.kick)}</small>` : ''}${o.h1}</h1>
       ${o.keepLead ? `<p class="phero__lead">${o.quote ? `<span class="phero__quote">${esc(o.quote)}</span>` : ''}${esc(o.keepLead)}</p>` : ''}
     </div>
   </section>
@@ -1536,7 +1536,7 @@ ${g.items.map((i) => `            <li><a href="${i.href}"${i.blank ? ' target="_
 
 /* 문의 띠(.cta)까지 본문(main)에 포함한 뒤 닫는다 */
 /* 현장 진행 방식·장비·로봇·회사 소개 본문 맨 아래에 넣는 출처 한 줄 */
-const SRC_LINE = '      <p class="note mt-block">출처: (주)신정개발 회사소개서(2024) · 기술소개서(2025)</p>\n';
+const SRC_LINE = '';   // 49차: 바닥글 한 줄(44차)이 근거를 대신한다
 
 /* 메인 업무 카드 아래 버튼 — 어느 업무인지 모를 때. "수행 이력 N건 모두 보기"와 같은 버튼 (문구는 설정 파일 home.copy.what.button) */
 const svcCta = () => `      <div class="svc-cta" data-reveal><a class="btn btn--line btn--sm" href="contact.html">${CFG.home.copy.what.button} ${arrow(18)}</a></div>`;   // 41차: 시안마다 설정이 달라 함수로 둔다
@@ -3384,7 +3384,7 @@ const unmannedPageV9 = () => {   // 시안C 14차: 9차 판(쓰지 않음). 새 
         <div class="stat"><b>800<i>명</i></b><span>연간 밀폐공간 투입 인원</span></div>
         <div class="stat"><b>1,200<i>시간</i></b><span>연간 밀폐공간 작업시간</span></div>
       </div>
-      <p class="note">고용노동부 2014~2023 산업재해조사 · 신정개발 연간 작업 기준 — 기술소개서(2025) '무인 로봇 시스템 개발 배경'. 개발 목적: 작업자 투입 전 유해물질 사전 제거를 통한 위험성 감소, 연속 가동 중 작업 효율 유지.</p>
+      <p class="note">고용노동부 2014~2023 산업재해조사와 신정개발 연간 작업을 기준으로 한 수치입니다. 로봇은 작업자가 들어가기 전에 유해물질을 먼저 걷어내 위험을 줄이고, 연속 가동 중에도 작업 효율을 지키기 위해 개발했습니다.</p>
     </div>
   </section>
 
@@ -3571,7 +3571,7 @@ ${usPanel('jet', 2, `${usDl([['장점', cases(2).pros.map(esc).join(' · ')], ['
   <!-- 4. 적용 시 고려사항 (기술소개서 29~30쪽 + 12쪽 Manway) -->
   <section class="section section--soft" id="conditions">
     <div class="wrap">
-      <div class="head"><div><h2>로봇이 모든 걸<br>해결하지는 않습니다</h2></div><p class="lead">그래서 로봇을 넣기 전에 현장을 먼저 보고 시험해 봅니다. 아래는 기술소개서(2025)에 실린 PFO Tank 작업의 고려사항입니다.</p></div>
+      <div class="head"><div><h2>로봇이 모든 걸<br>해결하지는 않습니다</h2></div><p class="lead">그래서 로봇을 넣기 전에 현장을 먼저 보고 시험해 봅니다. PFO Tank 작업에서 미리 살핀 점들입니다.</p></div>
       <ul class="us-cons">
         <li><em>확인 1</em><b>로봇이 안에서 잘 움직일 수 있는가</b><p>바닥에 쌓인 것의 상태에 따라 로봇이 움직이기 어려울 수 있고, 호스가 탱크 안 가열 코일에 걸릴 수 있습니다. 코일 배치를 먼저 봅니다.</p></li>
         <li><em>확인 2</em><b>호스가 열을 견디는가</b><p>흡입 호스는 55℃까지 견딥니다. 더 뜨거운 곳은 고온용 호스를 쓰는데, 덜 휘어서 작업에 걸릴 수 있습니다.</p></li>
@@ -3585,7 +3585,7 @@ ${usPanel('jet', 2, `${usDl([['장점', cases(2).pros.map(esc).join(' · ')], ['
           <li>액체가 로봇 바퀴보다 높이 남아 있을 때 — 움직이기 어려워 먼저 줄입니다</li>
         </ul>
         <blockquote>로봇으로 모든 문제를 해결할 수는 없습니다. 가장 위험한 원인을 먼저 없애는 데 씁니다.</blockquote>
-        <p class="us-easy">기술소개서(2025) 적용 시 고려사항의 내용을 쉬운 말로 옮겼습니다. 원문은 기술소개서 PDF에서 볼 수 있습니다.</p>
+        <p class="us-easy">자세한 내용은 기술소개서 PDF에서 보실 수 있습니다.</p>
       </div>
       <div class="us-two">
         <details class="us-fold" open><summary>밀폐공간 작업 위험성 비교 — 인원 투입 vs 로봇 투입</summary>
@@ -3683,7 +3683,7 @@ pages['news.html'] = () => {
     desc: '언론에 실린 신정개발 이야기 — 로봇 개발 인터뷰, 기업 선정, 지역 나눔 기사를 모았습니다.'
   }) + header('news', null, 'news.html') + `
 <main id="main" class="nw4">
-` + phero({ h1: c.title, keepLead: c.lead, crumbs: [{ label: c.title }] }) + `
+` + phero({ kick: c.title, h1: c.h1 || c.title, keepLead: c.lead, crumbs: [{ label: c.title }] }) + `
   <section class="section nw4-sec" aria-labelledby="nw4-h"><div class="wrap">
     <h2 id="nw4-h" class="sr-only">언론 보도 목록</h2>
     <div class="nw4-bar">
@@ -3795,7 +3795,7 @@ pages['cases.html'] = () => {
 <main id="main" class="cs9-page">
   <section class="cs9-head" aria-labelledby="cs9-h"><div class="wrap">
     <nav class="cs9-head__crumb" aria-label="현재 위치"><a href="index.html">홈</a><span aria-hidden="true">›</span><span aria-current="page">${esc(c.title)}</span></nav>
-    <h1 id="cs9-h">${esc(c.title)}</h1>
+    <h1 id="cs9-h"><small>${esc(c.title)}</small>${c.h1 || esc(c.title)}</h1>
     <p class="cs9-head__l">${esc(c.lead)}</p>
     <dl class="cs9-head__sum">
       <div><dt>${esc(TRUST[1].l)}</dt><dd>${TRUST[1].n}<small>${esc(TRUST[1].unit)}</small></dd></div>
@@ -3932,7 +3932,7 @@ ${RL22.filter((b) => b.grp === g).map(pick).join('\n')}
   };
   return `  <section class="rl" id="robots" aria-labelledby="rl-h">
     <div class="wrap">
-      <div class="um-vh um-vh--row"><div><p class="um-k2">로봇 라인업</p><h2 id="rl-h">현장 장비 ${rlCount('field')}, 연구개발 시제품 ${rlCount('rd')}</h2></div><p class="um-vh__l">기술소개서(2025)의 분류대로 나눴습니다. 로봇을 고르면 하는 일 · 사양 · 시험 결과가 바로 아래에 나옵니다.</p></div>
+      <div class="um-vh um-vh--row"><div><p class="um-k2">로봇 라인업</p><h2 id="rl-h">현장 장비 ${rlCount('field')}, 연구개발 시제품 ${rlCount('rd')}</h2></div><p class="um-vh__l">현장에 투입하는 장비 세 가지와, 기업부설연구소에서 개발한 시제품 세 가지입니다. 로봇마다 하는 일 · 사양 · 시험 결과를 함께 소개합니다.</p></div>
       <div class="rl-pick" role="tablist" aria-label="로봇 고르기">
 ${grp('field')}
 ${grp('rd')}
@@ -4049,7 +4049,7 @@ ${rlLineup()}
         <div class="stat"><b>800<i>명</i></b><span>연간 밀폐공간 투입 인원</span></div>
         <div class="stat"><b>1,200<i>시간</i></b><span>연간 밀폐공간 작업시간</span></div>
       </div>
-      <p class="note">고용노동부 2014~2023 산업재해조사 · 신정개발 연간 작업 기준 — 기술소개서(2025) '무인 로봇 시스템 개발 배경'. 개발 목적: 작업자 투입 전 유해물질 사전 제거를 통한 위험성 감소, 연속 가동 중 작업 효율 유지.</p>
+      <p class="note">고용노동부 2014~2023 산업재해조사와 신정개발 연간 작업을 기준으로 한 수치입니다. 로봇은 작업자가 들어가기 전에 유해물질을 먼저 걷어내 위험을 줄이고, 연속 가동 중에도 작업 효율을 지키기 위해 개발했습니다.</p>
     </div>
   </section>
 
@@ -4075,7 +4075,7 @@ ${UNM_STEPS.map((s) => `        <li class="${s.in && s.in[0] === 'r' ? 'is-robot
 
   <section class="section section--soft" id="conditions">
     <div class="wrap">
-      <div class="head"><div><h2>로봇이 모든 걸<br>해결하지는 않습니다</h2></div><p class="lead">그래서 로봇을 넣기 전에 현장을 먼저 보고 시험해 봅니다. 아래는 기술소개서(2025)에 실린 PFO Tank 작업의 고려사항입니다.</p></div>
+      <div class="head"><div><h2>로봇이 모든 걸<br>해결하지는 않습니다</h2></div><p class="lead">그래서 로봇을 넣기 전에 현장을 먼저 보고 시험해 봅니다. PFO Tank 작업에서 미리 살핀 점들입니다.</p></div>
       <ul class="us-cons">
         <li><em>확인 1</em><b>로봇이 안에서 잘 움직일 수 있는가</b><p>바닥에 쌓인 것의 상태에 따라 로봇이 움직이기 어려울 수 있고, 호스가 탱크 안 가열 코일에 걸릴 수 있습니다. 코일 배치를 먼저 봅니다.</p></li>
         <li><em>확인 2</em><b>호스가 열을 견디는가</b><p>흡입 호스는 55℃까지 견딥니다. 더 뜨거운 곳은 고온용 호스를 쓰는데, 덜 휘어서 작업에 걸릴 수 있습니다.</p></li>
@@ -4089,7 +4089,7 @@ ${UNM_STEPS.map((s) => `        <li class="${s.in && s.in[0] === 'r' ? 'is-robot
           <li>액체가 로봇 바퀴보다 높이 남아 있을 때 — 움직이기 어려워 먼저 줄입니다</li>
         </ul>
         <blockquote>로봇으로 모든 문제를 해결할 수는 없습니다. 가장 위험한 원인을 먼저 없애는 데 씁니다.</blockquote>
-        <p class="us-easy">기술소개서(2025) 적용 시 고려사항의 내용을 쉬운 말로 옮겼습니다. 원문은 기술소개서 PDF에서 볼 수 있습니다.</p>
+        <p class="us-easy">자세한 내용은 기술소개서 PDF에서 보실 수 있습니다.</p>
       </div>
       <div class="us-two">
         <details class="us-fold" open><summary>밀폐공간 작업 위험성 비교 — 인원 투입 vs 로봇 투입</summary>
@@ -4156,8 +4156,9 @@ pages['projects.html'] = () => head({
 }) + header('projects', null, 'projects.html') + `
 <main id="main">
 ` + phero({
-  h1: '수행 이력',
-  keepLead: '2020~2023년 4년간 170여 건의 작업을 수행했습니다. 이 가운데 4개 발주처와는 4년 연속 단가계약을 맺었습니다. 아래는 그중 대표 이력입니다.',
+  kick: '수행 이력',
+  h1: '4년 동안 170여 건,<br>현장에서 쌓은 기록입니다',   // 49차: 손님에게 하는 말(숫자는 TRUST · 회사소개서 2024 실적표와 같음)
+  keepLead: '2020~2023년 4년간 170여 건의 작업을 수행했고, 이 가운데 4개 발주처와는 4년 연속 단가계약을 맺었습니다. 그중 대표 이력을 정리했습니다.',
   crumbs: [{ label: '수행 이력' }]
 }) + `
   <section class="section">
@@ -4291,7 +4292,7 @@ ${coRow('특허', `<div>
     <div class="wrap">
       <div class="head head--solo" data-reveal><div><h2>보유 장비</h2></div></div>
       <div class="filters eqtabs" role="group" aria-label="업무별 보유 장비" data-reveal><a href="#equipment" data-eq="equipment">전체</a>${EQUIP_GROUPS.map((g) => `<a href="#${g.id}" data-eq="${g.id}">${esc(g.nav || g.title)}</a>`).join('')}</div>
-      <p class="note">보유 대수는 회사소개서(2024) 수록 기준이며, 현재 수량과 가동 상태는 문의 시 안내합니다.</p>
+      <p class="note">보유 대수는 2024년 기준이며, 현재 수량과 가동 상태는 문의 주시면 안내해 드립니다.</p>
 ${EQUIP_GROUPS.map((g, i) => eqGroup(g, i)).join('\n')}
     </div>
   </section>
@@ -4529,8 +4530,9 @@ pages['contact.html'] = () => head({
 }) + header('contact', null, 'contact.html') + `
 <main id="main">
 ` + phero({
-  h1: '현장 문의',
-  keepLead: '대상 설비와 작업 목적, 희망 일정을 보내 주시면 가능한 작업 범위와 진행 방법을 안내해 드립니다.',
+  kick: '현장 문의',
+  h1: '현장을 알려 주시면<br>작업 방법을 안내해 드립니다',   // 49차: 손님에게 하는 말
+  keepLead: '대상 설비와 작업 목적, 희망 일정을 보내 주세요. 전화 · 이메일 · 문의 양식 가운데 편하신 방법으로 연락 주시면 됩니다.',
   crumbs: [{ label: '현장 문의' }]
 }) + `
   <!-- 01 문의 방법 (32차: 전화 · 이메일 · 문의 양식 세 칸) -->
