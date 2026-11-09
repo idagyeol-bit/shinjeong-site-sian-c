@@ -37,8 +37,8 @@ const tel = pick(ko.contact, /<a href="tel:\d+">([\d-]+)<\/a>/, '대표 전화')
 const fax = pick(ko.contact, /팩스 ([\d-]+)/, '팩스');
 const hours = pick(ko.contact, /문의 가능 시간 ([\d:]+ ~ [\d:]+)/, '문의 가능 시간');
 const email = pick(ko.contact, /<a href="mailto:([^"]+)">/, '이메일');
-const koAddr = pick(ko.index, /본사 ([^<]+)<br>/, '본사 주소');
-const koBranch = pick(ko.index, /지사 ([^<]+)<br>/, '지사 주소');
+const koAddr = pick(ko.index, /본사 ([^<]+)(?:<br>|<\/span>)/, '본사 주소');
+const koBranch = pick(ko.index, /지사 ([^<]+)(?:<br>|<\/span>)/, '지사 주소');
 /* 주소 로마자 줄의 번지 숫자가 국문 주소의 숫자와 같은지 */
 const num = (s) => (s.match(/\d+/g) || []);
 if (!num(D.contact.hqLine).includes(num(koAddr)[num(koAddr).length - 1])) fail(`본사 주소 번지가 다릅니다: ${D.contact.hqLine} ↔ ${koAddr}`);

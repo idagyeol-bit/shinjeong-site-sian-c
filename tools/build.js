@@ -1522,14 +1522,19 @@ function cta(o) {
 }
 
 function footer(o) {   // 시안C 18차: o.noAsk — 본문 끝에 문의 띠가 있는 페이지(회사 소개 · 사업분야 상세)는 바닥글 윗줄 문의 줄을 그리지 않는다
-  const g = CFG.common.footerGroups;   // 바닥글 묶음 제목 (40차, 설정 파일)
+  /* 시안C 54차(2026-11-09 이다결 님 요청 '실제 회사 홈페이지의 맨 끝처럼'): 로고 · 자료 받기 → 메뉴와 같은 다섯 묶음 사이트맵 → 회사 정보 줄(상호 · 주소 · 전화 · 팩스 · 이메일) + 현장 상담 전화
+     → 정책 링크(개인정보 처리방침 굵게 · 이메일 무단 수집 거부 · 오시는 길) · 영문 저작권 줄 · 맨 위로. 대표자 · 사업자등록번호는 확인 전이라 넣지 않는다(CLAUDE.md 절대 규칙 4).
+     예전 큰 워드마크 · '…기준으로 합니다' 줄은 뺐다. 휴대폰은 사이트맵을 숨기고 회사 정보 · 정책 링크만 */
+  const nv = (k) => (CFG.nav.find((n) => n.key === k) || {}).label;
   const map = [
-    { h: g.services, items: SERVICES.map((s) => ({ href: s.file, label: s.title })) },
-    { h: g.tech, items: [{ href: 'unmanned.html', label: '무인 솔루션' }, { href: 'unmanned.html#robots', label: '현장 투입 로봇' }, { href: 'unmanned.html#how', label: '작업 절차' }, { href: 'service-dredging-sludge.html#dewater', label: '회수물 탈수 과정' }, { href: 'company.html#equipment', label: '보유 장비' }] },   // 시안C 9차: 장비·로봇 · 현장 진행 방식 페이지가 무인 솔루션(unmanned.html) 한 페이지로 합쳐져 모두 그쪽 구역으로, 보유 장비 표는 회사 소개로
-    { h: g.company, items: [{ href: 'cases.html', label: '적용 사례' }, { href: 'projects.html', label: '수행 이력' }, { href: 'company.html', label: '회사 소개' }, ...(CFG.nav.some((n) => n.key === 'news') ? [{ href: 'news.html', label: '소식' }] : []), { href: DOC_PROFILE, label: '회사소개서 (PDF)', blank: true }, { href: DOC_TECH, label: '기술소개서 (PDF)', blank: true }] },
-    { h: g.contact, items: [{ href: 'contact.html', label: '현장 문의' }, { href: `mailto:${C.email}`, label: '이메일로 문의' }] }
+    { h: nv('services') || '사업분야', href: 'services.html', items: SERVICES.map((s) => ({ href: s.file, label: s.title })) },
+    { h: '무인 솔루션', href: 'unmanned.html', items: [{ href: 'unmanned.html#robots', label: '로봇 라인업' }, { href: 'unmanned.html#method', label: '작업 방식' }, { href: 'unmanned.html#rnd', label: '연구개발 · 특허' }] },
+    { h: '적용 사례', href: 'cases.html', items: [{ href: 'cases.html', label: '분야별 적용 사례' }, { href: 'projects.html', label: '수행 이력' }] },
+    { h: '회사 소개', href: 'company.html', items: [{ href: 'company.html#greeting', label: '인사말' }, { href: 'company.html#history', label: '연혁 · 사업' }, { href: 'company.html#credentials', label: '인증 · 특허' }, { href: 'company.html#organization', label: '조직 · 장비' }, { href: 'company.html#location', label: '오시는 길' }] },
+    { h: '고객 지원', href: 'contact.html', items: [{ href: 'contact.html', label: '현장 문의' }, ...(CFG.nav.some((n) => n.key === 'news') ? [{ href: 'news.html', label: '소식' }] : []), { href: `mailto:${C.email}`, label: '이메일 문의' }] }
   ];
-  return `<footer class="ftr">
+  const tel = C.tel.replace(/-/g, '');
+  return `<footer class="ftr ftr2">
   <div class="wrap">${contactFooterOnly() && !(o && o.noAsk) ? `
     <div class="ftrB-ask">   <!-- 시안B 26차: 바닥글 윗줄 소형 문의 줄 — 머리말 낱말·문의 버튼 문구·이메일 재사용(새 문장 없음) -->
       <span class="ftrB-ask__label">${esc(CFG.common.headerCta)}<small class="ftrB-ask__sub">설비 종류 · 일정 · 현장 위치를 알려 주시면 상담 시 안내해 드립니다.</small></span>
@@ -1538,34 +1543,27 @@ function footer(o) {   // 시안C 18차: o.noAsk — 본문 끝에 문의 띠가
         <a class="ftrB-ask__mail" href="mailto:${C.email}">${C.email}</a>
       </div>
     </div>` : ''}
-    <div class="ftr__top">
-      <div class="ftr__brand">
-        <img class="ftr__logo" src="assets/logo/shinjeong-symbol.svg" width="30" height="37" alt="" aria-hidden="true">
-        <b>${esc(C.name)}</b><span aria-hidden="true">${esc(C.brandEn)}</span>
-        <p class="ftr__info">
-          ${esc(C.name)} · ${esc(C.tagline)} 전문기업 · ${C.founded}년 설립<br>
-          본사 ${esc(C.address)}<br>
-          지사 ${esc(C.branch)}<br>
-          TEL <a href="tel:${C.tel.replace(/-/g, '')}">${C.tel}</a> · FAX ${C.fax}<br>
-          <a href="mailto:${C.email}">${C.email}</a>
-        </p>
-      </div>
-      <nav class="ftr__map" aria-label="사이트맵">
-${map.map((g) => `        <div>
-          <h3>${esc(g.h)}</h3>   <!-- 35차: h4 → h3 (제목 단계 건너뜀 'heading-order' 수리, 글자·모양 그대로) -->
-          <ul>
-${g.items.map((i) => `            <li><a href="${i.href}"${i.blank ? ' target="_blank" rel="noopener"' : ''}>${esc(i.label)}</a></li>`).join('\n')}
-          </ul>
-        </div>`).join('\n')}
-      </nav>
+    <div class="ftr2__head">
+      <a class="ftr2__brand" href="index.html" aria-label="${esc(C.name)} 홈"><img src="assets/logo/shinjeong-symbol.svg" width="30" height="37" alt="" aria-hidden="true"><span><b>${esc(C.name)}</b><small>${esc(C.brandEn)}</small></span></a>
+      <div class="ftr2__docs"><span>자료 받기</span><a href="${DOC_PROFILE}" target="_blank" rel="noopener">회사소개서 PDF</a><a href="${DOC_TECH}" target="_blank" rel="noopener">기술소개서 PDF</a></div>
     </div>
-    <div class="ftr__bot">
-      <p>&copy; <span data-year>2026</span> ${esc(C.name)}. All rights reserved. <a class="ftr__pv" href="privacy.html">개인정보 처리방침</a></p>   <!-- 53차 -->
+    <nav class="ftr2__map" aria-label="사이트맵">
+${map.map((g) => `      <div><h3><a href="${g.href}">${esc(g.h)}</a></h3><ul>${g.items.map((i) => `<li><a href="${i.href}">${esc(i.label)}</a></li>`).join('')}</ul></div>`).join('\n')}
+    </nav>
+    <div class="ftr2__info">
+      <address class="ftr2__addr">
+        <p><span><b>${esc(C.name)}</b></span><span>본사 ${esc(C.address)}</span><span>지사 ${esc(C.branch)}</span></p>
+        <p><span>TEL <a href="tel:${tel}">${C.tel}</a></span><span>FAX ${C.fax}</span><span>E-mail <a href="mailto:${C.email}">${C.email}</a></span></p>
+      </address>
+      <div class="ftr2__cs"><small>현장 상담</small><a href="tel:${tel}">${C.tel}</a><span>문의 가능 시간 ${esc(C.hours)}</span></div>
+    </div>
+    <div class="ftr2__bot">
+      <ul class="ftr2__pol"><li><a class="is-b" href="privacy.html">개인정보 처리방침</a></li><li><a href="privacy.html#no-email">이메일 무단 수집 거부</a></li><li><a href="company.html#location">오시는 길</a></li></ul>
+      <p class="ftr2__copy">COPYRIGHT &copy; <span data-year>2026</span> ${esc(C.brandEn)} CO., LTD. ALL RIGHTS RESERVED.</p>
       <button class="totop" type="button" data-totop>맨 위로 <span aria-hidden="true">↑</span></button>
     </div>${aiNotice() ? `
     <p class="ftr__ai">${esc(aiNotice())}</p>   <!-- 시안B 23차: AI 연출 이미지 공통 고지(설정 look.aiNotice, look.aiMark 가 'footer' 일 때) — 개별 배지 대신 바닥글 한 줄 -->` : ''}
   </div>
-  <div class="moB-wordmark" aria-hidden="true">${esc(C.brandEn)}</div>   <!-- 시안B 16차: 바닥 대형 워드마크(장식, 머리말의 영문 상호 재사용, 낭독기에 안 읽힘) -->
 </footer>
 
 <nav class="mcta" aria-label="빠른 문의">
@@ -4659,6 +4657,7 @@ pages['privacy.html'] = () => head({
     <ol class="pv__l">
 ${PRIVACY.map(([h, items], i) => `      <li><h2><em>${String(i + 1).padStart(2, '0')}</em>${esc(h)}</h2>${items.map((x) => `<p>${esc(x)}</p>`).join('')}</li>`).join('\n')}
     </ol>
+    <section class="pv__ne" id="no-email" aria-labelledby="pv-ne-h"><h2 id="pv-ne-h">이메일 무단 수집 거부</h2><p>이 홈페이지에 실린 이메일 주소를 자동 수집 프로그램이나 그 밖의 기술적 장치로 무단 수집하는 것을 거부합니다. 이를 어기면 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」에 따라 처벌받을 수 있습니다.</p></section>   <!-- 54차: 바닥글 '이메일 무단 수집 거부' 링크가 오는 곳 -->
     <p class="pv__d">이 방침은 홈페이지를 정식으로 공개하는 날부터 적용합니다. 바뀌면 이 쪽에서 알려 드립니다.</p>
     <p class="pv__go"><a class="btn btn--sm" href="contact.html">현장 문의로 돌아가기 ${arrow(16)}</a></p>
   </div></section>
@@ -5025,7 +5024,7 @@ function custVoice(html) {
   html = html.replace(/ — 기술소개서\(2025\) \d+쪽의 구성/g, '');
   html = html.replace('<p class="s6-lead">회사소개서(2024) 9쪽 주요사업 안내 — 원문 표기를 함께 적음</p>', '<p class="s6-lead">신정개발이 화학세정하는 설비입니다.</p>');
   html = html.replace('<p class="s6-lead">Robot-Tank Cleaning System — 기술소개서(2025) 18쪽의 6단계 그대로</p>', '<p class="s6-lead">Robot-Tank Cleaning System, 여섯 단계로 작업합니다.</p>');
-  html = html.replace('<div class="ftr__bot">', '<div class="ftr__bot"><p class="ftr__basis">회사 정보 · 실적 · 장비 · 인증 내용은 신정개발 회사소개서(2024) · 기술소개서(2025)를 기준으로 합니다.</p>');
+  /* 54차: 바닥글의 '…기준으로 합니다' 줄은 뺐다(실제 회사 홈페이지 바닥글 모양) — 근거는 자료 주석에 그대로 */
   return html;
 }
 /* 시안C 51차: 가운뎃점 — 둘은 붙이고(촉매·충진물), 셋 이상 나열은 띄운다(탱크 · Pond · 배수로). 화면 글(태그 밖)만, script · style 안은 그대로 */

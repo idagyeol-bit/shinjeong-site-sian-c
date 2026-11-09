@@ -22,7 +22,7 @@
 <link rel="apple-touch-icon" href="../assets/logo/shinjeong-symbol.png">
 <link rel="preload" href="../assets/fonts/sub/PretendardVariable-0.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../css/tokens.test.css?v=818fd80b">
-<link rel="stylesheet" href="../css/site.css?v=48005454">
+<link rel="stylesheet" href="../css/site.css?v=8fc58a7f">
 </head>
 <body class="moB-root" data-page="projects">
 <a class="skip-link" href="#main">본문 바로가기</a>
@@ -196,7 +196,7 @@
 
 </main>
 
-<footer class="ftr">
+<footer class="ftr ftr2">
   <div class="wrap">
     <div class="ftrB-ask">   <!-- 시안B 26차: 바닥글 윗줄 소형 문의 줄 — 머리말 낱말·문의 버튼 문구·이메일 재사용(새 문장 없음) -->
       <span class="ftrB-ask__label">현장 문의<small class="ftrB-ask__sub">설비 종류 · 일정 · 현장 위치를 알려 주시면 상담 시 안내해 드립니다.</small></span>
@@ -205,65 +205,30 @@
         <a class="ftrB-ask__mail" href="mailto:shinjeong@sjdevel.com">shinjeong@sjdevel.com</a>
       </div>
     </div>
-    <div class="ftr__top">
-      <div class="ftr__brand">
-        <img class="ftr__logo" src="../assets/logo/shinjeong-symbol.svg" width="30" height="37" alt="" aria-hidden="true">
-        <b>(주)신정개발</b><span aria-hidden="true">SHINJEONG DEVELOPMENT</span>
-        <p class="ftr__info">
-          (주)신정개발 · 산업설비·환경시설 클리닝 전문기업 · 1992년 설립<br>
-          본사 전라남도 여수시 봉계2길 27<br>
-          지사 충청남도 서산시 지곡면 충의로 1106<br>
-          TEL <a href="tel:0616825537">061-682-5537</a> · FAX 061-683-5567<br>
-          <a href="mailto:shinjeong@sjdevel.com">shinjeong@sjdevel.com</a>
-        </p>
-      </div>
-      <nav class="ftr__map" aria-label="사이트맵">
-        <div>
-          <h3>사업분야</h3>   <!-- 35차: h4 → h3 (제목 단계 건너뜀 'heading-order' 수리, 글자·모양 그대로) -->
-          <ul>
-            <li><a href="service-equipment-cleaning.html">설비 클리닝</a></li>
-            <li><a href="service-catalyst-media.html">촉매·충진물 작업</a></li>
-            <li><a href="service-chemical-cleaning.html">화학세정</a></li>
-            <li><a href="service-dredging-sludge.html">준설·슬러지 회수</a></li>
-            <li><a href="service-inspection-repair.html">관로·지하 조사 및 보수</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>기술</h3>   <!-- 35차: h4 → h3 (제목 단계 건너뜀 'heading-order' 수리, 글자·모양 그대로) -->
-          <ul>
-            <li><a href="unmanned.html">무인 솔루션</a></li>
-            <li><a href="unmanned.html#robots">현장 투입 로봇</a></li>
-            <li><a href="unmanned.html#how">작업 절차</a></li>
-            <li><a href="service-dredging-sludge.html#dewater">회수물 탈수 과정</a></li>
-            <li><a href="company.html#equipment">보유 장비</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>회사</h3>   <!-- 35차: h4 → h3 (제목 단계 건너뜀 'heading-order' 수리, 글자·모양 그대로) -->
-          <ul>
-            <li><a href="cases.html">적용 사례</a></li>
-            <li><a href="projects.html">수행 이력</a></li>
-            <li><a href="company.html">회사 소개</a></li>
-            <li><a href="news.html">소식</a></li>
-            <li><a href="../assets/docs/shinjeong-company-profile-2024-public.pdf" target="_blank" rel="noopener">회사소개서 (PDF)</a></li>
-            <li><a href="../assets/docs/shinjeong-robot-cleaning-system-2025-public.pdf" target="_blank" rel="noopener">기술소개서 (PDF)</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>문의</h3>   <!-- 35차: h4 → h3 (제목 단계 건너뜀 'heading-order' 수리, 글자·모양 그대로) -->
-          <ul>
-            <li><a href="contact.html">현장 문의</a></li>
-            <li><a href="mailto:shinjeong@sjdevel.com">이메일로 문의</a></li>
-          </ul>
-        </div>
-      </nav>
+    <div class="ftr2__head">
+      <a class="ftr2__brand" href="index.html" aria-label="(주)신정개발 홈"><img src="../assets/logo/shinjeong-symbol.svg" width="30" height="37" alt="" aria-hidden="true"><span><b>(주)신정개발</b><small>SHINJEONG DEVELOPMENT</small></span></a>
+      <div class="ftr2__docs"><span>자료 받기</span><a href="../assets/docs/shinjeong-company-profile-2024-public.pdf" target="_blank" rel="noopener">회사소개서 PDF</a><a href="../assets/docs/shinjeong-robot-cleaning-system-2025-public.pdf" target="_blank" rel="noopener">기술소개서 PDF</a></div>
     </div>
-    <div class="ftr__bot">
-      <p>&copy; <span data-year>2026</span> (주)신정개발. All rights reserved. <a class="ftr__pv" href="privacy.html">개인정보 처리방침</a></p>   <!-- 53차 -->
+    <nav class="ftr2__map" aria-label="사이트맵">
+      <div><h3><a href="services.html">사업분야</a></h3><ul><li><a href="service-equipment-cleaning.html">설비 클리닝</a></li><li><a href="service-catalyst-media.html">촉매·충진물 작업</a></li><li><a href="service-chemical-cleaning.html">화학세정</a></li><li><a href="service-dredging-sludge.html">준설·슬러지 회수</a></li><li><a href="service-inspection-repair.html">관로·지하 조사 및 보수</a></li></ul></div>
+      <div><h3><a href="unmanned.html">무인 솔루션</a></h3><ul><li><a href="unmanned.html#robots">로봇 라인업</a></li><li><a href="unmanned.html#method">작업 방식</a></li><li><a href="unmanned.html#rnd">연구개발 · 특허</a></li></ul></div>
+      <div><h3><a href="cases.html">적용 사례</a></h3><ul><li><a href="cases.html">분야별 적용 사례</a></li><li><a href="projects.html">수행 이력</a></li></ul></div>
+      <div><h3><a href="company.html">회사 소개</a></h3><ul><li><a href="company.html#greeting">인사말</a></li><li><a href="company.html#history">연혁 · 사업</a></li><li><a href="company.html#credentials">인증 · 특허</a></li><li><a href="company.html#organization">조직 · 장비</a></li><li><a href="company.html#location">오시는 길</a></li></ul></div>
+      <div><h3><a href="contact.html">고객 지원</a></h3><ul><li><a href="contact.html">현장 문의</a></li><li><a href="news.html">소식</a></li><li><a href="mailto:shinjeong@sjdevel.com">이메일 문의</a></li></ul></div>
+    </nav>
+    <div class="ftr2__info">
+      <address class="ftr2__addr">
+        <p><span><b>(주)신정개발</b></span><span>본사 전라남도 여수시 봉계2길 27</span><span>지사 충청남도 서산시 지곡면 충의로 1106</span></p>
+        <p><span>TEL <a href="tel:0616825537">061-682-5537</a></span><span>FAX 061-683-5567</span><span>E-mail <a href="mailto:shinjeong@sjdevel.com">shinjeong@sjdevel.com</a></span></p>
+      </address>
+      <div class="ftr2__cs"><small>현장 상담</small><a href="tel:0616825537">061-682-5537</a><span>문의 가능 시간 09:00 ~ 17:30</span></div>
+    </div>
+    <div class="ftr2__bot">
+      <ul class="ftr2__pol"><li><a class="is-b" href="privacy.html">개인정보 처리방침</a></li><li><a href="privacy.html#no-email">이메일 무단 수집 거부</a></li><li><a href="company.html#location">오시는 길</a></li></ul>
+      <p class="ftr2__copy">COPYRIGHT &copy; <span data-year>2026</span> SHINJEONG DEVELOPMENT CO., LTD. ALL RIGHTS RESERVED.</p>
       <button class="totop" type="button" data-totop>맨 위로 <span aria-hidden="true">↑</span></button>
     </div>
   </div>
-  <div class="moB-wordmark" aria-hidden="true">SHINJEONG DEVELOPMENT</div>   <!-- 시안B 16차: 바닥 대형 워드마크(장식, 머리말의 영문 상호 재사용, 낭독기에 안 읽힘) -->
 </footer>
 
 <nav class="mcta" aria-label="빠른 문의">
