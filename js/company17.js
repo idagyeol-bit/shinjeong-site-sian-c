@@ -70,3 +70,10 @@
     });
   });
 })();
+/* 시안C 56차: 휴대폰에서 인사말은 첫 문단만 보이고, '인사말 전체 보기'로 펼친다 */
+(function () {
+  var box = document.querySelector('.c7-msg__b'), btn = box && box.querySelector('.c7-msg__more');
+  if (!btn || !window.matchMedia('(max-width: 860px)').matches) return;
+  box.classList.add('is-fold'); btn.hidden = false;
+  btn.addEventListener('click', function () { var open = box.classList.toggle('is-open'); btn.setAttribute('aria-expanded', String(open)); btn.textContent = open ? '인사말 접기' : '인사말 전체 보기'; });
+})();
