@@ -31,3 +31,30 @@ m.style.setProperty('--aw',aw+'px');m.style.setProperty('--cw',cw+'px');var h=0;
 [].forEach.call(m.children,function(li){li.style.transition='none';li.classList.add('on');li.style.width=aw+'px';h=Math.max(h,li.querySelector('.tx').offsetHeight);li.classList.remove('on');li.style.width=cw+'px';var t=li.querySelector('.tx'),ef=t.querySelector('.ef'),ds=t.querySelector('.ds');if(ds)ds.style.display='none';if(ef)ef.style.display='none';h=Math.max(h,t.offsetHeight)});
 m.remove();hs.style.setProperty('--txH',Math.ceil(h+2)+'px');hs.classList.add('sm');addEventListener('load',function(){},{once:true})}
 lay();var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){last=0;lay();window.dispatchEvent(new Event('hxlay'))},120)});if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){last=0;lay()});addEventListener('load',function(){last=0;lay()})})();
+
+/* 시안C 47차: 펼친 칸 그림 위 설명표 — 그림 속 무엇을 가리키는지(로봇 부품 · 장비 · 슬러지). 자리는 영상 프레임마다 따라간다(assets/hero-flow/pins.json, 24fps 의 3프레임마다).
+   칸이 다 열린 뒤 하나씩 나타나고, 닫히면 바로 숨는다. 휴대폰은 data-m 이 붙은 설명표만 */
+(function(){var hs=document.getElementById('hs');if(!hs||!window.fetch)return;var P=null,rm=matchMedia('(prefers-reduced-motion: reduce)').matches,mob=matchMedia('(max-width:820px)');
+var base=(document.querySelector('script[src*="hero-flow.js"]')||{}).src||'js/hero-flow.js';
+fetch(new URL('../assets/hero-flow/pins.json',base).href).then(function(r){return r.json()}).then(function(j){P=j;requestAnimationFrame(loop)}).catch(function(){});
+var shown=null,tOn=0;
+function frame(li){var v=li.querySelector('.vd'),ph=li.querySelector('.ph');if(!v||!ph||!ph.classList.contains('pl')||rm)return 0;return Math.max(0,v.currentTime*8)}   /* 8 = 24fps ÷ 3 */
+function at(arr,f){if(!arr||!arr.length)return null;var i=Math.min(arr.length-1,Math.floor(f)),k=Math.min(arr.length-1,i+1),u=Math.min(1,f-i),a=arr[i],b=arr[k];if(!a||!b)return a||b;return[a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u]}
+function place(li){var box=li.querySelector('.pins'),ph=li.querySelector('.ph'),img=ph&&ph.querySelector('img.po');if(!box||!img||!P)return;var d=P[box.dataset.v];if(!d)return;
+  var pr=ph.getBoundingClientRect(),ir=img.getBoundingClientRect(),W=pr.width,H=pr.height,f=frame(li),m=mob.matches,M=10,rects=[];
+  var L=[];[].forEach.call(box.children,function(pin){var p=at(d[pin.dataset.id],f),use=p&&(!m||pin.dataset.m);pin.style.display=use?'':'none';if(use)L.push([pin,ir.left-pr.left+p[0]*ir.width,ir.top-pr.top+p[1]*ir.height])});
+  L.forEach(function(e){rects.push([e[1]-9,e[2]-9,18,18])});   /* 점 자리는 비워 둔다 */
+  L.forEach(function(e){var pin=e[0],x=e[1],y=e[2],b=pin.querySelector('b'),bw=b.offsetWidth,bh=b.offsetHeight;
+    var side=pin.dataset.side,dy=(+pin.dataset.dy||0)*(m?.7:1),gap=(m?.7:1)*(+pin.dataset.dx||26);
+    var fitIn=function(q){q[0]=Math.min(Math.max(q[0],M),W-M-bw);q[1]=Math.min(Math.max(q[1],M),H-M-bh);return q};
+    var free=function(q){return !rects.some(function(r){return q[0]<r[0]+r[2]+6&&q[0]+bw+6>r[0]&&q[1]<r[1]+r[3]+6&&q[1]+bh+6>r[1]})};
+    var best=null,sides=side==='l'?['l','r']:['r','l'];
+    for(var si=0;si<2&&!best;si++)for(var o=0;o<9&&!best;o++){var st=[0,1,-1,2,-2,3,-3,4,-4][o]*(bh/2+4);var q=fitIn([sides[si]==='l'?x-gap-bw:x+gap,y+dy-bh/2+st]);if(free(q))best=q}
+    if(!best)best=fitIn([side==='l'?x-gap-bw:x+gap,y+dy-bh/2]);var bx=best[0],by=best[1];rects.push([bx,by,bw,bh]);
+    var inside=x>=0&&x<=W&&y>=0&&y<=H;pin.classList.toggle('out',!inside);
+    pin.querySelector('.pd').style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px)';b.style.transform='translate('+bx.toFixed(1)+'px,'+by.toFixed(1)+'px)';
+    var ex=Math.max(bx,Math.min(x,bx+bw)),ey=Math.max(by,Math.min(y,by+bh));if(ex===x&&ey===y)ey=by;var lx=ex-x,ly=ey-y,Ln=Math.hypot(lx,ly);var k=pin.querySelector('.pk');k.style.width=Ln.toFixed(1)+'px';k.style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px) rotate('+Math.atan2(ly,lx)+'rad)'})}
+function loop(){var li=hs.querySelector('li.on');if(li!==shown){if(shown){var o=shown.querySelector('.pins');if(o)o.classList.remove('on')}shown=li;tOn=performance.now()}
+  if(li&&!document.hidden){var box=li.querySelector('.pins');if(box){var ready=performance.now()-tOn>(mob.matches?250:760);place(li);if(ready)box.classList.add('on')}}
+  requestAnimationFrame(loop)}
+})();

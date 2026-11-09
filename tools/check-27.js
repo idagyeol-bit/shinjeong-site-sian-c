@@ -37,7 +37,7 @@ ok(/<body[^>]*data-hero="flow"/.test(h), "body data-hero=\"flow\"");
 ok(!/class="h3d"|hero-story\.js|class="why2"|id="how"/.test(h), '3D 첫 화면 · 왜 로봇인가 · 어떻게 일하나 없음');
 ok(/<script src="js\/hero-flow\.js\?v=/.test(h), 'js/hero-flow.js 연결');
 ok((main.match(/<li(?: class="rbt")?><i class="bar"><\/i><button type="button" class="sb"/g) || []).length === 5, '일하는 순서 다섯 칸');
-ok((h.match(/assets\/hero-flow\/[a-z0-9]+\.webp/g) || []).length === 22 && (h.match(/assets\/hero-flow\/v\d\.mp4/g) || []).length === 5, '그림 22장(영상 첫 장면 5 포함) · 영상 5개 연결');
+ok((h.match(/assets\/hero-flow\/p\d\.webp/g) || []).length === 5 && !/assets\/hero-flow\/[tf]\d/.test(h) && (h.match(/assets\/hero-flow\/v\d\.mp4/g) || []).length === 5, '47차: 칸마다 한 장면(p1~p5) · 영상 5개 연결, 예전 t · f 그림 없음');
 ok(!/<section class="hn"/.test(main), '숫자 줄은 첫 화면으로 합침(43차)');
 ok((main.match(/class="sv5__rec"/g) || []).length === 5 && !/<span class="sv5__t"><em>/.test(main), '다섯 가지 일: 실적 한 줄 5개 · 번호 없음');
 ok((main.match(/<section class="rf"[\s\S]*?<\/section>/)[0].match(/<figure>/g) || []).length === 4, '실제 현장 사진 넷');
