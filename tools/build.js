@@ -5052,7 +5052,7 @@ CFG = BASE_CFG;
    파일 내용이 바뀌면 지문도 바뀌어 브라우저가 새 파일을 받는다(예전 파일을 기억해 새 HTML 과 어긋나 화면이 깨지는 일 방지). 파일이 없으면 주소를 그대로 둔다 */
 const BUST = {};
 function bust(html) {
-  return html.replace(/(href|src)="((?:\.\.\/)?)((?:css|js)\/[^"?#]+\.(?:css|js))"/g, (m, a, up, f) => {
+  return html.replace(/(href|src|poster)="((?:\.\.\/)?)((?:css|js)\/[^"?#]+\.(?:css|js)|assets\/hero-flow\/[^"?#]+\.(?:webp|mp4))"/g, (m, a, up, f) => {   // 57차 보완: 다시 그린 첫 화면 그림 · 영상도 지문을 붙인다
     if (!(f in BUST)) { const p = path.join(OUT, f); BUST[f] = fs.existsSync(p) ? require('crypto').createHash('sha1').update(fs.readFileSync(p)).digest('hex').slice(0, 8) : ''; }
     return BUST[f] ? `${a}="${up}${f}?v=${BUST[f]}"` : m;
   });

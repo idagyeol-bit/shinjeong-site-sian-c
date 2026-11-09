@@ -348,5 +348,12 @@ fs.readdirSync(OUT).forEach((f) => {
   if (/\.html$/.test(f) && !LITE_PAGES.includes(f)) fs.unlinkSync(p);
 });
 const out = { 'index.html': homePage, 'technology.html': techPage, 'contact.html': contactPage };
-Object.keys(out).forEach((f) => fs.writeFileSync(path.join(OUT, f), out[f], 'utf8'));
+/* 57차 보완(2026-11-09): 국문과 같이 css · js 주소 끝에 파일 지문(?v=8글자)을 붙인다 — 바뀐 디자인 파일을 브라우저가 예전 것(캐시)으로 쓰지 않게.
+   지문이 없어서 엣지 · 크롬이 55차 이전 site.css 를 그대로 써 영문 본문 모양이 깨져 보였다 */
+const BUST = {};
+const bust = (html) => html.replace(/(href|src|poster)="\.\.\/((?:css|js)\/[^"?#]+\.(?:css|js)|assets\/hero-flow\/[^"?#]+\.(?:webp|mp4))"/g, (m, a, f) => {
+  if (!(f in BUST)) { const p = path.join(ROOT, f); BUST[f] = fs.existsSync(p) ? require('crypto').createHash('sha1').update(fs.readFileSync(p)).digest('hex').slice(0, 8) : ''; }
+  return BUST[f] ? `${a}="../${f}?v=${BUST[f]}"` : m;
+});
+Object.keys(out).forEach((f) => fs.writeFileSync(path.join(OUT, f), bust(out[f]), 'utf8'));
 console.log(`영문판(축약) 생성 완료: en/ ${Object.keys(out).length}쪽 (첫 화면 숫자 ${heroMeta.join('·')}, 연구소 ${rnd}, 로봇 ${generations}세대, 전화 ${intl(tel)}, 팩스 ${intl(fax)})`);
