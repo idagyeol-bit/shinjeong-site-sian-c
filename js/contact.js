@@ -69,8 +69,9 @@
       setBad(email, emailBad, emailVal ? '이메일 주소 형식을 확인해 주세요.' : '회신받으실 이메일을 입력해 주세요.');
       if (emailBad && !bad) bad = email;
 
-      var bodyBad = body.value.replace(/^문의 업무: .*\n?/, '').trim().length < 5;   // 미리 채운 업무 줄만 있으면 아직 안 쓴 것으로 본다
-      setBad(body, bodyBad, '문의 내용을 조금 더 적어 주세요.');
+      var picked = form.querySelector('[name="service"]'); picked = picked && picked.value;   // 52차: 설비를 골랐으면 현장 상황은 선택
+      var bodyBad = !picked && body.value.replace(/^문의 업무: .*\n?/, '').trim().length < 5;   // 미리 채운 업무 줄만 있으면 아직 안 쓴 것으로 본다
+      setBad(body, bodyBad, '설비를 고르시거나, 현장 상황을 조금 적어 주세요.');
       if (bodyBad && !bad) bad = body;
 
       return bad;
@@ -98,10 +99,11 @@
         has('service') ? '■ 문의 업무: ' + (service || '-') : null,
         has('target') ? '■ 대상 설비: ' + (get('target') || '-') : null,
         has('place') ? '■ 현장 위치: ' + (get('place') || '-') : null,
+        has('cond') ? '■ 현장 조건: ' + (get('cond') || '-') : null,   // 52차
         '■ 희망 일정: ' + (get('when') || '-'),
         '',
-        '■ 문의 내용',
-        get('body'),
+        '■ 현장 상황',
+        get('body') || '-',
         '',
         '— 신정개발 홈페이지 문의 양식에서 작성'
       ].filter(function (l) { return l !== null; });
@@ -172,28 +174,25 @@
   });
 })();
 
-/* 시안C 51차: '우리 현장 진단' 4문항 — 설비를 고르면 맞는 분야 · 장비 · 로봇 한 줄 · 준비할 것이 나오고, 단추를 누르면 문의 양식(업무 · 대상 설비 · 희망 시기 · 내용)을 채운다 */
+
+/* 시안C 52차: 문의 남기기 — 설비를 고르면 맞는 분야 · 투입 장비가 바로 보이고(방폭지역이면 유압 구동 한 줄), 고른 것은 숨은 칸(service · target · cond · when)에 담겨 메일에 들어간다 */
 (function () {
-  var box = document.querySelector('.dg-box'); if (!box) return;
-  var go = box.querySelector('.dg-go'), empty = box.querySelector('.dg-r__empty'), ex = box.querySelector('.dg-r__ex'), prep = box.querySelector('.dg-r__prep');
-  function val(q) { var r = box.querySelector('input[name="dg-' + q + '"]:checked'); return r ? r : null; }
-  function txt(r) { return r ? r.parentNode.querySelector('span').textContent : ''; }
+  var form = document.getElementById('inquiryForm'); if (!form || !form.querySelector('[name="cq-eq"]')) return;
+  var fit = form.querySelector('.cq-fit'), ex = form.querySelector('.cq-fit__ex');
+  var map = {}; try { map = JSON.parse(form.getAttribute('data-svc') || '{}'); } catch (e) {}
+  var put = function (n, v) { var el = form.querySelector('input[type="hidden"][name="' + n + '"]'); if (el) el.value = v; };
   function upd() {
-    var a = val('q1'), svc = a ? a.value : '';
-    [].forEach.call(box.querySelectorAll('.dg-svc'), function (d) { d.hidden = d.dataset.svc !== svc; });
-    empty.hidden = !!svc; prep.hidden = !svc; go.disabled = !svc;
-    var e = val('q3'); ex.hidden = !(svc && (svc === 'S01' || svc === 'S02') && e && e.value !== 'n');
+    var eq = form.querySelector('[name="cq-eq"]:checked'), svc = eq ? eq.value : '';
+    fit.hidden = !svc; [].forEach.call(fit.querySelectorAll('[data-svc]'), function (p) { p.hidden = p.dataset.svc !== svc; });
+    var cs = [].map.call(form.querySelectorAll('[name="cq-c"]:checked'), function (c) { return c.value; });
+    ex.hidden = !((svc === 'S01' || svc === 'S02') && cs.indexOf('방폭지역') > -1);
+    var w = form.querySelector('[name="cq-when"]:checked');
+    put('service', map[svc] || ''); put('target', eq ? eq.dataset.t : ''); put('cond', cs.join(', ')); put('when', w ? (w.value || '미정') : '');
+    if (svc) { var b = form.querySelector('[name="body"]'); var wrap = b && b.closest('.field'); if (wrap && wrap.classList.contains('is-bad')) { wrap.classList.remove('is-bad'); var er = wrap.querySelector('.field__err'); if (er) er.hidden = true; } }
   }
-  box.addEventListener('change', upd);
-  go.addEventListener('click', function () {
-    var a = val('q1'); if (!a) return;
-    var f = document.querySelector('#inquiry form') || document.querySelector('form.ct-form') || document.querySelector('#inquiry');
-    var set = function (n, v) { var el = document.querySelector('#inquiry [name="' + n + '"]'); if (el && v != null && (!el.value || n === 'service')) { el.value = v; el.dispatchEvent(new Event('change', { bubbles: true })); } };
-    set('service', a.value); set('target', txt(a)); var w = val('q4'); if (w) set('when', w.value === '미정' ? '' : w.value);
-    var lines = ['[현장 진단]', '· 설비: ' + txt(a), '· 내부 위험: ' + (txt(val('q2')) || '-'), '· 방폭지역: ' + (txt(val('q3')) || '-'), '· 희망 시기: ' + (txt(w) || '-'), ''];
-    var body = document.querySelector('#inquiry [name="body"]'); if (body && body.value.indexOf('[현장 진단]') < 0) { body.value = lines.join('\n') + body.value; }
-    var t = document.getElementById('inquiry'); if (t) t.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
-    var n = document.querySelector('#inquiry [name="name"]'); if (n) setTimeout(function () { try { n.focus({ preventScroll: true }); } catch (x) {} }, 600);
-  });
+  form.addEventListener('change', upd);
+  /* 주소로 넘어온 분야(?service=S0x) — 그 분야의 첫 설비를 골라 둔다 */
+  var v = new URLSearchParams(location.search).get('service');
+  if (v) { var r = form.querySelector('[name="cq-eq"][value="' + v.replace(/"/g, '') + '"]'); if (r) r.checked = true; var b = form.querySelector('[name="body"]'); if (b && /^문의 업무: /.test(b.value)) b.value = ''; }
   upd();
 })();

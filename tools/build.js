@@ -809,7 +809,7 @@ const WHAT_TILES = [
 const TILE_TARGETS = (svcId) => CARD_CHIPS[svcId].slice(0, 4).join(' · ');   // 타일 둘째 줄: 대상 설비 네 개까지
 const FINDER = {
   title: '우리 설비는 어디에 해당할까요',
-  lead: '설비 상태로 찾으면 맡길 일이 바로 보입니다. 현장 조건까지 함께 보시려면 <a class="tlink" href="contact.html#diag">4문항 현장 진단 →</a>',   // 51차: 현장 진단으로 가는 길
+  lead: '설비 상태로 찾으면 맡길 일이 바로 보입니다. <a class="tlink" href="contact.html#inquiry">현장 문의</a>에서 설비만 고르셔도 맞는 분야를 안내해 드립니다.',   // 52차
   rows: [
     { svc: 'S01', have: '탱크 · Pond · 배수로 · R.T.O', situation: '잔류물과 퇴적물이 쌓였다면', gear: '흡입 로봇 · 제어 차량 투입' },
     { svc: 'S02', have: '반응기', situation: '촉매·충진물을 교체해야 한다면', gear: '흡입 로봇 · 분리장치 투입' },
@@ -4577,146 +4577,66 @@ pages['contact.html'] = () => head({
   title: `현장 문의 | ${C.brand}`,
   desc: '대상 설비와 작업 목적, 희망 일정을 보내 주시면 가능한 작업 범위와 진행 방법을 안내해 드립니다.'
 }) + header('contact', null, 'contact.html') + `
-<main id="main">
+<main id="main" class="cq-page">
 ` + phero({
   kick: '현장 문의',
   h1: '현장을 알려 주시면<br>작업 방법을 안내해 드립니다',   // 49차: 손님에게 하는 말
-  keepLead: '대상 설비와 작업 목적, 희망 일정을 보내 주세요. 전화 · 이메일 · 문의 양식 가운데 편하신 방법으로 연락 주시면 됩니다.',
+  keepLead: '전화 한 통, 또는 아래 문의 한 번이면 됩니다. 확인 후 가능한 작업 범위와 진행 방법을 안내해 드립니다.',   // 52차
   crumbs: [{ label: '현장 문의' }]
 }) + `
-  <!-- 01 문의 방법 (32차: 전화 · 이메일 · 문의 양식 세 칸) -->
-  <section class="section section--sm">
-    <div class="wrap">
-      <div class="head head--solo" data-reveal><div><h2>문의 방법</h2></div></div>
-      <div class="ct-ways" data-reveal>
-        <div>
-          <h3>전화</h3>
-          <p class="ct-ways__main"><a href="tel:${C.tel.replace(/-/g, '')}">${C.tel}</a></p>
-          <p class="ct-ways__sub">문의 가능 시간 ${esc(C.hours)}</p>
-          <p class="ct-ways__sub">팩스 ${C.fax}</p>
+  <!-- 시안C 52차: 문의 쪽을 한 화면으로 — 왼쪽 '바로 연락'(전화 · 이메일 · 보내 주시면 좋은 것 · 문의 후 진행), 오른쪽 '문의 남기기'(설비 고르기 → 맞는 분야, 해당 조건, 희망 시기, 이름 · 이메일 · 연락처 · 내용).
+       51차 '현장 진단' 4문항과 '문의 방법' 세 칸은 이 양식 하나로 합쳤다. 글은 DIAG · FINDER 와 예전 문의 쪽 글 그대로 -->
+  <section class="section cq" id="inquiry" aria-label="문의">
+    <div class="wrap cq__grid">
+      <aside class="cq-side" aria-label="바로 연락">
+        <p class="cq-side__k">전화로 바로</p>
+        <p class="cq-side__tel"><a href="tel:${C.tel.replace(/-/g, '')}">${C.tel}</a></p>
+        <p class="cq-side__s">문의 가능 시간 ${esc(C.hours)} · 팩스 ${C.fax}</p>
+        <p class="cq-side__k">이메일</p>
+        <p class="cq-side__mail"><a href="mailto:${C.email}">${C.email}</a> <button class="cq-copy" type="button" data-copy="mail">주소 복사</button></p>
+        <p class="cq-side__s">사진 · 도면은 이메일로 보내 주시면 편리합니다.</p>
+        <div class="cq-side__box"><p class="cq-side__k">보내 주시면 좋은 것</p><ul>${DIAG.prep.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>
+        <div class="cq-side__box"><p class="cq-side__k">문의 후 진행</p><ol><li>문의를 받으면 현장 조건(출입구 · 내부 구조 · 잔류물 특성)을 확인합니다.</li><li>가능한 작업 범위와 진행 방법을 안내해 드립니다.</li></ol></div>
+        <p class="cq-side__s cq-side__loc">본사 · 지사 위치는 <a href="company.html#location">오시는 길</a>에 있습니다.</p>
+      </aside>
+
+      <form class="cq-form" id="inquiryForm" novalidate data-svc="${esc(JSON.stringify(Object.fromEntries(SERVICES.map((x) => [x.id, x.title]))))}">
+        <h2 class="cq-form__h">문의 남기기</h2>
+        <fieldset class="cq-q"><legend>어떤 설비인가요?</legend>
+          <div class="cq-ops">${DIAG.q1.map(([t, v]) => `<label><input type="radio" name="cq-eq" value="${v}" data-t="${esc(t)}"><span>${esc(t)}</span></label>`).join('')}</div>
+          <div class="cq-fit" aria-live="polite" hidden>${SERVICES.map((x) => { const f = FINDER.rows.find((r) => r.svc === x.id) || {}; return `<p data-svc="${x.id}" hidden>맞는 분야 <a href="${x.file}">${esc(x.title)} ${arrow(14)}</a><small>${esc(f.gear || '')}</small></p>`; }).join('')}<p class="cq-fit__ex" hidden>${esc(DIAG.ex)}</p></div>
+        </fieldset>
+        <fieldset class="cq-q"><legend>해당되는 것이 있나요? <small>선택</small></legend>
+          <div class="cq-ops"><label><input type="checkbox" name="cq-c" value="밀폐공간 · 유해물질"><span>사람이 들어가기 위험함 (밀폐공간 · 유해물질)</span></label><label><input type="checkbox" name="cq-c" value="방폭지역"><span>방폭지역</span></label></div>
+        </fieldset>
+        <fieldset class="cq-q"><legend>언제 작업하시려고 하나요? <small>선택</small></legend>
+          <div class="cq-ops">${DIAG.q4.map(([t, v]) => `<label><input type="radio" name="cq-when" value="${esc(v === '미정' ? '' : v)}"><span>${esc(t)}</span></label>`).join('')}</div>
+        </fieldset>
+        <input type="hidden" name="service" value=""><input type="hidden" name="target" value=""><input type="hidden" name="cond" value=""><input type="hidden" name="when" value="">
+        <div class="cq-row">
+          <div class="field"><label for="f-name">이름 또는 회사명 <em aria-hidden="true">*</em><span class="sr-only">(필수)</span></label><input type="text" id="f-name" name="name" autocomplete="organization" required><p class="field__err" hidden></p></div>
+          <div class="field"><label for="f-email">회신 받으실 이메일 <em aria-hidden="true">*</em><span class="sr-only">(필수)</span></label><input type="email" id="f-email" name="email" autocomplete="email" required><p class="field__err" hidden></p></div>
         </div>
-        <div>
-          <h3>이메일</h3>
-          <p class="ct-ways__main"><a href="mailto:${C.email}">${C.email}</a></p>
-          <p class="ct-ways__sub">사진·도면을 함께 보내실 때 편리합니다.</p>
-          <p class="ct-ways__act"><button class="btn btn--line btn--sm" type="button" data-copy="mail">이메일 주소 복사</button></p>
+        <div class="field"><label for="f-phone">연락처 <small>선택</small></label><input type="tel" id="f-phone" name="phone" autocomplete="tel" inputmode="tel"></div>
+        <div class="field"><label for="f-body">현장 상황 <small>설비를 고르셨다면 선택</small></label><textarea id="f-body" name="body" rows="4" placeholder="예: 탱크 바닥에 슬러지가 쌓여 있습니다. 크기 · 구조 · 잔류물을 아시면 함께 적어 주세요."></textarea><p class="field__err" hidden></p></div>
+        <div class="form__act"><button class="btn btn--fill cq-send" type="submit">메일로 문의 보내기 ${arrow(18)}</button></div>
+        <p class="cq-note">메일 앱이 열리고 내용이 채워집니다. 열리지 않으면 ${C.tel} 으로 전화 주세요. 적어 주신 정보는 답변에만 씁니다.</p>
+        <p class="form__msg" id="formMsg" role="status" aria-live="polite"></p>
+        <div id="copyWrap" hidden>
+          <pre class="copybox" id="copyBox" tabindex="0"></pre>
+          <div class="mt-12"><button class="btn btn--line btn--sm" type="button" data-copy="body">문의 내용 복사</button></div>
         </div>
-        <div>
-          <h3>문의 양식</h3>
-          <p class="ct-ways__sub ct-ways__sub--lead">아래 양식을 채우면 문의 메일이 작성됩니다.</p>
-          <p class="ct-ways__act"><a class="btn btn--fill btn--sm" href="#inquiry">문의 양식 작성</a></p>
-        </div>
-      </div>
-      <p class="note mt-24" data-reveal>본사·지사의 주소와 지도는 <a class="ct-link" href="company.html#location">오시는 길</a>에 있습니다.</p>
+      </form>
     </div>
   </section>
-
-  <!-- 02 문의 양식 (32차: 대상 설비 칸 추가, 양식 옆 안내) -->
-${diagSection()}
-  <section class="section section--soft" id="inquiry">
+${CFG.look && CFG.look.contactFaq ? `
+  <section class="section cq-faq" aria-labelledby="cq-faq-h">
     <div class="wrap">
-      <div class="${contactSlim() ? 'ctB-form' : 'split split--top split--wide'}">
-
-        <div data-reveal>
-          <h2>문의 양식</h2>
-
-          <form class="form mt-28" id="inquiryForm" novalidate data-svc="${esc(JSON.stringify(Object.fromEntries(SERVICES.map((x) => [x.id, x.title]))))}">   <!-- 2026-11-01: 업무 이름표 — 주소의 ?service=S0x 를 문의 내용 첫 줄로(js/contact.js) -->
-            <div class="form__row">
-              <div class="field">
-                <label for="f-name">이름 또는 회사명 <em aria-hidden="true">*</em><span class="sr-only">(필수)</span></label>
-                <input type="text" id="f-name" name="name" autocomplete="organization" required>
-                <p class="field__err" hidden></p>
-              </div>
-              <div class="field">
-                <label for="f-email">회신 이메일 <em aria-hidden="true">*</em><span class="sr-only">(필수)</span></label>
-                <input type="email" id="f-email" name="email" autocomplete="email" required>
-                <p class="field__err" hidden></p>
-              </div>
-            </div>
-
-            <div class="form__row">
-              <div class="field">
-                <label for="f-phone">연락처</label>
-                <input type="tel" id="f-phone" name="phone" autocomplete="tel" inputmode="tel">
-              </div>
-              <div class="field">
-                <label for="f-when">희망 일정</label>
-                <input type="text" id="f-when" name="when" placeholder="예: 2027년 상반기 정기보수">
-              </div>
-            </div>
-
-${contactSlim() ? '' : `            <div class="form__row">
-              <div class="field">
-                <label for="f-service">문의 업무</label>
-                <select id="f-service" name="service">
-                  <option value="">선택하지 않음</option>
-${SERVICES.map((s) => `                  <option value="${s.id}">${esc(s.title)}</option>`).join('\n')}
-                </select>
-              </div>
-              <div class="field">
-                <label for="f-target">대상 설비</label>
-                <input type="text" id="f-target" name="target" placeholder="예: 탱크, 반응기, 관로">
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="f-place">현장 위치</label>
-              <input type="text" id="f-place" name="place" placeholder="예: 전남 여수">
-            </div>
-
-`}            <div class="field">
-              <label for="f-body">문의 내용 <em aria-hidden="true">*</em><span class="sr-only">(필수)</span></label>
-              <textarea id="f-body" name="body" required placeholder="작업 목적과 현장 상태를 적어 주세요. 크기·구조·잔류물 정보를 알고 계시면 함께 적어 주세요."></textarea>
-              <p class="field__err" hidden></p>
-            </div>
-
-            <p class="ct-how"><b>보내는 방법</b> 아래 버튼을 누르면 사용하시는 메일 앱이 열리고 문의 내용이 채워집니다. 메일 앱이 열리지 않으면 버튼 아래에 나오는 문의 내용을 복사해 ${C.email} 으로 보내 주시거나 전화로 문의해 주세요.</p>
-            <p class="note">입력하신 이름·연락처·이메일은 문의 답변에만 사용합니다.</p>
-            <div class="form__act">
-              <button class="btn btn--fill" type="submit">메일로 문의 보내기 ${arrow(18)}</button>
-            </div>
-            <p class="form__msg" id="formMsg" role="status" aria-live="polite"></p>
-
-            <div id="copyWrap" hidden>
-              <p class="note mt-6">메일 앱이 열리지 않으면 아래 내용을 복사해 보내 주세요.</p>
-              <pre class="copybox" id="copyBox" tabindex="0"></pre>
-              <div class="mt-12"><button class="btn btn--line btn--sm" type="button" data-copy="body">문의 내용 복사</button></div>
-            </div>
-          </form>
-        </div>
-
-${contactSlim() ? '' : `        <div class="ct-guide" data-reveal data-delay="90">
-          <h3>적어 주시면 좋은 내용</h3>
-          <ul class="ct-guide__list">
-            <li><b>대상 설비</b><p>탱크·반응기·관로 등 작업 대상</p></li>
-            <li><b>작업 목적</b><p>클리닝·제거·교체·조사 등</p></li>
-            <li><b>현장 상태</b><p>크기·구조·잔류물 정보, 사진·도면</p></li>
-            <li><b>희망 일정</b><p>정기보수 기간 등 가능한 시기</p></li>
-          </ul>${contactFooterOnly() ? `
-          <p class="note mt-12">${esc(PROJECTS_CTA_P)}</p>   <!-- 시안B 26차: 수행 이력 문의 띠에서 옮긴 문장 -->` : ''}
-          <h3 class="mt-block-sm">문의 후 진행 순서</h3>
-          <ol class="ct-guide__steps">
-            <li><b>문의</b><p>전화, 이메일, 문의 양식 가운데 편한 방법으로 알려 주세요.</p></li>
-            <li><b>현장 조건 확인</b><p>출입구와 내부 구조, 잔류물 특성 등을 확인합니다.</p></li>
-            <li><b>적용 범위와 진행 방법 안내</b><p>가능한 작업 범위와 진행 방법을 안내해 드립니다.</p></li>
-          </ol>
-          <div class="mt-18"><a class="tlink" href="unmanned.html#how">작업 절차 보기 ${arrow(14)}</a></div>   <!-- 9차: '현장 진행 방식 보기'(process.html) → 무인 솔루션 '어떻게' -->
-        </div>
-`}
-      </div>
-    </div>
-  </section>
-${contactSlim() && !(CFG.look && CFG.look.contactFaq) ? '' : `
-  <!-- 03 자주 묻는 질문 (시안C 45차: look.contactFaq 이면 슬림 문의 쪽에도 — 문의 전에 손님이 스스로 확인) -->
-  <section class="section">
-    <div class="wrap">
-      <div class="head">
-        <div data-reveal><h2>자주 묻는 질문</h2></div>
-      </div>
+      <div class="head"><div data-reveal><h2 id="cq-faq-h">자주 물으시는 것</h2></div></div>
 ${faqBlock()}
     </div>
   </section>
-`}
+` : ''}
 </main>
 
 ` + footer() + foot(['contact.js']);

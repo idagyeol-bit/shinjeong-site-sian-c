@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="assets/logo/shinjeong-symbol.png">
 <link rel="preload" href="assets/fonts/sub/PretendardVariable-0.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/tokens.css?v=22103a3d">
-<link rel="stylesheet" href="css/site.css?v=f4fac64e">
+<link rel="stylesheet" href="css/site.css?v=bf4bcf79">
 </head>
 <body class="moB-root" data-page="contact">
 <a class="skip-link" href="#main">본문 바로가기</a>
@@ -89,128 +89,64 @@
   </div>
 </div>
 
-<main id="main">
+<main id="main" class="cq-page">
   <section class="phero">
     <div class="wrap">
       <nav class="s6-crumb phero__crumb" aria-label="현재 위치"><a href="index.html">홈</a><span aria-hidden="true">›</span><span aria-current="page">현장 문의</span></nav>
       <h1><small>현장 문의</small>현장을 알려 주시면<br>작업 방법을 안내해 드립니다</h1>
-      <p class="phero__lead">대상 설비와 작업 목적, 희망 일정을 보내 주세요. 전화 · 이메일 · 문의 양식 가운데 편하신 방법으로 연락 주시면 됩니다.</p>
+      <p class="phero__lead">전화 한 통, 또는 아래 문의 한 번이면 됩니다. 확인 후 가능한 작업 범위와 진행 방법을 안내해 드립니다.</p>
     </div>
   </section>
 
-  <!-- 01 문의 방법 (32차: 전화 · 이메일 · 문의 양식 세 칸) -->
-  <section class="section section--sm">
-    <div class="wrap">
-      <div class="head head--solo" data-reveal><div><h2>문의 방법</h2></div></div>
-      <div class="ct-ways" data-reveal>
-        <div>
-          <h3>전화</h3>
-          <p class="ct-ways__main"><a href="tel:0616825537">061-682-5537</a></p>
-          <p class="ct-ways__sub">문의 가능 시간 09:00 ~ 17:30</p>
-          <p class="ct-ways__sub">팩스 061-683-5567</p>
-        </div>
-        <div>
-          <h3>이메일</h3>
-          <p class="ct-ways__main"><a href="mailto:shinjeong@sjdevel.com">shinjeong@sjdevel.com</a></p>
-          <p class="ct-ways__sub">사진·도면을 함께 보내실 때 편리합니다.</p>
-          <p class="ct-ways__act"><button class="btn btn--line btn--sm" type="button" data-copy="mail">이메일 주소 복사</button></p>
-        </div>
-        <div>
-          <h3>문의 양식</h3>
-          <p class="ct-ways__sub ct-ways__sub--lead">아래 양식을 채우면 문의 메일이 작성됩니다.</p>
-          <p class="ct-ways__act"><a class="btn btn--fill btn--sm" href="#inquiry">문의 양식 작성</a></p>
-        </div>
-      </div>
-      <p class="note mt-24" data-reveal>본사·지사의 주소와 지도는 <a class="ct-link" href="company.html#location">오시는 길</a>에 있습니다.</p>
-    </div>
-  </section>
+  <!-- 시안C 52차: 문의 쪽을 한 화면으로 — 왼쪽 '바로 연락'(전화 · 이메일 · 보내 주시면 좋은 것 · 문의 후 진행), 오른쪽 '문의 남기기'(설비 고르기 → 맞는 분야, 해당 조건, 희망 시기, 이름 · 이메일 · 연락처 · 내용).
+       51차 '현장 진단' 4문항과 '문의 방법' 세 칸은 이 양식 하나로 합쳤다. 글은 DIAG · FINDER 와 예전 문의 쪽 글 그대로 -->
+  <section class="section cq" id="inquiry" aria-label="문의">
+    <div class="wrap cq__grid">
+      <aside class="cq-side" aria-label="바로 연락">
+        <p class="cq-side__k">전화로 바로</p>
+        <p class="cq-side__tel"><a href="tel:0616825537">061-682-5537</a></p>
+        <p class="cq-side__s">문의 가능 시간 09:00 ~ 17:30 · 팩스 061-683-5567</p>
+        <p class="cq-side__k">이메일</p>
+        <p class="cq-side__mail"><a href="mailto:shinjeong@sjdevel.com">shinjeong@sjdevel.com</a> <button class="cq-copy" type="button" data-copy="mail">주소 복사</button></p>
+        <p class="cq-side__s">사진 · 도면은 이메일로 보내 주시면 편리합니다.</p>
+        <div class="cq-side__box"><p class="cq-side__k">보내 주시면 좋은 것</p><ul><li>설비 종류와 크기 · 구조 (도면이 있으면 함께)</li><li>안에 쌓인 물질과 상태</li><li>희망 일정과 현장 위치</li><li>현장 사진</li></ul></div>
+        <div class="cq-side__box"><p class="cq-side__k">문의 후 진행</p><ol><li>문의를 받으면 현장 조건(출입구 · 내부 구조 · 잔류물 특성)을 확인합니다.</li><li>가능한 작업 범위와 진행 방법을 안내해 드립니다.</li></ol></div>
+        <p class="cq-side__s cq-side__loc">본사 · 지사 위치는 <a href="company.html#location">오시는 길</a>에 있습니다.</p>
+      </aside>
 
-  <!-- 02 문의 양식 (32차: 대상 설비 칸 추가, 양식 옆 안내) -->
-  <section class="section dg" id="diag" aria-labelledby="dg-h">
-    <div class="wrap">
-      <div class="head"><div><p class="h24-k">현장 진단</p><h2 id="dg-h">네 가지만 알려 주시면,<br>맞는 작업을 찾아 드립니다</h2></div><p class="lead">설비와 현장 조건에 맞는 분야 · 장비와, 상담 전에 준비하시면 좋은 것을 바로 보실 수 있습니다.</p></div>
-      <form class="dg-box" onsubmit="return false" novalidate>
-        <div class="dg-qs">
-          <fieldset class="dg-q" data-q="q1"><legend><em>01</em>어떤 설비인가요?</legend><div class="dg-ops"><label><input type="radio" name="dg-q1" value="S01" data-i="0"><span>탱크 · Pond · 배수로</span></label><label><input type="radio" name="dg-q1" value="S01" data-i="1"><span>R.T.O · Filter Press</span></label><label><input type="radio" name="dg-q1" value="S02" data-i="2"><span>반응기 (촉매 · 충진물)</span></label><label><input type="radio" name="dg-q1" value="S03" data-i="3"><span>배관 · 열교환기 · 냉각탑 · 보일러</span></label><label><input type="radio" name="dg-q1" value="S04" data-i="4"><span>하수관 · 오수관 · 처리시설</span></label><label><input type="radio" name="dg-q1" value="S05" data-i="5"><span>관로 · 맨홀 (조사 · 보수)</span></label></div></fieldset>
-          <fieldset class="dg-q" data-q="q2"><legend><em>02</em>설비 안에 사람이 들어가기 위험한가요? (밀폐공간 · 유해물질)</legend><div class="dg-ops"><label><input type="radio" name="dg-q2" value="y"><span>예, 위험합니다</span></label><label><input type="radio" name="dg-q2" value="n"><span>아니요</span></label><label><input type="radio" name="dg-q2" value="u"><span>잘 모르겠습니다</span></label></div></fieldset>
-          <fieldset class="dg-q" data-q="q3"><legend><em>03</em>방폭지역인가요?</legend><div class="dg-ops"><label><input type="radio" name="dg-q3" value="y"><span>예, 방폭지역입니다</span></label><label><input type="radio" name="dg-q3" value="n"><span>아니요</span></label><label><input type="radio" name="dg-q3" value="u"><span>잘 모르겠습니다</span></label></div></fieldset>
-          <fieldset class="dg-q" data-q="q4"><legend><em>04</em>언제 작업하시려고 하나요?</legend><div class="dg-ops"><label><input type="radio" name="dg-q4" value="정기보수 · 대정비 기간"><span>정기보수 · 대정비 기간</span></label><label><input type="radio" name="dg-q4" value="가능한 빨리"><span>가능한 빨리</span></label><label><input type="radio" name="dg-q4" value="미정"><span>아직 정하지 않았습니다</span></label></div></fieldset>
+      <form class="cq-form" id="inquiryForm" novalidate data-svc="{&quot;S01&quot;:&quot;설비 클리닝&quot;,&quot;S02&quot;:&quot;촉매·충진물 작업&quot;,&quot;S03&quot;:&quot;화학세정&quot;,&quot;S04&quot;:&quot;준설·슬러지 회수&quot;,&quot;S05&quot;:&quot;관로·지하 조사 및 보수&quot;}">
+        <h2 class="cq-form__h">문의 남기기</h2>
+        <fieldset class="cq-q"><legend>어떤 설비인가요?</legend>
+          <div class="cq-ops"><label><input type="radio" name="cq-eq" value="S01" data-t="탱크 · Pond · 배수로"><span>탱크 · Pond · 배수로</span></label><label><input type="radio" name="cq-eq" value="S01" data-t="R.T.O · Filter Press"><span>R.T.O · Filter Press</span></label><label><input type="radio" name="cq-eq" value="S02" data-t="반응기 (촉매 · 충진물)"><span>반응기 (촉매 · 충진물)</span></label><label><input type="radio" name="cq-eq" value="S03" data-t="배관 · 열교환기 · 냉각탑 · 보일러"><span>배관 · 열교환기 · 냉각탑 · 보일러</span></label><label><input type="radio" name="cq-eq" value="S04" data-t="하수관 · 오수관 · 처리시설"><span>하수관 · 오수관 · 처리시설</span></label><label><input type="radio" name="cq-eq" value="S05" data-t="관로 · 맨홀 (조사 · 보수)"><span>관로 · 맨홀 (조사 · 보수)</span></label></div>
+          <div class="cq-fit" aria-live="polite" hidden><p data-svc="S01" hidden>맞는 분야 <a href="service-equipment-cleaning.html">설비 클리닝 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a><small>흡입 로봇 · 제어 차량 투입</small></p><p data-svc="S02" hidden>맞는 분야 <a href="service-catalyst-media.html">촉매·충진물 작업 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a><small>흡입 로봇 · 분리장치 투입</small></p><p data-svc="S03" hidden>맞는 분야 <a href="service-chemical-cleaning.html">화학세정 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a><small>화학세정용 내산장비</small></p><p data-svc="S04" hidden>맞는 분야 <a href="service-dredging-sludge.html">준설·슬러지 회수 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a><small>무인준설로봇 투입</small></p><p data-svc="S05" hidden>맞는 분야 <a href="service-inspection-repair.html">관로·지하 조사 및 보수 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a><small>관로 CCTV 로봇 투입</small></p><p class="cq-fit__ex" hidden>유압 구동 로봇이라 방폭지역에서도 작업할 수 있습니다.</p></div>
+        </fieldset>
+        <fieldset class="cq-q"><legend>해당되는 것이 있나요? <small>선택</small></legend>
+          <div class="cq-ops"><label><input type="checkbox" name="cq-c" value="밀폐공간 · 유해물질"><span>사람이 들어가기 위험함 (밀폐공간 · 유해물질)</span></label><label><input type="checkbox" name="cq-c" value="방폭지역"><span>방폭지역</span></label></div>
+        </fieldset>
+        <fieldset class="cq-q"><legend>언제 작업하시려고 하나요? <small>선택</small></legend>
+          <div class="cq-ops"><label><input type="radio" name="cq-when" value="정기보수 · 대정비 기간"><span>정기보수 · 대정비 기간</span></label><label><input type="radio" name="cq-when" value="가능한 빨리"><span>가능한 빨리</span></label><label><input type="radio" name="cq-when" value=""><span>아직 정하지 않았습니다</span></label></div>
+        </fieldset>
+        <input type="hidden" name="service" value=""><input type="hidden" name="target" value=""><input type="hidden" name="cond" value=""><input type="hidden" name="when" value="">
+        <div class="cq-row">
+          <div class="field"><label for="f-name">이름 또는 회사명 <em aria-hidden="true">*</em><span class="sr-only">(필수)</span></label><input type="text" id="f-name" name="name" autocomplete="organization" required><p class="field__err" hidden></p></div>
+          <div class="field"><label for="f-email">회신 받으실 이메일 <em aria-hidden="true">*</em><span class="sr-only">(필수)</span></label><input type="email" id="f-email" name="email" autocomplete="email" required><p class="field__err" hidden></p></div>
         </div>
-        <aside class="dg-r" aria-live="polite">
-          <div class="dg-r__empty"><p class="dg-r__k">진단 결과</p><p>설비를 고르시면 맞는 분야가 여기에 나옵니다.</p></div>
-          <div class="dg-svc" data-svc="S01" hidden><p class="dg-r__k">맞는 분야</p><p class="dg-r__h"><a href="service-equipment-cleaning.html">설비 클리닝 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a></p><p class="dg-r__g">흡입 로봇 · 제어 차량 투입</p><p class="dg-r__rb">위험한 내부에는 흡입 로봇이 먼저 들어가고, 작업자는 밖의 제어 차량에서 원격으로 조종합니다.</p></div><div class="dg-svc" data-svc="S02" hidden><p class="dg-r__k">맞는 분야</p><p class="dg-r__h"><a href="service-catalyst-media.html">촉매·충진물 작업 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a></p><p class="dg-r__g">흡입 로봇 · 분리장치 투입</p><p class="dg-r__rb">반응기 안에는 로봇이 먼저 들어가 촉매 · 충진물을 회수합니다.</p></div><div class="dg-svc" data-svc="S03" hidden><p class="dg-r__k">맞는 분야</p><p class="dg-r__h"><a href="service-chemical-cleaning.html">화학세정 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a></p><p class="dg-r__g">화학세정용 내산장비</p><p class="dg-r__rb">화학세정용 내산장비로 작업합니다.</p></div><div class="dg-svc" data-svc="S04" hidden><p class="dg-r__k">맞는 분야</p><p class="dg-r__h"><a href="service-dredging-sludge.html">준설·슬러지 회수 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a></p><p class="dg-r__g">무인준설로봇 투입</p><p class="dg-r__rb">무인준설로봇으로 퇴적물과 슬러지를 회수합니다.</p></div><div class="dg-svc" data-svc="S05" hidden><p class="dg-r__k">맞는 분야</p><p class="dg-r__h"><a href="service-inspection-repair.html">관로·지하 조사 및 보수 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></a></p><p class="dg-r__g">관로 CCTV 로봇 투입</p><p class="dg-r__rb">관로 안은 CCTV 로봇으로 조사합니다.</p></div>
-          <p class="dg-r__ex" hidden>유압 구동 로봇이라 방폭지역에서도 작업할 수 있습니다.</p>
-          <div class="dg-r__prep" hidden><p class="dg-r__k">상담 전에 준비하시면 좋은 것</p><ul><li>설비 종류와 크기 · 구조 (도면이 있으면 함께)</li><li>안에 쌓인 물질과 상태</li><li>희망 일정과 현장 위치</li><li>현장 사진</li></ul></div>
-          <button class="btn btn--fill dg-go" type="button" disabled>이 내용으로 문의 양식 채우기 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></button>
-        </aside>
+        <div class="field"><label for="f-phone">연락처 <small>선택</small></label><input type="tel" id="f-phone" name="phone" autocomplete="tel" inputmode="tel"></div>
+        <div class="field"><label for="f-body">현장 상황 <small>설비를 고르셨다면 선택</small></label><textarea id="f-body" name="body" rows="4" placeholder="예: 탱크 바닥에 슬러지가 쌓여 있습니다. 크기 · 구조 · 잔류물을 아시면 함께 적어 주세요."></textarea><p class="field__err" hidden></p></div>
+        <div class="form__act"><button class="btn btn--fill cq-send" type="submit">메일로 문의 보내기 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></button></div>
+        <p class="cq-note">메일 앱이 열리고 내용이 채워집니다. 열리지 않으면 061-682-5537 으로 전화 주세요. 적어 주신 정보는 답변에만 씁니다.</p>
+        <p class="form__msg" id="formMsg" role="status" aria-live="polite"></p>
+        <div id="copyWrap" hidden>
+          <pre class="copybox" id="copyBox" tabindex="0"></pre>
+          <div class="mt-12"><button class="btn btn--line btn--sm" type="button" data-copy="body">문의 내용 복사</button></div>
+        </div>
       </form>
     </div>
   </section>
 
-  <section class="section section--soft" id="inquiry">
+  <section class="section cq-faq" aria-labelledby="cq-faq-h">
     <div class="wrap">
-      <div class="ctB-form">
-
-        <div data-reveal>
-          <h2>문의 양식</h2>
-
-          <form class="form mt-28" id="inquiryForm" novalidate data-svc="{&quot;S01&quot;:&quot;설비 클리닝&quot;,&quot;S02&quot;:&quot;촉매·충진물 작업&quot;,&quot;S03&quot;:&quot;화학세정&quot;,&quot;S04&quot;:&quot;준설·슬러지 회수&quot;,&quot;S05&quot;:&quot;관로·지하 조사 및 보수&quot;}">   <!-- 2026-11-01: 업무 이름표 — 주소의 ?service=S0x 를 문의 내용 첫 줄로(js/contact.js) -->
-            <div class="form__row">
-              <div class="field">
-                <label for="f-name">이름 또는 회사명 <em aria-hidden="true">*</em><span class="sr-only">(필수)</span></label>
-                <input type="text" id="f-name" name="name" autocomplete="organization" required>
-                <p class="field__err" hidden></p>
-              </div>
-              <div class="field">
-                <label for="f-email">회신 이메일 <em aria-hidden="true">*</em><span class="sr-only">(필수)</span></label>
-                <input type="email" id="f-email" name="email" autocomplete="email" required>
-                <p class="field__err" hidden></p>
-              </div>
-            </div>
-
-            <div class="form__row">
-              <div class="field">
-                <label for="f-phone">연락처</label>
-                <input type="tel" id="f-phone" name="phone" autocomplete="tel" inputmode="tel">
-              </div>
-              <div class="field">
-                <label for="f-when">희망 일정</label>
-                <input type="text" id="f-when" name="when" placeholder="예: 2027년 상반기 정기보수">
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="f-body">문의 내용 <em aria-hidden="true">*</em><span class="sr-only">(필수)</span></label>
-              <textarea id="f-body" name="body" required placeholder="작업 목적과 현장 상태를 적어 주세요. 크기·구조·잔류물 정보를 알고 계시면 함께 적어 주세요."></textarea>
-              <p class="field__err" hidden></p>
-            </div>
-
-            <p class="ct-how"><b>보내는 방법</b> 아래 버튼을 누르면 사용하시는 메일 앱이 열리고 문의 내용이 채워집니다. 메일 앱이 열리지 않으면 버튼 아래에 나오는 문의 내용을 복사해 shinjeong@sjdevel.com 으로 보내 주시거나 전화로 문의해 주세요.</p>
-            <p class="note">입력하신 이름 · 연락처 · 이메일은 문의 답변에만 사용합니다.</p>
-            <div class="form__act">
-              <button class="btn btn--fill" type="submit">메일로 문의 보내기 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></button>
-            </div>
-            <p class="form__msg" id="formMsg" role="status" aria-live="polite"></p>
-
-            <div id="copyWrap" hidden>
-              <p class="note mt-6">메일 앱이 열리지 않으면 아래 내용을 복사해 보내 주세요.</p>
-              <pre class="copybox" id="copyBox" tabindex="0"></pre>
-              <div class="mt-12"><button class="btn btn--line btn--sm" type="button" data-copy="body">문의 내용 복사</button></div>
-            </div>
-          </form>
-        </div>
-
-
-      </div>
-    </div>
-  </section>
-
-  <!-- 03 자주 묻는 질문 (시안C 45차: look.contactFaq 이면 슬림 문의 쪽에도 — 문의 전에 손님이 스스로 확인) -->
-  <section class="section">
-    <div class="wrap">
-      <div class="head">
-        <div data-reveal><h2>자주 묻는 질문</h2></div>
-      </div>
+      <div class="head"><div data-reveal><h2 id="cq-faq-h">자주 물으시는 것</h2></div></div>
       <div class="faq" data-reveal>
         <details open>
           <summary>어떤 정보를 보내면 상담에 도움이 되나요?<i aria-hidden="true"></i></summary>
@@ -318,6 +254,6 @@
 </nav>
 <script src="js/site.js?v=6657ea7c"></script>
 <script src="js/moB.js?v=e965b8f9"></script>
-<script src="js/contact.js?v=5a238e30"></script>
+<script src="js/contact.js?v=a2e97437"></script>
 </body>
 </html>
