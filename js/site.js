@@ -290,3 +290,17 @@
   document.addEventListener('focusin', function (e) { if (e.target.closest && e.target.closest('form') && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) b.classList.add('typing'); });
   document.addEventListener('focusout', function () { setTimeout(function () { var a = document.activeElement; if (!(a && a.closest && a.closest('form') && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName))) b.classList.remove('typing'); }, 60); });
 })();
+
+/* 시안C 51차: 사진 위 설명표(.rpins) — 원본 사진 기준 자리(%)를 화면에 잘려 보이는 사진(object-fit: cover)에 맞춘다. 넓은 화면은 사진에 마우스를 올리면, 휴대폰은 사진이 화면에 들어오면 나타난다 */
+(function () {
+  var figs = [].slice.call(document.querySelectorAll('.rf__pin')); if (!figs.length) return;
+  function lay(f) {
+    var img = f.querySelector('img'), box = f.querySelector('.rf__ph'); if (!img || !box || !img.naturalWidth) return;
+    var W = box.clientWidth, H = box.clientHeight, s = Math.max(W / img.naturalWidth, H / img.naturalHeight), iw = img.naturalWidth * s, ih = img.naturalHeight * s, ox = (W - iw) / 2, oy = (H - ih) / 2;
+    [].forEach.call(f.querySelectorAll('.rpin'), function (p) { var x = ox + iw * p.dataset.x / 100, y = oy + ih * p.dataset.y / 100; p.style.left = x.toFixed(1) + 'px'; p.style.top = y.toFixed(1) + 'px'; p.classList.toggle('out', x < 6 || x > W - 6 || y < 6 || y > H - 6); });
+  }
+  function all() { figs.forEach(lay); }
+  figs.forEach(function (f) { var img = f.querySelector('img'); if (img) { if (img.complete) lay(f); else img.addEventListener('load', function () { lay(f); }); } });
+  addEventListener('resize', all); addEventListener('load', all);
+  if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target.classList.toggle('in', e.isIntersecting); if (e.isIntersecting) lay(e.target); }); }, { threshold: 0.6 }); figs.forEach(function (f) { io.observe(f); }); }
+})();
