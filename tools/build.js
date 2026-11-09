@@ -974,13 +974,13 @@ const UNM_PAIR = {
 /* 작업 절차 6단계 — 시안C 15차: 기술소개서(2025) 18쪽 Robot-Tank Cleaning System 의 단계 이름 · 내용 그대로(14차의 7단계 쉬운 말 판을 바꿈).
    in/out 은 장소가 적힌 단계만: '외부에서'(1차 Washing) · Robot 투입/Jet Nozzle(내부) · 작업자 투입(Final Cleaning). 설비 밖 제어 차량 원격 조정은 18·20쪽 공사개략도.
    all = 장소가 적혀 있지 않은 단계(두 줄을 합친 한 칸, 장소 표시 없음) */
-const UNM_STEPS = [
-  { n: '01', t: 'System 설치', all: '현장 적용 가능성 검토 · 사전 Test 실시' },
-  { n: '02', t: '1차 Washing', out: 'Vacuum Car(흡입차)를 이용해 외부에서 잔여 물질 제거' },
-  { n: '03', t: '내부 Cleaning', in: ['r', 'Robot 투입 · Shell side 내부 잔여 위험 물질 1차 회수'], out: '제어 차량에서 CCTV 화면으로 내부를 보며 원격 조정' },
-  { n: '04', t: '2차 Washing', in: ['r', 'Robot 전면부 Jet Nozzle을 이용한 내부 Cleaning · 위험 물질 최소화'], out: '제어 차량에서 원격 조정' },
-  { n: '05', t: 'Final Cleaning', in: ['p', '작업자 투입 · 내부 최종 잔여물 제거'] },
-  { n: '06', t: '폐기물 처리', all: '폐기물량 감소 · 처리 기간 단축' }
+const UNM_STEPS = [   // 53차: 단계 이름 · 설명을 손님 말로(원래 이름은 en 으로 작게) — 뜻은 기술소개서(2025) 18쪽 그대로
+  { n: '01', t: '장비 설치 · 사전 시험', en: 'System 설치', all: '현장에 적용할 수 있는지 검토하고, 미리 시험합니다' },
+  { n: '02', t: '바깥에서 1차 세척', en: '1차 Washing', out: '흡입차(Vacuum Car)로 바깥에서 잔여 물질을 빨아냅니다' },
+  { n: '03', t: '로봇이 들어가 회수', en: '내부 Cleaning', in: ['r', '로봇이 설비 안에 들어가 남은 위험 물질을 먼저 회수합니다'], out: '제어 차량에서 CCTV 화면으로 내부를 보며 원격 조정' },
+  { n: '04', t: '로봇으로 2차 세척', en: '2차 Washing', in: ['r', '로봇 앞쪽 노즐(Jet Nozzle)로 안쪽을 씻어 위험 물질을 최소화합니다'], out: '제어 차량에서 원격 조정' },
+  { n: '05', t: '작업자가 마무리', en: 'Final Cleaning', in: ['p', '위험이 줄어든 뒤 작업자가 들어가 남은 잔여물을 걷어 냅니다'] },
+  { n: '06', t: '폐기물 처리', en: '', all: '폐기물 양을 줄이고 처리 기간을 단축합니다' }
 ];
 /* 흡입 로봇 세대 — 9차 상세 rb-hist 글 그대로(② 장비 보유 현황) */
 const UNM_GENS = [
@@ -1084,31 +1084,31 @@ const PROJ_TAB_ORDER = ['S01', 'S02', 'S04', 'S03', 'S05'];   // 실적이 많�
    근거: 로봇 투입 기록 = 회사소개서(2024) 43~47쪽 · 기술소개서(2025) 24쪽(9차 ROBOT_RECORDS 17건을 분야별로 나눔)
          단가계약·실적 = 회사소개서(2024) 2020~2023 실적표 39~47쪽. 화학세정 15건 · CCTV 8건은 실적표에서 센 수(클라이언트 확인 C-31) */
 const CASES = [
-  { id: 's01', svc: 'S01', name: '설비 클리닝', photo: 'K01', robot: 4,
+  { id: 's01', svc: 'S01', name: '설비 클리닝', photo: 'K01', more: ['R26', 'R24'], robot: 4,
     desc: '탱크·Pond·배수로 안의 잔류물과 퇴적물을 제거합니다. 위험한 내부에는 흡입 로봇을 먼저 넣고, 작업자는 밖에서 조종합니다.',
     main: { n: '4', u: '년 연속', l: 'Pond Cleaning 단가계약 (2020~2023)' },
     stats: [ { n: '4', u: '년 연속', l: 'Pond Cleaning 단가계약 (2020~2023)' }, { n: '4', u: '건', l: '로봇 투입 기록', r: true } ],
     robotRows: [ ['2023.06', '내부 Cleaning 작업 (로봇 적용)'], ['2022.05', 'MDEA Storage Tank 내부 Robot Cleaning'], ['2022.02', 'Drum — Vessel/Drum Cleaning · Phenol'], ['2021.11', 'WWT Tank (ID 20,000) Tank Cleaning'] ],
     rows: [ ['2020~2023', 'Pond Cleaning 단가계약'], ['2023.06', '설비 내부 Cleaning', true], ['2020.05~11', '위험물 저장탱크 개방검사 Cleaning'] ] },
-  { id: 's02', svc: 'S02', name: '촉매·충진물', photo: 'P03', robot: 12,
+  { id: 's02', svc: 'S02', name: '촉매·충진물', photo: 'P03', more: ['W05', 'R07'], robot: 12,
     desc: '반응기의 촉매·충진물을 꺼내고 새로 채웁니다. 반응기 안에는 로봇이 먼저 들어가 촉매와 충진물을 회수합니다.',
     main: { n: '12', u: '건', l: '로봇 투입 기록 (2021~2023)' },
     stats: [ { n: '12', u: '건', l: '로봇 투입 기록 (2021~2023)', r: true }, { n: '3', u: '년', l: '2021·2022·2023 해마다 로봇 작업' } ],
     robotRows: [ ['2023.05', '촉매 교체 공사'], ['2023.02~04', 'Reactor Robot 촉매 Unloading'], ['2022.05', 'Skimming 작업 & 흡착제 Loading 작업'], ['2022.04~06', '촉매 교체 공사'], ['2022.03~04', '1차 반응기 촉매 교체 도급 공사'], ['2022.03', 'Catalyst (ID 1,800) 촉매 제거'], ['2022.01', '전처리반응기 촉매교체 작업 (무인화)'], ['2021.11', 'Catalyst (ID 1,600) 촉매 제거'], ['2021.09', 'Catalyst Replacement'], ['2021.08~22.03', 'Clay Filter (ID 1,800) · N₂ 분위기 · 4회'], ['2021.08', 'Clay Filter 로봇을 이용한 충진물 Skimming 작업'], ['2021.06', '로봇을 활용한 충진물 Unloading Test 작업'] ],
     rows: [ ['2023.03~06', '건조제 교체'], ['2023.03', '흡착제 교체'], ['2022.05', '대정비 촉매 교체'] ] },
-  { id: 's04', svc: 'S04', name: '준설·슬러지', photo: 'K03', robot: 1,
+  { id: 's04', svc: 'S04', name: '준설·슬러지', photo: 'K03', more: ['W03', 'M10'], robot: 1,
     desc: '하수·오수관과 처리시설에 쌓인 퇴적물을 준설하고 슬러지를 회수합니다. 폐수처리장 유량조정조에는 로봇을 넣었습니다.',
     main: { n: '4', u: '년 연속', l: '준설작업 단가계약 (2020~2023)' },
     stats: [ { n: '4', u: '년 연속', l: '준설작업 단가계약 (2020~2023)' }, { n: '1', u: '건', l: '로봇 투입 기록 · 유량조정조', r: true } ],
     robotRows: [ ['2023.09~11', '폐수처리장 유량조정조 슬러지 준설 작업'] ],
     rows: [ ['2020~2023', '준설작업 단가계약'], ['2023.09~11', '폐수처리장 유량조정조 슬러지 준설', true], ['2023.07', '공정 내 배수로 슬러지 준설'] ] },
-  { id: 's03', svc: 'S03', name: '화학세정', photo: 'K04', robot: 0,
+  { id: 's03', svc: 'S03', name: '화학세정', photo: 'K04', more: ['M05', 'W09'], robot: 0,
     desc: '보일러·열교환기 튜브와 배관 계통을 세정합니다. 정기보수 기간에 맞춰 작업합니다.',
     main: { n: '15', u: '건', l: '보일러·튜브·APH 세정 (2020~2023)' },
     stats: [ { n: '15', u: '건', l: '보일러·튜브·APH 세정 (2020~2023)' }, { n: '4', u: '년 연속', l: '같은 발주처에서 해마다' } ],
     robotRows: [],
     rows: [ ['2023', '보일러 세정작업'], ['2022.05~06', '정기보수 APH·열교환기 튜브 Cleaning'], ['2022.04', '보일러 튜브 외면 & EP Cleaning'], ['2021.05', '보일러 튜브 세정작업'], ['2020.09', '보일러 튜브 외면 세정작업'] ] },
-  { id: 's05', svc: 'S05', name: '관로·지하 조사', photo: 'K05', robot: -1,
+  { id: 's05', svc: 'S05', name: '관로·지하 조사', photo: 'K05', more: ['R42', 'R34'], robot: -1,
     desc: '관로 안을 CCTV 로봇으로 조사하고, 지하매설물을 GPR로 확인한 뒤 비굴착으로 보수합니다.',
     main: { n: '8', u: '건', l: '하수관로 CCTV 조사 용역 (2020~2023)' },
     stats: [ { n: '8', u: '건', l: '하수관로 CCTV 조사 용역 (2020~2023)' }, { n: '2', u: '대', l: 'CCTV 조사차량 보유' }, { n: '1', u: '대', l: '관로 CCTV 로봇 보유', r: true } ],
@@ -1188,12 +1188,12 @@ const s16Place = (u) => u.in ? (u.in[0] === 'r' ? 'in' : 'in-p') : (u.out && !u.
 const SVC16 = {
   S01: { fn: '클리닝', down: '6단계 작업 순서 보기', eqT: '세척 · 흡입 장비', endQ: '탱크 · Pond 클리닝이 필요하신가요?',
     io: [['로봇이 하는 일', 1, '탱크 내부의 잔여 위험 물질을 먼저 <b>회수하고</b>, 전면부 Jet Nozzle로 <b>세척합니다</b>', '03 · 04단계', 'st-3'],
-         ['사람이 하는 일', 0, '설비 밖 제어 차량에서 원격 조정하고, 위험 물질이 줄어든 뒤 <b>Final Cleaning</b>', '05단계', 'st-5']],
-    howT: '탱크 · Pond 클리닝은 이렇게 합니다', howS: 'Robot-Tank Cleaning System — 기술소개서(2025) 18쪽의 6단계 그대로',
+         ['사람이 하는 일', 0, '설비 밖 제어 차량에서 원격 조정하고, 위험 물질이 줄어든 뒤 <b>마무리 세척</b>', '05단계', 'st-5']],
+    howT: '탱크 · Pond 클리닝은 이렇게 합니다', howS: '여섯 단계로 작업합니다. 위험한 03 · 04단계는 로봇이 설비 안에서 맡습니다.',
     steps: () => {
       const ph = [['R25'], ['W07'], ['R27'], [], ['P01'], []];
       const ch = [[['제어 차량', 0], ['흡입 로봇', 1, 'unmanned.html#r-vacuum']], [['진공흡입차(습식) 5대', 0]], [['흡입 로봇', 1, 'unmanned.html#r-vacuum'], ['제어 차량 원격 조정', 0]], [['흡입 로봇', 1, 'unmanned.html#r-vacuum']], [], [['데칸타 · 필터프레스 → 준설·슬러지 회수', 0, 'service-dredging-sludge.html#dewater']]];
-      return UNM_STEPS.map((u, k) => [u.t, u.all || (u.in ? u.in[1] : u.out), s16Place(u), ph[k], ch[k]]);
+      return UNM_STEPS.map((u, k) => [u.t, u.all || (u.in ? u.in[1] : u.out), s16Place(u), ph[k], ch[k], u.en]);
     },
     stepsSrc: '기술소개서(2025) 18쪽 Robot-Tank Cleaning System · 설비 밖 원격 조정은 18·20쪽 공사개략도',
     extra: ['탱크 · Pond 밖의 작업', '공장 내부 배수로 · R.T.O 유지보수·클리닝 · Filter Press 세정 · Bag Filter 교체', ['B01', 'B02'], '회사소개서(2024) 9·10쪽 주요사업 안내'],
@@ -1201,7 +1201,7 @@ const SVC16 = {
   S02: { fn: '촉매', down: '작업 구성 보기', eqT: '촉매 회수 · 선별 장비', endQ: '촉매 · 충진물 교체를 앞두고 계신가요?',
     io: [['로봇이 하는 일', 1, '반응기 안의 잔여 위험 물질을 <b>회수하고</b>, 전면부 Jet Nozzle로 내부를 <b>세척합니다</b>', '구성 01', 'st-1'],
          ['사람이 하는 일', 0, '설비 밖 제어 차량에서 CCTV로 내부를 보며 <b>조종합니다</b>', '구성 02', 'st-2']],
-    howT: '반응기 촉매 작업은 이렇게 구성합니다', howS: '공사개략도(촉매) — 기술소개서(2025) 17쪽의 구성',
+    howT: '반응기 촉매 작업은 이렇게 구성합니다', howS: '로봇 · 제어 차량 · 흡입차 · 분리장치가 함께 일합니다.',
     steps: () => {
       const ph = [['R13'], ['P16', 'P17'], ['W07'], ['B05']];
       const ch = [[['흡입 로봇', 1, 'unmanned.html#r-vacuum']], [['제어 차량', 0]], [['진공흡입차(건식) 4대', 0]], [['AUTO SEPARATOR 6SET', 0]]];
@@ -1214,8 +1214,8 @@ const SVC16 = {
   S03: { fn: '세정', down: '세정 대상 보기', eqT: '세관 장비', endQ: '배관 · 열교환기 세정이 필요하신가요?',
     io: [['하는 일', 0, '배관 · 열교환기 · 냉각탑 계통과 보일러 튜브를 <b>세정합니다</b>', '세정 대상', 'sv-how'],
          ['쓰는 장비', 0, '화학세정용 내산장비 <b>50HP / 20HP · 2대</b>', '보유 장비', 'sv-eq']],
-    howT: '화학세정 대상', howS: '회사소개서(2024) 9쪽 주요사업 안내 — 원문 표기를 함께 적음',
-    steps: () => [['Plant 배관', '건설 PLANT · PIPE류 세정', '', [], []], ['열교환기', 'HEATER EXCHANGERS', '', [], []], ['Cooling Tower 계통', 'COOLING TOWER SYSTEM', '', [], []], ['보일러 Tube', '보일러 TUBE IN/OUT 세정', '', [], []]],
+    howT: '화학세정 대상', howS: '네 가지 설비를 세정합니다.',
+    steps: () => [['플랜트 배관', '건설 플랜트의 배관류를 세정합니다', '', [], [], 'PLANT · PIPE'], ['열교환기', '열교환기를 세정합니다', '', [], [], 'HEAT EXCHANGERS'], ['냉각탑 계통', '냉각탑 계통을 세정합니다', '', [], [], 'COOLING TOWER SYSTEM'], ['보일러 튜브', '보일러 튜브 안쪽과 바깥쪽을 세정합니다', '', [], [], 'TUBE IN/OUT']],   // 53차: 손님 말(원문 표기는 작게) — 회사소개서(2024) 9쪽
     stepsSrc: '회사소개서(2024) 9쪽 주요사업 안내',
     extra: ['화학세정 현장', '배관 · 튜브를 세정하는 현장입니다', ['B06', 'B07', 'B08'], '회사소개서(2024) 12쪽 화학세정'],
     use: null, tech: [] },
@@ -1560,7 +1560,7 @@ ${g.items.map((i) => `            <li><a href="${i.href}"${i.blank ? ' target="_
       </nav>
     </div>
     <div class="ftr__bot">
-      <p>&copy; <span data-year>2026</span> ${esc(C.name)}. All rights reserved.</p>
+      <p>&copy; <span data-year>2026</span> ${esc(C.name)}. All rights reserved. <a class="ftr__pv" href="privacy.html">개인정보 처리방침</a></p>   <!-- 53차 -->
       <button class="totop" type="button" data-totop>맨 위로 <span aria-hidden="true">↑</span></button>
     </div>${aiNotice() ? `
     <p class="ftr__ai">${esc(aiNotice())}</p>   <!-- 시안B 23차: AI 연출 이미지 공통 고지(설정 look.aiNotice, look.aiMark 가 'footer' 일 때) — 개별 배지 대신 바닥글 한 줄 -->` : ''}
@@ -3241,12 +3241,12 @@ SERVICES.forEach((s, idx) => {
       : href ? `<a class="s6-chip s6-chip--l" href="${href}">${esc(name)} ${arrow(14)}</a>` : `<span class="s6-chip">${esc(name)}</span>`;
     const PL = { in: ['in', '설비 안 · 로봇'], 'in-p': ['inp', '설비 안 · 작업자'], out: ['out', '설비 밖'] };
     const steps = v.steps();
-    const stepHtml = steps.map(([t, d, pl, phs, chips], k) => {
+    const stepHtml = steps.map(([t, d, pl, phs, chips, en], k) => {
       const media = phs.length
         ? `<span class="s6-st__ph s6-st__ph--${phs.length}">${phs.map((id) => photo(P(id), '(max-width:860px) 120px, 500px')).join('')}</span>`
-        : `<span class="s6-st__ph s6-st__ph--none"><b>${String(k + 1).padStart(2, '0')}</b><small>${esc(t)}</small></span>`;
+        : '';   // 53차: 사진 없는 단계는 남색 번호 타일 대신 글 카드(.s6-st--np)
       const desc = s.id === 'S04' && / → /.test(d) ? `<ol class="s6-flow">${d.split(' → ').map((x) => `<li>${esc(x)}</li>`).join('')}</ol>` : `<p>${esc(d)}</p>`;
-      return `<li class="s6-st${pl === 'in' ? ' is-robot' : ''}" id="${s.id === 'S04' && k === 2 ? 'dewater' : 'st-' + (k + 1)}">${media}<div class="s6-st__tx"><div class="s6-st__h"><em>${String(k + 1).padStart(2, '0')}</em>${pl ? `<span class="s6-pl s6-pl--${PL[pl][0]}">${PL[pl][1]}</span>` : ''}</div><h3>${esc(t)}</h3>${desc}${chips.length ? `<div class="s6-chips">${chips.map(chip).join('')}</div>` : ''}</div></li>`;
+      return `<li class="s6-st${pl === 'in' ? ' is-robot' : ''}${phs.length ? '' : ' s6-st--np'}" id="${s.id === 'S04' && k === 2 ? 'dewater' : 'st-' + (k + 1)}">${media}<div class="s6-st__tx"><div class="s6-st__h"><em>${String(k + 1).padStart(2, '0')}</em>${pl ? `<span class="s6-pl s6-pl--${PL[pl][0]}">${PL[pl][1]}</span>` : ''}</div><h3>${esc(t)}${en ? `<small lang="en">${esc(en)}</small>` : ''}</h3>${desc}${chips.length ? `<div class="s6-chips">${chips.map(chip).join('')}</div>` : ''}</div></li>`;
     }).join('');
     const robots = v15.gear.filter((g) => g[0] === 'robot');
     const spec = [['주요 장비', s.equip.map(esc).join(' · ')]]
@@ -3820,7 +3820,7 @@ pages['cases.html'] = () => {
     const p = P(x.photo);
     return `  <article class="csd cs9" id="${x.id}" aria-labelledby="${x.id}-h">
     <div class="wrap cs9__g">
-      <figure class="cs9__ph">${photo(p, '(max-width:860px) 100vw, 50vw', i === 0)}<figcaption>${esc(p.cap || p.alt)}</figcaption></figure>
+      <div class="cs9__phs"><figure class="cs9__ph">${photo(p, '(max-width:860px) 100vw, 50vw', i === 0)}<figcaption>${esc(p.cap || p.alt)}</figcaption></figure>${(x.more || []).length ? `<div class="cs9__more">${x.more.map((id) => { const q = P(id); return `<figure>${photo(q, '(max-width:860px) 50vw, 25vw')}<figcaption>${esc(q.cap || q.alt)}</figcaption></figure>`; }).join('')}</div>` : ''}</div>   <!-- 53차: 분야마다 현장 사진 두 장을 더(클라이언트 사진, 보이는 것만 설명) -->
       <div class="cs9__tx">
         <p class="cs9__k"><span>${esc(c.title)}</span><b>${String(i + 1).padStart(2, '0')}</b> / ${N}</p>
         <h2 id="${x.id}-h">${esc(x.name)}</h2>
@@ -3845,12 +3845,7 @@ pages['cases.html'] = () => {
     <nav class="cs9-head__crumb" aria-label="현재 위치"><a href="index.html">홈</a><span aria-hidden="true">›</span><span aria-current="page">${esc(c.title)}</span></nav>
     <h1 id="cs9-h"><small>${esc(c.title)}</small>${c.h1 || esc(c.title)}</h1>
     <p class="cs9-head__l">${esc(c.lead)}</p>
-    <dl class="cs9-head__sum">
-      <div><dt>${esc(TRUST[1].l)}</dt><dd>${TRUST[1].n}<small>${esc(TRUST[1].unit)}</small></dd></div>
-      <div><dt>4개 발주처와 단가계약 (2020~2023)</dt><dd>4<small>년 연속</small></dd></div>
-      <div class="is-r"><dt>로봇 투입 기록 (2021~2023)</dt><dd>${caseRobotTotal()}<small>건</small></dd></div>
-    </dl>
-    <p class="cs9-head__src">${esc(CASE_SRC.rows)}</p>
+    <!-- 53차: 머리의 큰 숫자 줄은 뺐다(메인 첫 화면 한 곳에만) -->
     <a class="cs9-head__all" href="projects.html">2020~2023 전체 수행 이력 보기 ${arrow(14)}</a>   <!-- 50차: 수행 이력 쪽으로 가는 길 -->
   </div></section>
   <nav class="csd-nav cs9-nav" aria-label="분야"><div class="wrap"><div class="cs9-nav__l">${CASES.map((x) => `<a href="#${x.id}">${esc(x.name)}${x.robot ? '<i class="d" aria-label="로봇 투입 기록 있음"></i>' : ''}</a>`).join('')}</div><span class="cs9-nav__k" aria-hidden="true"><i class="d"></i>로봇 투입 기록 있음</span></div></nav>
@@ -3961,6 +3956,7 @@ ${RL22.filter((b) => b.grp === g).map(pick).join('\n')}
     const nx = RL22[(i + 1) % RL22.length];
     const p0 = P(b.photos[0]);
     const thumbs = b.photos.length > 1 ? `<div class="rl-th">${b.photos.map((id, k) => `<button type="button" class="rl-th__b" aria-pressed="${k === 0}" data-cap="${esc(P(id).cap || P(id).alt)}">${photo(P(id), '96px')}<span class="sr">${esc(P(id).cap || P(id).alt)} 크게 보기</span></button>`).join('')}</div>` : '';
+    const use = b.extra.filter(([h]) => /^(적용 범위|유의)/.test(h)), rest = b.extra.filter(([h]) => !/^(적용 범위|유의)/.test(h));
     const kn = `<dl class="rl-kn">${b.kn.map(([v, u, l]) => `<div><dt>${esc(l)}</dt><dd><b>${esc(v)}</b>${u ? `<small>${esc(u)}</small>` : ''}</dd></div>`).join('')}</dl>`;
     const vary = b.vary ? `<div class="rl-var"${b.vary[3] ? ' data-photo' : ''}><p class="rl-var__h">${esc(b.vary[0])}</p><div class="rl-seg" role="group" aria-label="${esc(b.vary[0])} 고르기">${b.vary[2].map(([t], k) => `<button type="button" aria-pressed="${k === b.vary[1]}" data-v="${k}">${esc(t)}</button>`).join('')}</div>${b.vary[2].map(([, rows], k) => `<div class="rl-var__p" data-p="${k}"${k === b.vary[1] ? '' : ' hidden'}><p class="rl-var__t">${esc(b.vary[2][k][0])}</p>${dl(rows)}</div>`).join('')}</div>` : dl(b.spec);
     return `        <article class="rl-d" id="${b.id}" role="tabpanel" aria-labelledby="${b.id}-h">
@@ -3970,18 +3966,21 @@ ${RL22.filter((b) => b.grp === g).map(pick).join('\n')}
               <p class="rl-d__k"><span class="rl-tag rl-tag--${b.grp}">${RL22_GRP[b.grp][0]}</span>${b.no} / ${String(RL22.length).padStart(2, '0')}</p>
               <h3 id="${b.id}-h">${esc(b.name)}<small>${esc(b.en)}</small></h3>
               <p class="rl-job">${unmJob(b)}</p>
-              ${kn}
               <p class="rl-where"><span>들어가는 곳</span>${b.where.map((w) => `<i>${esc(w)}</i>`).join('')}</p>
+              ${use.length ? use.map(([h, items]) => `<div class="rl-use${/^유의/.test(h) ? ' rl-use--note' : ''}"><h4>${/^유의/.test(h) ? '미리 알아 두실 점' : '이런 작업에 씁니다'}</h4><ul>${items.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>`).join('') : ''}
+              <details class="rl-more"><summary>사양 · ${b.grp === 'rd' ? '시험 결과' : '세부 내용'} 자세히</summary>
+              ${kn}
               ${vary}
+              ${rest.length ? `<div class="rl-d__ex">${rest.map(([h, items]) => `<div class="rl-ex"><h4>${esc(h)}</h4><ul>${items.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>`).join('')}</div>` : ''}
+              </details>   <!-- 53차: 손님이 먼저 볼 것(들어가는 곳 · 이런 작업 · 알아 둘 점)을 위에, 숫자 · 사양 · 시험은 접어 둠 -->
             </div>
           </div>
-          <div class="rl-d__ex">${b.extra.map(([h, items]) => `<div class="rl-ex"><h4>${esc(h)}</h4><ul>${items.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>`).join('')}</div>
           <div class="rl-d__f"><p class="rl-src">출처: ${esc(b.src)} — ① 회사소개서(2024) ② 기술소개서(2025)</p><a class="rl-nx" href="#${nx.id}">다음 로봇 · ${esc(nx.name)} ${arrow(18)}</a></div>
         </article>`;
   };
   return `  <section class="rl" id="robots" aria-labelledby="rl-h">
     <div class="wrap">
-      <div class="um-vh um-vh--row"><div><p class="um-k2">로봇 라인업</p><h2 id="rl-h">설비마다 들어가는 로봇이 다릅니다</h2></div><p class="um-vh__l">현장에 투입하는 장비 세 가지와, 기업부설연구소에서 개발한 시제품 세 가지입니다. 로봇마다 하는 일 · 사양 · 시험 결과를 함께 소개합니다.</p></div>
+      <div class="um-vh um-vh--row"><div><p class="um-k2">로봇 라인업</p><h2 id="rl-h">설비마다 들어가는 로봇이 다릅니다</h2></div><p class="um-vh__l">현장에 투입하는 장비 세 가지와, 기업부설연구소에서 개발한 시제품 세 가지입니다. 로봇마다 어떤 설비에, 어떤 작업에 들어가는지 소개합니다.</p></div>
       <div class="rl-pick" role="tablist" aria-label="로봇 고르기">
 ${grp('field')}
 ${grp('rd')}
@@ -4495,13 +4494,7 @@ pages['company.html'] = () => {
       <p class="us-src">${esc(G.src)}</p>
     </div>
   </div></section>
-  <section class="c7-facts" aria-label="한눈에 보기"><div class="wrap"><dl>
-    <div><dt>설립</dt><dd>${C.founded}<small>년</small></dd></div>
-    <div><dt>법인 전환</dt><dd>2007<small>년</small></dd></div>
-    <div><dt>기업부설연구소</dt><dd>2017<small>년</small></dd></div>
-    <div><dt>수행 실적 2020~2023</dt><dd>${PROJECT_SUMMARY.n}<small>${PROJECT_SUMMARY.unit}</small></dd></div>
-    <div><dt>등록 특허</dt><dd>${K.patents.length}<small>건</small></dd></div>
-  </dl><p class="c7-facts__src">회사소개서(2024) 기준</p></div></section>
+  <!-- 53차: 큰 숫자 줄(c7-facts)은 메인 첫 화면 한 곳에만 둔다. 영문판(build-en-lite.js)이 읽는 값만 남김: <dt>설립</dt><dd>${C.founded}년</dd> <dt>기업부설연구소</dt><dd>2017년</dd> -->
   <nav class="um-lnb c7-lnb" aria-label="회사 소개 안"><div class="wrap"><div class="um-lnb__t">${C7_VIEWS.map(([v, l, sh]) => `<a href="#v-${v}" data-view="${v}"><span class="c7-n__l">${l}</span><span class="c7-n__s">${sh}</span></a>`).join('')}</div><a class="um-lnb__q" href="contact.html">현장 문의 ${arrow(14)}</a></div></nav>   <!-- 시안C 34차: 무인 솔루션과 같은 흰 메뉴 줄 · 네 화면(누르면 그 화면만) -->
   <div class="c7-view" id="v-hist" data-view="hist">
 
@@ -4620,7 +4613,7 @@ pages['contact.html'] = () => head({
         <div class="field"><label for="f-phone">연락처 <small>선택</small></label><input type="tel" id="f-phone" name="phone" autocomplete="tel" inputmode="tel"></div>
         <div class="field"><label for="f-body">현장 상황 <small>설비를 고르셨다면 선택</small></label><textarea id="f-body" name="body" rows="4" placeholder="예: 탱크 바닥에 슬러지가 쌓여 있습니다. 크기 · 구조 · 잔류물을 아시면 함께 적어 주세요."></textarea><p class="field__err" hidden></p></div>
         <div class="form__act"><button class="btn btn--fill cq-send" type="submit">메일로 문의 보내기 ${arrow(18)}</button></div>
-        <p class="cq-note">메일 앱이 열리고 내용이 채워집니다. 열리지 않으면 ${C.tel} 으로 전화 주세요. 적어 주신 정보는 답변에만 씁니다.</p>
+        <p class="cq-note">메일 앱이 열리고 내용이 채워집니다. 열리지 않으면 ${C.tel} 으로 전화 주세요. 적어 주신 정보는 답변에만 씁니다. <a href="privacy.html">개인정보 처리방침</a></p>
         <p class="form__msg" id="formMsg" role="status" aria-live="polite"></p>
         <div id="copyWrap" hidden>
           <pre class="copybox" id="copyBox" tabindex="0"></pre>
@@ -4642,6 +4635,35 @@ ${faqBlock()}
 ` + footer() + foot(['contact.js']);
 
 /* ---------- 8. 404 ---------- */
+/* ---------- 시안C 53차: 개인정보 처리방침 (privacy.html) ----------
+   문의 양식은 서버에 보내지 않고 손님의 메일 앱으로 보낸다(js/contact.js) — 그 사실대로 적었다. 분석 도구 · 쿠키는 쓰지 않는다(지금 js/ 에 없음).
+   보유 기간 · 시행일 · 담당 부서는 회사 확인 전이라 일반적인 표현으로 두었다 — 정식 공개 전에 회사가 확인한다(CLAUDE.md 53차). */
+const PRIVACY = [
+  ['어떤 정보를 받나요', ['현장 문의 때 적어 주신 이름(또는 회사 이름), 회신 받으실 이메일, 연락처(선택), 현장 상황', '문의 양식에서 고르신 설비 · 현장 조건 · 희망 시기']],
+  ['어떻게 받나요', ['이 홈페이지는 적어 주신 내용을 따로 저장하지 않습니다.', '\'메일로 문의 보내기\'를 누르면 손님의 메일 앱에서 ' + C.email + ' 로 보내집니다. 전화 문의는 통화로만 받습니다.']],
+  ['어디에 쓰나요', ['문의에 대한 답변, 현장 상담과 작업 안내에만 씁니다.', '광고 · 홍보 메일을 보내는 데 쓰지 않습니다.']],
+  ['얼마나 보관하나요', ['상담이 끝나면 지체 없이 지웁니다. 다만 법령에 따라 보관해야 하는 경우에는 그 기간 동안만 보관합니다.']],
+  ['다른 곳에 주나요', ['손님의 동의 없이 다른 곳에 주지 않습니다. 법령에 따라 요청받은 경우는 예외입니다.']],
+  ['쿠키 · 방문 기록', ['이 홈페이지는 방문자를 따라다니는 쿠키나 방문 분석 도구를 쓰지 않습니다.']],
+  ['보기 · 고치기 · 지우기 요청', ['보내 주신 정보를 보거나 고치거나 지워 달라고 언제든 요청하실 수 있습니다.', '대표 전화 ' + C.tel + ' · 이메일 ' + C.email]]
+];
+pages['privacy.html'] = () => head({
+  file: 'privacy.html', page: 'privacy',
+  title: `개인정보 처리방침 | ${C.brand}`,
+  desc: '현장 문의 때 받는 정보와 그 정보를 어떻게 쓰는지 안내합니다.'
+}) + header('', null, 'privacy.html') + `
+<main id="main" class="pv">
+` + phero({ kick: '개인정보 처리방침', h1: '문의 때 주신 정보는<br>답변에만 씁니다', crumbs: [{ label: '개인정보 처리방침' }],
+  keepLead: `${C.name}은 현장 문의 때 받는 정보를 아래와 같이 다룹니다.` }) + `
+  <section class="section pv__b"><div class="wrap">
+    <ol class="pv__l">
+${PRIVACY.map(([h, items], i) => `      <li><h2><em>${String(i + 1).padStart(2, '0')}</em>${esc(h)}</h2>${items.map((x) => `<p>${esc(x)}</p>`).join('')}</li>`).join('\n')}
+    </ol>
+    <p class="pv__d">이 방침은 홈페이지를 정식으로 공개하는 날부터 적용합니다. 바뀌면 이 쪽에서 알려 드립니다.</p>
+    <p class="pv__go"><a class="btn btn--sm" href="contact.html">현장 문의로 돌아가기 ${arrow(16)}</a></p>
+  </div></section>
+` + MAIN_END + footer() + foot([]);
+
 pages['404.html'] = () => head({
   file: '404.html', page: 'error',
   title: `페이지를 찾을 수 없습니다 | ${C.brand}`,
